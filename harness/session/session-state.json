@@ -54,7 +54,8 @@
     "git_init": true,
     "committed": true,
     "branch": "feat/i-001-xugu-dialect-major",
-    "note": "B-001/P-001 must-commit complete; no push"
+    "note": "Scaffold must-commit 377b9e6; SHA-record follow-up f658aae; no push",
+    "head": "f658aae8d383d8a0bcf2159515045dd961475544"
   },
   "handoff": {
     "last_summary": "P-001 accepted; B-001 complete. Ask Human Gate for B-002 = P-002 only.",
