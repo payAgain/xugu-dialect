@@ -1,9 +1,10 @@
 # Architecture Notes
 
-> **Status:** P-001 scaffolded — parent POM + `dialect/` + `demo-spring-boot/` present and packaging.  
+> **Status:** P-002 accepted — dialect public contract + Definition A feature matrix published; P-001 scaffold remains.  
 > **Updated:** 2026-07-14  
-> **SSOT baselines:** `PROJECT_CHARTER.md`, `DECISIONS/ADR-0001-hibernate-baseline.md`, `contracts/xugu-dialect.scaffold.contract.md`  
-> Do not invent unimplemented dialect capabilities (definition A / SPI) as if they already exist.
+> **SSOT baselines:** `PROJECT_CHARTER.md`, `DECISIONS/ADR-0001-hibernate-baseline.md`, [`contracts/xugu-dialect.contract.md`](../contracts/xugu-dialect.contract.md), [`contracts/feature-matrix-definition-a.md`](../contracts/feature-matrix-definition-a.md) (Definition A matrix SSOT; docs pointer: [`docs/feature-matrix-definition-a.md`](feature-matrix-definition-a.md))  
+> Scaffold contract (historical): `contracts/xugu-dialect.scaffold.contract.md`  
+> Do not invent unimplemented dialect capabilities as if they already exist — implement only rows marked **可实现** for the active Phase.
 
 ## Repository Type
 
@@ -36,8 +37,8 @@ hibernate-test/                    # parent POM (packaging=pom)
 |---|---|---|
 | `dialect/` | Dialect library module (`com.xugu.dialect`, stub `XuguDialect`) | **Scaffolded** (P-001) — definition A / SPI not yet |
 | `demo-spring-boot/` | Spring Boot demo consuming dialect + JDBC | **Scaffolded** (P-001) — main entry only; no business demo |
-| `docs/` | Production use / verification / readiness docs | Present (governance docs); product usage docs expand later |
-| `contracts/` | Module public contracts | Scaffold contract present; full dialect contract later |
+| `docs/` | Production use / verification / readiness docs | Present; matrix pointer [`feature-matrix-definition-a.md`](feature-matrix-definition-a.md) → contracts SSOT |
+| `contracts/` | Module public contracts | **P-002:** [`xugu-dialect.contract.md`](../contracts/xugu-dialect.contract.md) + [Definition A matrix SSOT](../contracts/feature-matrix-definition-a.md) (105 rows); scaffold contract retained |
 | `harness/` | Clarify→Ship governance | Present |
 | `xugu-jdbc-12.3.6.jar` | Xugu JDBC 12.3.6 | Present at root; wired via Maven `systemPath` |
 
@@ -90,7 +91,8 @@ harness           governance only; never on runtime classpath
 
 ## Notes for Future Agents
 
-- Definition A dialect features and DialectResolver SPI are **out of scope** for P-001.
+- Definition A matrix SSOT is `contracts/feature-matrix-definition-a.md` (P-002 accepted). DialectResolver SPI remains out of scope until P-008.
+- Do not invent SQL for **文档不允许** rows.
 - Do not read or port `E:\Work\java\hibernate-dialect`.
 - Record further stable decisions in `DECISIONS/`.
 - Build: `mvn -q -DskipTests package` · Test: `mvn -q test` (see `harness/verification.json`).

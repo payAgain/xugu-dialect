@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "build_id": "B-002",
+  "initiative_id": "I-001",
+  "plan_revision": 1,
+  "status": "approved",
+  "proposed_phase_ids": [
+    "P-002"
+  ],
+  "approved_phase_ids": [
+    "P-002"
+  ],
+  "approval": {
+    "reference": "批准 B-002，范围仅 P-002",
+    "approved_at": "2026-07-14T16:48:00+08:00",
+    "approved_by": "Human Gate"
+  },
+  "recommendation": "Approve B-002 scope = P-002 only (dialect contract + definition A feature matrix). Do not approve P-003+ until P-002 ACCEPTANCE.",
+  "supersedes": null,
+  "scope_changes": [],
+  "notes": "Human Gate approved B-002 with scope P-002 only. Orchestrator may dispatch P-002 role_pipeline. P-003+ remain unapproved."
+}

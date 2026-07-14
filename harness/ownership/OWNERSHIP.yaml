@@ -8,6 +8,9 @@ owners:
     paths:
       - "dialect/**"
       - "contracts/dialect.contract.md"
+      - "contracts/xugu-dialect.contract.md"
+      - "contracts/xugu-dialect.scaffold.contract.md"
+      - "contracts/feature-matrix-definition-a.md"
     writers:
       - architect-contract   # contracts / public API surface only
       - implementer          # Java dialect implementation (future role instance)

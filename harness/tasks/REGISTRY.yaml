@@ -1,7 +1,7 @@
 schema_version: 1
 charter_version: "1.0.0"
 initiative_id: I-001
-updated: "2026-07-14T16:35:00+08:00"
+updated: "2026-07-14T17:10:00+08:00"
 # Phase progress index. IDs: I-00x / P-00x / B-00x — see protocol/references/glossary.md
 tasks:
   - task_id: P-001
@@ -14,14 +14,15 @@ tasks:
     dependencies: []
   - task_id: P-002
     title: "方言契约与定义 A 特性矩阵"
-    status: ready
+    status: accepted
+    build_id: B-002
     packet: harness/tasks/P-002.md
     acceptance_doc: harness/evidence/architect-contract/P-002/ACCEPTANCE.md
     role_pipeline_summary: "architect-contract → test → (reviewer?)"
     dependencies: [P-001]
   - task_id: P-003
     title: "方言类型映射与 DDL"
-    status: blocked
+    status: ready
     packet: harness/tasks/P-003.md
     acceptance_doc: harness/evidence/implementer/P-003/ACCEPTANCE.md
     role_pipeline_summary: "architect-contract → implementer → test → reviewer"

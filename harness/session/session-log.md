@@ -1,5 +1,27 @@
 # Session Log
 
+## Entry: B-002 APPROVED — P-002 in progress
+
+### Summary
+Human Gate 批准 Build：「批准 B-002，范围仅 P-002」（~2026-07-14T16:48+08:00）。Orchestrator 物化 `B-002.json`（`status=approved`, `approved_phase_ids=[P-002]`），将 `P-002` / REGISTRY 标为 `in_progress`（`build_id=B-002`）。未写 Java；未 commit。下一步：派发 P-002 `role_pipeline` RP-01 architect-contract。
+
+### Files Created or Updated
+- harness/builds/B-002.json (approved)
+- harness/tasks/P-002.md (build_id=B-002, status=in_progress)
+- harness/tasks/REGISTRY.yaml (P-002 in_progress + build_id)
+- harness/handoffs/orchestrator/B-002-approved.md
+- current-task.md, harness/session/*
+
+### Validation
+- harness-only disk updates; no Maven / Java implementation this turn
+- No git commit (Human Gate did not authorize)
+
+### Next Steps
+1. Dispatch RP-01 architect-contract（P-002）
+2. Then RP-02 test → RP-03 reviewer（if risk≥8）
+3. P-002 ACCEPTANCE 后再请批后续 Build（通常 P-003）
+
+---
 ## Entry: P-001 ACCEPTED — B-001 complete (await B-002)
 
 ### Summary
@@ -117,3 +139,32 @@ Pending at init; later completed in Bootstrap G1 entry above.
 
 ### Next Steps
 Superseded by Bootstrap G1 COMPLETE.
+
+
+---
+
+## Entry: B-002 / P-002 ACCEPT COMPLETE — await B-003
+
+### Summary
+Orchestrator closed P-002 after RP-01 architect-contract PASS (`arch-p002-20260714`), RP-02 test PASS (`test-p002-20260714`), RP-03 reviewer skipped (`risk_score=6 < 8`). Promoted docs cross-refs; ACCEPTANCE Decision ``accepted``; REGISTRY P-002 accepted; P-003 ready. Must-commit on `feat/i-001-xugu-dialect-major`. Next: Human Gate approve **B-003 → P-003 only**.
+
+### Files Created or Updated
+- contracts/xugu-dialect.contract.md, contracts/feature-matrix-definition-a.md
+- docs/architecture.md, docs/feature-matrix-definition-a.md
+- harness/evidence/architect-contract/P-002/ACCEPTANCE.md (+ verification.json)
+- harness/tasks/P-002.md (accepted), P-003.md (ready), REGISTRY.yaml
+- harness/ownership/OWNERSHIP.yaml
+- harness/handoffs/orchestrator/B-002-P-002-complete.md
+- current-task.md, harness/session/*
+
+### Validation
+- Independent test: **VERIFY PASS** (`harness/evidence/test/P-002/verification.json`)
+- Matrix: **105** rows (可实现 78 / 文档不允许 7 / 延后 20)
+- Observed flows: definition-a-matrix-reviewable, dialect-contract-published — PASS
+- `harness_check.py`: run at Accept close
+
+### Next Steps
+1. Human Gate：批准 B-003 范围仅 P-003
+2. 物化 B-003.json；P-003 in_progress；派发 role_pipeline
+3. 勿并行批准 P-004+
+
