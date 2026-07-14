@@ -208,3 +208,5 @@ Orchestrator closed P-002 after RP-01 architect-contract PASS (`arch-p002-202607
 - REGISTRY: P-003 accepted; P-004 ready
 - Must-commit on feat/i-001-xugu-dialect-major; propose B-004 → P-004 only
 - Resume: `harness/handoffs/orchestrator/B-003-P-003-complete.md`
+
+- Must-commit SHA recorded: `006c88d153388f276782310a93c50a3784664575`

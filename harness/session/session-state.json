@@ -5,7 +5,7 @@
   "status": "b003_p003_accepted_propose_b004",
   "current_phase": "P-003",
   "harness_level": "Standard",
-  "last_updated": "2026-07-14T18:25:00+08:00",
+  "last_updated": "2026-07-14T18:30:00+08:00",
   "initiative_id": "I-001",
   "initiative_type": "major",
   "working_branch": "feat/i-001-xugu-dialect-major",
@@ -47,13 +47,13 @@
     "blocked_on": "human_gate_b004_approval"
   },
   "version_control_checkpoint": {
-    "decision": "must_commit",
-    "candidate_commit": "PENDING_MUST_COMMIT",
+    "decision": "committed",
+    "candidate_commit": "006c88d153388f276782310a93c50a3784664575",
     "git_init": true,
-    "committed": false,
+    "committed": true,
     "branch": "feat/i-001-xugu-dialect-major",
     "note": "P-003 Accept must-commit; no push",
-    "head": "PENDING_MUST_COMMIT"
+    "head": "006c88d153388f276782310a93c50a3784664575"
   },
   "handoff": {
     "last_summary": "P-003 accepted. Propose B-004 scope P-004 only (pagination & locks).",
@@ -64,5 +64,5 @@
   "proposed_phases": [
     "P-004"
   ],
-  "updated_at": "2026-07-14T18:25:00+08:00"
+  "updated_at": "2026-07-14T18:30:00+08:00"
 }

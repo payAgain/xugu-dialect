@@ -14,7 +14,7 @@
 - VERIFY PASS: `harness/evidence/test/P-003/verification-retest.json`
 - Real DB IT: 6/6 PASS (incl. `XuguBinarySchemaExportIT`)
 - REGISTRY: P-003 `accepted`; P-004 `ready` (dependency satisfied)
-- Must-commit on working branch (SHA recorded in ACCEPTANCE / session after commit)
+- Must-commit on working branch (SHA: 006c88d153388f276782310a93c50a3784664575)
 
 ## Explicitly not done
 
