@@ -1,0 +1,48 @@
+schema_version: 1
+role: architect-contract
+phase_id: P-001
+build_id: B-001
+initiative_id: I-001
+invocation_id: arch-p001-20260714
+step_id: RP-01
+status: passed
+required: true
+completed_at: "2026-07-14T16:15:00+08:00"
+purpose: confirm Maven layout vs docs/architecture.md and GAV/JDBC wiring
+
+inputs:
+  - agents/architect-contract.md
+  - harness/tasks/P-001.md
+  - docs/architecture.md
+  - PROJECT_CHARTER.md
+  - DECISIONS/ADR-0001-hibernate-baseline.md
+  - harness/initiatives/I-001/brief.md
+
+outputs:
+  contract: contracts/xugu-dialect.scaffold.contract.md
+  evidence: harness/evidence/architect-contract/P-001/layout-confirmation.md
+  handoff: harness/handoffs/architect-contract/P-001.yaml
+
+layout_confirmation: PASS
+
+notes_for_implementer: |
+  Create root parent POM (packaging=pom) with modules dialect and demo-spring-boot.
+  Library GAV MUST be com.xugu:xugu-dialect:7.4.5.Final; folder name remains dialect/.
+  JDK 17; Hibernate 7.4.5.Final on dialect; demo Spring Boot 4.1.0 with property hibernate.version=7.4.5.Final.
+  Wire JDBC via system scope + systemPath to ${maven.multiModuleProjectDirectory}/xugu-jdbc-12.3.6.jar
+  (preferred) or ../xugu-jdbc-12.3.6.jar from module POM.
+  Minimal Java: public com.xugu.dialect.XuguDialect extends org.hibernate.dialect.Dialect
+  (NOT MySQLDialect/OracleDialect) — empty/placeholder constructor body OK if it compiles.
+  Demo: one @SpringBootApplication main only; no business demo / no live-DB required for package.
+  Also fill harness/verification.json + AGENTS.md real mvn commands; update docs/architecture.md
+  status after scaffold exists. Do NOT implement definition A, SPI, or read hibernate-dialect sibling.
+  Follow contracts/xugu-dialect.scaffold.contract.md as SSOT for this Phase.
+
+forbidden_reminder:
+  - no MySQLDialect / OracleDialect inheritance
+  - no E:\\Work\\java\\hibernate-dialect reference
+  - no definition-A dialect capabilities in P-001
+  - do not write root PROJECT_CHARTER.md
+
+next_step: RP-02 implementer
+blocker: null

@@ -1,0 +1,50 @@
+schema_version: 1
+role: implementer
+phase_id: P-001
+build_id: B-001
+initiative_id: I-001
+invocation_id: impl-p001-20260714
+step_id: RP-02
+status: passed
+required: true
+completed_at: "2026-07-14T16:21:03+08:00"
+purpose: scaffold parent + dialect/ + demo-spring-boot/; wire JDBC; fill verification + AGENTS commands
+
+inputs:
+  - contracts/xugu-dialect.scaffold.contract.md
+  - harness/tasks/P-001.md
+  - harness/handoffs/architect-contract/P-001.yaml
+  - PROJECT_CHARTER.md
+  - DECISIONS/ADR-0001-hibernate-baseline.md
+  - docs/architecture.md
+
+outputs:
+  - pom.xml
+  - dialect/**
+  - demo-spring-boot/**
+  - harness/verification.json
+  - AGENTS.md
+  - docs/architecture.md
+  - harness/ownership/OWNERSHIP.yaml
+  - harness/evidence/implementer/P-001/**
+  - harness/handoffs/implementer/P-001.yaml
+
+verification:
+  build: { command: "mvn -q -DskipTests package", exit_code: 0 }
+  test: { command: "mvn -q test", exit_code: 0 }
+  harness_check: { command: "python harness/scripts/harness_check.py", exit_code: 0 }
+  verify: { command: "python harness/scripts/verify.py --phase P-001", exit_code: 0, status: "VERIFY PASS" }
+
+notes_for_test: |
+  Scaffold only. XuguDialect is a stub extending org.hibernate.dialect.Dialect
+  with DatabaseVersion.make(12, 0). No live DB required. No Spring Boot IT that
+  would fail without datasource. Run verify.py with mvn on PATH.
+
+forbidden_reminder:
+  - no MySQLDialect / OracleDialect inheritance
+  - no E:\\Work\\java\\hibernate-dialect reference
+  - no definition-A dialect capabilities in P-001
+  - no git commit / tag / push by implementer
+
+next_step: RP-03 test
+blocker: null

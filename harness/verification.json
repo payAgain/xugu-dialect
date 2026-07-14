@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "checks": [
+    {
+      "id": "build",
+      "description": "Build the project or validate that it can be packaged",
+      "required": true,
+      "command": "mvn -q -DskipTests package"
+    },
+    {
+      "id": "test",
+      "description": "Run the project's automated test suite",
+      "required": true,
+      "command": "mvn -q test"
+    },
+    {
+      "id": "lint",
+      "description": "No dedicated lint command for this Java scaffold Phase",
+      "required": false,
+      "command": "NA"
+    }
+  ]
+}

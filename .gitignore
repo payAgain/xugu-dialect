@@ -1,0 +1,66 @@
+# Maven / Java
+target/
+*.class
+*.jar
+!xugu-jdbc-12.3.6.jar
+*.war
+*.ear
+*.nar
+hs_err_pid*
+replay_pid*
+
+# Maven wrapper local
+.mvn/wrapper/maven-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+.factorypath
+.bin/
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Logs & temp
+*.log
+*.tmp
+*.temp
+/tmp/
+/temp/
+
+# Env / secrets (never commit real credentials)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+secrets/
+
+# Test / coverage
+.jacoco/
+coverage/
+*.exec
+
+# Python harness caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Build tooling
+.gradle/
+build/
+out/

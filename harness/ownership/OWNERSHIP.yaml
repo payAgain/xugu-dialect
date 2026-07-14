@@ -1,0 +1,68 @@
+schema_version: 1
+# Module ownership — Bootstrap G1.
+# Writers are exclusive per path; no ambiguous shared writers.
+# Readers may consult any path; only listed writers may modify.
+
+owners:
+  dialect:
+    paths:
+      - "dialect/**"
+      - "contracts/dialect.contract.md"
+    writers:
+      - architect-contract   # contracts / public API surface only
+      - implementer          # Java dialect implementation (future role instance)
+      - test                 # dialect unit/integration tests
+    notes: >
+      Maven module directory `dialect/` scaffolded in P-001 (artifact com.xugu:xugu-dialect:7.4.5.Final).
+      Stub XuguDialect extends org.hibernate.dialect.Dialect only; definition A / SPI not yet.
+      Must NOT depend on demo-spring-boot. Must NOT extend MySQLDialect/OracleDialect.
+      FORBIDDEN reference: E:\Work\java\hibernate-dialect.
+
+  demo-spring-boot:
+    paths:
+      - "demo-spring-boot/**"
+      - "contracts/demo-spring-boot.contract.md"
+    writers:
+      - architect-contract   # contracts only
+      - implementer          # Spring Boot demo application
+      - test                 # demo-level smoke / IT when owned by test role
+    notes: >
+      Demo module scaffolded in P-001; depends on dialect artifact + Xugu JDBC.
+      Spring Boot 4.1.0 with hibernate.version=7.4.5.Final forced.
+      Must NOT host core dialect implementation. Business demo / live-DB IT deferred.
+
+  docs:
+    paths:
+      - "docs/**"
+      - "PROJECT_CHARTER.md"
+      - "DECISIONS/**"
+      - "contracts/**"
+    writers:
+      - orchestrator         # Charter promotion, architecture/verification/branching, Bootstrap docs
+      - architect-contract   # ADRs (draft→approved path), contracts, architecture notes when assigned
+      - docs                 # production usage docs / feature matrix narrative (future role)
+    notes: >
+      Project-internal production docs live under docs/.
+      Official SQL truth E:\Work\docs\content is READ-ONLY — never written from this repo ownership.
+      Root PROJECT_CHARTER.md and DECISIONS/ only via approved Human Gate content + orchestrator/architect process.
+
+  harness:
+    paths:
+      - "AGENTS.md"
+      - "agents/**"
+      - "skills/**"
+      - "current-task.md"
+      - "harness/**"
+      - ".gitignore"
+      - ".harness-version"
+    writers:
+      - orchestrator
+    notes: >
+      Governance, session, tasks, ownership, verification contract, handoffs, evidence namespaces.
+      Harness must not contain dialect business Java.
+      Other roles write only their allowed handoff/evidence namespaces when spawned (see agents/*.md).
+
+notes: >
+  Bootstrap G1 populated 2026-07-14. P-001 scaffolded dialect/ and demo-spring-boot/
+  under parent POM (com.xugu:xugu-dialect-parent:7.4.5.Final).
+  JDBC jar xugu-jdbc-12.3.6.jar at repo root is tracked dependency artifact (do not gitignore).
