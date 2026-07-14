@@ -14,7 +14,7 @@
 - Docs: `docs/architecture.md` cross-ref + `docs/feature-matrix-definition-a.md` pointer (no row duplication)
 - REGISTRY: P-002 `accepted`; P-003 `ready` (dependency satisfied)
 - VERIFY PASS evidence: `harness/evidence/architect-contract/P-002/verification.json`
-- Must-commit on working branch (SHA recorded in ACCEPTANCE / session after commit)
+- Must-commit on working branch (SHA: 647525010e9bc2d58ab322e52caf2b4159d17db5)
 
 ## Verification
 

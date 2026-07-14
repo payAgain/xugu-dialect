@@ -88,7 +88,7 @@
 ## Version control checkpoint
 
 - Branch: `feat/i-001-xugu-dialect-major`
-- Candidate commit: `PENDING_SHA`
+- Candidate commit: `647525010e9bc2d58ab322e52caf2b4159d17db5`
 - Deferred reason when no commit: N/A (must-commit authorized for B-002 Accept)
 
 ## Acceptance decision
