@@ -65,7 +65,7 @@
 ## Version control checkpoint
 
 - Branch: `feat/i-001-xugu-dialect-major`
-- Candidate commit: `PENDING_MUST_COMMIT`
+- Candidate commit: `377b9e6e8b831eee4cdeb5e56f71e73bc174393c`
 - Deferred reason when no commit: N/A (must-commit authorized for B-001)
 
 ## Acceptance decision

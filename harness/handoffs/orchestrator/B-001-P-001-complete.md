@@ -11,7 +11,7 @@
 - Reviewer Decision: **approve** (`rev-p001-20260714`) → `harness/evidence/reviewer/P-001/REVIEW.md`
 - ACCEPTANCE Decision: ``accepted`` → `harness/evidence/implementer/P-001/ACCEPTANCE.md`
 - REGISTRY: P-001 `accepted`; P-002 `ready` (dependency satisfied)
-- Must-commit on working branch (SHA: see ACCEPTANCE / session-state after commit)
+- Must-commit on working branch (SHA: `377b9e6e8b831eee4cdeb5e56f71e73bc174393c`)
 
 ## Verification
 

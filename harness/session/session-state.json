@@ -5,7 +5,7 @@
   "status": "p001_accepted_await_b002",
   "current_phase": "P-001",
   "harness_level": "Standard",
-  "last_updated": "2026-07-14T16:40:00+08:00",
+  "last_updated": "2026-07-14T16:45:00+08:00",
   "initiative_id": "I-001",
   "initiative_type": "major",
   "working_branch": "feat/i-001-xugu-dialect-major",
@@ -35,7 +35,7 @@
       "python harness/scripts/harness_check.py",
       "python harness/scripts/verify.py (prior VERIFY PASS)"
     ],
-    "last_result": "HARNESS_CHECK PASS; VERIFY PASS (P-001)",
+    "last_result": "HARNESS_CHECK PASS; VERIFY PASS; commit 377b9e6e8b831eee4cdeb5e56f71e73bc174393c",
     "known_failures": []
   },
   "cognitive_state": {
@@ -49,12 +49,12 @@
     "blocked_on": "human_gate_b002_scope_approval"
   },
   "version_control_checkpoint": {
-    "decision": "must-commit-authorized",
-    "candidate_commit": "PENDING_MUST_COMMIT",
+    "decision": "committed",
+    "candidate_commit": "377b9e6e8b831eee4cdeb5e56f71e73bc174393c",
     "git_init": true,
-    "committed": false,
+    "committed": true,
     "branch": "feat/i-001-xugu-dialect-major",
-    "note": "Will record real SHA after git commit"
+    "note": "B-001/P-001 must-commit complete; no push"
   },
   "handoff": {
     "last_summary": "P-001 accepted; B-001 complete. Ask Human Gate for B-002 = P-002 only.",
