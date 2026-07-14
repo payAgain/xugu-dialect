@@ -10,6 +10,8 @@
 | Plan | done | P-001…P-011 + REGISTRY |
 | B-001 Build | complete | P-001 accepted; must-commit on feature branch |
 | Maven scaffold | done | Parent + dialect stub + demo skeleton; VERIFY PASS |
-| P-002 | ready | Awaiting Human Gate B-002 approval |
+| P-002 | accepted | B-002 complete; contract + Definition A matrix |
+| B-003 Build | approved | scope P-003 only |
+| P-003 | in_progress | types/DDL; RP-01 next |
 | Baseline / feature commit | done | See ACCEPTANCE candidate SHA |
 | Ship | blocked | No tag/push without Human Gate |

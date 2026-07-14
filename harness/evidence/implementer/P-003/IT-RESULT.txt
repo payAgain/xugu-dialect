@@ -1,0 +1,4 @@
+﻿real_db_it_passed=true
+exit=0
+url=jdbc:xugu://127.0.0.1:5138/SYSTEM?compatiblemode=NONE
+ts=2026-07-14T17:50:27.9631397+08:00

@@ -1,0 +1,16 @@
+IT gate ON (xugu.run.integration=true) — real XuguDB — RETEST
+XuguBinarySchemaExportIT: tests=1 failures=0 errors=0 skipped=0
+XuguDdlIT: tests=1 failures=0 errors=0 skipped=0
+XuguTypeRoundTripIT: tests=4 failures=0 errors=0 skipped=0
+XuguDialectTest: tests=7 failures=0 errors=0 skipped=0
+TOTAL: tests=13 failures=0 errors=0 skipped=0
+IT methods executed: 6 (1 binary SchemaExport + 1 DDL + 4 round-trip)
+Unit methods: 7
+Observed JDBC: jdbc:xugu://127.0.0.1:5138/SYSTEM?...&compatiblemode=NONE
+Observed BINARY DDL: create table HIB_P003_BINARY_PROBE (id integer not null, payload binary not null, primary key (id))
+invocation_id=test-p003-retest-20260714
+ts=2026-07-14T18:16:24+08:00
+
+Offline (gate off) cross-check:
+XuguBinarySchemaExportIT skipped=1; XuguDdlIT skipped=1; XuguTypeRoundTripIT skipped=4; unit skipped=0
+TOTAL offline: tests=13 failures=0 skipped=6

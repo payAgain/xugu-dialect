@@ -1,0 +1,12 @@
+﻿IT gate ON (xugu.run.integration=true) — real XuguDB
+XuguDdlIT: tests=1 failures=0 errors=0 skipped=0
+XuguTypeRoundTripIT: tests=4 failures=0 errors=0 skipped=0
+XuguDialectTest: tests=7 failures=0 errors=0 skipped=0
+TOTAL: tests=12 failures=0 errors=0 skipped=0
+IT methods executed: 5 (1 DDL + 4 round-trip)
+Unit methods: 7
+Observed JDBC: jdbc:xugu://127.0.0.1:5138/SYSTEM?...&compatiblemode=NONE
+ts=2026-07-14T17:55:27+08:00
+
+Offline (gate off) cross-check:
+XuguDdlIT skipped=1; XuguTypeRoundTripIT skipped=4; unit skipped=0

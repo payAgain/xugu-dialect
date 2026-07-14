@@ -26,31 +26,31 @@
 
 | ID | Domain | Capability | Hibernate/Dialect surface (what apps expect) | Xugu doc ref | Status | Target Phase | Acceptance hint |
 |---|---|---|---|---|---|---|---|
-| A-TYP-001 | Types | Integer family | Map `TINYINT`/`SMALLINT`/`INTEGER`/`BIGINT` (SqlTypes) → Xugu integer types | `reference/sql/datatype/numerical.md` | 可实现 | P-003 | Export/create entity with each; round-trip IT |
-| A-TYP-002 | Types | Exact decimal | Map `NUMERIC`/`DECIMAL`/`NUMBER` with precision/scale | `reference/sql/datatype/numerical.md` | 可实现 | P-003 | precision/scale preserved in DDL |
-| A-TYP-003 | Types | Floating | Map `FLOAT`/`DOUBLE`/`REAL` | `reference/sql/datatype/numerical.md` | 可实现 | P-003 | bind/read float columns |
-| A-TYP-004 | Types | CHAR / VARCHAR | Map `CHAR`/`VARCHAR`/`NCHAR` lengths (dialect size strategy) | `reference/sql/datatype/character.md` | 可实现 | P-003 | length in CREATE TABLE; note CHAR trim semantics |
-| A-TYP-005 | Types | BOOLEAN | Map `BOOLEAN`/`BIT` boolean semantics | `reference/sql/datatype/bool.md`, `reference/sql/datatype/bit.md` | 可实现 | P-003 | prefer BOOLEAN; BIT only if needed |
-| A-TYP-006 | Types | DATE | Map `DATE` (date-only) | `reference/sql/datatype/datetime.md` | 可实现 | P-003 | under NONE mode DATE ≠ DATETIME |
-| A-TYP-007 | Types | TIME | Map `TIME` / optional TZ | `reference/sql/datatype/datetime.md` | 可实现 | P-003 | TIME precision 0–3 documented |
-| A-TYP-008 | Types | TIMESTAMP / DATETIME | Map `TIMESTAMP`/`DATETIME` (+ optional TZ) | `reference/sql/datatype/datetime.md` | 可实现 | P-003 | choose TIMESTAMP vs DATETIME consistently |
-| A-TYP-009 | Types | BINARY | Map `VARBINARY`/`BINARY` small binary | `reference/sql/datatype/binary.md` | 可实现 | P-003 | ≤64KB BINARY path |
-| A-TYP-010 | Types | BLOB | Map `BLOB` / materialize binary LOB | `reference/sql/datatype/large-object.md` | 可实现 | P-003 | LOB stream/read IT |
-| A-TYP-011 | Types | CLOB | Map `CLOB` / materialize character LOB | `reference/sql/datatype/large-object.md` | 可实现 | P-003 | CLOB/NCLOB synonym note |
-| A-TYP-012 | Types | GUID / UUID column | Map UUID/`UuidJdbcType` → `GUID` type | `reference/sql/datatype/guid.md` | 可实现 | P-003 | column type GUID; generators in P-006/cross |
-| A-TYP-013 | Types | JSON column | Map JSON/`SqlTypes.JSON` → `JSON` | `reference/sql/datatype/json.md` | 可实现 | P-003 | store/retrieve JSON string; operators later |
+| A-TYP-001 | Types | Integer family | Map `TINYINT`/`SMALLINT`/`INTEGER`/`BIGINT` (SqlTypes) → Xugu integer types | `reference/sql/datatype/numerical.md` | 可实现 | P-003 | ✅ P-003 unit + IT |
+| A-TYP-002 | Types | Exact decimal | Map `NUMERIC`/`DECIMAL`/`NUMBER` with precision/scale | `reference/sql/datatype/numerical.md` | 可实现 | P-003 | ✅ P-003 unit + IT |
+| A-TYP-003 | Types | Floating | Map `FLOAT`/`DOUBLE`/`REAL` | `reference/sql/datatype/numerical.md` | 可实现 | P-003 | ✅ P-003 unit (REAL→FLOAT) |
+| A-TYP-004 | Types | CHAR / VARCHAR | Map `CHAR`/`VARCHAR`/`NCHAR` lengths (dialect size strategy) | `reference/sql/datatype/character.md` | 可实现 | P-003 | ✅ P-003; CHAR trim noted |
+| A-TYP-005 | Types | BOOLEAN | Map `BOOLEAN`/`BIT` boolean semantics | `reference/sql/datatype/bool.md`, `reference/sql/datatype/bit.md` | 可实现 | P-003 | ✅ P-003 prefer BOOLEAN |
+| A-TYP-006 | Types | DATE | Map `DATE` (date-only) | `reference/sql/datatype/datetime.md` | 可实现 | P-003 | ✅ P-003 IT |
+| A-TYP-007 | Types | TIME | Map `TIME` / optional TZ | `reference/sql/datatype/datetime.md` | 可实现 | P-003 | ✅ P-003 columnType |
+| A-TYP-008 | Types | TIMESTAMP / DATETIME | Map `TIMESTAMP`/`DATETIME` (+ optional TZ) | `reference/sql/datatype/datetime.md` | 可实现 | P-003 | ✅ TIMESTAMP chosen |
+| A-TYP-009 | Types | BINARY | Map `VARBINARY`/`BINARY` small binary | `reference/sql/datatype/binary.md` | 可实现 | P-003 | ✅ P-003 → bare BINARY (no `$l`) |
+| A-TYP-010 | Types | BLOB | Map `BLOB` / materialize binary LOB | `reference/sql/datatype/large-object.md` | 可实现 | P-003 | ✅ P-003 IT |
+| A-TYP-011 | Types | CLOB | Map `CLOB` / materialize character LOB | `reference/sql/datatype/large-object.md` | 可实现 | P-003 | ✅ P-003; NCLOB→CLOB |
+| A-TYP-012 | Types | GUID / UUID column | Map UUID/`UuidJdbcType` → `GUID` type | `reference/sql/datatype/guid.md` | 可实现 | P-003 | ✅ P-003 IT |
+| A-TYP-013 | Types | JSON column | Map JSON/`SqlTypes.JSON` → `JSON` | `reference/sql/datatype/json.md` | 可实现 | P-003 | ✅ P-003 IT |
 | A-TYP-014 | Types | INTERVAL | Map Hibernate duration/interval if Dialect exposes | `reference/sql/datatype/datetime.md` | 延后 | later | Revisit if app demand + IntervalJdbcType needed |
 | A-TYP-015 | Types | ARRAY | Map SQL ARRAY / Hibernate array types | `reference/sql/datatype/array.md` | 延后 | later | Outside core MySQL/Oracle ORM default surface for I-001 |
 | A-TYP-016 | Types | XML | Map SQLXML / XML type | `reference/sql/datatype/xml.md` | 延后 | later | Not required for definition A core |
 | A-TYP-017 | Types | Geometric / spatial | Map geometry types | `reference/sql/datatype/geometric.md` | 延后 | later | Charter: spatial out unless matrix includes; revisit on Scope |
 | A-TYP-018 | Types | UDT | User-defined types as entity columns | `reference/sql/datatype/udt.md` | 延后 | later | Not production default for Hibernate apps |
-| A-TYP-019 | Types | Type conversion CAST | Dialect/app CAST between types | `reference/sql/type_conversion.md`, `reference/sql/expression/type_conversion.md` | 可实现 | P-003 | CAST in HQL/native smoke |
-| A-DDL-001 | DDL | CREATE TABLE basics | Schema export `create table` with columns/nullability/defaults | `reference/object/table/create.md` | 可实现 | P-003 | hbm2ddl/schema export smoke |
-| A-DDL-002 | DDL | ALTER TABLE add/drop column | Schema update add/modify column | `reference/object/table/alter.md` | 可实现 | P-003 | ALTER ADD COLUMN path |
-| A-DDL-003 | DDL | Primary key inline | `PRIMARY KEY` on column/table | `reference/object/constraints.md`, `reference/object/table/create.md` | 可实现 | P-003 | PK in exported DDL |
-| A-DDL-004 | DDL | NOT NULL | Column nullability | `reference/object/constraints.md` | 可实现 | P-003 | NOT NULL enforced |
-| A-DDL-005 | DDL | DEFAULT value | Column default in DDL | `reference/object/table/create.md` | 可实现 | P-003 | DEFAULT literal/function where documented |
-| A-DDL-006 | DDL | DROP TABLE | Schema drop | `reference/object/table/alter.md` (drop via object lifecycle; see table docs) | 可实现 | P-003 | drop table works in export |
+| A-TYP-019 | Types | Type conversion CAST | Dialect/app CAST between types | `reference/sql/type_conversion.md`, `reference/sql/expression/type_conversion.md` | 可实现 | P-003 | ✅ castPattern default |
+| A-DDL-001 | DDL | CREATE TABLE basics | Schema export `create table` with columns/nullability/defaults | `reference/object/table/create.md` | 可实现 | P-003 | ✅ schema export IT |
+| A-DDL-002 | DDL | ALTER TABLE add/drop column | Schema update add/modify column | `reference/object/table/alter.md` | 可实现 | P-003 | ✅ ALTER ADD COLUMN IT |
+| A-DDL-003 | DDL | Primary key inline | `PRIMARY KEY` on column/table | `reference/object/constraints.md`, `reference/object/table/create.md` | 可实现 | P-003 | ✅ PK in export IT |
+| A-DDL-004 | DDL | NOT NULL | Column nullability | `reference/object/constraints.md` | 可实现 | P-003 | ✅ NOT NULL IT |
+| A-DDL-005 | DDL | DEFAULT value | Column default in DDL | `reference/object/table/create.md` | 可实现 | P-003 | ✅ default exporter path |
+| A-DDL-006 | DDL | DROP TABLE | Schema drop | `reference/object/table/alter.md` (drop via object lifecycle; see table docs) | 可实现 | P-003 | ✅ drop table IT |
 | A-DDL-007 | DDL | IF NOT EXISTS create | Optional IF NOT EXISTS | `reference/object/table/create.md` | 延后 | later | Hibernate rarely requires; revisit if tooling needs |
 | A-DDL-008 | DDL | Table partitioning | PARTITION BY in CREATE | `reference/object/table/partition.md`, `reference/object/table/create.md` | 延后 | later | Not required for standard ORM schema export |
 | A-DDL-009 | DDL | Column/table ENCRYPT | Encryptor clauses | `reference/object/table/create.md`, `reference/object/encryptor.md` | 延后 | later | Security product feature, not Dialect core |
@@ -161,13 +161,13 @@
 
 | ID | Domain | Capability | Hibernate/Dialect surface (what apps expect) | Xugu doc ref | Status | Target Phase | Acceptance hint |
 |---|---|---|---|---|---|---|---|
-| A-XCUT-001 | Identifiers | Unquoted identifier case | NONE mode → uppercase fold | `reference/sql/identifier.md`, `reference/system-configuration-parameter/session-parameter/compatible_mode.md`, `reference/system-configuration-parameter/xugu.ini/compatible/def_compatible_mode.md` | 可实现 | P-003 | Quote strategy consistent with NONE |
-| A-XCUT-002 | Identifiers | Quoted identifiers | Double-quote / backtick quoting | `reference/sql/identifier.md` | 可实现 | P-003 | preserve case when quoted |
+| A-XCUT-001 | Identifiers | Unquoted identifier case | NONE mode → uppercase fold | `reference/sql/identifier.md`, `reference/system-configuration-parameter/session-parameter/compatible_mode.md`, `reference/system-configuration-parameter/xugu.ini/compatible/def_compatible_mode.md` | 可实现 | P-003 | ✅ UPPER via IdentifierHelper |
+| A-XCUT-002 | Identifiers | Quoted identifiers | Double-quote / backtick quoting | `reference/sql/identifier.md` | 可实现 | P-003 | ✅ quote `"` |
 | A-XCUT-003 | Identifiers | compatible_mode default NONE | Connection/session default | `reference/system-configuration-parameter/session-parameter/compatible_mode.md` | 可实现 | P-008 | demo/IT docs state NONE; no MySQL mode dependency |
-| A-XCUT-004 | Transactions | BEGIN/COMMIT/ROLLBACK | JDBC transactions (Dialect keyword support) | `reference/sql/tcl.md` | 可实现 | P-003 | smoke via JDBC; Dialect keywords if required |
+| A-XCUT-004 | Transactions | BEGIN/COMMIT/ROLLBACK | JDBC transactions (Dialect keyword support) | `reference/sql/tcl.md` | 可实现 | P-003 | ✅ JDBC TCL smoke + keywords |
 | A-XCUT-005 | Isolation | Isolation levels | READ COMMITTED / REPEATABLE READ / SERIALIZABLE | `reference/system-configuration-parameter/session-parameter/iso_level.md` | 可实现 | P-008 | document mapping; Dialect `supports*` flags if needed |
 | A-XCUT-006 | Isolation | READ UNCOMMITTED | Common JDBC level | `reference/system-configuration-parameter/session-parameter/iso_level.md` (0=READ ONLY,1=RC,2=RR,3=SERIALIZABLE) | 文档不允许 | P-008 | No RU level; do not claim support |
-| A-XCUT-007 | Keywords | Keyword escaping | Reserved word quoting | `reference/sql/keyword.md`, `reference/sql/identifier.md` | 可实现 | P-003 | register keywords where Hibernate expects |
+| A-XCUT-007 | Keywords | Keyword escaping | Reserved word quoting | `reference/sql/keyword.md`, `reference/sql/identifier.md` | 可实现 | P-003 | ✅ registerKeyword subset |
 | A-XCUT-008 | Dual | FROM DUAL (if needed) | Some Dialects use DUAL | `reference/object/sequence.md` examples use `FROM DUAL` | 可实现 | P-005 | support DUAL for sequence select if used |
 | A-XCUT-009 | Config | Secrets via env | Connection user/password/host | Charter / I-001 brief | 可实现 | P-009 | demo uses env overrides |
 | A-XCUT-010 | Non-goal | Extend MySQL/Oracle Dialect | Inheritance shortcut | ADR-0001 / Charter | 文档不允许 | — | Forbidden forever in I-001 |

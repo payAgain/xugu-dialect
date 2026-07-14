@@ -1,23 +1,21 @@
 # Current Task
 
 ## Goal
-I-001 (major): 虚谷 Hibernate 7.4.5 方言正式 jar + Spring Boot demo + 项目文档；定义 A 全能矩阵。
+I-001 (major)：虚谷 Hibernate 7.4.5 方言正式 jar + Spring Boot demo + 项目文档；定义 A 全能矩阵。
 
 ## Current Status
-b002_p002_accepted_await_b003
+b003_p003_accepted_propose_b004
 
 ## Active Batch / Tasks
-- Batch: **B-002** complete (scope P-002 only) — P-002 **accepted**
-- Next proposed: **B-003** → **P-003 only** (await Human Gate)
-- P-003 status: **ready** (dependency P-002 satisfied; not in_progress until B-003 approved)
-- P-004…P-011 still blocked / unapproved
-- Primary Owners: Human Gate → approve B-003; then orchestrator dispatch P-003 role_pipeline
+- Batch: **B-003** accepted (scope **P-003 only**) — P-003 **accepted**
+- P-004 status: **ready** (unlocked); **not** approved for Build until Human Gate
+- P-005…P-011 still blocked / unapproved
+- Primary Owners: Human Gate → approve B-004 (P-004 only) → orchestrator dispatch
 
 ## Scope
-Allowed after B-003 approval: per `harness/tasks/P-003.md` Allowed paths  
-Not allowed now:
-- P-003 Java until Human Gate approves B-003
-- P-004+ until separate Build approvals
+Allowed now: harness handoff / Human Gate Scope Q&A for B-004
+Not allowed until B-004 approval:
+- P-004 implementation
 - `tag` / `push` / Central 发布 without Human Gate
 
 ## Plan
@@ -25,8 +23,9 @@ Not allowed now:
 2. ~~Branch `feat/i-001-xugu-dialect-major`~~ DONE
 3. ~~Plan P-001…P-011 + REGISTRY + B-001~~ DONE
 4. ~~B-001 / P-001 Accept~~ DONE
-5. ~~B-002 / P-002 role_pipeline + Accept~~ DONE
-6. **Human Gate: 批准 Build B-003 范围仅 P-003**
+5. ~~B-002 / P-002 Accept~~ DONE
+6. ~~B-003 / P-003 Accept~~ DONE (RP-04 recheck approve; A-TYP-009 bare binary)
+7. **Human Gate: 批准 Build B-004 范围仅 P-004（pagination & locks）**
 
 ## Validation Commands
 ```text
@@ -39,18 +38,19 @@ python harness/scripts/verify.py
 - [x] I-001 brief active; INDEX active
 - [x] Working branch feat/i-001-xugu-dialect-major
 - [x] B-001 approved; P-001 accepted
-- [x] B-002 approved; P-002 accepted (contract + Definition A matrix 105 rows)
-- [ ] B-003 approved for P-003 only
+- [x] B-002 approved; P-002 accepted
+- [x] B-003 approved; P-003 accepted (VERIFY PASS + real DB IT + must-commit)
+- [ ] B-004 approved for P-004 only (pending Human Gate)
 
 ## Risks / Blockers
-- P-003 needs real XuguDB for IT observed flows
-- P-003 risk_score=9 → reviewer required
+- None for P-003 Accept
+- P-004 risk_score=8 → reviewer required when Build approved
 - SQL truth source read-only: `E:\Work\docs\content`
 
 ## Next 3 Steps
-1. Human Gate: 批准 **B-003 范围仅 P-003**
-2. On approval: materialize `B-003.json`, set P-003 `in_progress`, dispatch RP-01 architect-contract
-3. Do not start P-004+ until later Build approval
+1. **Human Gate approve B-004 scope P-004 only** (pagination & locks)
+2. On approval: materialize B-004.json; set P-004 in_progress; dispatch role_pipeline
+3. Keep P-005+ blocked until separate Build approvals
 
 ## Last Updated
-2026-07-14T17:10:00+08:00（角色：orchestrator）
+2026-07-14T18:25:00+08:00（角色：orchestrator）

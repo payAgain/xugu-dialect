@@ -16,6 +16,11 @@
   <name>xugu-dialect</name>
   <description>XuguDB Hibernate dialect library (scaffold)</description>
 
+  <properties>
+    <!-- Default off; enable with -Dxugu.run.integration=true or env XUGU_RUN_IT=true -->
+    <xugu.run.integration>false</xugu.run.integration>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.hibernate.orm</groupId>
@@ -34,4 +39,23 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <!-- Include *IT for gated live-DB tests (still skipped unless gate is on). -->
+          <includes>
+            <include>**/*Test.java</include>
+            <include>**/*Tests.java</include>
+            <include>**/*IT.java</include>
+          </includes>
+          <systemPropertyVariables>
+            <xugu.run.integration>${xugu.run.integration}</xugu.run.integration>
+          </systemPropertyVariables>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>

@@ -1,0 +1,26 @@
+schema_version: 1
+role: reviewer
+phase_id: P-003
+build_id: B-003
+initiative_id: I-001
+invocation_id: rev-p003-recheck-20260714
+prior_invocation_id: rev-p003-20260714
+step_id: RP-04
+status: passed
+decision: approve
+required: true
+condition: full_or_risk_ge_8
+completed_at: 2026-07-14T18:20:00+08:00
+readonly: true
+landed_by: orchestrator
+evidence_path: harness/evidence/reviewer/P-003/REVIEW-RECHECK.md
+prior_evidence_path: harness/evidence/reviewer/P-003/REVIEW.md
+blocker: null
+major_closed:
+  - id: A-TYP-009
+    disposition: closed
+    fix: bare-binary
+    observed_sql: "create table HIB_P003_BINARY_PROBE (id integer not null, payload binary not null, primary key (id))"
+    retest: test-p003-retest-20260714
+minors_deferred: true
+next: orchestrator Accept + must-commit; propose B-004 scope P-004 only

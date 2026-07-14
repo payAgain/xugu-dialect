@@ -1,7 +1,7 @@
 schema_version: 1
 charter_version: "1.0.0"
 initiative_id: I-001
-updated: "2026-07-14T17:10:00+08:00"
+updated: "2026-07-14T18:25:00+08:00"
 # Phase progress index. IDs: I-00x / P-00x / B-00x — see protocol/references/glossary.md
 tasks:
   - task_id: P-001
@@ -22,14 +22,15 @@ tasks:
     dependencies: [P-001]
   - task_id: P-003
     title: "方言类型映射与 DDL"
-    status: ready
+    status: accepted
+    build_id: B-003
     packet: harness/tasks/P-003.md
     acceptance_doc: harness/evidence/implementer/P-003/ACCEPTANCE.md
     role_pipeline_summary: "architect-contract → implementer → test → reviewer"
     dependencies: [P-002]
   - task_id: P-004
     title: "分页与锁语法"
-    status: blocked
+    status: ready
     packet: harness/tasks/P-004.md
     acceptance_doc: harness/evidence/implementer/P-004/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"

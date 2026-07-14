@@ -1,62 +1,68 @@
 {
   "schema_version": 1,
   "task_id": "I-001",
-  "batch_id": "B-002",
-  "status": "b002_p002_accepted_await_b003",
-  "current_phase": "P-002",
+  "batch_id": "B-003",
+  "status": "b003_p003_accepted_propose_b004",
+  "current_phase": "P-003",
   "harness_level": "Standard",
-  "last_updated": "2026-07-14T17:13:00+08:00",
+  "last_updated": "2026-07-14T18:25:00+08:00",
   "initiative_id": "I-001",
   "initiative_type": "major",
   "working_branch": "feat/i-001-xugu-dialect-major",
   "active_plan": [
-    "P-002 accepted (B-002)",
-    "Propose B-003 scope = P-003 only",
-    "Await Human Gate approval before P-003 dispatch"
+    "B-003 / P-003 accepted",
+    "P-004 ready (unlocked); await Human Gate B-004 approval (P-004 only)",
+    "P-005+ remain blocked / unapproved"
   ],
   "next_3_steps": [
-    "Human Gate approve B-003 scope P-003 only",
-    "Materialize B-003.json and set P-003 in_progress",
-    "Dispatch P-003 RP-01 architect-contract"
+    "Human Gate approve B-004 scope P-004 only",
+    "Materialize B-004.json; set P-004 in_progress; dispatch role_pipeline",
+    "Keep P-005+ blocked until separate Build approvals"
   ],
   "changed_files": [
-    "contracts/xugu-dialect.contract.md",
-    "contracts/feature-matrix-definition-a.md",
-    "docs/architecture.md",
-    "docs/feature-matrix-definition-a.md",
-    "harness/evidence/architect-contract/P-002/**",
-    "harness/tasks/P-002.md",
+    "dialect/**",
+    "contracts/**",
+    "harness/evidence/**/P-003/**",
     "harness/tasks/P-003.md",
-    "harness/tasks/REGISTRY.yaml"
+    "harness/tasks/P-004.md",
+    "harness/tasks/REGISTRY.yaml",
+    "harness/handoffs/orchestrator/B-003-P-003-complete.md"
   ],
   "validation": {
     "last_commands": [
-      "python harness/scripts/verify.py --phase P-002 (test evidence VERIFY PASS)",
+      "python harness/scripts/verify.py (retest evidence PASS)",
       "python harness/scripts/harness_check.py"
     ],
-    "last_result": "P-002 Accept; VERIFY PASS; matrix 105 (78/7/20)",
+    "last_result": "P-003 accepted; VERIFY PASS; RP-04 approve recheck; must-commit",
     "known_failures": []
   },
   "cognitive_state": {
     "failure_count": 0,
-    "current_mode": "accept_complete_await_next_build",
+    "current_mode": "accept_handoff",
     "tried_approaches": [
       "b001_p001_accepted",
-      "b002_p002_accepted"
+      "b002_p002_accepted",
+      "b003_p003_accepted"
     ],
-    "blocked_on": "human_gate_b003_approval"
+    "blocked_on": "human_gate_b004_approval"
   },
   "version_control_checkpoint": {
-    "decision": "committed",
-    "candidate_commit": "647525010e9bc2d58ab322e52caf2b4159d17db5",
+    "decision": "must_commit",
+    "candidate_commit": "PENDING_MUST_COMMIT",
     "git_init": true,
-    "committed": true,
+    "committed": false,
     "branch": "feat/i-001-xugu-dialect-major",
-    "note": "P-002 Accept must-commit recorded",
-    "head": "6f723fb6fd5332f5eca8b4f398dc60fe8e7c03b8"
+    "note": "P-003 Accept must-commit; no push",
+    "head": "PENDING_MUST_COMMIT"
   },
   "handoff": {
-    "last_summary": "P-002 accepted. Propose B-003 → P-003 only.",
-    "resume_from": "harness/handoffs/orchestrator/B-002-P-002-complete.md"
-  }
+    "last_summary": "P-003 accepted. Propose B-004 scope P-004 only (pagination & locks).",
+    "resume_from": "harness/handoffs/orchestrator/B-003-P-003-complete.md"
+  },
+  "active_phase": "P-003",
+  "proposed_build": "B-004",
+  "proposed_phases": [
+    "P-004"
+  ],
+  "updated_at": "2026-07-14T18:25:00+08:00"
 }

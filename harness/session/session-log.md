@@ -1,5 +1,27 @@
 # Session Log
 
+## Entry: B-003 APPROVED — P-003 in progress
+
+### Summary
+Human Gate 批准 Build：「批准 B-003，范围仅 P-003」（~2026-07-14T17:25+08:00）。Orchestrator 物化 `B-003.json`（`status=approved`, `approved_phase_ids=[P-003]`），将 `P-003` / REGISTRY 标为 `in_progress`（`build_id=B-003`）。未写 Java；未 commit。下一步：派发 P-003 `role_pipeline` RP-01 architect-contract。
+
+### Files Created or Updated
+- harness/builds/B-003.json (approved)
+- harness/tasks/P-003.md (build_id=B-003, status=in_progress)
+- harness/tasks/REGISTRY.yaml (P-003 in_progress + build_id)
+- harness/handoffs/orchestrator/B-003-approved.md
+- current-task.md, harness/session/*
+
+### Validation
+- harness-only disk updates; no Maven / Java implementation this turn
+- No git commit (Human Gate did not authorize)
+
+### Next Steps
+1. Dispatch RP-01 architect-contract（P-003）
+2. Then RP-02 implementer → RP-03 test → RP-04 reviewer（risk≥8）
+3. P-003 ACCEPTANCE 后再请批后续 Build（通常 P-004）
+
+---
 ## Entry: B-002 APPROVED — P-002 in progress
 
 ### Summary
@@ -171,3 +193,18 @@ Orchestrator closed P-002 after RP-01 architect-contract PASS (`arch-p002-202607
 
 ### Commit SHA
 - 647525010e9bc2d58ab322e52caf2b4159d17db5
+
+## 2026-07-14T18:02+08:00 orchestrator
+- Landed P-003 RP-04 reviewer **request-changes** (ev-p003-20260714): MAJOR A-TYP-009 BINARY.
+- Evidence: harness/evidence/reviewer/P-003/REVIEW.md; handoff: harness/handoffs/orchestrator/B-003-P-003-rp04-request-changes.md.
+- Next dispatch: implementer fix BINARY → re-test → re-review. **No Accept / no commit.**
+
+
+## 2026-07-14T18:23:32+08:00 — orchestrator: P-003 / B-003 Accept
+
+- Landed REVIEW-RECHECK.md (`rev-p003-recheck-20260714` approve); REVIEW.md superseded note
+- RP-04 passed; P-003 status accepted; verification_evidence → test verification-retest.json
+- ACCEPTANCE Decision: accepted (BINARY fix + VERIFY PASS + real DB IT)
+- REGISTRY: P-003 accepted; P-004 ready
+- Must-commit on feat/i-001-xugu-dialect-major; propose B-004 → P-004 only
+- Resume: `harness/handoffs/orchestrator/B-003-P-003-complete.md`

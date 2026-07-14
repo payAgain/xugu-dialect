@@ -1,18 +1,102 @@
 package com.xugu.dialect;
 
+import org.hibernate.type.SqlTypes;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Smoke test: dialect class loads and instantiates without a live database.
+ * Offline unit tests for XuguDialect type/DDL/identifier hooks (no live DB).
  */
 class XuguDialectTest {
 
+	private final XuguDialect dialect = new XuguDialect();
+
 	@Test
 	void dialectInstantiates() {
-		XuguDialect dialect = new XuguDialect();
-		assertNotNull(dialect);
-		assertNotNull(dialect.getVersion());
+		assertNotNull( dialect.getVersion() );
+		assertEquals( 12, dialect.getVersion().getMajor() );
+	}
+
+	@Test
+	void columnTypesMatchXuguDocs() {
+		assertEquals( "tinyint", expose( SqlTypes.TINYINT ) );
+		assertEquals( "smallint", expose( SqlTypes.SMALLINT ) );
+		assertEquals( "integer", expose( SqlTypes.INTEGER ) );
+		assertEquals( "bigint", expose( SqlTypes.BIGINT ) );
+		assertEquals( "numeric($p,$s)", expose( SqlTypes.NUMERIC ) );
+		assertEquals( "numeric($p,$s)", expose( SqlTypes.DECIMAL ) );
+		assertEquals( "float", expose( SqlTypes.FLOAT ) );
+		assertEquals( "float", expose( SqlTypes.REAL ) );
+		assertEquals( "double", expose( SqlTypes.DOUBLE ) );
+		assertEquals( "char($l)", expose( SqlTypes.CHAR ) );
+		assertEquals( "varchar($l)", expose( SqlTypes.VARCHAR ) );
+		assertEquals( "char($l)", expose( SqlTypes.NCHAR ) );
+		assertEquals( "varchar($l)", expose( SqlTypes.NVARCHAR ) );
+		assertEquals( "boolean", expose( SqlTypes.BOOLEAN ) );
+		assertEquals( "date", expose( SqlTypes.DATE ) );
+		assertEquals( "time($p)", expose( SqlTypes.TIME ) );
+		assertEquals( "timestamp($p)", expose( SqlTypes.TIMESTAMP ) );
+		assertEquals( "timestamp($p)", expose( SqlTypes.TIMESTAMP_UTC ) );
+		assertEquals( "timestamp($p) with time zone", expose( SqlTypes.TIMESTAMP_WITH_TIMEZONE ) );
+		assertEquals( "binary", expose( SqlTypes.BINARY ) );
+		assertEquals( "binary", expose( SqlTypes.VARBINARY ) );
+		assertEquals( "blob", expose( SqlTypes.LONGVARBINARY ) );
+		assertEquals( "blob", expose( SqlTypes.LONG32VARBINARY ) );
+		assertEquals( "blob", expose( SqlTypes.BLOB ) );
+		assertEquals( "clob", expose( SqlTypes.CLOB ) );
+		assertEquals( "clob", expose( SqlTypes.NCLOB ) );
+		assertEquals( "guid", expose( SqlTypes.UUID ) );
+		assertEquals( "json", expose( SqlTypes.JSON ) );
+	}
+
+	@Test
+	void sizeAndPrecisionDefaults() {
+		assertEquals( 60_000, dialect.getMaxVarcharLength() );
+		assertEquals( 65_536, dialect.getMaxVarbinaryLength() );
+		assertEquals( 12, dialect.getDefaultDecimalPrecision() );
+		assertEquals( 3, dialect.getDefaultTimestampPrecision() );
+		assertEquals( SqlTypes.BOOLEAN, dialect.getPreferredSqlTypeCodeForBoolean() );
+		assertTrue( dialect.stripsTrailingSpacesFromChar() );
+	}
+
+	@Test
+	void quoteCharsAreDoubleQuote() {
+		assertEquals( '"', dialect.openQuote() );
+		assertEquals( '"', dialect.closeQuote() );
+		assertEquals( "\"Order\"", dialect.toQuotedIdentifier( "Order" ) );
+	}
+
+	@Test
+	void ddlHelpersMatchXuguSyntax() {
+		assertEquals( "create table", dialect.getCreateTableString() );
+		assertEquals( "add column", dialect.getAddColumnString() );
+		assertEquals( "alter table T", dialect.getAlterTableString( "T" ) );
+		assertEquals( "drop table T", dialect.getDropTableString( "T" ) );
+		assertEquals( "", dialect.getNullColumnString() );
+	}
+
+	@Test
+	void booleanLiteralsAreTrueFalse() {
+		assertEquals( "true", dialect.toBooleanValueString( true ) );
+		assertEquals( "false", dialect.toBooleanValueString( false ) );
+	}
+
+	@Test
+	void keywordsIncludeTcl() {
+		assertTrue( dialect.getKeywords().contains( "begin" ) );
+		assertTrue( dialect.getKeywords().contains( "commit" ) );
+		assertTrue( dialect.getKeywords().contains( "rollback" ) );
+	}
+
+	/** Expose protected {@code columnType} for assertions. */
+	private String expose(int sqlTypeCode) {
+		return new XuguDialect() {
+			String of(int code) {
+				return columnType( code );
+			}
+		}.of( sqlTypeCode );
 	}
 }
