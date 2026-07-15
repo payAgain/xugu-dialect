@@ -55,7 +55,7 @@ hibernate.dialect=com.xugu.dialect.XuguDialect
 
 | Item | Requirement |
 |---|---|
-| Mechanism | `org.hibernate.boot.registry.selector.spi.DialectResolver` (Hibernate 7.4 SPI) registered via `META-INF/services` (exact service type per Hibernate 7.4.5 API) |
+| Mechanism | `org.hibernate.engine.jdbc.dialect.spi.DialectResolver` (Hibernate 7.4.5) registered via `META-INF/services/org.hibernate.engine.jdbc.dialect.spi.DialectResolver` |
 | Behavior | Auto-detect XuguDB from JDBC `DatabaseMetaData` / product name (and documented heuristics) and resolve to `com.xugu.dialect.XuguDialect` |
 | Target Phase | **P-008** |
 | Status until P-008 | Planned; not claimed complete by this contract alone |

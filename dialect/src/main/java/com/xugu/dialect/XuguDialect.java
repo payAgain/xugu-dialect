@@ -21,6 +21,7 @@ import org.hibernate.dialect.temptable.TemporaryTableKind;
 import org.hibernate.dialect.temptable.TemporaryTableStrategy;
 import org.hibernate.dialect.unique.CreateTableUniqueDelegate;
 import org.hibernate.dialect.unique.UniqueDelegate;
+import org.hibernate.engine.jdbc.dialect.spi.DialectResolutionInfo;
 import org.hibernate.engine.jdbc.env.spi.IdentifierCaseStrategy;
 import org.hibernate.engine.jdbc.env.spi.IdentifierHelper;
 import org.hibernate.engine.jdbc.env.spi.IdentifierHelperBuilder;
@@ -107,16 +108,73 @@ import jakarta.persistence.Timeout;
  * {@code FOR UPDATE} semantics so Hibernate lock APIs still emit executable SQL —
  * this is <em>not</em> share-lock support. Concurrent readers may block; applications
  * must not assume PostgreSQL-style {@code FOR SHARE} / non-blocking concurrent reads.
+ *
+ * <p><b>Isolation (A-XCUT-005 / A-XCUT-006):</b> XuGu {@code ISO_LEVEL} documents
+ * {@code 1=READ COMMITTED} (default), {@code 2=REPEATABLE READ},
+ * {@code 3=SERIALIZABLE} ({@code reference/.../iso_level.md}).
+ * <em>READ UNCOMMITTED is not a XuGu ISO_LEVEL value</em> — this dialect does
+ * <strong>not</strong> claim RU support (文档不允许). Hibernate's Dialect surface
+ * exposes only {@link #doesReadCommittedCauseWritersToBlockReaders()} /
+ * {@link #doesRepeatableReadCauseReadersToBlockWriters()}; session isolation is
+ * otherwise set via JDBC / XuGu session parameters.
+ *
+ * <p><b>compatible_mode (A-XCUT-003):</b> Integration and demo surfaces use
+ * {@code compatible_mode=NONE} (JDBC {@code compatiblemode=NONE}); no MySQL/Oracle
+ * compatible-mode dependency.
  */
 public class XuguDialect extends Dialect {
+
+	/** Default version when JDBC metadata does not supply one (live observed major=12). */
+	public static final DatabaseVersion MINIMUM_VERSION = DatabaseVersion.make( 12, 0 );
 
 	private final UniqueDelegate uniqueDelegate = new CreateTableUniqueDelegate( this );
 
 	public XuguDialect() {
-		super( DatabaseVersion.make( 12, 0 ) );
+		this( MINIMUM_VERSION );
+	}
+
+	/**
+	 * Version-aware constructor (A-SPI-003).
+	 */
+	public XuguDialect(DatabaseVersion version) {
+		super( version != null ? version : MINIMUM_VERSION );
+		registerXuguKeywords();
+	}
+
+	/**
+	 * SPI constructor: copy version from JDBC resolution info when present.
+	 */
+	public XuguDialect(DialectResolutionInfo info) {
+		this( info.makeCopyOrDefault( MINIMUM_VERSION ) );
+		registerKeywords( info );
+	}
+
+	private void registerXuguKeywords() {
 		for ( String keyword : XuguKeywords.RESERVED ) {
 			registerKeyword( keyword );
 		}
+	}
+
+	// -------------------------------------------------------------------------
+	// Isolation notes (A-XCUT-005 / A-XCUT-006) — Hibernate Dialect hooks only
+	// -------------------------------------------------------------------------
+
+	/**
+	 * XuGu READ COMMITTED does not require writers to block readers for typical
+	 * ORM workloads; leave Hibernate default {@code false}.
+	 */
+	@Override
+	public boolean doesReadCommittedCauseWritersToBlockReaders() {
+		return false;
+	}
+
+	/**
+	 * XuGu REPEATABLE READ does not require readers to block writers for typical
+	 * ORM workloads; leave Hibernate default {@code false}.
+	 */
+	@Override
+	public boolean doesRepeatableReadCauseReadersToBlockWriters() {
+		return false;
 	}
 
 	// -------------------------------------------------------------------------

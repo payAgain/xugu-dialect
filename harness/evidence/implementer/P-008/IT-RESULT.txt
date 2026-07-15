@@ -1,0 +1,41 @@
+# P-008 IT Result (implementer RP-01)
+
+**Gate:** `-Dxugu.run.integration=true`  
+**URL:** `jdbc:xugu://127.0.0.1:5138/SYSTEM?...&compatiblemode=NONE`  
+**Exit:** 0
+
+## Live metadata
+
+```
+P-008 live productName=[XuguDB] driverName=[XuguDB JDBC Driver] version=[XuguDB 12.0.0] major=12 minor=0
+```
+
+## XuguDialectResolverIT
+
+| Test | Result |
+|---|---|
+| `liveMetadata_productAndDriverContainXugu` | PASS |
+| `explicitDialect_sessionFactorySimpleQuery` | PASS (insert + HQL select) |
+| `spiAutoResolve_sessionFactoryWithoutExplicitDialect` | PASS (dialect=`XuguDialect` v12.0; count query) |
+
+## Offline
+
+| Suite | Result |
+|---|---|
+| `XuguDialectResolverTest` | PASS (match + MySQL/Oracle/Postgres null) |
+| `XuguDialectServicesResourceTest` | PASS (classpath + classes + fresh jar) |
+
+## Jar packaging
+
+```
+META-INF/services/
+META-INF/services/org.hibernate.engine.jdbc.dialect.spi.DialectResolver
+```
+
+## Cleanup
+
+`HIB_P008_PROBE` dropped in IT finally — OK
+
+## Isolation observation (JDBC)
+
+Hibernate log on live connection: `Isolation level: READ_COMMITTED` (default; aligns with XuGu ISO_LEVEL=1).

@@ -1,0 +1,96 @@
+schema_version: 1
+role: implementer
+phase_id: P-008
+build_id: B-008
+initiative_id: I-001
+invocation_id: impl-p008-20260715
+step_id: RP-01
+status: passed
+required: true
+completed_at: "2026-07-15T14:01:30+08:00"
+purpose: implement DialectResolver SPI + META-INF services wiring; verify explicit dialect config
+
+inputs:
+  - harness/tasks/P-008.md
+  - harness/builds/B-008.json
+  - contracts/feature-matrix-definition-a.md
+  - contracts/xugu-dialect.contract.md
+  - E:\\Work\\docs\\content\\reference\\system-configuration-parameter\\session-parameter\\iso_level.md
+  - Hibernate 7.4.5 DialectResolver SPI (m2: org.hibernate.engine.jdbc.dialect.spi.DialectResolver)
+  - Live XuguDB JDBC DatabaseMetaData probe
+
+outputs:
+  - dialect/src/main/java/com/xugu/dialect/XuguDialectResolver.java
+  - dialect/src/main/java/com/xugu/dialect/XuguDialect.java
+  - dialect/src/main/resources/META-INF/services/org.hibernate.engine.jdbc.dialect.spi.DialectResolver
+  - dialect/src/test/java/com/xugu/dialect/XuguDialectResolverTest.java
+  - dialect/src/test/java/com/xugu/dialect/XuguDialectServicesResourceTest.java
+  - dialect/src/test/java/com/xugu/dialect/it/XuguDialectResolverIT.java
+  - dialect/src/test/java/com/xugu/dialect/it/entities/P008ProbeEntity.java
+  - contracts/feature-matrix-definition-a.md
+  - contracts/xugu-dialect.contract.md
+  - harness/evidence/implementer/P-008/NOTES.md
+  - harness/evidence/implementer/P-008/CHECKLIST.md
+  - harness/evidence/implementer/P-008/IT-RESULT.txt
+  - harness/evidence/implementer/P-008/verification.json
+  - harness/handoffs/implementer/P-008.yaml
+
+coverage:
+  implemented:
+    - A-SPI-001
+    - A-SPI-002
+    - A-SPI-003
+    - A-SPI-004
+    - A-XCUT-003
+    - A-XCUT-005
+  documented_not_allowed:
+    - A-XCUT-006
+  deferred: []
+
+product_name_match_rule:
+  live_product_name: XuguDB
+  live_driver_name: "XuguDB JDBC Driver"
+  live_version: "XuguDB 12.0.0"
+  live_major_minor: "12.0"
+  rule: "product name OR driver name contains token 'xugu' (case-insensitive); else null"
+  spi_interface: org.hibernate.engine.jdbc.dialect.spi.DialectResolver
+  resolver_class: com.xugu.dialect.XuguDialectResolver
+
+isolation:
+  supported:
+    - READ_COMMITTED
+    - REPEATABLE_READ
+    - SERIALIZABLE
+  not_claimed:
+    - READ_UNCOMMITTED
+  compatible_mode: NONE
+
+cleanup:
+  prefix: HIB_P008_
+  status: cleaned
+
+verification:
+  test_offline:
+    command: "mvn -q test"
+    exit_code: 0
+  test_integration:
+    command: 'mvn -q -pl dialect test "-Dxugu.run.integration=true"'
+    exit_code: 0
+    real_db: true
+    url: "jdbc:xugu://127.0.0.1:5138/SYSTEM?...&compatiblemode=NONE"
+  verify_py:
+    command: "python harness/scripts/verify.py --phase P-008"
+    result: VERIFY PASS
+    evidence: harness/evidence/implementer/P-008/verification.json
+
+forbidden_reminder:
+  - no Accept
+  - no git commit / tag / push
+  - no MySQL/Oracle Dialect inheritance
+  - no sibling hibernate-dialect read
+  - no READ UNCOMMITTED support claim
+
+next_step: independent test RP-02 then reviewer RP-03
+blocker: null
+accept_authorized: false
+commit_authorized: false

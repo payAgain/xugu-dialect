@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "status": "FAIL",
-  "started_at": "2026-07-15T14:00:06+08:00",
-  "finished_at": "2026-07-15T14:00:06+08:00",
+  "status": "PASS",
+  "started_at": "2026-07-15T14:05:34+08:00",
+  "finished_at": "2026-07-15T14:05:59+08:00",
   "project_root": "E:\\Work\\java\\hibernate-test",
   "phase_id": "P-008",
   "config": "E:\\Work\\java\\hibernate-test\\harness\\verification.json",
@@ -15,18 +15,18 @@
     {
       "id": "build",
       "required": true,
-      "status": "FAIL",
+      "status": "PASS",
       "command": "mvn -q -DskipTests package",
       "cwd": "E:\\Work\\java\\hibernate-test",
-      "exit_code": 1
+      "exit_code": 0
     },
     {
       "id": "test",
       "required": true,
-      "status": "FAIL",
+      "status": "PASS",
       "command": "mvn -q test",
       "cwd": "E:\\Work\\java\\hibernate-test",
-      "exit_code": 1
+      "exit_code": 0
     },
     {
       "id": "lint",

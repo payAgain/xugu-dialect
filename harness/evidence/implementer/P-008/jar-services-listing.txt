@@ -1,0 +1,5 @@
+﻿
+META-INF/services/
+META-INF/services/org.hibernate.engine.jdbc.dialect.spi.DialectResolver
+
+

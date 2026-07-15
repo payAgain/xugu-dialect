@@ -152,10 +152,10 @@
 
 | ID | Domain | Capability | Hibernate/Dialect surface (what apps expect) | Xugu doc ref | Status | Target Phase | Acceptance hint |
 |---|---|---|---|---|---|---|---|
-| A-SPI-001 | SPI | Explicit dialect property | `hibernate.dialect=com.xugu.dialect.XuguDialect` | (product contract; JDBC URL shape driver docs) | 可实现 | P-008 | SessionFactory boots with explicit dialect |
-| A-SPI-002 | SPI | DialectResolver registration | META-INF/services resolver → XuguDialect | (Hibernate 7.4 SPI; Xugu product name via JDBC metadata) | 可实现 | P-008 | resolve without explicit property against real Xugu |
-| A-SPI-003 | SPI | Database version awareness | `DatabaseVersion` / versioned Dialect | JDBC metadata + Xugu version | 可实现 | P-008 | construct Dialect with detected version |
-| A-SPI-004 | SPI | Wrong-DB non-match | Resolver must not claim MySQL/Oracle | — | 可实现 | P-008 | negative test: non-Xugu metadata → no false resolve |
+| A-SPI-001 | SPI | Explicit dialect property | `hibernate.dialect=com.xugu.dialect.XuguDialect` | (product contract; JDBC URL shape driver docs) | 可实现 | P-008 | ✅ IT: explicit SessionFactory + query |
+| A-SPI-002 | SPI | DialectResolver registration | META-INF/services `org.hibernate.engine.jdbc.dialect.spi.DialectResolver` → `XuguDialectResolver` | Live product `XuguDB` / driver `XuguDB JDBC Driver` | 可实现 | P-008 | ✅ SPI auto-resolve IT + services resource |
+| A-SPI-003 | SPI | Database version awareness | `XuguDialect(DialectResolutionInfo)` / `DatabaseVersion` | JDBC major/minor (live 12.0) | 可实现 | P-008 | ✅ construct with detected version |
+| A-SPI-004 | SPI | Wrong-DB non-match | Resolver must not claim MySQL/Oracle | — | 可实现 | P-008 | ✅ unit: MySQL/Oracle/Postgres → null |
 
 ---
 
@@ -165,10 +165,10 @@
 |---|---|---|---|---|---|---|---|
 | A-XCUT-001 | Identifiers | Unquoted identifier case | NONE mode → uppercase fold | `reference/sql/identifier.md`, `reference/system-configuration-parameter/session-parameter/compatible_mode.md`, `reference/system-configuration-parameter/xugu.ini/compatible/def_compatible_mode.md` | 可实现 | P-003 | ✅ UPPER via IdentifierHelper |
 | A-XCUT-002 | Identifiers | Quoted identifiers | Double-quote / backtick quoting | `reference/sql/identifier.md` | 可实现 | P-003 | ✅ quote `"` |
-| A-XCUT-003 | Identifiers | compatible_mode default NONE | Connection/session default | `reference/system-configuration-parameter/session-parameter/compatible_mode.md` | 可实现 | P-008 | demo/IT docs state NONE; no MySQL mode dependency |
+| A-XCUT-003 | Identifiers | compatible_mode default NONE | Connection/session default | `reference/system-configuration-parameter/session-parameter/compatible_mode.md` | 可实现 | P-008 | ✅ IT/NOTES: `compatiblemode=NONE`; no MySQL mode dependency |
 | A-XCUT-004 | Transactions | BEGIN/COMMIT/ROLLBACK | JDBC transactions (Dialect keyword support) | `reference/sql/tcl.md` | 可实现 | P-003 | ✅ JDBC TCL smoke + keywords |
-| A-XCUT-005 | Isolation | Isolation levels | READ COMMITTED / REPEATABLE READ / SERIALIZABLE | `reference/system-configuration-parameter/session-parameter/iso_level.md` | 可实现 | P-008 | document mapping; Dialect `supports*` flags if needed |
-| A-XCUT-006 | Isolation | READ UNCOMMITTED | Common JDBC level | `reference/system-configuration-parameter/session-parameter/iso_level.md` (0=READ ONLY,1=RC,2=RR,3=SERIALIZABLE) | 文档不允许 | P-008 | No RU level; do not claim support |
+| A-XCUT-005 | Isolation | Isolation levels | READ COMMITTED / REPEATABLE READ / SERIALIZABLE | `reference/system-configuration-parameter/session-parameter/iso_level.md` | 可实现 | P-008 | ✅ Documented ISO_LEVEL 1/2/3 + Dialect isolation hooks |
+| A-XCUT-006 | Isolation | READ UNCOMMITTED | Common JDBC level | `reference/system-configuration-parameter/session-parameter/iso_level.md` (0=READ ONLY,1=RC,2=RR,3=SERIALIZABLE) | 文档不允许 | P-008 | ✅ Explicitly NOT claimed (no RU in XuGu ISO_LEVEL) |
 | A-XCUT-007 | Keywords | Keyword escaping | Reserved word quoting | `reference/sql/keyword.md`, `reference/sql/identifier.md` | 可实现 | P-003 | ✅ registerKeyword subset |
 | A-XCUT-008 | Dual | FROM DUAL (if needed) | Some Dialects use DUAL | `reference/object/sequence.md` examples use `FROM DUAL` | 可实现 | P-005 | ✅ `getFromDual()` → ` from dual` on NEXTVAL/CURRVAL selects |
 | A-XCUT-009 | Config | Secrets via env | Connection user/password/host | Charter / I-001 brief | 可实现 | P-009 | demo uses env overrides |

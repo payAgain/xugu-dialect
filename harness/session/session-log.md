@@ -339,3 +339,74 @@ ev-p003-20260714): MAJOR A-TYP-009 BINARY.
 - Resume: `harness/handoffs/orchestrator/B-007-P-007-complete.md`
 
 - Must-commit SHA recorded: 3826699f7588191a7157129467750a4f87b3bf19
+
+## 2026-07-15T13:49:00+08:00 — orchestrator: B-008 approved (P-008 only)
+
+- Human Gate phrase: 「批准 B-008，范围仅 P-008」(~2026-07-15T13:49+08:00)
+- Created harness/builds/B-008.json (approved_phase_ids=[P-008])
+- Updated harness/tasks/P-008.md: build_id=B-008, status=in_progress
+- Updated harness/tasks/REGISTRY.yaml: P-008 in_progress + build_id=B-008
+- Updated current-task.md, session-state.json
+- Handoff: harness/handoffs/orchestrator/B-008-approved.md → next **RP-01 implementer**
+- No Java; no commit
+- Working HEAD: `c236aa17c1011a5da7e6feb506afa525fbfd5ef7`
+
+
+---
+## Entry: P-008 RP-01 implementer PASS (impl-p008-20260715)
+
+### Summary
+Delivered `XuguDialectResolver` + META-INF/services for Hibernate 7.4 `org.hibernate.engine.jdbc.dialect.spi.DialectResolver`. Live match: product `XuguDB` / driver `XuguDB JDBC Driver` (token `xugu`). Explicit dialect IT + SPI auto-resolve IT PASS; offline resolver non-match PASS; VERIFY PASS. Isolation RC/RR/SERIALIZABLE documented; READ UNCOMMITTED not claimed. **No Accept / no commit.**
+
+### Files Created or Updated
+- dialect XuguDialectResolver + XuguDialect ctors/isolation docs
+- META-INF/services DialectResolver
+- unit + gated IT + P008ProbeEntity
+- contracts matrix + SPI FQCN fix
+- harness/evidence/implementer/P-008/*
+- harness/handoffs/implementer/P-008.yaml
+- current-task.md, harness/session/*
+
+### Validation
+- `mvn -q test` → 0
+- `mvn -q -pl dialect test -Dxugu.run.integration=true` → 0
+- `python harness/scripts/verify.py --phase P-008` → VERIFY PASS
+
+### Next Steps
+1. Independent test RP-02
+2. Reviewer RP-03 (risk_score=8)
+3. Only on approve → Accept + must-commit
+
+---
+## Entry: P-008 RP-02 test PASS (test-p008-20260715)
+
+### Summary
+Independent re-verify of DialectResolver SPI + explicit dialect. Offline `mvn -q test` PASS (17 IT skipped); gate ON full IT PASS (17 IT incl. 3 ResolverIT). Flows `explicit-dialect-config` and `spi-dialect-resolver-autodetect` PASS on live XuguDB. Jar services entry FOUND; non-Xugu non-match PASS; no READ UNCOMMITTED claim; `HIB_P008_*` leftover 0. VERIFY PASS. **No Accept / no commit.**
+
+### Files Created or Updated
+- harness/evidence/test/P-008/* (TEST-REPORT, verification.json, IT logs, jar listing, leftover probe)
+- harness/handoffs/test/P-008.yaml
+- current-task.md, harness/session/*
+
+### Validation
+- `mvn -q test` → 0
+- `mvn -q test -Dxugu.run.integration=true` → 0
+- `python harness/scripts/verify.py --phase P-008 --evidence harness/evidence/test/P-008/verification.json` → VERIFY PASS
+
+### Next Steps
+1. Reviewer RP-03 (risk_score=8)
+2. Only on approve → Accept + must-commit
+3. Then propose B-009 (usually P-009)
+
+
+
+## 2026-07-15T14:15:00+08:00 — orchestrator: P-008 / B-008 Accept
+
+- Landed REVIEW.md (`rev-p008-20260715` approve)
+- RP-03 passed; P-008 status accepted; verification_evidence → test verification.json
+- ACCEPTANCE Decision: accepted (DialectResolver SPI + explicit config; VERIFY PASS; cleanup HIB_P008_*=0; jar services FOUND; no RU claim)
+- REGISTRY: P-008 accepted; P-009 ready
+- Must-commit on feat/i-001-xugu-dialect-major; propose B-009 → P-009 only
+- Resume: `harness/handoffs/orchestrator/B-008-P-008-complete.md`
+
+- Must-commit SHA recorded: PENDING_MUST_COMMIT
