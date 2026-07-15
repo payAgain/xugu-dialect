@@ -533,4 +533,4 @@ ev-p009-20260715 approve)
 - Ship / tag / push / Central: deferred — separate authorization
 - Resume: `harness/handoffs/orchestrator/I-001-archived.md`
 
-- Must-commit SHA recorded: (pending this Archive commit)
+- Must-commit SHA recorded: 82db5a38cd1e2ca00981198bbf42c84777c87e54

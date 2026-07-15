@@ -31,7 +31,7 @@
     "last_commands": [
       "python harness/scripts/harness_check.py"
     ],
-    "last_result": "I-001 archived; awaiting harness_check after commit",
+    "last_result": "I-001 archived; HARNESS_CHECK PASS; Ship deferred",
     "known_failures": []
   },
   "cognitive_state": {
@@ -45,12 +45,12 @@
   },
   "version_control_checkpoint": {
     "decision": "committed_awaiting_human_review",
-    "candidate_commit": null,
+    "candidate_commit": "82db5a38cd1e2ca00981198bbf42c84777c87e54",
     "git_init": true,
-    "committed": false,
+    "committed": true,
     "branch": "feat/i-001-xugu-dialect-major",
-    "note": "I-001 Archive governance commit pending; Accept 208a12b; P-011 b7292f6; no push; Ship deferred",
-    "head": "e503ad76a18325d2738965dfd2cb775b0ebb293b",
+    "note": "I-001 Archive 82db5a3; Accept 208a12b; P-011 b7292f6; no push; Ship deferred",
+    "head": "82db5a38cd1e2ca00981198bbf42c84777c87e54",
     "i001_accept_sha": "208a12b207285249a9617cd4f6823daeb69737cb",
     "p011_accept_sha": "b7292f6be7155107888f9e30d6661c2a5386e59b"
   },
