@@ -1,82 +1,70 @@
-{
+﻿{
   "schema_version": 1,
   "task_id": "I-001",
-  "batch_id": "B-011",
-  "status": "b011_p011_accepted_awaiting_initiative_accept",
-  "current_phase": "P-011",
+  "batch_id": null,
+  "status": "i001_initiative_accepted_ship_deferred",
+  "current_phase": null,
   "harness_level": "Standard",
-  "last_updated": "2026-07-15T16:10:00+08:00",
+  "last_updated": "2026-07-15T16:15:00+08:00",
   "initiative_id": "I-001",
   "initiative_type": "major",
   "working_branch": "feat/i-001-xugu-dialect-major",
   "active_plan": [
-    "P-011 ACCEPTANCE Decision accepted",
-    "RP-01 passed; RP-02 passed VERIFY PASS; RP-03 approve",
-    "REGISTRY: P-011 accepted",
-    "Ask Human Gate for Initiative I-001 Accept (NOT Ship)"
+    "I-001 Initiative Accept Decision accepted",
+    "Human Gate: 确认 I-001 Accept (~2026-07-15T16:15+08:00)",
+    "Delivery: com.xugu:xugu-dialect:7.4.5.Final; Boot 4.1.0; docs/user-guide; Definition A 78/78; VERIFY PASS",
+    "Ship deferred (tag/push/Central out of scope)"
   ],
   "next_3_steps": [
-    "Human Gate confirm Initiative I-001 Accept (NOT Ship)",
-    "On Accept: update initiative / Archive path per initiative skill",
-    "Ship / Central only with separate Human Gate authorization"
+    "Optional Archive for I-001 per lifecycle",
+    "Ship / tag / push / Central only with separate Human Gate authorization",
+    "New work: open a new Initiative via skills/initiative.md"
   ],
   "changed_files": [
-    "README.md",
-    "contracts/feature-matrix-definition-a.md",
-    "harness/builds/B-011.json",
-    "harness/tasks/P-011.md",
-    "harness/tasks/REGISTRY.yaml",
-    "harness/evidence/implementer/P-011/**",
-    "harness/evidence/test/P-011/**",
-    "harness/evidence/reviewer/P-011/**",
-    "harness/evidence/orchestrator/P-011/**",
-    "harness/handoffs/**/P-011*",
-    "harness/handoffs/orchestrator/B-011*",
+    "harness/evidence/orchestrator/I-001/ACCEPTANCE.md",
+    "harness/initiatives/I-001/brief.md",
+    "harness/initiatives/INDEX.md",
+    "harness/handoffs/orchestrator/I-001-accepted.md",
     "current-task.md",
     "harness/session/"
   ],
   "validation": {
     "last_commands": [
-      "mvn -q -DskipTests package",
-      "mvn -q test",
-      "mvn -q test -Dxugu.run.integration=true",
-      "mvn -q -pl demo-spring-boot -am test -Dxugu.run.integration=true",
-      "python harness/scripts/harness_check.py",
-      "python harness/scripts/branch_check.py",
-      "python harness/scripts/verify.py --phase P-011 --evidence harness/evidence/test/P-011/verification.json"
+      "python harness/scripts/harness_check.py"
     ],
-    "last_result": "P-011 Accept: VERIFY PASS; matrix 78/78 closed; RP-03 approve; Decision accepted",
+    "last_result": "I-001 Initiative Accept recorded; Ship deferred",
     "known_failures": []
   },
   "cognitive_state": {
     "failure_count": 0,
-    "current_mode": "awaiting_initiative_accept",
+    "current_mode": "initiative_accepted",
     "tried_approaches": [
       "b011_human_gate_approve",
       "p011_rp01_implementer",
       "p011_rp02_test",
       "p011_rp03_reviewer",
-      "p011_accept"
+      "p011_accept",
+      "i001_initiative_accept"
     ],
-    "blocked_on": "Human Gate Initiative I-001 Accept (NOT Ship)"
+    "blocked_on": null
   },
   "version_control_checkpoint": {
     "decision": "committed_awaiting_human_review",
-    "candidate_commit": "b7292f6be7155107888f9e30d6661c2a5386e59b",
+    "candidate_commit": "PENDING_I001_ACCEPT_COMMIT",
     "git_init": true,
     "committed": true,
     "branch": "feat/i-001-xugu-dialect-major",
-    "note": "P-011 Accept must-commit; no push",
-    "head": "460a9ac2988ec6343f3872a817b7cf94a977c9d1"
+    "note": "I-001 Initiative Accept governance must-commit; no push; Ship deferred",
+    "head": "PENDING_I001_ACCEPT_COMMIT",
+    "p011_accept_sha": "b7292f6be7155107888f9e30d6661c2a5386e59b",
+    "pre_accept_head": "49927ac18e2396055ae62bc406993040e43e4632"
   },
   "handoff": {
-    "last_summary": "P-011 accepted. Ask Human Gate for Initiative I-001 Accept (NOT Ship).",
-    "resume_from": "harness/handoffs/orchestrator/B-011-P-011-complete.md"
+    "last_summary": "I-001 accepted (not Ship). Optional Archive; Ship needs separate Human Gate auth.",
+    "resume_from": "harness/handoffs/orchestrator/I-001-accepted.md"
   },
-  "active_phase": "P-011",
-  "approved_build": "B-011",
-  "approved_phases": [
-    "P-011"
-  ],
-  "updated_at": "2026-07-15T16:10:00+08:00"
+  "active_phase": null,
+  "approved_build": null,
+  "approved_phases": [],
+  "updated_at": "2026-07-15T16:15:00+08:00"
 }

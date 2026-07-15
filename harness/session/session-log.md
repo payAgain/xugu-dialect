@@ -510,3 +510,14 @@ ev-p009-20260715 approve)
 - Resume: harness/handoffs/orchestrator/B-010-P-010-complete.md
 
 - Must-commit SHA recorded: 19f98233d479ac4cad1d2e77557784cfbd2d0638
+
+## 2026-07-15T16:15:00+08:00 — orchestrator: I-001 Initiative Accept
+
+- Human Gate: 「确认 I-001 Accept」(~2026-07-15T16:15+08:00)
+- Decision: accepted (NOT Ship)
+- Delivery: com.xugu:xugu-dialect:7.4.5.Final; Boot 4.1.0; docs/user-guide; Definition A 可实现 78/78 closed; VERIFY PASS
+- Branch: feat/i-001-xugu-dialect-major; P-011 Accept SHA b7292f6
+- Updated: brief Status completed/accepted; INDEX completed; ACCEPTANCE.md; current-task + session
+- Ship / tag / push / Central: deferred — separate authorization
+- Resume: harness/handoffs/orchestrator/I-001-accepted.md
+
