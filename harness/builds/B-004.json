@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "build_id": "B-004",
+  "initiative_id": "I-001",
+  "plan_revision": 1,
+  "status": "approved",
+  "proposed_phase_ids": [
+    "P-004"
+  ],
+  "approved_phase_ids": [
+    "P-004"
+  ],
+  "approval": {
+    "reference": "批准 B-004，范围仅 P-004",
+    "approved_at": "2026-07-15T09:02:00+08:00",
+    "approved_by": "Human Gate"
+  },
+  "recommendation": "Approve B-004 scope = P-004 only (pagination and locks). Do not approve P-005+ until P-004 ACCEPTANCE.",
+  "supersedes": null,
+  "scope_changes": [],
+  "notes": "Human Gate approved B-004 with scope P-004 only. P-004 accepted after RP-03 recheck approve (rev-p004-recheck-20260715); FOR UPDATE before LIMIT proven on real XuguDB. P-005 unlocked ready; B-005 not approved."
+}

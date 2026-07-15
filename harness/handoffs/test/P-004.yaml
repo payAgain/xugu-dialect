@@ -1,0 +1,115 @@
+schema_version: 1
+role: test
+phase_id: P-004
+build_id: B-004
+initiative_id: I-001
+invocation_id: test-p004-retest-20260715
+prior_invocation_id: test-p004-20260715
+step_id: RP-02-retest
+status: passed
+required: true
+completed_at: "2026-07-15T09:40:00+08:00"
+purpose: re-verify P-004 after request-changes fix (A-LCK-005 docs + LIMIT|FOR UPDATE IT)
+
+inputs:
+  - harness/tasks/P-004.md
+  - harness/handoffs/implementer/P-004.yaml
+  - harness/evidence/implementer/P-004/NOTES.md
+  - harness/evidence/reviewer/P-004/REVIEW.md
+  - dialect/src/main/java/com/xugu/dialect/pagination/XuguLimitHandler.java
+  - dialect/src/main/java/com/xugu/dialect/XuguDialect.java
+  - dialect/src/test/java/com/xugu/dialect/XuguPaginationLockTest.java
+  - dialect/src/test/java/com/xugu/dialect/it/XuguLockIT.java
+  - contracts/feature-matrix-definition-a.md
+  - agents/test.md
+
+outputs:
+  - harness/evidence/test/P-004/TEST-REPORT-RETEST.md
+  - harness/evidence/test/P-004/verification-retest.json
+  - harness/evidence/test/P-004/mvn-test-offline-retest.log
+  - harness/evidence/test/P-004/mvn-test-integration-retest.log
+  - harness/evidence/test/P-004/surefire-summary-offline-retest.txt
+  - harness/evidence/test/P-004/surefire-summary-integration-retest.txt
+  - harness/evidence/test/P-004/IT-RESULT-RETEST.txt
+  - harness/evidence/test/P-004/CHECKLIST-RETEST.md
+  - harness/evidence/test/P-004/verify-retest.log
+  - harness/handoffs/test/P-004.yaml
+
+verification:
+  test_offline:
+    command: "mvn -q test"
+    exit_code: 0
+    it_skipped: 9
+    unit_passed: 17
+  test_integration:
+    command: 'mvn -q test "-Dxugu.run.integration=true"'
+    exit_code: 0
+    real_db: true
+    it_executed: 9
+    it_failed: 0
+    it_skipped: 0
+    unit_passed: 17
+    url: "jdbc:xugu://127.0.0.1:5138/SYSTEM?...&compatiblemode=NONE"
+  verify:
+    command: "python harness/scripts/verify.py --phase P-004 --evidence harness/evidence/test/P-004/verification-retest.json"
+    exit_code: 0
+    status: "VERIFY PASS"
+
+request_changes_confirmation:
+  a_lck_005_limitation_notes:
+    result: passed
+    locations:
+      - "XuguDialect class javadoc (Hibernate shim only; not share-lock; concurrent readers may block; matrix 文档不允许)"
+      - "XuguDialect.getReadLockString javadoc"
+      - "harness/evidence/implementer/P-004/NOTES.md § MAJOR 1"
+      - "contracts/feature-matrix-definition-a.md A-LCK-005 hint"
+  limit_for_update_order:
+    result: passed
+    expected_order: "FOR UPDATE then LIMIT (then WAIT if present)"
+    unit: "XuguPaginationLockTest → for update limit ? / for update limit ? wait 2000"
+    live_it: "XuguLockIT.limitForUpdateComboExecutes PASS"
+    hibernate_default_rejected: "limit … for update fails on live XuGu"
+
+spot_checks:
+  limit_form: "LIMIT count OFFSET offset"
+  limit_bind_markers: true
+  fetch_first_emitted: false
+  skip_locked_emitted: false
+  for_share_emitted: false
+  for_update_before_limit: true
+  a_lck_005_docs_present: true
+  real_db_no_mock: true
+
+observed_flows:
+  - id: limit-offset-pagination-real-db
+    result: passed
+    evidence: harness/evidence/test/P-004/mvn-test-integration-retest.log
+  - id: pessimistic-lock-sql-real-db
+    result: passed
+    evidence: harness/evidence/test/P-004/mvn-test-integration-retest.log
+  - id: limit-for-update-combo-real-db
+    result: passed
+    observed: "FOR UPDATE limit ? OK; FOR UPDATE limit ? wait 2000 OK; limit…for update rejected"
+    evidence: harness/evidence/test/P-004/com.xugu.dialect.it.XuguLockIT.txt
+
+it_counts:
+  offline: { total: 26, unit: 17, it: 9, it_skipped: 9, failures: 0 }
+  integration: { total: 26, unit: 17, it: 9, it_executed: 9, it_skipped: 0, failures: 0 }
+
+notes_for_reviewer: |
+  Independent RP-02 retest after impl-p004-fix-20260715.
+  Offline PASS (9 IT skipped); IT gate ON PASS (9 IT); verify PASS.
+  A-LCK-005 limitation notes confirmed (shim / exclusive / may block / 文档不允许).
+  LIMIT+FOR UPDATE order is FOR UPDATE then LIMIT; proven on live XuguDB.
+  No product code changes by test.
+
+forbidden_reminder:
+  - no product code rewrite by test unless harness fix required
+  - no MySQLDialect / OracleDialect inheritance
+  - no mock when gate ON / DB unreachable
+  - no git commit / tag / push by test
+
+next_step: RP-03 reviewer re-review (new rev-p004-*)
+blocker: null
+real_db_it_passed: true
+verdict: PASS

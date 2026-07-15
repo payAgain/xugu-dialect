@@ -1,0 +1,36 @@
+# P-004 IT Result (independent test RP-02)
+
+**Invocation:** test-p004-20260715
+**Gate:** `-Dxugu.run.integration=true`
+**DB:** `jdbc:xugu://127.0.0.1:5138/SYSTEM?...&compatiblemode=NONE`
+**Driver / Dialect / Version:** XuguDB JDBC Driver / XuguDialect / 12.0
+**When:** 2026-07-15T09:20:49+08:00
+**Module:** dialect — Tests run: 24, Failures: 0, Errors: 0, Skipped: 0
+
+## Offline (gate off)
+- Exit 0; 8 IT skipped; 16 unit passed (XuguDialectTest 7 + XuguPaginationLockTest 9)
+
+## Integration (gate ON)
+- Exit 0; 8 IT executed; 0 failed
+
+## Flow: limit-offset-pagination-real-db (XuguPaginationIT)
+- LIMIT 3 → [1,2,3]
+- LIMIT 3 OFFSET 4 → [5,6,7]
+- SQL contains `limit` / `offset`; no `fetch first`
+- Bind via LimitHandler JDBC markers (processSql + bindLimitParametersAtEndOfQuery)
+
+## Flow: pessimistic-lock-sql-real-db (XuguLockIT)
+- `supportsSkipLocked() == false`
+- `SELECT … FOR UPDATE` executes
+- `SELECT … FOR UPDATE OF id` executes
+- NOWAIT / WAIT 2000 ms smoke (inline Dialect string and/or parenthesized fallback)
+- No `skip locked` in skip-locked string helpers
+
+## Spot-check SQL fragments (unit XuguPaginationLockTest)
+- `select … limit ?`
+- `select … limit ? offset ?`
+- ` for update` / ` for update nowait` / ` for update wait 2000`
+- No FETCH FIRST / SKIP LOCKED / FOR SHARE
+
+Log: `harness/evidence/test/P-004/mvn-test-integration.log`
+Surefire: `harness/evidence/test/P-004/surefire-summary-integration.txt`

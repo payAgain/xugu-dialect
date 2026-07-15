@@ -1,0 +1,66 @@
+schema_version: 1
+role: implementer
+phase_id: P-004
+build_id: B-004
+initiative_id: I-001
+invocation_id: impl-p004-fix-20260715
+prior_invocation_id: impl-p004-20260715
+step_id: RP-01b
+status: passed
+required: true
+completed_at: "2026-07-15T09:35:00+08:00"
+purpose: fix MAJOR A-LCK-005 docs + LIMIT|FOR UPDATE gated IT (after rev-p004-20260715 request-changes)
+
+inputs:
+  - harness/evidence/reviewer/P-004/REVIEW.md
+  - harness/handoffs/orchestrator/B-004-P-004-rp03-request-changes.md
+  - harness/tasks/P-004.md
+  - contracts/feature-matrix-definition-a.md
+  - E:\\Work\\docs\\content\\reference\\sql\\select\\select.md
+
+outputs:
+  - dialect/src/main/java/com/xugu/dialect/XuguDialect.java
+  - dialect/src/main/java/com/xugu/dialect/pagination/XuguLimitHandler.java
+  - dialect/src/test/java/com/xugu/dialect/XuguPaginationLockTest.java
+  - dialect/src/test/java/com/xugu/dialect/it/XuguLockIT.java
+  - contracts/feature-matrix-definition-a.md
+  - harness/evidence/implementer/P-004/NOTES.md
+  - harness/handoffs/implementer/P-004.yaml
+
+fixes:
+  major_1_A_LCK_005:
+    status: done
+    summary: >
+      Document Hibernate shim only; NOT share-lock; PESSIMISTIC_READ=exclusive FOR UPDATE;
+      concurrent readers may block; matrix stays 文档不允许 for FOR SHARE.
+  major_2_LIMIT_FOR_UPDATE:
+    status: done
+    strategy: >
+      XuguLimitHandler inserts LIMIT after FOR UPDATE (insertAtEnd) and before trailing
+      NOWAIT/WAIT — live DB rejects LIMIT…FOR UPDATE and FOR UPDATE WAIT…LIMIT.
+    observed:
+      - "FAIL: … limit 1 for update (Hibernate default)"
+      - "OK: … for update limit ? → row returned"
+      - "OK: … for update limit ? wait 2000 → row returned"
+    it: XuguLockIT.limitForUpdateComboExecutes
+
+verification:
+  test_offline:
+    command: "mvn -q test"
+    exit_code: 0
+  test_integration:
+    command: 'mvn -q test "-Dxugu.run.integration=true"'
+    exit_code: 0
+    real_db: true
+    url: "jdbc:xugu://127.0.0.1:5138/SYSTEM?...&compatiblemode=NONE"
+
+forbidden_reminder:
+  - no Accept
+  - no git commit / tag / push
+  - no MySQL/Oracle Dialect inheritance
+  - no sibling hibernate-dialect read
+
+next_step: independent test re-run (RP-02) then reviewer re-review (new rev-p004-*)
+blocker: null
+accept_authorized: false
+commit_authorized: false

@@ -1,0 +1,34 @@
+schema_version: 1
+role: reviewer
+phase_id: P-004
+build_id: B-004
+initiative_id: I-001
+invocation_id: rev-p004-recheck-20260715
+prior_invocation_id: rev-p004-20260715
+step_id: RP-03
+status: passed
+decision: approve
+required: true
+condition: full_or_risk_ge_8
+completed_at: 2026-07-15T09:42:00+08:00
+readonly: true
+landed_by: orchestrator
+evidence_path: harness/evidence/reviewer/P-004/REVIEW-RECHECK.md
+prior_evidence_path: harness/evidence/reviewer/P-004/REVIEW.md
+blocker: null
+major_closed:
+  - id: A-LCK-005-doc
+    disposition: closed
+    fix: shim-docs
+    summary: "Hibernate shim only; NOT share-lock; PESSIMISTIC_READ=exclusive FOR UPDATE; matrix 文档不允许"
+  - id: LIMIT-FOR-UPDATE-IT
+    disposition: closed
+    fix: for-update-before-limit
+    observed: "FOR UPDATE limit ? OK; FOR UPDATE limit ? wait 2000 OK; limit…for update rejected"
+    it: XuguLockIT.limitForUpdateComboExecutes
+    retest: test-p004-retest-20260715
+minors_deferred: true
+clause_order: "FOR UPDATE then LIMIT (then WAIT)"
+next: orchestrator Accept + must-commit; propose B-005 scope P-005 only
+accept_authorized: true
+commit_authorized: true

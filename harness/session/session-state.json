@@ -1,68 +1,79 @@
 {
   "schema_version": 1,
   "task_id": "I-001",
-  "batch_id": "B-003",
-  "status": "b003_p003_accepted_propose_b004",
-  "current_phase": "P-003",
+  "batch_id": "B-004",
+  "status": "b004_p004_accepted_await_b005",
+  "current_phase": "P-004",
   "harness_level": "Standard",
-  "last_updated": "2026-07-14T18:30:00+08:00",
+  "last_updated": "2026-07-15T09:45:00+08:00",
   "initiative_id": "I-001",
   "initiative_type": "major",
   "working_branch": "feat/i-001-xugu-dialect-major",
   "active_plan": [
-    "B-003 / P-003 accepted",
-    "P-004 ready (unlocked); await Human Gate B-004 approval (P-004 only)",
-    "P-005+ remain blocked / unapproved"
+    "B-004 / P-004 ACCEPTANCE complete (recheck approve)",
+    "Must-commit on feat/i-001-xugu-dialect-major",
+    "Propose B-005 → P-005 only (Identity & Sequence)"
   ],
   "next_3_steps": [
-    "Human Gate approve B-004 scope P-004 only",
-    "Materialize B-004.json; set P-004 in_progress; dispatch role_pipeline",
-    "Keep P-005+ blocked until separate Build approvals"
+    "Human Gate approve B-005 scope P-005 only",
+    "Materialize B-005.json; set P-005 in_progress; dispatch role_pipeline",
+    "Do not parallel-approve P-006+"
   ],
   "changed_files": [
-    "dialect/**",
-    "contracts/**",
-    "harness/evidence/**/P-003/**",
-    "harness/tasks/P-003.md",
+    "harness/evidence/reviewer/P-004/REVIEW-RECHECK.md",
+    "harness/evidence/reviewer/P-004/REVIEW.md",
+    "harness/evidence/implementer/P-004/ACCEPTANCE.md",
+    "harness/evidence/test/P-004/verification-retest.json",
     "harness/tasks/P-004.md",
+    "harness/tasks/P-005.md",
     "harness/tasks/REGISTRY.yaml",
-    "harness/handoffs/orchestrator/B-003-P-003-complete.md"
+    "harness/handoffs/orchestrator/B-004-P-004-complete.md",
+    "harness/handoffs/readonly-results/P-004-reviewer.yaml",
+    "dialect/src/**",
+    "current-task.md",
+    "harness/session/*"
   ],
   "validation": {
     "last_commands": [
-      "python harness/scripts/verify.py (retest evidence PASS)",
-      "python harness/scripts/harness_check.py"
+      "mvn -q test — exit 0 (retest)",
+      "mvn -q test -Dxugu.run.integration=true — exit 0 (9 IT)",
+      "python harness/scripts/verify.py — VERIFY PASS (verification-retest.json)"
     ],
-    "last_result": "P-003 accepted; VERIFY PASS; RP-04 approve recheck; must-commit",
+    "last_result": "P-004 accepted; VERIFY PASS; real DB IT; FOR UPDATE before LIMIT; await B-005",
     "known_failures": []
   },
   "cognitive_state": {
     "failure_count": 0,
-    "current_mode": "accept_handoff",
+    "current_mode": "accept_complete_await_scope",
     "tried_approaches": [
-      "b001_p001_accepted",
-      "b002_p002_accepted",
-      "b003_p003_accepted"
+      "b004_approved",
+      "rp01_impl_pass",
+      "rp02_test_pass",
+      "rp03_request_changes",
+      "impl_fix_majors_landed",
+      "rp02_retest_pass",
+      "rp03_recheck_approve",
+      "p004_accepted"
     ],
-    "blocked_on": "human_gate_b004_approval"
+    "blocked_on": "Human Gate B-005 scope P-005 only"
   },
   "version_control_checkpoint": {
-    "decision": "committed",
-    "candidate_commit": "006c88d153388f276782310a93c50a3784664575",
+    "decision": "must_commit",
+    "candidate_commit": "PENDING_AFTER_MUST_COMMIT",
     "git_init": true,
-    "committed": true,
+    "committed": false,
     "branch": "feat/i-001-xugu-dialect-major",
-    "note": "P-003 Accept must-commit; no push",
-    "head": "006c88d153388f276782310a93c50a3784664575"
+    "note": "P-004 Accept must-commit this turn; no push",
+    "head": "PENDING_AFTER_MUST_COMMIT"
   },
   "handoff": {
-    "last_summary": "P-003 accepted. Propose B-004 scope P-004 only (pagination & locks).",
-    "resume_from": "harness/handoffs/orchestrator/B-003-P-003-complete.md"
+    "last_summary": "P-004 accepted after recheck approve. Propose B-005 → P-005 only. Must-commit SHA pending.",
+    "resume_from": "harness/handoffs/orchestrator/B-004-P-004-complete.md"
   },
-  "active_phase": "P-003",
-  "proposed_build": "B-004",
+  "active_phase": "P-004",
+  "proposed_build": "B-005",
   "proposed_phases": [
-    "P-004"
+    "P-005"
   ],
-  "updated_at": "2026-07-14T18:30:00+08:00"
+  "updated_at": "2026-07-15T09:45:00+08:00"
 }

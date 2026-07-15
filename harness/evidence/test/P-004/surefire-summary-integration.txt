@@ -1,0 +1,36 @@
+=== Integration surefire (xugu.run.integration=true) ===
+---- com.xugu.dialect.it.XuguBinarySchemaExportIT.txt ----
+-------------------------------------------------------------------------------
+Test set: com.xugu.dialect.it.XuguBinarySchemaExportIT
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.186 s -- in com.xugu.dialect.it.XuguBinarySchemaExportIT
+---- com.xugu.dialect.it.XuguDdlIT.txt ----
+-------------------------------------------------------------------------------
+Test set: com.xugu.dialect.it.XuguDdlIT
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.605 s -- in com.xugu.dialect.it.XuguDdlIT
+---- com.xugu.dialect.it.XuguLockIT.txt ----
+-------------------------------------------------------------------------------
+Test set: com.xugu.dialect.it.XuguLockIT
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.199 s -- in com.xugu.dialect.it.XuguLockIT
+---- com.xugu.dialect.it.XuguPaginationIT.txt ----
+-------------------------------------------------------------------------------
+Test set: com.xugu.dialect.it.XuguPaginationIT
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.309 s -- in com.xugu.dialect.it.XuguPaginationIT
+---- com.xugu.dialect.it.XuguTypeRoundTripIT.txt ----
+-------------------------------------------------------------------------------
+Test set: com.xugu.dialect.it.XuguTypeRoundTripIT
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.678 s -- in com.xugu.dialect.it.XuguTypeRoundTripIT
+---- com.xugu.dialect.XuguDialectTest.txt ----
+-------------------------------------------------------------------------------
+Test set: com.xugu.dialect.XuguDialectTest
+-------------------------------------------------------------------------------
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.017 s -- in com.xugu.dialect.XuguDialectTest
+---- com.xugu.dialect.XuguPaginationLockTest.txt ----
+-------------------------------------------------------------------------------
+Test set: com.xugu.dialect.XuguPaginationLockTest
+-------------------------------------------------------------------------------
+Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.024 s -- in com.xugu.dialect.XuguPaginationLockTest

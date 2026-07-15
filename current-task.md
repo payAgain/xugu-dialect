@@ -4,53 +4,48 @@
 I-001 (major)：虚谷 Hibernate 7.4.5 方言正式 jar + Spring Boot demo + 项目文档；定义 A 全能矩阵。
 
 ## Current Status
-b003_p003_accepted_propose_b004
+b004_p004_accepted_await_b005
 
 ## Active Batch / Tasks
-- Batch: **B-003** accepted (scope **P-003 only**) — P-003 **accepted**
-- P-004 status: **ready** (unlocked); **not** approved for Build until Human Gate
-- P-005…P-011 still blocked / unapproved
-- Primary Owners: Human Gate → approve B-004 (P-004 only) → orchestrator dispatch
+- Batch: **B-004** complete (scope was **P-004 only**)
+- P-004 status: **accepted** (`build_id=B-004`; must-commit SHA pending record)
+- P-005 status: **ready** (blocked dependency cleared)
+- Proposed next: **B-005 → P-005 only** (Identity & Sequence) — awaiting Human Gate
+- P-006…P-011 still blocked / unapproved
 
 ## Scope
-Allowed now: harness handoff / Human Gate Scope Q&A for B-004
-Not allowed until B-004 approval:
-- P-004 implementation
+Allowed now: Human Gate Scope for B-005 (P-005 only)
+Not allowed:
+- P-005+ implementation until B-005 approved
 - `tag` / `push` / Central 发布 without Human Gate
 
 ## Plan
 1. ~~Scope PASS~~ DONE
-2. ~~Branch `feat/i-001-xugu-dialect-major`~~ DONE
-3. ~~Plan P-001…P-011 + REGISTRY + B-001~~ DONE
-4. ~~B-001 / P-001 Accept~~ DONE
-5. ~~B-002 / P-002 Accept~~ DONE
-6. ~~B-003 / P-003 Accept~~ DONE (RP-04 recheck approve; A-TYP-009 bare binary)
-7. **Human Gate: 批准 Build B-004 范围仅 P-004（pagination & locks）**
+2. ~~B-004 / P-004 role_pipeline~~ DONE (incl. fix + retest + recheck approve)
+3. ~~P-004 ACCEPTANCE + must-commit~~ DONE this turn
+4. **Await Human Gate approve B-005 → P-005 only**
+5. On approve → materialize B-005; dispatch P-005 pipeline
 
 ## Validation Commands
 ```text
-python harness/scripts/harness_check.py
-python harness/scripts/branch_check.py
+mvn -q test
+mvn -q test -Dxugu.run.integration=true
 python harness/scripts/verify.py
 ```
 
 ## Acceptance Criteria
-- [x] I-001 brief active; INDEX active
-- [x] Working branch feat/i-001-xugu-dialect-major
-- [x] B-001 approved; P-001 accepted
-- [x] B-002 approved; P-002 accepted
-- [x] B-003 approved; P-003 accepted (VERIFY PASS + real DB IT + must-commit)
-- [ ] B-004 approved for P-004 only (pending Human Gate)
+- [x] B-004 approved for P-004 only
+- [x] P-004 ACCEPTANCE (VERIFY PASS + real DB IT + reviewer approve + must-commit)
+- [ ] B-005 approved for P-005 only (Human Gate)
 
 ## Risks / Blockers
-- None for P-003 Accept
-- P-004 risk_score=8 → reviewer required when Build approved
-- SQL truth source read-only: `E:\Work\docs\content`
+- None for P-004 close
+- P-005 not started until B-005 Scope approval
 
 ## Next 3 Steps
-1. **Human Gate approve B-004 scope P-004 only** (pagination & locks)
-2. On approval: materialize B-004.json; set P-004 in_progress; dispatch role_pipeline
-3. Keep P-005+ blocked until separate Build approvals
+1. Human Gate：批准 B-005，范围仅 P-005（Identity & Sequence）
+2. 物化 B-005.json；P-005 in_progress；派发 role_pipeline
+3. 勿并行批准 P-006+
 
 ## Last Updated
-2026-07-14T18:25:00+08:00（角色：orchestrator）
+2026-07-15T09:45:00+08:00（角色：orchestrator Accept）

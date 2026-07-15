@@ -1,3 +1,52 @@
+## Entry: P-004 RP-03 request-changes + implementer fix landed
+
+### Summary
+Landed reviewer **request-changes** (`rev-p004-20260715`): MAJOR 1 A-LCK-005 shim wording; MAJOR 2 LIMIT+FOR UPDATE live IT. Implementer fix (`impl-p004-fix-20260715`) updated javadoc/NOTES/matrix; adjusted `XuguLimitHandler` to XuGu order **FOR UPDATE → LIMIT → WAIT**; gated IT proves combo (Hibernate-default `LIMIT…FOR UPDATE` rejected). `mvn -q test` and `mvn -q test -Dxugu.run.integration=true` both exit 0. **No Accept / no commit.**
+
+### Files Created or Updated
+- harness/evidence/reviewer/P-004/REVIEW.md
+- harness/handoffs/readonly-results/P-004-reviewer.yaml
+- harness/handoffs/orchestrator/B-004-P-004-rp03-request-changes.md
+- harness/handoffs/implementer/P-004.yaml (impl-p004-fix-20260715)
+- harness/evidence/implementer/P-004/*
+- dialect LimitHandler + XuguDialect + XuguLockIT + unit tests
+- contracts/feature-matrix-definition-a.md
+- harness/tasks/P-004.md, current-task.md, session/*
+
+### Validation
+- `mvn -q test` → 0
+- `mvn -q test -Dxugu.run.integration=true` → 0 (LIMIT+FOR UPDATE+WAIT IT PASS)
+
+### Next Steps
+1. Independent test re-run (RP-02)
+2. Reviewer re-review (new rev-p004-*)
+3. Only on approve → Accept + must-commit
+
+---
+# Session Log
+
+## Entry: B-004 APPROVED — P-004 in progress
+
+### Summary
+Human Gate 批准 Build：「批准 B-004，范围仅 P-004」（~2026-07-15T09:02+08:00）。Orchestrator 物化 `B-004.json`（`status=approved`, `approved_phase_ids=[P-004]`），将 `P-004` / REGISTRY 标为 `in_progress`（`build_id=B-004`）。未写 Java；未 commit。下一步：派发 P-004 `role_pipeline` RP-01 implementer。
+
+### Files Created or Updated
+- harness/builds/B-004.json (approved)
+- harness/tasks/P-004.md (build_id=B-004, status=in_progress)
+- harness/tasks/REGISTRY.yaml (P-004 in_progress + build_id)
+- harness/handoffs/orchestrator/B-004-approved.md
+- current-task.md, harness/session/*
+
+### Validation
+- harness-only disk updates; no Maven / Java implementation this turn
+- No git commit (Human Gate did not authorize)
+
+### Next Steps
+1. Dispatch RP-01 implementer（P-004）
+2. Then RP-02 test → RP-03 reviewer（risk≥8）
+3. P-004 ACCEPTANCE 后再请批后续 Build（通常 P-005）
+
+---
 # Session Log
 
 ## Entry: B-003 APPROVED — P-003 in progress
@@ -195,7 +244,8 @@ Orchestrator closed P-002 after RP-01 architect-contract PASS (`arch-p002-202607
 - 647525010e9bc2d58ab322e52caf2b4159d17db5
 
 ## 2026-07-14T18:02+08:00 orchestrator
-- Landed P-003 RP-04 reviewer **request-changes** (ev-p003-20260714): MAJOR A-TYP-009 BINARY.
+- Landed P-003 RP-04 reviewer **request-changes** (
+ev-p003-20260714): MAJOR A-TYP-009 BINARY.
 - Evidence: harness/evidence/reviewer/P-003/REVIEW.md; handoff: harness/handoffs/orchestrator/B-003-P-003-rp04-request-changes.md.
 - Next dispatch: implementer fix BINARY → re-test → re-review. **No Accept / no commit.**
 
@@ -210,3 +260,15 @@ Orchestrator closed P-002 after RP-01 architect-contract PASS (`arch-p002-202607
 - Resume: `harness/handoffs/orchestrator/B-003-P-003-complete.md`
 
 - Must-commit SHA recorded: `006c88d153388f276782310a93c50a3784664575`
+
+
+## 2026-07-15T09:45:00+08:00 — orchestrator: P-004 / B-004 Accept
+
+- Landed REVIEW-RECHECK.md (`rev-p004-recheck-20260715` approve); REVIEW.md superseded note
+- RP-03 passed; P-004 status accepted; verification_evidence → test verification-retest.json
+- ACCEPTANCE Decision: accepted (A-LCK-005 docs + VERIFY PASS + real DB IT; FOR UPDATE before LIMIT)
+- REGISTRY: P-004 accepted; P-005 ready
+- Must-commit on feat/i-001-xugu-dialect-major; propose B-005 → P-005 only
+- Resume: `harness/handoffs/orchestrator/B-004-P-004-complete.md`
+
+- Must-commit SHA recorded: PENDING_AFTER_MUST_COMMIT
