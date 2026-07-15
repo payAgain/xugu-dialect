@@ -63,7 +63,7 @@ RP-03 `condition=null` (Accept-prep required despite risk_score=7) — evaluated
 ## Version control checkpoint
 
 - Branch: `feat/i-001-xugu-dialect-major`
-- Candidate commit: *(filled after must-commit)*
+- Candidate commit: `b7292f6be7155107888f9e30d6661c2a5386e59b`
 - Push/tag/release: awaiting-human-authorization (**not** requested this Accept)
 
 ## Acceptance decision

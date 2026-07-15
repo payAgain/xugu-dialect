@@ -62,12 +62,12 @@
   },
   "version_control_checkpoint": {
     "decision": "committed_awaiting_human_review",
-    "candidate_commit": "PENDING_AFTER_COMMIT",
+    "candidate_commit": "b7292f6be7155107888f9e30d6661c2a5386e59b",
     "git_init": true,
     "committed": true,
     "branch": "feat/i-001-xugu-dialect-major",
     "note": "P-011 Accept must-commit; no push",
-    "head": "PENDING_AFTER_COMMIT"
+    "head": "b7292f6be7155107888f9e30d6661c2a5386e59b"
   },
   "handoff": {
     "last_summary": "P-011 accepted. Ask Human Gate for Initiative I-001 Accept (NOT Ship).",

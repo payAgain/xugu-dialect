@@ -70,9 +70,10 @@ Prior Phase Accept commits (feat/i-001-xugu-dialect-major):
 | P-008 | `f9e1629` | SPI |
 | P-009 | `7fe9586` | Spring Boot demo |
 | P-010 | `19f9823` | user-guide |
-| P-011 | *(after must-commit)* | hardening / Accept prep |
+| P-011 | `b7292f6` | hardening / Accept prep |
 
-HEAD before P-011 commit: `1b6bdd0` (P-010 SHA record chore).
+HEAD before P-011 commit: `1b6bdd0` (P-010 SHA record chore).  
+P-011 Accept commit: `b7292f6be7155107888f9e30d6661c2a5386e59b`.
 
 ## Recommendation
 
