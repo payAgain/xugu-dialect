@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.hibernate.LockMode;
 import org.hibernate.LockOptions;
 import org.hibernate.Timeouts;
+import org.hibernate.boot.model.FunctionContributions;
 import org.hibernate.boot.model.TypeContributions;
 import org.hibernate.dialect.DatabaseVersion;
 import org.hibernate.dialect.Dialect;
@@ -29,6 +30,7 @@ import org.hibernate.type.descriptor.jdbc.spi.JdbcTypeRegistry;
 import org.hibernate.type.descriptor.sql.internal.DdlTypeImpl;
 import org.hibernate.type.descriptor.sql.spi.DdlTypeRegistry;
 
+import com.xugu.dialect.function.XuguFunctionRegistrations;
 import com.xugu.dialect.identity.XuguIdentityColumnSupport;
 import com.xugu.dialect.internal.XuguKeywords;
 import com.xugu.dialect.internal.XuguLockingSupport;
@@ -71,6 +73,11 @@ import jakarta.persistence.Timeout;
  *
  * <p><b>Sequence (A-SEQ-*, A-XCUT-008):</b> {@link XuguSequenceSupport} locks
  * {@code select &lt;seq&gt;.nextval from dual}; CURRVAL via {@code currval('name')}.
+ *
+ * <p><b>Functions (A-FUN-*):</b> {@link #initializeFunctionRegistry} contributes
+ * XuGu-native templates via {@link XuguFunctionRegistrations}. Primary UUID SQL:
+ * {@code uuid()}. JSON subset: {@code json_value} + {@code json_extract}.
+ * Hibernate {@code listagg} → XuGu {@code LISTAGG … WITHIN GROUP}.
  *
  * <p><b>Not emitted:</b> {@code SKIP LOCKED} (A-LCK-004), {@code FOR SHARE} (A-LCK-005).
  *
@@ -230,6 +237,16 @@ public class XuguDialect extends Dialect {
 	public String castPattern(CastType from, CastType to) {
 		// type_conversion.md: CAST(expr AS type) is supported
 		return super.castPattern( from, to );
+	}
+
+	// -------------------------------------------------------------------------
+	// SQL functions (A-FUN-001..014, 016..018) — P-006
+	// -------------------------------------------------------------------------
+
+	@Override
+	public void initializeFunctionRegistry(FunctionContributions functionContributions) {
+		super.initializeFunctionRegistry( functionContributions );
+		XuguFunctionRegistrations.register( functionContributions );
 	}
 
 	// -------------------------------------------------------------------------

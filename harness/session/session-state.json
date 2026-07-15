@@ -1,75 +1,75 @@
 {
   "schema_version": 1,
   "task_id": "I-001",
-  "batch_id": "B-005",
-  "status": "b005_accepted_await_b006",
-  "current_phase": "P-005",
+  "batch_id": "B-006",
+  "status": "p006_accepted_propose_b007",
+  "current_phase": "P-006",
   "harness_level": "Standard",
-  "last_updated": "2026-07-15T10:25:00+08:00",
+  "last_updated": "2026-07-15T11:05:00+08:00",
   "initiative_id": "I-001",
   "initiative_type": "major",
   "working_branch": "feat/i-001-xugu-dialect-major",
   "active_plan": [
-    "P-005 accepted (B-005); identity/sequence locked SQL + getGeneratedKeys primary",
-    "Propose B-006 → P-006 only (SQL functions)",
-    "Do not approve P-007+ until P-006 ACCEPTANCE"
+    "P-006 accepted (B-006); propose B-007 scope P-007 only",
+    "Await Human Gate approval for B-007",
+    "Do not approve P-008+ until P-007 ACCEPTANCE"
   ],
   "next_3_steps": [
-    "Human Gate approve B-006 scope P-006 only",
-    "Materialize B-006; P-006 in_progress; dispatch role_pipeline",
-    "Do not parallel-approve P-007+"
+    "Human Gate approve B-007 scope P-007 only",
+    "Materialize B-007; P-007 in_progress; dispatch RP-01",
+    "Do not parallel-approve P-008+"
   ],
   "changed_files": [
-    "harness/evidence/reviewer/P-005/REVIEW.md",
-    "harness/evidence/implementer/P-005/ACCEPTANCE.md",
-    "harness/tasks/P-005.md",
+    "dialect/src/main/java/com/xugu/dialect/function/",
+    "dialect/src/main/java/com/xugu/dialect/XuguDialect.java",
+    "dialect/src/test/java/com/xugu/dialect/",
+    "contracts/feature-matrix-definition-a.md",
+    "harness/evidence/implementer/P-006/",
+    "harness/evidence/test/P-006/",
+    "harness/evidence/reviewer/P-006/REVIEW.md",
+    "harness/handoffs/orchestrator/B-006-P-006-complete.md",
     "harness/tasks/P-006.md",
+    "harness/tasks/P-007.md",
     "harness/tasks/REGISTRY.yaml",
-    "harness/handoffs/orchestrator/B-005-P-005-complete.md",
     "current-task.md",
-    "harness/session/session-state.json",
-    "harness/session/session-log.md",
-    "dialect/src/main/java/com/xugu/dialect/identity/",
-    "dialect/src/main/java/com/xugu/dialect/sequence/"
+    "harness/session/"
   ],
   "validation": {
     "last_commands": [
-      "mvn -q test → exit 0 (test-p005)",
-      "mvn -q test -Dxugu.run.integration=true → exit 0 (11 IT)",
-      "python harness/scripts/verify.py --phase P-005 → VERIFY PASS"
+      "mvn -q test → exit 0 (test-p006)",
+      "mvn -q test -Dxugu.run.integration=true → exit 0 (13 IT)",
+      "python harness/scripts/verify.py --phase P-006 → VERIFY PASS"
     ],
-    "last_result": "P-005 accepted; RP-03 approve rev-p005-20260715; propose B-006→P-006 only",
+    "last_result": "P-006 accepted; RP-03 approve; propose B-007 → P-007 only",
     "known_failures": []
   },
   "cognitive_state": {
     "failure_count": 0,
     "current_mode": "accept_complete_await_next_build",
     "tried_approaches": [
-      "b005_approved",
-      "rp01_impl_pass",
-      "rp02_test_pass",
-      "rp03_review_approve",
-      "p005_accepted"
+      "b006_pipeline_complete",
+      "rp03_approve_landed",
+      "p006_accepted"
     ],
-    "blocked_on": "human_gate_b006_approve"
+    "blocked_on": "human_gate_b007_approve"
   },
   "version_control_checkpoint": {
-    "decision": "must_commit_on_accept",
-    "candidate_commit": "6864a390032a9352056f8963434a34f34a390f96",
+    "decision": "must_commit",
+    "candidate_commit": "PENDING_MUST_COMMIT",
     "git_init": true,
-    "committed": true,
+    "committed": false,
     "branch": "feat/i-001-xugu-dialect-major",
-    "note": "P-005 Accept must-commit; no push",
-    "head": "6864a390032a9352056f8963434a34f34a390f96"
+    "note": "Accept turn: must-commit pending; no push",
+    "head": "4bf40759a2d48c7307a3dcea0bc6f8ebcfaaf3e2"
   },
   "handoff": {
-    "last_summary": "P-005 accepted. Propose B-006 scope P-006 only (SQL functions).",
-    "resume_from": "harness/handoffs/orchestrator/B-005-P-005-complete.md"
+    "last_summary": "P-006 accepted. Ask Human Gate: approve B-007 scope P-007 only.",
+    "resume_from": "harness/handoffs/orchestrator/B-006-P-006-complete.md"
   },
-  "active_phase": "P-005",
-  "approved_build": "B-005",
+  "active_phase": "P-006",
+  "approved_build": "B-006",
   "approved_phases": [
-    "P-005"
+    "P-006"
   ],
-  "updated_at": "2026-07-15T10:25:00+08:00"
+  "updated_at": "2026-07-15T11:05:00+08:00"
 }

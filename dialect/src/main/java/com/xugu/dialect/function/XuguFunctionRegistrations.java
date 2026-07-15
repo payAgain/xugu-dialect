@@ -1,0 +1,107 @@
+package com.xugu.dialect.function;
+
+import org.hibernate.boot.model.FunctionContributions;
+import org.hibernate.dialect.function.CommonFunctionFactory;
+import org.hibernate.dialect.function.json.JsonValueFunction;
+import org.hibernate.query.sqm.function.SqmFunctionRegistry;
+import org.hibernate.query.sqm.produce.function.FunctionParameterType;
+import org.hibernate.query.sqm.produce.function.StandardFunctionArgumentTypeResolvers;
+import org.hibernate.type.BasicType;
+import org.hibernate.type.StandardBasicTypes;
+import org.hibernate.type.spi.TypeConfiguration;
+
+/**
+ * XuGu-native SQL function contributions for Hibernate 7.4 (P-006 / A-FUN-*).
+ *
+ * <p>Primary UUID SQL form: {@code uuid()} — returns dashed VARCHAR UUID; proven on live
+ * XuguDB. Alternates {@code gen_random_uuid()} / {@code sys_guid()} are also registered
+ * (documented) but {@code uuid()} is the dialect primary.
+ *
+ * <p>JSON subset: standard {@code json_value} (ANSI-style template via
+ * {@link JsonValueFunction}) plus native {@code json_extract}. Not a MySQL function dump.
+ *
+ * <p>String aggregate: Hibernate {@code listagg} → native XuGu
+ * {@code LISTAGG(...) WITHIN GROUP (ORDER BY ...)}.
+ */
+public final class XuguFunctionRegistrations {
+
+	/** Primary UUID generator SQL name for this dialect (live-proven). */
+	public static final String PRIMARY_UUID_FUNCTION = "uuid";
+
+	private XuguFunctionRegistrations() {
+	}
+
+	public static void register(FunctionContributions contributions) {
+		final TypeConfiguration typeConfiguration = contributions.getTypeConfiguration();
+		final SqmFunctionRegistry functionRegistry = contributions.getFunctionRegistry();
+		final CommonFunctionFactory functionFactory = new CommonFunctionFactory( contributions );
+		final BasicType<String> stringType = typeConfiguration.getBasicTypeRegistry()
+				.resolve( StandardBasicTypes.STRING );
+
+		// --- String (A-FUN-001..006 extras beyond Dialect defaults) ---
+		// concat / substring / lower / upper / length / replace / locate / trim:
+		// already registered by Dialect.initializeFunctionRegistry defaults.
+		functionFactory.substr(); // A-FUN-002 native substr
+		functionFactory.position(); // A-FUN-006 ANSI POSITION
+		functionFactory.trim1(); // A-FUN-005 ltrim / rtrim
+
+		// --- Null-handling (A-FUN-007): prefer COALESCE (already from Dialect); add NVL ---
+		functionRegistry.namedDescriptorBuilder( "nvl" )
+				.setExactArgumentCount( 2 )
+				.setArgumentTypeResolver( StandardFunctionArgumentTypeResolvers.ARGUMENT_OR_IMPLIED_RESULT_TYPE )
+				.register();
+
+		// --- Math (A-FUN-008/009) ---
+		functionFactory.ceiling_ceil(); // ceil + ceiling alias
+		functionFactory.trunc(); // trunc / truncate numeric
+
+		// --- Temporal (A-FUN-010/011/012) ---
+		functionFactory.nowCurdateCurtime(); // now() / curdate() / curtime()
+		functionFactory.yearMonthDay(); // year / month / day
+		functionFactory.toCharNumberDateTimestamp(); // to_char / to_date / to_timestamp
+
+		// --- UUID (A-FUN-016): primary = uuid() ---
+		functionRegistry.noArgsBuilder( PRIMARY_UUID_FUNCTION )
+				.setInvariantType( stringType )
+				.setUseParenthesesWhenNoArgs( true )
+				.register();
+		functionRegistry.noArgsBuilder( "gen_random_uuid" )
+				.setInvariantType( stringType )
+				.setUseParenthesesWhenNoArgs( true )
+				.register();
+		functionRegistry.noArgsBuilder( "sys_guid" )
+				.setInvariantType( stringType )
+				.setUseParenthesesWhenNoArgs( true )
+				.register();
+
+		// --- JSON subset (A-FUN-017): json_value + json_extract only ---
+		// Base JsonValueFunction renders JSON_VALUE(doc, path …) matching XuGu docs.
+		// Path expression supported; PASSING clause not documented for XuGu → false.
+		functionRegistry.register(
+				"json_value",
+				new JsonValueFunction( typeConfiguration, true, false )
+		);
+		functionRegistry.namedDescriptorBuilder( "json_extract" )
+				.setMinArgumentCount( 2 )
+				.setParameterTypes( FunctionParameterType.IMPLICIT_JSON, FunctionParameterType.STRING )
+				.setInvariantType( stringType )
+				.setArgumentListSignature( "(JSON jsonDoc, STRING path[, STRING path…])" )
+				.register();
+
+		// --- listagg / string_agg / group_concat (A-FUN-018) ---
+		// Hibernate HQL listagg → native LISTAGG … WITHIN GROUP (XuGu form).
+		functionFactory.listagg( null );
+		functionRegistry.namedDescriptorBuilder( "string_agg" )
+				.setArgumentCountBetween( 2, 3 )
+				.setParameterTypes( FunctionParameterType.STRING, FunctionParameterType.STRING )
+				.setInvariantType( stringType )
+				.setArgumentListSignature( "(STRING expr, STRING separator[, order by…])" )
+				.register();
+		functionRegistry.namedDescriptorBuilder( "group_concat" )
+				.setMinArgumentCount( 1 )
+				.setParameterTypes( FunctionParameterType.STRING )
+				.setInvariantType( stringType )
+				.setArgumentListSignature( "(STRING expr[, …] [ORDER BY …] [SEPARATOR delimiter])" )
+				.register();
+	}
+}

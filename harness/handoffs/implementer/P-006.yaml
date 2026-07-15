@@ -1,0 +1,89 @@
+schema_version: 1
+role: implementer
+phase_id: P-006
+build_id: B-006
+initiative_id: I-001
+invocation_id: impl-p006-20260715
+step_id: RP-01
+status: passed
+required: true
+completed_at: "2026-07-15T10:49:00+08:00"
+purpose: register/contribute SQL functions per matrix A-FUN-001..014,016..018
+
+inputs:
+  - harness/tasks/P-006.md
+  - harness/builds/B-006.json
+  - contracts/feature-matrix-definition-a.md
+  - E:\\Work\\docs\\content\\reference\\function\\ (string/math/date-time/aggregate/uuid/json)
+  - Hibernate 7.4.5 Dialect.initializeFunctionRegistry / CommonFunctionFactory / FunctionContributions (m2)
+
+outputs:
+  - dialect/src/main/java/com/xugu/dialect/function/XuguFunctionRegistrations.java
+  - dialect/src/main/java/com/xugu/dialect/XuguDialect.java
+  - dialect/src/test/java/com/xugu/dialect/XuguFunctionRegistryTest.java
+  - dialect/src/test/java/com/xugu/dialect/support/OfflineConnectionProvider.java
+  - dialect/src/test/java/com/xugu/dialect/it/XuguFunctionRegistryIT.java
+  - dialect/src/test/java/com/xugu/dialect/it/entities/P006FunEntity.java
+  - contracts/feature-matrix-definition-a.md
+  - harness/evidence/implementer/P-006/NOTES.md
+  - harness/evidence/implementer/P-006/CHECKLIST.md
+  - harness/evidence/implementer/P-006/verification.json
+  - harness/handoffs/implementer/P-006.yaml
+
+coverage:
+  implemented:
+    - A-FUN-001
+    - A-FUN-002
+    - A-FUN-003
+    - A-FUN-004
+    - A-FUN-005
+    - A-FUN-006
+    - A-FUN-007
+    - A-FUN-008
+    - A-FUN-009
+    - A-FUN-010
+    - A-FUN-011
+    - A-FUN-012
+    - A-FUN-013
+    - A-FUN-014
+    - A-FUN-016
+    - A-FUN-017
+    - A-FUN-018
+  deferred:
+    - A-FUN-015
+
+choices:
+  uuid_primary: "uuid()"
+  uuid_alternates:
+    - "gen_random_uuid()"
+    - "sys_guid()"
+  json_subset:
+    - "json_value"
+    - "json_extract"
+  listagg_sql: "LISTAGG(...) WITHIN GROUP (ORDER BY ...)"
+  json_hql_preview_setting: "hibernate.query.hql.json_functions_enabled=true"
+
+verification:
+  test_offline:
+    command: "mvn -q test"
+    exit_code: 0
+  test_integration:
+    command: 'mvn -q test "-Dxugu.run.integration=true"'
+    exit_code: 0
+    real_db: true
+    url: "jdbc:xugu://127.0.0.1:5138/SYSTEM?...&compatiblemode=NONE"
+  verify_py:
+    command: "python harness/scripts/verify.py --phase P-006"
+    result: VERIFY PASS
+    evidence: harness/evidence/implementer/P-006/verification.json
+
+forbidden_reminder:
+  - no Accept
+  - no git commit / tag / push
+  - no MySQL/Oracle Dialect inheritance
+  - no sibling hibernate-dialect read
+
+next_step: independent test RP-02 then reviewer RP-03
+blocker: null
+accept_authorized: false
+commit_authorized: false

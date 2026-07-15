@@ -1,0 +1,50 @@
+# P-006 IT Result (independent test RP-02)
+
+**Invocation:** test-p006-20260715
+**Gate:** `-Dxugu.run.integration=true`
+**DB:** `jdbc:xugu://127.0.0.1:5138/SYSTEM?...&compatiblemode=NONE`
+**Driver / Dialect / Version:** XuguDB JDBC Driver / XuguDialect / 12.0
+**When:** 2026-07-15T10:51:56+08:00 (first IT run; exit 0)
+**Module:** dialect — Tests run: 41, Failures: 0, Errors: 0, Skipped: 0 (gate ON)
+
+## Offline (gate off)
+- Exit 0; 13 IT skipped; 28 unit passed
+  (XuguDialectTest 7 + XuguFunctionRegistryTest 5 + XuguIdentitySequenceTest 6 + XuguPaginationLockTest 10)
+
+## Integration (gate ON)
+- Exit 0; 13 IT executed; 0 failed
+- P-006 focused: XuguFunctionRegistryIT 2/2 PASS
+
+## Flow: function-registry-hql-sql-real-db
+Method: XuguFunctionRegistryIT.functionFamilies_HqlAndNative_A_FUN
+
+DDL/DML:
+- `create table HIB_P006_FUN (id integer not null, amount integer, name varchar(64) not null, primary key (id))`
+- inserts for Alice/Bob; cleanup `drop table HIB_P006_FUN`
+
+HQL SHOW_SQL (representative):
+- `select concat(pfe1_0.name, '-x') from HIB_P006_FUN ...` → Alice-x
+- `select substring(pfe1_0.name, 1, 3) ...` → Ali
+- `select lower(pfe1_0.name) ...` → alice
+- `select abs(pfe1_0.amount) ...` → 3
+- `select current_timestamp`
+- `select extract(year from current_date)`
+- `select cast(pfe1_0.amount as varchar(60000)) ...` → 10
+- `select count(...)` / `select sum(...)` → 2 / 7
+- **UUID primary:** `select uuid()` (dashed VARCHAR asserted)
+- **JSON subset:** `select json_value('{"a":1}', '$.a')` → 1
+- **listagg:** `listagg(pfe1_0.name, ',') within group (order by pfe1_0.name)` → contains Alice,Bob
+
+Native probes:
+- `SELECT JSON_EXTRACT('{"a":1}', '$.a') FROM DUAL` → non-null
+- `SELECT UUID() FROM DUAL` → non-null
+
+Negative: XuguFunctionRegistryIT.unsupportedFunctionNegative_diagnosable
+- `SELECT xugu_unsupported_fn_xyz() FROM DUAL` → SQLException (diagnosable)
+
+## Spot-check deferred A-FUN-015
+- Unit: `bit_and` has no SqmFunctionDescriptor (not registered)
+
+Log: `harness/evidence/test/P-006/mvn-test-integration.log`
+Surefire: `harness/evidence/test/P-006/surefire-summary-integration.txt`
+IT report: `harness/evidence/test/P-006/com.xugu.dialect.it.XuguFunctionRegistryIT.txt`

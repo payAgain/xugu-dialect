@@ -100,24 +100,24 @@
 
 | ID | Domain | Capability | Hibernate/Dialect surface (what apps expect) | Xugu doc ref | Status | Target Phase | Acceptance hint |
 |---|---|---|---|---|---|---|---|
-| A-FUN-001 | Functions | concat | `concat` / SQL concatenation operator | `reference/function/string-functions/concat.md`, `reference/sql/operators/concatenation-operators/link.md` | 可实现 | P-006 | HQL concat IT |
-| A-FUN-002 | Functions | substring / substr | `substring`, `substr` | `reference/function/string-functions/substring.md`, `reference/function/string-functions/substr.md` | 可实现 | P-006 | register both if signatures differ |
-| A-FUN-003 | Functions | length / char_length | string length | `reference/function/string-functions/length.md`, `reference/function/string-functions/char_length.md` | 可实现 | P-006 | |
-| A-FUN-004 | Functions | lower / upper | case fold | `reference/function/string-functions/lower.md`, `reference/function/string-functions/upper.md` | 可实现 | P-006 | |
-| A-FUN-005 | Functions | trim / ltrim / rtrim | trim family | `reference/function/string-functions/trim.md`, `ltrim.md`, `rtrim.md` | 可实现 | P-006 | |
-| A-FUN-006 | Functions | replace / locate / position | search/replace | `reference/function/string-functions/replace.md`, `locate.md`, `position.md` | 可实现 | P-006 | |
-| A-FUN-007 | Functions | coalesce / nullif / nvl | null-handling | `reference/sql/expression/function.md` (COALESCE), `reference/function/flow-control-functions/nullif.md`, `reference/function/string-functions/nvl.md`, `reference/function/flow-control-functions/ifnull.md` | 可实现 | P-006 | prefer COALESCE for ANSI HQL |
-| A-FUN-008 | Functions | abs / mod / power / sqrt | math core | `reference/function/mathematical-functions/abs.md`, `mod.md`, `power.md`, `sqrt.md` | 可实现 | P-006 | |
-| A-FUN-009 | Functions | round / floor / ceil / trunc | rounding | `reference/function/mathematical-functions/round.md`, `floor.md`, `ceil.md`, `trunc.md` | 可实现 | P-006 | |
-| A-FUN-010 | Functions | current_date / current_timestamp / now | temporal current | `reference/function/date-and-time-functions/current_date.md`, `current_timestamp.md`, `now.md`, `sysdate.md` | 可实现 | P-006 | map Hibernate current_* functions |
-| A-FUN-011 | Functions | extract / year/month/day | datetime extract | `reference/function/date-and-time-functions/extract.md`, `year.md`, `month.md`, `day.md` | 可实现 | P-006 | |
-| A-FUN-012 | Functions | to_char / to_date / to_timestamp | format/parse | `reference/function/date-and-time-functions/to_char.md`, `to_date.md`, `to_timestamp.md` | 可实现 | P-006 | pattern smoke tests |
-| A-FUN-013 | Functions | cast | HQL cast | `reference/sql/expression/type_conversion.md` | 可实现 | P-006 | |
-| A-FUN-014 | Functions | aggregates avg/sum/min/max/count | standard aggregates | `reference/function/aggregate-functions/avg.md`, `sum.md`, `min.md`, `max.md` | 可实现 | P-006 | count is SQL keyword; verify |
+| A-FUN-001 | Functions | concat | `concat` / SQL concatenation operator | `reference/function/string-functions/concat.md`, `reference/sql/operators/concatenation-operators/link.md` | 可实现 | P-006 | ✅ HQL `concat` → `concat(...)`; IT |
+| A-FUN-002 | Functions | substring / substr | `substring`, `substr` | `reference/function/string-functions/substring.md`, `reference/function/string-functions/substr.md` | 可实现 | P-006 | ✅ both registered; HQL substring IT |
+| A-FUN-003 | Functions | length / char_length | string length | `reference/function/string-functions/length.md`, `reference/function/string-functions/char_length.md` | 可实现 | P-006 | ✅ Dialect default length/char_length |
+| A-FUN-004 | Functions | lower / upper | case fold | `reference/function/string-functions/lower.md`, `reference/function/string-functions/upper.md` | 可实现 | P-006 | ✅ HQL lower IT |
+| A-FUN-005 | Functions | trim / ltrim / rtrim | trim family | `reference/function/string-functions/trim.md`, `ltrim.md`, `rtrim.md` | 可实现 | P-006 | ✅ trim + ltrim/rtrim registered |
+| A-FUN-006 | Functions | replace / locate / position | search/replace | `reference/function/string-functions/replace.md`, `locate.md`, `position.md` | 可实现 | P-006 | ✅ replace/locate + ANSI position |
+| A-FUN-007 | Functions | coalesce / nullif / nvl | null-handling | `reference/sql/expression/function.md` (COALESCE), `reference/function/flow-control-functions/nullif.md`, `reference/function/string-functions/nvl.md`, `reference/function/flow-control-functions/ifnull.md` | 可实现 | P-006 | ✅ COALESCE preferred; NVL native registered |
+| A-FUN-008 | Functions | abs / mod / power / sqrt | math core | `reference/function/mathematical-functions/abs.md`, `mod.md`, `power.md`, `sqrt.md` | 可实现 | P-006 | ✅ abs IT; mod/power/sqrt registered |
+| A-FUN-009 | Functions | round / floor / ceil / trunc | rounding | `reference/function/mathematical-functions/round.md`, `floor.md`, `ceil.md`, `trunc.md` | 可实现 | P-006 | ✅ ceil/ceiling + trunc registered |
+| A-FUN-010 | Functions | current_date / current_timestamp / now | temporal current | `reference/function/date-and-time-functions/current_date.md`, `current_timestamp.md`, `now.md`, `sysdate.md` | 可实现 | P-006 | ✅ current_timestamp IT; now() registered |
+| A-FUN-011 | Functions | extract / year/month/day | datetime extract | `reference/function/date-and-time-functions/extract.md`, `year.md`, `month.md`, `day.md` | 可实现 | P-006 | ✅ extract(year) IT; year/month/day |
+| A-FUN-012 | Functions | to_char / to_date / to_timestamp | format/parse | `reference/function/date-and-time-functions/to_char.md`, `to_date.md`, `to_timestamp.md` | 可实现 | P-006 | ✅ registered; live probe OK |
+| A-FUN-013 | Functions | cast | HQL cast | `reference/sql/expression/type_conversion.md` | 可实现 | P-006 | ✅ cast IT |
+| A-FUN-014 | Functions | aggregates avg/sum/min/max/count | standard aggregates | `reference/function/aggregate-functions/avg.md`, `sum.md`, `min.md`, `max.md` | 可实现 | P-006 | ✅ count/sum IT |
 | A-FUN-015 | Functions | bit_and / bit_or | bitwise aggregates/ops if used | `reference/function/aggregate-functions/bit_and.md`, `bit_or.md` | 延后 | later | Only if app HQL needs |
-| A-FUN-016 | Functions | UUID generators | `uuid()`, `sys_guid()`, `gen_random_uuid()` | `reference/function/uuid-functions/uuid.md`, `sys_guid.md`, `gen_random_uuid.md`, `newid.md`, `sys_uuid.md` | 可实现 | P-006 | pick primary UUID SQL function for Dialect |
-| A-FUN-017 | Functions | JSON functions | `json_value` / `json_extract` / operators | `reference/function/json-functions/`, `reference/sql/operators/json-operators/` | 可实现 | P-006 | register subset used by Hibernate JSON; not full MySQL set blindly |
-| A-FUN-018 | Functions | listagg / string_agg / group_concat | string aggregate | `reference/function/aggregate-functions/listagg.md`, `string_agg.md`, `group_concat.md` | 可实现 | P-006 | map Hibernate listagg rendering |
+| A-FUN-016 | Functions | UUID generators | `uuid()`, `sys_guid()`, `gen_random_uuid()` | `reference/function/uuid-functions/uuid.md`, `sys_guid.md`, `gen_random_uuid.md`, `newid.md`, `sys_uuid.md` | 可实现 | P-006 | ✅ primary=`uuid()` (dashed VARCHAR); alts registered |
+| A-FUN-017 | Functions | JSON functions | `json_value` / `json_extract` / operators | `reference/function/json-functions/`, `reference/sql/operators/json-operators/` | 可实现 | P-006 | ✅ subset: json_value + json_extract; HQL needs JSON_FUNCTIONS_ENABLED |
+| A-FUN-018 | Functions | listagg / string_agg / group_concat | string aggregate | `reference/function/aggregate-functions/listagg.md`, `string_agg.md`, `group_concat.md` | 可实现 | P-006 | ✅ HQL listagg → `LISTAGG … WITHIN GROUP`; string_agg/group_concat named |
 | A-FUN-019 | Functions | regexp_* | regex HQL | `reference/function/string-functions/regexp_like.md`, `regexp_replace.md`, `regexp_substr.md` | 延后 | later | Revisit if Criteria/HQL regex used |
 | A-FUN-020 | Functions | geometric functions | spatial HQL | `reference/function/geometric-functions/` | 延后 | later | Paired with A-TYP-017 |
 | A-FUN-021 | Functions | XML functions | XML HQL | `reference/function/xml-functions/` | 延后 | later | Paired with A-TYP-016 |
