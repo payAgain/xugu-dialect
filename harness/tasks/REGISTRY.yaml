@@ -1,7 +1,7 @@
 schema_version: 1
 charter_version: "1.0.0"
 initiative_id: I-001
-updated: "2026-07-15T14:15:00+08:00"
+updated: "2026-07-15T15:20:00+08:00"
 # Phase progress index. IDs: I-00x / P-00x / B-00x — see protocol/references/glossary.md
 tasks:
   - task_id: P-001
@@ -70,14 +70,15 @@ tasks:
     dependencies: [P-007]
   - task_id: P-009
     title: "Spring Boot Demo"
-    status: ready
+    status: accepted
+    build_id: B-009
     packet: harness/tasks/P-009.md
     acceptance_doc: harness/evidence/implementer/P-009/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"
     dependencies: [P-008]
   - task_id: P-010
     title: "项目内用户指南 docs/user-guide/"
-    status: blocked
+    status: ready
     packet: harness/tasks/P-010.md
     acceptance_doc: harness/evidence/docs/P-010/ACCEPTANCE.md
     role_pipeline_summary: "docs → test → (reviewer?)"

@@ -1,3 +1,27 @@
+## Entry: B-009 APPROVED — P-009 in progress
+
+### Summary
+Human Gate 批准 Build：「批准 B-009，范围仅 P-009」（~2026-07-15T14:49+08:00）。Orchestrator 物化 `B-009.json`（`status=approved`, `approved_phase_ids=[P-009]`），将 `P-009` / REGISTRY 标为 `in_progress`（`build_id=B-009`）。RP-03 reviewer 保持 `required=true`，`condition` 设为 `null` 以免被 risk 门控跳过。未改 dialect Java；未 commit。下一步：派发 P-009 `role_pipeline` RP-01 implementer。
+
+### Files Created or Updated
+- harness/builds/B-009.json (approved)
+- harness/tasks/P-009.md (build_id=B-009, status=in_progress; RP-03 condition=null)
+- harness/tasks/REGISTRY.yaml (P-009 in_progress + build_id)
+- harness/handoffs/orchestrator/B-009-approved.md
+- current-task.md, harness/session/*
+
+### Validation
+- harness-only disk updates; no Maven / Java implementation this turn
+- No git commit (Human Gate did not authorize)
+
+### Next Steps
+1. Dispatch RP-01 implementer（P-009）
+2. Then RP-02 test → RP-03 reviewer（required）
+3. P-009 ACCEPTANCE 后再请批后续 Build（通常 P-010）
+
+---
+# Session Log
+
 ## Entry: P-004 RP-03 request-changes + implementer fix landed
 
 ### Summary
@@ -410,3 +434,16 @@ Independent re-verify of DialectResolver SPI + explicit dialect. Offline `mvn -q
 - Resume: `harness/handoffs/orchestrator/B-008-P-008-complete.md`
 
 - Must-commit SHA recorded: f9e16294aaf07ea8ca3b192362b5a8cd4e4d6374
+
+
+## 2026-07-15T15:20:00+08:00 — orchestrator: P-009 / B-009 Accept
+
+- Landed REVIEW.md (
+ev-p009-20260715 approve)
+- RP-03 passed; P-009 status accepted; verification_evidence → test verification.json
+- ACCEPTANCE Decision: accepted (Spring Boot 4.1.0 demo; Hibernate 7.4.5.Final forced; env overrides; VERIFY PASS; real-DB DemoPersonCrudIT)
+- REGISTRY: P-009 accepted; P-010 ready
+- Must-commit on feat/i-001-xugu-dialect-major; propose B-010 → P-010 only
+- Resume: harness/handoffs/orchestrator/B-009-P-009-complete.md
+
+- Must-commit SHA recorded: PENDING_FILL

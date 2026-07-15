@@ -1,0 +1,20 @@
+﻿[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------< com.xugu:demo-spring-boot >----------------------
+[INFO] Building demo-spring-boot 7.4.5.Final
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[WARNING] The POM for com.xugu:xugu-dialect:jar:7.4.5.Final is missing, no dependency information available
+[INFO] 
+[INFO] --- dependency:3.7.0:tree (default-cli) @ demo-spring-boot ---
+[INFO] com.xugu:demo-spring-boot:jar:7.4.5.Final
+[INFO] \- org.springframework.boot:spring-boot-starter-data-jpa:jar:4.1.0:compile
+[INFO]    \- org.springframework.boot:spring-boot-data-jpa:jar:4.1.0:compile
+[INFO]       \- org.springframework.boot:spring-boot-hibernate:jar:4.1.0:compile
+[INFO]          \- org.hibernate.orm:hibernate-core:jar:7.4.5.Final:compile
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  7.611 s
+[INFO] Finished at: 2026-07-15T15:13:35+08:00
+[INFO] ------------------------------------------------------------------------

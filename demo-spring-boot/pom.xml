@@ -14,12 +14,17 @@
   <packaging>jar</packaging>
 
   <name>demo-spring-boot</name>
-  <description>Spring Boot demo consuming xugu-dialect (scaffold entry only)</description>
+  <description>Spring Boot 4.1.0 demo consuming xugu-dialect against real XuguDB</description>
 
   <properties>
-    <!-- Force Hibernate aligned with ADR-0001; Boot 4.1.0 may default to an older 7.4.x -->
+    <!--
+      Boot 4.1.0 BOM defaults hibernate.version to 7.4.1.Final.
+      Force 7.4.5.Final (Charter / ADR-0001). Prove with dependency:tree.
+    -->
     <hibernate.version>7.4.5.Final</hibernate.version>
     <spring-boot.version>4.1.0</spring-boot.version>
+    <!-- Default off; enable with -Dxugu.run.integration=true or env XUGU_RUN_IT=true -->
+    <xugu.run.integration>false</xugu.run.integration>
   </properties>
 
   <dependencyManagement>
@@ -30,6 +35,12 @@
         <version>${spring-boot.version}</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+      <!-- Direct DM entry after Boot BOM import wins over BOM-managed 7.4.1 -->
+      <dependency>
+        <groupId>org.hibernate.orm</groupId>
+        <artifactId>hibernate-core</artifactId>
+        <version>${hibernate.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -48,7 +59,12 @@
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter</artifactId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 
@@ -58,6 +74,31 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
         <version>${spring-boot.version}</version>
+        <configuration>
+          <!-- system-scope JDBC jar must be on the runnable classpath -->
+          <includeSystemScope>true</includeSystemScope>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <includes>
+            <include>**/*Test.java</include>
+            <include>**/*Tests.java</include>
+            <include>**/*IT.java</include>
+          </includes>
+          <systemPropertyVariables>
+            <xugu.run.integration>${xugu.run.integration}</xugu.run.integration>
+          </systemPropertyVariables>
+        </configuration>
       </plugin>
     </plugins>
   </build>

@@ -1,81 +1,73 @@
 {
   "schema_version": 1,
   "task_id": "I-001",
-  "batch_id": "B-008",
-  "status": "p008_accepted_propose_b009",
-  "current_phase": "P-008",
+  "batch_id": "B-009",
+  "status": "p009_accepted_awaiting_b010_approval",
+  "current_phase": "P-009",
   "harness_level": "Standard",
-  "last_updated": "2026-07-15T14:20:00+08:00",
+  "last_updated": "2026-07-15T15:20:00+08:00",
   "initiative_id": "I-001",
   "initiative_type": "major",
   "working_branch": "feat/i-001-xugu-dialect-major",
   "active_plan": [
-    "P-008 accepted (B-008); propose B-009 scope P-009 only",
-    "Await Human Gate approval for Spring Boot demo",
-    "Do not approve P-010+ until P-009 ACCEPTANCE"
+    "P-009 accepted (B-009)",
+    "Propose B-010 scope P-010 only (docs/user-guide)",
+    "Do not approve P-011 until P-010 ACCEPTANCE"
   ],
   "next_3_steps": [
-    "Human Gate approve B-009 scope P-009 only",
-    "On approval materialize B-009 and dispatch RP-01 implementer",
-    "Do not parallel-approve P-010+"
+    "Human Gate approve B-010 scope P-010 only",
+    "Materialize B-010; dispatch docs RP-01",
+    "Do not parallel-approve P-011"
   ],
   "changed_files": [
-    "dialect/src/main/java/com/xugu/dialect/XuguDialectResolver.java",
-    "dialect/src/main/java/com/xugu/dialect/XuguDialect.java",
-    "dialect/src/main/resources/META-INF/services/",
-    "dialect/src/test/java/com/xugu/dialect/XuguDialectResolverTest.java",
-    "dialect/src/test/java/com/xugu/dialect/XuguDialectServicesResourceTest.java",
-    "dialect/src/test/java/com/xugu/dialect/it/XuguDialectResolverIT.java",
-    "contracts/feature-matrix-definition-a.md",
-    "contracts/xugu-dialect.contract.md",
-    "harness/evidence/implementer/P-008/",
-    "harness/evidence/test/P-008/",
-    "harness/evidence/reviewer/P-008/REVIEW.md",
-    "harness/tasks/P-008.md",
+    "demo-spring-boot/**",
+    "harness/evidence/**/P-009/**",
+    "harness/evidence/reviewer/P-009/REVIEW.md",
     "harness/tasks/P-009.md",
+    "harness/tasks/P-010.md",
     "harness/tasks/REGISTRY.yaml",
-    "harness/builds/B-008.json",
+    "harness/handoffs/orchestrator/B-009-P-009-complete.md",
     "current-task.md",
-    "harness/session/",
-    "harness/handoffs/orchestrator/B-008-P-008-complete.md"
+    "harness/session/"
   ],
   "validation": {
     "last_commands": [
       "mvn -q test",
-      "mvn -q test -Dxugu.run.integration=true",
-      "python harness/scripts/verify.py --phase P-008 --evidence harness/evidence/test/P-008/verification.json"
+      "mvn -q -pl demo-spring-boot -am test -Dxugu.run.integration=true",
+      "python harness/scripts/verify.py --phase P-009 --evidence harness/evidence/test/P-009/verification.json"
     ],
-    "last_result": "P-008 accepted; RP-03 approve rev-p008-20260715; VERIFY PASS; propose B-009 P-009 only",
+    "last_result": "P-009 Accept: RP-01/02/03 PASS; VERIFY PASS (test verification.json); REVIEW approve rev-p009-20260715",
     "known_failures": []
   },
   "cognitive_state": {
     "failure_count": 0,
-    "current_mode": "accept_propose_next_build",
+    "current_mode": "accept_complete",
     "tried_approaches": [
-      "p008_rp01_implementer",
-      "p008_rp02_test",
-      "p008_rp03_reviewer_approve",
-      "p008_accept_must_commit"
+      "b009_human_gate_approve",
+      "p009_rp01_implementer",
+      "p009_rp02_test",
+      "p009_rp03_reviewer_approve",
+      "p009_accept_must_commit"
     ],
-    "blocked_on": "human_gate_b009_approval"
+    "blocked_on": "human_gate_b010_approval"
   },
   "version_control_checkpoint": {
-    "decision": "committed",
-    "candidate_commit": "f9e16294aaf07ea8ca3b192362b5a8cd4e4d6374",
+    "decision": "must_commit",
+    "candidate_commit": null,
     "git_init": true,
-    "committed": true,
+    "committed": false,
     "branch": "feat/i-001-xugu-dialect-major",
-    "note": "P-008 Accept must-commit recorded; no push.",
-    "head": "f9e16294aaf07ea8ca3b192362b5a8cd4e4d6374"
+    "note": "Accept turn: must-commit pending; SHA to fill after commit",
+    "head": "2307ab7aba2df225267f39bfef98140d50522b77"
   },
   "handoff": {
-    "last_summary": "P-008 accepted. Propose B-009 scope P-009 only (Spring Boot demo).",
-    "resume_from": "harness/handoffs/orchestrator/B-008-P-008-complete.md"
+    "last_summary": "P-009 accepted. Propose B-010 → P-010 only (docs/user-guide).",
+    "resume_from": "harness/handoffs/orchestrator/B-009-P-009-complete.md"
   },
-  "active_phase": "P-008",
-  "approved_build": "B-008",
+  "active_phase": "P-009",
+  "approved_build": "B-009",
   "approved_phases": [
-    "P-008"
+    "P-009"
   ],
-  "updated_at": "2026-07-15T14:20:00+08:00"
+  "updated_at": "2026-07-15T15:20:00+08:00"
 }

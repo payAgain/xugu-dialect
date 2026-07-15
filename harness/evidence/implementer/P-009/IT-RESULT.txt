@@ -1,0 +1,26 @@
+P-009 Implementer IT Result
+===========================
+Gate: -Dxugu.run.integration=true
+Invocation: impl-p009-20260715
+
+Commands:
+  mvn -q test                                                     → exit 0 (offline; DemoPersonCrudIT skipped)
+  mvn -q -pl demo-spring-boot -am test -Dxugu.run.integration=true → exit 0
+  mvn -q test -Dxugu.run.integration=true                         → exit 0
+
+Demo IT: com.xugu.demo.it.DemoPersonCrudIT
+  Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+
+Observed:
+  Hibernate ORM core version 7.4.5.Final
+  Database dialect: XuguDialect
+  JDBC URL: jdbc:xugu://127.0.0.1:5138/SYSTEM?compatiblemode=NONE
+  Driver: XuguDB JDBC Driver
+  Persist/find HIB_DEMO_PERSON OK; DROP TABLE IF EXISTS after suite
+
+Hibernate force proof:
+  org.hibernate.orm:hibernate-core:jar:7.4.5.Final:compile
+  (Boot 4.1.0 BOM default would be 7.4.1.Final)
+
+verify.py --phase P-009 → VERIFY PASS
+  evidence: harness/evidence/implementer/P-009/verification.json

@@ -4,13 +4,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * Minimal Spring Boot entry for P-001 scaffold.
- * Does not require a live database to compile or package.
+ * Spring Boot demo entry: JPA CRUD against real XuguDB via {@code xugu-dialect}.
  */
 @SpringBootApplication
 public class DemoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		SpringApplication.run( DemoApplication.class, args );
 	}
 }

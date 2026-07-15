@@ -1,0 +1,29 @@
+# Local reference defaults only — override with env in any shared/CI/prod environment.
+# Do NOT commit production secrets.
+
+spring:
+  application:
+    name: demo-spring-boot
+  datasource:
+    # Prefer env XUGU_JDBC_URL; default includes compatiblemode=NONE (Charter).
+    url: ${XUGU_JDBC_URL:jdbc:xugu://127.0.0.1:5138/SYSTEM?compatiblemode=NONE}
+    username: ${XUGU_USER:SYSDBA}
+    password: ${XUGU_PASSWORD:SYSDBA}
+    driver-class-name: com.xugu.cloudjdbc.Driver
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        # Explicit dialect for clarity. DialectResolver SPI also works when unset
+        # (META-INF/services/...DialectResolver in xugu-dialect).
+        dialect: com.xugu.dialect.XuguDialect
+        jdbc:
+          time_zone: UTC
+
+# When true (default), ApplicationRunner persists/finds a HIB_DEMO_PERSON row on startup.
+xugu:
+  demo:
+    startup-crud: true
