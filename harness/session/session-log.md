@@ -446,4 +446,4 @@ ev-p009-20260715 approve)
 - Must-commit on feat/i-001-xugu-dialect-major; propose B-010 → P-010 only
 - Resume: harness/handoffs/orchestrator/B-009-P-009-complete.md
 
-- Must-commit SHA recorded: PENDING_FILL
+- Must-commit SHA recorded: 7fe9586e597db6cf4480d99b0501e2ee538c6b72

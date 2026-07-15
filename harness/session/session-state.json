@@ -5,7 +5,7 @@
   "status": "p009_accepted_awaiting_b010_approval",
   "current_phase": "P-009",
   "harness_level": "Standard",
-  "last_updated": "2026-07-15T15:20:00+08:00",
+  "last_updated": "2026-07-15T15:25:00+08:00",
   "initiative_id": "I-001",
   "initiative_type": "major",
   "working_branch": "feat/i-001-xugu-dialect-major",
@@ -52,13 +52,13 @@
     "blocked_on": "human_gate_b010_approval"
   },
   "version_control_checkpoint": {
-    "decision": "must_commit",
-    "candidate_commit": null,
+    "decision": "committed",
+    "candidate_commit": "7fe9586e597db6cf4480d99b0501e2ee538c6b72",
     "git_init": true,
-    "committed": false,
+    "committed": true,
     "branch": "feat/i-001-xugu-dialect-major",
-    "note": "Accept turn: must-commit pending; SHA to fill after commit",
-    "head": "2307ab7aba2df225267f39bfef98140d50522b77"
+    "note": "P-009 Accept must-commit; no push",
+    "head": "7fe9586e597db6cf4480d99b0501e2ee538c6b72"
   },
   "handoff": {
     "last_summary": "P-009 accepted. Propose B-010 → P-010 only (docs/user-guide).",
@@ -69,5 +69,5 @@
   "approved_phases": [
     "P-009"
   ],
-  "updated_at": "2026-07-15T15:20:00+08:00"
+  "updated_at": "2026-07-15T15:25:00+08:00"
 }

@@ -17,7 +17,7 @@ ev-p009-20260715)
 - Real DB IT: DemoPersonCrudIT PASS; dependency:tree hibernate-core:7.4.5.Final
 - REGISTRY: P-009 ccepted; P-010 
 eady (dependency satisfied)
-- Must-commit on working branch (SHA: PENDING_FILL)
+- Must-commit on working branch (SHA: 7fe9586e597db6cf4480d99b0501e2ee538c6b72)
 
 ## Explicitly not done
 

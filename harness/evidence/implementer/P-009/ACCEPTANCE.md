@@ -65,7 +65,7 @@ Reviewer MINOR (optional, non-blocking): user-guide prose deferred to P-010; doc
 ## Version control checkpoint
 
 - Branch: `feat/i-001-xugu-dialect-major`
-- Candidate commit: (filled after must-commit)
+- Candidate commit: 7fe9586e597db6cf4480d99b0501e2ee538c6b72
 - Deferred reason when no commit: N/A (must-commit on Accept)
 
 ## Acceptance decision
