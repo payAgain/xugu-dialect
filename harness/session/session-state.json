@@ -5,7 +5,7 @@
   "status": "awaiting_build_approval",
   "current_phase": null,
   "harness_level": "Standard",
-  "last_updated": "2026-07-15T18:30:00+08:00",
+  "last_updated": "2026-07-15T18:32:00+08:00",
   "initiative_id": "I-002",
   "initiative_type": "hotfix",
   "working_branch": "fix/i-002-hql-pagination-sequence-metadata",
@@ -53,13 +53,13 @@
     "blocked_on": "human_gate_b002_p002_only"
   },
   "version_control_checkpoint": {
-    "decision": "must_commit_p001_accepted",
-    "candidate_commit": null,
+    "decision": "committed_p001_accepted",
+    "candidate_commit": "63a7d6001dbd6845ea10520905c60bb56d2e3d9c",
     "git_init": true,
-    "committed": false,
+    "committed": true,
     "branch": "fix/i-002-hql-pagination-sequence-metadata",
-    "note": "P-001 accepted; SHA filled after must-commit",
-    "head": "8136c110d0bb1ce03c350f06032714946f95e0f0",
+    "note": "P-001 accepted; must-commit landed; await B-002 approval",
+    "head": "63a7d6001dbd6845ea10520905c60bb56d2e3d9c",
     "base_branch_at_fork": "feat/i-001-xugu-dialect-major",
     "i001_archive_sha": "82db5a38cd1e2ca00981198bbf42c84777c87e54"
   },
@@ -72,5 +72,5 @@
   "approved_phases": [
     "P-001"
   ],
-  "updated_at": "2026-07-15T18:30:00+08:00"
+  "updated_at": "2026-07-15T18:32:00+08:00"
 }

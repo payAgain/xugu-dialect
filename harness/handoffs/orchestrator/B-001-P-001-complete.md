@@ -14,7 +14,7 @@
 - ACCEPTANCE Decision: `accepted` — `harness/evidence/implementer/P-001/ACCEPTANCE.md`
 - VERIFY PASS: `harness/evidence/test/P-001/verification-retest.json`
 - REGISTRY: P-001 `accepted`; P-002 `ready` (dependency satisfied)
-- Must-commit on working branch (SHA: *filled after commit*)
+- Must-commit on working branch (SHA: `63a7d6001dbd6845ea10520905c60bb56d2e3d9c`)
 
 ## Explicitly not done
 

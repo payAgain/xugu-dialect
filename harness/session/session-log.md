@@ -21,7 +21,8 @@ select phpe1_0.id from HIB_P001_HQL_PAGE phpe1_0 order by phpe1_0.id for update 
 - `mvn -q test` EXIT 0
 - `mvn -q test -Dxugu.run.integration=true` EXIT 0
 - `verify.py --phase P-001` (retest evidence) → VERIFY PASS
-- `harness_check.py` (after Accept land)
+- `harness_check.py` → HARNESS_CHECK PASS
+- Must-commit SHA: `63a7d6001dbd6845ea10520905c60bb56d2e3d9c`
 
 ### Next Steps
 1. Human Gate：是否批准 B-002，范围仅 P-002？

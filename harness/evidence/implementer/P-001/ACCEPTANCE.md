@@ -52,7 +52,7 @@
 ## Version control checkpoint
 
 - Branch: `fix/i-002-hql-pagination-sequence-metadata`
-- Candidate commit: *(filled after must-commit)*
+- Candidate commit: `63a7d6001dbd6845ea10520905c60bb56d2e3d9c`
 - Deferred reason when no commit: N/A (must-commit on Accept)
 
 ## Acceptance decision
