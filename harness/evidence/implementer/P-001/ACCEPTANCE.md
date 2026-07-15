@@ -1,79 +1,66 @@
-# P-001 Acceptance Evidence
+# P-001 Acceptance Evidence (I-002)
 
 > Phase: `P-001`  
-> Initiative: `I-001`  
+> Initiative: `I-002`  
 > Build: `B-001`  
-> Result: `PASS`
+> Result: `PASS`  
+> Role: orchestrator (Accept)
 
 ## Approved scope
 
-- Build manifest: `harness/builds/B-001.json`
-- Plan revision: `1`
-- Approval reference: `批准 B-001，范围仅 P-001`
-- Phase is present in `approved_phase_ids`: `yes`
-- Contract: `contracts/xugu-dialect.scaffold.contract.md`
-
-## Acceptance criteria
-
-| Criterion | Result | Evidence |
-|---|---|---|
-| Parent + modules package via verification `build` | PASS | `mvn -q -DskipTests package` exit 0; implementer + test evidence |
-| verification.json real commands; `verify.py` not INCOMPLETE from placeholders | PASS | `VERIFY PASS`; lint NA optional |
-| AGENTS.md Real commands match verification.json | PASS | both `mvn -q -DskipTests package` / `mvn -q test` |
-| Demo depends on dialect; Boot 4.1.0 + hibernate.version 7.4.5.Final reserved | PASS | `demo-spring-boot/pom.xml` (+ parent properties) |
+- Build: B-001 (P-001 only) — `harness/builds/B-001.json`
+- Human Gate approval: 「批准 B-001，范围仅 P-001」
+- Goal: HQL/Criteria pagination → XuGu `LIMIT count OFFSET offset` via `XuguSqlAstTranslator`; lock order matches LimitHandler; version **7.4.5.Final**
 
 ## Role pipeline
 
-| Step | Role | Status | Invocation | Independent context | Evidence / handoff |
+| Step | Role | Status | Invocation | Independent | Evidence |
 |---|---|---|---|---|---|
-| RP-01 | architect-contract | passed | arch-p001-20260714 | N/A | `harness/evidence/architect-contract/P-001/layout-confirmation.md`, `harness/handoffs/architect-contract/P-001.yaml` |
-| RP-02 | implementer | passed | impl-p001-20260714 | N/A | `harness/evidence/implementer/P-001/`, `harness/handoffs/implementer/P-001.yaml` |
-| RP-03 | test | passed | test-p001-20260714 | true | `harness/evidence/test/P-001/TEST-REPORT.md`, `harness/handoffs/test/P-001.yaml` |
-| RP-04 | reviewer | passed | rev-p001-20260714 | true | `harness/evidence/reviewer/P-001/REVIEW.md`, `harness/handoffs/readonly-results/P-001-reviewer.yaml` |
+| RP-01 | implementer | passed | `impl-p001-20260715` | N/A | `harness/evidence/implementer/P-001/` |
+| RP-01b | implementer | passed | `impl-p001-fix-locklimit-20260715` | N/A | lock+page IT + NOTES |
+| RP-02 | test | passed | `test-p001-retest-20260715` | true | `harness/evidence/test/P-001/TEST-REPORT-RETEST.md` |
+| RP-03 | reviewer | passed | `rev-p001-recheck-20260715` | true | `harness/evidence/reviewer/P-001/REVIEW-RECHECK.md` |
+
+## Lock / pagination note
+
+- Prior RP-03 `request-changes` (`rev-p001-20260715`): AST/HQL FOR UPDATE→LIMIT(+WAIT) unproven.
+- Fix (`impl-p001-fix-locklimit-20260715`): gated IT `hqlLockAndPageEmitsForUpdateBeforeLimitAndWaitAfter`.
+- Observed SQL:
+  - `… for update of phpe1_0.id limit ? offset ?`
+  - `… for update of phpe1_0.id limit ? offset ? wait 2000`
+- Retest PASS; recheck **approve**; MAJOR **CLOSED**.
 
 ## Command verification
 
-- Phase verification evidence: `harness/evidence/implementer/P-001/verification.json`
-- Also (independent test): `harness/evidence/test/P-001/verification.json`
-- Linked latest: `harness/evidence/verification-latest.json`
-- Evidence `phase_id`: `P-001`
-- Overall status: `PASS` (**VERIFY PASS**)
+- Phase verification evidence: `harness/evidence/test/P-001/verification-retest.json`
+- Also: implementer + prior test `verification.json`
+- Overall status: **VERIFY PASS**
 - Required check IDs covered: `build`, `test`
 
 ## Observed affected flows
 
-| Flow | Environment and method | Expected | Observed | Result | Evidence |
-|---|---|---|---|---|---|
-| parent-and-modules-compile-via-maven | local JDK + Maven | parent + dialect + demo package | exit 0; jars produced | PASS | implementer logs; test report |
-| verification-json-real-mvn-commands | `python harness/scripts/verify.py` | required build/test configured and executable | VERIFY PASS | PASS | implementer + test `verification.json` |
-
-## Production readiness
-
-| Dimension | Trigger | Evidence or not-applicable reason | Result |
+| Flow | Method | Result | Evidence |
 |---|---|---|---|
-| functional-correctness | scaffold | compiles; stub dialect unit path via `mvn test` | PASS |
-| maintainability | module split | parent + dialect + demo; contract present | PASS |
-| deployment-and-configuration | mvn verify | real commands in verification.json + AGENTS.md | PASS |
-| compatibility | versions | Hibernate 7.4.5.Final / Spring Boot 4.1.0 / JDK 17 release | PASS |
+| hql-pagination-offset-fetch-real-db | `XuguHqlPaginationIT.hqlSetFirstResultMaxResultsUsesLimitNotFetchFirst` | PASS | test retest log |
+| hql-lock-page-for-update-order-real-db | `XuguHqlPaginationIT.hqlLockAndPageEmitsForUpdateBeforeLimitAndWaitAfter` | PASS | `IT-RESULT-RETEST.txt` |
 
-## Residual risk and limitations
+## Residual risks
 
-- Known limitations: stub dialect only; no Definition A SQL/DDL/Limit/SPI; demo does not connect to XuguDB
-- Residual risks: Boot BOM may drift hibernate unless property remains forced (reviewer nit)
-- Deferred follow-up: P-002+ (contract/matrix and implementation Phases)
+- MINOR carry-forward: unlocked page IT does not hard-assert `offset` token (logs show `limit ? offset ?`).
+- Deferred: P-002 sequence metadata; P-003 docs; Ship; sibling dialect port.
 
 ## Version control checkpoint
 
-- Branch: `feat/i-001-xugu-dialect-major`
-- Candidate commit: `377b9e6e8b831eee4cdeb5e56f71e73bc174393c`
-- Deferred reason when no commit: N/A (must-commit authorized for B-001)
+- Branch: `fix/i-002-hql-pagination-sequence-metadata`
+- Candidate commit: *(filled after must-commit)*
+- Deferred reason when no commit: N/A (must-commit on Accept)
 
 ## Acceptance decision
 
 - Decision: `accepted`
 - Decided by: `orchestrator`
-- Date: 2026-07-14
+- Date: 2026-07-15
 - Blocker reference when not accepted: N/A
-- Reviewer decision: `approve` (`rev-p001-20260714`)
-- Pipeline: RP-01..RP-04 all `passed`
-- Readiness: all required dimensions PASS for scaffold scope
+- Reviewer decision: `approve` (`rev-p001-recheck-20260715`; supersedes `request-changes` / `rev-p001-20260715`)
+- Pipeline: RP-01 / RP-01b / RP-02 / RP-03 all `passed`
+- Readiness: HQL pagination + AST lock order PASS with VERIFY PASS + real-DB IT

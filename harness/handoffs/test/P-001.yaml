@@ -2,57 +2,92 @@ schema_version: 1
 role: test
 phase_id: P-001
 build_id: B-001
-initiative_id: I-001
-invocation_id: test-p001-20260714
-step_id: RP-03
+initiative_id: I-002
+invocation_id: test-p001-retest-20260715
+prior_invocation_id: test-p001-20260715
+step_id: RP-02
 status: passed
 required: true
-completed_at: "2026-07-14T16:26:30+08:00"
-purpose: verify mvn build/test commands run and harness verify progresses past placeholders
+completed_at: "2026-07-15T18:28:30+08:00"
+purpose: independent re-verify after lock+page AST fix; FOR UPDATE before LIMIT (+ WAIT)
 
 inputs:
   - harness/tasks/P-001.md
+  - harness/builds/B-001.json
   - harness/handoffs/implementer/P-001.yaml
-  - harness/verification.json
+  - harness/handoffs/orchestrator/B-001-P-001-fix-locklimit-ready-retest.md
+  - dialect/src/main/java/com/xugu/dialect/sql/ast/XuguSqlAstTranslator.java
+  - dialect/src/test/java/com/xugu/dialect/it/XuguHqlPaginationIT.java
   - agents/test.md
 
 outputs:
-  - harness/evidence/test/P-001/TEST-REPORT.md
-  - harness/evidence/test/P-001/verification.json
+  - harness/evidence/test/P-001/TEST-REPORT-RETEST.md
+  - harness/evidence/test/P-001/verification-retest.json
+  - harness/evidence/test/P-001/mvn-test-offline-retest.log
+  - harness/evidence/test/P-001/mvn-test-integration-retest.log
+  - harness/evidence/test/P-001/IT-RESULT-RETEST.txt
+  - harness/evidence/test/P-001/CHECKLIST-RETEST.md
   - harness/handoffs/test/P-001.yaml
 
+commands:
+  - { cmd: "mvn -q test", exit: 0 }
+  - { cmd: "mvn -q test -Dxugu.run.integration=true", exit: 0 }
+  - { cmd: "python harness/scripts/verify.py --phase P-001 --evidence harness/evidence/test/P-001/verification-retest.json", exit: 0 }
+
 verification:
-  build: { command: "mvn -q -DskipTests package", exit_code: 0 }
-  test: { command: "mvn -q test", exit_code: 0 }
-  harness_check: { command: "python harness/scripts/harness_check.py", exit_code: 0 }
+  test_offline:
+    command: "mvn -q test"
+    exit_code: 0
+  test_integration:
+    command: 'mvn -q test "-Dxugu.run.integration=true"'
+    exit_code: 0
+    real_db: true
+    lock_page_it: PASS
+    sql_observed:
+      - "… for update of phpe1_0.id limit ? offset ?"
+      - "… for update of phpe1_0.id limit ? offset ? wait 2000"
   verify:
-    command: "python harness/scripts/verify.py --phase P-001 --evidence harness/evidence/test/P-001/verification.json"
+    command: "python harness/scripts/verify.py --phase P-001 --evidence harness/evidence/test/P-001/verification-retest.json"
     exit_code: 0
     status: "VERIFY PASS"
 
+request_changes_confirmation:
+  ast_hql_for_update_before_limit:
+    result: passed
+    expected_order: "FOR UPDATE then LIMIT (then WAIT if present)"
+    live_it: "XuguHqlPaginationIT.hqlLockAndPageEmitsForUpdateBeforeLimitAndWaitAfter PASS"
+    sql_evidence: harness/evidence/test/P-001/mvn-test-integration-retest.log
+
 spot_checks:
-  dialect_jar: { path: "dialect/target/xugu-dialect-7.4.5.Final.jar", exists: true }
-  xugu_dialect_extends: "org.hibernate.dialect.Dialect"
-  demo_spring_boot_version: "4.1.0"
-  demo_hibernate_version: "7.4.5.Final"
-  verification_json_fill_placeholders: false
+  hql_sql_limit_offset_not_fetch_first: true
+  for_update_before_limit: true
+  wait_after_limit: true
+  version_7_4_5_Final: true
 
 observed_flows:
-  - id: parent-and-modules-compile-via-maven
+  - id: hql-pagination-offset-fetch-real-db
     result: passed
-  - id: verification-json-real-mvn-commands
+    method: XuguHqlPaginationIT.hqlSetFirstResultMaxResultsUsesLimitNotFetchFirst
+    evidence: harness/evidence/test/P-001/mvn-test-integration-retest.log
+  - id: hql-lock-page-for-update-order-real-db
     result: passed
+    method: XuguHqlPaginationIT.hqlLockAndPageEmitsForUpdateBeforeLimitAndWaitAfter
+    observed: "FOR UPDATE before LIMIT; WAIT after LIMIT"
+    evidence: harness/evidence/test/P-001/IT-RESULT-RETEST.txt
 
 notes_for_reviewer: |
-  Independent re-run of build/test/harness_check/verify all exit 0.
-  XuguDialect extends Dialect only (not MySQL/Oracle). Demo pom locks
-  spring-boot.version=4.1.0 and hibernate.version=7.4.5.Final.
-  No product code changes by test role.
+  Independent RP-02 retest after impl-p001-fix-locklimit-20260715.
+  Offline PASS; gated IT PASS on live XuguDB; VERIFY PASS.
+  MAJOR closed at test level: AST/HQL lock+page emits FOR UPDATE before LIMIT (+ WAIT after).
+  No product code changes by test.
 
 forbidden_reminder:
-  - no product code rewrite by test unless harness fix required
-  - no MySQLDialect / OracleDialect inheritance
+  - no product code rewrite by test
+  - no P-002 sequence metadata scope creep
+  - no version bump / Ship
   - no git commit / tag / push by test
 
-next_step: RP-04 reviewer
+next_step: RP-03 reviewer recheck rev-p001-recheck-20260715
 blocker: null
+real_db_it_passed: true
+verdict: PASS

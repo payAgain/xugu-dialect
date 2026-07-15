@@ -2,49 +2,52 @@ schema_version: 1
 role: implementer
 phase_id: P-001
 build_id: B-001
-initiative_id: I-001
-invocation_id: impl-p001-20260714
-step_id: RP-02
-status: passed
-required: true
-completed_at: "2026-07-14T16:21:03+08:00"
-purpose: scaffold parent + dialect/ + demo-spring-boot/; wire JDBC; fill verification + AGENTS commands
+initiative_id: I-002
+invocation_id: impl-p001-fix-locklimit-20260715
+step_id: RP-01b
+status: completed_awaiting_retest_rereview
+updated_at: "2026-07-15T18:23:00+08:00"
 
-inputs:
-  - contracts/xugu-dialect.scaffold.contract.md
-  - harness/tasks/P-001.md
-  - harness/handoffs/architect-contract/P-001.yaml
-  - PROJECT_CHARTER.md
-  - DECISIONS/ADR-0001-hibernate-baseline.md
-  - docs/architecture.md
+summary: >
+  Closed RP-03 MAJOR: gated IT proves AST/HQL lock+page emits FOR UPDATE before LIMIT
+  and WAIT after LIMIT when present (matches XuguLimitHandler). Live SQL captured.
+  Offline + IT EXIT 0; VERIFY PASS. No Accept/commit. Translator code unchanged
+  (deferral already correct); evidence added only.
 
-outputs:
-  - pom.xml
-  - dialect/**
-  - demo-spring-boot/**
-  - harness/verification.json
-  - AGENTS.md
-  - docs/architecture.md
-  - harness/ownership/OWNERSHIP.yaml
-  - harness/evidence/implementer/P-001/**
-  - harness/handoffs/implementer/P-001.yaml
+prior_review:
+  invocation_id: rev-p001-20260715
+  decision: request-changes
+  evidence: harness/evidence/reviewer/P-001/REVIEW.md
 
-verification:
-  build: { command: "mvn -q -DskipTests package", exit_code: 0 }
-  test: { command: "mvn -q test", exit_code: 0 }
-  harness_check: { command: "python harness/scripts/harness_check.py", exit_code: 0 }
-  verify: { command: "python harness/scripts/verify.py --phase P-001", exit_code: 0, status: "VERIFY PASS" }
+delivered:
+  - dialect/src/test/java/com/xugu/dialect/it/XuguHqlPaginationIT.java
+    (hqlLockAndPageEmitsForUpdateBeforeLimitAndWaitAfter + offset assert)
+  - harness/evidence/implementer/P-001/NOTES.md
+  - harness/evidence/implementer/P-001/IT-RESULT.txt
+  - harness/evidence/implementer/P-001/mvn-test-integration-locklimit.log
 
-notes_for_test: |
-  Scaffold only. XuguDialect is a stub extending org.hibernate.dialect.Dialect
-  with DatabaseVersion.make(12, 0). No live DB required. No Spring Boot IT that
-  would fail without datasource. Run verify.py with mvn on PATH.
+sql_proof_lock_page:
+  for_update_limit: >
+    select phpe1_0.id from HIB_P001_HQL_PAGE phpe1_0 order by phpe1_0.id
+    for update of phpe1_0.id limit ? offset ?
+  for_update_limit_wait: >
+    select phpe1_0.id from HIB_P001_HQL_PAGE phpe1_0 order by phpe1_0.id
+    for update of phpe1_0.id limit ? offset ? wait 2000
+  evidence_log: harness/evidence/implementer/P-001/mvn-test-integration-locklimit.log
 
-forbidden_reminder:
-  - no MySQLDialect / OracleDialect inheritance
-  - no E:\\Work\\java\\hibernate-dialect reference
-  - no definition-A dialect capabilities in P-001
-  - no git commit / tag / push by implementer
+validation:
+  - "mvn -q test → EXIT 0"
+  - "mvn -q test -Dxugu.run.integration=true → EXIT 0"
+  - "python harness/scripts/verify.py --phase P-001 --evidence harness/evidence/implementer/P-001/verification.json → VERIFY PASS"
 
-next_step: RP-03 test
-blocker: null
+not_done:
+  - Accept
+  - git commit
+  - independent RP-02 retest
+  - RP-03 re-review
+  - P-002 getQuerySequencesString
+
+next:
+  - Dispatch independent RP-02 test retest
+  - Then RP-03 reviewer recheck (new rev-p001-*)
+  - Accept + must-commit only after both pass

@@ -1,65 +1,76 @@
 {
   "schema_version": 1,
-  "task_id": null,
-  "batch_id": null,
-  "status": "idle_ready_next_initiative",
+  "task_id": "P-001",
+  "batch_id": "B-001",
+  "status": "awaiting_build_approval",
   "current_phase": null,
   "harness_level": "Standard",
-  "last_updated": "2026-07-15T16:25:00+08:00",
-  "initiative_id": null,
-  "initiative_type": null,
-  "working_branch": "feat/i-001-xugu-dialect-major",
+  "last_updated": "2026-07-15T18:30:00+08:00",
+  "initiative_id": "I-002",
+  "initiative_type": "hotfix",
+  "working_branch": "fix/i-002-hql-pagination-sequence-metadata",
   "active_plan": [
-    "I-001 accepted then archived (NOT Ship)",
-    "Session idle — ready for next Initiative Scope",
-    "Ship deferred (tag/push/Central needs separate Human Gate)"
+    "I-002 Plan: P-001 SqlAstTranslator HQL pagination → P-002 sequence metadata → P-003 docs/Accept prep",
+    "B-001 complete = P-001 accepted",
+    "Propose B-002 → P-002 only; await Human Gate"
   ],
   "next_3_steps": [
-    "Human Gate: new Initiative via skills/initiative.md OR authorize Ship",
-    "If Ship: tag / push / Central only with explicit authorization",
-    "Do not start Build until Scope / Ship Gate approved"
+    "Human Gate: approve B-002 scope P-002 only?",
+    "On approval: materialize B-002.json; set P-002 in_progress; dispatch RP-01",
+    "Keep version 7.4.5.Final; no sibling dialect port"
   ],
   "changed_files": [
-    "harness/initiatives/I-001/ARCHIVE.md",
-    "harness/initiatives/I-001/brief.md",
-    "harness/initiatives/INDEX.md",
-    "harness/handoffs/orchestrator/I-001-archived.md",
+    "dialect/src/main/java/com/xugu/dialect/sql/",
+    "dialect/src/main/java/com/xugu/dialect/XuguDialect.java",
+    "dialect/src/test/java/com/xugu/dialect/XuguSqlAstTranslatorTest.java",
+    "dialect/src/test/java/com/xugu/dialect/it/XuguHqlPaginationIT.java",
+    "harness/evidence/**/P-001/",
+    "harness/handoffs/**/P-001*",
+    "harness/tasks/P-001.md",
+    "harness/tasks/REGISTRY.yaml",
     "current-task.md",
     "harness/session/"
   ],
   "validation": {
     "last_commands": [
-      "python harness/scripts/harness_check.py"
+      "mvn -q test",
+      "mvn -q test -Dxugu.run.integration=true",
+      "python harness/scripts/verify.py --phase P-001 --evidence harness/evidence/test/P-001/verification-retest.json"
     ],
-    "last_result": "I-001 archived; HARNESS_CHECK PASS; Ship deferred",
+    "last_result": "VERIFY PASS; retest+recheck approve; P-001 accepted",
     "known_failures": []
   },
   "cognitive_state": {
     "failure_count": 0,
-    "current_mode": "idle",
+    "current_mode": "awaiting_human_gate",
     "tried_approaches": [
-      "i001_initiative_accept",
-      "i001_archive"
+      "i002_scope_pass",
+      "i002_plan_three_serial_phases",
+      "xugu_sql_ast_translator_limit_offset",
+      "gated_it_ast_hql_for_update_before_limit",
+      "independent_retest_and_rereview_approve"
     ],
-    "blocked_on": null
+    "blocked_on": "human_gate_b002_p002_only"
   },
   "version_control_checkpoint": {
-    "decision": "committed_awaiting_human_review",
-    "candidate_commit": "82db5a38cd1e2ca00981198bbf42c84777c87e54",
+    "decision": "must_commit_p001_accepted",
+    "candidate_commit": null,
     "git_init": true,
-    "committed": true,
-    "branch": "feat/i-001-xugu-dialect-major",
-    "note": "I-001 Archive 82db5a3; Accept 208a12b; P-011 b7292f6; no push; Ship deferred",
-    "head": "82db5a38cd1e2ca00981198bbf42c84777c87e54",
-    "i001_accept_sha": "208a12b207285249a9617cd4f6823daeb69737cb",
-    "p011_accept_sha": "b7292f6be7155107888f9e30d6661c2a5386e59b"
+    "committed": false,
+    "branch": "fix/i-002-hql-pagination-sequence-metadata",
+    "note": "P-001 accepted; SHA filled after must-commit",
+    "head": "8136c110d0bb1ce03c350f06032714946f95e0f0",
+    "base_branch_at_fork": "feat/i-001-xugu-dialect-major",
+    "i001_archive_sha": "82db5a38cd1e2ca00981198bbf42c84777c87e54"
   },
   "handoff": {
-    "last_summary": "I-001 archived after Accept. Idle for next Initiative or Ship auth.",
-    "resume_from": "harness/handoffs/orchestrator/I-001-archived.md"
+    "last_summary": "P-001 accepted; propose B-002 → P-002 only",
+    "resume_from": "harness/handoffs/orchestrator/B-001-P-001-complete.md"
   },
   "active_phase": null,
-  "approved_build": null,
-  "approved_phases": [],
-  "updated_at": "2026-07-15T16:25:00+08:00"
+  "approved_build": "B-001",
+  "approved_phases": [
+    "P-001"
+  ],
+  "updated_at": "2026-07-15T18:30:00+08:00"
 }

@@ -1,47 +1,56 @@
-# P-001 Implementer Notes (scaffold)
+# P-001 Implementer Notes (I-002 HQL SqlAstTranslator)
 
-**Invocation:** `impl-p001-20260714`  
+**Invocation:** `impl-p001-fix-locklimit-20260715` (fix after `rev-p001-20260715` request-changes)  
+**Prior:** `impl-p001-20260715`  
 **Role:** implementer  
-**Phase / Build / Initiative:** P-001 / B-001 / I-001  
-**Date:** 2026-07-14
+**Phase / Build / Initiative:** P-001 / B-001 / I-002  
+**Date:** 2026-07-15  
+**Accept / commit:** **NOT done** (await independent re-test + re-review)
 
-## What was delivered
+## Root cause (original)
 
-1. Root parent `pom.xml` — `com.xugu:xugu-dialect-parent:7.4.5.Final`, packaging `pom`, modules `dialect`, `demo-spring-boot`
-2. `dialect/` — `com.xugu:xugu-dialect:7.4.5.Final` with Hibernate 7.4.5.Final + Xugu JDBC `systemPath`
-3. Stub `com.xugu.dialect.XuguDialect` extends `org.hibernate.dialect.Dialect` only (`super(DatabaseVersion.make(12, 0))`)
-4. Unit smoke test `XuguDialectTest` (instantiate / getVersion; no live DB)
-5. `demo-spring-boot/` — Spring Boot 4.1.0 BOM import, `hibernate.version=7.4.5.Final`, depends on `xugu-dialect`, minimal `@SpringBootApplication`
-6. `harness/verification.json` + `AGENTS.md` Real commands filled with real `mvn` commands
-7. `docs/architecture.md` status → scaffolded; `OWNERSHIP.yaml` notes refreshed
+`XuguDialect.getSqlAstTranslatorFactory()` returned `null` → Hibernate used `StandardSqlAstTranslator`, which emits ANSI:
 
-## Explicitly NOT done (out of scope)
+```text
+… offset ? rows fetch first ? rows only
+```
 
-- Definition A dialect features / DialectResolver SPI
-- Business demo / live DB connection
-- Reading `E:\Work\java\hibernate-dialect`
-- Extending MySQLDialect / OracleDialect
-- git commit / tag / push
+XuGu rejects this with `[E19132] unexpected OFFSET`.
 
-## Local command results
+## RP-03 MAJOR (rev-p001-20260715)
 
-| Command | Exit |
+AST/HQL path already deferred LIMIT until after `FOR UPDATE` (and before trailing `WAIT`), matching `XuguLimitHandler`, but **no IT/unit proved** that order. Required before approve.
+
+## What this fix delivered
+
+1. Gated IT `XuguHqlPaginationIT.hqlLockAndPageEmitsForUpdateBeforeLimitAndWaitAfter`:
+   - HQL `setFirstResult`/`setMaxResults` + `PESSIMISTIC_WRITE` → asserts `for update` index &lt; `limit` index; executes on live XuGu
+   - Same + `Timeout.milliseconds(2000)` → asserts `FOR UPDATE … LIMIT … WAIT`; executes on live XuGu
+2. Hardened unlocked page IT to also require `offset` in SQL
+3. No product translator change required (deferral path already correct); evidence gap closed only
+4. Version remains **7.4.5.Final**; no P-002 sequence work
+
+## Observed SQL (lock + page) — live IT
+
+| Scenario | SQL |
 |---|---|
-| `mvn -q -DskipTests package` | 0 |
-| `mvn -q test` | 0 |
-| `python harness/scripts/harness_check.py` | 0 |
-| `python harness/scripts/verify.py --phase P-001` | 0 → **VERIFY PASS** |
+| HQL page + FOR UPDATE | `select phpe1_0.id from HIB_P001_HQL_PAGE phpe1_0 order by phpe1_0.id for update of phpe1_0.id limit ? offset ?` |
+| HQL page + FOR UPDATE + WAIT | `select phpe1_0.id from HIB_P001_HQL_PAGE phpe1_0 order by phpe1_0.id for update of phpe1_0.id limit ? offset ? wait 2000` |
+| Unlocked HQL page (prior) | `select … from HIB_P001_HQL_PAGE … order by … limit ? offset ?` |
 
-## Artifacts observed
+Log: `harness/evidence/implementer/P-001/mvn-test-integration-locklimit.log` (lines with `for update of … limit`).
 
-- `dialect/target/xugu-dialect-7.4.5.Final.jar`
-- `demo-spring-boot/target/demo-spring-boot-7.4.5.Final.jar`
-- Dependency tree (dialect): `hibernate-core:7.4.5.Final` + `xugu-jdbc:12.3.6:system`
+## Validation
 
-## Environment note
+```text
+mvn -q test                                          → EXIT 0
+mvn -q test -Dxugu.run.integration=true              → EXIT 0
+python harness/scripts/verify.py --phase P-001 \
+  --evidence harness/evidence/implementer/P-001/verification.json → VERIFY PASS
+```
 
-JDK on PATH was 21; compiler `release=17`. Maven resolved via `C:\Users\admin\tools\apache-maven-3.9.9\bin` when not on default PATH.
+## Explicitly not done
 
-## Next step
-
-RP-03 test role — independent verify of build/test + harness verify.
+- Accept / must-commit
+- Independent RP-02 retest / RP-03 re-review
+- P-002 `getQuerySequencesString`

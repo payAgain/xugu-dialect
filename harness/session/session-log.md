@@ -1,3 +1,116 @@
+## Entry: P-001 accepted — propose B-002 (P-002 only)
+
+### Summary
+Independent RP-02 retest (`test-p001-retest-20260715`) PASS; RP-03 recheck (`rev-p001-recheck-20260715`) **approve**; MAJOR (AST/HQL FOR UPDATE→LIMIT→WAIT) **CLOSED**. ACCEPTANCE Decision **accepted**. REGISTRY: P-001 `accepted`, P-002 `ready`. Must-commit on `fix/i-002-hql-pagination-sequence-metadata`. Next: Human Gate 批准 B-002 范围仅 P-002.
+
+### SQL proof (retest)
+```text
+select phpe1_0.id from HIB_P001_HQL_PAGE phpe1_0 order by phpe1_0.id for update of phpe1_0.id limit ? offset ?
+select phpe1_0.id from HIB_P001_HQL_PAGE phpe1_0 order by phpe1_0.id for update of phpe1_0.id limit ? offset ? wait 2000
+```
+
+### Files Created or Updated
+- harness/evidence/test/P-001/TEST-REPORT-RETEST.md + verification-retest.json
+- harness/evidence/reviewer/P-001/REVIEW-RECHECK.md
+- harness/evidence/implementer/P-001/ACCEPTANCE.md (I-002)
+- harness/handoffs/orchestrator/B-001-P-001-complete.md
+- harness/tasks/P-001.md, REGISTRY.yaml
+- current-task.md, session/*
+
+### Validation
+- `mvn -q test` EXIT 0
+- `mvn -q test -Dxugu.run.integration=true` EXIT 0
+- `verify.py --phase P-001` (retest evidence) → VERIFY PASS
+- `harness_check.py` (after Accept land)
+
+### Next Steps
+1. Human Gate：是否批准 B-002，范围仅 P-002？
+2. 批准后派发 P-002 role_pipeline
+3. 禁止 Ship / 升版本 / 旁路移植
+
+---
+## Entry: P-001 RP-03 request-changes + RP-01b lock+page IT fix (no Accept/commit)
+
+### Summary
+Landed reviewer **request-changes** (`rev-p001-20260715`): MAJOR — AST/HQL FOR UPDATE→LIMIT(+WAIT) order unproven. Implementer fix (`impl-p001-fix-locklimit-20260715`) added gated IT `hqlLockAndPageEmitsForUpdateBeforeLimitAndWaitAfter`; live XuGu executes combo; SQL captured. Offline + IT EXIT 0; VERIFY PASS (implementer evidence). **No Accept / no commit.** Next: independent RP-02 retest → RP-03 recheck.
+
+### SQL proof (lock+page)
+```text
+select phpe1_0.id from HIB_P001_HQL_PAGE phpe1_0 order by phpe1_0.id for update of phpe1_0.id limit ? offset ?
+select phpe1_0.id from HIB_P001_HQL_PAGE phpe1_0 order by phpe1_0.id for update of phpe1_0.id limit ? offset ? wait 2000
+```
+
+### Files Created or Updated
+- harness/evidence/reviewer/P-001/REVIEW.md (I-002 request-changes)
+- dialect XuguHqlPaginationIT (lock+page IT)
+- harness/evidence/implementer/P-001/* (NOTES, IT-RESULT, log)
+- harness/handoffs implementer/P-001.yaml; orchestrator request-changes + ready-retest
+- harness/tasks/P-001.md (RP-01b passed; RP-03 failed)
+- current-task.md, session/*
+
+### Validation
+- `mvn -q test` EXIT 0
+- `mvn -q test -Dxugu.run.integration=true` EXIT 0
+- `python harness/scripts/verify.py --phase P-001 --evidence harness/evidence/implementer/P-001/verification.json` → VERIFY PASS
+
+### Next Steps
+1. Dispatch independent RP-02 retest
+2. Dispatch RP-03 reviewer recheck
+3. Accept + must-commit only after both; then B-002→P-002
+
+---
+## Entry: B-001 APPROVED + P-001 RP-01 implementer complete (no Accept/commit)
+
+### Summary
+Human Gate：「批准 B-001，范围仅 P-001」(~2026-07-15T17:36+08:00)。Orchestrator 将 B-001 标为 approved（P-001 only），P-001 in_progress。RP-01 `impl-p001-20260715`：新增 `XuguSqlAstTranslator` + `getSqlAstTranslatorFactory()`，HQL 分页改为 `LIMIT ? OFFSET ?`（不再 ANSI OFFSET/FETCH）；门控 IT + VERIFY PASS。**未** Accept / **未** commit。下一步：独立 RP-02 test → RP-03 reviewer。
+
+### SQL proof
+- Before: `offset ? rows fetch first ? rows only` → E19132
+- After: `select … from HIB_P001_HQL_PAGE … order by … limit ? offset ?`
+
+### Files Created or Updated
+- dialect SqlAstTranslator + XuguDialect factory + unit/IT
+- harness/builds/B-001.json (approved)
+- harness/tasks/P-001.md, REGISTRY.yaml
+- harness/evidence/implementer/P-001/*
+- harness/handoffs/implementer/P-001.yaml, orchestrator/B-001-approved-P-001-impl.md
+- current-task.md, session/*
+
+### Validation
+- `mvn -q test` EXIT 0
+- `mvn -q test -Dxugu.run.integration=true` EXIT 0
+- `python harness/scripts/verify.py --phase P-001 --evidence harness/evidence/implementer/P-001/verification.json` → VERIFY PASS
+
+### Next Steps
+1. Dispatch RP-02 test (independent)
+2. Dispatch RP-03 reviewer
+3. Accept + must-commit only after both; then B-002→P-002
+
+---
+## Entry: I-002 Plan complete — B-001 draft (P-001 only)
+
+### Summary
+Human Gate Scope PASS：「本 Initiative 范围已明确，可以开干」。Orchestrator 将 I-002 标为 **active**，检出分支 `fix/i-002-hql-pagination-sequence-metadata`（自 `feat/i-001-xugu-dialect-major` @ `8136c11`）。物化串行 Phases **P-001**（SqlAstTranslator + HQL 分页 IT）→ **P-002**（getQuerySequencesString + validate IT）→ **P-003**（docs/矩阵 + 全量 verify + Accept prep）。`harness/builds/B-001.json` 为 **draft**，proposed **仅 P-001**。未实现 Java；未 approve Build；未 commit。
+
+### Files Created or Updated
+- harness/initiatives/INDEX.md（I-002 active）
+- harness/initiatives/I-002/brief.md（已有 Scope Decisions）
+- harness/tasks/P-001.md, P-002.md, P-003.md
+- harness/tasks/REGISTRY.yaml（initiative_id=I-002）
+- harness/builds/B-001.json（draft）
+- harness/handoffs/orchestrator/i-002-plan.md
+- current-task.md, harness/session/*
+
+### Validation
+- branch_check PASS on fix/i-002-hql-pagination-sequence-metadata
+- No Maven / VERIFY（无代码变更）
+
+### Next Steps
+1. Human Gate：批准 B-001，范围仅 P-001？
+2. 批准后派发 P-001 role_pipeline
+3. 禁止旁路方言复制；版本保持 7.4.5.Final
+
+---
 ## Entry: B-011 APPROVED + P-011 Accept (matrix closed / VERIFY PASS)
 
 ### Summary

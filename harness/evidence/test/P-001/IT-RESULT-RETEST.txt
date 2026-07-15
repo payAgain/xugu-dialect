@@ -1,0 +1,20 @@
+P-001 independent retest IT result (test-p001-retest-20260715)
+Branch: fix/i-002-hql-pagination-sequence-metadata
+Gate: -Dxugu.run.integration=true
+DB: jdbc:xugu://127.0.0.1:5138/SYSTEM?...&compatiblemode=NONE
+Dialect: XuguDialect / Hibernate 7.4.5.Final
+
+Commands:
+  mvn -q test                                           EXIT 0
+  mvn -q test -Dxugu.run.integration=true               EXIT 0
+  python harness/scripts/verify.py --phase P-001
+    --evidence harness/evidence/test/P-001/verification-retest.json
+                                                        VERIFY PASS
+
+Lock+page SQL (XuguHqlPaginationIT.hqlLockAndPageEmitsForUpdateBeforeLimitAndWaitAfter):
+  select phpe1_0.id from HIB_P001_HQL_PAGE phpe1_0 order by phpe1_0.id for update of phpe1_0.id limit ? offset ?
+  select phpe1_0.id from HIB_P001_HQL_PAGE phpe1_0 order by phpe1_0.id for update of phpe1_0.id limit ? offset ? wait 2000
+
+Order confirmed: FOR UPDATE before LIMIT; WAIT after LIMIT when present.
+Log: harness/evidence/test/P-001/mvn-test-integration-retest.log
+Verdict: PASS

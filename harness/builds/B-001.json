@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "build_id": "B-001",
-  "initiative_id": "I-001",
+  "initiative_id": "I-002",
   "plan_revision": 1,
   "status": "approved",
   "proposed_phase_ids": [
@@ -12,11 +12,11 @@
   ],
   "approval": {
     "reference": "批准 B-001，范围仅 P-001",
-    "approved_at": "2026-07-14T16:08:00+08:00",
+    "approved_at": "2026-07-15T17:36:00+08:00",
     "approved_by": "Human Gate"
   },
-  "recommendation": "Approve B-001 scope = P-001 only (Maven scaffold + verification wiring). Do not approve P-002+ until P-001 ACCEPTANCE.",
+  "recommendation": "B-001 approved = P-001 only. Do not approve P-002/P-003 until P-001 ACCEPTANCE.",
   "supersedes": null,
   "scope_changes": [],
-  "notes": "Human Gate approved B-001 with scope P-001 only. Orchestrator may dispatch P-001 role_pipeline. P-002+ remain unapproved."
+  "notes": "Human Gate approved B-001 scope = P-001 only. P-001 accepted 2026-07-15 after retest+recheck approve (FOR UPDATE before LIMIT proven)."
 }

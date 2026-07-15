@@ -26,10 +26,16 @@ import org.hibernate.engine.jdbc.env.spi.IdentifierCaseStrategy;
 import org.hibernate.engine.jdbc.env.spi.IdentifierHelper;
 import org.hibernate.engine.jdbc.env.spi.IdentifierHelperBuilder;
 import org.hibernate.engine.jdbc.env.spi.NameQualifierSupport;
+import org.hibernate.engine.spi.SessionFactoryImplementor;
 import org.hibernate.mapping.CheckConstraint;
 import org.hibernate.query.sqm.CastType;
 import org.hibernate.service.ServiceRegistry;
+import org.hibernate.sql.ast.SqlAstTranslator;
+import org.hibernate.sql.ast.SqlAstTranslatorFactory;
 import org.hibernate.sql.ast.spi.SqlAppender;
+import org.hibernate.sql.ast.spi.StandardSqlAstTranslatorFactory;
+import org.hibernate.sql.ast.tree.Statement;
+import org.hibernate.sql.exec.spi.JdbcOperation;
 import org.hibernate.type.SqlTypes;
 import org.hibernate.type.descriptor.jdbc.JsonJdbcType;
 import org.hibernate.type.descriptor.jdbc.UUIDJdbcType;
@@ -43,6 +49,7 @@ import com.xugu.dialect.internal.XuguKeywords;
 import com.xugu.dialect.internal.XuguLockingSupport;
 import com.xugu.dialect.pagination.XuguLimitHandler;
 import com.xugu.dialect.sequence.XuguSequenceSupport;
+import com.xugu.dialect.sql.ast.XuguSqlAstTranslator;
 import com.xugu.dialect.temptable.XuguGlobalTemporaryTableStrategy;
 import com.xugu.dialect.temptable.XuguLocalTemporaryTableStrategy;
 
@@ -62,9 +69,11 @@ import jakarta.persistence.Timeout;
  *
  * <p><b>Pagination (A-PAG-*):</b> {@link XuguLimitHandler} emits
  * {@code LIMIT count} / {@code LIMIT count OFFSET offset} with JDBC bind markers
- * (not {@code FETCH FIRST}, not {@code LIMIT offset,count}). With locks, live XuGu
+ * (not {@code FETCH FIRST}, not {@code LIMIT offset,count}). HQL/Criteria pagination
+ * goes through {@link XuguSqlAstTranslator} (via {@link #getSqlAstTranslatorFactory()})
+ * so the AST path does not emit ANSI {@code OFFSET}/{@code FETCH}. With locks, live XuGu
  * requires {@code FOR UPDATE} before {@code LIMIT} (and {@code WAIT} after LIMIT when
- * both are present). The handler does not use Hibernate's default
+ * both are present). The handler / translator do not use Hibernate's default
  * {@code LIMIT…FOR UPDATE} insertion.
  *
  * <p><b>Lock timeout mapping (A-LCK-003):</b> XuGu {@code WAIT wait_ms} is
@@ -632,6 +641,21 @@ public class XuguDialect extends Dialect {
 	@Override
 	public LimitHandler getLimitHandler() {
 		return XuguLimitHandler.INSTANCE;
+	}
+
+	/**
+	 * HQL/Criteria pagination: use {@link XuguSqlAstTranslator} so offset/fetch
+	 * become {@code LIMIT count [OFFSET offset]} (not ANSI OFFSET/FETCH).
+	 */
+	@Override
+	public SqlAstTranslatorFactory getSqlAstTranslatorFactory() {
+		return new StandardSqlAstTranslatorFactory() {
+			@Override
+			protected <T extends JdbcOperation> SqlAstTranslator<T> buildTranslator(
+					SessionFactoryImplementor sessionFactory, Statement statement) {
+				return new XuguSqlAstTranslator<>( sessionFactory, statement );
+			}
+		};
 	}
 
 	// -------------------------------------------------------------------------

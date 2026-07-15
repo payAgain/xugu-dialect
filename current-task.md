@@ -1,52 +1,55 @@
 # Current Task
 
 ## Goal
-Idle — ready for next Initiative Scope (or separate Ship authorization for I-001)
+I-002 (hotfix): 修复 TEST-REPORT 中 HQL 分页（SqlAstTranslator）与 schema validate 序列元数据问题；本仓补 IT + VERIFY PASS；版本保持 7.4.5.Final
 
 ## Current Status
-idle_ready_next_initiative
+P-001 **accepted** — await Human Gate 批准 B-002 范围仅 P-002
 
 ## Active Batch / Tasks
-- None (no active Build)
-- Initiative **I-001**: **accepted** then **archived** (~2026-07-15T16:25+08:00)
-- Archive: `harness/initiatives/I-001/ARCHIVE.md`
-- Accept evidence: `harness/evidence/orchestrator/I-001/ACCEPTANCE.md`
+- Initiative: **I-002** hotfix — **active**
+- Branch: `fix/i-002-hql-pagination-sequence-metadata`
+- Build: **B-001** complete (P-001 accepted)
+- Phase: **P-001** `accepted`
+  - RP-01 `impl-p001-20260715` → passed
+  - RP-01b `impl-p001-fix-locklimit-20260715` → passed
+  - RP-02 `test-p001-retest-20260715` → passed (VERIFY PASS)
+  - RP-03 `rev-p001-recheck-20260715` → **approve** (MAJOR CLOSED)
+- Next: **P-002** `ready` (await B-002 approval)
+- Not started: P-003
 
 ## Scope
-Allowed next:
-- New Initiative via `skills/initiative.md` (Human Gate Scope)
-- **Ship** I-001 only with **separate** Human Gate authorization (tag / push / Central)
-
-Not allowed without further authorization:
-- Ship / tag / push / Central
-- Implementation without new Initiative Scope
+Completed (B-001):
+- P-001 SqlAstTranslator + HQL pagination gated IT (incl. lock+page order)
+Proposed next (B-002, awaiting Human Gate):
+- P-002 getQuerySequencesString only
+Forbidden until later:
+- P-003 docs/Accept prep
+- Ship / 升版本
 
 ## Plan
-1. ~~I-001 Accept~~ DONE
-2. ~~Archive I-001~~ DONE
-3. Next: new Initiative Scope **or** Ship auth
+1. ~~Human Gate 批准 B-001 范围仅 P-001~~
+2. ~~P-001 role_pipeline + fix + retest + recheck~~
+3. Human Gate 批准 B-002 范围仅 P-002
+4. P-002 → P-003 → Accept Initiative
 
 ## Validation Commands
 ```text
-mvn -q -DskipTests package
 mvn -q test
-python harness/scripts/verify.py
-python harness/scripts/harness_check.py
+mvn -q test -Dxugu.run.integration=true
+python harness/scripts/verify.py --phase P-001 --evidence harness/evidence/test/P-001/verification-retest.json
 ```
 
-## Acceptance Criteria
-- [x] I-001 Accept
-- [x] I-001 Archive
-- [ ] Ship (deferred — separate Human Gate)
-- [ ] Next Initiative Scope (when requested)
-
-## Risks / Blockers
-- Ship / push still Human Gate only
+## Observed SQL (lock+page, independent retest)
+```text
+select phpe1_0.id from HIB_P001_HQL_PAGE phpe1_0 order by phpe1_0.id for update of phpe1_0.id limit ? offset ?
+select phpe1_0.id from HIB_P001_HQL_PAGE phpe1_0 order by phpe1_0.id for update of phpe1_0.id limit ? offset ? wait 2000
+```
 
 ## Next 3 Steps
-1. Human Gate: open **new Initiative** (`skills/initiative.md`) **or** authorize **Ship**
-2. If Ship: tag / push / Central only after explicit authorization
-3. Do not start Build until Scope / Ship Gate is approved
+1. Human Gate：是否批准 B-002，范围仅 P-002？
+2. 批准后物化 B-002、派发 P-002 role_pipeline
+3. 禁止旁路方言移植；版本保持 7.4.5.Final
 
 ## Last Updated
-2026-07-15T16:25:00+08:00（角色：orchestrator I-001 Archive）
+2026-07-15T18:30:00+08:00

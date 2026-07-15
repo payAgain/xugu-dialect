@@ -1,94 +1,32 @@
 schema_version: 1
 charter_version: "1.0.0"
-initiative_id: I-001
-updated: "2026-07-15T16:10:00+08:00"
+initiative_id: I-002
+updated: "2026-07-15T18:30:00+08:00"
 # Phase progress index. IDs: I-00x / P-00x / B-00x — see protocol/references/glossary.md
+# I-001 Phases P-001…P-011 archived with Initiative; packets P-004…P-011 remain on disk for history.
+# I-002 restarts P/B numbering per skills/initiative.md.
 tasks:
   - task_id: P-001
-    title: "脚手架 Maven 多模块与验证契约"
+    title: "修复 HQL 分页 SqlAstTranslator"
     status: accepted
     build_id: B-001
     packet: harness/tasks/P-001.md
     acceptance_doc: harness/evidence/implementer/P-001/ACCEPTANCE.md
-    role_pipeline_summary: "architect-contract → implementer → test → reviewer"
+    role_pipeline_summary: "implementer → test → reviewer"
     dependencies: []
   - task_id: P-002
-    title: "方言契约与定义 A 特性矩阵"
-    status: accepted
-    build_id: B-002
+    title: "修复序列元数据 getQuerySequencesString"
+    status: ready
+    build_id: null
     packet: harness/tasks/P-002.md
-    acceptance_doc: harness/evidence/architect-contract/P-002/ACCEPTANCE.md
-    role_pipeline_summary: "architect-contract → test → (reviewer?)"
+    acceptance_doc: harness/evidence/implementer/P-002/ACCEPTANCE.md
+    role_pipeline_summary: "implementer → test → reviewer"
     dependencies: [P-001]
   - task_id: P-003
-    title: "方言类型映射与 DDL"
-    status: accepted
-    build_id: B-003
+    title: "文档矩阵勘误与 Accept 准备"
+    status: ready
+    build_id: null
     packet: harness/tasks/P-003.md
-    acceptance_doc: harness/evidence/implementer/P-003/ACCEPTANCE.md
-    role_pipeline_summary: "architect-contract → implementer → test → reviewer"
+    acceptance_doc: harness/evidence/orchestrator/P-003/ACCEPTANCE.md
+    role_pipeline_summary: "implementer → test → reviewer"
     dependencies: [P-002]
-  - task_id: P-004
-    title: "分页与锁语法"
-    status: accepted
-    build_id: B-004
-    packet: harness/tasks/P-004.md
-    acceptance_doc: harness/evidence/implementer/P-004/ACCEPTANCE.md
-    role_pipeline_summary: "implementer → test → reviewer"
-    dependencies: [P-003]
-  - task_id: P-005
-    title: "主键 Identity 与 Sequence"
-    status: accepted
-    build_id: B-005
-    packet: harness/tasks/P-005.md
-    acceptance_doc: harness/evidence/implementer/P-005/ACCEPTANCE.md
-    role_pipeline_summary: "implementer → test → reviewer"
-    dependencies: [P-004]
-  - task_id: P-006
-    title: "SQL 函数注册"
-    status: accepted
-    build_id: B-006
-    packet: harness/tasks/P-006.md
-    acceptance_doc: harness/evidence/implementer/P-006/ACCEPTANCE.md
-    role_pipeline_summary: "implementer → test → reviewer"
-    dependencies: [P-005]
-  - task_id: P-007
-    title: "Schema / 临时表 / 注释 / 外键"
-    status: accepted
-    build_id: B-007
-    packet: harness/tasks/P-007.md
-    acceptance_doc: harness/evidence/implementer/P-007/ACCEPTANCE.md
-    role_pipeline_summary: "implementer → test → reviewer"
-    dependencies: [P-006]
-  - task_id: P-008
-    title: "DialectResolver SPI 与显式配置"
-    status: accepted
-    build_id: B-008
-    packet: harness/tasks/P-008.md
-    acceptance_doc: harness/evidence/implementer/P-008/ACCEPTANCE.md
-    role_pipeline_summary: "implementer → test → reviewer"
-    dependencies: [P-007]
-  - task_id: P-009
-    title: "Spring Boot Demo"
-    status: accepted
-    build_id: B-009
-    packet: harness/tasks/P-009.md
-    acceptance_doc: harness/evidence/implementer/P-009/ACCEPTANCE.md
-    role_pipeline_summary: "implementer → test → reviewer"
-    dependencies: [P-008]
-  - task_id: P-010
-    title: "项目内用户指南 docs/user-guide/"
-    status: accepted
-    build_id: B-010
-    packet: harness/tasks/P-010.md
-    acceptance_doc: harness/evidence/docs/P-010/ACCEPTANCE.md
-    role_pipeline_summary: "docs → test → (reviewer?)"
-    dependencies: [P-009]
-  - task_id: P-011
-    title: "硬化与 Accept 准备"
-    status: accepted
-    build_id: B-011
-    packet: harness/tasks/P-011.md
-    acceptance_doc: harness/evidence/orchestrator/P-011/ACCEPTANCE.md
-    role_pipeline_summary: "implementer → test → reviewer"
-    dependencies: [P-010]

@@ -1,0 +1,20 @@
+P-001 implementer IT result (impl-p001-fix-locklimit-20260715)
+Date: 2026-07-15
+
+Gate: -Dxugu.run.integration=true
+Command: mvn -q test -Dxugu.run.integration=true
+Exit: 0
+
+XuguHqlPaginationIT.hqlSetFirstResultMaxResultsUsesLimitNotFetchFirst: PASS
+  SQL: select … from HIB_P001_HQL_PAGE … order by … limit ? offset ?
+  Window: [5, 6, 7]
+
+XuguHqlPaginationIT.hqlLockAndPageEmitsForUpdateBeforeLimitAndWaitAfter: PASS
+  FOR UPDATE + page SQL:
+    select phpe1_0.id from HIB_P001_HQL_PAGE phpe1_0 order by phpe1_0.id for update of phpe1_0.id limit ? offset ?
+  FOR UPDATE + page + WAIT SQL:
+    select phpe1_0.id from HIB_P001_HQL_PAGE phpe1_0 order by phpe1_0.id for update of phpe1_0.id limit ? offset ? wait 2000
+  Order: for update < limit < wait (when present)
+  Windows: locked page [2, 3]; wait page [1, 2]
+
+Log: harness/evidence/implementer/P-001/mvn-test-integration-locklimit.log
