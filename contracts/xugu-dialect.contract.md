@@ -161,7 +161,7 @@ Domains aligned to later Phases:
 | `PROJECT_CHARTER.md` | Product charter |
 | `DECISIONS/ADR-0001-hibernate-baseline.md` | Hibernate/GAV/package/non-inheritance |
 | `docs/architecture.md` | Layout & dependency notes (orchestrator may add matrix cross-ref) |
-| `docs/user-guide/` | Planned product usage docs (P-010) |
+| [`docs/user-guide/`](../docs/user-guide/README.md) | Project user guide (P-010): install, config, verify, matrix, troubleshooting |
 
 ---
 

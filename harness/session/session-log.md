@@ -1,3 +1,35 @@
+## Entry: B-010 APPROVED + P-010 RP-01 docs PASS
+
+### Summary
+Human Gate 批准 Build：「批准 B-010，范围仅 P-010」（~2026-07-15T15:38+08:00）。Orchestrator 物化 `B-010.json`（`status=approved`, `approved_phase_ids=[P-010]`），`P-010` / REGISTRY → `in_progress`（`build_id=B-010`）；补建 `agents/docs.md`。Docs RP-01（`docs-p010-20260715`）落地 `docs/user-guide/`（README + 01…05）、契约/矩阵交叉链接、NOTES + **DRAFT** ACCEPTANCE、handoff passed。**未**写 `E:\Work\docs\content`；**未**改 dialect Java；**未** Accept / commit。已写 RP-02 prep handoff。
+
+### Files Created or Updated
+- harness/builds/B-010.json (approved)
+- agents/docs.md
+- harness/handoffs/orchestrator/B-010-approved.md
+- harness/handoffs/orchestrator/B-010-P-010-rp01-complete.md
+- harness/tasks/P-010.md (build_id=B-010, in_progress; RP-01 passed)
+- harness/tasks/REGISTRY.yaml
+- docs/user-guide/** (6 files)
+- docs/feature-matrix-definition-a.md (cross-link)
+- contracts/xugu-dialect.contract.md (§10 link)
+- harness/evidence/docs/P-010/NOTES.md
+- harness/evidence/docs/P-010/ACCEPTANCE.md (DRAFT)
+- harness/handoffs/docs/P-010.yaml
+- current-task.md, harness/session/*
+
+### Validation
+- Docs authoring only; branch_check PASS on feat/i-001-xugu-dialect-major
+- Full Accept deferred pending RP-02
+
+### Next Steps
+1. Dispatch RP-02 test walkthrough（P-010）
+2. Skip RP-03 (risk&lt;8)
+3. Accept + must-commit；再请批 B-011 / P-011
+
+---
+# Session Log
+
 ## Entry: B-009 APPROVED — P-009 in progress
 
 ### Summary
@@ -447,3 +479,14 @@ ev-p009-20260715 approve)
 - Resume: harness/handoffs/orchestrator/B-009-P-009-complete.md
 
 - Must-commit SHA recorded: 7fe9586e597db6cf4480d99b0501e2ee538c6b72
+
+
+## 2026-07-15T15:52:00+08:00 — orchestrator: P-010 / B-010 Accept
+
+- Landed ACCEPTANCE Decision: ccepted (RP-01 docs + RP-02 test-p010-20260715; RP-03 skipped risk_score=4)
+- verification_evidence: harness/evidence/docs/P-010/verification.json (+ test twin)
+- REGISTRY: P-010 accepted; P-011 ready
+- Must-commit on feat/i-001-xugu-dialect-major; propose B-011 → P-011 only
+- Resume: harness/handoffs/orchestrator/B-010-P-010-complete.md
+
+- Must-commit SHA recorded: TBD_AFTER_COMMIT

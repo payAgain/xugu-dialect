@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "build_id": "B-010",
+  "initiative_id": "I-001",
+  "plan_revision": 1,
+  "status": "approved",
+  "proposed_phase_ids": [
+    "P-010"
+  ],
+  "approved_phase_ids": [
+    "P-010"
+  ],
+  "approval": {
+    "reference": "批准 B-010，范围仅 P-010",
+    "approved_at": "2026-07-15T15:38:00+08:00",
+    "approved_by": "Human Gate"
+  },
+  "recommendation": "Approve B-010 scope = P-010 only (docs/user-guide). Do not approve P-011 until P-010 ACCEPTANCE.",
+  "supersedes": null,
+  "scope_changes": [],
+  "notes": "Human Gate approved B-010 with scope P-010 only. P-010 ACCEPTANCE Decision accepted (RP-01 docs passed; RP-02 test-p010-20260715 passed; RP-03 skipped risk_score=4). P-011 ready. Propose B-011 scope P-011 only."
+}

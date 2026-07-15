@@ -1,0 +1,89 @@
+schema_version: 1
+role: test
+phase_id: P-010
+build_id: B-010
+initiative_id: I-001
+invocation_id: test-p010-20260715
+step_id: RP-02
+status: passed
+required: true
+completed_at: "2026-07-15T15:49:00+08:00"
+purpose: walkthrough checklist against docs/user-guide (dry-run OK if no DB)
+
+inputs:
+  - harness/tasks/P-010.md
+  - harness/builds/B-010.json
+  - harness/handoffs/docs/P-010.yaml
+  - harness/evidence/docs/P-010/ACCEPTANCE.md
+  - docs/user-guide/README.md
+  - docs/user-guide/01-install.md
+  - docs/user-guide/02-configuration.md
+  - docs/user-guide/03-verify.md
+  - docs/user-guide/04-feature-matrix.md
+  - docs/user-guide/05-troubleshooting.md
+  - agents/test.md
+
+outputs:
+  - harness/evidence/test/P-010/TEST-REPORT.md
+  - harness/evidence/test/P-010/CHECKLIST.md
+  - harness/evidence/test/P-010/verification.json
+  - harness/evidence/test/P-010/verify.log
+  - harness/handoffs/test/P-010.yaml
+
+verification:
+  build:
+    command: "mvn -q -DskipTests package"
+    exit_code: 0
+  verify:
+    command: "python harness/scripts/verify.py --phase P-010 --evidence harness/evidence/test/P-010/verification.json"
+    exit_code: 0
+    status: "VERIFY PASS"
+  link_check:
+    relative_links_ok: 44
+    relative_links_missing: 0
+  official_content_writes:
+    path: "E:\\Work\\docs\\content"
+    files_touched_today: 0
+    result: pass
+
+walkthrough:
+  install_gav: pass
+  configure_explicit: pass
+  configure_spi: pass
+  set_env: pass
+  run_verify_demo: pass
+  find_matrix: pass
+  troubleshoot: pass
+  method: dry-run_docs_e2e
+  live_db_required: false
+  live_db_executed: false
+
+observed_flows:
+  - id: user-guide-configure-and-verify-path
+    result: passed
+    method: end-to-end read of docs/user-guide + link resolve + offline build/verify
+    evidence: harness/evidence/test/P-010/TEST-REPORT.md
+
+role_pipeline:
+  RP-02:
+    status: passed
+    invocation_id: test-p010-20260715
+  RP-03:
+    status: skipped
+    reason: "risk_score=4 < 8 (condition risk_ge_8 false)"
+
+notes_for_orchestrator: |
+  Independent RP-02 after docs-p010-20260715.
+  Walkthrough PASS; links 44/44; no E:\Work\docs\content writes; VERIFY PASS (build+test).
+  RP-03 skipped (risk_score=4 < 8). Ready for Accept + must-commit.
+  No product/docs content changes by test.
+
+forbidden_reminder:
+  - no rewrite of E:\Work\docs\content
+  - no product code by test
+  - no git commit / tag / push by test
+  - no Ship / Central publish
+
+next_step: Accept (skip RP-03) + must-commit; do not approve P-011 until P-010 ACCEPTANCE
+blocker: null
+verdict: PASS
