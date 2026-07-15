@@ -1,79 +1,75 @@
 {
   "schema_version": 1,
   "task_id": "I-001",
-  "batch_id": "B-004",
-  "status": "b004_p004_accepted_await_b005",
-  "current_phase": "P-004",
+  "batch_id": "B-005",
+  "status": "b005_accepted_await_b006",
+  "current_phase": "P-005",
   "harness_level": "Standard",
-  "last_updated": "2026-07-15T09:48:00+08:00",
+  "last_updated": "2026-07-15T10:25:00+08:00",
   "initiative_id": "I-001",
   "initiative_type": "major",
   "working_branch": "feat/i-001-xugu-dialect-major",
   "active_plan": [
-    "B-004 / P-004 ACCEPTANCE complete (recheck approve)",
-    "Must-commit on feat/i-001-xugu-dialect-major",
-    "Propose B-005 → P-005 only (Identity & Sequence)"
+    "P-005 accepted (B-005); identity/sequence locked SQL + getGeneratedKeys primary",
+    "Propose B-006 → P-006 only (SQL functions)",
+    "Do not approve P-007+ until P-006 ACCEPTANCE"
   ],
   "next_3_steps": [
-    "Human Gate approve B-005 scope P-005 only",
-    "Materialize B-005.json; set P-005 in_progress; dispatch role_pipeline",
-    "Do not parallel-approve P-006+"
+    "Human Gate approve B-006 scope P-006 only",
+    "Materialize B-006; P-006 in_progress; dispatch role_pipeline",
+    "Do not parallel-approve P-007+"
   ],
   "changed_files": [
-    "harness/evidence/reviewer/P-004/REVIEW-RECHECK.md",
-    "harness/evidence/reviewer/P-004/REVIEW.md",
-    "harness/evidence/implementer/P-004/ACCEPTANCE.md",
-    "harness/evidence/test/P-004/verification-retest.json",
-    "harness/tasks/P-004.md",
+    "harness/evidence/reviewer/P-005/REVIEW.md",
+    "harness/evidence/implementer/P-005/ACCEPTANCE.md",
     "harness/tasks/P-005.md",
+    "harness/tasks/P-006.md",
     "harness/tasks/REGISTRY.yaml",
-    "harness/handoffs/orchestrator/B-004-P-004-complete.md",
-    "harness/handoffs/readonly-results/P-004-reviewer.yaml",
-    "dialect/src/**",
+    "harness/handoffs/orchestrator/B-005-P-005-complete.md",
     "current-task.md",
-    "harness/session/*"
+    "harness/session/session-state.json",
+    "harness/session/session-log.md",
+    "dialect/src/main/java/com/xugu/dialect/identity/",
+    "dialect/src/main/java/com/xugu/dialect/sequence/"
   ],
   "validation": {
     "last_commands": [
-      "mvn -q test — exit 0 (retest)",
-      "mvn -q test -Dxugu.run.integration=true — exit 0 (9 IT)",
-      "python harness/scripts/verify.py — VERIFY PASS (verification-retest.json)"
+      "mvn -q test → exit 0 (test-p005)",
+      "mvn -q test -Dxugu.run.integration=true → exit 0 (11 IT)",
+      "python harness/scripts/verify.py --phase P-005 → VERIFY PASS"
     ],
-    "last_result": "P-004 accepted; VERIFY PASS; real DB IT; FOR UPDATE before LIMIT; await B-005",
+    "last_result": "P-005 accepted; RP-03 approve rev-p005-20260715; propose B-006→P-006 only",
     "known_failures": []
   },
   "cognitive_state": {
     "failure_count": 0,
-    "current_mode": "accept_complete_await_scope",
+    "current_mode": "accept_complete_await_next_build",
     "tried_approaches": [
-      "b004_approved",
+      "b005_approved",
       "rp01_impl_pass",
       "rp02_test_pass",
-      "rp03_request_changes",
-      "impl_fix_majors_landed",
-      "rp02_retest_pass",
-      "rp03_recheck_approve",
-      "p004_accepted"
+      "rp03_review_approve",
+      "p005_accepted"
     ],
-    "blocked_on": "Human Gate B-005 scope P-005 only"
+    "blocked_on": "human_gate_b006_approve"
   },
   "version_control_checkpoint": {
-    "decision": "committed",
-    "candidate_commit": "7b995af4038a8fd3c41ccc90c0b89fa2a4494718",
+    "decision": "must_commit_on_accept",
+    "candidate_commit": "PENDING_MUST_COMMIT",
     "git_init": true,
     "committed": true,
     "branch": "feat/i-001-xugu-dialect-major",
-    "note": "P-004 Accept must-commit; no push; propose B-005 P-005 only",
-    "head": "7b995af4038a8fd3c41ccc90c0b89fa2a4494718"
+    "note": "P-005 Accept must-commit; no push",
+    "head": "PENDING_MUST_COMMIT"
   },
   "handoff": {
-    "last_summary": "P-004 accepted. Must-commit 7b995af4038a8fd3c41ccc90c0b89fa2a4494718. Propose B-005 → P-005 only.",
-    "resume_from": "harness/handoffs/orchestrator/B-004-P-004-complete.md"
+    "last_summary": "P-005 accepted. Propose B-006 scope P-006 only (SQL functions).",
+    "resume_from": "harness/handoffs/orchestrator/B-005-P-005-complete.md"
   },
-  "active_phase": "P-004",
-  "proposed_build": "B-005",
-  "proposed_phases": [
+  "active_phase": "P-005",
+  "approved_build": "B-005",
+  "approved_phases": [
     "P-005"
   ],
-  "updated_at": "2026-07-15T09:48:00+08:00"
+  "updated_at": "2026-07-15T10:25:00+08:00"
 }

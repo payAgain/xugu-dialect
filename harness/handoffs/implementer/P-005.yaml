@@ -1,0 +1,70 @@
+schema_version: 1
+role: implementer
+phase_id: P-005
+build_id: B-005
+initiative_id: I-001
+invocation_id: impl-p005-20260715
+step_id: RP-01
+status: passed
+required: true
+completed_at: "2026-07-15T10:10:00+08:00"
+purpose: implement identity/sequence/generators per matrix A-IDN/A-SEQ/A-XCUT-008
+
+inputs:
+  - harness/tasks/P-005.md
+  - harness/builds/B-005.json
+  - contracts/feature-matrix-definition-a.md
+  - E:\\Work\\docs\\content\\reference\\object\\table\\create.md
+  - E:\\Work\\docs\\content\\reference\\object\\sequence.md
+  - E:\\Work\\docs\\content\\reference\\function\\sequence-functions\\nextval.md
+  - E:\\Work\\docs\\content\\reference\\function\\system-infos-functions\\last_insert_id.md
+  - E:\\Work\\docs\\content\\development\\jdbc\\instruction-for-use\\result.md
+  - Hibernate 7.4.5 IdentityColumnSupport / SequenceSupport (m2)
+
+outputs:
+  - dialect/src/main/java/com/xugu/dialect/identity/XuguIdentityColumnSupport.java
+  - dialect/src/main/java/com/xugu/dialect/sequence/XuguSequenceSupport.java
+  - dialect/src/main/java/com/xugu/dialect/XuguDialect.java
+  - dialect/src/test/java/com/xugu/dialect/XuguIdentitySequenceTest.java
+  - dialect/src/test/java/com/xugu/dialect/it/XuguIdentitySequenceIT.java
+  - dialect/src/test/java/com/xugu/dialect/it/entities/P005IdentityEntity.java
+  - dialect/src/test/java/com/xugu/dialect/it/entities/P005SequenceEntity.java
+  - contracts/feature-matrix-definition-a.md
+  - harness/evidence/implementer/P-005/NOTES.md
+  - harness/evidence/implementer/P-005/CHECKLIST.md
+  - harness/evidence/implementer/P-005/verification.json
+  - harness/handoffs/implementer/P-005.yaml
+
+chosen_sql_forms:
+  identity_ddl: "identity(1,1)"
+  identity_keys_primary: "JDBC getGeneratedKeys"
+  identity_select_fallback: "select last_insert_id() from dual"
+  nextval: "select <seq>.nextval from dual"
+  currval: "select currval('<name>') from dual"
+  from_dual: " from dual"
+  create_sequence: "create sequence <name> start with N increment by M"
+  drop_sequence: "drop sequence <name>"
+
+verification:
+  test_offline:
+    command: "mvn -q test"
+    exit_code: 0
+  test_integration:
+    command: 'mvn -q test "-Dxugu.run.integration=true"'
+    exit_code: 0
+    real_db: true
+    url: "jdbc:xugu://127.0.0.1:5138/SYSTEM?...&compatiblemode=NONE"
+  verify_py:
+    command: "python harness/scripts/verify.py --phase P-005"
+    evidence: harness/evidence/implementer/P-005/verification.json
+
+forbidden_reminder:
+  - no Accept
+  - no git commit / tag / push
+  - no MySQL/Oracle Dialect inheritance
+  - no sibling hibernate-dialect read
+
+next_step: independent test RP-02 then reviewer RP-03
+blocker: null
+accept_authorized: false
+commit_authorized: false

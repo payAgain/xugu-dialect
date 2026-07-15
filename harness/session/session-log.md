@@ -272,3 +272,25 @@ ev-p003-20260714): MAJOR A-TYP-009 BINARY.
 - Resume: `harness/handoffs/orchestrator/B-004-P-004-complete.md`
 
 - Must-commit SHA recorded: `7b995af4038a8fd3c41ccc90c0b89fa2a4494718`
+
+## 2026-07-15T09:57:00+08:00 — orchestrator: B-005 Approved (P-005 only)
+
+- Human Gate phrase: 「批准 B-005，范围仅 P-005」 (~2026-07-15T09:56+08:00)
+- Created `harness/builds/B-005.json` status=approved; approved_phase_ids=[P-005]
+- P-005.md: build_id=B-005, status=in_progress
+- REGISTRY: P-005 in_progress + build_id=B-005
+- Handoff: `harness/handoffs/orchestrator/B-005-approved.md` → next **RP-01 implementer**
+- No Java; no commit this turn
+- Prior HEAD: `7b995af4038a8fd3c41ccc90c0b89fa2a4494718`
+
+
+## 2026-07-15T10:25:00+08:00 — orchestrator: P-005 / B-005 Accept
+
+- Landed REVIEW.md (`rev-p005-20260715` approve)
+- RP-03 passed; P-005 status accepted; verification_evidence → test verification.json
+- ACCEPTANCE Decision: accepted (locked SQL forms; getGeneratedKeys primary; VERIFY PASS; optional MINOR last_insert_id.md cite)
+- REGISTRY: P-005 accepted; P-006 ready
+- Must-commit on feat/i-001-xugu-dialect-major; propose B-006 → P-006 only
+- Resume: `harness/handoffs/orchestrator/B-005-P-005-complete.md`
+
+- Must-commit SHA recorded: `PENDING_MUST_COMMIT`

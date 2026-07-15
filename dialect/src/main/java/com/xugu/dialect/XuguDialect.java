@@ -12,8 +12,10 @@ import org.hibernate.dialect.DatabaseVersion;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.NationalizationSupport;
 import org.hibernate.dialect.TimeZoneSupport;
+import org.hibernate.dialect.identity.IdentityColumnSupport;
 import org.hibernate.dialect.lock.spi.LockingSupport;
 import org.hibernate.dialect.pagination.LimitHandler;
+import org.hibernate.dialect.sequence.SequenceSupport;
 import org.hibernate.engine.jdbc.env.spi.IdentifierCaseStrategy;
 import org.hibernate.engine.jdbc.env.spi.IdentifierHelper;
 import org.hibernate.engine.jdbc.env.spi.IdentifierHelperBuilder;
@@ -27,15 +29,17 @@ import org.hibernate.type.descriptor.jdbc.spi.JdbcTypeRegistry;
 import org.hibernate.type.descriptor.sql.internal.DdlTypeImpl;
 import org.hibernate.type.descriptor.sql.spi.DdlTypeRegistry;
 
+import com.xugu.dialect.identity.XuguIdentityColumnSupport;
 import com.xugu.dialect.internal.XuguKeywords;
 import com.xugu.dialect.internal.XuguLockingSupport;
 import com.xugu.dialect.pagination.XuguLimitHandler;
+import com.xugu.dialect.sequence.XuguSequenceSupport;
 
 import jakarta.persistence.Timeout;
 
 /**
- * XuguDB dialect for Hibernate 7.4 — types, DDL, pagination, locks (P-003/P-004).
- * Extends {@link Dialect} only (no MySQL/Oracle dialect inheritance).
+ * XuguDB dialect for Hibernate 7.4 — types, DDL, pagination, locks, identity, sequences
+ * (P-003/P-004/P-005). Extends {@link Dialect} only (no MySQL/Oracle dialect inheritance).
  *
  * <p><b>TIMESTAMP vs DATETIME (A-TYP-008):</b> Hibernate timestamp SqlTypes map to
  * Xugu {@code TIMESTAMP} (not {@code DATETIME}). Both exist under
@@ -59,6 +63,14 @@ import jakarta.persistence.Timeout;
  * token after {@code FOR UPDATE} (e.g. {@code for update nowait},
  * {@code for update wait 2000}). IT verifies executability; parenthesized form is a
  * documented fallback.
+ *
+ * <p><b>Identity (A-IDN-*):</b> {@link XuguIdentityColumnSupport} emits
+ * {@code identity(1,1)} (prefer IDENTITY over AUTO_INCREMENT in NONE mode).
+ * Generated keys: JDBC {@code getGeneratedKeys} (driver-documented); select fallback
+ * {@code select last_insert_id() from dual}.
+ *
+ * <p><b>Sequence (A-SEQ-*, A-XCUT-008):</b> {@link XuguSequenceSupport} locks
+ * {@code select &lt;seq&gt;.nextval from dual}; CURRVAL via {@code currval('name')}.
  *
  * <p><b>Not emitted:</b> {@code SKIP LOCKED} (A-LCK-004), {@code FOR SHARE} (A-LCK-005).
  *
@@ -275,6 +287,20 @@ public class XuguDialect extends Dialect {
 		builder.setQuotedCaseStrategy( IdentifierCaseStrategy.MIXED );
 		builder.applyReservedWords( getKeywords() );
 		return super.buildIdentifierHelper( builder, dbMetaData );
+	}
+
+	// -------------------------------------------------------------------------
+	// Identity & Sequence (A-IDN-*, A-SEQ-*, A-XCUT-008)
+	// -------------------------------------------------------------------------
+
+	@Override
+	public IdentityColumnSupport getIdentityColumnSupport() {
+		return XuguIdentityColumnSupport.INSTANCE;
+	}
+
+	@Override
+	public SequenceSupport getSequenceSupport() {
+		return XuguSequenceSupport.INSTANCE;
 	}
 
 	// -------------------------------------------------------------------------

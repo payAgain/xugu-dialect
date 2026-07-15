@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "build_id": "B-005",
+  "initiative_id": "I-001",
+  "plan_revision": 1,
+  "status": "approved",
+  "proposed_phase_ids": [
+    "P-005"
+  ],
+  "approved_phase_ids": [
+    "P-005"
+  ],
+  "approval": {
+    "reference": "批准 B-005，范围仅 P-005",
+    "approved_at": "2026-07-15T09:56:00+08:00",
+    "approved_by": "Human Gate"
+  },
+  "recommendation": "Approve B-005 scope = P-005 only (Identity and Sequence). Do not approve P-006+ until P-005 ACCEPTANCE.",
+  "supersedes": null,
+  "scope_changes": [],
+  "notes": "Human Gate approved B-005 with scope P-005 only. P-005 accepted after RP-03 approve (rev-p005-20260715); locked identity/sequence SQL; getGeneratedKeys primary; VERIFY PASS. P-006 unlocked ready; B-006 not approved."
+}

@@ -80,16 +80,18 @@
 
 | ID | Domain | Capability | Hibernate/Dialect surface (what apps expect) | Xugu doc ref | Status | Target Phase | Acceptance hint |
 |---|---|---|---|---|---|---|---|
-| A-IDN-001 | Identity | IDENTITY column DDL | `IdentityColumnSupport.getIdentityColumnString` | `reference/object/table/create.md` (`IDENTITY` / `AUTO_INCREMENT`) | 可实现 | P-005 | Emit `IDENTITY` or `IDENTITY(start,step)` |
-| A-IDN-002 | Identity | AUTO_INCREMENT synonym | MySQL-style keyword | `reference/object/table/create.md` | 可实现 | P-005 | Equivalent to IDENTITY(1,1); prefer IDENTITY in NONE mode |
-| A-IDN-003 | Identity | Retrieve generated keys | `getGeneratedKeys` / identity select | `reference/object/table/create.md`; JDBC driver behavior | 可实现 | P-005 | Persist entity; id populated |
-| A-IDN-004 | Identity | Insert with identity | Insert omitting identity column | `reference/object/table/create.md` | 可实现 | P-005 | INSERT without id column |
+| A-IDN-001 | Identity | IDENTITY column DDL | `IdentityColumnSupport.getIdentityColumnString` | `reference/object/table/create.md` (`IDENTITY` / `AUTO_INCREMENT`) | 可实现 | P-005 | ✅ Emit `identity(1,1)` |
+| A-IDN-002 | Identity | AUTO_INCREMENT synonym | MySQL-style keyword | `reference/object/table/create.md` | 可实现 | P-005 | ✅ Equivalent to IDENTITY(1,1); dialect emits IDENTITY only (NONE) |
+| A-IDN-003 | Identity | Retrieve generated keys | `getGeneratedKeys` / identity select | `reference/object/table/create.md`; JDBC driver behavior | 可实现 | P-005 | ✅ JDBC getGeneratedKeys primary; `LAST_INSERT_ID()` select fallback |
+| A-IDN-004 | Identity | Insert with identity | Insert omitting identity column | `reference/object/table/create.md` | 可实现 | P-005 | ✅ INSERT omits id column; id backfilled |
+
 | A-IDN-005 | Identity | Identity mode session params | Dialect-specific identity_mode knobs | `reference/system-configuration-parameter/session-parameter/identity_mode.md`, `reference/system-configuration-parameter/xugu.ini/compatible/def_identity_mode.md` | 延后 | later | Revisit if generated-key edge cases appear |
-| A-SEQ-001 | Sequence | CREATE SEQUENCE | `SequenceSupport.getCreateSequenceString` | `reference/object/sequence.md` | 可实现 | P-005 | export sequence DDL |
-| A-SEQ-002 | Sequence | DROP SEQUENCE | Drop sequence DDL | `reference/object/sequence.md` | 可实现 | P-005 | drop in schema tooling |
-| A-SEQ-003 | Sequence | NEXTVAL | `nextval` for SEQUENCE generator | `reference/object/sequence.md`, `reference/function/sequence-functions/nextval.md` | 可实现 | P-005 | `seq.NEXTVAL` and/or `NEXTVAL('seq')` — lock one form |
-| A-SEQ-004 | Sequence | CURRVAL | Current value function | `reference/object/sequence.md`, `reference/function/sequence-functions/currval.md` | 可实现 | P-005 | after NEXTVAL in same session |
-| A-SEQ-005 | Sequence | Sequence options | START/INCREMENT/MIN/MAX/CACHE/CYCLE | `reference/object/sequence.md` | 可实现 | P-005 | map Hibernate allocator options where possible |
+| A-SEQ-001 | Sequence | CREATE SEQUENCE | `SequenceSupport.getCreateSequenceString` | `reference/object/sequence.md` | 可实现 | P-005 | ✅ `create sequence … [start with N increment by M]` |
+| A-SEQ-002 | Sequence | DROP SEQUENCE | Drop sequence DDL | `reference/object/sequence.md` | 可实现 | P-005 | ✅ `drop sequence name` |
+| A-SEQ-003 | Sequence | NEXTVAL | `nextval` for SEQUENCE generator | `reference/object/sequence.md`, `reference/function/sequence-functions/nextval.md` | 可实现 | P-005 | ✅ Locked: `select seq.nextval from dual` (not internal NEXTVAL()) |
+| A-SEQ-004 | Sequence | CURRVAL | Current value function | `reference/object/sequence.md`, `reference/function/sequence-functions/currval.md` | 可实现 | P-005 | ✅ `currval('name')` after NEXTVAL same session |
+| A-SEQ-005 | Sequence | Sequence options | START/INCREMENT/MIN/MAX/CACHE/CYCLE | `reference/object/sequence.md` | 可实现 | P-005 | ✅ Hibernate maps START/INCREMENT; MIN/MAX/CACHE/CYCLE N/A via SequenceSupport API |
+
 | A-SEQ-006 | Sequence | ALTER SEQUENCE | Alter sequence options | `reference/object/sequence.md` | 延后 | later | Schema-update rare path |
 
 ---
@@ -168,7 +170,7 @@
 | A-XCUT-005 | Isolation | Isolation levels | READ COMMITTED / REPEATABLE READ / SERIALIZABLE | `reference/system-configuration-parameter/session-parameter/iso_level.md` | 可实现 | P-008 | document mapping; Dialect `supports*` flags if needed |
 | A-XCUT-006 | Isolation | READ UNCOMMITTED | Common JDBC level | `reference/system-configuration-parameter/session-parameter/iso_level.md` (0=READ ONLY,1=RC,2=RR,3=SERIALIZABLE) | 文档不允许 | P-008 | No RU level; do not claim support |
 | A-XCUT-007 | Keywords | Keyword escaping | Reserved word quoting | `reference/sql/keyword.md`, `reference/sql/identifier.md` | 可实现 | P-003 | ✅ registerKeyword subset |
-| A-XCUT-008 | Dual | FROM DUAL (if needed) | Some Dialects use DUAL | `reference/object/sequence.md` examples use `FROM DUAL` | 可实现 | P-005 | support DUAL for sequence select if used |
+| A-XCUT-008 | Dual | FROM DUAL (if needed) | Some Dialects use DUAL | `reference/object/sequence.md` examples use `FROM DUAL` | 可实现 | P-005 | ✅ `getFromDual()` → ` from dual` on NEXTVAL/CURRVAL selects |
 | A-XCUT-009 | Config | Secrets via env | Connection user/password/host | Charter / I-001 brief | 可实现 | P-009 | demo uses env overrides |
 | A-XCUT-010 | Non-goal | Extend MySQL/Oracle Dialect | Inheritance shortcut | ADR-0001 / Charter | 文档不允许 | — | Forbidden forever in I-001 |
 | A-XCUT-011 | Non-goal | Port sibling hibernate-dialect | Copy implementation | Charter non-goals | 文档不允许 | — | Forbidden |
