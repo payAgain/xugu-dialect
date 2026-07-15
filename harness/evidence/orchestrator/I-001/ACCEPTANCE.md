@@ -67,3 +67,10 @@ P-011 Accept must-commit: **`b7292f6`**. Subsequent chore commits may tip branch
 
 1. Archive initiative artifacts (if project Archive procedure applies)
 2. Ship / tag / push / Central — **only** with new Human Gate authorization
+
+## Version control checkpoint
+
+- Branch: `feat/i-001-xugu-dialect-major`
+- Initiative Accept must-commit: `208a12b207285249a9617cd4f6823daeb69737cb` (`208a12b`)
+- P-011 Accept: `b7292f6`
+- Push/Tag/Release: awaiting-human-authorization (Ship deferred)

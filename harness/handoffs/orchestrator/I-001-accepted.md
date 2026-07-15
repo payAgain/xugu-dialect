@@ -31,3 +31,8 @@ Human Gate confirmed **Initiative I-001 Accept** (「确认 I-001 Accept」, ~20
 ## Resume From
 
 `harness/evidence/orchestrator/I-001/ACCEPTANCE.md`
+
+## Must-commit
+
+- SHA: `208a12b207285249a9617cd4f6823daeb69737cb`
+

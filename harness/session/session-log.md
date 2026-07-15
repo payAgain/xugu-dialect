@@ -521,3 +521,5 @@ ev-p009-20260715 approve)
 - Ship / tag / push / Central: deferred — separate authorization
 - Resume: harness/handoffs/orchestrator/I-001-accepted.md
 
+- Must-commit SHA recorded: 208a12b207285249a9617cd4f6823daeb69737cb
+

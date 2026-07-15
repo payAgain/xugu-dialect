@@ -1,11 +1,11 @@
-﻿{
+{
   "schema_version": 1,
   "task_id": "I-001",
   "batch_id": null,
   "status": "i001_initiative_accepted_ship_deferred",
   "current_phase": null,
   "harness_level": "Standard",
-  "last_updated": "2026-07-15T16:15:00+08:00",
+  "last_updated": "2026-07-15T16:16:00+08:00",
   "initiative_id": "I-001",
   "initiative_type": "major",
   "working_branch": "feat/i-001-xugu-dialect-major",
@@ -32,7 +32,7 @@
     "last_commands": [
       "python harness/scripts/harness_check.py"
     ],
-    "last_result": "I-001 Initiative Accept recorded; Ship deferred",
+    "last_result": "I-001 Initiative Accept recorded at 208a12b; Ship deferred; harness_check pending",
     "known_failures": []
   },
   "cognitive_state": {
@@ -50,12 +50,12 @@
   },
   "version_control_checkpoint": {
     "decision": "committed_awaiting_human_review",
-    "candidate_commit": "PENDING_I001_ACCEPT_COMMIT",
+    "candidate_commit": "208a12b207285249a9617cd4f6823daeb69737cb",
     "git_init": true,
     "committed": true,
     "branch": "feat/i-001-xugu-dialect-major",
     "note": "I-001 Initiative Accept governance must-commit; no push; Ship deferred",
-    "head": "PENDING_I001_ACCEPT_COMMIT",
+    "head": "208a12b207285249a9617cd4f6823daeb69737cb",
     "p011_accept_sha": "b7292f6be7155107888f9e30d6661c2a5386e59b",
     "pre_accept_head": "49927ac18e2396055ae62bc406993040e43e4632"
   },
@@ -66,5 +66,5 @@
   "active_phase": null,
   "approved_build": null,
   "approved_phases": [],
-  "updated_at": "2026-07-15T16:15:00+08:00"
+  "updated_at": "2026-07-15T16:16:00+08:00"
 }
