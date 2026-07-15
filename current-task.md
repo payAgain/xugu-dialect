@@ -8,7 +8,7 @@ p006_accepted_propose_b007
 
 ## Active Batch / Tasks
 - Batch: **B-006** complete (scope was **P-006 only**)
-- P-006 status: **accepted** (build_id=B-006; SHA PENDING_MUST_COMMIT)
+- P-006 status: **accepted** (build_id=B-006; SHA a96f31079e359f5e369d4f4a0c11f3f1ed6e5950)
 - P-007 status: **ready** (await Human Gate B-007 approval)
 - P-008…P-011 still blocked / unapproved
 
@@ -33,7 +33,7 @@ python harness/scripts/verify.py
 ## Acceptance Criteria
 - [x] B-006 approved for P-006 only
 - [x] P-006 RP-01/02/03 PASS + ACCEPTANCE
-- [x] Must-commit on working branch after Accept (PENDING_MUST_COMMIT → fill SHA)
+- [x] Must-commit on working branch after Accept (a96f31079e359f5e369d4f4a0c11f3f1ed6e5950 → fill SHA)
 - [ ] Human Gate approve B-007 scope P-007 only
 
 ## Risks / Blockers

@@ -5,7 +5,7 @@
   "status": "p006_accepted_propose_b007",
   "current_phase": "P-006",
   "harness_level": "Standard",
-  "last_updated": "2026-07-15T11:05:00+08:00",
+  "last_updated": "2026-07-15T11:08:00+08:00",
   "initiative_id": "I-001",
   "initiative_type": "major",
   "working_branch": "feat/i-001-xugu-dialect-major",
@@ -55,12 +55,12 @@
   },
   "version_control_checkpoint": {
     "decision": "must_commit",
-    "candidate_commit": "PENDING_MUST_COMMIT",
+    "candidate_commit": "a96f31079e359f5e369d4f4a0c11f3f1ed6e5950",
     "git_init": true,
-    "committed": false,
+    "committed": true,
     "branch": "feat/i-001-xugu-dialect-major",
-    "note": "Accept turn: must-commit pending; no push",
-    "head": "4bf40759a2d48c7307a3dcea0bc6f8ebcfaaf3e2"
+    "note": "P-006 Accept must-commit recorded; no push",
+    "head": "a96f31079e359f5e369d4f4a0c11f3f1ed6e5950"
   },
   "handoff": {
     "last_summary": "P-006 accepted. Ask Human Gate: approve B-007 scope P-007 only.",
@@ -71,5 +71,5 @@
   "approved_phases": [
     "P-006"
   ],
-  "updated_at": "2026-07-15T11:05:00+08:00"
+  "updated_at": "2026-07-15T11:08:00+08:00"
 }

@@ -60,7 +60,7 @@ Reviewer MINOR (optional, non-blocking): P-010 user-guide callout for JSON previ
 ## Version control checkpoint
 
 - Branch: eat/i-001-xugu-dialect-major
-- Candidate commit: PENDING_MUST_COMMIT
+- Candidate commit: a96f31079e359f5e369d4f4a0c11f3f1ed6e5950
 - Deferred reason when no commit: N/A (must-commit on Accept)
 
 ## Acceptance decision

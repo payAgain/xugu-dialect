@@ -15,7 +15,7 @@
 - VERIFY PASS: `harness/evidence/test/P-006/verification.json`
 - Real DB IT: 13/13 PASS (incl. 2 FunctionRegistryIT)
 - REGISTRY: P-006 `accepted`; P-007 `ready` (dependency satisfied)
-- Must-commit on working branch (SHA: PENDING_MUST_COMMIT)
+- Must-commit on working branch (SHA: a96f31079e359f5e369d4f4a0c11f3f1ed6e5950)
 
 ## Explicitly not done
 
