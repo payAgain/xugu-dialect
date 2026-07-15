@@ -57,7 +57,7 @@ isk_score=4 < 8 (condition=risk_ge_8 false) |
 ## Version control checkpoint
 
 - Branch: eat/i-001-xugu-dialect-major
-- Candidate commit: (filled after must-commit)
+- Candidate commit: 19f98233d479ac4cad1d2e77557784cfbd2d0638
 - Deferred reason when no commit: N/A (must-commit on Accept)
 
 ## Acceptance decision

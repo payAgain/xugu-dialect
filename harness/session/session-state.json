@@ -5,7 +5,7 @@
   "status": "b010_p010_accepted_awaiting_b011",
   "current_phase": "P-010",
   "harness_level": "Standard",
-  "last_updated": "2026-07-15T15:52:00+08:00",
+  "last_updated": "2026-07-15T15:55:00+08:00",
   "initiative_id": "I-001",
   "initiative_type": "major",
   "working_branch": "feat/i-001-xugu-dialect-major",
@@ -56,13 +56,13 @@
     "blocked_on": "Human Gate approve B-011 scope P-011 only"
   },
   "version_control_checkpoint": {
-    "decision": "must_commit_on_accept",
-    "candidate_commit": null,
+    "decision": "committed_awaiting_human_review",
+    "candidate_commit": "19f98233d479ac4cad1d2e77557784cfbd2d0638",
     "git_init": true,
-    "committed": false,
+    "committed": true,
     "branch": "feat/i-001-xugu-dialect-major",
-    "note": "P-010 Accept must-commit pending this turn",
-    "head": "7fe9586e597db6cf4480d99b0501e2ee538c6b72"
+    "note": "P-010 Accept must-commit; no push",
+    "head": "19f98233d479ac4cad1d2e77557784cfbd2d0638"
   },
   "handoff": {
     "last_summary": "P-010 accepted. Propose B-011 → P-011 only (hardening & Accept prep).",
@@ -73,5 +73,5 @@
   "approved_phases": [
     "P-010"
   ],
-  "updated_at": "2026-07-15T15:52:00+08:00"
+  "updated_at": "2026-07-15T15:55:00+08:00"
 }

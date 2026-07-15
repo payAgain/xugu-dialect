@@ -17,7 +17,7 @@ isk_score=4 < 8 (condition=risk_ge_8)
 - Observed flow user-guide-configure-and-verify-path PASS; links 44/44; no E:\\Work\\docs\\content rewrite
 - REGISTRY: P-010 ccepted; P-011 
 eady (dependency satisfied)
-- Must-commit on working branch (SHA: TBD_AFTER_COMMIT)
+- Must-commit on working branch (SHA: 19f98233d479ac4cad1d2e77557784cfbd2d0638)
 
 ## Explicitly not done
 

@@ -489,4 +489,4 @@ ev-p009-20260715 approve)
 - Must-commit on feat/i-001-xugu-dialect-major; propose B-011 → P-011 only
 - Resume: harness/handoffs/orchestrator/B-010-P-010-complete.md
 
-- Must-commit SHA recorded: TBD_AFTER_COMMIT
+- Must-commit SHA recorded: 19f98233d479ac4cad1d2e77557784cfbd2d0638
