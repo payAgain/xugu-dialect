@@ -68,7 +68,7 @@ Reviewer MINOR (optional, non-blocking): P-010 user-guide callout for `support_g
 ## Version control checkpoint
 
 - Branch: `feat/i-001-xugu-dialect-major`
-- Candidate commit: PENDING_MUST_COMMIT
+- Candidate commit: 3826699f7588191a7157129467750a4f87b3bf19
 - Deferred reason when no commit: N/A (must-commit on Accept)
 
 ## Acceptance decision

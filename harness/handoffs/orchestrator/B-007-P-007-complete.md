@@ -15,7 +15,7 @@
 - VERIFY PASS: `harness/evidence/test/P-007/verification.json`
 - Real DB IT: 14/14 PASS (incl. XuguSchemaTempCommentIT); leftover probe `HIB_P007_*` = 0
 - REGISTRY: P-007 `accepted`; P-008 `ready` (dependency satisfied)
-- Must-commit on working branch (SHA: PENDING_MUST_COMMIT)
+- Must-commit on working branch (SHA: 3826699f7588191a7157129467750a4f87b3bf19)
 
 ## Explicitly not done
 
