@@ -1,8 +1,8 @@
-﻿# Initiative Brief: I-001
+# Initiative Brief: I-001
 
 > Scoped clarity for one change unit. Not a full product re-charter.
 > Type: major
-> Updated: 2026-07-15T16:15:00+08:00
+> Updated: 2026-07-15T16:25:00+08:00
 
 ## Goal
 - 交付 Hibernate **7.4.5.Final** 虚谷方言制品 **`com.xugu:xugu-dialect:7.4.5.Final`** + **Spring Boot demo** + **项目内生产文档**，功能覆盖 **定义 A 全量**（MySQL/Oracle Dialect 生产能力 ∩ 虚谷文档可实现）。
@@ -58,8 +58,10 @@
 - （无）— 2026-07-14 Human Gate 已确认 Boot 4.1.0+覆盖、Ship 另开、`docs/user-guide/`
 
 ## Status
-`completed` / **accepted**
+`completed` / **accepted** then **archived**
 
-- Human Gate: 「确认 I-001 Accept」(~2026-07-15T16:15+08:00)
+- Human Gate Accept: 「确认 I-001 Accept」(~2026-07-15T16:15+08:00)
+- Human Gate Archive: 「Archive I-001」(~2026-07-15T16:25+08:00)
+- Archive record: `harness/initiatives/I-001/ARCHIVE.md`
 - Delivery: GAV `com.xugu:xugu-dialect:7.4.5.Final`; Boot demo 4.1.0; `docs/user-guide`; Definition A 可实现 78/78 closed; VERIFY PASS
 - Ship / tag / push / Central: **not** done — separate authorization required

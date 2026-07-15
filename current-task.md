@@ -1,50 +1,52 @@
-﻿# Current Task
+# Current Task
 
 ## Goal
-I-001 (major)：**已 Accept** — Hibernate 7.4.5 虚谷正式 jar + Spring Boot demo + 项目文档；定义 A 全行覆盖
+Idle — ready for next Initiative Scope (or separate Ship authorization for I-001)
 
 ## Current Status
-i001_initiative_accepted_ship_deferred
+idle_ready_next_initiative
 
 ## Active Batch / Tasks
-- Initiative **I-001**: **accepted** / Status `completed` (~2026-07-15T16:15+08:00)
-- Human Gate phrase: 「确认 I-001 Accept」
-- Last Phase: P-011 **accepted** (B-011); Accept SHA `b7292f6`
-- Evidence: `harness/evidence/orchestrator/I-001/ACCEPTANCE.md`
+- None (no active Build)
+- Initiative **I-001**: **accepted** then **archived** (~2026-07-15T16:25+08:00)
+- Archive: `harness/initiatives/I-001/ARCHIVE.md`
+- Accept evidence: `harness/evidence/orchestrator/I-001/ACCEPTANCE.md`
 
 ## Scope
-Allowed next (optional):
-- Archive path per initiative lifecycle
-- **Ship** only with **separate** Human Gate authorization (tag / push / Central)
+Allowed next:
+- New Initiative via `skills/initiative.md` (Human Gate Scope)
+- **Ship** I-001 only with **separate** Human Gate authorization (tag / push / Central)
 
 Not allowed without further authorization:
 - Ship / tag / push / Central
+- Implementation without new Initiative Scope
 
 ## Plan
-1. ~~Human Gate Initiative I-001 Accept~~ DONE
-2. Optional Archive
-3. Ship / Central later (separate authorization)
+1. ~~I-001 Accept~~ DONE
+2. ~~Archive I-001~~ DONE
+3. Next: new Initiative Scope **or** Ship auth
 
 ## Validation Commands
 ```text
 mvn -q -DskipTests package
 mvn -q test
 python harness/scripts/verify.py
+python harness/scripts/harness_check.py
 ```
 
 ## Acceptance Criteria
-- [x] Human Gate approve B-011 scope P-011 only
-- [x] P-011 RP-01/02/03 + Accept + must-commit
-- [x] Human Gate Initiative I-001 Accept
+- [x] I-001 Accept
+- [x] I-001 Archive
 - [ ] Ship (deferred — separate Human Gate)
+- [ ] Next Initiative Scope (when requested)
 
 ## Risks / Blockers
 - Ship / push still Human Gate only
 
 ## Next 3 Steps
-1. Optional：Archive I-001（按 lifecycle）
-2. Human Gate 若要发布：另开 **Ship** 授权（tag / push / Central）
-3. 新需求：开新 Initiative（`skills/initiative.md`），勿在本 Accept 上混 Ship
+1. Human Gate: open **new Initiative** (`skills/initiative.md`) **or** authorize **Ship**
+2. If Ship: tag / push / Central only after explicit authorization
+3. Do not start Build until Scope / Ship Gate is approved
 
 ## Last Updated
-2026-07-15T16:15:00+08:00（角色：orchestrator I-001 Initiative Accept）
+2026-07-15T16:25:00+08:00（角色：orchestrator I-001 Archive）

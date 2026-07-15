@@ -523,3 +523,14 @@ ev-p009-20260715 approve)
 
 - Must-commit SHA recorded: 208a12b207285249a9617cd4f6823daeb69737cb
 
+## 2026-07-15T16:25:00+08:00 — orchestrator: I-001 Archive
+
+- Human Gate: 「Archive I-001」(~2026-07-15T16:25+08:00)
+- Final status: accepted then archived (NOT Ship)
+- Wrote `harness/initiatives/I-001/ARCHIVE.md`; brief Status archived; INDEX completed + Archived footnote
+- Session idle / ready for next Initiative Scope; no active Build
+- Key SHAs: Accept `208a12b`; P-011 `b7292f6`; pre-archive HEAD `e503ad7`
+- Ship / tag / push / Central: deferred — separate authorization
+- Resume: `harness/handoffs/orchestrator/I-001-archived.md`
+
+- Must-commit SHA recorded: (pending this Archive commit)

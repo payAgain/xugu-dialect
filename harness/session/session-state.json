@@ -1,71 +1,65 @@
 {
   "schema_version": 1,
-  "task_id": "I-001",
+  "task_id": null,
   "batch_id": null,
-  "status": "i001_initiative_accepted_ship_deferred",
+  "status": "idle_ready_next_initiative",
   "current_phase": null,
   "harness_level": "Standard",
-  "last_updated": "2026-07-15T16:17:00+08:00",
-  "initiative_id": "I-001",
-  "initiative_type": "major",
+  "last_updated": "2026-07-15T16:25:00+08:00",
+  "initiative_id": null,
+  "initiative_type": null,
   "working_branch": "feat/i-001-xugu-dialect-major",
   "active_plan": [
-    "I-001 Initiative Accept Decision accepted",
-    "Human Gate: 确认 I-001 Accept (~2026-07-15T16:15+08:00)",
-    "Delivery: com.xugu:xugu-dialect:7.4.5.Final; Boot 4.1.0; docs/user-guide; Definition A 78/78; VERIFY PASS",
-    "Ship deferred (tag/push/Central out of scope)"
+    "I-001 accepted then archived (NOT Ship)",
+    "Session idle — ready for next Initiative Scope",
+    "Ship deferred (tag/push/Central needs separate Human Gate)"
   ],
   "next_3_steps": [
-    "Optional Archive for I-001 per lifecycle",
-    "Ship / tag / push / Central only with separate Human Gate authorization",
-    "New work: open a new Initiative via skills/initiative.md"
+    "Human Gate: new Initiative via skills/initiative.md OR authorize Ship",
+    "If Ship: tag / push / Central only with explicit authorization",
+    "Do not start Build until Scope / Ship Gate approved"
   ],
   "changed_files": [
-    "harness/evidence/orchestrator/I-001/ACCEPTANCE.md",
+    "harness/initiatives/I-001/ARCHIVE.md",
     "harness/initiatives/I-001/brief.md",
     "harness/initiatives/INDEX.md",
-    "harness/handoffs/orchestrator/I-001-accepted.md",
+    "harness/handoffs/orchestrator/I-001-archived.md",
     "current-task.md",
     "harness/session/"
   ],
   "validation": {
     "last_commands": [
-      "python harness/scripts/harness_check.py",
-      "python harness/scripts/branch_check.py"
+      "python harness/scripts/harness_check.py"
     ],
-    "last_result": "I-001 Accept recorded; HARNESS_CHECK PASS; Ship deferred",
+    "last_result": "I-001 archived; awaiting harness_check after commit",
     "known_failures": []
   },
   "cognitive_state": {
     "failure_count": 0,
-    "current_mode": "initiative_accepted",
+    "current_mode": "idle",
     "tried_approaches": [
-      "b011_human_gate_approve",
-      "p011_rp01_implementer",
-      "p011_rp02_test",
-      "p011_rp03_reviewer",
-      "p011_accept",
-      "i001_initiative_accept"
+      "i001_initiative_accept",
+      "i001_archive"
     ],
     "blocked_on": null
   },
   "version_control_checkpoint": {
     "decision": "committed_awaiting_human_review",
-    "candidate_commit": "208a12b207285249a9617cd4f6823daeb69737cb",
+    "candidate_commit": null,
     "git_init": true,
-    "committed": true,
+    "committed": false,
     "branch": "feat/i-001-xugu-dialect-major",
-    "note": "I-001 Accept 208a12b207285249a9617cd4f6823daeb69737cb; tip after SHA-record chore; no push; Ship deferred",
-    "head": "40ecae0402347b0c7a7b0725f007d842ff9066ef",
-    "p011_accept_sha": "b7292f6be7155107888f9e30d6661c2a5386e59b",
-    "pre_accept_head": "49927ac18e2396055ae62bc406993040e43e4632"
+    "note": "I-001 Archive governance commit pending; Accept 208a12b; P-011 b7292f6; no push; Ship deferred",
+    "head": "e503ad76a18325d2738965dfd2cb775b0ebb293b",
+    "i001_accept_sha": "208a12b207285249a9617cd4f6823daeb69737cb",
+    "p011_accept_sha": "b7292f6be7155107888f9e30d6661c2a5386e59b"
   },
   "handoff": {
-    "last_summary": "I-001 accepted (not Ship). Optional Archive; Ship needs separate Human Gate auth.",
-    "resume_from": "harness/handoffs/orchestrator/I-001-accepted.md"
+    "last_summary": "I-001 archived after Accept. Idle for next Initiative or Ship auth.",
+    "resume_from": "harness/handoffs/orchestrator/I-001-archived.md"
   },
   "active_phase": null,
   "approved_build": null,
   "approved_phases": [],
-  "updated_at": "2026-07-15T16:17:00+08:00"
+  "updated_at": "2026-07-15T16:25:00+08:00"
 }
