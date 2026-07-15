@@ -1,7 +1,7 @@
 schema_version: 1
 charter_version: "1.0.0"
 initiative_id: I-001
-updated: "2026-07-15T15:45:00+08:00"
+updated: "2026-07-15T16:10:00+08:00"
 # Phase progress index. IDs: I-00x / P-00x / B-00x — see protocol/references/glossary.md
 tasks:
   - task_id: P-001
@@ -86,7 +86,8 @@ tasks:
     dependencies: [P-009]
   - task_id: P-011
     title: "硬化与 Accept 准备"
-    status: ready
+    status: accepted
+    build_id: B-011
     packet: harness/tasks/P-011.md
     acceptance_doc: harness/evidence/orchestrator/P-011/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"

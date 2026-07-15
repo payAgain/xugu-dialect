@@ -1,0 +1,35 @@
+schema_version: 1
+role: test
+phase_id: P-011
+build_id: B-011
+initiative_id: I-001
+invocation_id: test-p011-20260715
+step_id: RP-02
+status: passed
+required: true
+completed_at: "2026-07-15T16:07:00+08:00"
+purpose: full suite + verify.py PASS evidence
+
+commands:
+  - { cmd: "mvn -q -DskipTests package", exit: 0 }
+  - { cmd: "mvn -q test", exit: 0 }
+  - { cmd: "mvn -q test -Dxugu.run.integration=true", exit: 0 }
+  - { cmd: "mvn -q -pl demo-spring-boot -am test -Dxugu.run.integration=true", exit: 0 }
+  - { cmd: "python harness/scripts/harness_check.py", exit: 0 }
+  - { cmd: "python harness/scripts/branch_check.py", exit: 0 }
+  - { cmd: "python harness/scripts/verify.py --phase P-011 --evidence harness/evidence/test/P-011/verification.json", exit: 0 }
+
+verify:
+  status: PASS
+  evidence: harness/evidence/test/P-011/verification.json
+
+observed_flows:
+  full-verify-pass: PASS
+  definition-a-matrix-closed: PASS
+
+outputs:
+  - harness/evidence/test/P-011/TEST-REPORT.md
+  - harness/evidence/test/P-011/verification.json
+  - harness/handoffs/test/P-011.yaml
+
+next_step: RP-03 reviewer rev-p011-20260715

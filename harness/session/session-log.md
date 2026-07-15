@@ -1,3 +1,23 @@
+## Entry: B-011 APPROVED + P-011 Accept (matrix closed / VERIFY PASS)
+
+### Summary
+Human Gate 批准 Build：「批准 B-011，范围仅 P-011」（~2026-07-15T15:58+08:00）。Orchestrator 物化 `B-011.json`，`P-011` in_progress（RP-03 condition=null）。RP-01 `impl-p011-20260715`：矩阵 78/78 可实现闭环（P-007 ✅ + MATRIX-CLOSURE）、根 README、无密钥。RP-02 `test-p011-20260715`：package/offline/IT/demo IT + harness/branch/verify → **VERIFY PASS**。RP-03 `rev-p011-20260715`：**approve**。P-011 ACCEPTANCE Decision accepted；must-commit；**未** Ship。下一步：Human Gate **Initiative I-001 Accept**（非 Ship）。
+
+### Files Created or Updated
+- harness/builds/B-011.json, B-011-approved.md, B-011-P-011-complete.md
+- README.md; contracts/feature-matrix-definition-a.md (P-007 ✅)
+- harness/evidence/**/P-011/**; handoffs implementer/test/reviewer
+- harness/tasks/P-011.md (accepted); REGISTRY; current-task; session/*
+
+### Validation
+- VERIFY PASS (`harness/evidence/test/P-011/verification.json`)
+- Live IT + demo IT exit 0
+
+### Next Steps
+1. Human Gate：Initiative I-001 Accept（非 Ship）
+2. Ship / Central 另开授权
+
+---
 ## Entry: B-010 APPROVED + P-010 RP-01 docs PASS
 
 ### Summary

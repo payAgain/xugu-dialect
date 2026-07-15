@@ -128,22 +128,22 @@
 
 | ID | Domain | Capability | Hibernate/Dialect surface (what apps expect) | Xugu doc ref | Status | Target Phase | Acceptance hint |
 |---|---|---|---|---|---|---|---|
-| A-SCH-001 | Schema | CREATE / DROP SCHEMA | Schema management | `reference/object/schema.md` | 可实现 | P-007 | Locked: `create schema` / `drop schema`; IT `HIB_P007_SCH` |
-| A-SCH-002 | Schema | Qualified names schema.table | `schema.table` rendering | `reference/object/schema.md`, `reference/sql/identifier.md` | 可实现 | P-007 | `NameQualifierSupport.SCHEMA`; IT `schema.table` |
+| A-SCH-001 | Schema | CREATE / DROP SCHEMA | Schema management | `reference/object/schema.md` | 可实现 | P-007 | ✅ P-007 Locked: `create schema` / `drop schema`; IT `HIB_P007_SCH` |
+| A-SCH-002 | Schema | Qualified names schema.table | `schema.table` rendering | `reference/object/schema.md`, `reference/sql/identifier.md` | 可实现 | P-007 | ✅ P-007 `NameQualifierSupport.SCHEMA`; IT `schema.table` |
 | A-SCH-003 | Catalog | Catalog (database) qualifier | `catalog.schema.table` | `reference/object/database.md` | 延后 | later | Xugu “database” ≠ Hibernate catalog always; revisit after JDBC metadata study |
-| A-SCH-004 | Temp | Local temporary tables | Hibernate temp table strategy (local) | `reference/object/table/create.md` (#2-OptTemp) | 可实现 | P-007 | Locked: `create local temporary table` |
-| A-SCH-005 | Temp | Global temporary tables | Persistent global temp | `reference/object/table/create.md`; `reference/system-configuration-parameter/xugu.ini/sql-engine/support_global_tab.md` | 可实现 | P-007 | Locked: `create global temporary table`; **precondition `support_global_tab=ON`**; IT gated/skip if OFF |
-| A-SCH-006 | Temp | ON COMMIT DELETE/PRESERVE | Temp table commit behavior | `reference/object/table/create.md` | 可实现 | P-007 | Local: `on commit preserve rows`; Global: `on commit delete rows` |
-| A-SCH-007 | Temp | Temp table FK restriction | FK on temp tables | `reference/object/table/create.md` (temp: no FK) | 文档不允许 | P-007 | **Do not emit** FK on temp tables (`StandardTemporaryTableExporter`) |
-| A-SCH-008 | Comment | COMMENT ON TABLE | Table comments in schema export | `reference/sql/ddl/comment.md` | 可实现 | P-007 | `supportsCommentOn`; `comment on table … is '…'` |
-| A-SCH-009 | Comment | COMMENT ON COLUMN | Column comments | `reference/sql/ddl/comment.md` | 可实现 | P-007 | `comment on column … is '…'` |
-| A-SCH-010 | Comment | Inline COMMENT on CREATE | CREATE TABLE … COMMENT | `reference/object/table/create.md`, `reference/sql/ddl/comment.md` | 可实现 | P-007 | Alternate: `inlineTableComment` / `inlineColumnComment` → ` comment '…'` |
-| A-SCH-011 | Constraints | UNIQUE | Unique constraint DDL | `reference/object/constraints.md` | 可实现 | P-007 | `CreateTableUniqueDelegate` |
-| A-SCH-012 | Constraints | FOREIGN KEY | FK create/alter | `reference/object/constraints.md`, `reference/object/table/create.md` | 可实现 | P-007 | `add constraint … foreign key (…) references …` (permanent tables only) |
-| A-SCH-013 | Constraints | CHECK | Check constraints | `reference/object/constraints.md` | 可实现 | P-007 | `supportsColumnCheck` / `supportsTableCheck` |
-| A-SCH-014 | Constraints | ALTER ADD/DROP CONSTRAINT | Constraint management | `reference/object/constraints.md`, `reference/object/table/alter.md` | 可实现 | P-007 | `drop constraint` for FK/UK |
-| A-SCH-015 | Truncate | TRUNCATE TABLE | `truncate` / multi-table clear | `reference/object/table/truncate.md` | 可实现 | P-007 | Locked: `truncate table {name}` |
-| A-SCH-016 | Indexes | CREATE INDEX basics | Index export for unique/non-unique | `reference/object/indexes.md` | 可实现 | P-007 | `create index` / `create unique index` |
+| A-SCH-004 | Temp | Local temporary tables | Hibernate temp table strategy (local) | `reference/object/table/create.md` (#2-OptTemp) | 可实现 | P-007 | ✅ P-007 Locked: `create local temporary table` |
+| A-SCH-005 | Temp | Global temporary tables | Persistent global temp | `reference/object/table/create.md`; `reference/system-configuration-parameter/xugu.ini/sql-engine/support_global_tab.md` | 可实现 | P-007 | ✅ P-007 Locked: `create global temporary table`; **precondition `support_global_tab=ON`**; IT gated/skip if OFF |
+| A-SCH-006 | Temp | ON COMMIT DELETE/PRESERVE | Temp table commit behavior | `reference/object/table/create.md` | 可实现 | P-007 | ✅ P-007 Local: `on commit preserve rows`; Global: `on commit delete rows` |
+| A-SCH-007 | Temp | Temp table FK restriction | FK on temp tables | `reference/object/table/create.md` (temp: no FK) | 文档不允许 | P-007 | ✅ **Do not emit** FK on temp tables (`StandardTemporaryTableExporter`) |
+| A-SCH-008 | Comment | COMMENT ON TABLE | Table comments in schema export | `reference/sql/ddl/comment.md` | 可实现 | P-007 | ✅ P-007 `supportsCommentOn`; `comment on table … is '…'` |
+| A-SCH-009 | Comment | COMMENT ON COLUMN | Column comments | `reference/sql/ddl/comment.md` | 可实现 | P-007 | ✅ P-007 `comment on column … is '…'` |
+| A-SCH-010 | Comment | Inline COMMENT on CREATE | CREATE TABLE … COMMENT | `reference/object/table/create.md`, `reference/sql/ddl/comment.md` | 可实现 | P-007 | ✅ P-007 Alternate: `inlineTableComment` / `inlineColumnComment` → ` comment '…'` |
+| A-SCH-011 | Constraints | UNIQUE | Unique constraint DDL | `reference/object/constraints.md` | 可实现 | P-007 | ✅ P-007 `CreateTableUniqueDelegate` |
+| A-SCH-012 | Constraints | FOREIGN KEY | FK create/alter | `reference/object/constraints.md`, `reference/object/table/create.md` | 可实现 | P-007 | ✅ P-007 `add constraint … foreign key (…) references …` (permanent tables only) |
+| A-SCH-013 | Constraints | CHECK | Check constraints | `reference/object/constraints.md` | 可实现 | P-007 | ✅ P-007 `supportsColumnCheck` / `supportsTableCheck` |
+| A-SCH-014 | Constraints | ALTER ADD/DROP CONSTRAINT | Constraint management | `reference/object/constraints.md`, `reference/object/table/alter.md` | 可实现 | P-007 | ✅ P-007 `drop constraint` for FK/UK |
+| A-SCH-015 | Truncate | TRUNCATE TABLE | `truncate` / multi-table clear | `reference/object/table/truncate.md` | 可实现 | P-007 | ✅ P-007 Locked: `truncate table {name}` |
+| A-SCH-016 | Indexes | CREATE INDEX basics | Index export for unique/non-unique | `reference/object/indexes.md` | 可实现 | P-007 | ✅ P-007 `create index` / `create unique index` |
 | A-SCH-017 | Indexes | Advanced index types | Partial/functional/spatial indexes | `reference/object/indexes.md` | 延后 | later | Beyond standard ORM export |
 
 ---
