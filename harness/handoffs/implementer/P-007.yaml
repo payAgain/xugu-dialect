@@ -1,0 +1,106 @@
+schema_version: 1
+role: implementer
+phase_id: P-007
+build_id: B-007
+initiative_id: I-001
+invocation_id: impl-p007-20260715
+step_id: RP-01
+status: passed
+required: true
+completed_at: "2026-07-15T11:42:30+08:00"
+purpose: implement schema tooling, temp tables, comments, FK per matrix A-SCH-*
+
+inputs:
+  - harness/tasks/P-007.md
+  - harness/builds/B-007.json
+  - contracts/feature-matrix-definition-a.md
+  - E:\\Work\\docs\\content\\reference\\object\\schema.md
+  - E:\\Work\\docs\\content\\reference\\object\\table\\create.md
+  - E:\\Work\\docs\\content\\reference\\sql\\ddl\\comment.md
+  - E:\\Work\\docs\\content\\reference\\object\\constraints.md
+  - E:\\Work\\docs\\content\\reference\\object\\table\\truncate.md
+  - E:\\Work\\docs\\content\\reference\\object\\indexes.md
+  - E:\\Work\\docs\\content\\reference\\system-configuration-parameter\\xugu.ini\\sql-engine\\support_global_tab.md
+  - Hibernate 7.4.5 Dialect / TemporaryTableStrategy / UniqueDelegate (m2)
+
+outputs:
+  - dialect/src/main/java/com/xugu/dialect/temptable/XuguLocalTemporaryTableStrategy.java
+  - dialect/src/main/java/com/xugu/dialect/temptable/XuguGlobalTemporaryTableStrategy.java
+  - dialect/src/main/java/com/xugu/dialect/XuguDialect.java
+  - dialect/src/test/java/com/xugu/dialect/XuguSchemaTempCommentTest.java
+  - dialect/src/test/java/com/xugu/dialect/it/XuguSchemaTempCommentIT.java
+  - contracts/feature-matrix-definition-a.md
+  - harness/evidence/implementer/P-007/NOTES.md
+  - harness/evidence/implementer/P-007/CHECKLIST.md
+  - harness/evidence/implementer/P-007/IT-RESULT.txt
+  - harness/evidence/implementer/P-007/verification.json
+  - harness/handoffs/implementer/P-007.yaml
+
+coverage:
+  implemented:
+    - A-SCH-001
+    - A-SCH-002
+    - A-SCH-004
+    - A-SCH-005
+    - A-SCH-006
+    - A-SCH-008
+    - A-SCH-009
+    - A-SCH-010
+    - A-SCH-011
+    - A-SCH-012
+    - A-SCH-013
+    - A-SCH-014
+    - A-SCH-015
+    - A-SCH-016
+  documented_not_allowed:
+    - A-SCH-007
+  deferred:
+    - A-SCH-003
+    - A-SCH-017
+
+locked_sql:
+  create_schema: "create schema {name}"
+  drop_schema: "drop schema {name}"
+  local_temp: "create local temporary table … on commit preserve rows"
+  global_temp: "create global temporary table … on commit delete rows"
+  global_precondition: "support_global_tab=ON"
+  comment_table: "comment on table {t} is '{c}'"
+  comment_column: "comment on column {t.c} is '{c}'"
+  inline_comment: " comment '{c}'"
+  fk_alter: " add constraint {n} foreign key ({cols}) references {table} ({pk})"
+  truncate: "truncate table {name}"
+  create_index: "create index / create unique index"
+  no_temp_fk: true
+
+cleanup:
+  prefix: HIB_P007_
+  status: cleaned
+  notes:
+    - "DROP SCHEMA uses CASCADE without IF EXISTS (XuGu grammar)"
+    - "DROP INDEX IF EXISTS requires table.index form"
+
+verification:
+  test_offline:
+    command: "mvn -q test"
+    exit_code: 0
+  test_integration:
+    command: 'mvn -q -pl dialect test "-Dxugu.run.integration=true"'
+    exit_code: 0
+    real_db: true
+    url: "jdbc:xugu://127.0.0.1:5138/SYSTEM?...&compatiblemode=NONE"
+  verify_py:
+    command: "python harness/scripts/verify.py --phase P-007"
+    result: VERIFY PASS
+    evidence: harness/evidence/implementer/P-007/verification.json
+
+forbidden_reminder:
+  - no Accept
+  - no git commit / tag / push
+  - no MySQL/Oracle Dialect inheritance
+  - no sibling hibernate-dialect read
+  - no inventing FK on temp tables
+
+next_step: independent test RP-02 then reviewer RP-03
+blocker: null
+accept_authorized: false
+commit_authorized: false

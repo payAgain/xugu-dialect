@@ -1,75 +1,78 @@
 {
   "schema_version": 1,
   "task_id": "I-001",
-  "batch_id": "B-006",
-  "status": "p006_accepted_propose_b007",
-  "current_phase": "P-006",
+  "batch_id": "B-007",
+  "status": "p007_accepted_propose_b008",
+  "current_phase": "P-007",
   "harness_level": "Standard",
-  "last_updated": "2026-07-15T11:08:00+08:00",
+  "last_updated": "2026-07-15T11:53:00+08:00",
   "initiative_id": "I-001",
   "initiative_type": "major",
   "working_branch": "feat/i-001-xugu-dialect-major",
   "active_plan": [
-    "P-006 accepted (B-006); propose B-007 scope P-007 only",
-    "Await Human Gate approval for B-007",
-    "Do not approve P-008+ until P-007 ACCEPTANCE"
+    "P-007 accepted (B-007); propose B-008 scope P-008 only",
+    "Await Human Gate approval for DialectResolver SPI",
+    "Do not approve P-009+ until P-008 ACCEPTANCE"
   ],
   "next_3_steps": [
-    "Human Gate approve B-007 scope P-007 only",
-    "Materialize B-007; P-007 in_progress; dispatch RP-01",
-    "Do not parallel-approve P-008+"
+    "Human Gate approve B-008 scope P-008 only",
+    "On approval materialize B-008 and dispatch RP-01 implementer",
+    "Do not parallel-approve P-009+"
   ],
   "changed_files": [
-    "dialect/src/main/java/com/xugu/dialect/function/",
     "dialect/src/main/java/com/xugu/dialect/XuguDialect.java",
-    "dialect/src/test/java/com/xugu/dialect/",
+    "dialect/src/main/java/com/xugu/dialect/temptable/",
+    "dialect/src/test/java/com/xugu/dialect/XuguSchemaTempCommentTest.java",
+    "dialect/src/test/java/com/xugu/dialect/it/XuguSchemaTempCommentIT.java",
     "contracts/feature-matrix-definition-a.md",
-    "harness/evidence/implementer/P-006/",
-    "harness/evidence/test/P-006/",
-    "harness/evidence/reviewer/P-006/REVIEW.md",
-    "harness/handoffs/orchestrator/B-006-P-006-complete.md",
-    "harness/tasks/P-006.md",
+    "harness/evidence/implementer/P-007/",
+    "harness/evidence/test/P-007/",
+    "harness/evidence/reviewer/P-007/REVIEW.md",
     "harness/tasks/P-007.md",
+    "harness/tasks/P-008.md",
     "harness/tasks/REGISTRY.yaml",
+    "harness/builds/B-007.json",
     "current-task.md",
-    "harness/session/"
+    "harness/session/",
+    "harness/handoffs/orchestrator/B-007-P-007-complete.md"
   ],
   "validation": {
     "last_commands": [
-      "mvn -q test → exit 0 (test-p006)",
-      "mvn -q test -Dxugu.run.integration=true → exit 0 (13 IT)",
-      "python harness/scripts/verify.py --phase P-006 → VERIFY PASS"
+      "mvn -q test",
+      "mvn -q test -Dxugu.run.integration=true",
+      "python harness/scripts/verify.py --phase P-007"
     ],
-    "last_result": "P-006 accepted; RP-03 approve; propose B-007 → P-007 only",
+    "last_result": "P-007 accepted; RP-03 approve rev-p007-20260715; VERIFY PASS; propose B-008 P-008 only",
     "known_failures": []
   },
   "cognitive_state": {
     "failure_count": 0,
-    "current_mode": "accept_complete_await_next_build",
+    "current_mode": "accept_propose_next_build",
     "tried_approaches": [
-      "b006_pipeline_complete",
-      "rp03_approve_landed",
-      "p006_accepted"
+      "p007_rp01_implementer",
+      "p007_rp02_test",
+      "p007_rp03_reviewer_approve",
+      "p007_accept_must_commit"
     ],
-    "blocked_on": "human_gate_b007_approve"
+    "blocked_on": "human_gate_b008_approval"
   },
   "version_control_checkpoint": {
     "decision": "must_commit",
-    "candidate_commit": "a96f31079e359f5e369d4f4a0c11f3f1ed6e5950",
+    "candidate_commit": "PENDING_MUST_COMMIT",
     "git_init": true,
-    "committed": true,
+    "committed": false,
     "branch": "feat/i-001-xugu-dialect-major",
-    "note": "P-006 Accept must-commit recorded; no push",
-    "head": "a96f31079e359f5e369d4f4a0c11f3f1ed6e5950"
+    "note": "Accept turn must-commit for P-007 schema/temp/comment/FK; no push.",
+    "head": "12d9083e344e8d08fd034e917082a3843751e62c"
   },
   "handoff": {
-    "last_summary": "P-006 accepted. Ask Human Gate: approve B-007 scope P-007 only.",
-    "resume_from": "harness/handoffs/orchestrator/B-006-P-006-complete.md"
+    "last_summary": "P-007 accepted. Propose B-008 scope P-008 only (DialectResolver SPI).",
+    "resume_from": "harness/handoffs/orchestrator/B-007-P-007-complete.md"
   },
-  "active_phase": "P-006",
-  "approved_build": "B-006",
+  "active_phase": "P-007",
+  "approved_build": "B-007",
   "approved_phases": [
-    "P-006"
+    "P-007"
   ],
-  "updated_at": "2026-07-15T11:08:00+08:00"
+  "updated_at": "2026-07-15T11:53:00+08:00"
 }

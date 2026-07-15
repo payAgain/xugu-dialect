@@ -1,0 +1,25 @@
+P-007 RP-01 implementer IT result
+Date: 2026-07-15
+Invocation: impl-p007-20260715
+
+Commands:
+  mvn -q test                                          → exit 0
+  mvn -q -pl dialect test -Dxugu.run.integration=true  → exit 0
+
+IT class: com.xugu.dialect.it.XuguSchemaTempCommentIT
+Gate: -Dxugu.run.integration=true
+URL: jdbc:xugu://127.0.0.1:5138/SYSTEM?...&compatiblemode=NONE
+
+Observed:
+  - CREATE/DROP SCHEMA HIB_P007_SCH
+  - Qualified HIB_P007_SCH.HIB_P007_QT
+  - Local temp create/use/drop + ON COMMIT PRESERVE ROWS
+  - Global temp create/use/drop (server support_global_tab ON on this host)
+  - COMMENT ON TABLE/COLUMN + inline COMMENT on CREATE
+  - FK HIB_P007_CHILD → HIB_P007_PARENT (orphan rejected)
+  - UNIQUE + CHECK
+  - TRUNCATE TABLE
+  - CREATE INDEX
+  - Cleanup: DROP SCHEMA … CASCADE OK; all HIB_P007_* objects removed
+
+Result: PASS

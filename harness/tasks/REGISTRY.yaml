@@ -1,7 +1,7 @@
 schema_version: 1
 charter_version: "1.0.0"
 initiative_id: I-001
-updated: "2026-07-15T11:05:00+08:00"
+updated: "2026-07-15T11:53:00+08:00"
 # Phase progress index. IDs: I-00x / P-00x / B-00x — see protocol/references/glossary.md
 tasks:
   - task_id: P-001
@@ -54,14 +54,15 @@ tasks:
     dependencies: [P-005]
   - task_id: P-007
     title: "Schema / 临时表 / 注释 / 外键"
-    status: ready
+    status: accepted
+    build_id: B-007
     packet: harness/tasks/P-007.md
     acceptance_doc: harness/evidence/implementer/P-007/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"
     dependencies: [P-006]
   - task_id: P-008
     title: "DialectResolver SPI 与显式配置"
-    status: blocked
+    status: ready
     packet: harness/tasks/P-008.md
     acceptance_doc: harness/evidence/implementer/P-008/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"

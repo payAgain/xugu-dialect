@@ -1,0 +1,44 @@
+=== P-007 IT RESULT (test-p007-20260715) ===
+Suite: com.xugu.dialect.it.XuguSchemaTempCommentIT#schemaTempCommentFkTruncate_A_SCH
+Result: PASS
+DB: jdbc:xugu://127.0.0.1:5138/SYSTEM?...&compatiblemode=NONE
+Driver: XuguDB JDBC Driver; Dialect: XuguDialect; Version: 12.0
+
+=== HIB_P007 CLEANUP CHECKLIST (from IT stdout) ===
+OK: DROP TABLE IF EXISTS HIB_P007_CHILD
+OK: DROP TABLE IF EXISTS HIB_P007_PARENT
+OK: DROP TABLE IF EXISTS HIB_P007_CMT
+OK: DROP TABLE IF EXISTS HIB_P007_UK
+OK: DROP TABLE IF EXISTS HIB_P007_TR
+skip: DROP INDEX IF EXISTS HIB_P007_IDX.HIB_P007_I1 (pre-body / object absent)
+OK: DROP TABLE IF EXISTS HIB_P007_IDX
+OK: DROP TABLE IF EXISTS HIB_P007_LTMP
+OK: DROP TABLE IF EXISTS HIB_P007_GTMP
+skip: DROP TABLE IF EXISTS HIB_P007_SCH.HIB_P007_QT (pre-body schema absent)
+skip: DROP SCHEMA HIB_P007_SCH CASCADE (pre-body)
+skip: DROP SCHEMA HIB_P007_SCH (pre-body)
+dropped local temp HIB_P007_LTMP
+dropped global temp HIB_P007_GTMP
+IT body completed OK
+OK: DROP TABLE IF EXISTS HIB_P007_CHILD
+OK: DROP TABLE IF EXISTS HIB_P007_PARENT
+OK: DROP TABLE IF EXISTS HIB_P007_CMT
+OK: DROP TABLE IF EXISTS HIB_P007_UK
+OK: DROP TABLE IF EXISTS HIB_P007_TR
+OK: DROP INDEX IF EXISTS HIB_P007_IDX.HIB_P007_I1
+OK: DROP TABLE IF EXISTS HIB_P007_IDX
+OK: DROP TABLE IF EXISTS HIB_P007_LTMP
+OK: DROP TABLE IF EXISTS HIB_P007_GTMP
+OK: DROP TABLE IF EXISTS HIB_P007_SCH.HIB_P007_QT
+OK: DROP SCHEMA HIB_P007_SCH CASCADE
+skip: DROP SCHEMA HIB_P007_SCH (already dropped by CASCADE)
+
+=== Post-IT leftover probe (independent JDBC) ===
+ALL_TABLES HIB_P007_% => 0
+ALL_SCHEMAS HIB_P007_SCH => 0
+USER_TABLES HIB_P007_% => 0
+
+=== Spot notes ===
+A-SCH-007: unit tempTableExporterDoesNotEmitFk + IT assertFalse(localCreate contains foreign key)
+A-SCH-003: matrix deferred; NameQualifierSupport.SCHEMA only (no catalog)
+Global temp: live create/drop succeeded (support_global_tab ON on this server)

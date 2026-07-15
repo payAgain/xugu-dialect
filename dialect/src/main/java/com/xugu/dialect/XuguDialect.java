@@ -17,9 +17,15 @@ import org.hibernate.dialect.identity.IdentityColumnSupport;
 import org.hibernate.dialect.lock.spi.LockingSupport;
 import org.hibernate.dialect.pagination.LimitHandler;
 import org.hibernate.dialect.sequence.SequenceSupport;
+import org.hibernate.dialect.temptable.TemporaryTableKind;
+import org.hibernate.dialect.temptable.TemporaryTableStrategy;
+import org.hibernate.dialect.unique.CreateTableUniqueDelegate;
+import org.hibernate.dialect.unique.UniqueDelegate;
 import org.hibernate.engine.jdbc.env.spi.IdentifierCaseStrategy;
 import org.hibernate.engine.jdbc.env.spi.IdentifierHelper;
 import org.hibernate.engine.jdbc.env.spi.IdentifierHelperBuilder;
+import org.hibernate.engine.jdbc.env.spi.NameQualifierSupport;
+import org.hibernate.mapping.CheckConstraint;
 import org.hibernate.query.sqm.CastType;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.sql.ast.spi.SqlAppender;
@@ -36,12 +42,15 @@ import com.xugu.dialect.internal.XuguKeywords;
 import com.xugu.dialect.internal.XuguLockingSupport;
 import com.xugu.dialect.pagination.XuguLimitHandler;
 import com.xugu.dialect.sequence.XuguSequenceSupport;
+import com.xugu.dialect.temptable.XuguGlobalTemporaryTableStrategy;
+import com.xugu.dialect.temptable.XuguLocalTemporaryTableStrategy;
 
 import jakarta.persistence.Timeout;
 
 /**
- * XuguDB dialect for Hibernate 7.4 — types, DDL, pagination, locks, identity, sequences
- * (P-003/P-004/P-005). Extends {@link Dialect} only (no MySQL/Oracle dialect inheritance).
+ * XuguDB dialect for Hibernate 7.4 — types, DDL, pagination, locks, identity, sequences,
+ * schema/temp/comment/constraints (P-003…P-007). Extends {@link Dialect} only
+ * (no MySQL/Oracle dialect inheritance).
  *
  * <p><b>TIMESTAMP vs DATETIME (A-TYP-008):</b> Hibernate timestamp SqlTypes map to
  * Xugu {@code TIMESTAMP} (not {@code DATETIME}). Both exist under
@@ -79,7 +88,17 @@ import jakarta.persistence.Timeout;
  * {@code uuid()}. JSON subset: {@code json_value} + {@code json_extract}.
  * Hibernate {@code listagg} → XuGu {@code LISTAGG … WITHIN GROUP}.
  *
- * <p><b>Not emitted:</b> {@code SKIP LOCKED} (A-LCK-004), {@code FOR SHARE} (A-LCK-005).
+ * <p><b>Schema / temp / comment / constraints (A-SCH-* , P-007):</b>
+ * {@code CREATE}/{@code DROP SCHEMA}; schema-qualified names
+ * ({@link NameQualifierSupport#SCHEMA}, catalog deferred A-SCH-003);
+ * local temp via {@link XuguLocalTemporaryTableStrategy}; global temp via
+ * {@link XuguGlobalTemporaryTableStrategy} (requires {@code support_global_tab=ON});
+ * {@code COMMENT ON TABLE|COLUMN}; UNIQUE/FK/CHECK; {@code TRUNCATE TABLE};
+ * basic {@code CREATE [UNIQUE] INDEX}. Temp-table FK is <em>文档不允许</em>
+ * (A-SCH-007) — never emitted by the temp-table exporter.
+ *
+ * <p><b>Not emitted:</b> {@code SKIP LOCKED} (A-LCK-004), {@code FOR SHARE} (A-LCK-005),
+ * FK on temporary tables (A-SCH-007), catalog.schema.table (A-SCH-003 deferred).
  *
  * <p><b>A-LCK-005 (FOR SHARE / pessimistic read) — Hibernate shim only:</b>
  * XuGu documents {@code FOR UPDATE} / {@code FOR READ ONLY}, not {@code FOR SHARE}.
@@ -90,6 +109,8 @@ import jakarta.persistence.Timeout;
  * must not assume PostgreSQL-style {@code FOR SHARE} / non-blocking concurrent reads.
  */
 public class XuguDialect extends Dialect {
+
+	private final UniqueDelegate uniqueDelegate = new CreateTableUniqueDelegate( this );
 
 	public XuguDialect() {
 		super( DatabaseVersion.make( 12, 0 ) );
@@ -284,6 +305,231 @@ public class XuguDialect extends Dialect {
 	}
 
 	// -------------------------------------------------------------------------
+	// Schema / temp / comment / constraints / truncate / index (A-SCH-*) — P-007
+	// -------------------------------------------------------------------------
+
+	/**
+	 * A-SCH-002: qualify with schema only. Catalog (database) qualifier is deferred
+	 * (A-SCH-003) — Xugu “database” ≠ Hibernate catalog always.
+	 */
+	@Override
+	public NameQualifierSupport getNameQualifierSupport() {
+		return NameQualifierSupport.SCHEMA;
+	}
+
+	/** A-SCH-001: {@code CREATE SCHEMA schema_name} ({@code reference/object/schema.md}). */
+	@Override
+	public boolean canCreateSchema() {
+		return true;
+	}
+
+	@Override
+	public String[] getCreateSchemaCommand(String schemaName) {
+		return new String[] { "create schema " + schemaName };
+	}
+
+	/** A-SCH-001: {@code DROP SCHEMA schema_name} (default RESTRICT). */
+	@Override
+	public String[] getDropSchemaCommand(String schemaName) {
+		return new String[] { "drop schema " + schemaName };
+	}
+
+	/** Resolve current schema for tooling ({@code SELECT CURRENT_SCHEMA()}). */
+	@Override
+	public String getCurrentSchemaCommand() {
+		return "select current_schema()";
+	}
+
+	/**
+	 * Preferred mutation temp-table kind: local (always available).
+	 * Global requires {@code support_global_tab=ON} — see {@link XuguGlobalTemporaryTableStrategy}.
+	 */
+	@Override
+	public TemporaryTableKind getSupportedTemporaryTableKind() {
+		return TemporaryTableKind.LOCAL;
+	}
+
+	@Override
+	public TemporaryTableStrategy getLocalTemporaryTableStrategy() {
+		return XuguLocalTemporaryTableStrategy.INSTANCE;
+	}
+
+	/**
+	 * Returns global-temp DDL strategy always (strings locked for apps/tests).
+	 * Live CREATE requires {@code support_global_tab=ON} (A-SCH-005 precondition).
+	 */
+	@Override
+	public TemporaryTableStrategy getGlobalTemporaryTableStrategy() {
+		return XuguGlobalTemporaryTableStrategy.INSTANCE;
+	}
+
+	@Override
+	public String getTemporaryTableCreateCommand() {
+		return XuguLocalTemporaryTableStrategy.CREATE_COMMAND;
+	}
+
+	@Override
+	public String getTemporaryTableCreateOptions() {
+		return XuguLocalTemporaryTableStrategy.CREATE_OPTIONS;
+	}
+
+	@Override
+	public String getTemporaryTableDropCommand() {
+		return "drop table";
+	}
+
+	@Override
+	public String getTemporaryTableTruncateCommand() {
+		return "truncate table";
+	}
+
+	/**
+	 * A-SCH-008/009: Hibernate {@code StandardTableExporter} emits
+	 * {@code comment on table … is '…'} / {@code comment on column … is '…'}
+	 * when this returns true and {@link #getTableComment}/{@link #getColumnComment}
+	 * return empty (no inline suffix on CREATE).
+	 */
+	@Override
+	public boolean supportsCommentOn() {
+		return true;
+	}
+
+	/**
+	 * Empty → schema export uses separate {@code COMMENT ON} (A-SCH-008/009).
+	 * For the documented inline alternate on CREATE TABLE, use
+	 * {@link #inlineTableComment(String)} (A-SCH-010).
+	 */
+	@Override
+	public String getTableComment(String comment) {
+		return "";
+	}
+
+	@Override
+	public String getColumnComment(String comment) {
+		return "";
+	}
+
+	/**
+	 * A-SCH-010 alternate: {@code CREATE TABLE … COMMENT 'text'}
+	 * ({@code reference/object/table/create.md} {@code opt_comment}).
+	 * Not used by Hibernate schema export when {@link #supportsCommentOn()} is true.
+	 */
+	public static String inlineTableComment(String comment) {
+		return " comment '" + escapeComment( comment ) + "'";
+	}
+
+	/**
+	 * Documented inline column comment on CREATE: {@code col TYPE COMMENT 'text'}.
+	 */
+	public static String inlineColumnComment(String comment) {
+		return " comment '" + escapeComment( comment ) + "'";
+	}
+
+	/** Locked {@code COMMENT ON TABLE} form for unit/IT assertions (A-SCH-008). */
+	public static String commentOnTableSql(String tableName, String comment) {
+		return "comment on table " + tableName + " is '" + escapeComment( comment ) + "'";
+	}
+
+	/** Locked {@code COMMENT ON COLUMN} form for unit/IT assertions (A-SCH-009). */
+	public static String commentOnColumnSql(String qualifiedColumn, String comment) {
+		return "comment on column " + qualifiedColumn + " is '" + escapeComment( comment ) + "'";
+	}
+
+	/**
+	 * A-SCH-011: prefer unique constraints on CREATE TABLE (and ALTER ADD when migrating).
+	 */
+	@Override
+	public UniqueDelegate getUniqueDelegate() {
+		return uniqueDelegate;
+	}
+
+	/**
+	 * A-SCH-012: {@code ALTER TABLE … ADD CONSTRAINT … FOREIGN KEY (…) REFERENCES …}.
+	 * Matches {@code reference/object/constraints.md}. Default Dialect form is correct;
+	 * override kept for locked fragment documentation in tests.
+	 */
+	@Override
+	public String getAddForeignKeyConstraintString(
+			String constraintName,
+			String[] foreignKey,
+			String referencedTable,
+			String[] primaryKey,
+			boolean referencesPrimaryKey) {
+		final StringBuilder sb = new StringBuilder( 64 );
+		sb.append( " add constraint " )
+				.append( quote( constraintName ) )
+				.append( " foreign key (" )
+				.append( String.join( ",", foreignKey ) )
+				.append( ") references " )
+				.append( referencedTable );
+		if ( !referencesPrimaryKey ) {
+			sb.append( " (" ).append( String.join( ",", primaryKey ) ).append( ')' );
+		}
+		return sb.toString();
+	}
+
+	@Override
+	public String getAddForeignKeyConstraintString(String constraintName, String foreignKeyDefinition) {
+		return " add constraint " + quote( constraintName ) + " " + foreignKeyDefinition;
+	}
+
+	/** A-SCH-014: drop FK / unique via {@code DROP CONSTRAINT}. */
+	@Override
+	public String getDropForeignKeyString() {
+		return "drop constraint";
+	}
+
+	@Override
+	public String getDropUniqueKeyString() {
+		return "drop constraint";
+	}
+
+	/** A-SCH-013: CHECK constraints documented. */
+	@Override
+	public boolean supportsColumnCheck() {
+		return true;
+	}
+
+	@Override
+	public boolean supportsTableCheck() {
+		return true;
+	}
+
+	@Override
+	public String getCheckConstraintString(CheckConstraint checkConstraint) {
+		return super.getCheckConstraintString( checkConstraint );
+	}
+
+	/** A-SCH-012: ON DELETE CASCADE etc. documented under key_actions. */
+	@Override
+	public boolean supportsCascadeDelete() {
+		return true;
+	}
+
+	/**
+	 * A-SCH-015: {@code TRUNCATE [TABLE] name}
+	 * ({@code reference/object/table/truncate.md}).
+	 */
+	@Override
+	public String getTruncateTableStatement(String tableName) {
+		return "truncate table " + tableName;
+	}
+
+	/**
+	 * A-SCH-016: {@code CREATE [UNIQUE] INDEX … ON … (…)}
+	 * ({@code reference/object/indexes.md}).
+	 */
+	@Override
+	public String getCreateIndexString(boolean unique) {
+		return unique ? "create unique index" : "create index";
+	}
+
+	@Override
+	public boolean qualifyIndexName() {
+		return true;
+	}
+
+	// -------------------------------------------------------------------------
 	// Identifiers & keywords (A-XCUT-001/002/007)
 	// -------------------------------------------------------------------------
 
@@ -302,6 +548,7 @@ public class XuguDialect extends Dialect {
 			throws SQLException {
 		builder.setUnquotedCaseStrategy( IdentifierCaseStrategy.UPPER );
 		builder.setQuotedCaseStrategy( IdentifierCaseStrategy.MIXED );
+		builder.setNameQualifierSupport( getNameQualifierSupport() );
 		builder.applyReservedWords( getKeywords() );
 		return super.buildIdentifierHelper( builder, dbMetaData );
 	}

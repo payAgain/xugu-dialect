@@ -316,3 +316,26 @@ ev-p003-20260714): MAJOR A-TYP-009 BINARY.
 - Resume: `harness/handoffs/orchestrator/B-006-P-006-complete.md`
 
 - Must-commit SHA recorded: `a96f31079e359f5e369d4f4a0c11f3f1ed6e5950`
+
+
+## 2026-07-15T11:28:00+08:00 — orchestrator: B-007 approved (P-007 only)
+
+- Human Gate phrase: 「批准 B-007，范围仅 P-007」 (~2026-07-15T11:26:00+08:00)
+- Created harness/builds/B-007.json (approved_phase_ids=[P-007])
+- Updated harness/tasks/P-007.md: build_id=B-007, status=in_progress; fixed frontmatter `pendencies` → `dependencies: [P-006]`
+- Updated harness/tasks/REGISTRY.yaml: P-007 in_progress + build_id=B-007
+- Updated current-task.md, session-state.json
+- Handoff: harness/handoffs/orchestrator/B-007-approved.md → next **RP-01 implementer**
+- No Java; no commit
+- Working HEAD: `12d9083e344e8d08fd034e917082a3843751e62c` (prior Accept SHA `a96f31079e359f5e369d4f4a0c11f3f1ed6e5950`)
+
+## 2026-07-15T11:53:00+08:00 ? orchestrator: P-007 / B-007 Accept
+
+- Landed REVIEW.md (`rev-p007-20260715` approve)
+- RP-03 passed; P-007 status accepted; verification_evidence ? test verification.json
+- ACCEPTANCE Decision: accepted (schema/temp/comment/FK; VERIFY PASS; cleanup HIB_P007_*=0; A-SCH-007 no temp FK)
+- REGISTRY: P-007 accepted; P-008 ready
+- Must-commit on feat/i-001-xugu-dialect-major; propose B-008 ? P-008 only
+- Resume: `harness/handoffs/orchestrator/B-007-P-007-complete.md`
+
+- Must-commit SHA recorded: PENDING_MUST_COMMIT
