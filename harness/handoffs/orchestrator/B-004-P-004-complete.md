@@ -15,7 +15,7 @@
 - VERIFY PASS: `harness/evidence/test/P-004/verification-retest.json`
 - Real DB IT: 9/9 PASS (incl. `XuguLockIT.limitForUpdateComboExecutes`)
 - REGISTRY: P-004 `accepted`; P-005 `ready` (dependency satisfied)
-- Must-commit on working branch (SHA: PENDING_AFTER_MUST_COMMIT)
+- Must-commit on working branch (SHA: 7b995af4038a8fd3c41ccc90c0b89fa2a4494718)
 
 ## Explicitly not done
 

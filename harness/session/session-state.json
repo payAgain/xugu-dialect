@@ -5,7 +5,7 @@
   "status": "b004_p004_accepted_await_b005",
   "current_phase": "P-004",
   "harness_level": "Standard",
-  "last_updated": "2026-07-15T09:45:00+08:00",
+  "last_updated": "2026-07-15T09:48:00+08:00",
   "initiative_id": "I-001",
   "initiative_type": "major",
   "working_branch": "feat/i-001-xugu-dialect-major",
@@ -58,16 +58,16 @@
     "blocked_on": "Human Gate B-005 scope P-005 only"
   },
   "version_control_checkpoint": {
-    "decision": "must_commit",
-    "candidate_commit": "PENDING_AFTER_MUST_COMMIT",
+    "decision": "committed",
+    "candidate_commit": "7b995af4038a8fd3c41ccc90c0b89fa2a4494718",
     "git_init": true,
-    "committed": false,
+    "committed": true,
     "branch": "feat/i-001-xugu-dialect-major",
-    "note": "P-004 Accept must-commit this turn; no push",
-    "head": "PENDING_AFTER_MUST_COMMIT"
+    "note": "P-004 Accept must-commit; no push; propose B-005 P-005 only",
+    "head": "7b995af4038a8fd3c41ccc90c0b89fa2a4494718"
   },
   "handoff": {
-    "last_summary": "P-004 accepted after recheck approve. Propose B-005 → P-005 only. Must-commit SHA pending.",
+    "last_summary": "P-004 accepted. Must-commit 7b995af4038a8fd3c41ccc90c0b89fa2a4494718. Propose B-005 → P-005 only.",
     "resume_from": "harness/handoffs/orchestrator/B-004-P-004-complete.md"
   },
   "active_phase": "P-004",
@@ -75,5 +75,5 @@
   "proposed_phases": [
     "P-005"
   ],
-  "updated_at": "2026-07-15T09:45:00+08:00"
+  "updated_at": "2026-07-15T09:48:00+08:00"
 }
