@@ -16,7 +16,7 @@
 - VERIFY PASS: `harness/evidence/test/P-005/verification.json`
 - Real DB IT: 11/11 PASS (incl. 2 IdentitySequenceIT)
 - REGISTRY: P-005 `accepted`; P-006 `ready` (dependency satisfied)
-- Must-commit on working branch (SHA: PENDING_MUST_COMMIT)
+- Must-commit on working branch (SHA: 6864a390032a9352056f8963434a34f34a390f96)
 
 ## Explicitly not done
 

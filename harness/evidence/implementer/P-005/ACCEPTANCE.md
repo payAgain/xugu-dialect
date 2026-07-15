@@ -66,7 +66,7 @@ Reviewer MINOR (optional, non-blocking): polish cite to `reference/function/syst
 ## Version control checkpoint
 
 - Branch: `feat/i-001-xugu-dialect-major`
-- Candidate commit: `PENDING_MUST_COMMIT`
+- Candidate commit: `6864a390032a9352056f8963434a34f34a390f96`
 - Deferred reason when no commit: N/A (must-commit on Accept)
 
 ## Acceptance decision

@@ -293,4 +293,4 @@ ev-p003-20260714): MAJOR A-TYP-009 BINARY.
 - Must-commit on feat/i-001-xugu-dialect-major; propose B-006 → P-006 only
 - Resume: `harness/handoffs/orchestrator/B-005-P-005-complete.md`
 
-- Must-commit SHA recorded: `PENDING_MUST_COMMIT`
+- Must-commit SHA recorded: `6864a390032a9352056f8963434a34f34a390f96`

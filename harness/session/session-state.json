@@ -55,12 +55,12 @@
   },
   "version_control_checkpoint": {
     "decision": "must_commit_on_accept",
-    "candidate_commit": "PENDING_MUST_COMMIT",
+    "candidate_commit": "6864a390032a9352056f8963434a34f34a390f96",
     "git_init": true,
     "committed": true,
     "branch": "feat/i-001-xugu-dialect-major",
     "note": "P-005 Accept must-commit; no push",
-    "head": "PENDING_MUST_COMMIT"
+    "head": "6864a390032a9352056f8963434a34f34a390f96"
   },
   "handoff": {
     "last_summary": "P-005 accepted. Propose B-006 scope P-006 only (SQL functions).",

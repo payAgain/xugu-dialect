@@ -8,7 +8,7 @@ b005_accepted_await_b006
 
 ## Active Batch / Tasks
 - Batch: **B-005** complete (scope **P-005 only**)
-- P-005 status: **accepted** (`build_id=B-005`; SHA `PENDING_MUST_COMMIT`)
+- P-005 status: **accepted** (`build_id=B-005`; SHA `6864a390032a9352056f8963434a34f34a390f96`)
 - P-006 status: **ready** (await Human Gate **B-006** approve, scope P-006 only)
 - P-007…P-011 still blocked / unapproved
 
