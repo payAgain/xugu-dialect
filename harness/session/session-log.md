@@ -409,4 +409,4 @@ Independent re-verify of DialectResolver SPI + explicit dialect. Offline `mvn -q
 - Must-commit on feat/i-001-xugu-dialect-major; propose B-009 → P-009 only
 - Resume: `harness/handoffs/orchestrator/B-008-P-008-complete.md`
 
-- Must-commit SHA recorded: PENDING_MUST_COMMIT
+- Must-commit SHA recorded: f9e16294aaf07ea8ca3b192362b5a8cd4e4d6374

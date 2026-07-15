@@ -15,7 +15,7 @@
 - VERIFY PASS: `harness/evidence/test/P-008/verification.json`
 - Real DB IT: 17/17 PASS (incl. XuguDialectResolverIT 3/3); leftover probe `HIB_P008_*` = 0; jar services FOUND
 - REGISTRY: P-008 `accepted`; P-009 `ready` (dependency satisfied)
-- Must-commit on working branch (SHA: PENDING_MUST_COMMIT)
+- Must-commit on working branch (SHA: f9e16294aaf07ea8ca3b192362b5a8cd4e4d6374)
 
 ## Explicitly not done
 

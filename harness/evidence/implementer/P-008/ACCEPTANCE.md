@@ -66,7 +66,7 @@ Reviewer MINOR (optional, non-blocking): SPI vs explicit dialect prose can wait 
 ## Version control checkpoint
 
 - Branch: `feat/i-001-xugu-dialect-major`
-- Candidate commit: PENDING_MUST_COMMIT
+- Candidate commit: f9e16294aaf07ea8ca3b192362b5a8cd4e4d6374
 - Deferred reason when no commit: N/A (must-commit on Accept)
 
 ## Acceptance decision

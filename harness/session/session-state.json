@@ -5,7 +5,7 @@
   "status": "p008_accepted_propose_b009",
   "current_phase": "P-008",
   "harness_level": "Standard",
-  "last_updated": "2026-07-15T14:15:00+08:00",
+  "last_updated": "2026-07-15T14:20:00+08:00",
   "initiative_id": "I-001",
   "initiative_type": "major",
   "working_branch": "feat/i-001-xugu-dialect-major",
@@ -60,13 +60,13 @@
     "blocked_on": "human_gate_b009_approval"
   },
   "version_control_checkpoint": {
-    "decision": "must_commit",
-    "candidate_commit": "PENDING_MUST_COMMIT",
+    "decision": "committed",
+    "candidate_commit": "f9e16294aaf07ea8ca3b192362b5a8cd4e4d6374",
     "git_init": true,
-    "committed": false,
+    "committed": true,
     "branch": "feat/i-001-xugu-dialect-major",
-    "note": "Accept turn must-commit for P-008 DialectResolver SPI; no push.",
-    "head": "c236aa17c1011a5da7e6feb506afa525fbfd5ef7"
+    "note": "P-008 Accept must-commit recorded; no push.",
+    "head": "f9e16294aaf07ea8ca3b192362b5a8cd4e4d6374"
   },
   "handoff": {
     "last_summary": "P-008 accepted. Propose B-009 scope P-009 only (Spring Boot demo).",
@@ -77,5 +77,5 @@
   "approved_phases": [
     "P-008"
   ],
-  "updated_at": "2026-07-15T14:15:00+08:00"
+  "updated_at": "2026-07-15T14:20:00+08:00"
 }
