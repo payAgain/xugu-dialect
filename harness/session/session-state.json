@@ -50,12 +50,12 @@
   },
   "version_control_checkpoint": {
     "decision": "p001_accepted_awaiting_b002",
-    "candidate_commit": "ef69b7c0c147c535b9882d4d17e92c8623de484c",
+    "candidate_commit": "25302b5b997b6839bef317c140803c24ff733c55",
     "git_init": true,
     "committed": true,
     "branch": "feat/i-003-production-capability-parity",
     "note": "P-001 accepted; propose B-002 P-002 only",
-    "head": "ef69b7c0c147c535b9882d4d17e92c8623de484c",
+    "head": "25302b5b997b6839bef317c140803c24ff733c55",
     "base_branch_at_fork": "fix/i-002-hql-pagination-sequence-metadata"
   },
   "handoff": {
