@@ -61,15 +61,15 @@
 
 | ID | Domain | Capability | Hibernate/Dialect surface (what apps expect) | Xugu doc ref | Status | Target Phase | Acceptance hint |
 |---|---|---|---|---|---|---|---|
-| A-PAG-001 | Pagination | LIMIT only | `LimitHandler` limit without offset | `reference/sql/select/resultset-restricted.md` | 可实现 | P-004 | ✅ `LIMIT ?` via XuguLimitHandler; with locks appends after FOR UPDATE (XuGu grammar) |
-| A-PAG-002 | Pagination | LIMIT + OFFSET | `supportsLimitOffset` | `reference/sql/select/resultset-restricted.md` | 可实现 | P-004 | ✅ stable form `LIMIT count OFFSET offset`; with locks: FOR UPDATE before LIMIT |
+| A-PAG-001 | Pagination | LIMIT only | `LimitHandler` + HQL/Criteria `SqlAstTranslator` limit without offset | `reference/sql/select/resultset-restricted.md` | 可实现 | P-004 | ✅ `LIMIT ?` via XuguLimitHandler **and** `XuguSqlAstTranslator` (I-002/P-001); with locks: FOR UPDATE → LIMIT (XuGu grammar) |
+| A-PAG-002 | Pagination | LIMIT + OFFSET | `supportsLimitOffset` / HQL `setFirstResult`+`setMaxResults` | `reference/sql/select/resultset-restricted.md` | 可实现 | P-004 | ✅ stable form `LIMIT count [OFFSET offset]` (**not** ANSI `OFFSET…FETCH`); I-002/P-001 AST path; with locks: **FOR UPDATE → LIMIT → WAIT** |
 | A-PAG-003 | Pagination | Parameter binding | Limit/offset as JDBC parameters | `reference/sql/select/resultset-restricted.md` (`?` / named) | 可实现 | P-004 | ✅ bind markers; reverse order count→offset |
 | A-PAG-004 | Pagination | TOP syntax | Alternate top-N | `reference/sql/select/resultset-restricted.md` (#top) | 延后 | later | Prefer LIMIT for Hibernate; TOP not required |
-| A-PAG-005 | Pagination | ANSI FETCH FIRST | `FETCH FIRST n ROWS ONLY` | — (not documented under resultset-restricted) | 文档不允许 | P-004 | ✅ not emitted (unit + IT assert) |
+| A-PAG-005 | Pagination | ANSI FETCH FIRST | `FETCH FIRST n ROWS ONLY` | — (not documented under resultset-restricted) | 文档不允许 | P-004 | ✅ not emitted (unit + IT assert); I-002/P-001 closed E19132 `unexpected OFFSET` on HQL page path |
 | A-PAG-006 | Pagination | ROWNUM pagination | Oracle-style ROWNUM wrappers | `reference/sql/select/select.md` (#ROWNUM) | 延后 | later | Documented but LIMIT preferred; revisit only if LIMIT blocked |
-| A-LCK-001 | Locks | FOR UPDATE | Pessimistic write lock clause | `reference/sql/select/select.md` (#opt_for_update_clause) | 可实现 | P-004 | ✅ `for update` + IT |
+| A-LCK-001 | Locks | FOR UPDATE | Pessimistic write lock clause | `reference/sql/select/select.md` (#opt_for_update_clause) | 可实现 | P-004 | ✅ `for update` + IT; combo with page: FOR UPDATE before LIMIT (LimitHandler + SqlAstTranslator) |
 | A-LCK-002 | Locks | FOR UPDATE OF columns | Optional column list | `reference/sql/select/select.md` | 可实现 | P-004 | ✅ `for update of …` + IT |
-| A-LCK-003 | Locks | Lock wait / NOWAIT | `LockOptions.NOWAIT` / timeout | `reference/sql/select/select.md` (`opt_wait`: NOWAIT / WAIT / WAIT ms); also `reference/object/table/lock.md` | 可实现 | P-004 | ✅ ms pass-through; IT smoke |
+| A-LCK-003 | Locks | Lock wait / NOWAIT | `LockOptions.NOWAIT` / timeout | `reference/sql/select/select.md` (`opt_wait`: NOWAIT / WAIT / WAIT ms); also `reference/object/table/lock.md` | 可实现 | P-004 | ✅ ms pass-through; with page: trailing WAIT after LIMIT (I-002/P-001 IT) |
 | A-LCK-004 | Locks | SKIP LOCKED | `LockOptions.SKIP_LOCKED` | — (no SKIP LOCKED in select FOR UPDATE grammar) | 文档不允许 | P-004 | ✅ `supportsSkipLocked=false`; no keyword |
 | A-LCK-005 | Locks | FOR SHARE / read lock | Pessimistic read share clause | — (FOR UPDATE / FOR READ ONLY only) | 文档不允许 | P-004 | ✅ 文档不允许 retained; Hibernate shim only — no FOR SHARE; PESSIMISTIC_READ→exclusive FOR UPDATE (not share); concurrent readers may block |
 | A-LCK-006 | Locks | LOCK TABLE (explicit) | Rare Dialect helper for table locks | `reference/object/table/lock.md` | 延后 | later | Not required for JPA LockMode path |
@@ -86,7 +86,7 @@
 | A-IDN-004 | Identity | Insert with identity | Insert omitting identity column | `reference/object/table/create.md` | 可实现 | P-005 | ✅ INSERT omits id column; id backfilled |
 
 | A-IDN-005 | Identity | Identity mode session params | Dialect-specific identity_mode knobs | `reference/system-configuration-parameter/session-parameter/identity_mode.md`, `reference/system-configuration-parameter/xugu.ini/compatible/def_identity_mode.md` | 延后 | later | Revisit if generated-key edge cases appear |
-| A-SEQ-001 | Sequence | CREATE SEQUENCE | `SequenceSupport.getCreateSequenceString` | `reference/object/sequence.md` | 可实现 | P-005 | ✅ `create sequence … [start with N increment by M]`; I-002/P-002 also wires `getQuerySequencesString`→`all_sequences` for hbm2ddl validate |
+| A-SEQ-001 | Sequence | CREATE SEQUENCE | `SequenceSupport.getCreateSequenceString` | `reference/object/sequence.md` | 可实现 | P-005 | ✅ `create sequence … [start with N increment by M]`; I-002/P-002: `getQuerySequencesString`→`select * from all_sequences` + Xugu extractor (`seq_name`/`min_val`/`max_val`/`step_val`) so `hbm2ddl.auto=validate` sees existing sequences |
 | A-SEQ-002 | Sequence | DROP SEQUENCE | Drop sequence DDL | `reference/object/sequence.md` | 可实现 | P-005 | ✅ `drop sequence name` |
 | A-SEQ-003 | Sequence | NEXTVAL | `nextval` for SEQUENCE generator | `reference/object/sequence.md`, `reference/function/sequence-functions/nextval.md` | 可实现 | P-005 | ✅ Locked: `select seq.nextval from dual` (not internal NEXTVAL()) |
 | A-SEQ-004 | Sequence | CURRVAL | Current value function | `reference/object/sequence.md`, `reference/function/sequence-functions/currval.md` | 可实现 | P-005 | ✅ `currval('name')` after NEXTVAL same session |

@@ -2,53 +2,44 @@ schema_version: 1
 role: implementer
 phase_id: P-003
 build_id: B-003
-initiative_id: I-001
-invocation_id: impl-p003-fix-binary-20260714
-step_id: RP-02b
-status: passed
-required: true
-completed_at: "2026-07-14T18:10:00+08:00"
-purpose: fix MAJOR A-TYP-009 BINARY DDL to bare binary + SchemaExport IT
+initiative_id: I-002
+invocation_id: impl-p003-20260716
+step_id: RP-01
+status: completed_awaiting_test_review
+updated_at: "2026-07-16T09:40:00+08:00"
 
-inputs:
-  - harness/handoffs/orchestrator/B-003-P-003-rp04-request-changes.md
-  - harness/evidence/reviewer/P-003/REVIEW.md
-  - E:\\Work\\docs\\content\\reference\\sql\\datatype\\binary.md
-  - dialect/src/main/java/com/xugu/dialect/XuguDialect.java
+summary: >
+  Aligned matrix/docs/user-guide/contract with P-001 HQL SqlAstTranslator pagination
+  (LIMIT/OFFSET, FOR UPDATE→LIMIT→WAIT) and P-002 all_sequences validate.
+  No dialect Java changes. SeqProbe.java removed. xugu-hibernate-test re-run N/A.
+  Version 7.4.5.Final. No Accept/commit yet.
 
-outputs:
-  - dialect/src/main/java/com/xugu/dialect/XuguDialect.java
-  - dialect/src/test/java/com/xugu/dialect/XuguDialectTest.java
-  - dialect/src/test/java/com/xugu/dialect/it/XuguBinarySchemaExportIT.java
-  - dialect/src/test/java/com/xugu/dialect/it/entities/P003BinaryEntity.java
-  - contracts/xugu-dialect.p003-types-ddl.contract.md
-  - harness/evidence/implementer/P-003/NOTES.md
-  - harness/handoffs/implementer/P-003.yaml
-  - harness/tasks/P-003.md (RP-02 note + RP-02b; RP-04 remains failed)
+delivered:
+  - contracts/feature-matrix-definition-a.md
+  - contracts/xugu-dialect.contract.md
+  - docs/user-guide/05-troubleshooting.md
+  - docs/user-guide/04-feature-matrix.md
+  - docs/user-guide/README.md
+  - docs/feature-matrix-definition-a.md
+  - README.md
+  - harness/evidence/implementer/P-003/*
+  - SeqProbe.java (deleted)
 
-fix:
-  id: A-TYP-009
-  mapping:
-    BINARY: binary
-    VARBINARY: binary
-    LONGVARBINARY: blob
-    LONG32VARBINARY: blob
-  length_limit: "getMaxVarbinaryLength()=65536 retained"
-  schema_export_it: XuguBinarySchemaExportIT
-  docs_ssot: "bare BINARY only in binary.md"
+validation:
+  - "docs-only; Maven verify deferred to RP-02 test-p003-20260716"
 
-verification:
-  test_offline: { command: "mvn -q test", exit_code: 0 }
-  test_integration:
-    command: 'mvn -q test "-Dxugu.run.integration=true"'
-    exit_code: 0
-    real_db: true
-    observed_create: "create table HIB_P003_BINARY_PROBE (id integer not null, payload binary not null, primary key (id))"
+observed:
+  matrix_docs_aligned: YES
+  xugu_hibernate_test_rerun: N/A
+  dialect_rewrites: none
 
-forbidden_reminder:
-  - no Accept
-  - no git commit / tag / push
-  - RP-04 stays failed until re-test + re-review
+not_done:
+  - Accept
+  - git commit
+  - independent RP-02 test
+  - RP-03 reviewer
 
-next_step: independent test re-verify then reviewer RP-04 re-review
-blocker: null
+next:
+  - Dispatch RP-02 test-p003-20260716
+  - Then RP-03 rev-p003-20260716
+  - Accept + must-commit only after both pass

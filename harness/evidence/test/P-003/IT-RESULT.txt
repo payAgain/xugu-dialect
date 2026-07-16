@@ -1,11 +1,27 @@
-﻿real_db_it_passed=true
-exit=0
-url=jdbc:xugu://127.0.0.1:5138/SYSTEM?compatiblemode=NONE
-it_executed=5
-it_failed=0
-it_skipped_when_gate_on=0
-it_skipped_offline=5
-unit_tests=7
-verdict=PASS
-invocation_id=test-p003-20260714
-ts=2026-07-14T17:55:27+08:00
+﻿P-003 Independent Test IT Result (test-p003-20260716)
+=====================================================
+Gate: -Dxugu.run.integration=true
+DB: jdbc:xugu://127.0.0.1:5138/SYSTEM?...&compatiblemode=NONE
+
+Commands:
+  mvn -q -DskipTests package                           → EXIT 0
+  mvn -q test                                          → EXIT 0
+  mvn -q test -Dxugu.run.integration=true              → EXIT 0
+  verify.py --phase P-003 --evidence harness/evidence/test/P-003/verification.json → VERIFY PASS
+  harness_check.py                                     → HARNESS_CHECK PASS
+  branch_check.py                                      → BRANCH_CHECK PASS
+
+Live SQL sample (from integration log):
+  select … from HIB_P001_HQL_PAGE … for update of … limit ? offset ?
+  select … from HIB_P001_HQL_PAGE … for update of … limit ? offset ? wait 2000
+  P-002 sequence validate path exercised (create/drop HIB_P002_SEQ_GEN)
+
+xugu-hibernate-test external re-run: N/A
+
+Logs:
+  harness/evidence/test/P-003/mvn-package.log
+  harness/evidence/test/P-003/mvn-test-offline.log
+  harness/evidence/test/P-003/mvn-test-integration.log
+  harness/evidence/test/P-003/verify.log
+  harness/evidence/test/P-003/harness-check.log
+  harness/evidence/test/P-003/branch-check.log

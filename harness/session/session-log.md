@@ -1,3 +1,49 @@
+## Entry: P-003 accepted — ask Human Gate Accept I-002
+
+### Summary
+RP-01 `impl-p003-20260716`：矩阵/排障/契约与 P-001+P-002 交付行为对齐；`SeqProbe.java` 删除；xugu-hibernate-test **N/A**。RP-02 `test-p003-20260716` VERIFY PASS + harness_check/branch_check PASS。RP-03 `rev-p003-20260716` **approve**。ACCEPTANCE Decision **accepted**。REGISTRY: P-003 `accepted`。Must-commit on working branch。Next: Human Gate **是否 Accept Initiative I-002？**（Archive 可选；Ship 另授权）。
+
+### Observed behavior
+- Docs state: HQL → `LIMIT … [OFFSET …]`；锁序 FOR UPDATE→LIMIT→WAIT；validate 读 `all_sequences`
+- Full gated IT still green (P-001/P-002 paths exercised)
+
+### Files Created or Updated
+- contracts + docs/user-guide + README
+- harness/evidence/**/P-003/, handoffs
+- harness/tasks/P-003.md, REGISTRY.yaml
+- current-task.md, session/*
+- harness/handoffs/orchestrator/B-003-P-003-complete.md, I-002-accept-ask.md
+
+### Validation
+- `mvn -q -DskipTests package` EXIT 0
+- `mvn -q test` EXIT 0
+- `mvn -q test -Dxugu.run.integration=true` EXIT 0
+- `verify.py --phase P-003` → VERIFY PASS
+- Reviewer: approve
+- Must-commit SHA: *(pending this commit)*
+
+### Next Steps
+1. Human Gate：是否 Accept Initiative I-002？
+2. 禁止 Ship / 升版本直至单独授权
+
+---
+## Entry: B-003 APPROVED — P-003 in_progress (RP-01 starting)
+
+### Summary
+Human Gate：「批准 B-003，范围仅 P-003」(~2026-07-16T09:32+08:00)。Orchestrator 将 `B-003.json` 覆盖为 I-002 / approved / P-003 only；P-003 `in_progress`；RP-01 `impl-p003-20260716` 启动。范围：矩阵/用户指南/排障与 P-001+P-002 交付行为对齐；全量 verify；Initiative Accept 材料（不含 Ship）。版本保持 7.4.5.Final；禁止 Ship / 旁路移植 / 官方 content 写入。
+
+### Files Created or Updated
+- harness/builds/B-003.json (I-002 overwrite)
+- harness/tasks/P-003.md, REGISTRY.yaml
+- harness/handoffs/orchestrator/B-003-approved.md
+- current-task.md, session/*
+
+### Next Steps
+1. RP-01 implementer docs/matrix polish
+2. RP-02 test → RP-03 reviewer
+3. Accept P-003 + must-commit；请 Human Gate Accept I-002
+
+---
 ## Entry: P-002 accepted — propose B-003 (P-003 only)
 
 ### Summary

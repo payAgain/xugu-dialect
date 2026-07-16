@@ -137,6 +137,7 @@ Domains aligned to later Phases:
 - Artifact version **tracks the adapted Hibernate version** (currently `7.4.5.Final`).
 - Do **not** use an unrelated `1.0.0`-style product version for this artifact while adapting Hibernate 7.4.5.
 - When a future Initiative targets another Hibernate line, GAV version and Charter/ADR must be updated together.
+- **I-002 hotfix (behavior-only):** HQL/Criteria pagination (`XuguSqlAstTranslator` → `LIMIT … [OFFSET …]`, lock order FOR UPDATE → LIMIT → WAIT) and sequence catalog for `hbm2ddl validate` (`getQuerySequencesString` → `all_sequences`) ship under the **same** GAV `7.4.5.Final` — no version bump. See matrix A-PAG-* / A-SEQ-001 and user-guide troubleshooting.
 
 ---
 

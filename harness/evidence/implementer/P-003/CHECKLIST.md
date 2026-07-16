@@ -1,14 +1,14 @@
-# P-003 Implementer checklist (RP-02)
+# P-003 Implementer Checklist
 
-1. [x] Expand `com.xugu.dialect.XuguDialect` only from `Dialect` (no MySQL/Oracle extends).
-2. [x] Implement `contributeTypes` / `columnType` mappings for **A-TYP-001…013**.
-3. [x] Implement CAST hooks for **A-TYP-019**.
-4. [x] Wire DDL helpers for **A-DDL-001…006** (defaults OK only if IT proves Xugu accepts them).
-5. [x] Identifier helper UPPER + quote `"` for **A-XCUT-001/002**; keywords for **A-XCUT-007**; JDBC TCL smoke for **A-XCUT-004**.
-6. [x] Optional helpers only under `com.xugu.dialect` / `com.xugu.dialect.internal`.
-7. [x] Add gated IT (`xugu.run.integration` / `XUGU_RUN_IT`); default `mvn test` green offline.
-8. [x] Run IT **with flag ON** against real XuguDB; prove DB reachable.
-9. [x] Cite Xugu doc paths for TIMESTAMP vs DATETIME (NOTES).
-10. [x] Sync matrix acceptance hints for P-003 rows.
-11. [x] Do **not** read `E:\Work\java\hibernate-dialect`; do **not** rewrite docs content.
-12. [x] Leave must-commit to orchestrator/Human Gate; no commit this turn.
+- [x] Matrix A-PAG-* annotated for SqlAstTranslator / LIMIT OFFSET (not ANSI FETCH)
+- [x] Matrix A-LCK-* annotated for FOR UPDATE → LIMIT → WAIT
+- [x] Matrix A-SEQ-001 annotated for all_sequences + extractor / validate
+- [x] Troubleshooting: E19132 unexpected OFFSET + missing sequence (fixed in 7.4.5.Final same GAV)
+- [x] User-guide examples / index updated
+- [x] Contract §8 I-002 behavior-only note
+- [x] README one-liner
+- [x] No new Definition A capability IDs
+- [x] SeqProbe.java deleted (if present)
+- [x] xugu-hibernate-test re-run: **N/A** (explicit in NOTES)
+- [x] Version remains 7.4.5.Final
+- [ ] Independent RP-02 / RP-03 / Accept (orchestrator)

@@ -2,95 +2,37 @@ schema_version: 1
 role: test
 phase_id: P-003
 build_id: B-003
-initiative_id: I-001
-invocation_id: test-p003-retest-20260714
-prior_invocation_id: test-p003-20260714
-step_id: RP-03
+initiative_id: I-002
+invocation_id: test-p003-20260716
+step_id: RP-02
 status: passed
-required: true
-completed_at: "2026-07-14T18:16:24+08:00"
-purpose: independent re-verify after A-TYP-009 BINARY fix (bare binary + SchemaExport IT)
+updated_at: "2026-07-16T09:40:00+08:00"
 
-inputs:
-  - harness/tasks/P-003.md
-  - harness/handoffs/implementer/P-003.yaml
-  - harness/evidence/implementer/P-003/NOTES.md
-  - dialect/src/main/java/com/xugu/dialect/XuguDialect.java
-  - dialect/src/test/java/com/xugu/dialect/**
-  - agents/test.md
+summary: >
+  Full offline + gated IT + verify.py VERIFY PASS; harness_check PASS;
+  branch_check PASS on fix/i-002-hql-pagination-sequence-metadata.
+  Docs-only Phase; no product code changes by test. xugu-hibernate-test N/A.
 
-outputs:
-  - harness/evidence/test/P-003/TEST-REPORT-RETEST.md
-  - harness/evidence/test/P-003/verification-retest.json
-  - harness/evidence/test/P-003/mvn-test-integration-retest.log
-  - harness/evidence/test/P-003/surefire-summary-retest.txt
-  - harness/evidence/test/P-003/IT-RESULT-RETEST.txt
-  - harness/evidence/test/P-003/CHECKLIST-RETEST.md
-  - harness/handoffs/test/P-003.yaml
+validation:
+  - "mvn -q -DskipTests package → EXIT 0"
+  - "mvn -q test → EXIT 0"
+  - "mvn -q test -Dxugu.run.integration=true → EXIT 0"
+  - "verify.py --phase P-003 → VERIFY PASS"
+  - "harness_check.py → PASS"
+  - "branch_check.py → PASS"
 
-verification:
-  test_offline:
-    command: "mvn -q test"
-    exit_code: 0
-    it_skipped: 6
-    unit_passed: 7
-  test_integration:
-    command: 'mvn -q test "-Dxugu.run.integration=true"'
-    exit_code: 0
-    real_db: true
-    it_executed: 6
-    it_failed: 0
-    it_skipped: 0
-    unit_passed: 7
-    url: "jdbc:xugu://127.0.0.1:5138/SYSTEM?...&compatiblemode=NONE"
-  verify:
-    command: "python harness/scripts/verify.py --phase P-003 --evidence harness/evidence/test/P-003/verification-retest.json"
-    exit_code: 0
-    status: "VERIFY PASS"
+evidence:
+  - harness/evidence/test/P-003/TEST-REPORT.md
+  - harness/evidence/test/P-003/CHECKLIST.md
+  - harness/evidence/test/P-003/IT-RESULT.txt
+  - harness/evidence/test/P-003/verification.json
 
-a_typ_009_binary:
-  result: passed
-  unit_column_type: "binary"
-  schema_export_observed_sql: "create table HIB_P003_BINARY_PROBE (id integer not null, payload binary not null, primary key (id))"
-  binary_with_length: false
-  it: XuguBinarySchemaExportIT
-  evidence: harness/evidence/test/P-003/mvn-test-integration-retest.log
+observed:
+  full_verify_pass: PASS
+  matrix_docs_spot_check: PASS
+  xugu_hibernate_test_rerun: N/A
+  version: 7.4.5.Final
 
-spot_checks:
-  xugu_dialect_extends: "org.hibernate.dialect.Dialect"
-  extends_mysql_or_oracle: false
-  timestamp_choice: "TIMESTAMP"
-  it_gate: "XuguITGate + Assumptions.assumeTrue; pom default xugu.run.integration=false"
-  real_db_no_mock: true
-
-observed_flows:
-  - id: type-mapping-roundtrip-real-db
-    result: passed
-    evidence: harness/evidence/test/P-003/mvn-test-integration-retest.log
-  - id: ddl-generation-matches-xugu-docs
-    result: passed
-    observed_sql_ddl: "create table HIB_P003_DDL_PROBE (id integer not null, name varchar(64) not null, primary key (id))"
-    observed_sql_binary: "create table HIB_P003_BINARY_PROBE (id integer not null, payload binary not null, primary key (id))"
-    evidence: harness/evidence/test/P-003/mvn-test-integration-retest.log
-
-it_counts:
-  offline: { total: 13, unit: 7, it: 6, it_skipped: 6, failures: 0 }
-  integration: { total: 13, unit: 7, it: 6, it_executed: 6, it_skipped: 0, failures: 0 }
-
-notes_for_reviewer: |
-  Independent RETEST after impl-p003-fix-binary-20260714.
-  Offline test PASS (6 IT skipped); IT with -Dxugu.run.integration=true
-  against live XuguDB PASS (6 IT); verify PASS (verification-retest.json).
-  SchemaExport emits bare binary: payload binary not null (no binary(n)).
-  Clears RP-04 MAJOR A-TYP-009 from test perspective. No product code changes by test.
-
-forbidden_reminder:
-  - no product code rewrite by test unless harness fix required
-  - no MySQLDialect / OracleDialect inheritance
-  - no mock when gate ON / DB unreachable
-  - no git commit / tag / push by test
-
-next_step: RP-04 reviewer re-review (risk_score=9, required)
-blocker: null
-real_db_it_passed: true
-verdict: PASS
+next:
+  - Dispatch RP-03 rev-p003-20260716
+  - Accept + must-commit after reviewer approve

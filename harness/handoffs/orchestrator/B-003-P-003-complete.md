@@ -1,31 +1,49 @@
-# Handoff: B-003 / P-003 complete — propose B-004
+# Handoff: B-003 / P-003 complete — ask Initiative Accept
 
-**From:** orchestrator  
-**To:** Human Gate  
-**When:** 2026-07-14T18:25:00+08:00  
-**Branch:** `feat/i-001-xugu-dialect-major`
+> Role: orchestrator  
+> Initiative: I-002 (hotfix)  
+> Updated: 2026-07-16T09:45:00+08:00
 
-## Completed
+## Summary
 
-- P-003 role_pipeline complete: RP-01..RP-04 all `passed`
-  - RP-04 recheck **approve** (`rev-p003-recheck-20260714`); MAJOR A-TYP-009 CLOSED (bare `binary`)
-  - Evidence: `harness/evidence/reviewer/P-003/REVIEW-RECHECK.md`
-- ACCEPTANCE Decision: `accepted` — `harness/evidence/implementer/P-003/ACCEPTANCE.md`
-- VERIFY PASS: `harness/evidence/test/P-003/verification-retest.json`
-- Real DB IT: 6/6 PASS (incl. `XuguBinarySchemaExportIT`)
-- REGISTRY: P-003 `accepted`; P-004 `ready` (dependency satisfied)
-- Must-commit on working branch (SHA: 006c88d153388f276782310a93c50a3784664575)
+B-003 (P-003 only) completed: docs/matrix/user-guide aligned with P-001 HQL pagination + P-002 sequence validate; full VERIFY PASS; reviewer **approve**; ACCEPTANCE **accepted**. Must-commit on working branch (**no push / tag / Ship**).
+
+## Pipeline
+
+| Step | ID | Result |
+|---|---|---|
+| RP-01 | `impl-p003-20260716` | passed |
+| RP-02 | `test-p003-20260716` | VERIFY PASS |
+| RP-03 | `rev-p003-20260716` | approve |
+
+## VERIFY pointers
+
+- `harness/evidence/test/P-003/verification.json` → **PASS**
+- `harness_check.py` → **HARNESS_CHECK PASS**
+- `branch_check.py` → **BRANCH_CHECK PASS** (`fix/i-002-hql-pagination-sequence-metadata`)
+
+## I-002 Phase summary (for Human Gate Initiative Accept)
+
+| Phase | Focus | Key SHA | Status |
+|---|---|---|---|
+| P-001 | `XuguSqlAstTranslator` HQL/Criteria → `LIMIT … [OFFSET …]`; lock order FOR UPDATE→LIMIT→WAIT | `63a7d6001dbd6845ea10520905c60bb56d2e3d9c` | accepted |
+| P-002 | `getQuerySequencesString`→`all_sequences` + extractor; schema validate IT | `908e7f665c3317beef3665063ebc0d02efc6ed5f` | accepted |
+| P-003 | Docs/matrix/troubleshooting alignment + Accept prep | *(P-003 must-commit SHA)* | accepted |
+
+Version remains **7.4.5.Final** (behavior fix, no bump).
+
+## External evidence
+
+`E:\Work\java\xugu-hibernate-test` re-run: **N/A** (non-unique if done later; this repo IT is primary).
+
+## Next ask for Human Gate
+
+1. **是否 Accept Initiative I-002？**
+2. Accept 后可选：是否 Archive I-002？
+3. **Ship 仍须单独授权**（本 handoff **不**授权 tag/push/release）
 
 ## Explicitly not done
 
-- No P-004 pagination/lock implementation
-- No `git push` / tag / release
-- B-004 not approved
-
-## Ask Human Gate
-
-**是否批准 B-004，范围仅 P-004（pagination & locks）？**
-
-## Resume From
-
-After B-004 approval: materialize `harness/builds/B-004.json`, set P-004 `in_progress` / `build_id=B-004`, dispatch P-004 role_pipeline (implementer → test → reviewer; risk=8).
+- Initiative Accept (await Human Gate)
+- Archive
+- Ship / tag / push

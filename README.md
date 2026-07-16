@@ -2,6 +2,8 @@
 
 Hibernate **7.4.5** dialect for **XuguDB**, plus a Spring Boot demo and project docs.
 
+I-002 hotfix (same GAV **7.4.5.Final**): HQL/Criteria pagination emits `LIMIT … [OFFSET …]` (not ANSI FETCH); `hbm2ddl validate` reads sequences from `all_sequences`.
+
 ## Start here
 
 - **User guide:** [docs/user-guide/README.md](docs/user-guide/README.md)

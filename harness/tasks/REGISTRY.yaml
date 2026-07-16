@@ -1,7 +1,7 @@
 schema_version: 1
 charter_version: "1.0.0"
 initiative_id: I-002
-updated: "2026-07-16T09:25:00+08:00"
+updated: "2026-07-16T09:45:00+08:00"
 # Phase progress index. IDs: I-00x / P-00x / B-00x — see protocol/references/glossary.md
 # I-001 Phases P-001…P-011 archived with Initiative; packets P-004…P-011 remain on disk for history.
 # I-002 restarts P/B numbering per skills/initiative.md.
@@ -24,8 +24,8 @@ tasks:
     dependencies: [P-001]
   - task_id: P-003
     title: "文档矩阵勘误与 Accept 准备"
-    status: ready
-    build_id: null
+    status: accepted
+    build_id: B-003
     packet: harness/tasks/P-003.md
     acceptance_doc: harness/evidence/orchestrator/P-003/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"

@@ -5,6 +5,8 @@
 **Date:** 2026-07-16  
 **Version:** **7.4.5.Final** (unchanged)
 
+- Decision: `accepted`
+
 ## Pipeline
 
 | Step | Invocation | Status |

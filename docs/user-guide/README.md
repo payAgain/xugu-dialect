@@ -15,7 +15,7 @@
 2. **配置** — 显式 dialect 或 SPI；Boot 强制 `hibernate.version`；`XUGU_*` + `compatiblemode=NONE` → [02-configuration.md](02-configuration.md)
 3. **验证** — `mvn verify` / demo `spring-boot:run` / 集成开关 → [03-verify.md](03-verify.md)
 4. **能力边界** — 定义 A 矩阵（可实现 / 文档不允许 / 延后）→ [04-feature-matrix.md](04-feature-matrix.md)
-5. **排障** — LIMIT/FOR UPDATE、BINARY、SPI、连库失败 → [05-troubleshooting.md](05-troubleshooting.md)
+5. **排障** — LIMIT/FOR UPDATE、E19132 OFFSET、missing sequence、BINARY、SPI、连库失败 → [05-troubleshooting.md](05-troubleshooting.md)
 
 ## Index
 

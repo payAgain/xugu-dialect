@@ -37,7 +37,9 @@
 
 | ID | Status | Integrator takeaway |
 |---|---|---|
-| A-PAG-001 / A-LCK-001 | 可实现 | 分页 + `FOR UPDATE` 可用；组合时语法顺序为虚谷要求（见排障） |
+| A-PAG-001 / A-PAG-002 | 可实现 | HQL/Criteria 分页走 `SqlAstTranslator` → `LIMIT … [OFFSET …]`（非 ANSI FETCH）；带锁时 **FOR UPDATE → LIMIT → WAIT**（见排障 §1–§2） |
+| A-PAG-001 / A-LCK-001 | 可实现 | 分页 + `FOR UPDATE` 可用；组合时语法顺序为虚谷要求 |
+| A-SEQ-001 | 可实现 | `hbm2ddl validate` 经 `all_sequences` 读取序列元数据（I-002/P-002；见排障 §3） |
 | A-LCK-004 SKIP LOCKED | 文档不允许 | `supportsSkipLocked=false`；不会发出该关键字 |
 | A-TYP-014 INTERVAL 等 | 延后 | 暂勿当作已交付能力 |
 

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "build_id": "B-003",
-  "initiative_id": "I-001",
+  "initiative_id": "I-002",
   "plan_revision": 1,
   "status": "approved",
   "proposed_phase_ids": [
@@ -12,11 +12,11 @@
   ],
   "approval": {
     "reference": "批准 B-003，范围仅 P-003",
-    "approved_at": "2026-07-14T17:25:00+08:00",
+    "approved_at": "2026-07-16T09:32:00+08:00",
     "approved_by": "Human Gate"
   },
-  "recommendation": "Approve B-003 scope = P-003 only (dialect type mapping + DDL per definition A matrix). Do not approve P-004+ until P-003 ACCEPTANCE.",
-  "supersedes": null,
+  "recommendation": "Approve B-003 scope = P-003 only (docs/matrix polish + full verify + Initiative Accept prep). Do not Ship / bump version / Archive without Human Gate.",
+  "supersedes": "I-001 B-003.json (types/DDL phase; overwritten for I-002 hotfix)",
   "scope_changes": [],
-  "notes": "Human Gate approved B-003 with scope P-003 only. P-003 accepted after RP-04 recheck approve (rev-p003-recheck-20260714); A-TYP-009 bare binary closed. P-004 unlocked ready; B-004 not approved."
+  "notes": "P-001 accepted SHA 63a7d6001dbd6845ea10520905c60bb56d2e3d9c; P-002 accepted SHA 908e7f665c3317beef3665063ebc0d02efc6ed5f (chore HEAD may be d630ae3…). B-003 = docs/matrix alignment + VERIFY PASS + Accept materials. Version stays 7.4.5.Final; no Ship; no sibling dialect port; no official content write."
 }
