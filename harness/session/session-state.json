@@ -1,36 +1,30 @@
 {
   "schema_version": 1,
-  "task_id": "P-003",
-  "batch_id": "B-003",
-  "status": "awaiting_initiative_accept",
+  "task_id": null,
+  "batch_id": null,
+  "status": "initiative_accepted_awaiting_archive_or_ship",
   "current_phase": null,
   "harness_level": "Standard",
-  "last_updated": "2026-07-16T09:45:00+08:00",
+  "last_updated": "2026-07-16T10:28:00+08:00",
   "initiative_id": "I-002",
   "initiative_type": "hotfix",
   "working_branch": "fix/i-002-hql-pagination-sequence-metadata",
   "active_plan": [
-    "I-002 Plan: P-001 SqlAstTranslator HQL pagination → P-002 sequence metadata → P-003 docs/Accept prep",
-    "B-001 complete = P-001 accepted",
-    "B-002 complete = P-002 accepted",
-    "B-003 complete = P-003 accepted",
-    "Await Human Gate Initiative Accept I-002 (Archive optional; Ship deferred)"
-  ],
-  "next_3_steps": [
-    "Human Gate: Accept Initiative I-002?",
-    "On Accept: optionally ask Archive",
+    "I-002 Initiative Accept recorded (NOT Ship)",
+    "B-001…B-003 / P-001…P-003 all accepted",
+    "Optional: ask Human Gate Archive I-002",
     "Ship remains deferred unless Human Gate authorizes separately"
   ],
+  "next_3_steps": [
+    "Human Gate: Archive I-002?",
+    "Ship remains deferred (separate authorization)",
+    "Next Initiative via skills/initiative.md when ready"
+  ],
   "changed_files": [
-    "contracts/feature-matrix-definition-a.md",
-    "contracts/xugu-dialect.contract.md",
-    "docs/user-guide/**",
-    "docs/feature-matrix-definition-a.md",
-    "README.md",
-    "harness/evidence/**/P-003/",
-    "harness/handoffs/**",
-    "harness/tasks/P-003.md",
-    "harness/tasks/REGISTRY.yaml",
+    "harness/evidence/orchestrator/I-002/ACCEPTANCE.md",
+    "harness/initiatives/I-002/brief.md",
+    "harness/initiatives/INDEX.md",
+    "harness/handoffs/orchestrator/I-002-accepted.md",
     "current-task.md",
     "harness/session/"
   ],
@@ -43,7 +37,7 @@
       "python harness/scripts/harness_check.py",
       "python harness/scripts/branch_check.py"
     ],
-    "last_result": "VERIFY PASS; harness_check PASS; branch_check PASS; reviewer approve; P-003 accepted",
+    "last_result": "VERIFY PASS (P-003); Initiative I-002 accepted; Ship/Archive deferred",
     "known_failures": []
   },
   "cognitive_state": {
@@ -54,29 +48,37 @@
       "i002_plan_three_serial_phases",
       "p001_accepted",
       "p002_accepted",
-      "p003_docs_aligned_verify_pass"
+      "p003_accepted",
+      "i002_initiative_accepted"
     ],
-    "blocked_on": "human_gate_initiative_accept_i002"
+    "blocked_on": "human_gate_optional_archive_or_separate_ship"
   },
   "version_control_checkpoint": {
-    "decision": "committed_p003_accepted_awaiting_initiative_accept",
-    "candidate_commit": "9df8c6242eb2f5593d7fd2fcb1f7f6482e17c8bf",
+    "decision": "committed_i002_accepted_ship_deferred",
+    "candidate_commit": "pending",
     "git_init": true,
-    "committed": true,
+    "committed": false,
     "branch": "fix/i-002-hql-pagination-sequence-metadata",
-    "note": "P-003 accepted; must-commit landed; ask Human Gate Accept I-002; no Ship",
-    "head": "9df8c6242eb2f5593d7fd2fcb1f7f6482e17c8bf",
+    "note": "I-002 Initiative Accept; must-commit pending; no Ship; Archive not done",
+    "head": "fc572b0",
     "base_branch_at_fork": "feat/i-001-xugu-dialect-major",
+    "phase_shas": {
+      "P-001": "63a7d6001dbd6845ea10520905c60bb56d2e3d9c",
+      "P-002": "908e7f665c3317beef3665063ebc0d02efc6ed5f",
+      "P-003": "9df8c6242eb2f5593d7fd2fcb1f7f6482e17c8bf"
+    },
     "i001_archive_sha": "82db5a38cd1e2ca00981198bbf42c84777c87e54"
   },
   "handoff": {
-    "last_summary": "P-003 accepted; ask Human Gate Accept I-002",
-    "resume_from": "harness/handoffs/orchestrator/I-002-accept-ask.md"
+    "last_summary": "I-002 accepted; ask Archive; Ship deferred",
+    "resume_from": "harness/handoffs/orchestrator/I-002-accepted.md"
   },
   "active_phase": null,
   "approved_build": "B-003",
   "approved_phases": [
+    "P-001",
+    "P-002",
     "P-003"
   ],
-  "updated_at": "2026-07-16T09:45:00+08:00"
+  "updated_at": "2026-07-16T10:28:00+08:00"
 }

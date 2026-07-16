@@ -1,3 +1,30 @@
+## Entry: I-002 Initiative Accept — Ship deferred
+
+### Summary
+Human Gate：「Accept Initiative I-002」(~2026-07-16T10:28+08:00)。Decision **accepted**（**NOT Ship**）。Delivery：GAV `com.xugu:xugu-dialect:7.4.5.Final` 同版本行为修复；P0 HQL 分页 `limit ? offset ?` + 锁序 FOR UPDATE→LIMIT→WAIT；P1 `all_sequences` validate；本仓门控 IT；P-003 文档/矩阵对齐；VERIFY PASS。B-001…B-003 / P-001…P-003 均已 accepted。Archive **未**做；Ship 须单独授权。
+
+### Key SHAs
+- P-001: `63a7d6001dbd6845ea10520905c60bb56d2e3d9c`
+- P-002: `908e7f665c3317beef3665063ebc0d02efc6ed5f`
+- P-003: `9df8c6242eb2f5593d7fd2fcb1f7f6482e17c8bf`
+
+### Files Created or Updated
+- harness/evidence/orchestrator/I-002/ACCEPTANCE.md
+- harness/initiatives/I-002/brief.md (completed / accepted)
+- harness/initiatives/INDEX.md (I-002 → completed)
+- harness/handoffs/orchestrator/I-002-accepted.md
+- current-task.md, session/*
+
+### Validation
+- Prior P-003 VERIFY PASS (`harness/evidence/test/P-003/verification.json`)
+- External xugu-hibernate-test: N/A (in-repo IT primary)
+
+### Next Steps
+1. Human Gate：是否 Archive I-002？
+2. Ship 仍须单独授权（tag / push / Central）
+3. 禁止在未授权情况下 push / tag / Archive
+
+---
 ## Entry: P-003 accepted — ask Human Gate Accept I-002
 
 ### Summary

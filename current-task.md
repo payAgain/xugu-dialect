@@ -1,38 +1,30 @@
 # Current Task
 
 ## Goal
-I-002 (hotfix): 修复 TEST-REPORT 中 HQL 分页（SqlAstTranslator）与 schema validate 序列元数据问题；本仓补 IT + VERIFY PASS；版本保持 7.4.5.Final
+I-002 (hotfix) **Initiative Accept recorded** — Ship / Archive still need separate Human Gate auth
 
 ## Current Status
-P-003 **accepted** — awaiting Human Gate **Initiative Accept** (I-002)；可选再问 Archive；**Ship 须单独授权**
+I-002 **accepted** (「Accept Initiative I-002」, ~2026-07-16T10:28+08:00) — **NOT Ship**; Archive not performed (ask Human Gate)
 
 ## Active Batch / Tasks
-- Initiative: **I-002** hotfix — **active** (all Phases accepted; Initiative Accept pending)
+- Initiative: **I-002** hotfix — **completed / accepted** (not archived)
 - Branch: `fix/i-002-hql-pagination-sequence-metadata`
-- Build: **B-003** complete (P-003 accepted)
-- Phase: **P-003** `accepted`
-  - RP-01 `impl-p003-20260716` → passed
-  - RP-02 `test-p003-20260716` → passed (VERIFY PASS)
-  - RP-03 `rev-p003-20260716` → **approve**
-- Prior: **P-001** `accepted` · **P-002** `accepted`
-- Next: Human Gate Accept I-002 — **not** B-004
+- Builds **B-001…B-003** / Phases **P-001…P-003** all `accepted`
+- Key SHAs: P-001 `63a7d60` · P-002 `908e7f6` · P-003 `9df8c62`
+- Next: optional **Archive I-002?**；**Ship** 须单独授权
 
 ## Scope
-Completed:
-- P-001 SqlAstTranslator + HQL pagination gated IT
-- P-002 getQuerySequencesString + extractor + schema validate IT
-- P-003 docs/matrix/user-guide alignment + full verify + Accept prep
+Completed (I-002):
+- P0 HQL pagination via SqlAstTranslator → `limit ? offset ?`; lock order FOR UPDATE→LIMIT→WAIT
+- P1 sequence metadata via `all_sequences` + extractor for hbm2ddl validate
+- In-repo gated ITs + docs/matrix (P-003) + VERIFY PASS
 Forbidden until authorized:
 - Ship / 升版本 / tag / push / Archive
 
 ## Plan
-1. ~~Human Gate 批准 B-001 范围仅 P-001~~
-2. ~~P-001 Accept + must-commit~~
-3. ~~Human Gate 批准 B-002 范围仅 P-002~~
-4. ~~P-002 Accept + must-commit~~
-5. ~~Human Gate 批准 B-003 范围仅 P-003~~
-6. ~~P-003 Accept + must-commit~~
-7. Human Gate：**是否 Accept Initiative I-002？**（再问 Archive；Ship 另授权）
+1. ~~Human Gate Accept Initiative I-002~~
+2. Human Gate：是否 **Archive I-002**？
+3. Ship 仍须单独授权（本阶段不提案 Ship）
 
 ## Validation Commands
 ```text
@@ -42,9 +34,9 @@ python harness/scripts/verify.py --phase P-003 --evidence harness/evidence/test/
 ```
 
 ## Next 3 Steps
-1. Human Gate：是否 Accept Initiative I-002？
-2. Accept 后可选：是否 Archive I-002？
-3. Ship 仍须单独授权（本阶段不提案 Ship）
+1. Human Gate：是否 Archive I-002？
+2. Ship 仍须单独授权（tag / push / Central）
+3. 若开下一个 Initiative → `skills/initiative.md`（Scoped Scope）
 
 ## Last Updated
-2026-07-16T09:45:00+08:00
+2026-07-16T10:28:00+08:00

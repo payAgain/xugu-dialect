@@ -2,7 +2,7 @@
 
 > Scoped clarity for one change unit. Not a full product re-charter.
 > Type: hotfix
-> Updated: 2026-07-15T17:20:00+08:00
+> Updated: 2026-07-16T10:28:00+08:00
 
 ## Goal
 - 根据 `E:\Work\java\xugu-hibernate-test\TEST-REPORT.md`，修复 HQL 分页（ANSI OFFSET/FETCH）与 schema validate 序列元数据缺失；**本仓补充测试用例并验证通过**；制品版本仍为 **`7.4.5.Final`**。
@@ -25,10 +25,10 @@
 - 升版本号；Ship；扩大定义 A；改写官方 content；旁路方言移植
 
 ## Acceptance criteria
-- [ ] 本仓新增/补齐用例覆盖 HQL 分页与 sequence metadata/validate，门控 IT 在真实库 PASS
-- [ ] 离线 `mvn test` 仍 PASS；`verify.py` VERIFY PASS
-- [ ] 重建 `com.xugu:xugu-dialect:7.4.5.Final` 后，上述能力可用
-- [ ] （可选证据）`xugu-hibernate-test` 复跑相关失败项 PASS
+- [x] 本仓新增/补齐用例覆盖 HQL 分页与 sequence metadata/validate，门控 IT 在真实库 PASS
+- [x] 离线 `mvn test` 仍 PASS；`verify.py` VERIFY PASS
+- [x] 重建 `com.xugu:xugu-dialect:7.4.5.Final` 后，上述能力可用
+- [ ] （可选证据）`xugu-hibernate-test` 复跑相关失败项 PASS — **N/A**（本仓 IT primary；未作为强制验收）
 
 ## Decisions (Human Gate 2026-07-15)
 1. P0+P1 一起修 — **确认**
@@ -36,5 +36,17 @@
 3. 版本沿用 7.4.5.Final — **确认**
 4. Scope PASS：「本 Initiative 范围已明确，可以开干」
 
+## Related
+- Branch: `fix/i-002-hql-pagination-sequence-metadata`
+- Builds: **B-001 … B-003** / Phases **P-001 … P-003** (all accepted)
+- Key SHAs: P-001 `63a7d6001dbd6845ea10520905c60bb56d2e3d9c` · P-002 `908e7f665c3317beef3665063ebc0d02efc6ed5f` · P-003 `9df8c6242eb2f5593d7fd2fcb1f7f6482e17c8bf`
+- Initiative Accept evidence: `harness/evidence/orchestrator/I-002/ACCEPTANCE.md`
+- Ship: **out of this Initiative** (deferred)
+
 ## Status
-`active` — B-001 **approved**（P-001 only）；P-001 RP-01 implementer complete；待独立 test + reviewer；未 Accept/commit
+`completed` / **accepted**
+
+- Human Gate Accept: 「Accept Initiative I-002」(~2026-07-16T10:28+08:00)
+- Archive: *(blank — ask Human Gate if desired)*
+- Delivery: GAV `com.xugu:xugu-dialect:7.4.5.Final` same-version behavior fix; P0 HQL pagination `limit ? offset ?` + lock order; P1 `all_sequences` validate; in-repo gated ITs; docs/matrix P-003; VERIFY PASS
+- Ship / tag / push / Central: **not** done — separate authorization required
