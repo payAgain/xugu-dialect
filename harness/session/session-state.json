@@ -4,7 +4,7 @@
   "batch_id": "B-006",
   "status": "awaiting_build_approval",
   "harness_level": "Standard",
-  "last_updated": "2026-07-16T15:22:00+08:00",
+  "last_updated": "2026-07-16T15:23:00+08:00",
   "initiative_id": "I-003",
   "initiative_type": "feature",
   "working_branch": "feat/i-003-production-capability-parity",
@@ -27,10 +27,10 @@
   },
   "version_control_checkpoint": {
     "decision": "p005_accepted_awaiting_b006",
-    "committed": false,
+    "committed": true,
     "branch": "feat/i-003-production-capability-parity",
-    "candidate_commit": null,
-    "head": "aac0d27"
+    "candidate_commit": "e4da4cffd04a57eeb3534c759a380b37950c13dd",
+    "head": "e4da4cffd04a57eeb3534c759a380b37950c13dd"
   },
   "handoff": {
     "resume_from": "harness/handoffs/orchestrator/B-005-P-005-complete.md"
@@ -43,5 +43,5 @@
     "P-004",
     "P-005"
   ],
-  "updated_at": "2026-07-16T15:22:00+08:00"
+  "updated_at": "2026-07-16T15:23:00+08:00"
 }
