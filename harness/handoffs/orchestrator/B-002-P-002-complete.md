@@ -1,40 +1,9 @@
-# Handoff: B-002 / P-002 complete
+# Handoff: B-002 / P-002 complete — propose B-003
 
-> Role: orchestrator  
-> Initiative: I-002 (hotfix)  
-> Updated: 2026-07-16T09:25:00+08:00
+## Result
+- Exception mapping + extractor wired on `XuguDialect`
+- ORM IT PASS (Session unique → ConstraintViolationException UNIQUE)
+- VERIFY PASS; reviewer **approve**; P-002 **accepted**
 
-## Summary
-
-B-002 (P-002 only) completed: sequence metadata wired from documented `ALL_SEQUENCES`; gated validate IT PASS; reviewer **approve**; ACCEPTANCE **accepted**. Must-commit on working branch (no push/Ship).
-
-## Pipeline
-
-| Step | ID | Result |
-|---|---|---|
-| RP-01 | `impl-p002-20260716` | passed |
-| RP-02 | `test-p002-20260716` | VERIFY PASS |
-| RP-03 | `rev-p002-20260716` | approve |
-
-## VERIFY
-
-`harness/evidence/test/P-002/verification.json` → **PASS**
-
-## Observed behavior
-
-- Validate **succeeds** when mapped sequence exists in `all_sequences`
-- Validate **fails diagnostically** when sequence is missing/dropped
-
-## Next ask for Human Gate
-
-是否批准 **B-003**，范围仅 **P-003**？
-
-## Must-commit
-
-SHA: `908e7f665c3317beef3665063ebc0d02efc6ed5f` on `fix/i-002-hql-pagination-sequence-metadata` (no push/Ship).
-
-## Explicitly not done
-
-- Ship / tag / push
-- Version bump
-- B-003 approval
+## Ask Human Gate
+**是否批准 B-003，范围仅 P-003？**（JSON 深能力 + AggregateSupport + 入口 IT）

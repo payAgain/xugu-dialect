@@ -22,6 +22,8 @@ import org.hibernate.dialect.temptable.TemporaryTableStrategy;
 import org.hibernate.dialect.unique.CreateTableUniqueDelegate;
 import org.hibernate.dialect.unique.UniqueDelegate;
 import org.hibernate.engine.jdbc.dialect.spi.DialectResolutionInfo;
+import org.hibernate.exception.spi.SQLExceptionConversionDelegate;
+import org.hibernate.exception.spi.ViolatedConstraintNameExtractor;
 import org.hibernate.tool.schema.extract.spi.SequenceInformationExtractor;
 import org.hibernate.engine.jdbc.env.spi.IdentifierCaseStrategy;
 import org.hibernate.engine.jdbc.env.spi.IdentifierHelper;
@@ -44,6 +46,8 @@ import org.hibernate.type.descriptor.jdbc.spi.JdbcTypeRegistry;
 import org.hibernate.type.descriptor.sql.internal.DdlTypeImpl;
 import org.hibernate.type.descriptor.sql.spi.DdlTypeRegistry;
 
+import com.xugu.dialect.exception.XuguSQLExceptionConversionDelegate;
+import com.xugu.dialect.exception.XuguViolatedConstraintNameExtractor;
 import com.xugu.dialect.function.XuguFunctionRegistrations;
 import com.xugu.dialect.identity.XuguIdentityColumnSupport;
 import com.xugu.dialect.internal.XuguKeywords;
@@ -73,6 +77,12 @@ import jakarta.persistence.Timeout;
  * reads documented {@code ALL_SEQUENCES}; {@link #getSequenceInformationExtractor()}
  * maps {@code seq_name}/{@code min_val}/{@code max_val}/{@code step_val} so validate
  * sees existing sequences (avoids false {@code missing sequence}).
+ *
+ * <p><b>Exception mapping (C-EXC-* / I-003):</b>
+ * {@link #buildSQLExceptionConversionDelegate()} maps documented Xugu error codes
+ * (unique/FK/check/not-null, deadlock, lock timeout) to Hibernate exception types;
+ * {@link #getViolatedConstraintNameExtractor()} parses field names when present
+ * (e.g. E16005 not-null messages).
  *
  * <p><b>Pagination (A-PAG-*):</b> {@link XuguLimitHandler} emits
  * {@code LIMIT count} / {@code LIMIT count OFFSET offset} with JDBC bind markers
@@ -634,6 +644,16 @@ public class XuguDialect extends Dialect {
 	@Override
 	public IdentityColumnSupport getIdentityColumnSupport() {
 		return XuguIdentityColumnSupport.INSTANCE;
+	}
+
+	@Override
+	public SQLExceptionConversionDelegate buildSQLExceptionConversionDelegate() {
+		return XuguSQLExceptionConversionDelegate.create( getViolatedConstraintNameExtractor() );
+	}
+
+	@Override
+	public ViolatedConstraintNameExtractor getViolatedConstraintNameExtractor() {
+		return XuguViolatedConstraintNameExtractor.INSTANCE;
 	}
 
 	@Override

@@ -1,22 +1,16 @@
 {
   "schema_version": 1,
   "build_id": "B-003",
-  "initiative_id": "I-002",
+  "initiative_id": "I-003",
   "plan_revision": 1,
-  "status": "approved",
+  "status": "draft",
   "proposed_phase_ids": [
     "P-003"
   ],
-  "approved_phase_ids": [
-    "P-003"
-  ],
-  "approval": {
-    "reference": "批准 B-003，范围仅 P-003",
-    "approved_at": "2026-07-16T09:32:00+08:00",
-    "approved_by": "Human Gate"
-  },
-  "recommendation": "Approve B-003 scope = P-003 only (docs/matrix polish + full verify + Initiative Accept prep). Do not Ship / bump version / Archive without Human Gate.",
-  "supersedes": "I-001 B-003.json (types/DDL phase; overwritten for I-002 hotfix)",
+  "approved_phase_ids": [],
+  "approval": null,
+  "recommendation": "Propose B-003 = P-003 only (JSON deep + AggregateSupport + ORM entrypoint IT).",
+  "supersedes": null,
   "scope_changes": [],
-  "notes": "P-001 accepted SHA 63a7d6001dbd6845ea10520905c60bb56d2e3d9c; P-002 accepted SHA 908e7f665c3317beef3665063ebc0d02efc6ed5f (chore HEAD may be d630ae3…). B-003 = docs/matrix alignment + VERIFY PASS + Accept materials. Version stays 7.4.5.Final; no Ship; no sibling dialect port; no official content write."
+  "notes": "Unlocked after P-002 Accept. Version 7.4.5.Final. No harness framework changes. No Ship."
 }

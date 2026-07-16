@@ -3,14 +3,20 @@
   "build_id": "B-002",
   "initiative_id": "I-003",
   "plan_revision": 1,
-  "status": "draft",
+  "status": "approved",
   "proposed_phase_ids": [
     "P-002"
   ],
-  "approved_phase_ids": [],
-  "approval": null,
-  "recommendation": "Propose B-002 = P-002 only (exception mapping + ORM entrypoint IT). Await Human Gate.",
+  "approved_phase_ids": [
+    "P-002"
+  ],
+  "approval": {
+    "reference": "批准 B-002，范围仅 P-002",
+    "approved_at": "2026-07-16T13:31:00+08:00",
+    "approved_by": "Human Gate"
+  },
+  "recommendation": "B-002 approved = P-002 only (exception mapping + ORM entrypoint IT).",
   "supersedes": null,
   "scope_changes": [],
-  "notes": "Unlocked after P-001 Accept. Version 7.4.5.Final. No harness framework changes. No Ship."
+  "notes": "Human Gate approved B-002 scope = P-002 only. Version 7.4.5.Final. No harness framework changes. No Ship."
 }
