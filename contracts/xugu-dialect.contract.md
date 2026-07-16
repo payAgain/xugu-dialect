@@ -108,27 +108,41 @@ harness           governance only; never on runtime classpath
 
 ---
 
-## 7. Capability scope = Definition A
+## 7. Capability scope = Definition A (+ I-003 ruler C)
 
 **Definition A** = MySQL/Oracle Dialect **production capability surface** ∩ capabilities **allowed by XuguDB docs**.
 
 - Actionable checklist: [`contracts/feature-matrix-definition-a.md`](feature-matrix-definition-a.md)
 - Every matrix row has Status: `可实现` | `文档不允许` | `延后`
 - `文档不允许` → implementers **MUST NOT** invent unsupported SQL
-- `延后` → out of I-001 active Phases until revisit trigger fires
-- Phase mapping: see matrix Target Phase column and `harness/evidence/architect-contract/P-002/ACCEPTANCE.md`
+- `延后` → out of active Phases until revisit trigger fires
 
-Domains aligned to later Phases:
+### 7.1 I-003 feature addendum (ruler C)
 
-| Phase | Domain |
+I-003 extends the **implementable** production surface using **ruler C**:
+
+- **A:** Hibernate 7.4.5 MySQL-class Dialect production overrides/capabilities ∩ XuGu docs
+- **B:** **read-only** inventory vs `E:\Work\java\hibernate-dialect` (discover gaps only)
+
+SSOT for I-003 new rows: [`contracts/feature-matrix-i003-ruler-c.md`](feature-matrix-i003-ruler-c.md)
+
+Rules:
+
+- **Still forbidden:** copying/porting sibling or legacy dialect **source code**; inheriting MySQL/Oracle Dialect
+- Each I-003 `可实现` row requires an **ORM `app_entrypoint` IT** in its Phase
+- Version remains **`7.4.5.Final`** (no bump)
+- Harness framework agents/skills/verification.json **not** changed by I-003
+
+Domains for I-003 Phases:
+
+| Phase | Domain (C-* IDs) |
 |---|---|
-| P-003 | Types & DDL mapping |
-| P-004 | Pagination & locks |
-| P-005 | Identity & Sequence |
-| P-006 | Function registry |
-| P-007 | Schema/catalog, temporary tables, COMMENT, FK/unique, truncate |
-| P-008 | DialectResolver SPI + explicit dialect verification |
-| Cross-cutting | Identifier quoting/`compatible_mode=NONE`, isolation (dialect-relevant), UUID/GUID, JSON |
+| P-002 | Exception mapping C-EXC-* |
+| P-003 | JSON deep + AggregateSupport C-JSON-001…004 |
+| P-004 | Window + CTE C-WIN-001 / C-CTE-001 |
+| P-005 | Bulk mutation C-BULK-* |
+| P-006 | Type/DDL details C-DDL-001…003, C-CAT-001, C-GUID-001 |
+| P-007 | Docs/matrix align + Accept prep |
 
 ---
 
@@ -138,18 +152,20 @@ Domains aligned to later Phases:
 - Do **not** use an unrelated `1.0.0`-style product version for this artifact while adapting Hibernate 7.4.5.
 - When a future Initiative targets another Hibernate line, GAV version and Charter/ADR must be updated together.
 - **I-002 hotfix (behavior-only):** HQL/Criteria pagination (`XuguSqlAstTranslator` → `LIMIT … [OFFSET …]`, lock order FOR UPDATE → LIMIT → WAIT) and sequence catalog for `hbm2ddl validate` (`getQuerySequencesString` → `all_sequences`) ship under the **same** GAV `7.4.5.Final` — no version bump. See matrix A-PAG-* / A-SEQ-001 and user-guide troubleshooting.
+- **I-003 feature:** capability parity expansion under ruler C also ships under **`7.4.5.Final`** — no version bump unless Human Gate later authorizes.
 
 ---
 
 ## 9. Non-goals (this Initiative / this contract)
 
 1. **No** inheritance of `MySQLDialect` / `OracleDialect`.
-2. **No** reading, copying, or porting `E:\Work\java\hibernate-dialect` or legacy xugu-dialect sources.
+2. **No** copying or porting `E:\Work\java\hibernate-dialect` or legacy xugu-dialect **implementation sources**. (I-003 ruler C allows **read-only gap inventory** only.)
 3. **No** rewrite of official content under `E:\Work\docs\content`.
 4. **No** Hibernate 6.x or 8 beta adaptation.
-5. **Ship out of I-001:** Maven Central credentials, signing, `tag` / `push` / release pipelines — Accept first; Ship needs separate Human Gate.
-6. Spatial/geometry and other extras **outside** the definition A matrix (see matrix `延后` / non-goals).
+5. **Ship out of I-001/I-003:** Maven Central credentials, signing, `tag` / `push` / release pipelines — Accept first; Ship needs separate Human Gate.
+6. Spatial/geometry and other extras **outside** definition A / I-003 matrices (see `延后` / non-goals).
 7. Hard-coding fake SQL for `文档不允许` rows.
+8. **I-003:** No harness framework harden (agents/skills/verification.json Accept ontology) — other thread.
 
 ---
 
@@ -159,6 +175,7 @@ Domains aligned to later Phases:
 |---|---|
 | `contracts/xugu-dialect.scaffold.contract.md` | Maven layout / P-001 scaffold |
 | `contracts/feature-matrix-definition-a.md` | Definition A checklist SSOT |
+| `contracts/feature-matrix-i003-ruler-c.md` | I-003 ruler C gap SSOT |
 | `PROJECT_CHARTER.md` | Product charter |
 | `DECISIONS/ADR-0001-hibernate-baseline.md` | Hibernate/GAV/package/non-inheritance |
 | `docs/architecture.md` | Layout & dependency notes (orchestrator may add matrix cross-ref) |
@@ -176,5 +193,6 @@ Domains aligned to later Phases:
 | `compatible_mode=NONE` + env secrets | §5 |
 | Module boundaries | §6 |
 | Definition A bound to matrix | §7 + feature-matrix file |
+| I-003 ruler C bound to gap matrix | §7.1 + feature-matrix-i003-ruler-c |
 | Version tracks Hibernate | §8 |
-| Non-goals clear | §9 |
+| Non-goals respected | §9 |

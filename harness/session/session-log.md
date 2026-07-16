@@ -1,4 +1,19 @@
-﻿## Entry: I-003 Scope PASS + Plan — propose B-001 (P-001 only)
+﻿## Entry: P-001 accepted — propose B-002 (P-002 only)
+
+### Summary
+Human Gate「批准 B-001，范围仅 P-001」。architect `arch-p001-20260716` 产出尺子 C SSOT（可实现 16）；reviewer `rev-p001-20260716` **approve**；P-001 **accepted**。无 dialect Java；无 harness 框架改动；无 Ship。Next：Human Gate 批准 B-002 范围仅 P-002。
+
+### Artifacts
+- contracts/feature-matrix-i003-ruler-c.md
+- contracts/xugu-dialect.contract.md §7.1
+- harness/evidence/architect-contract/P-001/*
+- harness/evidence/reviewer/P-001/REVIEW.md
+
+### Next Steps
+1. Human Gate：批准 B-002，范围仅 P-002？
+
+---
+## Entry: I-003 Scope PASS + Plan — propose B-001 (P-001 only)
 
 ### Summary
 Human Gate：「Archive I-002；类型 feature；尺子 C；首批全做；要入口 IT；版本保持 7.4.5.Final；本 Initiative 范围已明确，可以开干」(~2026-07-16T10:46+08:00)。I-002 Archive 落盘；I-003 feature active；分支 `feat/i-003-production-capability-parity`；串行 Plan P-001…P-007；B-001 draft=仅 P-001。不改 harness 框架；不写业务 Java；不 Ship。
@@ -791,4 +806,5 @@ ev-p009-20260715 approve)
 - Resume: `harness/handoffs/orchestrator/I-001-archived.md`
 
 - Must-commit SHA recorded: 82db5a38cd1e2ca00981198bbf42c84777c87e54
+
 

@@ -1,66 +1,71 @@
 {
   "schema_version": 1,
-  "task_id": "P-001",
-  "batch_id": "B-001",
+  "task_id": "P-002",
+  "batch_id": "B-002",
   "status": "awaiting_build_approval",
-  "current_phase": "P-001",
+  "current_phase": null,
   "harness_level": "Standard",
-  "last_updated": "2026-07-16T10:46:00+08:00",
+  "last_updated": "2026-07-16T11:50:00+08:00",
   "initiative_id": "I-003",
   "initiative_type": "feature",
   "working_branch": "feat/i-003-production-capability-parity",
   "active_plan": [
-    "I-003 Plan: P-001 gap SSOT → P-002 exception → P-003 JSON/Aggregate → P-004 Window/CTE → P-005 bulk → P-006 type/DDL → P-007 docs/Accept",
-    "B-001 draft = P-001 only",
-    "No harness framework changes; version 7.4.5.Final; ruler C; entrypoint IT required"
+    "I-003 Plan: P-001 accepted → P-002 exception → … → P-007",
+    "B-001 complete = P-001 accepted",
+    "B-002 draft = P-002 only"
   ],
   "next_3_steps": [
-    "Human Gate: approve B-001 scope P-001 only?",
-    "On approve: architect-contract RP-01 gap inventory",
-    "Do not start P-002 until separate Build approval"
+    "Human Gate: approve B-002 scope P-002 only?",
+    "On approve: implementer exception mapping + ORM IT",
+    "No Ship; no harness framework changes"
   ],
   "changed_files": [
-    "harness/initiatives/**",
+    "contracts/feature-matrix-i003-ruler-c.md",
+    "contracts/xugu-dialect.contract.md",
+    "contracts/feature-matrix-definition-a.md",
+    "harness/evidence/**/P-001/",
     "harness/tasks/**",
     "harness/builds/B-001.json",
-    "harness/handoffs/orchestrator/**",
+    "harness/builds/B-002.json",
     "current-task.md",
     "harness/session/"
   ],
   "validation": {
     "last_commands": [
+      "python harness/scripts/harness_check.py",
       "python harness/scripts/branch_check.py"
     ],
-    "last_result": "BRANCH_CHECK PASS; Plan drafted; awaiting B-001 approval",
+    "last_result": "P-001 accepted; reviewer approve; awaiting B-002",
     "known_failures": []
   },
   "cognitive_state": {
     "failure_count": 0,
     "current_mode": "awaiting_human_gate",
     "tried_approaches": [
-      "i002_archived",
-      "i003_scope_pass",
-      "i003_plan_seven_serial_phases"
+      "b001_approved",
+      "arch_p001_ruler_c_ssot",
+      "rev_p001_approve"
     ],
-    "blocked_on": "human_gate_build_b001_p001_only"
+    "blocked_on": "human_gate_build_b002_p002_only"
   },
   "version_control_checkpoint": {
-    "decision": "plan_committed_awaiting_b001_approval",
-    "candidate_commit": "f040948d32400a7e8a13a45a3edd5bbd4227fb51",
+    "decision": "p001_accepted_awaiting_b002",
+    "candidate_commit": null,
     "git_init": true,
-    "committed": true,
+    "committed": false,
     "branch": "feat/i-003-production-capability-parity",
-    "note": "I-002 archived; I-003 Plan ready; ask Human Gate approve B-001 = P-001 only; no Ship",
-    "head": "f040948d32400a7e8a13a45a3edd5bbd4227fb51",
-    "base_branch_at_fork": "fix/i-002-hql-pagination-sequence-metadata",
-    "i002_archive_base_sha": "a009ed2a391289baf19454268755ddbb035ebfbc"
+    "note": "P-001 accepted; propose B-002 P-002 only",
+    "head": null,
+    "base_branch_at_fork": "fix/i-002-hql-pagination-sequence-metadata"
   },
   "handoff": {
-    "last_summary": "I-003 Plan ready; ask approve B-001 P-001 only",
-    "resume_from": "harness/handoffs/orchestrator/B-001-propose.md"
+    "last_summary": "P-001 accepted; ask approve B-002 P-002 only",
+    "resume_from": "harness/handoffs/orchestrator/B-001-P-001-complete.md"
   },
-  "active_phase": "P-001",
-  "approved_build": null,
-  "approved_phases": [],
-  "updated_at": "2026-07-16T10:46:00+08:00"
+  "active_phase": null,
+  "approved_build": "B-001",
+  "approved_phases": [
+    "P-001"
+  ],
+  "updated_at": "2026-07-16T11:50:00+08:00"
 }

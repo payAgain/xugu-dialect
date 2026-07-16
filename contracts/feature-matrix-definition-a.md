@@ -204,4 +204,7 @@ Derivation detail: `harness/evidence/architect-contract/P-002/NOTES.md`.
 
 ## Orchestrator note
 
-Prefer this file as SSOT (ACCEPTANCE path). If product docs should link it, add a short cross-ref in `docs/architecture.md` and/or `docs/feature-matrix-definition-a.md` → point here (architect cannot write those paths in this Phase packet for architect role; see evidence NOTES).
+Prefer this file as SSOT for **definition A** (I-001/I-002).  
+**I-003** production-gap rows live in [`feature-matrix-i003-ruler-c.md`](feature-matrix-i003-ruler-c.md) (ruler C). Both are required reading for I-003 implementers.
+
+If product docs should link it, add a short cross-ref in `docs/architecture.md` and/or `docs/feature-matrix-definition-a.md` → point here (architect cannot write those paths in this Phase packet for architect role; see evidence NOTES).

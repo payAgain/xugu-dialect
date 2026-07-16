@@ -1,20 +1,19 @@
 schema_version: 1
 charter_version: "1.0.0"
 initiative_id: I-003
-updated: "2026-07-16T10:46:00+08:00"
-# I-003 restarts P/B numbering. I-002 packets remain on disk as history until overwritten by same IDs.
+updated: "2026-07-16T11:50:00+08:00"
 tasks:
   - task_id: P-001
     title: "尺子 C 生产能力差集盘点 SSOT"
-    status: ready
-    build_id: null
+    status: accepted
+    build_id: B-001
     packet: harness/tasks/P-001.md
     acceptance_doc: harness/evidence/architect-contract/P-001/ACCEPTANCE.md
     role_pipeline_summary: "architect-contract → reviewer"
     dependencies: []
   - task_id: P-002
     title: "异常映射与约束名抽取 + 入口 IT"
-    status: blocked
+    status: ready
     build_id: null
     packet: harness/tasks/P-002.md
     acceptance_doc: harness/evidence/implementer/P-002/ACCEPTANCE.md

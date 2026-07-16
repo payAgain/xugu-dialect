@@ -1,22 +1,16 @@
 {
   "schema_version": 1,
   "build_id": "B-002",
-  "initiative_id": "I-002",
+  "initiative_id": "I-003",
   "plan_revision": 1,
-  "status": "approved",
+  "status": "draft",
   "proposed_phase_ids": [
     "P-002"
   ],
-  "approved_phase_ids": [
-    "P-002"
-  ],
-  "approval": {
-    "reference": "批准 B-002，范围仅 P-002",
-    "approved_at": "2026-07-16T09:10:00+08:00",
-    "approved_by": "Human Gate"
-  },
-  "recommendation": "Approve B-002 scope = P-002 only (sequence metadata / getQuerySequencesString + extractor + gated validate IT). Do not approve P-003 until P-002 ACCEPTANCE.",
+  "approved_phase_ids": [],
+  "approval": null,
+  "recommendation": "Propose B-002 = P-002 only (exception mapping + ORM entrypoint IT). Await Human Gate.",
   "supersedes": null,
   "scope_changes": [],
-  "notes": "P-001 accepted SHA 63a7d6001dbd6845ea10520905c60bb56d2e3d9c. B-002 = sequence metadata only (all_sequences / hbm2ddl validate). Human Gate approved again ~09:14. Version stays 7.4.5.Final; no Ship; no sibling dialect port."
+  "notes": "Unlocked after P-001 Accept. Version 7.4.5.Final. No harness framework changes. No Ship."
 }
