@@ -17,8 +17,9 @@ import org.hibernate.type.spi.TypeConfiguration;
  * XuguDB. Alternates {@code gen_random_uuid()} / {@code sys_guid()} are also registered
  * (documented) but {@code uuid()} is the dialect primary.
  *
- * <p>JSON subset: standard {@code json_value} (ANSI-style template via
- * {@link JsonValueFunction}) plus native {@code json_extract}. Not a MySQL function dump.
+ * <p>JSON: {@code json_value} + {@code json_extract}, plus native
+ * {@code json_arrayagg}/{@code json_objectagg} (I-003 C-JSON-001/002).
+ * HQL JSON functions require {@code hibernate.query.hql.json_functions_enabled=true}.
  *
  * <p>String aggregate: Hibernate {@code listagg} → native XuGu
  * {@code LISTAGG(...) WITHIN GROUP (ORDER BY ...)}.
@@ -74,7 +75,7 @@ public final class XuguFunctionRegistrations {
 				.setUseParenthesesWhenNoArgs( true )
 				.register();
 
-		// --- JSON subset (A-FUN-017): json_value + json_extract only ---
+		// --- JSON subset (A-FUN-017 + C-JSON-001/002) ---
 		// Base JsonValueFunction renders JSON_VALUE(doc, path …) matching XuGu docs.
 		// Path expression supported; PASSING clause not documented for XuGu → false.
 		functionRegistry.register(
@@ -87,6 +88,8 @@ public final class XuguFunctionRegistrations {
 				.setInvariantType( stringType )
 				.setArgumentListSignature( "(JSON jsonDoc, STRING path[, STRING path…])" )
 				.register();
+		functionRegistry.register( "json_arrayagg", new XuguJsonArrayAggFunction( typeConfiguration ) );
+		functionRegistry.register( "json_objectagg", new XuguJsonObjectAggFunction( typeConfiguration ) );
 
 		// --- listagg / string_agg / group_concat (A-FUN-018) ---
 		// Hibernate HQL listagg → native LISTAGG … WITHIN GROUP (XuGu form).

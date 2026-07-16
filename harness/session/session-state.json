@@ -1,71 +1,36 @@
 {
   "schema_version": 1,
-  "task_id": "P-002",
-  "batch_id": "B-002",
+  "task_id": "P-004",
+  "batch_id": "B-004",
   "status": "awaiting_build_approval",
-  "current_phase": null,
   "harness_level": "Standard",
-  "last_updated": "2026-07-16T11:50:00+08:00",
+  "last_updated": "2026-07-16T13:50:00+08:00",
   "initiative_id": "I-003",
   "initiative_type": "feature",
   "working_branch": "feat/i-003-production-capability-parity",
-  "active_plan": [
-    "I-003 Plan: P-001 accepted → P-002 exception → … → P-007",
-    "B-001 complete = P-001 accepted",
-    "B-002 draft = P-002 only"
-  ],
+  "active_plan": ["P-001..P-003 accepted", "B-004 draft = P-004 only"],
   "next_3_steps": [
-    "Human Gate: approve B-002 scope P-002 only?",
-    "On approve: implementer exception mapping + ORM IT",
-    "No Ship; no harness framework changes"
-  ],
-  "changed_files": [
-    "contracts/feature-matrix-i003-ruler-c.md",
-    "contracts/xugu-dialect.contract.md",
-    "contracts/feature-matrix-definition-a.md",
-    "harness/evidence/**/P-001/",
-    "harness/tasks/**",
-    "harness/builds/B-001.json",
-    "harness/builds/B-002.json",
-    "current-task.md",
-    "harness/session/"
+    "Human Gate: approve B-004 scope P-004 only?",
+    "On approve: Window/CTE + ORM IT",
+    "No Ship"
   ],
   "validation": {
-    "last_commands": [
-      "python harness/scripts/harness_check.py",
-      "python harness/scripts/branch_check.py"
-    ],
-    "last_result": "P-001 accepted; reviewer approve; awaiting B-002",
-    "known_failures": []
+    "last_result": "P-003 accepted; VERIFY PASS; JSON IT PASS"
   },
   "cognitive_state": {
     "failure_count": 0,
     "current_mode": "awaiting_human_gate",
-    "tried_approaches": [
-      "b001_approved",
-      "arch_p001_ruler_c_ssot",
-      "rev_p001_approve"
-    ],
-    "blocked_on": "human_gate_build_b002_p002_only"
+    "blocked_on": "human_gate_build_b004_p004_only"
   },
   "version_control_checkpoint": {
-    "decision": "p001_accepted_awaiting_b002",
-    "candidate_commit": "25302b5b997b6839bef317c140803c24ff733c55",
-    "git_init": true,
-    "committed": true,
-    "branch": "feat/i-003-production-capability-parity",
-    "note": "P-001 accepted; propose B-002 P-002 only",
-    "head": "25302b5b997b6839bef317c140803c24ff733c55",
-    "base_branch_at_fork": "fix/i-002-hql-pagination-sequence-metadata"
+    "decision": "p003_accepted_awaiting_b004",
+    "committed": false,
+    "branch": "feat/i-003-production-capability-parity"
   },
   "handoff": {
-    "last_summary": "P-001 accepted; ask approve B-002 P-002 only",
-    "resume_from": "harness/handoffs/orchestrator/B-001-P-001-complete.md"
+    "resume_from": "harness/handoffs/orchestrator/B-003-P-003-complete.md"
   },
-  "active_phase": null,
-  "approved_build": "B-001",
-  "approved_phases": [
-    "P-001"
-  ],
-  "updated_at": "2026-07-16T11:50:00+08:00"
+  "approved_build": "B-003",
+  "approved_phases": ["P-001", "P-002", "P-003"],
+  "updated_at": "2026-07-16T13:50:00+08:00"
 }

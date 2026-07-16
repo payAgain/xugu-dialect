@@ -13,6 +13,7 @@ import org.hibernate.dialect.DatabaseVersion;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.NationalizationSupport;
 import org.hibernate.dialect.TimeZoneSupport;
+import org.hibernate.dialect.aggregate.AggregateSupport;
 import org.hibernate.dialect.identity.IdentityColumnSupport;
 import org.hibernate.dialect.lock.spi.LockingSupport;
 import org.hibernate.dialect.pagination.LimitHandler;
@@ -40,12 +41,12 @@ import org.hibernate.sql.ast.spi.StandardSqlAstTranslatorFactory;
 import org.hibernate.sql.ast.tree.Statement;
 import org.hibernate.sql.exec.spi.JdbcOperation;
 import org.hibernate.type.SqlTypes;
-import org.hibernate.type.descriptor.jdbc.JsonJdbcType;
 import org.hibernate.type.descriptor.jdbc.UUIDJdbcType;
 import org.hibernate.type.descriptor.jdbc.spi.JdbcTypeRegistry;
 import org.hibernate.type.descriptor.sql.internal.DdlTypeImpl;
 import org.hibernate.type.descriptor.sql.spi.DdlTypeRegistry;
 
+import com.xugu.dialect.aggregate.XuguAggregateSupport;
 import com.xugu.dialect.exception.XuguSQLExceptionConversionDelegate;
 import com.xugu.dialect.exception.XuguViolatedConstraintNameExtractor;
 import com.xugu.dialect.function.XuguFunctionRegistrations;
@@ -58,6 +59,8 @@ import com.xugu.dialect.sequence.XuguSequenceSupport;
 import com.xugu.dialect.sql.ast.XuguSqlAstTranslator;
 import com.xugu.dialect.temptable.XuguGlobalTemporaryTableStrategy;
 import com.xugu.dialect.temptable.XuguLocalTemporaryTableStrategy;
+import com.xugu.dialect.type.XuguCastingJsonArrayJdbcTypeConstructor;
+import com.xugu.dialect.type.XuguCastingJsonJdbcType;
 
 import jakarta.persistence.Timeout;
 
@@ -110,9 +113,11 @@ import jakarta.persistence.Timeout;
  * <p><b>Sequence (A-SEQ-*, A-XCUT-008):</b> {@link XuguSequenceSupport} locks
  * {@code select &lt;seq&gt;.nextval from dual}; CURRVAL via {@code currval('name')}.
  *
- * <p><b>Functions (A-FUN-*):</b> {@link #initializeFunctionRegistry} contributes
+ * <p><b>Functions (A-FUN-* / C-JSON-*):</b> {@link #initializeFunctionRegistry} contributes
  * XuGu-native templates via {@link XuguFunctionRegistrations}. Primary UUID SQL:
- * {@code uuid()}. JSON subset: {@code json_value} + {@code json_extract}.
+ * {@code uuid()}. JSON: {@code json_value}/{@code json_extract} plus
+ * {@code json_arrayagg}/{@code json_objectagg}; JDBC writes use {@code cast(? as json)};
+ * {@link #getAggregateSupport()} covers JSON embeddable component paths.
  * Hibernate {@code listagg} → XuGu {@code LISTAGG … WITHIN GROUP}.
  *
  * <p><b>Schema / temp / comment / constraints (A-SCH-* , P-007):</b>
@@ -252,7 +257,13 @@ public class XuguDialect extends Dialect {
 		super.contributeTypes( typeContributions, serviceRegistry );
 		final JdbcTypeRegistry jdbcTypes = typeContributions.getTypeConfiguration().getJdbcTypeRegistry();
 		jdbcTypes.addDescriptorIfAbsent( UUIDJdbcType.INSTANCE );
-		jdbcTypes.addDescriptorIfAbsent( JsonJdbcType.INSTANCE );
+		jdbcTypes.addDescriptorIfAbsent( SqlTypes.JSON, XuguCastingJsonJdbcType.INSTANCE );
+		jdbcTypes.addTypeConstructorIfAbsent( XuguCastingJsonArrayJdbcTypeConstructor.INSTANCE );
+	}
+
+	@Override
+	public AggregateSupport getAggregateSupport() {
+		return XuguAggregateSupport.INSTANCE;
 	}
 
 	@Override

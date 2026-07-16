@@ -1,4 +1,10 @@
-﻿## Entry: P-002 accepted — propose B-003 (P-003 only)
+﻿## Entry: P-003 accepted — propose B-004
+
+JSON/Aggregate PASS; ask approve B-004 P-004 only.
+
+---
+
+## Entry: P-002 accepted — propose B-003 (P-003 only)
 
 ### Summary
 Human Gate「批准 B-002，范围仅 P-002」。实现异常映射 + extractor；ORM IT PASS（E13001 UNIQUE）；VERIFY PASS；reviewer approve；P-002 accepted。Next：批准 B-003 仅 P-003。
@@ -812,6 +818,7 @@ ev-p009-20260715 approve)
 - Resume: `harness/handoffs/orchestrator/I-001-archived.md`
 
 - Must-commit SHA recorded: 82db5a38cd1e2ca00981198bbf42c84777c87e54
+
 
 
 

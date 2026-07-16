@@ -1,7 +1,7 @@
 schema_version: 1
 charter_version: "1.0.0"
 initiative_id: I-003
-updated: "2026-07-16T13:40:00+08:00"
+updated: "2026-07-16T13:50:00+08:00"
 tasks:
   - task_id: P-001
     title: "尺子 C 生产能力差集盘点 SSOT"
@@ -21,15 +21,15 @@ tasks:
     dependencies: [P-001]
   - task_id: P-003
     title: "JSON 深能力与 AggregateSupport + 入口 IT"
-    status: ready
-    build_id: null
+    status: accepted
+    build_id: B-003
     packet: harness/tasks/P-003.md
     acceptance_doc: harness/evidence/implementer/P-003/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"
     dependencies: [P-002]
   - task_id: P-004
     title: "Window 与 WITH(CTE) + 入口 IT"
-    status: blocked
+    status: ready
     build_id: null
     packet: harness/tasks/P-004.md
     acceptance_doc: harness/evidence/implementer/P-004/ACCEPTANCE.md
