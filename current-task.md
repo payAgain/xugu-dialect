@@ -1,23 +1,23 @@
 # Current Task
 
 ## Goal
-I-003 P-005 **accepted** — awaiting Human Gate **批准 B-006，范围仅 P-006**
+I-003 P-006 **accepted** — awaiting Human Gate **批准 B-007，范围仅 P-007**
 
 ## Current Status
-Bulk mutation delivered. Next: Type/DDL details (P-006).
+Type/DDL details delivered. Next: matrix/docs align + Accept prep (P-007).
 
 ## Active Batch / Tasks
-- P-001…P-005 `accepted` · P-006 `ready`
-- B-006 `draft` (P-006 only)
+- P-001…P-006 `accepted` · P-007 `ready`
+- B-007 `draft` (P-007 only)
 - Branch: `feat/i-003-production-capability-parity`
 
 ## Validation
-VERIFY PASS; JOINED bulk update/delete IT PASS (`XuguBulkMutationIT`)
+VERIFY PASS; `XuguTypeDdlDetailsIT` PASS
 
 ## Next 3 Steps
-1. Human Gate：批准 B-006，范围仅 P-006？
-2. 实现 Type/DDL 细节 + 入口 IT
+1. Human Gate：批准 B-007，范围仅 P-007？
+2. 矩阵/文档对齐 + Accept 准备
 3. 禁止 Ship / harness 框架改动
 
 ## Last Updated
-2026-07-16T15:22:00+08:00
+2026-07-16T17:26:00+08:00

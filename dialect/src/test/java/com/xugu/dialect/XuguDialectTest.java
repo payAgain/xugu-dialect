@@ -71,7 +71,7 @@ class XuguDialectTest {
 
 	@Test
 	void ddlHelpersMatchXuguSyntax() {
-		assertEquals( "create table", dialect.getCreateTableString() );
+		assertEquals( "create table if not exists", dialect.getCreateTableString() );
 		assertEquals( "add column", dialect.getAddColumnString() );
 		assertEquals( "alter table T", dialect.getAlterTableString( "T" ) );
 		assertEquals( "drop table T", dialect.getDropTableString( "T" ) );

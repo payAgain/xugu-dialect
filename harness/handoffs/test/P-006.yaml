@@ -1,97 +1,101 @@
-schema_version: 1
+﻿schema_version: 1
 role: test
 phase_id: P-006
 build_id: B-006
-initiative_id: I-001
-invocation_id: test-p006-20260715
+initiative_id: I-003
+invocation_id: test-p006-20260716
 step_id: RP-02
 status: passed
 required: true
-completed_at: "2026-07-15T10:54:33+08:00"
-purpose: real DB IT for function rendering and execution; spot-check uuid/json/listagg/A-FUN-015
+completed_at: "2026-07-16T17:16:00+08:00"
+purpose: Verify Type/DDL details (C-DDL-001/002/003/004, C-CAT-001, C-GUID-001; C-DDL-005 skipped) via unit + live XuguDB IT
 
 inputs:
   - harness/tasks/P-006.md
   - harness/builds/B-006.json
   - harness/handoffs/implementer/P-006.yaml
-  - harness/evidence/implementer/P-006/NOTES.md
-  - dialect/src/main/java/com/xugu/dialect/function/XuguFunctionRegistrations.java
   - dialect/src/main/java/com/xugu/dialect/XuguDialect.java
-  - dialect/src/test/java/com/xugu/dialect/XuguFunctionRegistryTest.java
-  - dialect/src/test/java/com/xugu/dialect/it/XuguFunctionRegistryIT.java
-  - agents/test.md
+  - dialect/src/test/java/com/xugu/dialect/XuguTypeDdlDetailsTest.java
+  - dialect/src/test/java/com/xugu/dialect/it/XuguTypeDdlDetailsIT.java
+  - dialect/src/test/java/com/xugu/dialect/XuguDialectTest.java
 
 outputs:
   - harness/evidence/test/P-006/TEST-REPORT.md
+  - harness/evidence/test/P-006/CHECKLIST.md
+  - harness/evidence/test/P-006/IT-RESULT.txt
   - harness/evidence/test/P-006/verification.json
+  - harness/evidence/test/P-006/mvn-package.log
   - harness/evidence/test/P-006/mvn-test-offline.log
   - harness/evidence/test/P-006/mvn-test-integration.log
-  - harness/evidence/test/P-006/surefire-summary-offline.txt
-  - harness/evidence/test/P-006/surefire-summary-integration.txt
-  - harness/evidence/test/P-006/IT-RESULT.txt
-  - harness/evidence/test/P-006/CHECKLIST.md
   - harness/evidence/test/P-006/verify.log
-  - harness/evidence/test/P-006/com.xugu.dialect.it.XuguFunctionRegistryIT.txt
-  - harness/evidence/test/P-006/com.xugu.dialect.XuguFunctionRegistryTest.txt
+  - harness/evidence/test/P-006/harness-check.log
+  - harness/evidence/test/P-006/branch-check.log
+  - harness/evidence/test/P-006/TEST-com.xugu.dialect.it.XuguTypeDdlDetailsIT.xml
+  - harness/evidence/test/P-006/TEST-com.xugu.dialect.XuguTypeDdlDetailsTest.xml
   - harness/handoffs/test/P-006.yaml
 
 verification:
+  build:
+    command: "mvn -q -DskipTests package"
+    exit_code: 0
   test_offline:
     command: "mvn -q test"
     exit_code: 0
-    it_skipped: 13
-    unit_passed: 28
+    note: "First run exit 1 (stale XuguDialectTest assert); fixed test-only then re-ran exit 0"
   test_integration:
     command: 'mvn -q test "-Dxugu.run.integration=true"'
     exit_code: 0
     real_db: true
-    it_executed: 13
-    it_failed: 0
-    it_skipped: 0
-    unit_passed: 28
-    url: "jdbc:xugu://127.0.0.1:5138/SYSTEM?...&compatiblemode=NONE"
+    url: "jdbc:xugu://127.0.0.1:5138/SYSTEM?user=SYSDBA&password=SYSDBA&compatiblemode=NONE"
   verify:
     command: "python harness/scripts/verify.py --phase P-006 --evidence harness/evidence/test/P-006/verification.json"
     exit_code: 0
     status: "VERIFY PASS"
-
-spot_checks:
-  uuid_primary: "uuid()"
-  uuid_live_sql: "select uuid()"
-  json_subset:
-    - "json_value"
-    - "json_extract"
-  json_value_live: "select json_value('{\"a\":1}', '$.a')"
-  listagg_sql: "listagg(...) within group (order by ...)"
-  listagg_live: "listagg(pfe1_0.name, ',') within group (order by pfe1_0.name)"
-  a_fun_015_not_registered: true
-  bit_and_descriptor: null
-  real_db_no_mock: true
+  harness_check:
+    command: "python harness/scripts/harness_check.py"
+    exit_code: 0
+  branch_check:
+    command: "python harness/scripts/branch_check.py"
+    exit_code: 0
 
 observed_flows:
-  - id: function-registry-hql-sql-real-db
+  - id: C-DDL-001
     result: passed
-    method: XuguFunctionRegistryIT.functionFamilies_HqlAndNative_A_FUN
-    evidence: harness/evidence/test/P-006/mvn-test-integration.log
-
-it_counts:
-  offline: { total: 41, unit: 28, it: 13, it_skipped: 13, failures: 0 }
-  integration: { total: 41, unit: 28, it: 13, it_executed: 13, it_skipped: 0, failures: 0 }
+    methods:
+      - com.xugu.dialect.XuguTypeDdlDetailsTest.createTableIfNotExists_C_DDL_001
+      - com.xugu.dialect.it.XuguTypeDdlDetailsIT.typeDdlDetailsOnLiveDb
+  - id: C-DDL-002
+    result: passed
+    methods:
+      - com.xugu.dialect.XuguTypeDdlDetailsTest.alterColumnType_C_DDL_002
+      - com.xugu.dialect.it.XuguTypeDdlDetailsIT.typeDdlDetailsOnLiveDb
+  - id: C-DDL-003
+    result: passed
+    methods:
+      - com.xugu.dialect.XuguTypeDdlDetailsTest.datetimeLiteralAndFormat_C_DDL_003
+      - com.xugu.dialect.it.XuguTypeDdlDetailsIT.typeDdlDetailsOnLiveDb
+  - id: C-DDL-004
+    result: passed
+    methods:
+      - com.xugu.dialect.XuguTypeDdlDetailsTest.enumTypeDeclarationIsNull_C_DDL_004
+  - id: C-DDL-005
+    result: skipped
+    note: "Deferred per matrix / implementer authorization"
+  - id: C-CAT-001
+    result: passed
+    methods:
+      - com.xugu.dialect.XuguTypeDdlDetailsTest.catalogCreateDrop_C_CAT_001
+      - com.xugu.dialect.it.XuguTypeDdlDetailsIT.typeDdlDetailsOnLiveDb
+  - id: C-GUID-001
+    result: passed
+    methods:
+      - com.xugu.dialect.XuguTypeDdlDetailsTest.selectGuidString_C_GUID_001
+      - com.xugu.dialect.it.XuguTypeDdlDetailsIT.typeDdlDetailsOnLiveDb
 
 notes_for_reviewer: |
-  Independent RP-02 after impl-p006-20260715.
-  Offline PASS (13 IT skipped); IT gate ON PASS (13 IT incl. 2 P-006 FunctionRegistryIT); VERIFY PASS.
-  Spot-checks on live XuguDB SHOW_SQL: select uuid(); json_value(...); listagg ... within group (order by ...);
-  unit confirms bit_and (A-FUN-015) not registered; json_set absent.
-  No product code changes by test.
+  RP-02 for Type/DDL parity. First offline suite failed on stale XuguDialectTest
+  assert (expected "create table"); test-only fix to "create table if not exists"
+  (C-DDL-001). No product code changes. VERIFY PASS. Next RP-03 reviewer.
 
-forbidden_reminder:
-  - no product code rewrite by test unless harness fix required
-  - no MySQLDialect / OracleDialect inheritance
-  - no mock when gate ON / DB unreachable
-  - no git commit / tag / push by test
-
-next_step: RP-03 reviewer (risk_score=8; Full review of function coverage vs matrix A-FUN)
 blocker: null
-real_db_it_passed: true
 verdict: PASS

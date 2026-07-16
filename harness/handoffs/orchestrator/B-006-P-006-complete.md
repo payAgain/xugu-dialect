@@ -2,31 +2,23 @@
 
 **From:** orchestrator  
 **To:** Human Gate  
-**When:** 2026-07-15T11:05:00+08:00  
-**Branch:** `feat/i-001-xugu-dialect-major`
+**When:** 2026-07-16T17:26:00+08:00  
+**Branch:** `feat/i-003-production-capability-parity`
 
 ## Completed
 
-- P-006 role_pipeline complete: RP-01 / RP-02 / RP-03 all `passed`
-  - RP-03 **approve** (`rev-p006-20260715`)
-  - Forms: UUID primary `uuid()`; JSON subset `json_value` + `json_extract`; listagg `WITHIN GROUP`; A-FUN-015 not registered
-  - Evidence: `harness/evidence/reviewer/P-006/REVIEW.md`
-- ACCEPTANCE Decision: `accepted` — `harness/evidence/implementer/P-006/ACCEPTANCE.md`
-- VERIFY PASS: `harness/evidence/test/P-006/verification.json`
-- Real DB IT: 13/13 PASS (incl. 2 FunctionRegistryIT)
-- REGISTRY: P-006 `accepted`; P-007 `ready` (dependency satisfied)
-- Must-commit on working branch (SHA: a96f31079e359f5e369d4f4a0c11f3f1ed6e5950)
-
-## Explicitly not done
-
-- No P-007 schema / temp / comment / FK
-- No `git push` / tag / release
-- B-007 not approved
+- P-006 role_pipeline: RP-01 / RP-02 / RP-03 **passed** (auto subagents)
+- C-DDL-001…004, C-CAT-001, C-GUID-001 delivered; VERIFY PASS; reviewer **approve**
+- ACCEPTANCE: `accepted` — `harness/evidence/implementer/P-006/ACCEPTANCE.md`
+- REGISTRY: P-006 `accepted`; P-007 `ready`
+- B-007 `draft` = P-007 only (Docs/matrix align + Accept prep)
 
 ## Ask Human Gate
 
-**是否批准 B-007，范围仅 P-007（Schema / 临时表 / 注释 / 外键）？**
+**是否批准 B-007，范围仅 P-007？**（矩阵文档对齐与 Accept 准备）
 
-## Resume From
+## Explicitly not done
 
-After B-007 approval: materialize `harness/builds/B-007.json`, set P-007 `in_progress` / `build_id=B-007`, dispatch P-007 role_pipeline (implementer → test → reviewer; risk=8).
+- No P-007 docs work
+- No Ship / push / tag
+- B-007 not approved

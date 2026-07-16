@@ -1,47 +1,48 @@
 {
   "schema_version": 1,
-  "task_id": "P-006",
-  "batch_id": "B-006",
+  "task_id": "P-007",
+  "batch_id": "B-007",
   "status": "awaiting_build_approval",
   "harness_level": "Standard",
-  "last_updated": "2026-07-16T15:23:00+08:00",
+  "last_updated": "2026-07-16T17:26:00+08:00",
   "initiative_id": "I-003",
   "initiative_type": "feature",
   "working_branch": "feat/i-003-production-capability-parity",
   "active_plan": [
-    "P-001..P-005 accepted",
-    "B-006 draft = P-006 only"
+    "P-001..P-006 accepted",
+    "B-007 draft = P-007 only"
   ],
   "next_3_steps": [
-    "Human Gate: approve B-006 scope P-006 only?",
-    "On approve: Type/DDL details + ORM IT",
+    "Human Gate: approve B-007 scope P-007 only?",
+    "On approve: matrix/docs + Accept prep",
     "No Ship"
   ],
   "validation": {
-    "last_result": "P-005 accepted; VERIFY PASS; bulk mutation IT PASS"
+    "last_result": "P-006 accepted; VERIFY PASS; Type/DDL IT PASS"
   },
   "cognitive_state": {
     "failure_count": 0,
     "current_mode": "awaiting_human_gate",
-    "blocked_on": "human_gate_build_b006_p006_only"
+    "blocked_on": "human_gate_build_b007_p007_only"
   },
   "version_control_checkpoint": {
-    "decision": "p005_accepted_awaiting_b006",
-    "committed": true,
+    "decision": "p006_accepted_awaiting_b007",
+    "committed": false,
     "branch": "feat/i-003-production-capability-parity",
-    "candidate_commit": "e4da4cffd04a57eeb3534c759a380b37950c13dd",
-    "head": "e4da4cffd04a57eeb3534c759a380b37950c13dd"
+    "candidate_commit": null,
+    "head": "03b5886"
   },
   "handoff": {
-    "resume_from": "harness/handoffs/orchestrator/B-005-P-005-complete.md"
+    "resume_from": "harness/handoffs/orchestrator/B-006-P-006-complete.md"
   },
-  "approved_build": "B-005",
+  "approved_build": "B-006",
   "approved_phases": [
     "P-001",
     "P-002",
     "P-003",
     "P-004",
-    "P-005"
+    "P-005",
+    "P-006"
   ],
-  "updated_at": "2026-07-16T15:23:00+08:00"
+  "updated_at": "2026-07-16T17:26:00+08:00"
 }

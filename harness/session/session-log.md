@@ -1,4 +1,11 @@
-﻿## Entry: P-005 accepted — propose B-006
+﻿## Entry: P-006 accepted — propose B-007
+
+### Summary
+Human Gate「批准 B-006，范围仅 P-006」。Type/DDL hooks + IT PASS；VERIFY PASS；reviewer approve；P-006 accepted（auto subagents）。Next：批准 B-007 仅 P-007。
+
+---
+
+## Entry: P-005 accepted — propose B-006
 
 ### Summary
 Human Gate「批准 B-005，范围仅 P-005」。Bulk mutation fallback + JOINED bulk update/delete IT PASS；VERIFY PASS；reviewer approve；P-005 accepted（auto subagents）。Next：批准 B-006 仅 P-006。

@@ -1,111 +1,90 @@
-# P-006 Test Report (independent test role)
+﻿# P-006 Test Report (RP-02)
 
-> Phase: `P-006`  
-> Initiative: `I-001`  
-> Build: `B-006`  
-> Invocation: `test-p006-20260715`  
-> Role: `test` (independent context from implementer)  
-> Verdict: **PASS**  
-> Date: 2026-07-15
+| Field | Value |
+|-------|-------|
+| Initiative | I-003 |
+| Build | B-006 |
+| Phase | P-006 — Type/DDL details |
+| Role | test / RP-02 |
+| Branch | feat/i-003-production-capability-parity |
+| HEAD (at run) | 03b58865aa4a55fd4c0cb53ca3c41fbeeeec1daf |
+| invocation_id | test-p006-20260716 |
+| Completed | 2026-07-16T17:16:00+08:00 |
 
-## Environment
+## Scope
 
-| Item | Value |
-|---|---|
-| Maven | Apache Maven 3.9.9 (`C:\Users\admin\tools\apache-maven-3.9.9\bin` prepended to PATH) |
-| JDK | Oracle 21.0.1 |
-| Working directory | `E:\Work\java\hibernate-test` |
-| Branch | `feat/i-001-xugu-dialect-major` |
-| HEAD (test time) | `4bf40759a2d48c7307a3dcea0bc6f8ebcfaaf3e2` |
-| Product code changes by test | none |
-| Live DB | XuguDB `jdbc:xugu://127.0.0.1:5138/SYSTEM?...&compatiblemode=NONE` (driver: XuguDB JDBC Driver; dialect: XuguDialect; version: 12.0) |
+Independent verification of implementer delivery: `XuguDialect` Type/DDL details (IF NOT EXISTS, ALTER COLUMN, datetime literals/format, ENUM null, catalog create/drop, select sys_guid), `XuguTypeDdlDetailsTest` (offline), `XuguTypeDdlDetailsIT` (live XuguDB when IT gate ON).
 
-## Commands and exit codes
+## Command matrix
 
-| # | Command | Exit code | Result |
-|---|---|---|---|
-| 1 | `mvn -q test` (gate default/off) | 0 | PASS (13 IT skipped) |
-| 2 | `mvn -q test -Dxugu.run.integration=true` | 0 | PASS (13 IT executed on real XuguDB) |
-| 3 | `python harness/scripts/verify.py --phase P-006 --evidence harness/evidence/test/P-006/verification.json` | 0 | `VERIFY PASS` |
+| Step | Command | Exit |
+|------|---------|------|
+| Build | `mvn -q -DskipTests package` | 0 |
+| Unit/offline tests (1st) | `mvn -q test` | 1 — stale assert in `XuguDialectTest.ddlHelpersMatchXuguSyntax` expected `create table` |
+| Test-only fix | `XuguDialectTest` expect `create table if not exists` (C-DDL-001) | — |
+| Unit/offline tests (re-run) | `mvn -q test` | 0 |
+| Integration tests | `mvn -q test "-Dxugu.run.integration=true"` | 0 |
+| Verify | `python harness/scripts/verify.py --phase P-006 --evidence harness/evidence/test/P-006/verification.json` | 0 — **VERIFY PASS** |
+| Harness check | `python harness/scripts/harness_check.py` | 0 |
+| Branch check | `python harness/scripts/branch_check.py` | 0 |
 
-## Surefire counts
+### PowerShell note
 
-### Offline (`xugu.run.integration=false`)
+Unquoted `-Dxugu.run.integration=true` is parsed as a lifecycle phase. Effective integration run used quoted property: `"-Dxugu.run.integration=true"`.
 
-| Suite | tests | failures | errors | skipped |
-|---|---:|---:|---:|---:|
-| `XuguDialectTest` | 7 | 0 | 0 | 0 |
-| `XuguFunctionRegistryTest` | 5 | 0 | 0 | 0 |
-| `XuguIdentitySequenceTest` | 6 | 0 | 0 | 0 |
-| `XuguPaginationLockTest` | 10 | 0 | 0 | 0 |
-| `XuguTypeRoundTripIT` | 4 | 0 | 0 | 4 |
-| `XuguDdlIT` | 1 | 0 | 0 | 1 |
-| `XuguBinarySchemaExportIT` | 1 | 0 | 0 | 1 |
-| `XuguPaginationIT` | 1 | 0 | 0 | 1 |
-| `XuguLockIT` | 2 | 0 | 0 | 2 |
-| `XuguIdentitySequenceIT` | 2 | 0 | 0 | 2 |
-| `XuguFunctionRegistryIT` | 2 | 0 | 0 | 2 |
-| **Total** | **41** | **0** | **0** | **13** |
+## Observed flows
 
-### Integration gate ON (real XuguDB)
+### C-DDL-001 — CREATE TABLE IF NOT EXISTS
 
-| Suite | tests | failures | errors | skipped |
-|---|---:|---:|---:|---:|
-| `XuguDialectTest` | 7 | 0 | 0 | 0 |
-| `XuguFunctionRegistryTest` | 5 | 0 | 0 | 0 |
-| `XuguIdentitySequenceTest` | 6 | 0 | 0 | 0 |
-| `XuguPaginationLockTest` | 10 | 0 | 0 | 0 |
-| `XuguTypeRoundTripIT` | 4 | 0 | 0 | 0 |
-| `XuguDdlIT` | 1 | 0 | 0 | 0 |
-| `XuguBinarySchemaExportIT` | 1 | 0 | 0 | 0 |
-| `XuguPaginationIT` | 1 | 0 | 0 | 0 |
-| `XuguLockIT` | 2 | 0 | 0 | 0 |
-| `XuguIdentitySequenceIT` | 2 | 0 | 0 | 0 |
-| `XuguFunctionRegistryIT` | 2 | 0 | 0 | 0 |
-| **Total** | **41** | **0** | **0** | **0** |
+| Check | Result | Evidence |
+|-------|--------|----------|
+| Offline | PASS | `XuguTypeDdlDetailsTest.createTableIfNotExists_C_DDL_001` |
+| Live SchemaExport | PASS | `XuguTypeDdlDetailsIT.typeDdlDetailsOnLiveDb` (CREATE script contains `if not exists`) |
 
-**IT summary:** 13 IT methods executed when gate ON, 0 failed, 0 skipped. Offline: 13 IT skipped via `Assumptions.assumeTrue(XuguITGate.isEnabled())`. Unit: 28 passed both runs (`7+5+6+10`). P-006 focused: `XuguFunctionRegistryIT` 2/2 PASS.
+### C-DDL-002 — ALTER COLUMN type
 
-## Project verify evidence
+| Check | Result | Evidence |
+|-------|--------|----------|
+| Offline | PASS | `XuguTypeDdlDetailsTest.alterColumnType_C_DDL_002` |
+| Live ALTER integer→varchar | PASS | `XuguTypeDdlDetailsIT.typeDdlDetailsOnLiveDb` |
 
-- Path: `harness/evidence/test/P-006/verification.json`
-- Overall status: `PASS`
-- Required checks: `build` PASS (exit 0), `test` PASS (exit 0)
-- Optional: `lint` NOT_APPLICABLE
-- Harness check embedded: `HARNESS_CHECK PASS`
+### C-DDL-003 — datetime format / literals
 
-## Spot-check (function forms)
+| Check | Result | Evidence |
+|-------|--------|----------|
+| Offline | PASS | `XuguTypeDdlDetailsTest.datetimeLiteralAndFormat_C_DDL_003` |
+| Live HQL timestamp literal + to_char | PASS | `XuguTypeDdlDetailsIT.typeDdlDetailsOnLiveDb` |
 
-| Capability | Expected / locked | Unit | Live IT (SHOW_SQL / native) | Result |
-|---|---|---|---|---|
-| UUID primary | `uuid()` | `PRIMARY_UUID_FUNCTION=uuid`; descriptor registered | HQL → `select uuid()`; native `SELECT UUID() FROM DUAL` | PASS |
-| JSON subset | `json_value` + `json_extract` only | `JsonValueFunction`; `json_extract` registered; `json_set` absent | HQL → `select json_value('{"a":1}', '$.a')`; native `JSON_EXTRACT(...) FROM DUAL` | PASS |
-| listagg | `LISTAGG(...) WITHIN GROUP (ORDER BY ...)` | `ListaggFunction` descriptor | `listagg(pfe1_0.name, ',') within group (order by pfe1_0.name)` | PASS |
-| A-FUN-015 | not registered (延后) | `bit_and` descriptor **null** | — (deferred; no claim) | PASS |
-| Negative | unregistered fails diagnosably | `xugu_unsupported_fn_xyz` null | native `SELECT xugu_unsupported_fn_xyz() FROM DUAL` throws SQLException | PASS |
+### C-DDL-004 — ENUM declaration null
 
-## Observed affected flows
+| Check | Result | Evidence |
+|-------|--------|----------|
+| Offline | PASS | `XuguTypeDdlDetailsTest.enumTypeDeclarationIsNull_C_DDL_004` (`getEnumTypeDeclaration` → null) |
 
-| Flow | Method | Expected | Observed | Result | Evidence |
-|---|---|---|---|---|---|
-| function-registry-hql-sql-real-db | `XuguFunctionRegistryIT.functionFamilies_HqlAndNative_A_FUN` (+ negative IT) | Matrix 可实现 families render + execute on live XuguDB; UUID=`uuid()`; JSON subset; listagg WITHIN GROUP; A-FUN-015 not registered | Live SHOW_SQL: concat/substring/lower/abs/current_timestamp/extract/cast/count/sum/`uuid()`/`json_value`/`listagg … within group`; native JSON_EXTRACT + UUID(); bit_and absent in unit; unsupported FN fails | PASS | `mvn-test-integration.log`, `com.xugu.dialect.it.XuguFunctionRegistryIT.txt`, `IT-RESULT.txt` |
+### C-DDL-005
 
-## Readiness dimensions (test view)
+**Skipped** — deferred per matrix / implementer authorization.
 
-| Dimension | Observation | Result |
-|---|---|---|
-| functional-correctness | Unit + real-DB IT pass for function families incl. uuid/json/listagg | PASS |
-| maintainability | IT gated; offline suite green without DB; `OfflineConnectionProvider` for unit registry boot | PASS |
-| compatibility | Hibernate 7.4 function SPI; no MySQL/Oracle Dialect inheritance in this Phase path; JSON HQL needs `JSON_FUNCTIONS_ENABLED` (documented) | PASS |
+### C-CAT-001 — CREATE/DROP DATABASE catalog
 
-## Residual notes
+| Check | Result | Evidence |
+|-------|--------|----------|
+| Offline | PASS | `XuguTypeDdlDetailsTest.catalogCreateDrop_C_CAT_001` |
+| Live CREATE/DROP `HIB_I003_P006_CAT` | PASS | `XuguTypeDdlDetailsIT.typeDdlDetailsOnLiveDb` |
 
-- Test role did not modify product code.
-- DB unreachable with gate ON would be FAIL/blocker (no mock path); this run connected successfully.
-- A-FUN-015 remains deferred (matrix 延后) — confirmed not registered.
-- A-FUN-019/020/021 remain deferred per implementer — out of P-006 required flow.
-- Next: RP-03 reviewer (risk_score=8, Full review required).
+### C-GUID-001 — select sys_guid()
+
+| Check | Result | Evidence |
+|-------|--------|----------|
+| Offline | PASS | `XuguTypeDdlDetailsTest.selectGuidString_C_GUID_001` |
+| Live Session native query | PASS | `XuguTypeDdlDetailsIT.typeDdlDetailsOnLiveDb` |
+
+Surefire (integration gate ON): `TEST-com.xugu.dialect.it.XuguTypeDdlDetailsIT.xml` — 1 test, 0 failures; `TEST-com.xugu.dialect.XuguTypeDdlDetailsTest.xml` — 6 tests, 0 failures.
+
+## Product code changes by test
+
+None. Test-only: aligned `XuguDialectTest.ddlHelpersMatchXuguSyntax` with C-DDL-001.
 
 ## Verdict
 
-**PASS** — offline test / real-DB IT / verify green; required observed flow `function-registry-hql-sql-real-db` evidenced; UUID=`uuid()`, JSON subset, listagg WITHIN GROUP, and A-FUN-015 not-registered confirmed.
+**PASS** — all required commands succeeded; VERIFY PASS; Type/DDL flows confirmed as above.

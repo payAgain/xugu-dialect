@@ -1,107 +1,41 @@
-# P-006 Implementer Notes (SQL function registry)
+# P-006 Implementer NOTES — Type/DDL details (I-003)
 
-**Invocation:** `impl-p006-20260715`  
-**Role:** implementer  
-**Phase / Build / Initiative:** P-006 / B-006 / I-001  
-**Date:** 2026-07-15  
-**Step:** RP-01  
-**Accept / commit:** **NOT done** (await RP-02 test + RP-03 reviewer)
+> **Invocation:** `impl-p006-20260716` · I-003 / B-006 / RP-01
 
-## What was delivered
+## Delivered
 
-1. `com.xugu.dialect.function.XuguFunctionRegistrations` — XuGu-native contributions.
-2. `XuguDialect.initializeFunctionRegistry` → `super` + `XuguFunctionRegistrations.register`.
-3. Offline unit tests: `XuguFunctionRegistryTest` (+ `OfflineConnectionProvider`).
-4. Gated IT: `XuguFunctionRegistryIT` (`-Dxugu.run.integration=true`).
-5. Matrix acceptance hints updated for A-FUN-001..014, 016..018 (015 deferred untouched).
-
-## Coverage (matrix 可实现)
-
-| ID | Status | Notes |
+| ID | Surface | Implementation |
 |---|---|---|
-| A-FUN-001 concat | ✅ | HQL → `concat(...)`; live IT |
-| A-FUN-002 substring/substr | ✅ | both registered; substring IT |
-| A-FUN-003 length/char_length | ✅ | Dialect defaults |
-| A-FUN-004 lower/upper | ✅ | lower IT |
-| A-FUN-005 trim/ltrim/rtrim | ✅ | trim + trim1() |
-| A-FUN-006 replace/locate/position | ✅ | + ANSI position |
-| A-FUN-007 coalesce/nullif/nvl | ✅ | COALESCE preferred; NVL native |
-| A-FUN-008 abs/mod/power/sqrt | ✅ | abs IT |
-| A-FUN-009 round/floor/ceil/trunc | ✅ | ceiling_ceil + trunc |
-| A-FUN-010 current_*/now | ✅ | current_timestamp IT; now() |
-| A-FUN-011 extract/year/month/day | ✅ | extract(year) IT |
-| A-FUN-012 to_char/to_date/to_timestamp | ✅ | registered; live probe |
-| A-FUN-013 cast | ✅ | cast IT |
-| A-FUN-014 avg/sum/min/max/count | ✅ | count/sum IT |
-| A-FUN-015 bit_and/bit_or | 延后 | not registered |
-| A-FUN-016 UUID | ✅ | **primary = `uuid()`** |
-| A-FUN-017 JSON | ✅ | **subset: `json_value` + `json_extract`** |
-| A-FUN-018 listagg family | ✅ | HQL listagg → `LISTAGG … WITHIN GROUP` |
+| C-DDL-001 | `getCreateTableString` + `supportsIfExistsBeforeTableName` | `"create table if not exists"`; `true` (DROP IF EXISTS before name) |
+| C-DDL-002 | `supportsAlterColumnType` + `getAlterColumnTypeString` | `true`; `"alter column " + name + " " + def.trim()` |
+| C-DDL-003 | `appendDatetimeFormat` + `appendDateTimeLiteral` ×3 | MySQL `datetimeFormat` helper (no inheritance); literals `date '…'` / `time '…'` / `timestamp '…'` via `DateTimeUtils` |
+| C-DDL-004 | `getEnumTypeDeclaration` | `null` (文档不允许 native ENUM) |
+| C-CAT-001 | `canCreateCatalog` / create|drop commands | `true`; `create database {name}` / `drop database {name}` |
+| C-GUID-001 | `getSelectGUIDString` | `select sys_guid()` (registry primary remains `uuid()`) |
 
-## UUID choice (A-FUN-016)
+**Skipped (authorized):** C-DDL-005 延后 · C-LOCK-001 已有 · C-SKIP-001 文档不允许
 
-**Primary: `uuid()`**
+## Tests
 
-| Candidate | Live result | Why not primary |
-|---|---|---|
-| `uuid()` | dashed VARCHAR e.g. `767E0000-…` | **chosen** — docs + standard dashed form |
-| `gen_random_uuid()` | dashed VARCHAR | also OK; registered as alternate |
-| `sys_guid()` | GUID type hex without dashes | registered alternate; less Hibernate-string-friendly |
+- Unit: `XuguTypeDdlDetailsTest` — flags/strings (IF EXISTS, alter, enum null, catalog, GUID; subquery N/A for this Phase)
+- ORM/schema IT: `XuguTypeDdlDetailsIT` + `I003P006TypeEntity` / `I003P006AlterEntity` (`HIB_I003_P006_*`)
+  - C-DDL-001: SchemaExport CREATE script contains `if not exists` — **PASS**
+  - C-DDL-002: live `ALTER TABLE … ALTER COLUMN` integer→varchar (empty nullable column) — **PASS**
+  - C-DDL-003: HQL `local datetime` literal → SQL `timestamp '…'`; `to_char` + `current_timestamp` — **PASS**
+  - C-CAT-001: `CREATE`/`DROP DATABASE HIB_I003_P006_CAT` with cleanup — **PASS**
+  - C-GUID-001: Session native `select sys_guid()` — **PASS**
 
-Docs cited: `reference/function/uuid-functions/uuid.md`, `sys_guid.md`, `gen_random_uuid.md`.
+## C-DDL-002 boundary
 
-## JSON choice (A-FUN-017)
+XuGu rejects type change when column is `NOT NULL` with incompatible existing values (E16017). IT alters an empty nullable column, then inserts varchar data.
 
-**Subset only (not MySQL dump):**
-
-| Function | Registration | Live |
-|---|---|---|
-| `json_value` | Hibernate `JsonValueFunction` (ANSI `JSON_VALUE(doc, path…)`) | HQL IT OK |
-| `json_extract` | named descriptor | native IT OK |
-| `json_set` / MySQL dump | **NOT registered** | — |
-
-Docs: `reference/function/json-functions/json_value.md`, `json_extract.md`.
-
-**App note:** Hibernate 7 gates HQL `json_*` behind `hibernate.query.hql.json_functions_enabled=true` (`QuerySettings.JSON_FUNCTIONS_ENABLED`). Dialect still registers descriptors; IT enables the preview flag.
-
-## listagg (A-FUN-018)
-
-Hibernate `listagg` → `ListaggFunction` → SQL  
-`listagg(expr, sep) within group (order by …)`  
-matches XuGu `reference/function/aggregate-functions/listagg.md`.  
-Also register native `string_agg` / `group_concat` names (docs; live-proven).
-
-## Doc citations (families)
-
-- string: `concat.md`, `substring.md`, `substr.md`, `length.md`, `lower.md`, `upper.md`, `trim.md`, `ltrim.md`, `rtrim.md`, `replace.md`, `locate.md`, `position.md`, `nvl.md`
-- math: `abs.md`, `mod.md`, `power.md`, `sqrt.md`, `round.md`, `floor.md`, `ceil.md`, `trunc.md`
-- date-time: `current_date.md`, `current_timestamp.md`, `now.md`, `extract.md`, `year.md`, `month.md`, `day.md`, `to_char.md`, `to_date.md`, `to_timestamp.md`
-- aggregate: `avg.md`, `sum.md`, `min.md`, `max.md`, `listagg.md`, `string_agg.md`, `group_concat.md`
-- uuid: `uuid.md`, `sys_guid.md`, `gen_random_uuid.md`
-- json: `json_value.md`, `json_extract.md`
-- cast: `reference/sql/expression/type_conversion.md`
-
-## Negative / unsupported
-
-- Unit: `xugu_unsupported_fn_xyz` and deferred `bit_and` have **no** descriptors.
-- IT: `SELECT xugu_unsupported_fn_xyz() FROM DUAL` fails with diagnosable XuGu SQLException.
-
-## Explicitly NOT done / forbidden
-
-- No MySQL/Oracle Dialect inheritance
-- No sibling `hibernate-dialect` port
-- No inventing undocumented functions as supported
-- No Accept / git commit this turn
-- A-FUN-015/019/020/021 remain deferred
-
-## Commands
+## Validation (implementer)
 
 | Command | Exit |
 |---|---|
-| `mvn -q test` | **0** |
-| `mvn -q test -Dxugu.run.integration=true` | **0** |
-| `python harness/scripts/verify.py --phase P-006` | see verification.json |
+| `mvn -q -pl dialect -am test -Dtest=XuguTypeDdlDetailsTest` | **0** |
+| `mvn -q -pl dialect -am test -Dtest=XuguTypeDdlDetailsIT -Dxugu.run.integration=true` | **0** |
 
-## Observed flows
+## Forbidden respected
 
-- `function-registry-hql-sql-real-db`: HQL concat/substring/lower/abs/current_timestamp/extract/cast/count/sum/uuid/json_value/listagg + native json_extract/uuid on live XuguDB (`compatiblemode=NONE`).
+No sibling source copy; no MySQL/Oracle Dialect inheritance (static `MySQLDialect.datetimeFormat` helper only); no harness framework changes; version 7.4.5.Final; no Accept; no git commit.

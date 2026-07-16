@@ -2,6 +2,11 @@ package com.xugu.dialect;
 
 import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
+import java.time.ZonedDateTime;
+import java.time.temporal.TemporalAccessor;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 import java.util.UUID;
 
 import org.hibernate.LockMode;
@@ -11,6 +16,7 @@ import org.hibernate.boot.model.FunctionContributions;
 import org.hibernate.boot.model.TypeContributions;
 import org.hibernate.dialect.DatabaseVersion;
 import org.hibernate.dialect.Dialect;
+import org.hibernate.dialect.MySQLDialect;
 import org.hibernate.dialect.NationalizationSupport;
 import org.hibernate.dialect.TimeZoneSupport;
 import org.hibernate.dialect.aggregate.AggregateSupport;
@@ -48,6 +54,7 @@ import org.hibernate.sql.ast.spi.StandardSqlAstTranslatorFactory;
 import org.hibernate.sql.ast.tree.Statement;
 import org.hibernate.sql.exec.spi.JdbcOperation;
 import org.hibernate.type.SqlTypes;
+import org.hibernate.type.descriptor.DateTimeUtils;
 import org.hibernate.type.descriptor.jdbc.UUIDJdbcType;
 import org.hibernate.type.descriptor.jdbc.spi.JdbcTypeRegistry;
 import org.hibernate.type.descriptor.sql.internal.DdlTypeImpl;
@@ -69,6 +76,7 @@ import com.xugu.dialect.temptable.XuguLocalTemporaryTableStrategy;
 import com.xugu.dialect.type.XuguCastingJsonArrayJdbcTypeConstructor;
 import com.xugu.dialect.type.XuguCastingJsonJdbcType;
 
+import jakarta.persistence.TemporalType;
 import jakarta.persistence.Timeout;
 
 /**
@@ -134,9 +142,19 @@ import jakarta.persistence.Timeout;
  * {@link LocalTemporaryTableMutationStrategy} / {@link LocalTemporaryTableInsertStrategy}
  * backed by {@link XuguLocalTemporaryTableStrategy} ({@code CREATE LOCAL TEMPORARY TABLE}).
  *
+ * <p><b>Type / DDL details (C-DDL-* / C-CAT-* / C-GUID-* / I-003 P-006):</b>
+ * {@code CREATE TABLE IF NOT EXISTS} via {@link #getCreateTableString()} +
+ * {@link #supportsIfExistsBeforeTableName()}; {@code ALTER COLUMN} type change;
+ * XuGu {@code date '…'}/{@code timestamp '…'} literals and MySQL-style datetime
+ * format tokens (via {@link MySQLDialect#datetimeFormat} helper, not inheritance);
+ * {@link #getEnumTypeDeclaration} returns {@code null} (no native ENUM);
+ * {@code CREATE}/{@code DROP DATABASE} catalog commands; {@code select sys_guid()}
+ * for GUID select (function registry primary remains {@code uuid()}).
+ *
  * <p><b>Schema / temp / comment / constraints (A-SCH-* , P-007):</b>
  * {@code CREATE}/{@code DROP SCHEMA}; schema-qualified names
- * ({@link NameQualifierSupport#SCHEMA}, catalog deferred A-SCH-003);
+ * ({@link NameQualifierSupport#SCHEMA}); catalog create/drop via
+ * {@link #canCreateCatalog()} (C-CAT-001) — name qualification stays schema-only;
  * local temp via {@link XuguLocalTemporaryTableStrategy}; global temp via
  * {@link XuguGlobalTemporaryTableStrategy} (requires {@code support_global_tab=ON});
  * {@code COMMENT ON TABLE|COLUMN}; UNIQUE/FK/CHECK; {@code TRUNCATE TABLE};
@@ -144,7 +162,7 @@ import jakarta.persistence.Timeout;
  * (A-SCH-007) — never emitted by the temp-table exporter.
  *
  * <p><b>Not emitted:</b> {@code SKIP LOCKED} (A-LCK-004), {@code FOR SHARE} (A-LCK-005),
- * FK on temporary tables (A-SCH-007), catalog.schema.table (A-SCH-003 deferred).
+ * FK on temporary tables (A-SCH-007), native {@code ENUM} DDL (C-DDL-004).
  *
  * <p><b>A-LCK-005 (FOR SHARE / pessimistic read) — Hibernate shim only:</b>
  * XuGu documents {@code FOR UPDATE} / {@code FOR READ ONLY}, not {@code FOR SHARE}.
@@ -380,12 +398,24 @@ public class XuguDialect extends Dialect {
 	}
 
 	// -------------------------------------------------------------------------
-	// DDL helpers (A-DDL-*) — defaults match Xugu CREATE/ALTER/DROP docs
+	// DDL helpers (A-DDL-* / C-DDL-*) — match Xugu CREATE/ALTER/DROP docs
 	// -------------------------------------------------------------------------
 
+	/**
+	 * C-DDL-001: {@code CREATE TABLE IF NOT EXISTS}
+	 * ({@code reference/object/table/create.md}).
+	 */
 	@Override
 	public String getCreateTableString() {
-		return "create table";
+		return "create table if not exists";
+	}
+
+	/**
+	 * C-DDL-001: {@code DROP TABLE IF EXISTS …} (IF EXISTS before table name).
+	 */
+	@Override
+	public boolean supportsIfExistsBeforeTableName() {
+		return true;
 	}
 
 	@Override
@@ -396,6 +426,20 @@ public class XuguDialect extends Dialect {
 	@Override
 	public String getAddColumnString() {
 		return "add column";
+	}
+
+	/**
+	 * C-DDL-002: {@code ALTER TABLE … ALTER COLUMN col &lt;definition&gt;}
+	 * ({@code reference/object/table/alter.md}).
+	 */
+	@Override
+	public boolean supportsAlterColumnType() {
+		return true;
+	}
+
+	@Override
+	public String getAlterColumnTypeString(String columnName, String columnType, String columnDefinition) {
+		return "alter column " + columnName + " " + columnDefinition.trim();
 	}
 
 	@Override
@@ -413,17 +457,152 @@ public class XuguDialect extends Dialect {
 		return " add constraint " + constraintName + " primary key ";
 	}
 
+	/**
+	 * C-DDL-004: XuGu has no native ENUM datatype — do not emit MySQL {@code ENUM(…)}.
+	 */
+	@Override
+	public String getEnumTypeDeclaration(String name, String[] values) {
+		return null;
+	}
+
+	/**
+	 * C-GUID-001: {@code select sys_guid()} ({@code reference/function/uuid-functions}).
+	 * Function-registry primary remains {@code uuid()}; this is the Dialect GUID-select hook.
+	 */
+	@Override
+	public String getSelectGUIDString() {
+		return "select sys_guid()";
+	}
+
+	// -------------------------------------------------------------------------
+	// Datetime literals / format (C-DDL-003)
+	// -------------------------------------------------------------------------
+
+	/**
+	 * XuGu-friendly literals: {@code date '…'} / {@code time '…'} / {@code timestamp '…'}
+	 * (not JDBC {@code {d …}} escapes). Docs: {@code reference/sql/datatype/datetime.md}.
+	 */
+	@Override
+	public void appendDateTimeLiteral(
+			SqlAppender appender,
+			TemporalAccessor temporalAccessor,
+			TemporalType precision,
+			TimeZone jdbcTimeZone) {
+		switch ( precision ) {
+			case DATE -> {
+				appender.appendSql( "date '" );
+				DateTimeUtils.appendAsDate( appender, temporalAccessor );
+				appender.appendSql( '\'' );
+			}
+			case TIME -> {
+				appender.appendSql( "time '" );
+				DateTimeUtils.appendAsLocalTime( appender, temporalAccessor );
+				appender.appendSql( '\'' );
+			}
+			case TIMESTAMP -> {
+				TemporalAccessor value = temporalAccessor instanceof ZonedDateTime z
+						? z.toOffsetDateTime()
+						: temporalAccessor;
+				appender.appendSql( "timestamp '" );
+				DateTimeUtils.appendAsTimestampWithMicros(
+						appender, value, supportsTemporalLiteralOffset(), jdbcTimeZone, false );
+				appender.appendSql( '\'' );
+			}
+			default -> throw new IllegalArgumentException( "Unexpected TemporalType: " + precision );
+		}
+	}
+
+	@Override
+	public void appendDateTimeLiteral(
+			SqlAppender appender,
+			Date date,
+			TemporalType precision,
+			TimeZone jdbcTimeZone) {
+		switch ( precision ) {
+			case DATE -> {
+				appender.appendSql( "date '" );
+				DateTimeUtils.appendAsDate( appender, date );
+				appender.appendSql( '\'' );
+			}
+			case TIME -> {
+				appender.appendSql( "time '" );
+				DateTimeUtils.appendAsLocalTime( appender, date );
+				appender.appendSql( '\'' );
+			}
+			case TIMESTAMP -> {
+				appender.appendSql( "timestamp '" );
+				DateTimeUtils.appendAsTimestampWithMicros( appender, date, jdbcTimeZone );
+				appender.appendSql( '\'' );
+			}
+			default -> throw new IllegalArgumentException( "Unexpected TemporalType: " + precision );
+		}
+	}
+
+	@Override
+	public void appendDateTimeLiteral(
+			SqlAppender appender,
+			Calendar calendar,
+			TemporalType precision,
+			TimeZone jdbcTimeZone) {
+		switch ( precision ) {
+			case DATE -> {
+				appender.appendSql( "date '" );
+				DateTimeUtils.appendAsDate( appender, calendar );
+				appender.appendSql( '\'' );
+			}
+			case TIME -> {
+				appender.appendSql( "time '" );
+				DateTimeUtils.appendAsLocalTime( appender, calendar );
+				appender.appendSql( '\'' );
+			}
+			case TIMESTAMP -> {
+				appender.appendSql( "timestamp '" );
+				DateTimeUtils.appendAsTimestampWithMillis( appender, calendar, jdbcTimeZone );
+				appender.appendSql( '\'' );
+			}
+			default -> throw new IllegalArgumentException( "Unexpected TemporalType: " + precision );
+		}
+	}
+
+	/**
+	 * Map Hibernate/Java datetime format patterns to XuGu {@code DATE_FORMAT}-style tokens
+	 * via {@link MySQLDialect#datetimeFormat} (static helper only — this dialect does not extend MySQL).
+	 */
+	@Override
+	public void appendDatetimeFormat(SqlAppender appender, String format) {
+		appender.appendSql( MySQLDialect.datetimeFormat( format ).result() );
+	}
+
 	// -------------------------------------------------------------------------
 	// Schema / temp / comment / constraints / truncate / index (A-SCH-*) — P-007
 	// -------------------------------------------------------------------------
 
 	/**
-	 * A-SCH-002: qualify with schema only. Catalog (database) qualifier is deferred
-	 * (A-SCH-003) — Xugu “database” ≠ Hibernate catalog always.
+	 * A-SCH-002: qualify with schema only. Catalog create/drop is separate (C-CAT-001);
+	 * object names stay schema-qualified, not catalog.schema.table.
 	 */
 	@Override
 	public NameQualifierSupport getNameQualifierSupport() {
 		return NameQualifierSupport.SCHEMA;
+	}
+
+	/**
+	 * C-CAT-001: {@code CREATE DATABASE} / {@code DROP DATABASE}
+	 * ({@code reference/object/database.md}).
+	 */
+	@Override
+	public boolean canCreateCatalog() {
+		return true;
+	}
+
+	@Override
+	public String[] getCreateCatalogCommand(String catalogName) {
+		return new String[] { "create database " + catalogName };
+	}
+
+	@Override
+	public String[] getDropCatalogCommand(String catalogName) {
+		return new String[] { "drop database " + catalogName };
 	}
 
 	/** A-SCH-001: {@code CREATE SCHEMA schema_name} ({@code reference/object/schema.md}). */

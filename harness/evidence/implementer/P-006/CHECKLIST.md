@@ -1,15 +1,15 @@
-# P-006 Implementer Checklist (RP-01)
+# P-006 Implementer Checklist (RP-01 / I-003 Type/DDL details)
 
-- [x] `XuguDialect.initializeFunctionRegistry` extended
-- [x] Helpers under `com.xugu.dialect.function` (`XuguFunctionRegistrations`)
-- [x] Matrix A-FUN-001..014, 016..018 covered (015 deferred)
-- [x] UUID primary = `uuid()` documented + live-proven
-- [x] JSON subset = `json_value` + `json_extract` (not MySQL dump)
-- [x] listagg → XuGu `LISTAGG … WITHIN GROUP`
-- [x] Unit tests: descriptors / pattern fragments
-- [x] Gated IT: representative functions per family
-- [x] Negative: unsupported function diagnosable
-- [x] Evidence NOTES + matrix hints
-- [x] verify.py --phase P-006
+- [x] C-DDL-001: `supportsIfExistsBeforeTableName()` → true + `getCreateTableString` → `create table if not exists`
+- [x] C-DDL-002: `supportsAlterColumnType` + `getAlterColumnTypeString` per alter.md
+- [x] C-DDL-003: `appendDatetimeFormat` + `appendDateTimeLiteral` overrides (XuGu literals)
+- [x] C-DDL-004: `getEnumTypeDeclaration` → null (do not emit MySQL ENUM)
+- [x] C-CAT-001: `canCreateCatalog` + create/drop database commands
+- [x] C-GUID-001: `getSelectGUIDString` → `select sys_guid()`
+- [x] Skip C-DDL-005 / C-LOCK-001 / C-SKIP-001 as authorized
+- [x] Unit test `XuguTypeDdlDetailsTest`
+- [x] ORM/schema IT `XuguTypeDdlDetailsIT` (CREATE if not exists, alter column, datetime HQL, catalog, GUID)
+- [x] Evidence NOTES + CHECKLIST overwritten for I-003 Type/DDL Phase
+- [x] Handoff `harness/handoffs/implementer/P-006.yaml` → `completed_awaiting_test_review`
 - [ ] Accept (orchestrator / later)
 - [ ] Commit (Human Gate / later)

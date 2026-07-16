@@ -3,12 +3,16 @@
   "build_id": "B-006",
   "initiative_id": "I-003",
   "plan_revision": 1,
-  "status": "draft",
+  "status": "approved",
   "proposed_phase_ids": ["P-006"],
-  "approved_phase_ids": [],
-  "approval": null,
-  "recommendation": "Propose B-006 = P-006 only (Type/DDL details + ORM IT). Do not start until Human Gate approves.",
+  "approved_phase_ids": ["P-006"],
+  "approval": {
+    "reference": "批准 B-006，范围仅 P-006",
+    "approved_at": "2026-07-16T16:56:00+08:00",
+    "approved_by": "Human Gate"
+  },
+  "recommendation": "B-006 approved = P-006 only (Type/DDL details + ORM IT). Subagents use auto model.",
   "supersedes": null,
   "scope_changes": [],
-  "notes": "Version 7.4.5.Final. No harness framework changes. No Ship. Unlocked after P-005 Accept."
+  "notes": "Version 7.4.5.Final. No harness framework changes. No Ship."
 }
