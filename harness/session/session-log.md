@@ -1,4 +1,20 @@
-﻿## Entry: P-003 accepted — propose B-004
+﻿## Entry: P-004 accepted — propose B-005
+
+### Summary
+Human Gate「批准 B-004，范围仅 P-004」。Window/CTE flags + ORM IT PASS；VERIFY PASS；reviewer approve；P-004 accepted。Next：批准 B-005 仅 P-005（Bulk mutation）。
+
+### Artifacts
+- `XuguDialect.supportsWindowFunctions` / `supportsWithClause`
+- `XuguWindowCteIT` / `XuguWindowCteSupportTest`
+- harness/evidence/{implementer,test,reviewer}/P-004/*
+- B-005 draft = P-005 only
+
+### Next Steps
+1. Human Gate：批准 B-005，范围仅 P-005？
+
+---
+
+## Entry: P-003 accepted — propose B-004
 
 JSON/Aggregate PASS; ask approve B-004 P-004 only.
 

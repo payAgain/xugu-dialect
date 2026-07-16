@@ -3,12 +3,16 @@
   "build_id": "B-004",
   "initiative_id": "I-003",
   "plan_revision": 1,
-  "status": "draft",
+  "status": "approved",
   "proposed_phase_ids": ["P-004"],
-  "approved_phase_ids": [],
-  "approval": null,
-  "recommendation": "Propose B-004 = P-004 only (Window + WITH/CTE + ORM entrypoint IT).",
+  "approved_phase_ids": ["P-004"],
+  "approval": {
+    "reference": "批准 B-004，范围仅 P-004",
+    "approved_at": "2026-07-16T13:55:00+08:00",
+    "approved_by": "Human Gate"
+  },
+  "recommendation": "B-004 approved = P-004 only (Window + WITH/CTE + ORM IT).",
   "supersedes": null,
   "scope_changes": [],
-  "notes": "Unlocked after P-003 Accept. Version 7.4.5.Final."
+  "notes": "Version 7.4.5.Final. No harness framework changes. No Ship."
 }

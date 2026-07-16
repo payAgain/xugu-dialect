@@ -1,14 +1,11 @@
-# P-004 Test Checklist (RP-02)
+# P-004 Test Checklist (I-003)
 
-**Invocation:** `test-p004-20260715`
-
-- [x] Independent test context (no product code changes)
-- [x] `mvn -q test` PASS (IT skipped when gate off)
-- [x] `mvn -q test -Dxugu.run.integration=true` PASS on real XuguDB
-- [x] `python harness/scripts/verify.py --phase P-004 --evidence harness/evidence/test/P-004/verification.json` → VERIFY PASS
-- [x] Spot-check: LIMIT count OFFSET offset with bind markers
-- [x] Spot-check: no FETCH FIRST / SKIP LOCKED / FOR SHARE on supported paths
-- [x] Spot-check: FOR UPDATE / NOWAIT / WAIT evidence
-- [x] Observed flow: limit-offset-pagination-real-db
-- [x] Observed flow: pessimistic-lock-sql-real-db
-- [x] TEST-REPORT + handoff written; RP-02 `passed` / `test-p004-20260715`
+- [x] `mvn -q -DskipTests package` EXIT 0
+- [x] `mvn -q test` EXIT 0
+- [x] Window/CTE gated IT EXIT 0 (`XuguWindowCteIT`)
+- [x] `mvn -q test -Dxugu.run.integration=true` EXIT 0
+- [x] `python harness/scripts/verify.py --phase P-004` → VERIFY PASS
+- [x] `python harness/scripts/harness_check.py` → HARNESS_CHECK PASS
+- [x] `python harness/scripts/branch_check.py` → BRANCH_CHECK PASS
+- [x] Version 7.4.5.Final unchanged
+- [x] No dialect behavior rewrite by test role

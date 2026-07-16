@@ -667,6 +667,24 @@ public class XuguDialect extends Dialect {
 		return XuguViolatedConstraintNameExtractor.INSTANCE;
 	}
 
+	/**
+	 * Window / analytic functions ({@code OVER}) — C-WIN-001.
+	 * Docs: {@code reference/sql/select/analyze_func.md}.
+	 */
+	@Override
+	public boolean supportsWindowFunctions() {
+		return true;
+	}
+
+	/**
+	 * {@code WITH} common table expressions — C-CTE-001.
+	 * Docs: {@code reference/sql/select/with.md}.
+	 */
+	@Override
+	public boolean supportsWithClause() {
+		return true;
+	}
+
 	@Override
 	public SequenceSupport getSequenceSupport() {
 		return XuguSequenceSupport.INSTANCE;

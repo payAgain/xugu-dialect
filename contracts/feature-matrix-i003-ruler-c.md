@@ -50,8 +50,8 @@
 
 | ID | Theme | Capability | Hibernate surface | Xugu doc ref | Sibling (read-only) | Status | Target Phase | app_entrypoint | Acceptance hint |
 |---|---|---|---|---|---|---|---|---|---|
-| C-WIN-001 | Window | Window functions | `supportsWindowFunctions()` + HQL OVER | `reference/sql/select/analyze_func.md` (OVER / RANK / ROW_NUMBER…) | `supportsWindowFunctions=true` | 可实现 | P-004 | HQL query with `OVER (PARTITION BY …)` on live Session | Assert SQL contains OVER; result rows correct |
-| C-CTE-001 | CTE | WITH clause | `supportsWithClause()` + HQL CTE | `reference/sql/select/with.md` | `supportsWithClause=true` | 可实现 | P-004 | HQL/Criteria CTE (`with … as`) on live Session | Assert WITH rendered; query succeeds |
+| C-WIN-001 | Window | Window functions | `supportsWindowFunctions()` + HQL OVER | `reference/sql/select/analyze_func.md` (OVER / RANK / ROW_NUMBER…) | `supportsWindowFunctions=true` | 可实现 | P-004 | HQL query with `OVER (PARTITION BY …)` on live Session | ✅ I-003/P-004 `XuguWindowCteIT` OVER + ranking |
+| C-CTE-001 | CTE | WITH clause | `supportsWithClause()` + HQL CTE | `reference/sql/select/with.md` | `supportsWithClause=true` | 可实现 | P-004 | HQL/Criteria CTE (`with … as`) on live Session | ✅ I-003/P-004 `XuguWindowCteIT` WITH rendered |
 
 ---
 
