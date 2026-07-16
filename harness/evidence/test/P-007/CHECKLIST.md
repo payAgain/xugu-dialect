@@ -1,14 +1,18 @@
-# P-007 Test Checklist (RP-02)
+﻿# P-007 Test Checklist (RP-02) — I-003
 
-**Invocation:** `test-p007-20260715`
+**Invocation:** `test-p007-20260716`
 
-- [x] Independent test context (no product code changes)
-- [x] `mvn -q test` PASS (IT skipped when gate off)
-- [x] `mvn -q test -Dxugu.run.integration=true` PASS on real XuguDB
-- [x] `python harness/scripts/verify.py --phase P-007 --evidence harness/evidence/test/P-007/verification.json` → VERIFY PASS
-- [x] Observed flow: schema-tooling-real-db
-- [x] Observed flow: temp-table-comments-fk-real-db
-- [x] Spot-check: `HIB_P007_*` cleanup (IT checklist + leftover probe = 0)
-- [x] Spot-check: A-SCH-007 no temp FK (`StandardTemporaryTableExporter` / IT assert)
-- [x] Spot-check: A-SCH-003 deferred (`NameQualifierSupport.SCHEMA` only; matrix 延后)
-- [x] TEST-REPORT + handoff written; RP-02 `passed` / `test-p007-20260715`
+- [x] Authorization: I-003 / B-007 / P-007
+- [x] Branch `feat/i-003-production-capability-parity` (branch_check PASS)
+- [x] `mvn -q -DskipTests package` (exit 0)
+- [x] `mvn -q test` offline (exit 0; 28 IT skipped via gate)
+- [x] `mvn -q test "-Dxugu.run.integration=true"` on live XuguDB (exit 0; 0 skipped)
+- [x] `verify.py --phase P-007` — VERIFY PASS
+- [x] `harness_check.py` PASS
+- [x] `branch_check.py` PASS
+- [x] Observed flow: docs-matrix-aligned-full-verify
+- [x] Spot-check: docs mention I-003 ruler-C matrix (SSOT + pointers)
+- [x] Spot-check: version 7.4.5.Final unchanged
+- [x] Evidence under `harness/evidence/test/P-007/`
+- [x] Handoff `harness/handoffs/test/P-007.yaml` (passed)
+- [x] No product code changes; no git commit; no Accept; no Ship

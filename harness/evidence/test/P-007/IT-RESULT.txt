@@ -1,44 +1,41 @@
-=== P-007 IT RESULT (test-p007-20260715) ===
-Suite: com.xugu.dialect.it.XuguSchemaTempCommentIT#schemaTempCommentFkTruncate_A_SCH
-Result: PASS
-DB: jdbc:xugu://127.0.0.1:5138/SYSTEM?...&compatiblemode=NONE
-Driver: XuguDB JDBC Driver; Dialect: XuguDialect; Version: 12.0
+﻿=== P-007 IT RESULT (test-p007-20260716) — I-003 docs/matrix full VERIFY ===
+Date: 2026-07-16
+Branch: feat/i-003-production-capability-parity
+HEAD: 7317c995f7a0943e5ba34a8a54f602e1b7a31a06
+Flow: docs-matrix-aligned-full-verify
 
-=== HIB_P007 CLEANUP CHECKLIST (from IT stdout) ===
-OK: DROP TABLE IF EXISTS HIB_P007_CHILD
-OK: DROP TABLE IF EXISTS HIB_P007_PARENT
-OK: DROP TABLE IF EXISTS HIB_P007_CMT
-OK: DROP TABLE IF EXISTS HIB_P007_UK
-OK: DROP TABLE IF EXISTS HIB_P007_TR
-skip: DROP INDEX IF EXISTS HIB_P007_IDX.HIB_P007_I1 (pre-body / object absent)
-OK: DROP TABLE IF EXISTS HIB_P007_IDX
-OK: DROP TABLE IF EXISTS HIB_P007_LTMP
-OK: DROP TABLE IF EXISTS HIB_P007_GTMP
-skip: DROP TABLE IF EXISTS HIB_P007_SCH.HIB_P007_QT (pre-body schema absent)
-skip: DROP SCHEMA HIB_P007_SCH CASCADE (pre-body)
-skip: DROP SCHEMA HIB_P007_SCH (pre-body)
-dropped local temp HIB_P007_LTMP
-dropped global temp HIB_P007_GTMP
-IT body completed OK
-OK: DROP TABLE IF EXISTS HIB_P007_CHILD
-OK: DROP TABLE IF EXISTS HIB_P007_PARENT
-OK: DROP TABLE IF EXISTS HIB_P007_CMT
-OK: DROP TABLE IF EXISTS HIB_P007_UK
-OK: DROP TABLE IF EXISTS HIB_P007_TR
-OK: DROP INDEX IF EXISTS HIB_P007_IDX.HIB_P007_I1
-OK: DROP TABLE IF EXISTS HIB_P007_IDX
-OK: DROP TABLE IF EXISTS HIB_P007_LTMP
-OK: DROP TABLE IF EXISTS HIB_P007_GTMP
-OK: DROP TABLE IF EXISTS HIB_P007_SCH.HIB_P007_QT
-OK: DROP SCHEMA HIB_P007_SCH CASCADE
-skip: DROP SCHEMA HIB_P007_SCH (already dropped by CASCADE)
+Command: mvn -q test "-Dxugu.run.integration=true"
+Exit code: 0
+Real DB: jdbc:xugu://127.0.0.1:5138/SYSTEM (XuguDB 12.0 / XuguDialect / Hibernate 7.4.5.Final)
 
-=== Post-IT leftover probe (independent JDBC) ===
-ALL_TABLES HIB_P007_% => 0
-ALL_SCHEMAS HIB_P007_SCH => 0
-USER_TABLES HIB_P007_% => 0
+Surefire TOTAL (integration gate ON):
+  tests=99 failures=0 errors=0 skipped=0
 
-=== Spot notes ===
-A-SCH-007: unit tempTableExporterDoesNotEmitFk + IT assertFalse(localCreate contains foreign key)
-A-SCH-003: matrix deferred; NameQualifierSupport.SCHEMA only (no catalog)
-Global temp: live create/drop succeeded (support_global_tab ON on this server)
+I-003 capability IT (gate ON, sample):
+  XuguExceptionMappingIT     PASS (P-002)
+  XuguJsonAggregateIT        PASS (P-003)
+  XuguWindowCteIT            PASS (P-004)
+  XuguBulkMutationIT         PASS (P-005)
+  XuguTypeDdlDetailsIT       PASS (P-006)
+  DemoPersonCrudIT           PASS (demo)
+
+Offline counterpart:
+  Command: mvn -q test
+  Exit: 0
+  TOTAL: tests=99 failures=0 errors=0 skipped=28
+
+Docs spot-check:
+  I-003 ruler C matrix SSOT linked from README / user-guide — PASS
+  GAV 7.4.5.Final unchanged — PASS
+
+Artifacts:
+  harness/evidence/test/P-007/mvn-test-integration.log
+  harness/evidence/test/P-007/surefire-summary-integration.txt
+  harness/evidence/test/P-007/TEST-com.xugu.dialect.it.XuguExceptionMappingIT.xml
+  harness/evidence/test/P-007/TEST-com.xugu.dialect.it.XuguJsonAggregateIT.xml
+  harness/evidence/test/P-007/TEST-com.xugu.dialect.it.XuguWindowCteIT.xml
+  harness/evidence/test/P-007/TEST-com.xugu.dialect.it.XuguBulkMutationIT.xml
+  harness/evidence/test/P-007/TEST-com.xugu.dialect.it.XuguTypeDdlDetailsIT.xml
+  harness/evidence/test/P-007/spot-check-docs.txt
+
+Overall IT verdict: PASS

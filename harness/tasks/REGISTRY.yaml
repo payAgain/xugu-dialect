@@ -1,7 +1,7 @@
 schema_version: 1
 charter_version: "1.0.0"
 initiative_id: I-003
-updated: "2026-07-16T17:26:00+08:00"
+updated: "2026-07-16T17:46:00+08:00"
 tasks:
   - task_id: P-001
     title: "尺子 C 生产能力差集盘点 SSOT"
@@ -53,8 +53,8 @@ tasks:
     dependencies: [P-005]
   - task_id: P-007
     title: "矩阵文档对齐与 Accept 准备"
-    status: ready
-    build_id: null
+    status: accepted
+    build_id: B-007
     packet: harness/tasks/P-007.md
     acceptance_doc: harness/evidence/orchestrator/P-007/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"

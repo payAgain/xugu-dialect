@@ -1,80 +1,49 @@
-# P-007 Implementer Notes (schema / temp / comment / FK)
+# P-007 Implementer NOTES — docs/matrix align + Accept prep (I-003)
 
-**Invocation:** `impl-p007-20260715`  
-**Role:** implementer  
-**Phase / Build / Initiative:** P-007 / B-007 / I-001  
-**Date:** 2026-07-15  
-**Step:** RP-01  
-**Accept / commit:** **NOT done** (await RP-02 test + RP-03 reviewer)
+> **Invocation:** `impl-p007-20260716` · I-003 / B-007 / RP-01  
+> **Role:** implementer (docs only — no dialect behavior rewrite)  
+> **Accept / Ship / commit:** **NOT** claimed (await RP-02 test + RP-03 reviewer; orchestrator owns final ACCEPTANCE)
 
-## What was delivered
+## Goal
 
-1. `XuguLocalTemporaryTableStrategy` / `XuguGlobalTemporaryTableStrategy`
-2. `XuguDialect` overrides: schema create/drop, `NameQualifierSupport.SCHEMA`, temp strategies, COMMENT ON, UNIQUE/FK/CHECK, truncate, CREATE INDEX
-3. Offline unit: `XuguSchemaTempCommentTest`
-4. Gated IT: `XuguSchemaTempCommentIT` (`HIB_P007_*` prefix + cleanup checklist)
-5. Matrix acceptance hints updated for A-SCH-001..016 (003 deferred, 007 文档不允许)
+Align documentation/matrix with P-002…P-006 delivered behavior; prepare Initiative Accept evidence (**不含 Ship**).
 
-## Locked SQL forms
+## Docs aligned
 
-| ID | Locked form |
+| File | Update |
 |---|---|
-| A-SCH-001 | `create schema {name}` / `drop schema {name}` |
-| A-SCH-002 | qualifier = schema only (`schema.table`); no catalog |
-| A-SCH-004 | `create local temporary table` |
-| A-SCH-005 | `create global temporary table` (**precondition:** `support_global_tab=ON`) |
-| A-SCH-006 | local: `on commit preserve rows`; global: `on commit delete rows` |
-| A-SCH-007 | **NOT emitted** — no FK on temp DDL |
-| A-SCH-008 | `comment on table {t} is '{c}'` |
-| A-SCH-009 | `comment on column {t}.{c} is '{c}'` |
-| A-SCH-010 | alternate inline: ` comment '{c}'` via `inlineTableComment` / `inlineColumnComment` |
-| A-SCH-011 | `CreateTableUniqueDelegate` (CREATE / ALTER UNIQUE) |
-| A-SCH-012 | ` add constraint {n} foreign key ({cols}) references {table} ({pk})` |
-| A-SCH-013 | `supportsColumnCheck` / `supportsTableCheck` = true |
-| A-SCH-014 | `drop constraint` (FK/UK) |
-| A-SCH-015 | `truncate table {name}` |
-| A-SCH-016 | `create index` / `create unique index` |
+| `contracts/feature-matrix-i003-ruler-c.md` | Status → **CONFIRMED / Accept-ready**; C-EXC / C-JSON Acceptance ✅; delivery table + IT classes; deferred/文档不允许 remain |
+| `contracts/xugu-dialect.contract.md` | §7.1 Phase delivery column (P-002…P-006 delivered; P-007 docs) |
+| `docs/user-guide/04-feature-matrix.md` | Pointer to I-003 ruler-C SSOT; Definition A remains; C-* examples |
+| `docs/user-guide/README.md` | Link I-003 matrix; same-GAV capability expansion note |
+| `docs/user-guide/05-troubleshooting.md` | §9 JSON_FUNCTIONS_ENABLED; §10 bulk insert N/A; §11 ENUM null |
+| `README.md` | I-003 parity blurb + ruler-C link under **7.4.5.Final** |
+| `docs/feature-matrix-i003-ruler-c.md` | New stub → contracts SSOT |
+| `harness/initiatives/I-003/brief.md` | P-001…P-006 criteria checked; Ship unchecked; P-007 in progress |
 
-## Global temp precondition (A-SCH-005)
+## Delivered C-* (first-batch 可实现) + IT
 
-Server parameter `support_global_tab` default **FALSE**.  
-Docs: `reference/system-configuration-parameter/xugu.ini/sql-engine/support_global_tab.md`.  
-Dialect always exposes global DDL strings; live IT runs CREATE GLOBAL TEMP only when parameter is ON (probe via `SHOW` / trial CREATE). Live run observed global temp create/use/drop succeeded on this server.
+| Phase | IDs | Key IT |
+|---|---|---|
+| P-002 | C-EXC-001, C-EXC-002 | `XuguExceptionMappingIT` |
+| P-003 | C-JSON-001…004 | `XuguJsonAggregateIT` |
+| P-004 | C-WIN-001, C-CTE-001 | `XuguWindowCteIT` |
+| P-005 | C-BULK-001…003 | `XuguBulkMutationIT` (bulk insert live IT **N/A** documented) |
+| P-006 | C-DDL-001…004, C-CAT-001, C-GUID-001 | `XuguTypeDdlDetailsIT` (ENUM → null) |
 
-## A-SCH-007 (文档不允许)
+## Deferred / 文档不允许 (unchanged)
 
-Temporary table CREATE path uses Hibernate `StandardTemporaryTableExporter` (columns only). Unit asserts temp create fragments contain no `foreign key` / `references`.
+- **延后:** C-JSON-005, C-JSON-006, C-DDL-005, C-SRV-001, C-SEL-001
+- **文档不允许:** C-DDL-004 (ENUM), C-SKIP-001 (SKIP LOCKED)
 
-## Deferred / not done
+## Forbidden respected
 
-- A-SCH-003 catalog qualifier — 延后
-- A-SCH-017 advanced indexes — 延后
-- No Accept / git commit this turn
+- No dialect Java rewrite; no harness agents/skills/verification.json changes
+- Version remains **7.4.5.Final**; no Ship / tag / push / Accept claim / git commit
+- No invented product capabilities
 
-## Cleanup checklist (IT)
+## Next
 
-Prefix: `HIB_P007_*`
-
-| Object | Cleanup |
-|---|---|
-| `HIB_P007_CHILD` / `PARENT` | `DROP TABLE IF EXISTS` (child first) |
-| `HIB_P007_CMT` / `UK` / `TR` / `IDX` | `DROP TABLE IF EXISTS` |
-| `HIB_P007_I1` | `DROP INDEX IF EXISTS HIB_P007_IDX.HIB_P007_I1` |
-| `HIB_P007_LTMP` / `GTMP` | `DROP TABLE IF EXISTS` |
-| `HIB_P007_SCH.HIB_P007_QT` | `DROP TABLE IF EXISTS schema.table` |
-| `HIB_P007_SCH` | `DROP SCHEMA HIB_P007_SCH CASCADE` (no IF EXISTS in XuGu) |
-
-Final IT cleanup: **OK** (schema CASCADE drop succeeded; residual `DROP SCHEMA` without CASCADE skipped as already gone).
-
-## Commands
-
-| Command | Exit |
-|---|---|
-| `mvn -q test` | **0** |
-| `mvn -q test -Dxugu.run.integration=true` (dialect) | **0** |
-| `python harness/scripts/verify.py --phase P-007` | see verification.json |
-
-## Observed flows
-
-- `schema-tooling-real-db`: CREATE/DROP SCHEMA + qualified `schema.table` on live XuguDB
-- `temp-table-comments-fk-real-db`: local temp + ON COMMIT; COMMENT ON; FK parent/child; UNIQUE; CHECK; TRUNCATE; CREATE INDEX; cleanup
+- RP-02 test: full `verify.py` / gated IT → `harness/evidence/test/P-007/`
+- RP-03 reviewer: docs/behavior consistency
+- Orchestrator: draft Initiative Accept evidence under orchestrator namespace (**no Ship**)

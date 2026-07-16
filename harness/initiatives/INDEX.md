@@ -7,7 +7,7 @@
 |---|---|---|---|---|---|
 | I-001 | major | 交付 Hibernate 7.4.5 虚谷方言 jar + Spring Boot demo + 项目文档（定义 A 全量） | feat/i-001-xugu-dialect-major | completed | 2026-07-15T16:25:00+08:00（archived） |
 | I-002 | hotfix | 修复 HQL 分页 OFFSET/FETCH 与 schema validate 序列元数据（TEST-REPORT 20/22） | fix/i-002-hql-pagination-sequence-metadata | completed | 2026-07-16T10:46:00+08:00（archived） |
-| I-003 | feature | 生产能力补齐（尺子 C：MySQLDialect∩虚谷文档 + 只读对照 hibernate-dialect 差集；入口 IT；版本 7.4.5.Final） | feat/i-003-production-capability-parity | active | 2026-07-16T10:46:00+08:00 |
+| I-003 | feature | 生产能力补齐（尺子 C：MySQLDialect∩虚谷文档 + 只读对照 hibernate-dialect 差集；入口 IT；版本 7.4.5.Final） | feat/i-003-production-capability-parity | active | 2026-07-16T17:46:00+08:00（P-007 accepted; awaiting Initiative Accept） |
 
 Status: `clarifying` | `active` | `completed` | `abandoned`
 

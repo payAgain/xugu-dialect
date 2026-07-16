@@ -8,7 +8,9 @@
 |---|---|
 | **[`contracts/feature-matrix-definition-a.md`](../../contracts/feature-matrix-definition-a.md)** | **SSOT** — 全行 Definition A 矩阵（勿在别处复制全文） |
 | [`docs/feature-matrix-definition-a.md`](../feature-matrix-definition-a.md) | 导航 stub / pointer，指向 contracts SSOT |
-| [`contracts/xugu-dialect.contract.md`](../../contracts/xugu-dialect.contract.md) | 公共接入面 + 能力边界绑定矩阵 |
+| **[`contracts/feature-matrix-i003-ruler-c.md`](../../contracts/feature-matrix-i003-ruler-c.md)** | **I-003 ruler C SSOT** — C-* 生产能力扩展（异常/JSON/Window-CTE/bulk/DDL） |
+| [`docs/feature-matrix-i003-ruler-c.md`](../feature-matrix-i003-ruler-c.md) | I-003 导航 stub / pointer |
+| [`contracts/xugu-dialect.contract.md`](../../contracts/xugu-dialect.contract.md) | 公共接入面 + 能力边界绑定矩阵（§7 + §7.1） |
 
 本用户指南 **只解释状态含义并给链接**，不重复 100+ 行矩阵正文。
 
@@ -16,6 +18,9 @@
 
 **Definition A** = MySQL/Oracle Dialect **生产能力面** ∩ **虚谷文档允许** 的能力。超出文档允许的 SQL，实现侧 **不得编造**。
 
+## I-003 ruler C（扩展）
+
+**Definition A 仍然有效。** I-003 在同一 GAV **`7.4.5.Final`** 下用尺子 C 扩展可实现面（C-* 行）：异常映射、JSON 聚合、Window/CTE、bulk mutation、DDL 细节等。详见 I-003 矩阵 SSOT；延后 / 文档不允许行仍不得发明。
 ## Status legend / 状态含义
 
 | Status | 中文 | Meaning for integrators |
@@ -42,9 +47,12 @@
 | A-SEQ-001 | 可实现 | `hbm2ddl validate` 经 `all_sequences` 读取序列元数据（I-002/P-002；见排障 §3） |
 | A-LCK-004 SKIP LOCKED | 文档不允许 | `supportsSkipLocked=false`；不会发出该关键字 |
 | A-TYP-014 INTERVAL 等 | 延后 | 暂勿当作已交付能力 |
+| C-EXC-* / C-JSON-* / C-WIN-* / C-CTE-* / C-BULK-* / C-DDL-* | 可实现（I-003） | 见 ruler-C 矩阵 Acceptance hint（✅ + IT 类名） |
+| C-DDL-004 ENUM / C-SKIP-001 | 文档不允许 | 不发出 MySQL ENUM / SKIP LOCKED |
+| C-JSON-005/006 等 | 延后 | I-003 首批之外 |
 
 ## Cross-links
 
-- Contract §7 Capability scope → matrix  
+- Contract §7 Capability scope → Definition A matrix；§7.1 → I-003 ruler C  
 - User guide index: [README.md](README.md)  
 - Demo 仅证明接入路径，**不以 demo 覆盖矩阵全行**

@@ -1,17 +1,18 @@
-# P-007 Implementer Checklist (RP-01)
+# P-007 Implementer Checklist (RP-01 / I-003 docs align)
 
-- [x] Schema create/drop + current_schema command (A-SCH-001)
-- [x] NameQualifierSupport.SCHEMA only (A-SCH-002); catalog deferred (A-SCH-003)
-- [x] Local temp strategy + ON COMMIT PRESERVE (A-SCH-004/006)
-- [x] Global temp strategy + ON COMMIT DELETE + support_global_tab precondition (A-SCH-005/006)
-- [x] No FK on temp tables (A-SCH-007 文档不允许)
-- [x] COMMENT ON table/column (A-SCH-008/009) + inline alternate helpers (A-SCH-010)
-- [x] UNIQUE / FK / CHECK / ALTER drop constraint (A-SCH-011..014)
-- [x] TRUNCATE TABLE (A-SCH-015)
-- [x] CREATE [UNIQUE] INDEX (A-SCH-016)
-- [x] Unit tests for SQL fragments
-- [x] Gated IT with HIB_P007_ prefix + cleanup checklist
-- [x] Evidence NOTES + matrix hints
-- [x] verify.py --phase P-007
-- [ ] Accept (orchestrator / later)
+- [x] `contracts/feature-matrix-i003-ruler-c.md` → CONFIRMED / Accept-ready; C-* ✅ for P-002…P-006
+- [x] Deferred / 文档不允许 rows remain deferred / forbidden (documented)
+- [x] `contracts/xugu-dialect.contract.md` §7.1 delivery notes (P-002…P-006 + P-007 docs)
+- [x] `docs/user-guide/04-feature-matrix.md` → I-003 SSOT pointer + Definition A remains
+- [x] `docs/user-guide/README.md` → I-003 matrix link + same-GAV expansion
+- [x] `docs/user-guide/05-troubleshooting.md` → JSON_FUNCTIONS_ENABLED / bulk insert N/A / ENUM
+- [x] Root `README.md` → I-003 parity + ruler-C link
+- [x] `docs/feature-matrix-i003-ruler-c.md` stub created
+- [x] `harness/initiatives/I-003/brief.md` — P-001…P-006 checked; Ship unchecked; P-007 status note
+- [x] Evidence NOTES + CHECKLIST (this Phase overwrite for I-003)
+- [x] Handoff `harness/handoffs/implementer/P-007.yaml` → `completed_awaiting_test_review`
+- [ ] Full VERIFY PASS (test RP-02)
+- [ ] Reviewer RP-03
+- [ ] Accept (orchestrator / later — Initiative Accept prep only)
+- [ ] Ship (out of scope)
 - [ ] Commit (Human Gate / later)

@@ -2,7 +2,7 @@
 
 > Scoped clarity for one change unit. Not a full product re-charter.
 > Type: feature
-> Updated: 2026-07-16T10:46:00+08:00
+> Updated: 2026-07-16T17:35:00+08:00
 
 ## Goal
 - 在**现有 harness 不变**的前提下，按尺子 **C** 补齐方言**生产能力缺口**，使进阶能力对齐完整生产面；GAV 保持 **`com.xugu:xugu-dialect:7.4.5.Final`**。
@@ -34,11 +34,11 @@
 - 空间/几何等尺子 C 明确「文档不允许 / 延后」项（除非 P-001 升格）
 
 ## Acceptance criteria
-- [ ] P-001 产出尺子 C 差集 SSOT，并锁定后续 Phase 实现清单
-- [ ] P-002…P-006 各能力有实现 + **ORM 入口 IT**（门控真库）证据
-- [ ] P-007 矩阵/用户指南与行为对齐；`verify.py` **VERIFY PASS**
-- [ ] 版本仍为 **7.4.5.Final**；工作分支 must-commit SHA 可审
-- [ ] **不要求**本 Initiative 完成 Central / Ship
+- [x] P-001 产出尺子 C 差集 SSOT，并锁定后续 Phase 实现清单
+- [x] P-002…P-006 各能力有实现 + **ORM 入口 IT**（门控真库）证据
+- [x] P-007 矩阵/用户指南与行为对齐；`verify.py` **VERIFY PASS**
+- [x] 版本仍为 **7.4.5.Final**（无 bump）；工作分支 must-commit SHA 可审
+- [ ] **不要求**本 Initiative 完成 Central / Ship（Ship 仍 out of scope — 保持未勾选）
 
 ## Decisions (Human Gate 2026-07-16)
 1. Archive I-002 — **确认**
@@ -52,13 +52,12 @@
 
 ## Related
 - Branch: `feat/i-003-production-capability-parity`
-- Base: I-002 HEAD（含 hotfix）`a009ed2a391289baf19454268755ddbb035ebfbc`
-- Prior: I-002 Archive `harness/initiatives/I-002/ARCHIVE.md`
-- Charter: `PROJECT_CHARTER.md`（定义 A 仍有效；本 Initiative 用尺子 C **扩展**可实现面）
+- Matrix SSOT: `contracts/feature-matrix-i003-ruler-c.md` (**CONFIRMED / Accept-ready**)
 - Ship: **out of this Initiative**
 
 ## Status
-`active`
+`active` — **P-007 accepted**; awaiting Human Gate **Initiative Accept** (no Ship)
 
 - Scope PASS: ~2026-07-16T10:46+08:00
-- Next: Human Gate 批准 **B-001** 范围仅 **P-001**（gap inventory）
+- P-001…P-007: all accepted
+- Next: Human Gate Initiative Accept → optional Archive; **Ship separate**

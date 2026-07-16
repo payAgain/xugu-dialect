@@ -1,13 +1,14 @@
 # I-003 Capability Gap Matrix (Ruler C SSOT)
 
-> **Status:** Draft for P-001 Accept (I-003 / B-001)  
-> **Author role:** architect-contract  
-> **Invocation:** `arch-p001-20260716`  
+> **Status:** **CONFIRMED / Accept-ready** for I-003 — all first-batch **可实现** rows (P-002…P-006) delivered; P-007 docs/matrix align  
+> **Author role:** architect-contract (P-001); implementer docs align `impl-p007-20260716`  
+> **Invocation:** `arch-p001-20260716` → delivery P-002…P-006 → docs P-007  
 > **Ruler C:** (A) Hibernate 7.4.5 MySQLDialect-class production surface ∩ Xugu docs  
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(B) read-only diff vs `E:\Work\java\hibernate-dialect` — **no code port**  
 > **Baseline product:** `com.xugu:xugu-dialect:7.4.5.Final` on `feat/i-003-production-capability-parity`  
 > **Companion:** [`feature-matrix-definition-a.md`](feature-matrix-definition-a.md) (I-001/I-002 closed rows remain)  
-> **Public contract addendum:** [`xugu-dialect.contract.md`](xugu-dialect.contract.md) § I-003
+> **Public contract addendum:** [`xugu-dialect.contract.md`](xugu-dialect.contract.md) § I-003  
+> **Docs pointer:** [`docs/feature-matrix-i003-ruler-c.md`](../docs/feature-matrix-i003-ruler-c.md)
 
 ## Status legend
 
@@ -28,8 +29,8 @@
 
 | ID | Theme | Capability | Hibernate surface | Xugu doc ref | Sibling (read-only) | Status | Target Phase | app_entrypoint | Acceptance hint |
 |---|---|---|---|---|---|---|---|---|---|
-| C-EXC-001 | Exception | SQLException → Hibernate exception | `Dialect.buildSQLExceptionConversionDelegate()` | `reference/error-code/**` (SQLSTATE/vendor codes) | `XuguSQLExceptionConversionDelegate` | 可实现 | P-002 | Session persist/flush that hits unique/FK/check violation → typed Hibernate exception | ORM IT must assert exception class (not JDBC-only) |
-| C-EXC-002 | Exception | Violated constraint name | `getViolatedConstraintNameExtractor()` | `reference/object/constraints.md`; error-code messages | `XuguViolatedConstraintNameExtractor` + `XuguErrorCodes` | 可实现 | P-002 | Same ORM violation path; extractor yields constraint name when present | May be null if driver message lacks name — document boundary |
+| C-EXC-001 | Exception | SQLException → Hibernate exception | `Dialect.buildSQLExceptionConversionDelegate()` | `reference/error-code/**` (SQLSTATE/vendor codes) | `XuguSQLExceptionConversionDelegate` | 可实现 | P-002 | Session persist/flush that hits unique/FK/check violation → typed Hibernate exception | ✅ I-003/P-002 `XuguExceptionMappingIT` (ConstraintViolation UNIQUE) |
+| C-EXC-002 | Exception | Violated constraint name | `getViolatedConstraintNameExtractor()` | `reference/object/constraints.md`; error-code messages | `XuguViolatedConstraintNameExtractor` + `XuguErrorCodes` | 可实现 | P-002 | Same ORM violation path; extractor yields constraint name when present | ✅ I-003/P-002 extractor wired; may be null if driver message lacks name |
 
 ---
 
@@ -37,10 +38,10 @@
 
 | ID | Theme | Capability | Hibernate surface | Xugu doc ref | Sibling (read-only) | Status | Target Phase | app_entrypoint | Acceptance hint |
 |---|---|---|---|---|---|---|---|---|---|
-| C-JSON-001 | JSON | json_arrayagg | HQL/SQM aggregate + function registry | `reference/function/aggregate-functions/json_arrayagg.md` | `XuguJsonArrayAggFunction` | 可实现 | P-003 | HQL `select json_arrayagg(...)` (or documented HQL name) on live Session | Enable JSON functions if required by Hibernate 7.4 |
-| C-JSON-002 | JSON | json_objectagg | HQL/SQM aggregate | `reference/function/aggregate-functions/json_objectagg.md` | `XuguJsonObjectAggFunction` | 可实现 | P-003 | HQL `json_objectagg` path on live Session | Same |
-| C-JSON-003 | JSON | AggregateSupport | `Dialect.getAggregateSupport()` | aggregate-functions + json datatype | `XuguAggregateSupport` | 可实现 | P-003 | HQL aggregation over JSON/aggregate column path exercising AggregateSupport | Unit alone insufficient |
-| C-JSON-004 | JSON | JSON JDBC casting | `contributeTypes` JSON / JSON array JDBC types | `reference/sql/datatype/json.md` | `XuguCastingJsonJdbcType*` | 可实现 | P-003 | Entity JSON attribute round-trip persist/load via Session | Prefer CAST-safe mapping per docs |
+| C-JSON-001 | JSON | json_arrayagg | HQL/SQM aggregate + function registry | `reference/function/aggregate-functions/json_arrayagg.md` | `XuguJsonArrayAggFunction` | 可实现 | P-003 | HQL `select json_arrayagg(...)` (or documented HQL name) on live Session | ✅ I-003/P-003 `XuguJsonAggregateIT` (+ `JSON_FUNCTIONS_ENABLED`) |
+| C-JSON-002 | JSON | json_objectagg | HQL/SQM aggregate | `reference/function/aggregate-functions/json_objectagg.md` | `XuguJsonObjectAggFunction` | 可实现 | P-003 | HQL `json_objectagg` path on live Session | ✅ I-003/P-003 `XuguJsonAggregateIT` |
+| C-JSON-003 | JSON | AggregateSupport | `Dialect.getAggregateSupport()` | aggregate-functions + json datatype | `XuguAggregateSupport` | 可实现 | P-003 | HQL aggregation over JSON/aggregate column path exercising AggregateSupport | ✅ I-003/P-003 `XuguJsonAggregateIT` AggregateSupport path |
+| C-JSON-004 | JSON | JSON JDBC casting | `contributeTypes` JSON / JSON array JDBC types | `reference/sql/datatype/json.md` | `XuguCastingJsonJdbcType*` | 可实现 | P-003 | Entity JSON attribute round-trip persist/load via Session | ✅ I-003/P-003 JSON round-trip (`cast(? as json)`) |
 | C-JSON-005 | JSON | Broader json_* HQL set | function registry beyond value/extract | `reference/function/json-functions/**` | `XuguJsonFunctions` (large set) | 延后 | later | — | Revisit if app demand; I-001 already has json_value/extract (A-FUN-017) |
 | C-JSON-006 | JSON | json_table | `supportsJsonTableFunction` etc. | (verify docs; no dedicated json_table file found in inventory) | sibling may flag | 延后 | later | — | Confirm doc before promoting |
 
@@ -83,24 +84,24 @@
 
 ---
 
-## Counts (P-001 architect)
+## Counts (P-001 architect) + delivery (P-007)
 
-| Status | Count (new C-* rows) |
-|---|---|
-| 可实现 | **16** |
-| 文档不允许 | **2** (C-DDL-004 ENUM, C-SKIP-001) |
-| 延后 | **5** (C-JSON-005, C-JSON-006, C-DDL-005, C-SRV-001, C-SEL-001) |
-| 已有 | **1** (C-LOCK-001) |
-| **Total new C-* rows** | **24** |
+| Status | Count (new C-* rows) | Delivery note |
+|---|---|---|
+| 可实现 | **16** | **All delivered** in P-002…P-006 (Acceptance hints ✅) |
+| 文档不允许 | **2** (C-DDL-004 ENUM, C-SKIP-001) | Remain forbidden — ENUM returns null; no SKIP LOCKED |
+| 延后 | **5** (C-JSON-005, C-JSON-006, C-DDL-005, C-SRV-001, C-SEL-001) | Remain deferred — out of I-003 first batch |
+| 已有 | **1** (C-LOCK-001) | Covered by I-001/I-002 |
+| **Total new C-* rows** | **24** | |
 
-| Target Phase | 可实现 IDs |
-|---|---|
-| P-002 | C-EXC-001, C-EXC-002 |
-| P-003 | C-JSON-001…004 |
-| P-004 | C-WIN-001, C-CTE-001 |
-| P-005 | C-BULK-001…003 |
-| P-006 | C-DDL-001…003, C-CAT-001, C-GUID-001 |
-
+| Target Phase | 可实现 IDs | IT class |
+|---|---|---|
+| P-002 | C-EXC-001, C-EXC-002 | `XuguExceptionMappingIT` |
+| P-003 | C-JSON-001…004 | `XuguJsonAggregateIT` |
+| P-004 | C-WIN-001, C-CTE-001 | `XuguWindowCteIT` |
+| P-005 | C-BULK-001…003 | `XuguBulkMutationIT` (insert live IT N/A documented) |
+| P-006 | C-DDL-001…003, C-CAT-001, C-GUID-001 (+ C-DDL-004 null) | `XuguTypeDdlDetailsIT` |
+| P-007 | Docs/matrix align | — (no new dialect capability) |
 ## Method notes (ruler C)
 
 1. **A (MySQL-class surface):** Enumerated Dialect responsibilities commonly overridden for production MySQL-like Dialects on Hibernate 7.4 (exception, aggregate/JSON, window/CTE, multi-table mutation, DDL if-exists/alter type, datetime rendering, catalog). Cross-checked against XuGu docs under `E:\Work\docs\content`.

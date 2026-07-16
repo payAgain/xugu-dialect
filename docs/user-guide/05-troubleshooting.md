@@ -97,9 +97,34 @@
 
 **处理：** 确认仓库根目录有 `xugu-jdbc-12.3.6.jar`；从 **reactor 根** 构建（`maven.multiModuleProjectDirectory` 指向根）。见 [01-install.md](01-install.md)。
 
+## 9. HQL `json_arrayagg` / `json_objectagg` 不可用
+
+**症状：** HQL 聚合 JSON 函数报未知函数，或 JSON 功能被禁用。
+
+**处理：** Hibernate 7.4 需开启 JSON 函数（IT / 应用配置示例）：
+
+```properties
+hibernate.query.json_functions_enabled=true
+```
+
+（或等价 `QuerySettings.JSON_FUNCTIONS_ENABLED`）。方言已注册虚谷原生 `json_arrayagg` / `json_objectagg`（I-003 C-JSON-*）。见矩阵 [`feature-matrix-i003-ruler-c.md`](../../contracts/feature-matrix-i003-ruler-c.md)。
+
+## 10. Bulk insert（JOINED + IDENTITY）live IT N/A
+
+**症状：** 多表 bulk insert 路径在部分驱动场景下失败（如 `GetGeneratedKeys` / `distillTbName`）。
+
+**说明：** I-003 已接线 `getFallbackSqmInsertStrategy`（本地临时表）；**update/delete** 经 `XuguBulkMutationIT` 验证。Bulk **insert** 真库 IT 因 JDBC 已知边界标为 **N/A**（见 P-005 证据）。应用优先依赖已验证的 update/delete 回退。
+
+## 11. Native ENUM DDL 不会发出
+
+**症状：** 期望 MySQL 风格 `ENUM('a','b')` 列类型。
+
+**原因：** 虚谷无明确 native ENUM 文档；`getEnumTypeDeclaration` 返回 **`null`**（C-DDL-004 文档不允许）。改用字符串/校验约束等文档允许映射。
+
 ## Still stuck?
 
 - Contract: [`contracts/xugu-dialect.contract.md`](../../contracts/xugu-dialect.contract.md)  
-- Matrix: [`contracts/feature-matrix-definition-a.md`](../../contracts/feature-matrix-definition-a.md)  
+- Matrix (Definition A): [`contracts/feature-matrix-definition-a.md`](../../contracts/feature-matrix-definition-a.md)  
+- Matrix (I-003 ruler C): [`contracts/feature-matrix-i003-ruler-c.md`](../../contracts/feature-matrix-i003-ruler-c.md)  
 - Demo README: [`demo-spring-boot/README.md`](../../demo-spring-boot/README.md)  
 - Project verification: `docs/verification.md` / `python harness/scripts/verify.py`

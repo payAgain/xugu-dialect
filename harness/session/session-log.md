@@ -1,4 +1,11 @@
-﻿## Entry: P-006 accepted — propose B-007
+﻿## Entry: P-007 accepted — Initiative Accept prep
+
+### Summary
+Human Gate「批准 B-007，范围仅 P-007」。Docs/matrix CONFIRMED；VERIFY PASS；reviewer approve；P-007 accepted。I-003 首批完成，待 Initiative Accept（不含 Ship）。
+
+---
+
+## Entry: P-006 accepted — propose B-007
 
 ### Summary
 Human Gate「批准 B-006，范围仅 P-006」。Type/DDL hooks + IT PASS；VERIFY PASS；reviewer approve；P-006 accepted（auto subagents）。Next：批准 B-007 仅 P-007。

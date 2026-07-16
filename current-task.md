@@ -1,23 +1,23 @@
 # Current Task
 
 ## Goal
-I-003 P-006 **accepted** — awaiting Human Gate **批准 B-007，范围仅 P-007**
+I-003 P-007 **accepted** — awaiting Human Gate **Initiative Accept**（不含 Ship）
 
 ## Current Status
-Type/DDL details delivered. Next: matrix/docs align + Accept prep (P-007).
+Docs/matrix CONFIRMED; full VERIFY PASS. All Phases P-001…P-007 accepted.
 
 ## Active Batch / Tasks
-- P-001…P-006 `accepted` · P-007 `ready`
-- B-007 `draft` (P-007 only)
+- P-001…P-007 `accepted`
 - Branch: `feat/i-003-production-capability-parity`
+- Ship: **out of scope** until separate authorization
 
 ## Validation
-VERIFY PASS; `XuguTypeDdlDetailsIT` PASS
+VERIFY PASS (gated IT 99/0/0/0); reviewer approve
 
 ## Next 3 Steps
-1. Human Gate：批准 B-007，范围仅 P-007？
-2. 矩阵/文档对齐 + Accept 准备
-3. 禁止 Ship / harness 框架改动
+1. Human Gate：是否批准 I-003 Initiative Accept？
+2. 可选：Archive I-003（Accept 后）
+3. Ship / tag / push：另行授权
 
 ## Last Updated
-2026-07-16T17:26:00+08:00
+2026-07-16T17:46:00+08:00

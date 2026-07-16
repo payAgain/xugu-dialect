@@ -1,14 +1,17 @@
-# Xugu Hibernate Dialect (I-001)
+# Xugu Hibernate Dialect (I-001 → I-003)
 
 Hibernate **7.4.5** dialect for **XuguDB**, plus a Spring Boot demo and project docs.
 
 I-002 hotfix (same GAV **7.4.5.Final**): HQL/Criteria pagination emits `LIMIT … [OFFSET …]` (not ANSI FETCH); `hbm2ddl validate` reads sequences from `all_sequences`.
+
+I-003 feature parity (same GAV **7.4.5.Final**): exception mapping, JSON aggregates / AggregateSupport, window + CTE, bulk mutation fallback, DDL details (IF NOT EXISTS, ALTER COLUMN, catalog, GUID). See [contracts/feature-matrix-i003-ruler-c.md](contracts/feature-matrix-i003-ruler-c.md).
 
 ## Start here
 
 - **User guide:** [docs/user-guide/README.md](docs/user-guide/README.md)
 - **Public contract:** [contracts/xugu-dialect.contract.md](contracts/xugu-dialect.contract.md)
 - **Definition A feature matrix (SSOT):** [contracts/feature-matrix-definition-a.md](contracts/feature-matrix-definition-a.md)
+- **I-003 ruler C matrix (SSOT):** [contracts/feature-matrix-i003-ruler-c.md](contracts/feature-matrix-i003-ruler-c.md)
 - **Spring Boot demo:** [demo-spring-boot/README.md](demo-spring-boot/README.md)
 
 ## Modules

@@ -135,15 +135,16 @@ Rules:
 
 Domains for I-003 Phases:
 
-| Phase | Domain (C-* IDs) |
-|---|---|
-| P-002 | Exception mapping C-EXC-* |
-| P-003 | JSON deep + AggregateSupport C-JSON-001…004 |
-| P-004 | Window + CTE C-WIN-001 / C-CTE-001 |
-| P-005 | Bulk mutation C-BULK-* |
-| P-006 | Type/DDL details C-DDL-001…003, C-CAT-001, C-GUID-001 |
-| P-007 | Docs/matrix align + Accept prep |
+| Phase | Domain (C-* IDs) | Delivery (I-003) |
+|---|---|---|
+| P-002 | Exception mapping C-EXC-* | **Delivered** — `XuguExceptionMappingIT` |
+| P-003 | JSON deep + AggregateSupport C-JSON-001…004 | **Delivered** — `XuguJsonAggregateIT` |
+| P-004 | Window + CTE C-WIN-001 / C-CTE-001 | **Delivered** — `XuguWindowCteIT` |
+| P-005 | Bulk mutation C-BULK-* | **Delivered** — `XuguBulkMutationIT` (bulk insert live IT N/A) |
+| P-006 | Type/DDL details C-DDL-001…003, C-CAT-001, C-GUID-001 | **Delivered** — `XuguTypeDdlDetailsIT` |
+| P-007 | Docs/matrix align + Accept prep | **Docs align** (this Phase) — Ship still out of scope |
 
+GAV remains **`7.4.5.Final`**. Deferred / 文档不允许 rows in the I-003 matrix stay deferred / forbidden.
 ---
 
 ## 8. Versioning policy
