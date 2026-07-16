@@ -1,39 +1,39 @@
 {
   "schema_version": 1,
   "task_id": "I-003",
-  "batch_id": "B-007",
-  "status": "awaiting_initiative_accept",
+  "batch_id": null,
+  "status": "initiative_accepted",
   "harness_level": "Standard",
-  "last_updated": "2026-07-16T17:47:00+08:00",
+  "last_updated": "2026-07-16T17:48:00+08:00",
   "initiative_id": "I-003",
   "initiative_type": "feature",
   "working_branch": "feat/i-003-production-capability-parity",
   "active_plan": [
-    "P-001..P-007 all accepted",
-    "Initiative Accept prep ready; no Ship"
+    "I-003 Initiative Accept complete",
+    "Ship and Archive deferred"
   ],
   "next_3_steps": [
-    "Human Gate: I-003 Initiative Accept?",
-    "Optional Archive after Accept",
-    "Ship only with separate authorization"
+    "Human Gate: Archive I-003?",
+    "Or authorize Ship separately",
+    "Or start new Initiative"
   ],
   "validation": {
-    "last_result": "P-007 accepted; VERIFY PASS; Accept prep ready"
+    "last_result": "I-003 accepted; VERIFY PASS; no Ship"
   },
   "cognitive_state": {
     "failure_count": 0,
     "current_mode": "awaiting_human_gate",
-    "blocked_on": "human_gate_initiative_accept_i003"
+    "blocked_on": "optional_archive_or_ship_or_next_initiative"
   },
   "version_control_checkpoint": {
-    "decision": "p007_accepted_awaiting_initiative_accept",
-    "committed": true,
+    "decision": "i003_initiative_accepted",
+    "committed": false,
     "branch": "feat/i-003-production-capability-parity",
-    "candidate_commit": "5d9c44d84a3b2ab507002a1a66cd153ec93ac237",
-    "head": "5d9c44d84a3b2ab507002a1a66cd153ec93ac237"
+    "candidate_commit": null,
+    "head": "870551f"
   },
   "handoff": {
-    "resume_from": "harness/handoffs/orchestrator/B-007-P-007-complete.md"
+    "resume_from": "harness/handoffs/orchestrator/I-003-accepted.md"
   },
   "approved_build": "B-007",
   "approved_phases": [
@@ -45,5 +45,5 @@
     "P-006",
     "P-007"
   ],
-  "updated_at": "2026-07-16T17:47:00+08:00"
+  "updated_at": "2026-07-16T17:48:00+08:00"
 }

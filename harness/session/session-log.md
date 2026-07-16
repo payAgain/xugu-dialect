@@ -1,4 +1,14 @@
-﻿## Entry: P-007 accepted — Initiative Accept prep
+﻿## Entry: I-003 Initiative Accept
+
+### Summary
+Human Gate「I-003 Initiative Accept」。Initiative **accepted**（不含 Ship / Archive）。P-001…P-007 全部 accepted；VERIFY PASS；GAV 7.4.5.Final。
+
+### Next
+可选：Archive I-003；或另行授权 Ship；或开新 Initiative。
+
+---
+
+## Entry: P-007 accepted — Initiative Accept prep
 
 ### Summary
 Human Gate「批准 B-007，范围仅 P-007」。Docs/matrix CONFIRMED；VERIFY PASS；reviewer approve；P-007 accepted。I-003 首批完成，待 Initiative Accept（不含 Ship）。
