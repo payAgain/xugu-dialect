@@ -1,13 +1,16 @@
-# P-005 Test Checklist (RP-02)
+﻿# P-005 Test Checklist (RP-02)
 
-**Invocation:** `test-p005-20260715`
-
-- [x] Independent test context (no product code changes)
-- [x] `mvn -q test` PASS (IT skipped when gate off)
-- [x] `mvn -q test -Dxugu.run.integration=true` PASS on real XuguDB
-- [x] `python harness/scripts/verify.py --phase P-005 --evidence harness/evidence/test/P-005/verification.json` → VERIFY PASS
-- [x] Spot-check locked forms: `identity(1,1)`; INSERT omit id; `select <seq>.nextval from dual`; `currval('name')`; FROM DUAL
-- [x] Spot-check: no `auto_increment` / no `NEXTVAL('seq')` / no `seq.currval` claimed by dialect
-- [x] Observed flow: identity-insert-real-db
-- [x] Observed flow: sequence-generator-real-db
-- [x] TEST-REPORT + handoff written; RP-02 `passed` / `test-p005-20260715`
+- [x] Authorization: I-003 / B-005 / P-005
+- [x] Branch `feat/i-003-production-capability-parity` (branch_check PASS)
+- [x] `mvn -q -DskipTests package` (exit 0)
+- [x] `mvn -q test` offline (exit 0)
+- [x] `mvn -q test "-Dxugu.run.integration=true"` on live XuguDB (exit 0)
+- [x] `verify.py --phase P-005` → VERIFY PASS
+- [x] `harness_check.py` PASS
+- [x] `branch_check.py` PASS
+- [x] Evidence logs under `harness/evidence/test/P-005/`
+- [x] Handoff `harness/handoffs/test/P-005.yaml` updated
+- [x] No git commit / no Accept by test role
+- [x] C-BULK-001 JOINED bulk update/delete IT executed (gate ON)
+- [x] C-BULK-003 `supportsSubqueryOnMutatingTable=false` (unit + IT)
+- [x] C-BULK-002 documented N/A (no bulk insert IT)

@@ -1,40 +1,30 @@
-# P-005 IT Result (independent test RP-02)
+﻿P-005 Integration Test Result — bulk mutation (RP-02)
+Date: 2026-07-16
+Branch: feat/i-003-production-capability-parity
+HEAD: aac0d27b4c6f12fc7800b403dda7c858214ca1f2
 
-**Invocation:** test-p005-20260715
-**Gate:** `-Dxugu.run.integration=true`
-**DB:** `jdbc:xugu://127.0.0.1:5138/SYSTEM?...&compatiblemode=NONE`
-**Driver / Dialect / Version:** XuguDB JDBC Driver / XuguDialect / 12.0
-**When:** 2026-07-15T10:13:53+08:00 (first IT run; exit 0)
-**Module:** dialect — Tests run: 34, Failures: 0, Errors: 0, Skipped: 0 (gate ON)
+Command: mvn -q test "-Dxugu.run.integration=true"
+Exit code: 0
+Real DB: jdbc:xugu://127.0.0.1:5138/SYSTEM (XuguDB 12.0)
 
-## Offline (gate off)
-- Exit 0; 11 IT skipped; 23 unit passed (XuguDialectTest 7 + XuguIdentitySequenceTest 6 + XuguPaginationLockTest 10)
+--- XuguBulkMutationSupportTest (offline, gate OFF in surefire) ---
+Tests: 2 | Failures: 0 | Errors: 0 | Skipped: 0
+  localTemporaryTableStrategyForBulkMutation_C_BULK_001  PASS
+  supportsSubqueryOnMutatingTableIsFalse_C_BULK_003       PASS
 
-## Integration (gate ON)
-- Exit 0; 11 IT executed; 0 failed
-- P-005 focused: XuguIdentitySequenceIT 2/2 PASS
+--- XuguBulkMutationIT (gate ON: xugu.run.integration=true) ---
+Tests: 3 | Failures: 0 | Errors: 0 | Skipped: 0
+  bulkUpdateOnJoinedInheritanceSucceeds                  PASS  (C-BULK-001)
+  bulkDeleteOnJoinedInheritanceSucceeds                  PASS  (C-BULK-001)
+  dialectExposesLocalTempBulkStrategyFlags               PASS  (C-BULK-001/003)
 
-## Flow: identity-insert-real-db (XuguIdentitySequenceIT.identityPersistBackfillsId_A_IDN_003_004)
-- DDL: `create table HIB_P005_IDN (id bigint identity(1,1), name varchar(64) not null, primary key (id))`
-- INSERT: `insert into HIB_P005_IDN (name) values (?)` (id omitted)
-- Id backfilled after persist/flush (positive Long)
-- Row verified via SELECT; LAST_INSERT_ID() FROM DUAL fallback smoke OK
-- Cleanup: `drop table HIB_P005_IDN`
+--- C-BULK-002 bulk insert ---
+N/A — no bulk insert IT in this phase (per P-001).
 
-## Flow: sequence-generator-real-db (XuguIdentitySequenceIT.sequenceGeneratorPersist_A_SEQ_003_004_008)
-- Probe: CREATE SEQUENCE START WITH 10; `SELECT HIB_P005_SEQ_GEN.NEXTVAL FROM DUAL` → 10; `SELECT CURRVAL('HIB_P005_SEQ_GEN') FROM DUAL` → 10; DROP
-- Hibernate: `create sequence HIB_P005_SEQ_GEN start with 1 increment by 1`
-- NEXTVAL: `select HIB_P005_SEQ_GEN.nextval from dual` (twice)
-- INSERT with explicit ids; `id2 > id1`
-- Cleanup: DROP TABLE + `drop sequence HIB_P005_SEQ_GEN`
+Artifacts:
+  harness/evidence/test/P-005/TEST-com.xugu.dialect.it.XuguBulkMutationIT.xml
+  harness/evidence/test/P-005/TEST-com.xugu.dialect.XuguBulkMutationSupportTest.xml
+  harness/evidence/test/P-005/mvn-test-integration.log
+  harness/evidence/test/P-005/mvn-test-offline.log
 
-## Locked SQL forms (confirmed)
-- IDENTITY DDL: `identity(1,1)`
-- Identity insert omit column
-- NEXTVAL: `select <seq>.nextval from dual`
-- CURRVAL: `select currval('<name>') from dual`
-- CREATE/DROP SEQUENCE as Hibernate SequenceSupport defaults
-
-Log: `harness/evidence/test/P-005/mvn-test-integration.log`
-Surefire: `harness/evidence/test/P-005/surefire-summary-integration.txt`
-IT report: `harness/evidence/test/P-005/com.xugu.dialect.it.XuguIdentitySequenceIT.txt`
+Overall IT verdict: PASS

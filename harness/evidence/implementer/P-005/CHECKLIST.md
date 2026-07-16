@@ -1,14 +1,14 @@
-# P-005 Implementer Checklist (RP-01)
+# P-005 Implementer Checklist (RP-01 / I-003 bulk mutation)
 
-- [x] XuguIdentityColumnSupport wired from XuguDialect
-- [x] getIdentityColumnString → `identity(1,1)`
-- [x] supportsIdentityColumns = true
-- [x] Identity retrieval: JDBC getGeneratedKeys proven; LAST_INSERT_ID select fallback documented
-- [x] XuguSequenceSupport CREATE/DROP/NEXTVAL/CURRVAL/FROM DUAL
-- [x] NEXTVAL form locked: `select seq.nextval from dual`
-- [x] Unit tests for DDL/SQL fragments
-- [x] Gated IT identity + sequence with cleanup
-- [x] Evidence NOTES + matrix hints
-- [x] verify.py --phase P-005
+- [x] C-BULK-003: `supportsSubqueryOnMutatingTable()` → `false`
+- [x] C-BULK-001: `getFallbackSqmMutationStrategy` → `LocalTemporaryTableMutationStrategy` + `TemporaryTable.createIdTable`
+- [x] C-BULK-002: `getFallbackSqmInsertStrategy` → `LocalTemporaryTableInsertStrategy` + `TemporaryTable.createEntityTable`
+- [x] Reuses `XuguLocalTemporaryTableStrategy` (LOCAL temp DDL)
+- [x] Unit test `XuguBulkMutationSupportTest`
+- [x] ORM IT `XuguBulkMutationIT` — bulk update on JOINED entity (live DB)
+- [x] ORM IT `XuguBulkMutationIT` — bulk delete on JOINED entity (live DB)
+- [x] C-BULK-002 insert IT documented N/A (driver issue; strategy wired)
+- [x] Evidence NOTES + CHECKLIST
+- [x] Handoff `harness/handoffs/implementer/P-005.yaml` → `completed_awaiting_test_review`
 - [ ] Accept (orchestrator / later)
 - [ ] Commit (Human Gate / later)

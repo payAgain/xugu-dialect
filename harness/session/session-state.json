@@ -1,46 +1,47 @@
 {
   "schema_version": 1,
-  "task_id": "P-005",
-  "batch_id": "B-005",
+  "task_id": "P-006",
+  "batch_id": "B-006",
   "status": "awaiting_build_approval",
   "harness_level": "Standard",
-  "last_updated": "2026-07-16T14:05:00+08:00",
+  "last_updated": "2026-07-16T15:22:00+08:00",
   "initiative_id": "I-003",
   "initiative_type": "feature",
   "working_branch": "feat/i-003-production-capability-parity",
   "active_plan": [
-    "P-001..P-004 accepted",
-    "B-005 draft = P-005 only"
+    "P-001..P-005 accepted",
+    "B-006 draft = P-006 only"
   ],
   "next_3_steps": [
-    "Human Gate: approve B-005 scope P-005 only?",
-    "On approve: Bulk mutation fallback + ORM IT",
+    "Human Gate: approve B-006 scope P-006 only?",
+    "On approve: Type/DDL details + ORM IT",
     "No Ship"
   ],
   "validation": {
-    "last_result": "P-004 accepted; VERIFY PASS; Window/CTE IT PASS"
+    "last_result": "P-005 accepted; VERIFY PASS; bulk mutation IT PASS"
   },
   "cognitive_state": {
     "failure_count": 0,
     "current_mode": "awaiting_human_gate",
-    "blocked_on": "human_gate_build_b005_p005_only"
+    "blocked_on": "human_gate_build_b006_p006_only"
   },
   "version_control_checkpoint": {
-    "decision": "p004_accepted_awaiting_b005",
-    "committed": true,
+    "decision": "p005_accepted_awaiting_b006",
+    "committed": false,
     "branch": "feat/i-003-production-capability-parity",
-    "candidate_commit": "8cb1f498b2fde69469744aa4841724613109398a",
-    "head": "8cb1f498b2fde69469744aa4841724613109398a"
+    "candidate_commit": null,
+    "head": "aac0d27"
   },
   "handoff": {
-    "resume_from": "harness/handoffs/orchestrator/B-004-P-004-complete.md"
+    "resume_from": "harness/handoffs/orchestrator/B-005-P-005-complete.md"
   },
-  "approved_build": "B-004",
+  "approved_build": "B-005",
   "approved_phases": [
     "P-001",
     "P-002",
     "P-003",
-    "P-004"
+    "P-004",
+    "P-005"
   ],
-  "updated_at": "2026-07-16T14:05:00+08:00"
+  "updated_at": "2026-07-16T15:22:00+08:00"
 }

@@ -18,8 +18,15 @@ import org.hibernate.dialect.identity.IdentityColumnSupport;
 import org.hibernate.dialect.lock.spi.LockingSupport;
 import org.hibernate.dialect.pagination.LimitHandler;
 import org.hibernate.dialect.sequence.SequenceSupport;
+import org.hibernate.dialect.temptable.TemporaryTable;
 import org.hibernate.dialect.temptable.TemporaryTableKind;
 import org.hibernate.dialect.temptable.TemporaryTableStrategy;
+import org.hibernate.metamodel.mapping.EntityMappingType;
+import org.hibernate.metamodel.spi.RuntimeModelCreationContext;
+import org.hibernate.query.sqm.mutation.internal.temptable.LocalTemporaryTableInsertStrategy;
+import org.hibernate.query.sqm.mutation.internal.temptable.LocalTemporaryTableMutationStrategy;
+import org.hibernate.query.sqm.mutation.spi.SqmMultiTableInsertStrategy;
+import org.hibernate.query.sqm.mutation.spi.SqmMultiTableMutationStrategy;
 import org.hibernate.dialect.unique.CreateTableUniqueDelegate;
 import org.hibernate.dialect.unique.UniqueDelegate;
 import org.hibernate.engine.jdbc.dialect.spi.DialectResolutionInfo;
@@ -119,6 +126,13 @@ import jakarta.persistence.Timeout;
  * {@code json_arrayagg}/{@code json_objectagg}; JDBC writes use {@code cast(? as json)};
  * {@link #getAggregateSupport()} covers JSON embeddable component paths.
  * Hibernate {@code listagg} → XuGu {@code LISTAGG … WITHIN GROUP}.
+ *
+ * <p><b>Bulk mutation (C-BULK-* / I-003):</b>
+ * {@link #supportsSubqueryOnMutatingTable()} is {@code false} (no self-referencing
+ * subquery on DML target — align MySQL-class behavior and Xugu DML docs).
+ * Multi-table HQL bulk update/delete/insert on JOINED inheritance uses
+ * {@link LocalTemporaryTableMutationStrategy} / {@link LocalTemporaryTableInsertStrategy}
+ * backed by {@link XuguLocalTemporaryTableStrategy} ({@code CREATE LOCAL TEMPORARY TABLE}).
  *
  * <p><b>Schema / temp / comment / constraints (A-SCH-* , P-007):</b>
  * {@code CREATE}/{@code DROP SCHEMA}; schema-qualified names
@@ -476,6 +490,56 @@ public class XuguDialect extends Dialect {
 	@Override
 	public String getTemporaryTableTruncateCommand() {
 		return "truncate table";
+	}
+
+	// -------------------------------------------------------------------------
+	// Bulk mutation fallback (C-BULK-*) — local temp table strategies
+	// -------------------------------------------------------------------------
+
+	/**
+	 * C-BULK-003: mutating-table self-referencing subqueries are not supported
+	 * (MySQL-class / Xugu DML docs); bulk DML uses temp-table fallback instead.
+	 */
+	@Override
+	public boolean supportsSubqueryOnMutatingTable() {
+		return false;
+	}
+
+	/**
+	 * C-BULK-001: JOINED / multi-table bulk update/delete fallback via local id temp table.
+	 * Docs: {@code reference/object/table/create.md} (local temporary tables).
+	 */
+	@Override
+	public SqmMultiTableMutationStrategy getFallbackSqmMutationStrategy(
+			EntityMappingType rootEntityDescriptor,
+			RuntimeModelCreationContext runtimeModelCreationContext) {
+		return new LocalTemporaryTableMutationStrategy(
+				TemporaryTable.createIdTable(
+						rootEntityDescriptor,
+						basename -> TemporaryTable.ID_TABLE_PREFIX + basename,
+						this,
+						runtimeModelCreationContext
+				),
+				runtimeModelCreationContext.getSessionFactory()
+		);
+	}
+
+	/**
+	 * C-BULK-002: bulk insert fallback via local entity temp table (same temp DDL strategy).
+	 */
+	@Override
+	public SqmMultiTableInsertStrategy getFallbackSqmInsertStrategy(
+			EntityMappingType rootEntityDescriptor,
+			RuntimeModelCreationContext runtimeModelCreationContext) {
+		return new LocalTemporaryTableInsertStrategy(
+				TemporaryTable.createEntityTable(
+						rootEntityDescriptor,
+						name -> TemporaryTable.ENTITY_TABLE_PREFIX + name,
+						this,
+						runtimeModelCreationContext
+				),
+				runtimeModelCreationContext.getSessionFactory()
+		);
 	}
 
 	/**

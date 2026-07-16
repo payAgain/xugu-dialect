@@ -59,9 +59,9 @@
 
 | ID | Theme | Capability | Hibernate surface | Xugu doc ref | Sibling (read-only) | Status | Target Phase | app_entrypoint | Acceptance hint |
 |---|---|---|---|---|---|---|---|---|---|
-| C-BULK-001 | Bulk | Multi-table mutation fallback | `getFallbackSqmMutationStrategy` (local temp) | `reference/object/table/create.md` (#临时表); existing temp strategies | `LocalTemporaryTableMutationStrategy` wiring | 可实现 | P-005 | HQL bulk `update`/`delete` on inheritance or join path needing temp strategy | Must use Session/Query bulk API |
-| C-BULK-002 | Bulk | Multi-table insert fallback | `getFallbackSqmInsertStrategy` | same | `LocalTemporaryTableInsertStrategy` | 可实现 | P-005 | Bulk insert path requiring strategy (as applicable to mapping) | Document N/A if mapping never triggers |
-| C-BULK-003 | Bulk | Subquery on mutating table | `supportsSubqueryOnMutatingTable()` | select/subquery + DML docs | sibling returns false-like MySQL | 可实现 | P-005 | Bulk HQL that would self-reference target if unsupported | Behavior matches flag + docs |
+| C-BULK-001 | Bulk | Multi-table mutation fallback | `getFallbackSqmMutationStrategy` (local temp) | `reference/object/table/create.md` (#临时表); existing temp strategies | `LocalTemporaryTableMutationStrategy` wiring | 可实现 | P-005 | HQL bulk `update`/`delete` on inheritance or join path needing temp strategy | ✅ I-003/P-005 `XuguBulkMutationIT` update/delete |
+| C-BULK-002 | Bulk | Multi-table insert fallback | `getFallbackSqmInsertStrategy` | same | `LocalTemporaryTableInsertStrategy` | 可实现 | P-005 | Bulk insert path requiring strategy (as applicable to mapping) | ✅ wired; live IT **N/A** (GetGeneratedKeys blocker documented) |
+| C-BULK-003 | Bulk | Subquery on mutating table | `supportsSubqueryOnMutatingTable()` | select/subquery + DML docs | sibling returns false-like MySQL | 可实现 | P-005 | Bulk HQL that would self-reference target if unsupported | ✅ `supportsSubqueryOnMutatingTable=false` + temp fallback IT |
 
 ---
 

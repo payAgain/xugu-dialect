@@ -3,12 +3,16 @@
   "build_id": "B-005",
   "initiative_id": "I-003",
   "plan_revision": 1,
-  "status": "draft",
+  "status": "approved",
   "proposed_phase_ids": ["P-005"],
-  "approved_phase_ids": [],
-  "approval": null,
-  "recommendation": "Propose B-005 = P-005 only (Bulk mutation fallback + ORM IT). Do not start until Human Gate approves.",
+  "approved_phase_ids": ["P-005"],
+  "approval": {
+    "reference": "批准 B-005，范围仅 P-005",
+    "approved_at": "2026-07-16T14:56:00+08:00",
+    "approved_by": "Human Gate"
+  },
+  "recommendation": "B-005 approved = P-005 only (Bulk mutation fallback + ORM IT). Subagents use auto model per Human Gate.",
   "supersedes": null,
   "scope_changes": [],
-  "notes": "Version 7.4.5.Final. No harness framework changes. No Ship. Unlocked after P-004 Accept."
+  "notes": "Version 7.4.5.Final. No harness framework changes. No Ship."
 }

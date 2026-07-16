@@ -1,22 +1,14 @@
 {
   "schema_version": 1,
   "build_id": "B-006",
-  "initiative_id": "I-001",
+  "initiative_id": "I-003",
   "plan_revision": 1,
-  "status": "approved",
-  "proposed_phase_ids": [
-    "P-006"
-  ],
-  "approved_phase_ids": [
-    "P-006"
-  ],
-  "approval": {
-    "reference": "批准 B-006，范围仅 P-006",
-    "approved_at": "2026-07-15T10:28:00+08:00",
-    "approved_by": "Human Gate"
-  },
-  "recommendation": "Approve B-006 scope = P-006 only (SQL functions). Do not approve P-007+ until P-006 ACCEPTANCE.",
+  "status": "draft",
+  "proposed_phase_ids": ["P-006"],
+  "approved_phase_ids": [],
+  "approval": null,
+  "recommendation": "Propose B-006 = P-006 only (Type/DDL details + ORM IT). Do not start until Human Gate approves.",
   "supersedes": null,
   "scope_changes": [],
-  "notes": "Human Gate approved B-006 with scope P-006 only. P-006 accepted after RP-03 approve (rev-p006-20260715); uuid()/json_value+json_extract/listagg WITHIN GROUP; VERIFY PASS. P-007 unlocked ready; B-007 not approved."
+  "notes": "Version 7.4.5.Final. No harness framework changes. No Ship. Unlocked after P-005 Accept."
 }

@@ -1,7 +1,7 @@
 schema_version: 1
 charter_version: "1.0.0"
 initiative_id: I-003
-updated: "2026-07-16T14:02:00+08:00"
+updated: "2026-07-16T15:22:00+08:00"
 tasks:
   - task_id: P-001
     title: "尺子 C 生产能力差集盘点 SSOT"
@@ -37,15 +37,15 @@ tasks:
     dependencies: [P-003]
   - task_id: P-005
     title: "Bulk mutation 回退策略 + 入口 IT"
-    status: ready
-    build_id: null
+    status: accepted
+    build_id: B-005
     packet: harness/tasks/P-005.md
     acceptance_doc: harness/evidence/implementer/P-005/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"
     dependencies: [P-004]
   - task_id: P-006
     title: "类型与 DDL 细节缺口 + 入口 IT"
-    status: blocked
+    status: ready
     build_id: null
     packet: harness/tasks/P-006.md
     acceptance_doc: harness/evidence/implementer/P-006/ACCEPTANCE.md

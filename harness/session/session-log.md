@@ -1,4 +1,19 @@
-﻿## Entry: P-004 accepted — propose B-005
+﻿## Entry: P-005 accepted — propose B-006
+
+### Summary
+Human Gate「批准 B-005，范围仅 P-005」。Bulk mutation fallback + JOINED bulk update/delete IT PASS；VERIFY PASS；reviewer approve；P-005 accepted（auto subagents）。Next：批准 B-006 仅 P-006。
+
+### Artifacts
+- `XuguDialect` bulk fallback hooks + `XuguBulkMutationIT`
+- harness/evidence/{implementer,test,reviewer}/P-005/*
+- B-006 draft = P-006 only
+
+### Next Steps
+1. Human Gate：批准 B-006，范围仅 P-006？
+
+---
+
+## Entry: P-004 accepted — propose B-005
 
 ### Summary
 Human Gate「批准 B-004，范围仅 P-004」。Window/CTE flags + ORM IT PASS；VERIFY PASS；reviewer approve；P-004 accepted。Next：批准 B-005 仅 P-005（Bulk mutation）。

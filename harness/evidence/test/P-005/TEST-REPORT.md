@@ -1,114 +1,63 @@
-# P-005 Test Report (independent test role)
+﻿# P-005 Test Report (RP-02)
 
-> Phase: `P-005`  
-> Initiative: `I-001`  
-> Build: `B-005`  
-> Invocation: `test-p005-20260715`  
-> Role: `test` (independent context from implementer)  
-> Verdict: **PASS**  
-> Date: 2026-07-15
+| Field | Value |
+|-------|-------|
+| Initiative | I-003 |
+| Build | B-005 |
+| Phase | P-005 — bulk mutation fallback |
+| Role | test / RP-02 |
+| Branch | feat/i-003-production-capability-parity |
+| HEAD | aac0d27b4c6f12fc7800b403dda7c858214ca1f2 |
+| invocation_id | test-p005-20260716 |
+| Completed | 2026-07-16T15:13:00+08:00 |
 
-## Environment
+## Scope
 
-| Item | Value |
-|---|---|
-| Maven | Apache Maven 3.9.9 (`C:\Users\admin\tools\apache-maven-3.9.9\bin` prepended to PATH) |
-| JDK | Oracle 21.0.1 |
-| Working directory | `E:\Work\java\hibernate-test` |
-| Branch | `feat/i-001-xugu-dialect-major` |
-| HEAD (test time) | `d925515c2be1ceb94334a63acc1464d467adb3ce` |
-| Product code changes by test | none |
-| Live DB | XuguDB `jdbc:xugu://127.0.0.1:5138/SYSTEM?...&compatiblemode=NONE` (driver: XuguDB JDBC Driver; dialect: XuguDialect; version: 12.0) |
+Independent verification of implementer delivery: `XuguDialect` bulk mutation fallback wiring, `XuguBulkMutationSupportTest` (offline), `XuguBulkMutationIT` (live XuguDB when IT gate ON).
 
-## Commands and exit codes
+## Command matrix
 
-| # | Command | Exit code | Result |
-|---|---|---|---|
-| 1 | `mvn -q test` (gate default/off) | 0 | PASS (11 IT skipped) |
-| 2 | `mvn -q test -Dxugu.run.integration=true` | 0 | PASS (11 IT executed on real XuguDB) |
-| 3 | `python harness/scripts/verify.py --phase P-005 --evidence harness/evidence/test/P-005/verification.json` | 0 | `VERIFY PASS` |
+| Step | Command | Exit |
+|------|---------|------|
+| Build | `mvn -q -DskipTests package` | 0 |
+| Unit/offline tests | `mvn -q test` | 0 |
+| Integration tests | `mvn -q test "-Dxugu.run.integration=true"` | 0 |
+| Verify | `python harness/scripts/verify.py --phase P-005 --evidence harness/evidence/test/P-005/verification.json` | 0 → **VERIFY PASS** |
+| Harness check | `python harness/scripts/harness_check.py` | 0 |
+| Branch check | `python harness/scripts/branch_check.py` | 0 |
 
-## Surefire counts
+### PowerShell note
 
-### Offline (`xugu.run.integration=false`)
+Unquoted `-Dxugu.run.integration=true` is parsed as a lifecycle phase (exit 1). Effective integration run used quoted property: `"-Dxugu.run.integration=true"`.
 
-| Suite | tests | failures | errors | skipped |
-|---|---:|---:|---:|---:|
-| `XuguDialectTest` | 7 | 0 | 0 | 0 |
-| `XuguIdentitySequenceTest` | 6 | 0 | 0 | 0 |
-| `XuguPaginationLockTest` | 10 | 0 | 0 | 0 |
-| `XuguTypeRoundTripIT` | 4 | 0 | 0 | 4 |
-| `XuguDdlIT` | 1 | 0 | 0 | 1 |
-| `XuguBinarySchemaExportIT` | 1 | 0 | 0 | 1 |
-| `XuguPaginationIT` | 1 | 0 | 0 | 1 |
-| `XuguLockIT` | 2 | 0 | 0 | 2 |
-| `XuguIdentitySequenceIT` | 2 | 0 | 0 | 2 |
-| **Total** | **34** | **0** | **0** | **11** |
+## Observed flows
 
-### Integration gate ON (real XuguDB)
+### C-BULK-001 — JOINED bulk update/delete ORM entrypoint (live DB)
 
-| Suite | tests | failures | errors | skipped |
-|---|---:|---:|---:|---:|
-| `XuguDialectTest` | 7 | 0 | 0 | 0 |
-| `XuguIdentitySequenceTest` | 6 | 0 | 0 | 0 |
-| `XuguPaginationLockTest` | 10 | 0 | 0 | 0 |
-| `XuguTypeRoundTripIT` | 4 | 0 | 0 | 0 |
-| `XuguDdlIT` | 1 | 0 | 0 | 0 |
-| `XuguBinarySchemaExportIT` | 1 | 0 | 0 | 0 |
-| `XuguPaginationIT` | 1 | 0 | 0 | 0 |
-| `XuguLockIT` | 2 | 0 | 0 | 0 |
-| `XuguIdentitySequenceIT` | 2 | 0 | 0 | 0 |
-| **Total** | **34** | **0** | **0** | **0** |
+| Check | Result | Evidence |
+|-------|--------|----------|
+| Offline strategy wiring | PASS | `XuguBulkMutationSupportTest.localTemporaryTableStrategyForBulkMutation_C_BULK_001` |
+| Live HQL bulk update on JOINED inheritance | PASS | `XuguBulkMutationIT.bulkUpdateOnJoinedInheritanceSucceeds` (gate ON) |
+| Live HQL bulk delete on JOINED inheritance | PASS | `XuguBulkMutationIT.bulkDeleteOnJoinedInheritanceSucceeds` (gate ON) |
+| Dialect flags on live path | PASS | `XuguBulkMutationIT.dialectExposesLocalTempBulkStrategyFlags` |
 
-**IT summary:** 11 IT methods executed when gate ON, 0 failed, 0 skipped. Offline: 11 IT skipped via `Assumptions.assumeTrue(XuguITGate.isEnabled())`. Unit: 23 passed both runs (`7+6+10`).
+Surefire (integration gate ON): `TEST-com.xugu.dialect.it.XuguBulkMutationIT.xml` — 3 tests, 0 failures, 0 skipped, `xugu.run.integration=true`.
 
-## Project verify evidence
+### C-BULK-003 — supportsSubqueryOnMutatingTable=false
 
-- Path: `harness/evidence/test/P-005/verification.json`
-- Overall status: `PASS`
-- Required checks: `build` PASS (exit 0), `test` PASS (exit 0)
-- Optional: `lint` NOT_APPLICABLE
-- Harness check embedded: `HARNESS_CHECK PASS`
+| Check | Result | Evidence |
+|-------|--------|----------|
+| Unit assertion | PASS | `XuguBulkMutationSupportTest.supportsSubqueryOnMutatingTableIsFalse_C_BULK_003` |
+| IT assertion | PASS | `XuguBulkMutationIT.dialectExposesLocalTempBulkStrategyFlags` |
 
-## Locked SQL forms (spot-check)
+### C-BULK-002 — bulk insert IT
 
-| Capability | Locked form | Unit | Live IT (SHOW_SQL) | Result |
-|---|---|---|---|---|
-| IDENTITY DDL | `identity(1,1)` after type | `getIdentityColumnString` → `identity(1,1)`; no `auto_increment` | `create table HIB_P005_IDN (id bigint identity(1,1), …)` | PASS |
-| Identity insert | omit id column | — | `insert into HIB_P005_IDN (name) values (?)` | PASS |
-| Generated keys primary | JDBC `getGeneratedKeys` | dialect default + IT `USE_GET_GENERATED_KEYS=true` | id backfilled after persist/flush | PASS |
-| Identity select fallback | `select last_insert_id() from dual` | unit exact match | JDBC `SELECT LAST_INSERT_ID() FROM DUAL` after insert | PASS |
-| CREATE SEQUENCE | `create sequence … start with N increment by M` | SequenceSupport default path | `create sequence HIB_P005_SEQ_GEN start with 1 increment by 1` | PASS |
-| NEXTVAL | `select <seq>.nextval from dual` | unit exact | `select HIB_P005_SEQ_GEN.nextval from dual` (×2) | PASS |
-| CURRVAL | `select currval('<name>') from dual` | unit exact | probe `SELECT CURRVAL('HIB_P005_SEQ_GEN') FROM DUAL` → 10 after NEXTVAL 10 | PASS |
-| DROP SEQUENCE | `drop sequence <name>` | — | `drop sequence HIB_P005_SEQ_GEN` | PASS |
-| FROM DUAL | ` from dual` | `getFromDual()` | present on NEXTVAL selects | PASS |
+**N/A** — no dedicated bulk-insert integration test in P-005 scope (acceptable per P-001).
 
-**Rejected forms (implementer live probe; not re-claimed by dialect):** `NEXTVAL('seq')` FAIL; `seq.CURRVAL` FAIL — dialect does not emit these.
+## Product code changes by test
 
-## Observed affected flows
-
-| Flow | Method | Expected | Observed | Result | Evidence |
-|---|---|---|---|---|---|
-| identity-insert-real-db | `XuguIdentitySequenceIT.identityPersistBackfillsId_A_IDN_003_004` | IDENTITY DDL + insert omit id + id backfill + cleanup | `bigint identity(1,1)`; INSERT `(name)`; positive id backfilled; row readable; DROP | PASS | `mvn-test-integration.log`, `com.xugu.dialect.it.XuguIdentitySequenceIT.txt`, `IT-RESULT.txt` |
-| sequence-generator-real-db | `XuguIdentitySequenceIT.sequenceGeneratorPersist_A_SEQ_003_004_008` | CREATE SEQUENCE; NEXTVAL/CURRVAL/DUAL; Hibernate persist increasing ids; DROP | Probe NEXTVAL=10 / CURRVAL=10; Hibernate two `nextval from dual` then inserts; `id2 > id1`; DROP table+seq | PASS | same |
-
-## Readiness dimensions (test view)
-
-| Dimension | Observation | Result |
-|---|---|---|
-| functional-correctness | Unit + real-DB IT pass for identity persist and sequence generator | PASS |
-| data-integrity | Id backfill verified by SELECT; sequence ids strictly increasing; cleanup DROP | PASS |
-| maintainability | IT gated; offline suite green without DB | PASS |
-| compatibility | Hibernate 7.4 IdentityColumnSupport / SequenceSupport; no MySQL/Oracle Dialect inheritance in this Phase path | PASS |
-
-## Residual notes
-
-- Test role did not modify product code.
-- DB unreachable with gate ON would be FAIL/blocker (no mock path); this run connected successfully.
-- A-IDN-005 / A-SEQ-006 remain deferred per implementer (matrix 延后) — out of P-005 required flows.
-- Next: RP-03 reviewer (risk_score=8, Full review required).
+None.
 
 ## Verdict
 
-**PASS** — offline test / real-DB IT / verify green; both required observed flows evidenced; locked IDENTITY / SEQUENCE SQL forms confirmed on live XuguDB.
+**PASS** — all required commands succeeded; VERIFY PASS; bulk mutation flows confirmed as above.
