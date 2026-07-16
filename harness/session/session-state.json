@@ -46,12 +46,12 @@
   },
   "version_control_checkpoint": {
     "decision": "plan_committed_awaiting_b001_approval",
-    "candidate_commit": null,
+    "candidate_commit": "f040948d32400a7e8a13a45a3edd5bbd4227fb51",
     "git_init": true,
-    "committed": false,
+    "committed": true,
     "branch": "feat/i-003-production-capability-parity",
     "note": "I-002 archived; I-003 Plan ready; ask Human Gate approve B-001 = P-001 only; no Ship",
-    "head": null,
+    "head": "f040948d32400a7e8a13a45a3edd5bbd4227fb51",
     "base_branch_at_fork": "fix/i-002-hql-pagination-sequence-metadata",
     "i002_archive_base_sha": "a009ed2a391289baf19454268755ddbb035ebfbc"
   },
