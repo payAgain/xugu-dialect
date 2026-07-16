@@ -44,9 +44,10 @@
 - Ship: **out of this Initiative** (deferred)
 
 ## Status
-`completed` / **accepted**
+`completed` / **accepted** then **archived**
 
 - Human Gate Accept: 「Accept Initiative I-002」(~2026-07-16T10:28+08:00)
-- Archive: *(blank — ask Human Gate if desired)*
+- Human Gate Archive: 「Archive I-002」(~2026-07-16T10:46+08:00)
+- Archive record: `harness/initiatives/I-002/ARCHIVE.md`
 - Delivery: GAV `com.xugu:xugu-dialect:7.4.5.Final` same-version behavior fix; P0 HQL pagination `limit ? offset ?` + lock order; P1 `all_sequences` validate; in-repo gated ITs; docs/matrix P-003; VERIFY PASS
 - Ship / tag / push / Central: **not** done — separate authorization required

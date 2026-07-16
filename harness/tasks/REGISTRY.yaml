@@ -1,32 +1,62 @@
 schema_version: 1
 charter_version: "1.0.0"
-initiative_id: I-002
-updated: "2026-07-16T09:45:00+08:00"
-# Phase progress index. IDs: I-00x / P-00x / B-00x — see protocol/references/glossary.md
-# I-001 Phases P-001…P-011 archived with Initiative; packets P-004…P-011 remain on disk for history.
-# I-002 restarts P/B numbering per skills/initiative.md.
+initiative_id: I-003
+updated: "2026-07-16T10:46:00+08:00"
+# I-003 restarts P/B numbering. I-002 packets remain on disk as history until overwritten by same IDs.
 tasks:
   - task_id: P-001
-    title: "修复 HQL 分页 SqlAstTranslator"
-    status: accepted
-    build_id: B-001
+    title: "尺子 C 生产能力差集盘点 SSOT"
+    status: ready
+    build_id: null
     packet: harness/tasks/P-001.md
-    acceptance_doc: harness/evidence/implementer/P-001/ACCEPTANCE.md
-    role_pipeline_summary: "implementer → test → reviewer"
+    acceptance_doc: harness/evidence/architect-contract/P-001/ACCEPTANCE.md
+    role_pipeline_summary: "architect-contract → reviewer"
     dependencies: []
   - task_id: P-002
-    title: "修复序列元数据 getQuerySequencesString"
-    status: accepted
-    build_id: B-002
+    title: "异常映射与约束名抽取 + 入口 IT"
+    status: blocked
+    build_id: null
     packet: harness/tasks/P-002.md
     acceptance_doc: harness/evidence/implementer/P-002/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"
     dependencies: [P-001]
   - task_id: P-003
-    title: "文档矩阵勘误与 Accept 准备"
-    status: accepted
-    build_id: B-003
+    title: "JSON 深能力与 AggregateSupport + 入口 IT"
+    status: blocked
+    build_id: null
     packet: harness/tasks/P-003.md
-    acceptance_doc: harness/evidence/orchestrator/P-003/ACCEPTANCE.md
+    acceptance_doc: harness/evidence/implementer/P-003/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"
     dependencies: [P-002]
+  - task_id: P-004
+    title: "Window 与 WITH(CTE) + 入口 IT"
+    status: blocked
+    build_id: null
+    packet: harness/tasks/P-004.md
+    acceptance_doc: harness/evidence/implementer/P-004/ACCEPTANCE.md
+    role_pipeline_summary: "implementer → test → reviewer"
+    dependencies: [P-003]
+  - task_id: P-005
+    title: "Bulk mutation 回退策略 + 入口 IT"
+    status: blocked
+    build_id: null
+    packet: harness/tasks/P-005.md
+    acceptance_doc: harness/evidence/implementer/P-005/ACCEPTANCE.md
+    role_pipeline_summary: "implementer → test → reviewer"
+    dependencies: [P-004]
+  - task_id: P-006
+    title: "类型与 DDL 细节缺口 + 入口 IT"
+    status: blocked
+    build_id: null
+    packet: harness/tasks/P-006.md
+    acceptance_doc: harness/evidence/implementer/P-006/ACCEPTANCE.md
+    role_pipeline_summary: "implementer → test → reviewer"
+    dependencies: [P-005]
+  - task_id: P-007
+    title: "矩阵文档对齐与 Accept 准备"
+    status: blocked
+    build_id: null
+    packet: harness/tasks/P-007.md
+    acceptance_doc: harness/evidence/orchestrator/P-007/ACCEPTANCE.md
+    role_pipeline_summary: "implementer → test → reviewer"
+    dependencies: [P-006]

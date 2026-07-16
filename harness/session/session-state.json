@@ -1,84 +1,66 @@
 {
   "schema_version": 1,
-  "task_id": null,
-  "batch_id": null,
-  "status": "initiative_accepted_awaiting_archive_or_ship",
-  "current_phase": null,
+  "task_id": "P-001",
+  "batch_id": "B-001",
+  "status": "awaiting_build_approval",
+  "current_phase": "P-001",
   "harness_level": "Standard",
-  "last_updated": "2026-07-16T10:28:00+08:00",
-  "initiative_id": "I-002",
-  "initiative_type": "hotfix",
-  "working_branch": "fix/i-002-hql-pagination-sequence-metadata",
+  "last_updated": "2026-07-16T10:46:00+08:00",
+  "initiative_id": "I-003",
+  "initiative_type": "feature",
+  "working_branch": "feat/i-003-production-capability-parity",
   "active_plan": [
-    "I-002 Initiative Accept recorded (NOT Ship)",
-    "B-001…B-003 / P-001…P-003 all accepted",
-    "Optional: ask Human Gate Archive I-002",
-    "Ship remains deferred unless Human Gate authorizes separately"
+    "I-003 Plan: P-001 gap SSOT → P-002 exception → P-003 JSON/Aggregate → P-004 Window/CTE → P-005 bulk → P-006 type/DDL → P-007 docs/Accept",
+    "B-001 draft = P-001 only",
+    "No harness framework changes; version 7.4.5.Final; ruler C; entrypoint IT required"
   ],
   "next_3_steps": [
-    "Human Gate: Archive I-002?",
-    "Ship remains deferred (separate authorization)",
-    "Next Initiative via skills/initiative.md when ready"
+    "Human Gate: approve B-001 scope P-001 only?",
+    "On approve: architect-contract RP-01 gap inventory",
+    "Do not start P-002 until separate Build approval"
   ],
   "changed_files": [
-    "harness/evidence/orchestrator/I-002/ACCEPTANCE.md",
-    "harness/initiatives/I-002/brief.md",
-    "harness/initiatives/INDEX.md",
-    "harness/handoffs/orchestrator/I-002-accepted.md",
+    "harness/initiatives/**",
+    "harness/tasks/**",
+    "harness/builds/B-001.json",
+    "harness/handoffs/orchestrator/**",
     "current-task.md",
     "harness/session/"
   ],
   "validation": {
     "last_commands": [
-      "mvn -q -DskipTests package",
-      "mvn -q test",
-      "mvn -q test -Dxugu.run.integration=true",
-      "python harness/scripts/verify.py --phase P-003 --evidence harness/evidence/test/P-003/verification.json",
-      "python harness/scripts/harness_check.py",
       "python harness/scripts/branch_check.py"
     ],
-    "last_result": "VERIFY PASS (P-003); Initiative I-002 accepted; Ship/Archive deferred",
+    "last_result": "BRANCH_CHECK PASS; Plan drafted; awaiting B-001 approval",
     "known_failures": []
   },
   "cognitive_state": {
     "failure_count": 0,
     "current_mode": "awaiting_human_gate",
     "tried_approaches": [
-      "i002_scope_pass",
-      "i002_plan_three_serial_phases",
-      "p001_accepted",
-      "p002_accepted",
-      "p003_accepted",
-      "i002_initiative_accepted"
+      "i002_archived",
+      "i003_scope_pass",
+      "i003_plan_seven_serial_phases"
     ],
-    "blocked_on": "human_gate_optional_archive_or_separate_ship"
+    "blocked_on": "human_gate_build_b001_p001_only"
   },
   "version_control_checkpoint": {
-    "decision": "committed_i002_accepted_ship_deferred",
-    "candidate_commit": "be559b9d29b298e91d815b057590527e14faafca",
+    "decision": "plan_committed_awaiting_b001_approval",
+    "candidate_commit": null,
     "git_init": true,
-    "committed": true,
-    "branch": "fix/i-002-hql-pagination-sequence-metadata",
-    "note": "I-002 Initiative Accept landed; no Ship; Archive not done",
-    "head": "be559b9d29b298e91d815b057590527e14faafca",
-    "base_branch_at_fork": "feat/i-001-xugu-dialect-major",
-    "phase_shas": {
-      "P-001": "63a7d6001dbd6845ea10520905c60bb56d2e3d9c",
-      "P-002": "908e7f665c3317beef3665063ebc0d02efc6ed5f",
-      "P-003": "9df8c6242eb2f5593d7fd2fcb1f7f6482e17c8bf"
-    },
-    "i001_archive_sha": "82db5a38cd1e2ca00981198bbf42c84777c87e54"
+    "committed": false,
+    "branch": "feat/i-003-production-capability-parity",
+    "note": "I-002 archived; I-003 Plan ready; ask Human Gate approve B-001 = P-001 only; no Ship",
+    "head": null,
+    "base_branch_at_fork": "fix/i-002-hql-pagination-sequence-metadata",
+    "i002_archive_base_sha": "a009ed2a391289baf19454268755ddbb035ebfbc"
   },
   "handoff": {
-    "last_summary": "I-002 accepted; ask Archive; Ship deferred",
-    "resume_from": "harness/handoffs/orchestrator/I-002-accepted.md"
+    "last_summary": "I-003 Plan ready; ask approve B-001 P-001 only",
+    "resume_from": "harness/handoffs/orchestrator/B-001-propose.md"
   },
-  "active_phase": null,
-  "approved_build": "B-003",
-  "approved_phases": [
-    "P-001",
-    "P-002",
-    "P-003"
-  ],
-  "updated_at": "2026-07-16T10:28:00+08:00"
+  "active_phase": "P-001",
+  "approved_build": null,
+  "approved_phases": [],
+  "updated_at": "2026-07-16T10:46:00+08:00"
 }

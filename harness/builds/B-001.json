@@ -1,22 +1,19 @@
 {
   "schema_version": 1,
   "build_id": "B-001",
-  "initiative_id": "I-002",
+  "initiative_id": "I-003",
   "plan_revision": 1,
-  "status": "approved",
+  "status": "draft",
   "proposed_phase_ids": [
     "P-001"
   ],
-  "approved_phase_ids": [
-    "P-001"
-  ],
-  "approval": {
-    "reference": "批准 B-001，范围仅 P-001",
-    "approved_at": "2026-07-15T17:36:00+08:00",
-    "approved_by": "Human Gate"
+  "approved_phase_ids": [],
+  "approval": null,
+  "recommendation": "Propose B-001 = P-001 only (ruler-C gap inventory SSOT). Do not approve P-002… until P-001 ACCEPTANCE.",
+  "supersedes": {
+    "prior_initiative": "I-002",
+    "note": "I-002 B-001 archived with Initiative; this file is I-003 draft overwrite"
   },
-  "recommendation": "B-001 approved = P-001 only. Do not approve P-002/P-003 until P-001 ACCEPTANCE.",
-  "supersedes": null,
   "scope_changes": [],
-  "notes": "Human Gate approved B-001 scope = P-001 only. P-001 accepted 2026-07-15 after retest+recheck approve (FOR UPDATE before LIMIT proven)."
+  "notes": "Await Human Gate: 批准 B-001，范围仅 P-001. No harness framework changes. Version 7.4.5.Final."
 }
