@@ -8,7 +8,10 @@
   "initiative_id": "I-003",
   "initiative_type": "feature",
   "working_branch": "feat/i-003-production-capability-parity",
-  "active_plan": ["P-001..P-003 accepted", "B-004 draft = P-004 only"],
+  "active_plan": [
+    "P-001..P-003 accepted",
+    "B-004 draft = P-004 only"
+  ],
   "next_3_steps": [
     "Human Gate: approve B-004 scope P-004 only?",
     "On approve: Window/CTE + ORM IT",
@@ -24,13 +27,19 @@
   },
   "version_control_checkpoint": {
     "decision": "p003_accepted_awaiting_b004",
-    "committed": false,
-    "branch": "feat/i-003-production-capability-parity"
+    "committed": true,
+    "branch": "feat/i-003-production-capability-parity",
+    "candidate_commit": "edc81965dd0f56453568ae67db3ce26599397abc",
+    "head": "edc81965dd0f56453568ae67db3ce26599397abc"
   },
   "handoff": {
     "resume_from": "harness/handoffs/orchestrator/B-003-P-003-complete.md"
   },
   "approved_build": "B-003",
-  "approved_phases": ["P-001", "P-002", "P-003"],
+  "approved_phases": [
+    "P-001",
+    "P-002",
+    "P-003"
+  ],
   "updated_at": "2026-07-16T13:50:00+08:00"
 }
