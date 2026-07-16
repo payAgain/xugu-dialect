@@ -18,6 +18,7 @@ Human Gate：「Accept Initiative I-002」(~2026-07-16T10:28+08:00)。Decision *
 ### Validation
 - Prior P-003 VERIFY PASS (`harness/evidence/test/P-003/verification.json`)
 - External xugu-hibernate-test: N/A (in-repo IT primary)
+- Must-commit SHA: `be559b9d29b298e91d815b057590527e14faafca`
 
 ### Next Steps
 1. Human Gate：是否 Archive I-002？

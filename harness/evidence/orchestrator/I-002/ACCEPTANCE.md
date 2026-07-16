@@ -64,6 +64,6 @@ P-003 Accept must-commit: **`9df8c6242eb2f5593d7fd2fcb1f7f6482e17c8bf`**. Subseq
 ## Version control checkpoint
 
 - Branch: `fix/i-002-hql-pagination-sequence-metadata`
-- Initiative Accept must-commit: *(pending must-commit)*
+- Initiative Accept must-commit: `be559b9d29b298e91d815b057590527e14faafca` (`be559b9`)
 - P-003 Accept: `9df8c6242eb2f5593d7fd2fcb1f7f6482e17c8bf`
 - Push/Tag/Release: awaiting-human-authorization (Ship deferred)
