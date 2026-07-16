@@ -1,3 +1,48 @@
+## Entry: P-002 accepted — propose B-003 (P-003 only)
+
+### Summary
+RP-01 `impl-p002-20260716`：`getQuerySequencesString`→`all_sequences` + Xugu extractor；门控 `XuguSchemaValidateIT` PASS。RP-02 `test-p002-20260716` VERIFY PASS。RP-03 `rev-p002-20260716` **approve**。ACCEPTANCE Decision **accepted**。REGISTRY: P-002 `accepted`，P-003 `ready`。Must-commit on working branch。Next: Human Gate 批准 B-003 范围仅 P-003。
+
+### Observed behavior
+- Validate succeeds when sequence exists in `all_sequences`
+- Validate fails diagnostically when sequence missing
+
+### Files Created or Updated
+- dialect SequenceInformationExtractorXuguDatabaseImpl + XuguDialect hooks + unit/IT
+- harness/evidence/**/P-002/, handoffs
+- harness/tasks/P-002.md, REGISTRY.yaml
+- current-task.md, session/*
+- harness/handoffs/orchestrator/B-002-P-002-complete.md
+
+### Validation
+- `mvn -q test` EXIT 0
+- `mvn -q test -Dxugu.run.integration=true` EXIT 0
+- `verify.py --phase P-002` → VERIFY PASS
+- Reviewer: approve
+
+### Next Steps
+1. Human Gate：是否批准 B-003，范围仅 P-003？
+2. Must-commit SHA（本轮提交后回填）
+3. 禁止 Ship / 升版本
+
+---
+## Entry: B-002 APPROVED — P-002 in_progress (RP-01 starting)
+
+### Summary
+Human Gate：「批准 B-002，范围仅 P-002」(~2026-07-16T09:10+08:00；再确认 ~09:14)。Orchestrator 将 `B-002.json` 改为 I-002 / approved / P-002 only；P-002 `in_progress`；RP-01 `impl-p002-20260716` 启动。范围：序列元数据 `all_sequences` + extractor + 门控 validate IT。版本保持 7.4.5.Final；禁止 Ship / 旁路移植。
+
+### Files Created or Updated
+- harness/builds/B-002.json (I-002 overwrite)
+- harness/tasks/P-002.md, REGISTRY.yaml
+- harness/handoffs/orchestrator/B-002-approved.md
+- current-task.md, session/*
+
+### Next Steps
+1. RP-01 implementer
+2. RP-02 test → RP-03 reviewer
+3. Accept + must-commit；提案 B-003→P-003
+
+---
 ## Entry: P-001 accepted — propose B-002 (P-002 only)
 
 ### Summary

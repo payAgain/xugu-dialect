@@ -86,7 +86,7 @@
 | A-IDN-004 | Identity | Insert with identity | Insert omitting identity column | `reference/object/table/create.md` | 可实现 | P-005 | ✅ INSERT omits id column; id backfilled |
 
 | A-IDN-005 | Identity | Identity mode session params | Dialect-specific identity_mode knobs | `reference/system-configuration-parameter/session-parameter/identity_mode.md`, `reference/system-configuration-parameter/xugu.ini/compatible/def_identity_mode.md` | 延后 | later | Revisit if generated-key edge cases appear |
-| A-SEQ-001 | Sequence | CREATE SEQUENCE | `SequenceSupport.getCreateSequenceString` | `reference/object/sequence.md` | 可实现 | P-005 | ✅ `create sequence … [start with N increment by M]` |
+| A-SEQ-001 | Sequence | CREATE SEQUENCE | `SequenceSupport.getCreateSequenceString` | `reference/object/sequence.md` | 可实现 | P-005 | ✅ `create sequence … [start with N increment by M]`; I-002/P-002 also wires `getQuerySequencesString`→`all_sequences` for hbm2ddl validate |
 | A-SEQ-002 | Sequence | DROP SEQUENCE | Drop sequence DDL | `reference/object/sequence.md` | 可实现 | P-005 | ✅ `drop sequence name` |
 | A-SEQ-003 | Sequence | NEXTVAL | `nextval` for SEQUENCE generator | `reference/object/sequence.md`, `reference/function/sequence-functions/nextval.md` | 可实现 | P-005 | ✅ Locked: `select seq.nextval from dual` (not internal NEXTVAL()) |
 | A-SEQ-004 | Sequence | CURRVAL | Current value function | `reference/object/sequence.md`, `reference/function/sequence-functions/currval.md` | 可实现 | P-005 | ✅ `currval('name')` after NEXTVAL same session |

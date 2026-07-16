@@ -1,0 +1,44 @@
+schema_version: 1
+role: implementer
+phase_id: P-002
+build_id: B-002
+initiative_id: I-002
+invocation_id: impl-p002-20260716
+step_id: RP-01
+status: completed_awaiting_test_review
+updated_at: "2026-07-16T09:22:00+08:00"
+
+summary: >
+  Wired getQuerySequencesString → select * from all_sequences and
+  SequenceInformationExtractorXuguDatabaseImpl (seq_name/min_val/max_val/step_val).
+  Offline unit + gated XuguSchemaValidateIT PASS (validate succeeds when seq exists;
+  fails diagnostically when missing). Version 7.4.5.Final. No Accept/commit yet.
+
+delivered:
+  - dialect/src/main/java/com/xugu/dialect/sequence/SequenceInformationExtractorXuguDatabaseImpl.java
+  - dialect/src/main/java/com/xugu/dialect/XuguDialect.java
+  - dialect/src/test/java/com/xugu/dialect/XuguIdentitySequenceTest.java
+  - dialect/src/test/java/com/xugu/dialect/it/XuguSchemaValidateIT.java
+  - dialect/src/test/java/com/xugu/dialect/it/entities/P002SequenceEntity.java
+  - contracts/feature-matrix-definition-a.md (A-SEQ-001 note)
+  - harness/evidence/implementer/P-002/*
+
+validation:
+  - "mvn -q test → EXIT 0"
+  - "mvn -q test -Dxugu.run.integration=true → EXIT 0"
+
+observed:
+  validate_when_seq_exists: PASS
+  validate_when_seq_missing: FAIL_diagnostic (expected)
+  all_sequences_row: HIB_P002_SEQ_GEN visible via JDBC
+
+not_done:
+  - Accept
+  - git commit
+  - independent RP-02 test
+  - RP-03 reviewer
+
+next:
+  - Dispatch RP-02 test-p002-20260716
+  - Then RP-03 rev-p002-20260716
+  - Accept + must-commit only after both pass

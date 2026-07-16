@@ -5,11 +5,13 @@ import org.hibernate.dialect.sequence.SequenceSupport;
 import org.junit.jupiter.api.Test;
 
 import com.xugu.dialect.identity.XuguIdentityColumnSupport;
+import com.xugu.dialect.sequence.SequenceInformationExtractorXuguDatabaseImpl;
 import com.xugu.dialect.sequence.XuguSequenceSupport;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -71,5 +73,16 @@ class XuguIdentitySequenceTest {
 	@Test
 	void dialectPrefersGetGeneratedKeys() {
 		assertTrue( dialect.getDefaultUseGetGeneratedKeys() );
+	}
+
+	@Test
+	void sequenceMetadataQueryAndExtractorWired() {
+		String query = dialect.getQuerySequencesString();
+		assertNotNull( query );
+		assertTrue( query.toLowerCase().contains( "all_sequences" ),
+				"expected all_sequences lookup, got: " + query );
+		assertInstanceOf(
+				SequenceInformationExtractorXuguDatabaseImpl.class,
+				dialect.getSequenceInformationExtractor() );
 	}
 }

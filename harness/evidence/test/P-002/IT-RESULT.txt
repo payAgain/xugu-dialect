@@ -1,0 +1,18 @@
+P-002 Independent Test IT Result (test-p002-20260716)
+=====================================================
+Gate: -Dxugu.run.integration=true
+DB: jdbc:xugu://127.0.0.1:5138/SYSTEM?...&compatiblemode=NONE
+
+Commands:
+  mvn -q test                                          → EXIT 0
+  mvn -q test -Dxugu.run.integration=true              → EXIT 0
+  verify.py --phase P-002 --evidence harness/evidence/test/P-002/verification.json → VERIFY PASS
+
+XuguSchemaValidateIT:
+  schemaValidateSucceedsWhenSequenceExists → PASS
+  schemaValidateFailsWhenSequenceMissing   → PASS
+  Surefire: Tests run: 2, Failures: 0, Errors: 0, Skipped: 0
+
+Logs:
+  harness/evidence/test/P-002/mvn-test-offline.log
+  harness/evidence/test/P-002/mvn-test-integration.log

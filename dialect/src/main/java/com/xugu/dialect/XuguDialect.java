@@ -22,6 +22,7 @@ import org.hibernate.dialect.temptable.TemporaryTableStrategy;
 import org.hibernate.dialect.unique.CreateTableUniqueDelegate;
 import org.hibernate.dialect.unique.UniqueDelegate;
 import org.hibernate.engine.jdbc.dialect.spi.DialectResolutionInfo;
+import org.hibernate.tool.schema.extract.spi.SequenceInformationExtractor;
 import org.hibernate.engine.jdbc.env.spi.IdentifierCaseStrategy;
 import org.hibernate.engine.jdbc.env.spi.IdentifierHelper;
 import org.hibernate.engine.jdbc.env.spi.IdentifierHelperBuilder;
@@ -48,6 +49,7 @@ import com.xugu.dialect.identity.XuguIdentityColumnSupport;
 import com.xugu.dialect.internal.XuguKeywords;
 import com.xugu.dialect.internal.XuguLockingSupport;
 import com.xugu.dialect.pagination.XuguLimitHandler;
+import com.xugu.dialect.sequence.SequenceInformationExtractorXuguDatabaseImpl;
 import com.xugu.dialect.sequence.XuguSequenceSupport;
 import com.xugu.dialect.sql.ast.XuguSqlAstTranslator;
 import com.xugu.dialect.temptable.XuguGlobalTemporaryTableStrategy;
@@ -66,6 +68,11 @@ import jakarta.persistence.Timeout;
  * Hibernate's timestamp codes and documented fractional-second precision (0–6, default 3).
  * Note: Xugu TIMESTAMP may auto-fill current time when the column is omitted on INSERT;
  * IT always binds explicit values.
+ *
+ * <p><b>Sequence metadata (hbm2ddl validate):</b> {@link #getQuerySequencesString()}
+ * reads documented {@code ALL_SEQUENCES}; {@link #getSequenceInformationExtractor()}
+ * maps {@code seq_name}/{@code min_val}/{@code max_val}/{@code step_val} so validate
+ * sees existing sequences (avoids false {@code missing sequence}).
  *
  * <p><b>Pagination (A-PAG-*):</b> {@link XuguLimitHandler} emits
  * {@code LIMIT count} / {@code LIMIT count OFFSET offset} with JDBC bind markers
@@ -632,6 +639,20 @@ public class XuguDialect extends Dialect {
 	@Override
 	public SequenceSupport getSequenceSupport() {
 		return XuguSequenceSupport.INSTANCE;
+	}
+
+	/**
+	 * Documented system view {@code ALL_SEQUENCES}
+	 * ({@code reference/system-view/all/all_sequences.md}).
+	 */
+	@Override
+	public String getQuerySequencesString() {
+		return "select * from all_sequences";
+	}
+
+	@Override
+	public SequenceInformationExtractor getSequenceInformationExtractor() {
+		return SequenceInformationExtractorXuguDatabaseImpl.INSTANCE;
 	}
 
 	// -------------------------------------------------------------------------

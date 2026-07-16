@@ -1,0 +1,22 @@
+P-002 Implementer IT Result (impl-p002-20260716)
+================================================
+Gate: -Dxugu.run.integration=true
+DB: jdbc:xugu://127.0.0.1:5138/SYSTEM?...&compatiblemode=NONE
+Dialect: XuguDialect / Hibernate 7.4.5.Final
+
+Commands:
+  mvn -q test                                          → EXIT 0
+  mvn -q test -Dxugu.run.integration=true              → EXIT 0
+
+XuguSchemaValidateIT (2 tests):
+  schemaValidateSucceedsWhenSequenceExists  → PASS
+    - CREATE_ONLY HIB_P002_SEQ_ENT + HIB_P002_SEQ_GEN
+    - JDBC: select seq_name from all_sequences where seq_name='HIB_P002_SEQ_GEN' → row present
+    - Action.VALIDATE → succeeds (no missing sequence)
+  schemaValidateFailsWhenSequenceMissing    → PASS
+    - CREATE_ONLY then DROP SEQUENCE HIB_P002_SEQ_GEN
+    - Action.VALIDATE → fails with diagnostic mentioning missing sequence
+
+Log: harness/evidence/implementer/P-002/mvn-test-integration.log
+Surefire: dialect/target/surefire-reports/com.xugu.dialect.it.XuguSchemaValidateIT.txt
+  Tests run: 2, Failures: 0, Errors: 0, Skipped: 0

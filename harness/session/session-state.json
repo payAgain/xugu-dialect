@@ -1,32 +1,35 @@
 {
   "schema_version": 1,
-  "task_id": "P-001",
-  "batch_id": "B-001",
+  "task_id": "P-002",
+  "batch_id": "B-002",
   "status": "awaiting_build_approval",
   "current_phase": null,
   "harness_level": "Standard",
-  "last_updated": "2026-07-15T18:32:00+08:00",
+  "last_updated": "2026-07-16T09:25:00+08:00",
   "initiative_id": "I-002",
   "initiative_type": "hotfix",
   "working_branch": "fix/i-002-hql-pagination-sequence-metadata",
   "active_plan": [
     "I-002 Plan: P-001 SqlAstTranslator HQL pagination → P-002 sequence metadata → P-003 docs/Accept prep",
     "B-001 complete = P-001 accepted",
-    "Propose B-002 → P-002 only; await Human Gate"
+    "B-002 complete = P-002 accepted",
+    "Propose B-003 → P-003 only; await Human Gate"
   ],
   "next_3_steps": [
-    "Human Gate: approve B-002 scope P-002 only?",
-    "On approval: materialize B-002.json; set P-002 in_progress; dispatch RP-01",
-    "Keep version 7.4.5.Final; no sibling dialect port"
+    "Human Gate: approve B-003 scope P-003 only?",
+    "On approval: materialize B-003.json; set P-003 in_progress; dispatch RP-01",
+    "Keep version 7.4.5.Final; no Ship until authorized"
   ],
   "changed_files": [
-    "dialect/src/main/java/com/xugu/dialect/sql/",
+    "dialect/src/main/java/com/xugu/dialect/sequence/SequenceInformationExtractorXuguDatabaseImpl.java",
     "dialect/src/main/java/com/xugu/dialect/XuguDialect.java",
-    "dialect/src/test/java/com/xugu/dialect/XuguSqlAstTranslatorTest.java",
-    "dialect/src/test/java/com/xugu/dialect/it/XuguHqlPaginationIT.java",
-    "harness/evidence/**/P-001/",
-    "harness/handoffs/**/P-001*",
-    "harness/tasks/P-001.md",
+    "dialect/src/test/java/com/xugu/dialect/XuguIdentitySequenceTest.java",
+    "dialect/src/test/java/com/xugu/dialect/it/XuguSchemaValidateIT.java",
+    "dialect/src/test/java/com/xugu/dialect/it/entities/P002SequenceEntity.java",
+    "contracts/feature-matrix-definition-a.md",
+    "harness/evidence/**/P-002/",
+    "harness/handoffs/**/P-002*",
+    "harness/tasks/P-002.md",
     "harness/tasks/REGISTRY.yaml",
     "current-task.md",
     "harness/session/"
@@ -35,9 +38,9 @@
     "last_commands": [
       "mvn -q test",
       "mvn -q test -Dxugu.run.integration=true",
-      "python harness/scripts/verify.py --phase P-001 --evidence harness/evidence/test/P-001/verification-retest.json"
+      "python harness/scripts/verify.py --phase P-002 --evidence harness/evidence/test/P-002/verification.json"
     ],
-    "last_result": "VERIFY PASS; retest+recheck approve; P-001 accepted",
+    "last_result": "VERIFY PASS; reviewer approve; P-002 accepted",
     "known_failures": []
   },
   "cognitive_state": {
@@ -46,31 +49,32 @@
     "tried_approaches": [
       "i002_scope_pass",
       "i002_plan_three_serial_phases",
-      "xugu_sql_ast_translator_limit_offset",
-      "gated_it_ast_hql_for_update_before_limit",
-      "independent_retest_and_rereview_approve"
+      "p001_accepted",
+      "b002_approved_p002_only",
+      "all_sequences_metadata_extractor",
+      "gated_schema_validate_it"
     ],
-    "blocked_on": "human_gate_b002_p002_only"
+    "blocked_on": "human_gate_b003_p003_only"
   },
   "version_control_checkpoint": {
-    "decision": "committed_p001_accepted",
-    "candidate_commit": "63a7d6001dbd6845ea10520905c60bb56d2e3d9c",
+    "decision": "p002_accepted_awaiting_commit",
+    "candidate_commit": null,
     "git_init": true,
-    "committed": true,
+    "committed": false,
     "branch": "fix/i-002-hql-pagination-sequence-metadata",
-    "note": "P-001 accepted; must-commit landed; await B-002 approval",
+    "note": "P-002 accepted; must-commit pending this turn",
     "head": "63a7d6001dbd6845ea10520905c60bb56d2e3d9c",
     "base_branch_at_fork": "feat/i-001-xugu-dialect-major",
     "i001_archive_sha": "82db5a38cd1e2ca00981198bbf42c84777c87e54"
   },
   "handoff": {
-    "last_summary": "P-001 accepted; propose B-002 → P-002 only",
-    "resume_from": "harness/handoffs/orchestrator/B-001-P-001-complete.md"
+    "last_summary": "P-002 accepted; propose B-003 → P-003 only",
+    "resume_from": "harness/handoffs/orchestrator/B-002-P-002-complete.md"
   },
   "active_phase": null,
-  "approved_build": "B-001",
+  "approved_build": "B-002",
   "approved_phases": [
-    "P-001"
+    "P-002"
   ],
-  "updated_at": "2026-07-15T18:32:00+08:00"
+  "updated_at": "2026-07-16T09:25:00+08:00"
 }
