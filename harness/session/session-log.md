@@ -19,11 +19,11 @@ RP-01 `impl-p002-20260716`：`getQuerySequencesString`→`all_sequences` + Xugu 
 - `mvn -q test -Dxugu.run.integration=true` EXIT 0
 - `verify.py --phase P-002` → VERIFY PASS
 - Reviewer: approve
+- Must-commit SHA: `908e7f665c3317beef3665063ebc0d02efc6ed5f`
 
 ### Next Steps
 1. Human Gate：是否批准 B-003，范围仅 P-003？
-2. Must-commit SHA（本轮提交后回填）
-3. 禁止 Ship / 升版本
+2. 禁止 Ship / 升版本
 
 ---
 ## Entry: B-002 APPROVED — P-002 in_progress (RP-01 starting)

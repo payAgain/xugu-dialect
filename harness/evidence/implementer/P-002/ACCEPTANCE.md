@@ -41,4 +41,4 @@
 
 ## Must-commit
 
-Required on `fix/i-002-hql-pagination-sequence-metadata` after this ACCEPTANCE (no push/tag/Ship).
+SHA: `908e7f665c3317beef3665063ebc0d02efc6ed5f` on `fix/i-002-hql-pagination-sequence-metadata` (no push/tag/Ship).

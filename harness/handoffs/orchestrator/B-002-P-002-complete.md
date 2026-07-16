@@ -29,6 +29,10 @@ B-002 (P-002 only) completed: sequence metadata wired from documented `ALL_SEQUE
 
 是否批准 **B-003**，范围仅 **P-003**？
 
+## Must-commit
+
+SHA: `908e7f665c3317beef3665063ebc0d02efc6ed5f` on `fix/i-002-hql-pagination-sequence-metadata` (no push/Ship).
+
 ## Explicitly not done
 
 - Ship / tag / push

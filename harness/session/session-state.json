@@ -57,13 +57,13 @@
     "blocked_on": "human_gate_b003_p003_only"
   },
   "version_control_checkpoint": {
-    "decision": "p002_accepted_awaiting_commit",
-    "candidate_commit": null,
+    "decision": "committed_p002_accepted",
+    "candidate_commit": "908e7f665c3317beef3665063ebc0d02efc6ed5f",
     "git_init": true,
-    "committed": false,
+    "committed": true,
     "branch": "fix/i-002-hql-pagination-sequence-metadata",
-    "note": "P-002 accepted; must-commit pending this turn",
-    "head": "63a7d6001dbd6845ea10520905c60bb56d2e3d9c",
+    "note": "P-002 accepted; must-commit landed; await B-003 approval",
+    "head": "908e7f665c3317beef3665063ebc0d02efc6ed5f",
     "base_branch_at_fork": "feat/i-001-xugu-dialect-major",
     "i001_archive_sha": "82db5a38cd1e2ca00981198bbf42c84777c87e54"
   },
