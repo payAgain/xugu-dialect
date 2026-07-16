@@ -28,7 +28,7 @@ B-003 (P-003 only) completed: docs/matrix/user-guide aligned with P-001 HQL pagi
 |---|---|---|---|
 | P-001 | `XuguSqlAstTranslator` HQL/Criteria → `LIMIT … [OFFSET …]`; lock order FOR UPDATE→LIMIT→WAIT | `63a7d6001dbd6845ea10520905c60bb56d2e3d9c` | accepted |
 | P-002 | `getQuerySequencesString`→`all_sequences` + extractor; schema validate IT | `908e7f665c3317beef3665063ebc0d02efc6ed5f` | accepted |
-| P-003 | Docs/matrix/troubleshooting alignment + Accept prep | *(P-003 must-commit SHA)* | accepted |
+| P-003 | Docs/matrix/troubleshooting alignment + Accept prep | `9df8c6242eb2f5593d7fd2fcb1f7f6482e17c8bf` | accepted |
 
 Version remains **7.4.5.Final** (behavior fix, no bump).
 

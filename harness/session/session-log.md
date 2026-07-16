@@ -20,7 +20,7 @@ RP-01 `impl-p003-20260716`：矩阵/排障/契约与 P-001+P-002 交付行为对
 - `mvn -q test -Dxugu.run.integration=true` EXIT 0
 - `verify.py --phase P-003` → VERIFY PASS
 - Reviewer: approve
-- Must-commit SHA: *(pending this commit)*
+- Must-commit SHA: `9df8c6242eb2f5593d7fd2fcb1f7f6482e17c8bf`
 
 ### Next Steps
 1. Human Gate：是否 Accept Initiative I-002？

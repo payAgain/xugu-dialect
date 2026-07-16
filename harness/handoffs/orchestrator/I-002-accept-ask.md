@@ -18,7 +18,7 @@ Accept 后可再问是否 **Archive**。**Ship**（tag / push / release / Centra
 2. **P-002** — Schema validate sequence metadata from documented `all_sequences` + Xugu extractor.  
    SHA: `908e7f665c3317beef3665063ebc0d02efc6ed5f`
 3. **P-003** — Matrix / user-guide / troubleshooting / contract notes aligned; full VERIFY PASS; Accept materials.  
-   SHA: *(see must-commit on working branch)*
+   SHA: `9df8c6242eb2f5593d7fd2fcb1f7f6482e17c8bf`
 
 ## VERIFY PASS pointers
 

@@ -60,12 +60,12 @@
   },
   "version_control_checkpoint": {
     "decision": "committed_p003_accepted_awaiting_initiative_accept",
-    "candidate_commit": null,
+    "candidate_commit": "9df8c6242eb2f5593d7fd2fcb1f7f6482e17c8bf",
     "git_init": true,
-    "committed": false,
+    "committed": true,
     "branch": "fix/i-002-hql-pagination-sequence-metadata",
-    "note": "P-003 accepted; must-commit pending; ask Human Gate Accept I-002; no Ship",
-    "head": "d630ae3",
+    "note": "P-003 accepted; must-commit landed; ask Human Gate Accept I-002; no Ship",
+    "head": "9df8c6242eb2f5593d7fd2fcb1f7f6482e17c8bf",
     "base_branch_at_fork": "feat/i-001-xugu-dialect-major",
     "i001_archive_sha": "82db5a38cd1e2ca00981198bbf42c84777c87e54"
   },

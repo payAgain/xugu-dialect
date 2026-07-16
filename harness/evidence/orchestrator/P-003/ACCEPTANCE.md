@@ -54,7 +54,11 @@
 |---|---|
 | P-001 | `63a7d6001dbd6845ea10520905c60bb56d2e3d9c` |
 | P-002 | `908e7f665c3317beef3665063ebc0d02efc6ed5f` |
-| P-003 | *(this must-commit; fill after commit)* |
+| P-003 | `9df8c6242eb2f5593d7fd2fcb1f7f6482e17c8bf` |
+
+## Must-commit
+
+SHA: `9df8c6242eb2f5593d7fd2fcb1f7f6482e17c8bf` on `fix/i-002-hql-pagination-sequence-metadata` (no push/tag/Ship).
 
 ## Explicitly not done
 
