@@ -4,11 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
-
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledIf;
@@ -37,8 +32,6 @@ import jakarta.persistence.PersistenceContext;
 @Transactional
 class DemoPersonCrudIT {
 
-	private static final String TABLE = "HIB_DEMO_PERSON";
-
 	@Autowired
 	private DemoPersonRepository repository;
 
@@ -48,28 +41,6 @@ class DemoPersonCrudIT {
 	@AfterEach
 	void cleanupRows() {
 		repository.deleteAll();
-	}
-
-	@AfterAll
-	static void dropDemoTable() throws Exception {
-		// Resolve the same env/defaults as application.yml without Spring context.
-		String url = System.getenv( "XUGU_JDBC_URL" );
-		if ( url == null || url.isBlank() ) {
-			url = "jdbc:xugu://127.0.0.1:5138/SYSTEM?compatiblemode=NONE";
-		}
-		String user = System.getenv( "XUGU_USER" );
-		if ( user == null || user.isBlank() ) {
-			user = "SYSDBA";
-		}
-		String password = System.getenv( "XUGU_PASSWORD" );
-		if ( password == null || password.isBlank() ) {
-			password = "SYSDBA";
-		}
-		Class.forName( "com.xugu.cloudjdbc.Driver" );
-		try ( Connection c = DriverManager.getConnection( url, user, password );
-				Statement st = c.createStatement() ) {
-			st.execute( "DROP TABLE IF EXISTS " + TABLE );
-		}
 	}
 
 	@Test

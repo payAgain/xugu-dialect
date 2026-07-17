@@ -5,12 +5,15 @@
 > **Public contract:** [`contracts/xugu-dialect.contract.md`](../../contracts/xugu-dialect.contract.md)  
 > **Feature matrix SSOT (Definition A):** [`contracts/feature-matrix-definition-a.md`](../../contracts/feature-matrix-definition-a.md)  
 > **I-003 capability matrix (ruler C):** [`contracts/feature-matrix-i003-ruler-c.md`](../../contracts/feature-matrix-i003-ruler-c.md)  
+> **I-005 production regression baseline SSOT:** [`contracts/production-regression-baseline.md`](../../contracts/production-regression-baseline.md)  
 > **Docs pointers:** [`docs/feature-matrix-definition-a.md`](../feature-matrix-definition-a.md) · [`docs/feature-matrix-i003-ruler-c.md`](../feature-matrix-i003-ruler-c.md)  
 > **Demo:** [`demo-spring-boot/README.md`](../../demo-spring-boot/README.md)
 
 **不改写** 官方树 `E:\Work\docs\content`。Ship / Maven Central 发布不在本指南必做范围（另开 Human Gate / Ship）。
 
 **I-003：** 同一 GAV **`com.xugu:xugu-dialect:7.4.5.Final`** 下扩展生产能力（异常映射、JSON 聚合、Window/CTE、bulk、DDL 细节）；Definition A 仍有效，详见 ruler-C 矩阵。
+
+**I-005：** 生产回归测试基线 — **94 可实现** + **34 negative-only** 行映射到可执行用例；冻结门控见 [03-verify.md § Frozen baseline](03-verify.md#frozen-baseline--i-005-冻结基线门控)。
 ## Quick start / 快速开始
 
 1. **依赖** — JDK 17 + GAV `com.xugu:xugu-dialect:7.4.5.Final` + 仓库根目录 Xugu JDBC jar → [01-install.md](01-install.md)

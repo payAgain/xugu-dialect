@@ -72,7 +72,14 @@ mvn -q -pl demo-spring-boot -am test -Dxugu.run.integration=true
 mvn -q test -Dxugu.run.integration=true
 ```
 
-IT class: `com.xugu.demo.it.DemoPersonCrudIT` (`@EnabledIf` on `XuguIntegrationGate`). Cleanup deletes `HIB_DEMO_PERSON` rows after each test.
+IT classes (`@EnabledIf` on `XuguIntegrationGate`):
+
+| Class | Purpose |
+|---|---|
+| `DemoPersonCrudIT` | Spring Boot + JPA persist/find + IDENTITY |
+| `DemoBootBaselineSmokeTest` | SessionFactory explicit dialect, JDBC pool, JPQL, Pageable pagination |
+
+Cleanup deletes `HIB_DEMO_PERSON` rows after each test; `@AfterAll` drops the demo table.
 
 ## Table
 

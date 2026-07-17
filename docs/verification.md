@@ -20,24 +20,18 @@ python harness/scripts/branch_check.py
 
 ## Project Verification Contract
 
-Configure `harness/verification.json` after confirming the commands work in this repository. Each check has:
+Configured in `harness/verification.json`. Each check has:
 
 - `id`: stable, unique check name;
 - `required`: whether completion is impossible without this check;
 - `command`: command executed from the project root;
 - optional `cwd`: working directory relative to the project root.
 
-### Bootstrap / pre-Maven status (2026-07-14)
-
-Maven multi-module scaffold (`dialect/`, `demo-spring-boot/`, parent POM) is **not yet created**. Therefore:
-
-| Check | Command in `harness/verification.json` | Notes |
+| Check | Command | Notes |
 |---|---|---|
-| build | `<fill-build-command>` | Fill after Maven scaffold (e.g. `mvn -q -DskipTests package`) — **do not invent** until POM exists |
-| test | `<fill-test-command>` | Fill after Maven scaffold (e.g. `mvn -q test`) — integration tests need real XuguDB |
-| lint | `<fill-lint-command-or-NA>` | Optional; set when project adopts a linter |
-
-Until build/test are real configured commands, project verification may return **`VERIFY INCOMPLETE`**. That is expected and **blocks Accept**. AGENTS.md placeholders remain until scaffold Initiative.
+| build | `mvn -q -DskipTests package` | Full reactor package |
+| test | `mvn -q test` | Default IT gate **OFF** — gated integration tests skipped |
+| lint | `NA` | Optional; not configured |
 
 Do not replace an unknown command with a guessed command. An unconfigured required check produces `VERIFY INCOMPLETE` (exit 2), never `VERIFY PASS`.
 
@@ -60,12 +54,41 @@ harness/evidence/verification-latest.json
 For Phase acceptance, write Phase-bound evidence instead of relying on the mutable latest pointer:
 
 ```text
-python harness/scripts/verify.py --phase P-001 --evidence harness/evidence/<lead>/P-001/verification.json
+python harness/scripts/verify.py --phase P-006 --evidence harness/evidence/test/I-005/P-006/verification.json
 ```
 
 The Packet `verification_evidence` must name that repository-contained file. `verification-latest.json` remains a convenience result for interactive runs and cannot authorize an accepted Phase.
 
 Acceptance evidence must reference the Phase-bound result and any required observed user-flow verification. Running commands is not by itself proof that the affected behavior works.
+
+## I-005 production regression baseline (frozen)
+
+Initiative **I-005** freezes a full regression baseline. SSOT:
+
+[`contracts/production-regression-baseline.md`](../contracts/production-regression-baseline.md)
+
+| Bucket | Count | Accept requirement |
+|---|---:|---|
+| 可实现 rows | 94 | Each row maps to `entry_class#method` (93 covered + 1 known-limit-documented) |
+| negative-only rows | 34 | Explicit non-support or `@Disabled` defer anchors |
+| Demo smoke | 7 entrypoints | Offline + gated live paths in SSOT |
+
+### IT gate for frozen baseline
+
+| Gate | Enable | Effect |
+|---|---|---|
+| JVM property | `-Dxugu.run.integration=true` | Surefire runs gated dialect + demo IT |
+| Environment | `XUGU_RUN_IT=true` | Same as property (read by `XuguITGate` / `XuguIntegrationGate`) |
+
+**Daily default:** `mvn -q test` (gate OFF) — sufficient for `verify.py` **VERIFY PASS**.
+
+**Frozen baseline Accept (I-005):** `XUGU_RUN_IT=true mvn -q test` must be **all green** when a reachable XuguDB is available. When no live DB is present, document `SKIPPED_INFRA` in Phase evidence (same pattern as P-002/P-005); wiring is verified offline.
+
+User-facing procedure: [`docs/user-guide/03-verify.md`](user-guide/03-verify.md#frozen-baseline--i-005-冻结基线门控).
+
+### Known limitation (not a gap)
+
+**C-BULK-002** bulk insert: **known-limit-documented** — live IT waived; offline wiring via `XuguBulkMutationSupportTest#fallbackSqmInsertStrategyWired_C_BULK_002`.
 
 ## Change-Type Matrix
 

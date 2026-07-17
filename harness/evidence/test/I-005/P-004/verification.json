@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "started_at": "2026-07-17T16:28:00+08:00",
+  "finished_at": "2026-07-17T16:32:00+08:00",
+  "project_root": "E:\\Work\\java\\hibernate-test",
+  "initiative_id": "I-005",
+  "phase_id": "P-004",
+  "build_id": "B-001",
+  "invocation_id": "test-i005-p004-rp02-20260717",
+  "step_id": "RP-02",
+  "role": "test",
+  "branch": "feat/i-005-production-regression-baseline",
+  "head_sha": "e892e9015356697948bedbecc0a6509a6f5d0e7a",
+  "verdict": "PASS",
+  "closure_path": "known-limit-documented",
+  "config": "E:\\Work\\java\\hibernate-test\\harness\\verification.json",
+  "results": [
+    {
+      "id": "build",
+      "required": true,
+      "status": "PASS",
+      "command": "mvn -q -DskipTests package",
+      "cwd": "E:\\Work\\java\\hibernate-test",
+      "exit_code": 0,
+      "log": "harness/evidence/test/I-005/P-004/mvn-package.log"
+    },
+    {
+      "id": "test_reactor",
+      "required": true,
+      "status": "FAIL",
+      "command": "mvn -q test",
+      "cwd": "E:\\Work\\java\\hibernate-test",
+      "exit_code": 1,
+      "log": "harness/evidence/test/I-005/P-004/mvn-test-offline.log",
+      "first_failure": {
+        "module": "demo-spring-boot",
+        "phase": "testCompile",
+        "file": "demo-spring-boot/src/test/java/com/xugu/demo/it/DemoBootBaselineSmokeTest.java",
+        "line": 73,
+        "message": "cannot find symbol DemoPersonCrudIT.dropDemoTableStatic(String)",
+        "git_state": "untracked WIP (P-005 demo)",
+        "p004_scope_impact": "none"
+      }
+    },
+    {
+      "id": "test_dialect",
+      "required": true,
+      "status": "PASS",
+      "command": "mvn -q test -pl dialect",
+      "cwd": "E:\\Work\\java\\hibernate-test",
+      "exit_code": 0,
+      "log": "harness/evidence/test/I-005/P-004/mvn-test-dialect.log",
+      "counts": {
+        "dialect": {
+          "tests_run": 139,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 54
+        }
+      },
+      "it_gate": "OFF",
+      "it_skipped_expected": true
+    },
+    {
+      "id": "test_c_bulk_002",
+      "required": true,
+      "status": "PASS",
+      "command": "mvn -q test -pl dialect -Dtest=XuguBulkMutationSupportTest",
+      "cwd": "E:\\Work\\java\\hibernate-test",
+      "exit_code": 0,
+      "log": "harness/evidence/test/I-005/P-004/mvn-test-bulk-mutation.log",
+      "matrix_id": "C-BULK-002",
+      "target_method": "fallbackSqmInsertStrategyWired_C_BULK_002",
+      "counts": {
+        "XuguBulkMutationSupportTest": {
+          "tests_run": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "surefire": "harness/evidence/test/I-005/P-004/com.xugu.dialect.XuguBulkMutationSupportTest.txt"
+    },
+    {
+      "id": "ssot_c_bulk_002_audit",
+      "required": true,
+      "status": "PASS",
+      "artifact": "contracts/production-regression-baseline.md",
+      "c_bulk_002_status": "known-limit-documented",
+      "c_bulk_002_gap_action": "N/A",
+      "implementable_gap_count": 0,
+      "known_limit_documented_count": 1,
+      "dual_state_ambiguity": false,
+      "user_guide_refs": [
+        "docs/user-guide/05-troubleshooting.md#10-bulk-insertjoined--identity已知限制",
+        "docs/user-guide/04-feature-matrix.md"
+      ]
+    },
+    {
+      "id": "verify_py",
+      "required": false,
+      "status": "FAIL",
+      "command": "python harness/scripts/verify.py",
+      "exit_code": 1,
+      "reason": "harness_check semantic contract violation on prior phases (P-001/P-002 acceptance); unrelated to P-004 deliverables"
+    },
+    {
+      "id": "lint",
+      "required": false,
+      "status": "NOT_APPLICABLE",
+      "command": "NA"
+    }
+  ],
+  "summary": {
+    "build": "PASS",
+    "p004_deliverables": "PASS",
+    "c_bulk_002_unit_test": "PASS",
+    "dialect_test_suite": "PASS",
+    "test_reactor": "FAIL",
+    "test_reactor_blocker_owner": "P-005 demo WIP (untracked DemoBootBaselineSmokeTest.java)",
+    "ssot_c_bulk_002_closure": "PASS",
+    "overall_p004_accept_gate": "READY_FOR_RP03_REVIEWER"
+  }
+}

@@ -61,6 +61,38 @@ mvn -q -pl demo-spring-boot -am test -Dxugu.run.integration=true
 
 **缺真实库时**：不要强开 gate；文档要求 IT 使用真实 XuguDB（无 mock-only 替代）。离线验证以默认 `mvn test` 为准。
 
+## Frozen baseline — I-005 冻结基线门控
+
+I-005 将 **Definition A 可实现 (78)** + **I-003 ruler C 可实现 (16)** = **94 行** 与 **34 negative-only** 行冻结为生产回归基线。SSOT 清单：
+
+[`contracts/production-regression-baseline.md`](../../contracts/production-regression-baseline.md)
+
+### 日常 vs 冻结验收
+
+| Mode | Command | When |
+|---|---|---|
+| **Daily / offline** | `mvn -q test` | 默认 CI、无真库；gated IT 跳过 |
+| **Frozen baseline (I-005 Accept)** | `XUGU_RUN_IT=true mvn -q test` | 冻结基线验收；**全部** gated dialect + demo IT 须全绿 |
+| **Harness contract** | `python harness/scripts/verify.py` | 项目治理；Accept 须 **VERIFY PASS** |
+
+### 冻结基线步骤（复现）
+
+1. 确认可达 XuguDB 与 env：`XUGU_JDBC_URL`、`XUGU_USER`、`XUGU_PASSWORD`（见 [02-configuration.md](02-configuration.md)）。
+2. 打开 IT gate（二选一）：
+   ```bash
+   set XUGU_RUN_IT=true
+   mvn -q test
+   ```
+   或 `mvn -q test -Dxugu.run.integration=true`。
+3. 期望：dialect 模块 gated IT + demo `DemoPersonCrudIT` / `DemoBootBaselineSmokeTest` 全 PASS；离线单元与 `@Disabled` defer 锚点仍按默认 gate 行为。
+4. 运行 `python harness/scripts/verify.py` → **VERIFY PASS**（build + offline test）。
+5. **GAV 不变**：`com.xugu:xugu-dialect:7.4.5.Final`。
+
+### 已知限制（非 gap）
+
+- **C-BULK-002** bulk insert：SSOT 标 **known-limit-documented**；真库 bulk insert IT waived — 见 [05-troubleshooting.md §10](05-troubleshooting.md#10-bulk-insertjoined--identity已知限制)。
+- Demo 可选路径（validate / function-HQL / bulk demo）为 SSOT 可选 gap，不阻塞 I-005 Accept。
+
 ## Checklist（集成方自测）
 
 - [ ] 依赖可解析：`com.xugu:xugu-dialect:7.4.5.Final` + JDBC 驱动在 classpath

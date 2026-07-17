@@ -6,6 +6,8 @@ I-002 hotfix (same GAV **7.4.5.Final**): HQL/Criteria pagination emits `LIMIT �
 
 I-003 feature parity (same GAV **7.4.5.Final**): exception mapping, JSON aggregates / AggregateSupport, window + CTE, bulk mutation fallback, DDL details (IF NOT EXISTS, ALTER COLUMN, catalog, GUID). See [contracts/feature-matrix-i003-ruler-c.md](contracts/feature-matrix-i003-ruler-c.md).
 
+I-005 production regression baseline (same GAV **7.4.5.Final**): **94** 可实现 + **34** negative-only rows frozen with test entrypoints; demo smoke in baseline. SSOT: [contracts/production-regression-baseline.md](contracts/production-regression-baseline.md). Frozen IT gate: `XUGU_RUN_IT=true mvn -q test` (see [docs/user-guide/03-verify.md](docs/user-guide/03-verify.md)).
+
 ## Start here
 
 - **User guide:** [docs/user-guide/README.md](docs/user-guide/README.md)

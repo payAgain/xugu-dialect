@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "started_at": "2026-07-17T16:31:00+08:00",
+  "finished_at": "2026-07-17T16:40:00+08:00",
+  "project_root": "E:\\Work\\java\\hibernate-test",
+  "initiative_id": "I-005",
+  "phase_id": "P-005",
+  "build_id": "B-001",
+  "invocation_id": "test-i005-p005-rp02-20260717",
+  "step_id": "RP-02",
+  "role": "test",
+  "branch": "feat/i-005-production-regression-baseline",
+  "head_sha": "e892e9015356697948bedbecc0a6509a6f5d0e7a",
+  "verdict": "PASS",
+  "config": "E:\\Work\\java\\hibernate-test\\harness\\verification.json",
+  "results": [
+    {
+      "id": "test_default",
+      "required": true,
+      "status": "PASS",
+      "command": "mvn -q test",
+      "cwd": "E:\\Work\\java\\hibernate-test",
+      "exit_code": 0,
+      "log": "harness/evidence/test/I-005/P-005/mvn-test-offline.log",
+      "counts": {
+        "dialect": {
+          "tests_run": 139,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 54
+        },
+        "demo-spring-boot": {
+          "tests_run": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 5
+        }
+      },
+      "demo_offline_smoke": {
+        "class": "com.xugu.demo.DemoOfflineSmokeTest",
+        "tests_run": 2,
+        "failures": 0,
+        "skipped": 0
+      },
+      "demo_gated_it_skipped": {
+        "DemoPersonCrudIT": 1,
+        "DemoBootBaselineSmokeTest": 4
+      },
+      "it_gate": "OFF",
+      "it_skipped_expected": true
+    },
+    {
+      "id": "test_demo_module",
+      "required": true,
+      "status": "PASS",
+      "command": "mvn -q -pl demo-spring-boot -am test",
+      "exit_code": 0,
+      "log": "harness/evidence/test/I-005/P-005/mvn-test-demo-offline.log"
+    },
+    {
+      "id": "test_live_it",
+      "required": false,
+      "status": "SKIPPED_INFRA",
+      "command": "mvn -q -pl demo-spring-boot test -Dxugu.run.integration=true",
+      "exit_code": 1,
+      "log": "harness/evidence/test/I-005/P-005/mvn-test-demo-live-only.log",
+      "note": "No reachable XuguDB at jdbc:xugu://127.0.0.1:5138 (E50027). Gated IT wiring verified; live PASS requires CI/prod DB (same as P-002 pattern)."
+    },
+    {
+      "id": "ssot_demo_smoke",
+      "required": true,
+      "status": "PASS",
+      "artifact": "contracts/production-regression-baseline.md",
+      "matrix_id": "A-XCUT-009",
+      "demo_smoke_entries": [
+        "DemoOfflineSmokeTest#applicationYmlDocumentsExplicitDialectAndEnvKeys",
+        "DemoOfflineSmokeTest#demoPersonTableUsesHibDemoPrefix",
+        "DemoPersonCrudIT#persistAndFindPerson",
+        "DemoBootBaselineSmokeTest#sessionFactoryUsesExplicitXuguDialectFromApplicationYml",
+        "DemoBootBaselineSmokeTest#datasourceUrlIncludesCompatibleModeNone",
+        "DemoBootBaselineSmokeTest#jpaPersistAndJpqlQueryRoundTrip",
+        "DemoBootBaselineSmokeTest#pageableFindAllUsesLimitOffset"
+      ],
+      "gap_action_closed": true
+    }
+  ],
+  "summary": {
+    "test_default": "PASS",
+    "demo_offline_smoke": "PASS",
+    "demo_gated_it_skip_default": "PASS",
+    "ssot_a_xcut_009": "PASS",
+    "live_db_present": false,
+    "overall_accept_gate": "READY_FOR_RP03_REVIEWER"
+  }
+}

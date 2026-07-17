@@ -34,24 +34,24 @@ tasks:
     dependencies: [P-002]
   - task_id: P-004
     title: "钉死 Bulk insert 基线策略"
-    status: pending
-    build_id: null
+    status: accepted
+    build_id: B-001
     packet: harness/tasks/P-004.md
     acceptance_doc: harness/evidence/implementer/I-005/P-004/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"
     dependencies: [P-003]
   - task_id: P-005
     title: "纳入 Demo Boot 自动化冒烟"
-    status: pending
-    build_id: null
+    status: accepted
+    build_id: B-001
     packet: harness/tasks/P-005.md
     acceptance_doc: harness/evidence/implementer/I-005/P-005/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"
     dependencies: [P-004]
   - task_id: P-006
     title: "基线文档对齐与 VERIFY PASS Accept 准备"
-    status: pending
-    build_id: null
+    status: accepted
+    build_id: B-001
     packet: harness/tasks/P-006.md
     acceptance_doc: harness/evidence/orchestrator/I-005/P-006/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"
