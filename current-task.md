@@ -1,18 +1,20 @@
 # Current Task
 
 ## Goal
-I-004 B-001 **complete** — awaiting Human Gate **I-004 Initiative Accept**
+I-004 **Initiative Accept** — completed（不含 Ship / Archive）
 
 ## Current Status
-P-001 + P-002 accepted. Hotfix delivered on `fix/i-004-sequence-drop-identity-reserved`.
+Human Gate accepted I-004 hotfix. Awaiting optional Archive or Ship authorization.
 
-## Validation
-VERIFY PASS for both Phases; no JDBC changes
+## Active Batch / Tasks
+- Initiative: **I-004** `accepted`
+- Phases P-001…P-002: `accepted`
+- Branch: `fix/i-004-sequence-drop-identity-reserved`
 
 ## Next 3 Steps
-1. Human Gate：是否批准 I-004 Initiative Accept？
-2. 可选 Archive
-3. Ship 另行授权
+1. Human Gate：是否 Archive I-004？
+2. 或授权 Ship（另行明确）
+3. 或开新 Initiative
 
 ## Last Updated
-2026-07-17T14:56:00+08:00
+2026-07-17T15:01:00+08:00
