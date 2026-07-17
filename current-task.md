@@ -1,25 +1,20 @@
 # Current Task
 
 ## Goal
-I-003 **Initiative Accept** — completed（不含 Ship / Archive）
+I-003 **archived**. Clarifying **I-004 hotfix**（AUTO drop sequence IF EXISTS + IDENTITY×保留字表名）
 
 ## Current Status
-Human Gate accepted I-003. First-batch ruler-C capabilities delivered. Awaiting optional Archive or Ship authorization or next Initiative.
+I-003 archived (NOT Ship). Next Initiative Scope in progress — no implementation until Scope PASS.
 
 ## Active Batch / Tasks
-- Initiative: **I-003** `accepted`
-- Phases P-001…P-007: all `accepted`
-- Branch: `feat/i-003-production-capability-parity`
-- Ship: **not authorized**
-- Archive: **not requested**
-
-## Validation
-VERIFY PASS; Accept evidence at `harness/evidence/orchestrator/I-003/ACCEPTANCE.md`
+- I-003: `archived`
+- I-004: `clarifying` (proposed hotfix)
+- Branch: still on `feat/i-003-production-capability-parity` until I-004 Scope PASS + new fix branch
 
 ## Next 3 Steps
-1. Human Gate：是否 Archive I-003？
-2. 或授权 Ship（另行明确）
-3. 或开新 Initiative
+1. Human Gate：确认 I-004 类型/范围（见 Scope 问题）
+2. Scope PASS 后开 `fix/i-004-…` 分支 + Plan
+3. 批准 B-001 后再实现
 
 ## Last Updated
-2026-07-16T17:48:00+08:00
+2026-07-17T14:32:00+08:00

@@ -1,4 +1,11 @@
-﻿## Entry: I-003 Initiative Accept
+﻿## Entry: I-003 Archive — I-004 Scope clarifying
+
+### Summary
+Human Gate「Archive I-003」+ 两则 bug 分析 +「下一步推进bug修复」。I-003 archived（NOT Ship）。I-004 hotfix Scope 澄清中（DROP SEQUENCE IF EXISTS；IDENTITY×保留字×getGeneratedKeys）。
+
+---
+
+## Entry: I-003 Initiative Accept
 
 ### Summary
 Human Gate「I-003 Initiative Accept」。Initiative **accepted**（不含 Ship / Archive）。P-001…P-007 全部 accepted；VERIFY PASS；GAV 7.4.5.Final。

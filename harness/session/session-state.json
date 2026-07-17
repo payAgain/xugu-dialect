@@ -1,49 +1,41 @@
 {
   "schema_version": 1,
-  "task_id": "I-003",
+  "task_id": "I-004",
   "batch_id": null,
-  "status": "initiative_accepted",
+  "status": "clarifying",
   "harness_level": "Standard",
-  "last_updated": "2026-07-16T17:49:00+08:00",
-  "initiative_id": "I-003",
-  "initiative_type": "feature",
+  "last_updated": "2026-07-17T14:32:00+08:00",
+  "initiative_id": "I-004",
+  "initiative_type": "hotfix",
   "working_branch": "feat/i-003-production-capability-parity",
   "active_plan": [
-    "I-003 Initiative Accept complete",
-    "Ship and Archive deferred"
+    "I-003 archived",
+    "I-004 Scope clarifying (sequence DROP IF EXISTS + IDENTITY reserved keyword)"
   ],
   "next_3_steps": [
-    "Human Gate: Archive I-003?",
-    "Or authorize Ship separately",
-    "Or start new Initiative"
+    "Human Gate: answer I-004 Scope questions",
+    "On Scope PASS: fix branch + Plan P-001..",
+    "Await Build B-001 approval before code"
   ],
   "validation": {
-    "last_result": "I-003 accepted; VERIFY PASS; no Ship"
+    "last_result": "I-003 archived; I-004 clarifying"
   },
   "cognitive_state": {
     "failure_count": 0,
-    "current_mode": "awaiting_human_gate",
-    "blocked_on": "optional_archive_or_ship_or_next_initiative"
+    "current_mode": "clarify",
+    "blocked_on": "human_gate_i004_scope"
   },
   "version_control_checkpoint": {
-    "decision": "i003_initiative_accepted",
-    "committed": true,
+    "decision": "i003_archived_i004_clarifying",
+    "committed": false,
     "branch": "feat/i-003-production-capability-parity",
-    "candidate_commit": "f3d3ed266454a161f225674ba988da90f41b8864",
-    "head": "f3d3ed266454a161f225674ba988da90f41b8864"
+    "candidate_commit": null,
+    "head": "b850afe"
   },
   "handoff": {
-    "resume_from": "harness/handoffs/orchestrator/I-003-accepted.md"
+    "resume_from": "harness/handoffs/orchestrator/I-003-archived.md"
   },
-  "approved_build": "B-007",
-  "approved_phases": [
-    "P-001",
-    "P-002",
-    "P-003",
-    "P-004",
-    "P-005",
-    "P-006",
-    "P-007"
-  ],
-  "updated_at": "2026-07-16T17:49:00+08:00"
+  "approved_build": null,
+  "approved_phases": [],
+  "updated_at": "2026-07-17T14:32:00+08:00"
 }
