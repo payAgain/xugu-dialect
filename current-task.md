@@ -1,20 +1,20 @@
 # Current Task
 
 ## Goal
-I-004 **Initiative Accept** — completed（不含 Ship / Archive）
+I-005 **feature**：生产回归测试基线 — Plan 完成；等待 Human Gate 批准 B-001（仅 P-001）
 
 ## Current Status
-Human Gate accepted I-004 hotfix. Awaiting optional Archive or Ship authorization.
+I-004 archived. I-005 Scope PASS。Orchestrator Plan P-001→P-006 已物化；分支 `feat/i-005-production-regression-baseline`；B-001 **draft** = P-001 only。
 
 ## Active Batch / Tasks
-- Initiative: **I-004** `accepted`
-- Phases P-001…P-002: `accepted`
-- Branch: `fix/i-004-sequence-drop-identity-reserved`
+- Initiative: **I-005** `active`
+- Branch: `feat/i-005-production-regression-baseline`
+- Build: **B-001** draft → 提议仅 **P-001**（基线 SSOT 盘点）
 
 ## Next 3 Steps
-1. Human Gate：是否 Archive I-004？
-2. 或授权 Ship（另行明确）
-3. 或开新 Initiative
+1. Human Gate：批准 Build 范围（推荐仅 P-001）
+2. 派 researcher → architect-contract → reviewer 执行 P-001
+3. P-001 Accept 后 orchestrator 提议 B-002 → P-002
 
 ## Last Updated
-2026-07-17T15:01:00+08:00
+2026-07-17T15:30:00+08:00

@@ -32,9 +32,10 @@
 - Ship: **out of this Initiative**
 
 ## Status
-`accepted` — Initiative Accept by Human Gate; **not archived**; **not shipped**
+`archived` — Human Gate Archive via I-005 Scope PASS (~2026-07-17T15:23+08:00); **not shipped**
 
 - Scope PASS: ~2026-07-17T14:36+08:00
 - P-001…P-002: accepted under B-001
 - Initiative Accept: ~2026-07-17T15:01+08:00
-- Next (optional): Archive I-004；Ship 另行授权
+- Archive: ~2026-07-17T15:23+08:00
+- Archive doc: `harness/initiatives/I-004/ARCHIVE.md`

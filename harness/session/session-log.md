@@ -1,4 +1,21 @@
-﻿## Entry: I-004 Initiative Accept
+﻿## Entry: I-005 Plan complete — B-001 draft (P-001 only)
+
+### Summary
+Orchestrator 串行 Plan P-001→P-006（生产回归基线）；分支 `feat/i-005-production-regression-baseline`；REGISTRY/B-001 draft/Phase packets 物化；I-004 P-001/P-002 packets 归档至 `harness/tasks/archive/I-004/`。未写方言/测试 Java。B-001 draft = 仅 P-001（基线 SSOT 盘点）。
+
+### Next
+Human Gate：是否批准 B-001，范围仅 P-001？
+
+---
+
+## Entry: I-005 Scope PASS — Archive I-004 — Plan pending
+
+### Summary
+Human Gate「本 Initiative 范围已明确，可以开干」。按推荐项锁定 I-005 feature：生产回归测试基线（Definition A + I-003 可实现全量；门控真库全绿；负向断言；Demo 冒烟；bulk insert 钉死；不升版 7.4.5.Final；不 Ship）。I-004 archived。下一步：orchestrator 串行 Plan + 开分支 `feat/i-005-production-regression-baseline` + B-001 draft（仅最早 ready Phase）。未写业务测试代码。
+
+---
+
+## Entry: I-004 Initiative Accept
 
 ### Summary
 Human Gate「I-004 Initiative Accept」。Initiative **accepted**（不含 Ship / Archive）。P-001 DROP SEQUENCE IF EXISTS；P-002 IDENTITY×保留字方言缓解；VERIFY PASS；GAV 7.4.5.Final。

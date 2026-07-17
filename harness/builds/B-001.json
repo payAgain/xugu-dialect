@@ -1,18 +1,14 @@
 {
   "schema_version": 1,
   "build_id": "B-001",
-  "initiative_id": "I-004",
+  "initiative_id": "I-005",
   "plan_revision": 1,
-  "status": "approved",
-  "proposed_phase_ids": ["P-001", "P-002"],
-  "approved_phase_ids": ["P-001", "P-002"],
-  "approval": {
-    "reference": "批准 B-001，范围P-001~P-002",
-    "approved_at": "2026-07-17T14:38:00+08:00",
-    "approved_by": "Human Gate"
-  },
-  "recommendation": "B-001 approved = P-001 then P-002 serial (DROP SEQUENCE IF EXISTS → IDENTITY reserved-table dialect mitigation). No JDBC driver changes. No Ship.",
-  "supersedes": null,
+  "status": "draft",
+  "proposed_phase_ids": ["P-001"],
+  "approved_phase_ids": [],
+  "approval": null,
+  "recommendation": "B-001 draft = P-001 only (baseline SSOT inventory). Serial Plan P-001→P-006. No dialect Java in Plan batch. No Ship. GAV 7.4.5.Final.",
+  "supersedes": "I-004-B-001",
   "scope_changes": [],
-  "notes": "Version 7.4.5.Final. Native dialect only. Orchestrator runs Phases serially."
+  "notes": "I-004 B-001 (P-001~P-002 hotfix) completed and archived. I-005 production regression baseline starts fresh under same build id per initiative convention."
 }

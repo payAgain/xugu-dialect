@@ -11,6 +11,7 @@ owners:
       - "contracts/xugu-dialect.contract.md"
       - "contracts/xugu-dialect.scaffold.contract.md"
       - "contracts/feature-matrix-definition-a.md"
+      - "contracts/production-regression-baseline.md"
     writers:
       - architect-contract   # contracts / public API surface only
       - implementer          # Java dialect implementation (future role instance)
@@ -69,3 +70,5 @@ notes: >
   Bootstrap G1 populated 2026-07-14. P-001 scaffolded dialect/ and demo-spring-boot/
   under parent POM (com.xugu:xugu-dialect-parent:7.4.5.Final).
   JDBC jar xugu-jdbc-12.3.6.jar at repo root is tracked dependency artifact (do not gitignore).
+  I-005 (2026-07-17): production regression baseline — tests/contracts/docs/demo paths active;
+  SSOT at contracts/production-regression-baseline.md (P-001 architect-contract).
