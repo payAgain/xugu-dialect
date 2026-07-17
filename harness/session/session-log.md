@@ -1,10 +1,27 @@
-﻿## Entry: I-005 Plan complete — B-001 draft (P-001 only)
+## Entry: I-005 B-001 complete — P-006 closeout / Initiative Accept prep
+
+### Summary
+Orchestrator resume closeout after proxy interrupt. P-001…P-006 **all accepted** (REGISTRY 17:40). P-006 harness evidence finalized (ACCEPTANCE / TEST-REPORT / REVIEW). **VERIFY PASS** (`harness/evidence/test/I-005/P-006/verification.json`, resume run 17:46). Session → `b001_complete_awaiting_initiative_accept`. Must-commit closeout on `feat/i-005-production-regression-baseline`. **NOT Ship**. `org/` accidental dump left untracked.
+
+### Next
+Human Gate：是否 **Initiative Accept I-005**？（不含 Ship）
+
+---
+
+## Entry: I-005 Plan complete — B-001 draft (P-001 only)
 
 ### Summary
 Orchestrator 串行 Plan P-001→P-006（生产回归基线）；分支 `feat/i-005-production-regression-baseline`；REGISTRY/B-001 draft/Phase packets 物化；I-004 P-001/P-002 packets 归档至 `harness/tasks/archive/I-004/`。未写方言/测试 Java。B-001 draft = 仅 P-001（基线 SSOT 盘点）。
 
 ### Next
 Human Gate：是否批准 B-001，范围仅 P-001？
+
+---
+
+## Entry: I-005 B-001 approved — P-001~P-006 serial
+
+### Summary
+Human Gate「B-001，范围仅 P-001~P-006」。Build **approved**（扩大 draft 的仅 P-001 为全 Plan）。Orchestrator **串行**执行 P-001→P-006；不并行策略问询；不 Ship；GAV 7.4.5.Final。
 
 ---
 

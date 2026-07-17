@@ -3,12 +3,25 @@
   "build_id": "B-001",
   "initiative_id": "I-005",
   "plan_revision": 1,
-  "status": "draft",
-  "proposed_phase_ids": ["P-001"],
-  "approved_phase_ids": [],
-  "approval": null,
-  "recommendation": "B-001 draft = P-001 only (baseline SSOT inventory). Serial Plan P-001→P-006. No dialect Java in Plan batch. No Ship. GAV 7.4.5.Final.",
+  "status": "approved",
+  "proposed_phase_ids": ["P-001", "P-002", "P-003", "P-004", "P-005", "P-006"],
+  "approved_phase_ids": ["P-001", "P-002", "P-003", "P-004", "P-005", "P-006"],
+  "approval": {
+    "reference": "B-001，范围仅 P-001~P-006",
+    "approved_at": "2026-07-17T15:29:00+08:00",
+    "approved_by": "Human Gate"
+  },
+  "completion": {
+    "completed_at": "2026-07-17T18:00:00+08:00",
+    "all_phases_accepted": true,
+    "accepted_phase_ids": ["P-001", "P-002", "P-003", "P-004", "P-005", "P-006"],
+    "verify_status": "PASS",
+    "verification_evidence": "harness/evidence/test/I-005/P-006/verification.json"
+  },
+  "recommendation": "B-001 approved = P-001→P-006 serial (baseline SSOT → live IT gaps → negative asserts → bulk insert nail → demo smoke → docs/VERIFY/Accept prep). No Ship. GAV 7.4.5.Final.",
   "supersedes": "I-004-B-001",
-  "scope_changes": [],
-  "notes": "I-004 B-001 (P-001~P-002 hotfix) completed and archived. I-005 production regression baseline starts fresh under same build id per initiative convention."
+  "scope_changes": [
+    "Human Gate expanded draft (P-001 only) to full Plan P-001~P-006 in one Build; orchestrator still executes serially"
+  ],
+  "notes": "Execution complete 2026-07-17. All P-001…P-006 accepted with evidence. Awaiting Human Gate Initiative Accept (NOT Ship)."
 }

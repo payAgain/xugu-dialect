@@ -2,42 +2,48 @@
   "schema_version": 1,
   "task_id": "I-005",
   "batch_id": "B-001",
-  "status": "plan_complete_await_build_approval",
+  "status": "b001_complete_awaiting_initiative_accept",
   "harness_level": "Standard",
-  "last_updated": "2026-07-17T15:30:00+08:00",
+  "last_updated": "2026-07-17T18:00:00+08:00",
   "initiative_id": "I-005",
   "initiative_type": "feature",
   "working_branch": "feat/i-005-production-regression-baseline",
   "active_plan": [
-    "I-004 archived",
-    "I-005 Scope PASS",
-    "Plan P-001→P-006 serial",
-    "B-001 draft = P-001 only"
+    "B-001 P-001…P-006 all accepted",
+    "VERIFY PASS evidence recorded",
+    "Await Human Gate Initiative Accept"
   ],
   "next_3_steps": [
-    "Human Gate: approve Build scope B-001 P-001 only",
-    "Execute P-001 via role instances (researcher → architect-contract → reviewer)",
-    "After P-001 accept: propose B-002 for P-002"
+    "Human Gate: review SHAs on feat/i-005-production-regression-baseline",
+    "Human Gate: authorize Initiative Accept I-005 (NOT Ship)",
+    "Ship/tag/push: separate authorization if desired"
   ],
   "validation": {
-    "last_result": "Plan materialized; no mvn implementation in Plan batch"
+    "last_result": "VERIFY PASS; all Phases P-001…P-006 accepted"
   },
   "cognitive_state": {
     "failure_count": 0,
-    "current_mode": "awaiting_build_approval",
-    "blocked_on": "human_gate_b001_approval"
+    "current_mode": "awaiting_initiative_accept",
+    "blocked_on": "human_gate_initiative_accept"
   },
   "version_control_checkpoint": {
-    "decision": "i005_plan_complete",
+    "decision": "b001_closeout_p006_accept_prep",
     "committed": true,
     "branch": "feat/i-005-production-regression-baseline",
-    "candidate_commit": "ba60dc196acf39bd89d3efd279d201c8a48fd0da",
-    "head": "ba60dc196acf39bd89d3efd279d201c8a48fd0da"
+    "candidate_commit": "7ac92e95d9b3deacdd7d2c76c7f7d54674fafc4f",
+    "head": "7ac92e95d9b3deacdd7d2c76c7f7d54674fafc4f"
   },
   "handoff": {
-    "resume_from": "harness/handoffs/orchestrator/I-005-plan-ready.md"
+    "resume_from": "harness/handoffs/orchestrator/I-005-B-001-complete.md"
   },
-  "approved_build": null,
-  "approved_phases": [],
-  "updated_at": "2026-07-17T15:30:00+08:00"
+  "approved_build": "B-001",
+  "approved_phases": [
+    "P-001",
+    "P-002",
+    "P-003",
+    "P-004",
+    "P-005",
+    "P-006"
+  ],
+  "updated_at": "2026-07-17T18:00:00+08:00"
 }
