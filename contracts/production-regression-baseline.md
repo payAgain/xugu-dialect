@@ -279,33 +279,22 @@ Matrix status **文档不允许** or **延后**; baseline records explicit non-s
 
 ---
 
-## Explicit call-out — Negative assertion scope (P-003 input)
+## Explicit call-out — Negative assertion scope (closed P-003)
 
-Primary **must-add** negatives:
+All **must-add** and **consolidate** negatives from the P-001 gap audit are **closed in I-005/P-003**:
 
-| matrix_id | Current evidence | P-003 action |
+| matrix_id | Current evidence | Status |
 |---|---|---|
-| A-XCUT-006 | `XuguNegativeRegressionBaselineTest#readUncommittedNotClaimed_A_XCUT_006` | Add explicit READ UNCOMMITTED NOT-claimed test |
+| A-XCUT-006 | `XuguNegativeRegressionBaselineTest#readUncommittedNotClaimed_A_XCUT_006` | **Closed P-003** — READ UNCOMMITTED not claimed |
+| A-XCUT-010 | `XuguNegativeRegressionBaselineTest#charterNoMySqlOracleInheritance_A_XCUT_010` | **Closed P-003** |
+| A-XCUT-011 | `XuguNegativeRegressionBaselineTest#charterNoSiblingDialectPort_A_XCUT_011` | **Closed P-003** |
+| A-PAG-005 | `XuguNegativeRegressionBaselineTest#ansiFetchFirstNotEmitted_A_PAG_005` + IT bundle | **Closed P-003** |
+| A-LCK-004 / C-SKIP-001 | `XuguNegativeRegressionBaselineTest#skipLockedNotSupported_A_LCK_004_C_SKIP_001` + IT | **Closed P-003** |
+| A-LCK-005 | `XuguNegativeRegressionBaselineTest#forShareNotSupported_A_LCK_005` | **Closed P-003** |
+| A-SCH-007 | `XuguNegativeRegressionBaselineTest#tempTableFkNotEmitted_A_SCH_007` + IT | **Closed P-003** |
+| C-DDL-004 | `XuguNegativeRegressionBaselineTest#enumDdlNotEmitted_C_DDL_004` | **Closed P-003** |
 
-Primary **consolidate** negatives (evidence exists, scattered):
-
-| matrix_id | Current evidence | P-003 action |
-|---|---|---|
-| A-PAG-005 | unit + IT (no FETCH FIRST) | Consolidate checklist |
-| A-LCK-004 | unit + IT | Bundle with C-SKIP-001 |
-| A-LCK-005 | unit only | Add IT if pessimistic-read path tested |
-| A-SCH-007 | unit + IT (no FK on temp) | Consolidate |
-| C-DDL-004 | unit (ENUM null) | Consolidate |
-| C-SKIP-001 | via A-LCK-004 | Same bundle |
-
-Charter non-goals (documentation-only unless harness requires guard):
-
-| matrix_id | P-003 action |
-|---|---|
-| A-XCUT-010 | `XuguNegativeRegressionBaselineTest#charterNoMySqlOracleInheritance_A_XCUT_010` | Document in negative suite |
-| A-XCUT-011 | `XuguNegativeRegressionBaselineTest#charterNoSiblingDialectPort_A_XCUT_011` | Document in negative suite |
-
-Optional negatives: A-DDL-007 (IF NOT EXISTS), A-FUN-015 (bit_and not registered).
+Optional negatives (also covered): A-DDL-007 (IF NOT EXISTS defer), A-FUN-015 (bit_and not registered).
 
 ---
 
@@ -336,10 +325,10 @@ Source: [`harness/evidence/researcher/I-005/P-001/GAP-SUMMARY.md`](../harness/ev
 
 ### 4. Isolation & session config
 
-| matrix_id | gap | P-002 action |
+| matrix_id | gap | Status |
 |---|---|---|
-| A-XCUT-005 | No isolation-level test | Unit dialect hooks; optional gated JDBC smoke |
-| A-XCUT-006 | negative-only — no test | **Defer to P-003** (listed for hook audit only) |
+| A-XCUT-005 | No isolation-level test | **Closed P-002** — unit dialect hooks |
+| A-XCUT-006 | negative-only — no test | **Closed P-003** — `XuguNegativeRegressionBaselineTest#readUncommittedNotClaimed_A_XCUT_006` |
 
 ### 5. Bulk mutation (routed)
 
