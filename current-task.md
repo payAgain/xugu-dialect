@@ -1,20 +1,20 @@
 # Current Task
 
 ## Goal
-I-003 **archived**. Clarifying **I-004 hotfix**（AUTO drop sequence IF EXISTS + IDENTITY×保留字表名）
+I-004 (hotfix): DROP SEQUENCE IF EXISTS + IDENTITY×保留字方言缓解；版本 **7.4.5.Final**；不改 JDBC；原生实现
 
 ## Current Status
-I-003 archived (NOT Ship). Next Initiative Scope in progress — no implementation until Scope PASS.
+I-003 archived. I-004 **active** — Plan ready; awaiting Human Gate **批准 B-001，范围仅 P-001**
 
 ## Active Batch / Tasks
-- I-003: `archived`
-- I-004: `clarifying` (proposed hotfix)
-- Branch: still on `feat/i-003-production-capability-parity` until I-004 Scope PASS + new fix branch
+- Branch: `fix/i-004-sequence-drop-identity-reserved`
+- B-001 `draft` = P-001 only
+- P-001 `ready`；P-002 `blocked`
 
 ## Next 3 Steps
-1. Human Gate：确认 I-004 类型/范围（见 Scope 问题）
-2. Scope PASS 后开 `fix/i-004-…` 分支 + Plan
-3. 批准 B-001 后再实现
+1. Human Gate：批准 B-001，范围仅 P-001？
+2. 实现 DROP SEQUENCE IF EXISTS + ORM IT
+3. 禁止改 JDBC / Ship / 升版本
 
 ## Last Updated
-2026-07-17T14:32:00+08:00
+2026-07-17T14:36:00+08:00

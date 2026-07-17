@@ -1,61 +1,21 @@
 schema_version: 1
 charter_version: "1.0.0"
-initiative_id: I-003
-updated: "2026-07-16T17:46:00+08:00"
+initiative_id: I-004
+updated: "2026-07-17T14:36:00+08:00"
 tasks:
   - task_id: P-001
-    title: "尺子 C 生产能力差集盘点 SSOT"
-    status: accepted
-    build_id: B-001
+    title: "DROP SEQUENCE IF EXISTS（AUTO / create-drop）"
+    status: ready
+    build_id: null
     packet: harness/tasks/P-001.md
-    acceptance_doc: harness/evidence/architect-contract/P-001/ACCEPTANCE.md
-    role_pipeline_summary: "architect-contract → reviewer"
+    acceptance_doc: harness/evidence/implementer/P-001/ACCEPTANCE.md
+    role_pipeline_summary: "implementer → test → reviewer"
     dependencies: []
   - task_id: P-002
-    title: "异常映射与约束名抽取 + 入口 IT"
-    status: accepted
-    build_id: B-002
+    title: "IDENTITY × 保留字表名（方言侧缓解）"
+    status: blocked
+    build_id: null
     packet: harness/tasks/P-002.md
     acceptance_doc: harness/evidence/implementer/P-002/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"
     dependencies: [P-001]
-  - task_id: P-003
-    title: "JSON 深能力与 AggregateSupport + 入口 IT"
-    status: accepted
-    build_id: B-003
-    packet: harness/tasks/P-003.md
-    acceptance_doc: harness/evidence/implementer/P-003/ACCEPTANCE.md
-    role_pipeline_summary: "implementer → test → reviewer"
-    dependencies: [P-002]
-  - task_id: P-004
-    title: "Window 与 WITH(CTE) + 入口 IT"
-    status: accepted
-    build_id: B-004
-    packet: harness/tasks/P-004.md
-    acceptance_doc: harness/evidence/implementer/P-004/ACCEPTANCE.md
-    role_pipeline_summary: "implementer → test → reviewer"
-    dependencies: [P-003]
-  - task_id: P-005
-    title: "Bulk mutation 回退策略 + 入口 IT"
-    status: accepted
-    build_id: B-005
-    packet: harness/tasks/P-005.md
-    acceptance_doc: harness/evidence/implementer/P-005/ACCEPTANCE.md
-    role_pipeline_summary: "implementer → test → reviewer"
-    dependencies: [P-004]
-  - task_id: P-006
-    title: "类型与 DDL 细节缺口 + 入口 IT"
-    status: accepted
-    build_id: B-006
-    packet: harness/tasks/P-006.md
-    acceptance_doc: harness/evidence/implementer/P-006/ACCEPTANCE.md
-    role_pipeline_summary: "implementer → test → reviewer"
-    dependencies: [P-005]
-  - task_id: P-007
-    title: "矩阵文档对齐与 Accept 准备"
-    status: accepted
-    build_id: B-007
-    packet: harness/tasks/P-007.md
-    acceptance_doc: harness/evidence/orchestrator/P-007/ACCEPTANCE.md
-    role_pipeline_summary: "implementer → test → reviewer"
-    dependencies: [P-006]

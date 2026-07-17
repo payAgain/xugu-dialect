@@ -1,4 +1,11 @@
-﻿## Entry: I-003 Archive — I-004 Scope clarifying
+﻿## Entry: I-004 Scope PASS + Plan — propose B-001 (P-001 only)
+
+### Summary
+Human Gate Scope PASS：hotfix；两 Bug 都进；不升版；要入口 IT；不改 JDBC；原生实现。分支 `fix/i-004-sequence-drop-identity-reserved`；Plan P-001→P-002；B-001 draft=仅 P-001。未写方言代码。
+
+---
+
+## Entry: I-003 Archive — I-004 Scope clarifying
 
 ### Summary
 Human Gate「Archive I-003」+ 两则 bug 分析 +「下一步推进bug修复」。I-003 archived（NOT Ship）。I-004 hotfix Scope 澄清中（DROP SEQUENCE IF EXISTS；IDENTITY×保留字×getGeneratedKeys）。

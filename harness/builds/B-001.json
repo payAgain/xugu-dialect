@@ -1,25 +1,14 @@
 {
   "schema_version": 1,
   "build_id": "B-001",
-  "initiative_id": "I-003",
+  "initiative_id": "I-004",
   "plan_revision": 1,
-  "status": "approved",
-  "proposed_phase_ids": [
-    "P-001"
-  ],
-  "approved_phase_ids": [
-    "P-001"
-  ],
-  "approval": {
-    "reference": "批准 B-001，范围仅 P-001",
-    "approved_at": "2026-07-16T11:37:00+08:00",
-    "approved_by": "Human Gate"
-  },
-  "recommendation": "B-001 approved = P-001 only. Do not approve P-002… until P-001 ACCEPTANCE.",
-  "supersedes": {
-    "prior_initiative": "I-002",
-    "note": "I-003 B-001 overwrite of draft"
-  },
+  "status": "draft",
+  "proposed_phase_ids": ["P-001"],
+  "approved_phase_ids": [],
+  "approval": null,
+  "recommendation": "Propose B-001 = P-001 only (DROP SEQUENCE IF EXISTS). Do not start P-002 until P-001 Accept.",
+  "supersedes": null,
   "scope_changes": [],
-  "notes": "Human Gate approved B-001 scope = P-001 only (ruler-C gap inventory). No harness framework changes. Version 7.4.5.Final."
+  "notes": "Version 7.4.5.Final. No JDBC driver changes. No Ship. Native dialect implementation only."
 }

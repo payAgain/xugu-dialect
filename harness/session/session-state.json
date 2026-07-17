@@ -1,41 +1,42 @@
 {
   "schema_version": 1,
-  "task_id": "I-004",
-  "batch_id": null,
-  "status": "clarifying",
+  "task_id": "P-001",
+  "batch_id": "B-001",
+  "status": "awaiting_build_approval",
   "harness_level": "Standard",
-  "last_updated": "2026-07-17T14:32:00+08:00",
+  "last_updated": "2026-07-17T14:36:00+08:00",
   "initiative_id": "I-004",
   "initiative_type": "hotfix",
-  "working_branch": "feat/i-003-production-capability-parity",
+  "working_branch": "fix/i-004-sequence-drop-identity-reserved",
   "active_plan": [
-    "I-003 archived",
-    "I-004 Scope clarifying (sequence DROP IF EXISTS + IDENTITY reserved keyword)"
+    "P-001 ready (DROP SEQUENCE IF EXISTS)",
+    "P-002 blocked until P-001",
+    "B-001 draft = P-001 only"
   ],
   "next_3_steps": [
-    "Human Gate: answer I-004 Scope questions",
-    "On Scope PASS: fix branch + Plan P-001..",
-    "Await Build B-001 approval before code"
+    "Human Gate: approve B-001 scope P-001 only?",
+    "On approve: implement drop sequence if exists + ORM IT",
+    "No JDBC driver changes; no Ship"
   ],
   "validation": {
-    "last_result": "I-003 archived; I-004 clarifying"
+    "last_result": "I-004 Plan ready; awaiting B-001 approval"
   },
   "cognitive_state": {
     "failure_count": 0,
-    "current_mode": "clarify",
-    "blocked_on": "human_gate_i004_scope"
+    "current_mode": "awaiting_human_gate",
+    "blocked_on": "human_gate_build_b001_p001_only"
   },
   "version_control_checkpoint": {
-    "decision": "i003_archived_i004_clarifying",
-    "committed": true,
-    "branch": "feat/i-003-production-capability-parity",
-    "candidate_commit": "8f6ae58d2e679c986e3372d7411d55e1256b7712",
-    "head": "8f6ae58d2e679c986e3372d7411d55e1256b7712"
+    "decision": "i004_plan_awaiting_b001",
+    "committed": false,
+    "branch": "fix/i-004-sequence-drop-identity-reserved",
+    "candidate_commit": null,
+    "head": "b7e3fc9"
   },
   "handoff": {
-    "resume_from": "harness/handoffs/orchestrator/I-003-archived.md"
+    "resume_from": "harness/handoffs/orchestrator/B-001-propose.md"
   },
   "approved_build": null,
   "approved_phases": [],
-  "updated_at": "2026-07-17T14:32:00+08:00"
+  "updated_at": "2026-07-17T14:36:00+08:00"
 }
