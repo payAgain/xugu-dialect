@@ -27,10 +27,10 @@
   },
   "version_control_checkpoint": {
     "decision": "i003_archived_i004_clarifying",
-    "committed": false,
+    "committed": true,
     "branch": "feat/i-003-production-capability-parity",
-    "candidate_commit": null,
-    "head": "b850afe"
+    "candidate_commit": "8f6ae58d2e679c986e3372d7411d55e1256b7712",
+    "head": "8f6ae58d2e679c986e3372d7411d55e1256b7712"
   },
   "handoff": {
     "resume_from": "harness/handoffs/orchestrator/I-003-archived.md"
