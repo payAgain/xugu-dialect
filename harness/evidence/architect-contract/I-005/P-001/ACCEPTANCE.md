@@ -68,3 +68,11 @@ A-PAG-005, A-LCK-004, A-LCK-005, A-SCH-007, A-XCUT-006, A-XCUT-010, A-XCUT-011, 
 ## Next step
 
 Reviewer RP-03 readonly audit: matrix ID 1:1 match, no invented SQL rows, P-002 gap list actionable.
+
+## Acceptance decision
+
+- Decision: `accepted`
+- Decided by: orchestrator
+- Date: 2026-07-17T15:55:00+08:00
+- Phase verification: `harness/evidence/architect-contract/I-005/P-001/verification.json`
+- Reviewer audit: `harness/evidence/reviewer/I-005/P-001/REVIEW.md` (PASS)

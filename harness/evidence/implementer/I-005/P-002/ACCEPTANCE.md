@@ -37,3 +37,10 @@
 
 - Build: `mvn -q -DskipTests package` → **exit 0**
 - Test: `mvn -q test` → **exit 0** (105 run, 0 failures, 32 IT skipped)
+
+## Acceptance decision
+
+- Decision: `accepted`
+- Decided by: orchestrator
+- Date: 2026-07-17T16:05:00+08:00
+- Phase verification: `harness/evidence/test/I-005/P-002/verification.json`

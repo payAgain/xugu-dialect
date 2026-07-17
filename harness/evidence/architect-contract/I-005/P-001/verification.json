@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "started_at": "2026-07-17T15:45:00+08:00",
+  "finished_at": "2026-07-17T15:50:00+08:00",
+  "project_root": "E:\\Work\\java\\hibernate-test",
+  "initiative_id": "I-005",
+  "phase_id": "P-001",
+  "build_id": "B-001",
+  "step_id": "RP-02",
+  "role": "architect-contract",
+  "branch": "feat/i-005-production-regression-baseline",
+  "head_sha": "5a40af4ede657c8abf53815776cca07bf8ca02f0",
+  "results": [
+    {
+      "id": "harness_check",
+      "required": true,
+      "status": "PASS",
+      "command": "python harness/scripts/harness_check.py",
+      "exit_code": 0
+    },
+    {
+      "id": "baseline-inventory-ssot-mapping",
+      "required": true,
+      "status": "PASS",
+      "artifact": "contracts/production-regression-baseline.md",
+      "feasible_rows": 94,
+      "total_rows": 129
+    }
+  ],
+  "summary": {
+    "harness_check": "PASS",
+    "ssot_published": "PASS",
+    "overall_accept_gate": "PASS"
+  }
+}

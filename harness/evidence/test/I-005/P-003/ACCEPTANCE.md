@@ -64,3 +64,11 @@ Pre-existing live IT issue (`C-EXC-002` / `XuguExceptionMappingIT`) from P-002 i
 **Condition:** SSOT non-可实现 rows have negative-only or deferred-documented entrypoints.  
 **Action:** Offline `mvn -q test`.  
 **Result:** PASS — proceed to RP-03 reviewer.
+
+## Acceptance decision
+
+- Decision: `accepted`
+- Decided by: orchestrator
+- Date: 2026-07-17T17:40:00+08:00
+- Phase verification: `harness/evidence/test/I-005/P-003/verification.json`
+- Reviewer audit: `harness/evidence/reviewer/I-005/P-003/REVIEW.md` (PASS)

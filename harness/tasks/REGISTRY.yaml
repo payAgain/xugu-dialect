@@ -1,7 +1,7 @@
 schema_version: 1
 charter_version: "1.0.0"
 initiative_id: I-005
-updated: "2026-07-17T15:30:00+08:00"
+updated: "2026-07-17T17:40:00+08:00"
 supersedes_initiative: I-004
 notes: >
   I-004 P-001/P-002 packets archived at harness/tasks/archive/I-004/.
@@ -18,7 +18,7 @@ tasks:
     dependencies: []
   - task_id: P-002
     title: "补齐可实现行真库入口回归用例"
-    status: in_progress
+    status: accepted
     build_id: B-001
     packet: harness/tasks/P-002.md
     acceptance_doc: harness/evidence/implementer/I-005/P-002/ACCEPTANCE.md
@@ -26,8 +26,8 @@ tasks:
     dependencies: [P-001]
   - task_id: P-003
     title: "添加文档不允许与延后负向断言"
-    status: pending
-    build_id: null
+    status: accepted
+    build_id: B-001
     packet: harness/tasks/P-003.md
     acceptance_doc: harness/evidence/test/I-005/P-003/ACCEPTANCE.md
     role_pipeline_summary: "test → implementer (conditional) → reviewer"
