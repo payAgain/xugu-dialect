@@ -12,7 +12,8 @@
 
 ## HEAD SHA
 
-`7ac92e95d9b3deacdd7d2c76c7f7d54674fafc4f` — closeout must-commit (P-006 Accept prep)
+- Closeout (P-006 evidence + session): `8993a03d4b8d6c0bdeb712af595c87b923628341`
+- **Final HEAD:** `301eccbb93df38ae612433a3eb6b57ec51985532`
 
 ## Phase table
 
