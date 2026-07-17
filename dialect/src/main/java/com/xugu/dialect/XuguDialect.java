@@ -122,8 +122,9 @@ import jakarta.persistence.Timeout;
  *
  * <p><b>Identity (A-IDN-*):</b> {@link XuguIdentityColumnSupport} emits
  * {@code identity(1,1)} (prefer IDENTITY over AUTO_INCREMENT in NONE mode).
- * Generated keys: JDBC {@code getGeneratedKeys} (driver-documented); select fallback
- * {@code select last_insert_id() from dual}.
+ * Generated keys: {@link #getDefaultUseGetGeneratedKeys()} is {@code false} so Hibernate
+ * uses {@code select last_insert_id() from dual} instead of JDBC {@code RETURN_GENERATED_KEYS}
+ * (avoids driver re-parse dropping quotes on reserved table names such as {@code "order"}).
  *
  * <p><b>Sequence (A-SEQ-*, A-XCUT-008):</b> {@link XuguSequenceSupport} locks
  * {@code select &lt;seq&gt;.nextval from dual}; CURRVAL via {@code currval('name')}.
@@ -898,6 +899,18 @@ public class XuguDialect extends Dialect {
 	@Override
 	public IdentityColumnSupport getIdentityColumnSupport() {
 		return XuguIdentityColumnSupport.INSTANCE;
+	}
+
+	/**
+	 * Prefer select-based identity retrieval ({@code LAST_INSERT_ID()}) over JDBC
+	 * {@code Statement.RETURN_GENERATED_KEYS}. XuGu's getGeneratedKeys path re-parses
+	 * the INSERT and can drop identifier quoting, breaking reserved table names
+	 * (e.g. {@code "order"} → {@code unexpected ORDER}). This is a dialect mitigation,
+	 * not a JDBC driver fix.
+	 */
+	@Override
+	public boolean getDefaultUseGetGeneratedKeys() {
+		return false;
 	}
 
 	@Override

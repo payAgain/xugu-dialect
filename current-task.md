@@ -1,20 +1,18 @@
 # Current Task
 
 ## Goal
-I-004 B-001 **approved** — P-001 then P-002 (serial)
+I-004 B-001 **complete** — awaiting Human Gate **I-004 Initiative Accept**
 
 ## Current Status
-Human Gate approved B-001 scope P-001~P-002. Starting P-001 (DROP SEQUENCE IF EXISTS).
+P-001 + P-002 accepted. Hotfix delivered on `fix/i-004-sequence-drop-identity-reserved`.
 
-## Active Batch / Tasks
-- Branch: `fix/i-004-sequence-drop-identity-reserved`
-- B-001 `approved` = P-001 → P-002
-- P-001 `in_progress`
+## Validation
+VERIFY PASS for both Phases; no JDBC changes
 
 ## Next 3 Steps
-1. P-001 implementer → test → reviewer → Accept
-2. Unlock P-002 and run same pipeline
-3. No JDBC / Ship / version bump
+1. Human Gate：是否批准 I-004 Initiative Accept？
+2. 可选 Archive
+3. Ship 另行授权
 
 ## Last Updated
-2026-07-17T14:38:00+08:00
+2026-07-17T14:56:00+08:00

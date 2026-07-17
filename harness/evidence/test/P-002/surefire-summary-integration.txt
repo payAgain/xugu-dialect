@@ -1,0 +1,9 @@
+﻿Gated suite (mvn -q test -Dxugu.run.integration=true): EXIT 0
+XuguReservedIdentityIT: Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+  testcase: identityPersistOnReservedTableOrderBackfillsId
+XuguIdentitySequenceTest: Tests run: 7, Failures: 0, Errors: 0, Skipped: 0
+Observed SQL:
+  create table if not exists "order" (...)
+  insert into "order" (name) values (?)
+  select last_insert_id() from dual
+  drop table if exists "order"

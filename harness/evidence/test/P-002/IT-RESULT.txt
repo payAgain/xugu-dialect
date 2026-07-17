@@ -1,18 +1,29 @@
-P-002 Independent Test IT Result (test-p002-20260716)
-=====================================================
+﻿P-002 IT Result — IDENTITY × reserved table (I-004)
+===================================================
+Invocation: test-p002-20260717
 Gate: -Dxugu.run.integration=true
-DB: jdbc:xugu://127.0.0.1:5138/SYSTEM?...&compatiblemode=NONE
+Live DB: jdbc:xugu://127.0.0.1:5138/SYSTEM (XuguDB 12.0 / XuguDialect)
 
-Commands:
-  mvn -q test                                          → EXIT 0
-  mvn -q test -Dxugu.run.integration=true              → EXIT 0
-  verify.py --phase P-002 --evidence harness/evidence/test/P-002/verification.json → VERIFY PASS
+## XuguReservedIdentityIT
+Surefire: Tests run: 1, Failures: 0, Errors: 0, Skipped: 0 (EXIT 0)
+testcase: identityPersistOnReservedTableOrderBackfillsId
 
-XuguSchemaValidateIT:
-  schemaValidateSucceedsWhenSequenceExists → PASS
-  schemaValidateFailsWhenSequenceMissing   → PASS
-  Surefire: Tests run: 2, Failures: 0, Errors: 0, Skipped: 0
+Observed Hibernate SQL:
+- create table if not exists "order" (id integer identity(1,1), name varchar(64) not null, primary key (id))
+- insert into "order" (name) values (?)
+- select last_insert_id() from dual
+- drop table if exists "order"
 
-Logs:
-  harness/evidence/test/P-002/mvn-test-offline.log
-  harness/evidence/test/P-002/mvn-test-integration.log
+Identity path: last_insert_id select (getDefaultUseGetGeneratedKeys=false)
+No unexpected ORDER / E19132 on insert path
+Persist + flush backfills non-null positive Integer id
+
+## Unit (XuguIdentitySequenceTest)
+Surefire: Tests run: 7, Failures: 0, Errors: 0, Skipped: 0
+Includes dialectPrefersIdentitySelectOverGetGeneratedKeys → assertFalse
+
+## Full gated suite
+mvn -q test -Dxugu.run.integration=true → EXIT 0
+Evidence log: harness/evidence/test/P-002/mvn-test-integration.log
+
+Verdict: PASS

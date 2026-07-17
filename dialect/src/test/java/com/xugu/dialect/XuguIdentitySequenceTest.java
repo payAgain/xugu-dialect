@@ -71,8 +71,9 @@ class XuguIdentitySequenceTest {
 	}
 
 	@Test
-	void dialectPrefersGetGeneratedKeys() {
-		assertTrue( dialect.getDefaultUseGetGeneratedKeys() );
+	void dialectPrefersIdentitySelectOverGetGeneratedKeys() {
+		assertFalse( dialect.getDefaultUseGetGeneratedKeys(),
+				"avoid JDBC RETURN_GENERATED_KEYS × reserved table names (I-004/P-002)" );
 	}
 
 	@Test

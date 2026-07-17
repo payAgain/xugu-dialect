@@ -1,7 +1,7 @@
 schema_version: 1
 charter_version: "1.0.0"
 initiative_id: I-004
-updated: "2026-07-17T14:52:00+08:00"
+updated: "2026-07-17T14:56:00+08:00"
 tasks:
   - task_id: P-001
     title: "DROP SEQUENCE IF EXISTS（AUTO / create-drop）"
@@ -13,7 +13,7 @@ tasks:
     dependencies: []
   - task_id: P-002
     title: "IDENTITY × 保留字表名（方言侧缓解）"
-    status: in_progress
+    status: accepted
     build_id: B-001
     packet: harness/tasks/P-002.md
     acceptance_doc: harness/evidence/implementer/P-002/ACCEPTANCE.md

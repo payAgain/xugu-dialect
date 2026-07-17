@@ -1,37 +1,110 @@
-schema_version: 1
+﻿schema_version: 1
 role: test
 phase_id: P-002
-build_id: B-002
-initiative_id: I-002
-invocation_id: test-p002-20260716
+build_id: B-001
+initiative_id: I-004
+invocation_id: test-p002-20260717
 step_id: RP-02
 status: passed
-updated_at: "2026-07-16T09:24:00+08:00"
+required: true
+completed_at: "2026-07-17T14:53:00+08:00"
+purpose: gated ORM IT persist IDENTITY entity on reserved table name; VERIFY PASS
 
-summary: >
-  Independent retest PASS. Offline + gated IT EXIT 0 including XuguSchemaValidateIT
-  (validate succeeds when seq exists; fails when missing). VERIFY PASS at
-  harness/evidence/test/P-002/verification.json. No product code changes by test.
+inputs:
+  - harness/tasks/P-002.md
+  - harness/handoffs/implementer/P-002.yaml
+  - harness/evidence/implementer/P-002/NOTES.md
+  - dialect/src/main/java/com/xugu/dialect/XuguDialect.java
+  - dialect/src/main/java/com/xugu/dialect/identity/XuguIdentityColumnSupport.java
+  - dialect/src/test/java/com/xugu/dialect/XuguIdentitySequenceTest.java
+  - dialect/src/test/java/com/xugu/dialect/it/XuguReservedIdentityIT.java
+  - dialect/src/test/java/com/xugu/dialect/it/entities/I004P002OrderEntity.java
+  - agents/test.md
 
-validation:
-  offline_mvn_test: EXIT_0
-  integration_mvn_test: EXIT_0
-  verify_py: PASS
-  verification_evidence: harness/evidence/test/P-002/verification.json
-
-observed_flow:
-  id: schema-validate-sequence-metadata-real-db
-  happy_path: PASS
-  missing_sequence_boundary: PASS
-
-evidence:
+outputs:
   - harness/evidence/test/P-002/TEST-REPORT.md
-  - harness/evidence/test/P-002/CHECKLIST.md
-  - harness/evidence/test/P-002/IT-RESULT.txt
-  - harness/evidence/test/P-002/SPOT-CHECK.md
   - harness/evidence/test/P-002/verification.json
+  - harness/evidence/test/P-002/mvn-package.log
   - harness/evidence/test/P-002/mvn-test-offline.log
   - harness/evidence/test/P-002/mvn-test-integration.log
+  - harness/evidence/test/P-002/surefire-summary-offline.txt
+  - harness/evidence/test/P-002/surefire-summary-integration.txt
+  - harness/evidence/test/P-002/IT-RESULT.txt
+  - harness/evidence/test/P-002/SPOT-CHECK.md
+  - harness/evidence/test/P-002/CHECKLIST.md
+  - harness/evidence/test/P-002/verify.log
+  - harness/evidence/test/P-002/harness-check.log
+  - harness/evidence/test/P-002/branch-check.log
+  - harness/evidence/test/P-002/com.xugu.dialect.it.XuguReservedIdentityIT.txt
+  - harness/evidence/test/P-002/TEST-com.xugu.dialect.it.XuguReservedIdentityIT.xml
+  - harness/evidence/test/P-002/com.xugu.dialect.XuguIdentitySequenceTest.txt
+  - harness/handoffs/test/P-002.yaml
 
-next:
-  - Dispatch RP-03 reviewer rev-p002-20260716
+commands:
+  - { cmd: "mvn -q -DskipTests package", exit: 0 }
+  - { cmd: "mvn -q test", exit: 0 }
+  - { cmd: 'mvn -q test "-Dxugu.run.integration=true"', exit: 0 }
+  - { cmd: "python harness/scripts/verify.py --phase P-002 --evidence harness/evidence/test/P-002/verification.json", exit: 0 }
+  - { cmd: "python harness/scripts/harness_check.py", exit: 0 }
+  - { cmd: "python harness/scripts/branch_check.py", exit: 0 }
+
+verification:
+  package:
+    command: "mvn -q -DskipTests package"
+    exit_code: 0
+  test_offline:
+    command: "mvn -q test"
+    exit_code: 0
+  test_integration:
+    command: 'mvn -q test "-Dxugu.run.integration=true"'
+    exit_code: 0
+    real_db: true
+    reserved_identity_it: PASS
+    sql_observed:
+      - 'create table if not exists "order" (...)'
+      - 'insert into "order" (name) values (?)'
+      - 'select last_insert_id() from dual'
+    identity_path: last_insert_id_select
+  verify:
+    command: "python harness/scripts/verify.py --phase P-002 --evidence harness/evidence/test/P-002/verification.json"
+    exit_code: 0
+    status: "VERIFY PASS"
+  harness_check:
+    exit_code: 0
+    status: "HARNESS_CHECK PASS"
+  branch_check:
+    exit_code: 0
+    status: "BRANCH_CHECK PASS"
+    branch: "fix/i-004-sequence-drop-identity-reserved"
+
+spot_checks:
+  unit_get_default_use_get_generated_keys_false: true
+  orm_it_xugu_reserved_identity: true
+  live_sql_quoted_order_and_last_insert_id: true
+  no_unexpected_order: true
+  no_product_code_by_test: true
+
+observed_flows:
+  - id: orm-identity-reserved-table-persist
+    result: passed
+    method: XuguReservedIdentityIT
+    observed: 'insert into "order"; select last_insert_id() from dual; id backfilled'
+    evidence: harness/evidence/test/P-002/IT-RESULT.txt
+
+notes_for_reviewer: |
+  Independent RP-02 after impl-p002-20260717.
+  Package / offline / gated IT / VERIFY / harness_check / branch_check all EXIT 0.
+  Live SQL confirms quoted "order" + last_insert_id path (dialect mitigation, not JDBC fix).
+  No product code changes by test. No Accept / commit.
+
+forbidden_reminder:
+  - no product code rewrite by test
+  - no JDBC driver changes
+  - no version bump / Ship
+  - no git commit / tag / push by test
+  - no Accept
+
+next_step: RP-03 reviewer
+blocker: null
+real_db_it_passed: true
+verdict: PASS

@@ -1,16 +1,14 @@
-# P-002 REVIEW — exception mapping
+# P-002 REVIEW (I-004)
 
-> **Invocation:** `rev-p002-20260716`  
-> **Risk:** 8
+> **Invocation:** `rev-p002-20260717`
 
-## Checklist
-| Check | Result |
+| Criterion | Result |
 |---|---|
-| Docs-cited error codes | PASS |
-| ORM entrypoint IT (Session unique) | PASS |
-| No sibling code port | PASS |
-| SPI-only evidence rejected | PASS (IT present) |
-| Version / no Ship / no harness rewrite | PASS |
+| Dialect only (no JDBC) | PASS |
+| ORM IT reserved IDENTITY | PASS — `XuguReservedIdentityIT` |
+| Native / no sibling | PASS |
+| 7.4.5.Final | PASS |
+| getGeneratedKeys side-effect documented | PASS |
 
 ## Decision
 **approve**

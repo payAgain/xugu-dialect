@@ -1,0 +1,13 @@
+schema_version: 1
+role: reviewer
+phase_id: P-002
+build_id: B-001
+initiative_id: I-004
+invocation_id: rev-p002-20260717
+step_id: RP-03
+status: approve
+decision: approve
+updated_at: "2026-07-17T14:55:00+08:00"
+evidence: harness/evidence/reviewer/P-002/REVIEW.md
+verify_status: PASS
+summary: getDefaultUseGetGeneratedKeys=false + reserved order IT PASS; approve.

@@ -8,10 +8,10 @@ import org.hibernate.dialect.identity.IdentityColumnSupportImpl;
  * <p>DDL: prefer {@code identity(1,1)} in {@code compatiblemode=NONE}
  * ({@code AUTO_INCREMENT} ≡ {@code IDENTITY(1,1)} per create.md — not emitted).
  *
- * <p>Generated-key retrieval: Hibernate uses JDBC {@code getGeneratedKeys} by default
- * ({@code Dialect#getDefaultUseGetGeneratedKeys()} == true; live JDBC driver proven).
- * {@link #getIdentitySelectString} provides documented {@code LAST_INSERT_ID()} fallback
- * when a select-based path is required.
+ * <p>Generated-key retrieval: {@link com.xugu.dialect.XuguDialect#getDefaultUseGetGeneratedKeys()}
+ * is {@code false}, so Hibernate uses {@link #getIdentitySelectString}
+ * ({@code select last_insert_id() from dual}) instead of JDBC {@code RETURN_GENERATED_KEYS}.
+ * That avoids driver re-parse losing quotes on reserved table names (I-004 / P-002).
  */
 public class XuguIdentityColumnSupport extends IdentityColumnSupportImpl {
 
@@ -32,7 +32,7 @@ public class XuguIdentityColumnSupport extends IdentityColumnSupportImpl {
 	}
 
 	/**
-	 * Documented XuGu fallback when not using JDBC getGeneratedKeys:
+	 * Primary XuGu identity retrieval when {@code getDefaultUseGetGeneratedKeys} is false:
 	 * {@code SELECT LAST_INSERT_ID() FROM dual}.
 	 */
 	@Override

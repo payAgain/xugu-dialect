@@ -32,18 +32,10 @@
 - I-003 延后 C-* 能力扩展
 
 ## Acceptance criteria
-- [ ] P-001：`drop sequence if exists` 落地；AUTO/create-drop 门控 IT PASS
-- [ ] P-002：IDENTITY + 保留字表名 persist 门控 IT PASS（方言缓解，非驱动补丁）
-- [ ] `verify.py` VERIFY PASS；版本仍为 7.4.5.Final
+- [x] P-001：`drop sequence if exists` 落地；AUTO/create-drop 门控 IT PASS
+- [x] P-002：IDENTITY + 保留字表名 persist 门控 IT PASS（方言缓解，非驱动补丁）
+- [x] `verify.py` VERIFY PASS；版本仍为 7.4.5.Final
 - [ ] **不要求** Ship
 
-## Related
-- Prior: I-003 archived `harness/initiatives/I-003/ARCHIVE.md`
-- Branch: `fix/i-004-sequence-drop-identity-reserved`
-- Evidence of bugs: Human Gate analysis (PrimaryKeyStrategyIT / ReservedKeywordMappingIT)
-
 ## Status
-`active`
-
-- Scope PASS: ~2026-07-17T14:36+08:00
-- Next: Human Gate 批准 **B-001** 范围仅 **P-001**
+`active` — B-001 complete (P-001+P-002 accepted); awaiting Human Gate **Initiative Accept**
