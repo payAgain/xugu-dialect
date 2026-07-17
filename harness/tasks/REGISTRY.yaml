@@ -10,7 +10,7 @@ notes: >
 tasks:
   - task_id: P-001
     title: "建立生产回归基线 SSOT 清单"
-    status: ready
+    status: accepted
     build_id: B-001
     packet: harness/tasks/P-001.md
     acceptance_doc: harness/evidence/architect-contract/I-005/P-001/ACCEPTANCE.md
@@ -18,8 +18,8 @@ tasks:
     dependencies: []
   - task_id: P-002
     title: "补齐可实现行真库入口回归用例"
-    status: pending
-    build_id: null
+    status: in_progress
+    build_id: B-001
     packet: harness/tasks/P-002.md
     acceptance_doc: harness/evidence/implementer/I-005/P-002/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"
