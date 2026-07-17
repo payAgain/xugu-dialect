@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "started_at": "2026-07-17T16:12:00+08:00",
+  "finished_at": "2026-07-17T16:15:30+08:00",
+  "project_root": "E:\\Work\\java\\hibernate-test",
+  "initiative_id": "I-005",
+  "phase_id": "P-003",
+  "build_id": "B-001",
+  "invocation_id": "test-i005-p003-rp01-20260717",
+  "step_id": "RP-01",
+  "role": "test",
+  "branch": "feat/i-005-production-regression-baseline",
+  "head_sha": "e892e9015356697948bedbecc0a6509a6f5d0e7a",
+  "verdict": "PASS",
+  "config": "E:\\Work\\java\\hibernate-test\\harness\\verification.json",
+  "results": [
+    {
+      "id": "test_default",
+      "required": true,
+      "status": "PASS",
+      "command": "mvn -q test",
+      "cwd": "E:\\Work\\java\\hibernate-test",
+      "exit_code": 0,
+      "log": "harness/evidence/test/I-005/P-003/mvn-test-offline.log",
+      "counts": {
+        "dialect": {
+          "tests_run": 138,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 54
+        }
+      },
+      "negative_baseline_class": {
+        "class": "com.xugu.dialect.XuguNegativeRegressionBaselineTest",
+        "tests_run": 33,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 22,
+        "active_negative_assertions": 11
+      },
+      "it_gate": "OFF",
+      "it_skipped_expected": true
+    },
+    {
+      "id": "ssot_negative_rows",
+      "required": true,
+      "status": "PASS",
+      "artifact": "contracts/production-regression-baseline.md",
+      "definition_a_doc_forbidden": 7,
+      "definition_a_deferred": 20,
+      "ruler_c_doc_forbidden_deferred": 7,
+      "total_negative_only_rows": 34,
+      "rows_with_entry_class_method": 34,
+      "must_add_closed": [
+        "A-XCUT-006",
+        "A-XCUT-010",
+        "A-XCUT-011"
+      ],
+      "p003_consolidate_closed": [
+        "A-PAG-005",
+        "A-LCK-004",
+        "A-LCK-005",
+        "A-SCH-007",
+        "A-DDL-007",
+        "C-DDL-004",
+        "C-SKIP-001"
+      ]
+    },
+    {
+      "id": "implementer_rp02_needed",
+      "required": false,
+      "status": "NOT_REQUIRED",
+      "note": "No dialect false positives from new negative tests"
+    }
+  ],
+  "summary": {
+    "test_default": "PASS",
+    "negative_only_ssot_coverage": "PASS",
+    "implementer_fixes_needed": false,
+    "overall_accept_gate": "READY_FOR_RP03_REVIEWER"
+  }
+}

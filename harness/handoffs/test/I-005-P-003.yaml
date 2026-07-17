@@ -1,0 +1,72 @@
+schema_version: 1
+role: test
+phase_id: P-003
+initiative_id: I-005
+build_id: B-001
+invocation_id: test-i005-p003-rp01-20260717
+step_id: RP-01
+status: passed
+required: true
+completed_at: "2026-07-17T16:15:30+08:00"
+purpose: add/extend negative assertions for Definition A 文档不允许 (7) + 延后 (20) and I-003 C-* 文档不允许 (2) + 延后 (5); update SSOT entry_class#method
+
+inputs:
+  - harness/tasks/P-003.md
+  - contracts/production-regression-baseline.md
+  - agents/test.md
+
+outputs:
+  - dialect/src/test/java/com/xugu/dialect/XuguNegativeRegressionBaselineTest.java
+  - contracts/production-regression-baseline.md
+  - harness/evidence/test/I-005/P-003/ACCEPTANCE.md
+  - harness/evidence/test/I-005/P-003/verification.json
+  - harness/evidence/test/I-005/P-003/mvn-test-offline.log
+  - harness/evidence/test/I-005/P-003/surefire-summary-offline.txt
+  - harness/handoffs/test/I-005-P-003.yaml
+
+commands:
+  - { cmd: "mvn -q test", exit: 0 }
+
+verification:
+  test_offline:
+    command: "mvn -q test"
+    exit_code: 0
+    status: PASS
+    dialect_counts:
+      tests_run: 138
+      failures: 0
+      errors: 0
+      skipped: 54
+  negative_baseline:
+    class: com.xugu.dialect.XuguNegativeRegressionBaselineTest
+    tests_run: 33
+    active: 11
+    disabled_deferred: 22
+    failures: 0
+  ssot_negative_rows:
+    total: 34
+    all_have_entry_class_method: true
+    status: PASS
+
+deliverables:
+  tests_added:
+    - XuguNegativeRegressionBaselineTest (33 methods; 11 active negative + 22 @Disabled defer)
+  ssot_updated: contracts/production-regression-baseline.md negative-only section
+  implementer_rp02_needed: false
+
+observed_flows:
+  - id: negative-assertions-doc-forbidden-deferred
+    result: passed
+    evidence: harness/evidence/test/I-005/P-003/ACCEPTANCE.md
+
+notes_for_rp02_implementer: |
+  No dialect flag/SQL false positives detected by new negative tests.
+  Pre-existing P-002 live IT failure (C-EXC-002) unchanged and out of P-003 scope.
+
+notes_for_rp03_reviewer: |
+  Confirm @Disabled defer anchors acceptable vs active negatives where unit suffices.
+  SSOT now lists entry_class#method for all 34 negative-only rows.
+
+next_step: RP-03 reviewer
+blocker: null
+verdict: PASS

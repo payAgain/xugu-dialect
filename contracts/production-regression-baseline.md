@@ -13,6 +13,8 @@
 | status | Meaning |
 |---|---|
 | **covered** | At least one verified test entrypoint (unit / IT / demo) |
+| **covered-live** | Live gated IT PASS on an 可实现 row (no waiver) |
+| **known-limit-documented** | Code wired; live IT waived with formal SSOT + user-doc known limitation |
 | **gap** | No entrypoint, or missing expected live IT on an 可实现 row |
 | **negative-only** | 文档不允许 / 延后 — explicit non-support or defer; no positive SQL invention |
 
@@ -157,7 +159,7 @@ Columns: `matrix_id | status | entry_class#method | gate | gap_action`
 | A-XCUT-005 | covered | `XuguDialectTest#isolationLevelHooksMatchXuguIsoLevel_A_XCUT_005` | unit | N/A |
 | A-XCUT-007 | covered | `XuguDialectTest#keywordsIncludeTcl` | unit | N/A |
 | A-XCUT-008 | covered | `XuguIdentitySequenceTest#sequenceSupportWired_A_SEQ_001_003_008` | unit | N/A |
-| A-XCUT-009 | covered | `DemoOfflineSmokeTest#applicationYmlDocumentsExplicitDialectAndEnvKeys`; `DemoPersonCrudIT#persistAndFindPerson` | demo | P-005 |
+| A-XCUT-009 | covered | `DemoOfflineSmokeTest#applicationYmlDocumentsExplicitDialectAndEnvKeys`; `DemoPersonCrudIT#persistAndFindPerson`; `DemoBootBaselineSmokeTest#sessionFactoryUsesExplicitXuguDialectFromApplicationYml`; `#jpaPersistAndJpqlQueryRoundTrip`; `#pageableFindAllUsesLimitOffset` | demo | N/A |
 
 ### Ruler C — 可实现 (16)
 
@@ -172,7 +174,7 @@ Columns: `matrix_id | status | entry_class#method | gate | gap_action`
 | C-WIN-001 | covered | `XuguWindowCteIT#hqlWindowAndWithClauseOnLiveSession`; `XuguWindowCteSupportTest#dialectEnablesWindowAndWithClause` | IT | N/A |
 | C-CTE-001 | covered | `XuguWindowCteIT#hqlWindowAndWithClauseOnLiveSession` | IT | N/A |
 | C-BULK-001 | covered | `XuguBulkMutationIT#bulkUpdateOnJoinedInheritanceSucceeds`; `#bulkDeleteOnJoinedInheritanceSucceeds`; `XuguBulkMutationSupportTest#localTemporaryTableStrategyForBulkMutation_C_BULK_001` | IT | N/A |
-| C-BULK-002 | gap | — | none | P-004 |
+| C-BULK-002 | known-limit-documented | `XuguBulkMutationSupportTest#fallbackSqmInsertStrategyWired_C_BULK_002`; live IT waived — `docs/user-guide/05-troubleshooting.md` §10 | unit | N/A |
 | C-BULK-003 | covered | `XuguBulkMutationSupportTest#supportsSubqueryOnMutatingTableIsFalse_C_BULK_003`; `XuguBulkMutationIT#dialectExposesLocalTempBulkStrategyFlags` | IT | N/A |
 | C-DDL-001 | covered | `XuguTypeDdlDetailsTest#createTableIfNotExists_C_DDL_001`; `XuguTypeDdlDetailsIT#typeDdlDetailsOnLiveDb` | IT | N/A |
 | C-DDL-002 | covered | `XuguTypeDdlDetailsTest#alterColumnType_C_DDL_002`; `XuguTypeDdlDetailsIT#typeDdlDetailsOnLiveDb` | IT | N/A |
@@ -190,50 +192,50 @@ Matrix status **文档不允许** or **延后**; baseline records explicit non-s
 
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
-| A-PAG-005 | negative-only | `XuguPaginationLockTest#limitOnlyUsesBindMarker_A_PAG_001_003`; `XuguPaginationIT#limitAndOffsetReturnExpectedRows`; `XuguHqlPaginationIT#hqlSetFirstResultMaxResultsUsesLimitNotFetchFirst` | IT | P-003 |
-| A-LCK-004 | negative-only | `XuguPaginationLockTest#skipLockedNotSupported_A_LCK_004`; `XuguLockIT#forUpdateExecutesAndSkipLockedUnsupported` | IT | P-003 |
-| A-LCK-005 | negative-only | `XuguPaginationLockTest#noForShare_A_LCK_005` | unit | P-003 |
-| A-SCH-007 | negative-only | `XuguSchemaTempCommentTest#tempTableExporterDoesNotEmitFk_A_SCH_007`; `XuguSchemaTempCommentIT#schemaTempCommentFkTruncate_A_SCH` | IT | P-003 |
-| A-XCUT-006 | negative-only | — | none | P-003 |
-| A-XCUT-010 | negative-only | — | none | P-003 |
-| A-XCUT-011 | negative-only | — | none | P-003 |
+| A-PAG-005 | negative-only | `XuguNegativeRegressionBaselineTest#ansiFetchFirstNotEmitted_A_PAG_005`; `XuguPaginationLockTest#limitOnlyUsesBindMarker_A_PAG_001_003`; `XuguPaginationIT#limitAndOffsetReturnExpectedRows`; `XuguHqlPaginationIT#hqlSetFirstResultMaxResultsUsesLimitNotFetchFirst` | IT | P-003 |
+| A-LCK-004 | negative-only | `XuguNegativeRegressionBaselineTest#skipLockedNotSupported_A_LCK_004_C_SKIP_001`; `XuguPaginationLockTest#skipLockedNotSupported_A_LCK_004`; `XuguLockIT#forUpdateExecutesAndSkipLockedUnsupported` | IT | P-003 |
+| A-LCK-005 | negative-only | `XuguNegativeRegressionBaselineTest#forShareNotSupported_A_LCK_005`; `XuguPaginationLockTest#noForShare_A_LCK_005` | unit | P-003 |
+| A-SCH-007 | negative-only | `XuguNegativeRegressionBaselineTest#tempTableFkNotEmitted_A_SCH_007`; `XuguSchemaTempCommentTest#tempTableExporterDoesNotEmitFk_A_SCH_007`; `XuguSchemaTempCommentIT#schemaTempCommentFkTruncate_A_SCH` | IT | P-003 |
+| A-XCUT-006 | negative-only | `XuguNegativeRegressionBaselineTest#readUncommittedNotClaimed_A_XCUT_006` | unit | P-003 |
+| A-XCUT-010 | negative-only | `XuguNegativeRegressionBaselineTest#charterNoMySqlOracleInheritance_A_XCUT_010` | unit | P-003 |
+| A-XCUT-011 | negative-only | `XuguNegativeRegressionBaselineTest#charterNoSiblingDialectPort_A_XCUT_011` | unit | P-003 |
 
 ### Definition A — 延后 (20)
 
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
-| A-TYP-014 | negative-only | — | none | N/A |
-| A-TYP-015 | negative-only | — | none | N/A |
-| A-TYP-016 | negative-only | — | none | N/A |
-| A-TYP-017 | negative-only | — | none | N/A |
-| A-TYP-018 | negative-only | — | none | N/A |
-| A-DDL-007 | negative-only | `XuguDdlIT` comment only (CREATE_ONLY defers IF NOT EXISTS) | none | P-003 |
-| A-DDL-008 | negative-only | — | none | N/A |
-| A-DDL-009 | negative-only | — | none | N/A |
-| A-PAG-004 | negative-only | — | none | N/A |
-| A-PAG-006 | negative-only | — | none | N/A |
-| A-LCK-006 | negative-only | — | none | N/A |
-| A-IDN-005 | negative-only | — | none | N/A |
-| A-SEQ-006 | negative-only | — | none | N/A |
+| A-TYP-014 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_TYP_014_interval` (@Disabled) | none | N/A |
+| A-TYP-015 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_TYP_015_array` (@Disabled) | none | N/A |
+| A-TYP-016 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_TYP_016_xml` (@Disabled) | none | N/A |
+| A-TYP-017 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_TYP_017_spatial` (@Disabled) | none | N/A |
+| A-TYP-018 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_TYP_018_udt` (@Disabled) | none | N/A |
+| A-DDL-007 | negative-only | `XuguNegativeRegressionBaselineTest#definitionAIfNotExistsDeferred_A_DDL_007`; `XuguDdlIT` comment (CREATE_ONLY defers IF NOT EXISTS) | unit | P-003 |
+| A-DDL-008 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_DDL_008_partitioning` (@Disabled) | none | N/A |
+| A-DDL-009 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_DDL_009_encrypt` (@Disabled) | none | N/A |
+| A-PAG-004 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_PAG_004_top` (@Disabled) | none | N/A |
+| A-PAG-006 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_PAG_006_rownum` (@Disabled) | none | N/A |
+| A-LCK-006 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_LCK_006_lockTable` (@Disabled) | none | N/A |
+| A-IDN-005 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_IDN_005_identityMode` (@Disabled) | none | N/A |
+| A-SEQ-006 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_SEQ_006_alterSequence` (@Disabled) | none | N/A |
 | A-FUN-015 | negative-only | `XuguFunctionRegistryTest#unsupportedFunctionNotRegistered_negativeNote` | unit | N/A |
-| A-FUN-019 | negative-only | — | none | N/A |
-| A-FUN-020 | negative-only | — | none | N/A |
-| A-FUN-021 | negative-only | — | none | N/A |
-| A-SCH-003 | negative-only | `XuguSchemaTempCommentTest#nameQualifierIsSchemaOnly_A_SCH_002_not_003` (supportsCatalogs=false) | unit | N/A |
-| A-SCH-017 | negative-only | — | none | N/A |
-| A-XCUT-012 | negative-only | — | none | N/A |
+| A-FUN-019 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_FUN_019_regexp` (@Disabled) | none | N/A |
+| A-FUN-020 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_FUN_020_geometric` (@Disabled) | none | N/A |
+| A-FUN-021 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_FUN_021_xmlFunctions` (@Disabled) | none | N/A |
+| A-SCH-003 | negative-only | `XuguNegativeRegressionBaselineTest#catalogsNotSupported_negativeOnly_A_SCH_003`; `XuguSchemaTempCommentTest#nameQualifierIsSchemaOnly_A_SCH_002_not_003` (supportsCatalogs=false) | unit | N/A |
+| A-SCH-017 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_SCH_017_advancedIndexes` (@Disabled) | none | N/A |
+| A-XCUT-012 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_XCUT_012_mavenCentralPublish` (@Disabled) | none | N/A |
 
 ### Ruler C — 文档不允许 / 延后 (7)
 
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
-| C-DDL-004 | negative-only | `XuguTypeDdlDetailsTest#enumTypeDeclarationIsNull_C_DDL_004` | unit | P-003 |
-| C-SKIP-001 | negative-only | `XuguPaginationLockTest#skipLockedNotSupported_A_LCK_004`; `XuguLockIT#forUpdateExecutesAndSkipLockedUnsupported` | IT | P-003 |
-| C-JSON-005 | negative-only | — | none | N/A |
-| C-JSON-006 | negative-only | — | none | N/A |
-| C-DDL-005 | negative-only | — | none | N/A |
-| C-SRV-001 | negative-only | — | none | N/A |
-| C-SEL-001 | negative-only | — | none | N/A |
+| C-DDL-004 | negative-only | `XuguNegativeRegressionBaselineTest#enumDdlNotEmitted_C_DDL_004`; `XuguTypeDdlDetailsTest#enumTypeDeclarationIsNull_C_DDL_004` | unit | P-003 |
+| C-SKIP-001 | negative-only | `XuguNegativeRegressionBaselineTest#skipLockedNotSupported_A_LCK_004_C_SKIP_001`; `XuguPaginationLockTest#skipLockedNotSupported_A_LCK_004`; `XuguLockIT#forUpdateExecutesAndSkipLockedUnsupported` | IT | P-003 |
+| C-JSON-005 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_C_JSON_005_broaderJsonFunctions` (@Disabled); `XuguFunctionRegistryTest#jsonSubsetUsesStandardJsonValueNotMysqlDump` (json_set guard) | unit | N/A |
+| C-JSON-006 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_C_JSON_006_jsonTable` (@Disabled) | none | N/A |
+| C-DDL-005 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_C_DDL_005_arraySqlType` (@Disabled) | none | N/A |
+| C-SRV-001 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_C_SRV_001_serverConfiguration` (@Disabled) | none | N/A |
+| C-SEL-001 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_C_SEL_001_dialectSelector` (@Disabled) | none | N/A |
 
 ### Ruler C — 已有 (audit anchor, outside 94 可实现 count)
 
@@ -248,12 +250,13 @@ Matrix status **文档不允许** or **延后**; baseline records explicit non-s
 | Field | Value |
 |---|---|
 | **matrix_id** | C-BULK-002 |
-| **status** | gap |
+| **status** | **known-limit-documented** |
 | **Code surface** | `XuguDialect#getFallbackSqmInsertStrategy()` → `LocalTemporaryTableInsertStrategy` |
-| **Test evidence** | None — no `@Test` references insert fallback strategy |
-| **Related tests** | `XuguBulkMutationIT` (update/delete only); `XuguBulkMutationSupportTest` (mutation flags, not insert) |
-| **Live IT** | **N/A / waived** — GetGeneratedKeys × reserved-table blocker (I-004); matrix acceptance documents waiver |
-| **gap_action** | **P-004** — minimum: unit assert dialect returns non-null `LocalTemporaryTableInsertStrategy`; live bulk-insert IT decision or formal known-limitation |
+| **Test evidence** | `XuguBulkMutationSupportTest#fallbackSqmInsertStrategyWired_C_BULK_002` (offline wiring) |
+| **Related tests** | `XuguBulkMutationIT` (update/delete live); `XuguBulkMutationSupportTest` (C-BULK-001/003 flags + C-BULK-002 insert wiring) |
+| **Live IT** | **Waived** — JOINED bulk insert + IDENTITY root can hit Xugu JDBC 12.3.6 `GetGeneratedKeys` / `distillTbName` failures (I-004/P-005); dialect uses `getDefaultUseGetGeneratedKeys=false` for normal persist but bulk-insert temp-table path remains unproven on live DB |
+| **User doc** | [`docs/user-guide/05-troubleshooting.md`](../docs/user-guide/05-troubleshooting.md) §10 |
+| **gap_action** | **N/A** — closed in I-005/P-004 (known-limit path) |
 
 ---
 
@@ -264,12 +267,15 @@ Matrix status **文档不允许** or **延后**; baseline records explicit non-s
 | Env secrets / explicit dialect | `DemoOfflineSmokeTest#applicationYmlDocumentsExplicitDialectAndEnvKeys` | demo | covered | N/A |
 | Table prefix convention | `DemoOfflineSmokeTest#demoPersonTableUsesHibDemoPrefix` | demo | covered | N/A |
 | Spring Boot + JPA CRUD + IDENTITY | `DemoPersonCrudIT#persistAndFindPerson` | demo | covered | N/A |
-| HQL pagination / Pageable | — | none | gap | P-005 |
-| hbm2ddl validate | — | none | gap | P-005 |
-| Function / HQL smoke | — | none | gap | P-005 |
-| Bulk mutation | — | none | gap | P-005 |
+| SessionFactory + explicit dialect (consumer path) | `DemoBootBaselineSmokeTest#sessionFactoryUsesExplicitXuguDialectFromApplicationYml`; `#datasourceUrlIncludesCompatibleModeNone` | demo | covered | N/A |
+| JPA JPQL smoke | `DemoBootBaselineSmokeTest#jpaPersistAndJpqlQueryRoundTrip` | demo | covered | N/A |
+| Spring Data Pageable / LIMIT-OFFSET | `DemoBootBaselineSmokeTest#pageableFindAllUsesLimitOffset` | demo | covered | N/A |
+| hbm2ddl validate | — | none | gap | N/A |
+| Function / HQL smoke | — | none | gap | N/A |
+| Bulk mutation | — | none | gap | N/A |
 
-**Recommendation (P-005):** add 1–2 gated `@SpringBootTest` methods mirroring golden paths from `XuguHqlPaginationIT` and `XuguSchemaValidateIT`.
+**Offline (default `mvn test`):** `DemoOfflineSmokeTest` — no Spring context, no live DB.  
+**Gated live (`XUGU_RUN_IT=true` or `-Dxugu.run.integration=true`):** `DemoPersonCrudIT`, `DemoBootBaselineSmokeTest`.
 
 ---
 
@@ -279,7 +285,7 @@ Primary **must-add** negatives:
 
 | matrix_id | Current evidence | P-003 action |
 |---|---|---|
-| A-XCUT-006 | none | Add explicit READ UNCOMMITTED NOT-claimed test |
+| A-XCUT-006 | `XuguNegativeRegressionBaselineTest#readUncommittedNotClaimed_A_XCUT_006` | Add explicit READ UNCOMMITTED NOT-claimed test |
 
 Primary **consolidate** negatives (evidence exists, scattered):
 
@@ -296,8 +302,8 @@ Charter non-goals (documentation-only unless harness requires guard):
 
 | matrix_id | P-003 action |
 |---|---|
-| A-XCUT-010 | Document in negative suite |
-| A-XCUT-011 | Document in negative suite |
+| A-XCUT-010 | `XuguNegativeRegressionBaselineTest#charterNoMySqlOracleInheritance_A_XCUT_010` | Document in negative suite |
+| A-XCUT-011 | `XuguNegativeRegressionBaselineTest#charterNoSiblingDialectPort_A_XCUT_011` | Document in negative suite |
 
 Optional negatives: A-DDL-007 (IF NOT EXISTS), A-FUN-015 (bit_and not registered).
 
@@ -339,19 +345,19 @@ Source: [`harness/evidence/researcher/I-005/P-001/GAP-SUMMARY.md`](../harness/ev
 
 | matrix_id | gap | Owner |
 |---|---|---|
-| C-BULK-002 | No insert fallback strategy test | **P-004** (unit minimum + live IT waiver doc) |
+| C-BULK-002 | No insert fallback strategy test | **Closed P-004** — unit wiring + known-limit SSOT |
 
 ### 6. Demo smoke (routed)
 
 | gap | Owner |
 |---|---|
-| HQL pagination, validate, function/HQL, bulk mutation demo paths | **P-005** |
+| HQL pagination, validate, function/HQL, bulk mutation demo paths | **Closed P-005** — Pageable + SessionFactory/JPA smoke in `DemoBootBaselineSmokeTest`; validate/function/bulk remain optional demo gaps |
 
-### Hard gap IDs (7 total, 可实现 rows)
+### Hard gap IDs (6 total, 可实现 rows — all closed in I-005 first batch)
 
-`A-TYP-019`, `A-DDL-005`, `A-XCUT-001`, `A-XCUT-005`, `A-SCH-014`, `C-EXC-002`, `C-BULK-002`
+`A-TYP-019`, `A-DDL-005`, `A-XCUT-001`, `A-XCUT-005`, `A-SCH-014`, `C-EXC-002`
 
-*(A-TYP-007 is covered at unit level; P-002 adds live TIME IT — counted as stretch in GAP-SUMMARY, not a hard gap.)*
+*(C-BULK-002 closed as **known-limit-documented** in P-004; A-TYP-007 stretch live TIME IT in P-002.)*
 
 ---
 
@@ -361,7 +367,8 @@ Source: [`harness/evidence/researcher/I-005/P-001/GAP-SUMMARY.md`](../harness/ev
 |---|---:|
 | **可实现 rows (SSOT primary)** | **94** |
 | covered (可实现) | 93 |
-| gap (可实现) | 1 |
+| known-limit-documented (可实现) | 1 |
+| gap (可实现) | 0 |
 | negative-only (文档不允许 + 延后 + C defer) | 34 |
 | Ruler C 已有 (C-LOCK-001) | 1 |
 | **Total baseline rows** | **129** |
@@ -371,8 +378,8 @@ Source: [`harness/evidence/researcher/I-005/P-001/GAP-SUMMARY.md`](../harness/ev
 | gap_action | matrix_ids |
 |---|---|
 | P-002 | *(closed in I-005/P-002)* |
-| P-004 | C-BULK-002 |
-| P-005 | A-XCUT-009 (demo expansion) |
+| P-004 | *(closed — C-BULK-002 known-limit-documented)* |
+| P-005 | *(closed — A-XCUT-009 demo boot smoke)* |
 
 ---
 
