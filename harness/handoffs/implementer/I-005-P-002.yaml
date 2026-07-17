@@ -1,0 +1,73 @@
+schema_version: 1
+role: implementer
+phase_id: P-002
+build_id: B-001
+initiative_id: I-005
+invocation_id: impl-i005-p002-rp01
+step_id: RP-01
+status: completed_awaiting_test_review
+updated_at: "2026-07-17T15:45:00+08:00"
+
+summary: >
+  Closed all I-005/P-002 hard gaps (6) plus stretch A-TYP-007 TIME JDBC IT.
+  Updated production-regression-baseline SSOT gap rows to covered with entry_class#method.
+  C-BULK-002 untouched (P-004 owner).
+
+closed_gap_ids:
+  - A-TYP-019
+  - A-DDL-005
+  - A-XCUT-001
+  - A-XCUT-005
+  - A-SCH-014
+  - C-EXC-002
+  - A-TYP-007
+
+not_touched:
+  - C-BULK-002
+
+delivered:
+  - dialect/src/test/java/com/xugu/dialect/XuguDialectTest.java
+  - dialect/src/test/java/com/xugu/dialect/XuguDefaultColumnExportTest.java
+  - dialect/src/test/java/com/xugu/dialect/it/XuguSchemaTempCommentIT.java
+  - dialect/src/test/java/com/xugu/dialect/it/XuguExceptionMappingIT.java
+  - dialect/src/test/java/com/xugu/dialect/it/XuguTypeRoundTripIT.java
+  - dialect/src/test/java/com/xugu/dialect/it/entities/P002DefaultColumnEntity.java
+  - dialect/src/test/java/com/xugu/dialect/it/entities/I005P002NotNullEntity.java
+  - contracts/production-regression-baseline.md
+  - harness/evidence/implementer/I-005/P-002/ACCEPTANCE.md
+
+tests_added:
+  unit:
+    - XuguDialectTest#castPatternDefaultUsesStandardCastSyntax_A_TYP_019
+    - XuguDialectTest#unquotedIdentifiersFoldToUppercase_A_XCUT_001
+    - XuguDialectTest#isolationLevelHooksMatchXuguIsoLevel_A_XCUT_005
+    - XuguDefaultColumnExportTest#schemaExportEmitsDefaultColumn_A_DDL_005
+  integration_gated:
+    - XuguSchemaTempCommentIT#schemaTempCommentFkTruncate_A_SCH (DROP CONSTRAINT step)
+    - XuguExceptionMappingIT#sessionNotNullViolationExtractsFieldNameWhenPresent
+    - XuguTypeRoundTripIT#jdbcTimeRoundTrip_A_TYP_007
+
+validation:
+  build:
+    command: "mvn -q -DskipTests package"
+    exit_code: 0
+  test:
+    command: "mvn -q test"
+    exit_code: 0
+    tests_run: 105
+    failures: 0
+    errors: 0
+    skipped: 32
+    note: IT classes skipped unless XUGU_RUN_IT=true
+
+not_done:
+  - RP-02 test review
+  - RP-03 reviewer
+  - git commit
+  - Ship
+
+next:
+  - RP-02 test (live IT with XUGU_RUN_IT=true)
+  - RP-03 reviewer
+
+blocker: null

@@ -6,9 +6,11 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.UUID;
 
 import org.junit.jupiter.api.Assumptions;
@@ -142,6 +144,51 @@ class XuguTypeRoundTripIT {
 
 	@Test
 	@Order( 3 )
+	void jdbcTimeRoundTrip_A_TYP_007() throws Exception {
+		Assumptions.assumeTrue( XuguITGate.isEnabled(), "integration gate off" );
+
+		String table = "HIB_P003_TIME_RT";
+		LocalTime expected = LocalTime.of( 17, 30, 15 );
+		try ( Connection c = XuguTestConnection.open() ) {
+			c.setAutoCommit( false );
+			try ( Statement st = c.createStatement() ) {
+				st.execute( "DROP TABLE IF EXISTS " + table );
+				st.execute( "CREATE TABLE " + table + " (id INTEGER PRIMARY KEY, c_time TIME(3) NOT NULL)" );
+
+				try ( PreparedStatement ps = c.prepareStatement(
+						"INSERT INTO " + table + " (id, c_time) VALUES (?, ?)" ) ) {
+					ps.setInt( 1, 1 );
+					ps.setTime( 2, Time.valueOf( expected ) );
+					assertEquals( 1, ps.executeUpdate() );
+				}
+
+				try ( PreparedStatement ps = c.prepareStatement(
+						"SELECT c_time FROM " + table + " WHERE id = 1" );
+						ResultSet rs = ps.executeQuery() ) {
+					assertTrue( rs.next() );
+					assertEquals( expected, rs.getTime( 1 ).toLocalTime() );
+					assertFalse( rs.next() );
+				}
+
+				c.commit();
+			}
+			catch ( Exception e ) {
+				c.rollback();
+				throw e;
+			}
+			finally {
+				try ( Statement st = c.createStatement() ) {
+					st.execute( "DROP TABLE IF EXISTS " + table );
+					c.commit();
+				}
+				catch ( Exception ignored ) {
+				}
+			}
+		}
+	}
+
+	@Test
+	@Order( 4 )
 	void jdbcTransactionCommitRollbackSmoke() throws Exception {
 		Assumptions.assumeTrue( XuguITGate.isEnabled(), "integration gate off" );
 		String table = "HIB_P003_TX";
@@ -180,7 +227,7 @@ class XuguTypeRoundTripIT {
 	}
 
 	@Test
-	@Order( 4 )
+	@Order( 5 )
 	void illegalTypeFailsDiagnosablyAndCleansUp() throws Exception {
 		Assumptions.assumeTrue( XuguITGate.isEnabled(), "integration gate off" );
 		String table = "HIB_P003_BAD";

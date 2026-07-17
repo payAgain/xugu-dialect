@@ -51,14 +51,14 @@ Columns: `matrix_id | status | entry_class#method | gate | gap_action`
 | A-TYP-004 | covered | `XuguDialectTest#columnTypesMatchXuguDocs`; `XuguDialectTest#sizeAndPrecisionDefaults` (CHAR trim); `XuguTypeRoundTripIT#typeRoundTripKeyTypes` | IT | N/A |
 | A-TYP-005 | covered | `XuguDialectTest#columnTypesMatchXuguDocs`; `XuguDialectTest#booleanLiteralsAreTrueFalse`; `XuguTypeRoundTripIT#typeRoundTripKeyTypes` | IT | N/A |
 | A-TYP-006 | covered | `XuguDialectTest#columnTypesMatchXuguDocs`; `XuguTypeRoundTripIT#typeRoundTripKeyTypes` | IT | N/A |
-| A-TYP-007 | covered | `XuguDialectTest#columnTypesMatchXuguDocs` (time `$p`) | unit | P-002 |
+| A-TYP-007 | covered | `XuguDialectTest#columnTypesMatchXuguDocs` (time `$p`); `XuguTypeRoundTripIT#jdbcTimeRoundTrip_A_TYP_007` | IT | N/A |
 | A-TYP-008 | covered | `XuguDialectTest#columnTypesMatchXuguDocs`; `XuguTypeRoundTripIT#typeRoundTripKeyTypes` | IT | N/A |
 | A-TYP-009 | covered | `XuguDialectTest#columnTypesMatchXuguDocs`; `XuguBinarySchemaExportIT#schemaExportEmitsBareBinaryAndCreatesOnDb`; `XuguTypeRoundTripIT#typeRoundTripKeyTypes` | IT | N/A |
 | A-TYP-010 | covered | `XuguDialectTest#columnTypesMatchXuguDocs`; `XuguTypeRoundTripIT#typeRoundTripKeyTypes` | IT | N/A |
 | A-TYP-011 | covered | `XuguDialectTest#columnTypesMatchXuguDocs` (NCLOB→clob); `XuguTypeRoundTripIT#typeRoundTripKeyTypes` | IT | N/A |
 | A-TYP-012 | covered | `XuguDialectTest#columnTypesMatchXuguDocs`; `XuguTypeRoundTripIT#typeRoundTripKeyTypes` | IT | N/A |
 | A-TYP-013 | covered | `XuguDialectTest#columnTypesMatchXuguDocs`; `XuguTypeRoundTripIT#typeRoundTripKeyTypes`; `XuguJsonAggregateIT#jsonColumnRoundTripAndHqlAggregates` | IT | N/A |
-| A-TYP-019 | gap | — | none | P-002 |
+| A-TYP-019 | covered | `XuguDialectTest#castPatternDefaultUsesStandardCastSyntax_A_TYP_019` | unit | N/A |
 
 ### Definition A — P-003 DDL (6)
 
@@ -68,7 +68,7 @@ Columns: `matrix_id | status | entry_class#method | gate | gap_action`
 | A-DDL-002 | covered | `XuguDdlIT#schemaExportCreateDropWithPkAndNotNull` (ALTER ADD COLUMN) | IT | N/A |
 | A-DDL-003 | covered | `XuguDdlIT#schemaExportCreateDropWithPkAndNotNull` | IT | N/A |
 | A-DDL-004 | covered | `XuguDdlIT#schemaExportCreateDropWithPkAndNotNull` (NOT NULL reject) | IT | N/A |
-| A-DDL-005 | gap | — | none | P-002 |
+| A-DDL-005 | covered | `XuguDefaultColumnExportTest#schemaExportEmitsDefaultColumn_A_DDL_005` | unit | N/A |
 | A-DDL-006 | covered | `XuguDdlIT#schemaExportCreateDropWithPkAndNotNull`; `XuguDialectTest#ddlHelpersMatchXuguSyntax` | IT | N/A |
 
 ### Definition A — P-004 Pagination (3)
@@ -138,7 +138,7 @@ Columns: `matrix_id | status | entry_class#method | gate | gap_action`
 | A-SCH-011 | covered | `XuguSchemaTempCommentTest#uniqueFkCheckAlterTruncateIndex_A_SCH_011_to_016`; `XuguSchemaTempCommentIT#schemaTempCommentFkTruncate_A_SCH` | IT | N/A |
 | A-SCH-012 | covered | same as A-SCH-011 | IT | N/A |
 | A-SCH-013 | covered | same as A-SCH-011 | IT | N/A |
-| A-SCH-014 | gap | `XuguSchemaTempCommentTest#uniqueFkCheckAlterTruncateIndex_A_SCH_011_to_016` (drop constraint strings only) | unit | P-002 |
+| A-SCH-014 | covered | `XuguSchemaTempCommentTest#uniqueFkCheckAlterTruncateIndex_A_SCH_011_to_016`; `XuguSchemaTempCommentIT#schemaTempCommentFkTruncate_A_SCH` (DROP CONSTRAINT live) | IT | N/A |
 | A-SCH-015 | covered | `XuguSchemaTempCommentTest#uniqueFkCheckAlterTruncateIndex_A_SCH_011_to_016`; `XuguSchemaTempCommentIT#schemaTempCommentFkTruncate_A_SCH` | IT | N/A |
 | A-SCH-016 | covered | same as A-SCH-015 | IT | N/A |
 
@@ -150,11 +150,11 @@ Columns: `matrix_id | status | entry_class#method | gate | gap_action`
 | A-SPI-002 | covered | `XuguDialectServicesResourceTest#servicesFileOnClasspathListsXuguDialectResolver`; `XuguDialectResolverIT#spiAutoResolve_sessionFactoryWithoutExplicitDialect` | IT | N/A |
 | A-SPI-003 | covered | `XuguDialectResolverTest#resolvesXuguProductName_withDatabaseVersion`; `XuguDialectResolverIT#spiAutoResolve_sessionFactoryWithoutExplicitDialect` | IT | N/A |
 | A-SPI-004 | covered | `XuguDialectResolverTest#returnsNullForMySQL`; `#returnsNullForOracle`; `#returnsNullForPostgreSQL` | unit | N/A |
-| A-XCUT-001 | gap | — | none | P-002 |
+| A-XCUT-001 | covered | `XuguDialectTest#unquotedIdentifiersFoldToUppercase_A_XCUT_001` | unit | N/A |
 | A-XCUT-002 | covered | `XuguDialectTest#quoteCharsAreDoubleQuote` | unit | N/A |
 | A-XCUT-003 | covered | `DemoOfflineSmokeTest#applicationYmlDocumentsExplicitDialectAndEnvKeys`; `XuguDialectResolverIT` (jdbcUrl compatiblemode=NONE via `XuguTestConnection`) | IT | N/A |
 | A-XCUT-004 | covered | `XuguDialectTest#keywordsIncludeTcl`; `XuguTypeRoundTripIT#jdbcTransactionCommitRollbackSmoke` | IT | N/A |
-| A-XCUT-005 | gap | — | none | P-002 |
+| A-XCUT-005 | covered | `XuguDialectTest#isolationLevelHooksMatchXuguIsoLevel_A_XCUT_005` | unit | N/A |
 | A-XCUT-007 | covered | `XuguDialectTest#keywordsIncludeTcl` | unit | N/A |
 | A-XCUT-008 | covered | `XuguIdentitySequenceTest#sequenceSupportWired_A_SEQ_001_003_008` | unit | N/A |
 | A-XCUT-009 | covered | `DemoOfflineSmokeTest#applicationYmlDocumentsExplicitDialectAndEnvKeys`; `DemoPersonCrudIT#persistAndFindPerson` | demo | P-005 |
@@ -164,7 +164,7 @@ Columns: `matrix_id | status | entry_class#method | gate | gap_action`
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
 | C-EXC-001 | covered | `XuguExceptionMappingIT#sessionUniqueViolationMapsToConstraintViolationException`; `XuguExceptionConversionTest#conversionMapsUniqueViolation` | IT | N/A |
-| C-EXC-002 | gap | `XuguExceptionConversionTest#extractorParsesNotNullFieldName`; `#extractorReturnsNullWhenNameAbsent` | unit | P-002 |
+| C-EXC-002 | covered | `XuguExceptionConversionTest#extractorParsesNotNullFieldName`; `#extractorReturnsNullWhenNameAbsent`; `XuguExceptionMappingIT#sessionNotNullViolationExtractsFieldNameWhenPresent` | IT | N/A |
 | C-JSON-001 | covered | `XuguJsonAggregateIT#jsonColumnRoundTripAndHqlAggregates`; `XuguJsonAggregateSupportTest#jsonAggFunctionsConstruct` | IT | N/A |
 | C-JSON-002 | covered | `XuguJsonAggregateIT#jsonColumnRoundTripAndHqlAggregates` | IT | N/A |
 | C-JSON-003 | covered | `XuguJsonAggregateIT#jsonColumnRoundTripAndHqlAggregates`; `XuguJsonAggregateSupportTest#dialectWiresAggregateSupportAndCastingJsonType` | IT | N/A |
@@ -360,8 +360,8 @@ Source: [`harness/evidence/researcher/I-005/P-001/GAP-SUMMARY.md`](../harness/ev
 | Bucket | Count |
 |---|---:|
 | **可实现 rows (SSOT primary)** | **94** |
-| covered (可实现) | 87 |
-| gap (可实现) | 7 |
+| covered (可实现) | 93 |
+| gap (可实现) | 1 |
 | negative-only (文档不允许 + 延后 + C defer) | 34 |
 | Ruler C 已有 (C-LOCK-001) | 1 |
 | **Total baseline rows** | **129** |
@@ -370,7 +370,7 @@ Source: [`harness/evidence/researcher/I-005/P-001/GAP-SUMMARY.md`](../harness/ev
 
 | gap_action | matrix_ids |
 |---|---|
-| P-002 | A-TYP-019, A-DDL-005, A-XCUT-001, A-XCUT-005, A-SCH-014, C-EXC-002; stretch: A-TYP-007 |
+| P-002 | *(closed in I-005/P-002)* |
 | P-004 | C-BULK-002 |
 | P-005 | A-XCUT-009 (demo expansion) |
 

@@ -1,9 +1,16 @@
 package com.xugu.dialect;
 
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.JdbcSettings;
+import org.hibernate.engine.jdbc.env.spi.IdentifierHelper;
+import org.hibernate.engine.jdbc.env.spi.JdbcEnvironment;
+import org.hibernate.query.sqm.CastType;
 import org.hibernate.type.SqlTypes;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -89,6 +96,45 @@ class XuguDialectTest {
 		assertTrue( dialect.getKeywords().contains( "begin" ) );
 		assertTrue( dialect.getKeywords().contains( "commit" ) );
 		assertTrue( dialect.getKeywords().contains( "rollback" ) );
+	}
+
+	@Test
+	void castPatternDefaultUsesStandardCastSyntax_A_TYP_019() {
+		String pattern = dialect.castPattern( CastType.STRING, CastType.INTEGER );
+		assertNotNull( pattern );
+		String lower = pattern.toLowerCase();
+		assertTrue( lower.contains( "cast" ), "castPattern should use CAST syntax: " + pattern );
+		assertTrue( pattern.contains( "?1" ), "castPattern should bind expression: " + pattern );
+		assertTrue( pattern.contains( "?2" ), "castPattern should bind target type: " + pattern );
+	}
+
+	@Test
+	void unquotedIdentifiersFoldToUppercase_A_XCUT_001() throws Exception {
+		StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+				.applySetting( JdbcSettings.DIALECT, XuguDialect.class.getName() )
+				.build();
+		try {
+			JdbcEnvironment jdbcEnvironment = registry.getService( JdbcEnvironment.class );
+			XuguDialect wiredDialect = (XuguDialect) jdbcEnvironment.getDialect();
+			IdentifierHelper helper = wiredDialect.buildIdentifierHelper(
+					org.hibernate.engine.jdbc.env.spi.IdentifierHelperBuilder.from( jdbcEnvironment ),
+					null );
+			assertEquals(
+					"MYTABLE",
+					helper.toMetaDataObjectName( helper.toIdentifier( "mytable", false ) ) );
+			assertEquals(
+					"mixedCase",
+					helper.toMetaDataObjectName( helper.toIdentifier( "mixedCase", true ) ) );
+		}
+		finally {
+			StandardServiceRegistryBuilder.destroy( registry );
+		}
+	}
+
+	@Test
+	void isolationLevelHooksMatchXuguIsoLevel_A_XCUT_005() {
+		assertFalse( dialect.doesReadCommittedCauseWritersToBlockReaders() );
+		assertFalse( dialect.doesRepeatableReadCauseReadersToBlockWriters() );
 	}
 
 	/** Expose protected {@code columnType} for assertions. */

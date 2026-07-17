@@ -138,6 +138,18 @@ class XuguSchemaTempCommentIT {
 			// --- A-SCH-013 CHECK ---
 			st.execute( "ALTER TABLE " + UNIQUE_TBL + " ADD CONSTRAINT HIB_P007_CK CHECK (id > 0)" );
 
+			// --- A-SCH-014 DROP CONSTRAINT (live) ---
+			st.execute( "ALTER TABLE " + UNIQUE_TBL + " " + dialect.getDropForeignKeyString() + " HIB_P007_CK" );
+			boolean checkStillEnforced = false;
+			try {
+				st.execute( "INSERT INTO " + UNIQUE_TBL + " VALUES (-1, 'neg@x')" );
+			}
+			catch ( SQLException e ) {
+				checkStillEnforced = true;
+			}
+			assertFalse( checkStillEnforced, "CHECK constraint should be dropped" );
+			st.execute( "DELETE FROM " + UNIQUE_TBL + " WHERE id = -1" );
+
 			// --- A-SCH-015 TRUNCATE ---
 			st.execute( "CREATE TABLE " + TRUNC_TBL + " (id INT PRIMARY KEY)" );
 			st.execute( "INSERT INTO " + TRUNC_TBL + " VALUES (1)" );

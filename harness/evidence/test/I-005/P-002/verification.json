@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "status": "FAIL",
+  "started_at": "2026-07-17T15:53:00+08:00",
+  "finished_at": "2026-07-17T15:55:30+08:00",
+  "project_root": "E:\\Work\\java\\hibernate-test",
+  "initiative_id": "I-005",
+  "phase_id": "P-002",
+  "build_id": "B-001",
+  "invocation_id": "test-i005-p002-20260717",
+  "step_id": "RP-02",
+  "role": "test",
+  "branch": "feat/i-005-production-regression-baseline",
+  "head_sha": "5a40af4ede657c8abf53815776cca07bf8ca02f0",
+  "verdict": "PARTIAL",
+  "config": "E:\\Work\\java\\hibernate-test\\harness\\verification.json",
+  "results": [
+    {
+      "id": "build",
+      "required": true,
+      "status": "PASS",
+      "command": "mvn -q -DskipTests package",
+      "cwd": "E:\\Work\\java\\hibernate-test",
+      "exit_code": 0,
+      "log": "harness/evidence/test/I-005/P-002/mvn-package.log"
+    },
+    {
+      "id": "test_default",
+      "required": true,
+      "status": "PASS",
+      "command": "mvn -q test",
+      "cwd": "E:\\Work\\java\\hibernate-test",
+      "exit_code": 0,
+      "log": "harness/evidence/test/I-005/P-002/mvn-test-offline.log",
+      "counts": {
+        "dialect": {
+          "tests_run": 105,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 32
+        }
+      },
+      "it_gate": "OFF",
+      "it_skipped_expected": true
+    },
+    {
+      "id": "test_live_it",
+      "required": true,
+      "status": "FAIL",
+      "command": "XUGU_RUN_IT=true mvn -q test",
+      "cwd": "E:\\Work\\java\\hibernate-test",
+      "exit_code": 1,
+      "log": "harness/evidence/test/I-005/P-002/mvn-test-live-it.log",
+      "live_it_status": "FAIL",
+      "real_db": true,
+      "db_reachable": true,
+      "skip_reason": null,
+      "counts": {
+        "dialect": {
+          "tests_run": 105,
+          "failures": 1,
+          "errors": 0,
+          "skipped": 0
+        },
+        "reactor": {
+          "tests_run": 108,
+          "failures": 1,
+          "errors": 0,
+          "skipped": 1
+        }
+      },
+      "first_failure": {
+        "class": "com.xugu.dialect.it.XuguExceptionMappingIT",
+        "method": "sessionNotNullViolationExtractsFieldNameWhenPresent",
+        "line": 147,
+        "matrix_id": "C-EXC-002",
+        "message": "expected ConstraintViolationException in cause chain, got: org.hibernate.PropertyValueException: not-null property references a null or transient value for entity com.xugu.dialect.it.entities.I005P002NotNullEntity.email"
+      }
+    },
+    {
+      "id": "ssot_contract_audit",
+      "required": true,
+      "status": "PASS",
+      "artifact": "contracts/production-regression-baseline.md",
+      "p002_gaps_closed_in_ssot": true,
+      "remaining_p002_scope_gap": "C-BULK-002",
+      "remaining_gap_action": "P-004",
+      "implementable_gap_count": 1,
+      "note": "SSOT marks C-EXC-002 covered; live IT failure is a runtime contradiction for orchestrator"
+    },
+    {
+      "id": "verify_py",
+      "required": false,
+      "status": "FAIL",
+      "command": "python harness/scripts/verify.py --phase I-005/P-002 --evidence harness/evidence/test/I-005/P-002/verification-default-gate.json",
+      "exit_code": 1,
+      "reason": "harness_check semantic contract violation (P-001 acceptance JSON parse); build/test checks not executed by verify.py"
+    },
+    {
+      "id": "lint",
+      "required": false,
+      "status": "NOT_APPLICABLE",
+      "command": "NA"
+    }
+  ],
+  "summary": {
+    "build": "PASS",
+    "test_default": "PASS",
+    "live_it": "FAIL",
+    "ssot_p002_gap_closure_document": "PASS",
+    "overall_accept_gate": "BLOCKED"
+  }
+}

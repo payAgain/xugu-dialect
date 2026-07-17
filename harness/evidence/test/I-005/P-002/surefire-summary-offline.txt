@@ -1,0 +1,6 @@
+Offline gate (XUGU_RUN_IT unset) — dialect module surefire aggregate
+Tests run: 105
+Failures: 0
+Errors: 0
+Skipped: 32
+Exit code: 0

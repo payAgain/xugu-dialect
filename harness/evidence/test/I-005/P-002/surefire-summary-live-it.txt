@@ -1,0 +1,8 @@
+Live IT gate (XUGU_RUN_IT=true) — full reactor surefire aggregate
+Tests run: 108
+Failures: 1
+Errors: 0
+Skipped: 1
+Exit code: 1
+
+First failure: XuguExceptionMappingIT#sessionNotNullViolationExtractsFieldNameWhenPresent (C-EXC-002)
