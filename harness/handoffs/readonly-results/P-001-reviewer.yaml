@@ -2,23 +2,12 @@ schema_version: 1
 role: reviewer
 phase_id: P-001
 build_id: B-001
-initiative_id: I-002
-invocation_id: rev-p001-recheck-20260715
-prior_invocation_id: rev-p001-20260715
+initiative_id: I-004
+invocation_id: rev-p001-20260717
 step_id: RP-03
-status: passed
+status: approve
 decision: approve
-required: true
-condition: full_or_risk_ge_8
-completed_at: 2026-07-15T18:30:00+08:00
-readonly: true
-landed_by: orchestrator
-evidence_path: harness/evidence/reviewer/P-001/REVIEW-RECHECK.md
-majors_closed:
-  - AST-HQL-FOR-UPDATE-BEFORE-LIMIT
-clause_order: "FOR UPDATE then LIMIT (then WAIT)"
-retest: test-p001-retest-20260715
-notes: |
-  approve. MAJOR CLOSED: AST/HQL FOR UPDATE before LIMIT (+ WAIT after) proven by gated IT + live SQL.
-  Prior request-changes (rev-p001-20260715) superseded for MAJOR gate.
-  Orchestrator may Accept + must-commit; no Ship.
+updated_at: "2026-07-17T14:50:00+08:00"
+evidence: harness/evidence/reviewer/P-001/REVIEW.md
+verify_status: PASS
+summary: DROP SEQUENCE IF EXISTS + ORM IT PASS; approve.

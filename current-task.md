@@ -1,20 +1,20 @@
 # Current Task
 
 ## Goal
-I-004 (hotfix): DROP SEQUENCE IF EXISTS + IDENTITY×保留字方言缓解；版本 **7.4.5.Final**；不改 JDBC；原生实现
+I-004 B-001 **approved** — P-001 then P-002 (serial)
 
 ## Current Status
-I-003 archived. I-004 **active** — Plan ready; awaiting Human Gate **批准 B-001，范围仅 P-001**
+Human Gate approved B-001 scope P-001~P-002. Starting P-001 (DROP SEQUENCE IF EXISTS).
 
 ## Active Batch / Tasks
 - Branch: `fix/i-004-sequence-drop-identity-reserved`
-- B-001 `draft` = P-001 only
-- P-001 `ready`；P-002 `blocked`
+- B-001 `approved` = P-001 → P-002
+- P-001 `in_progress`
 
 ## Next 3 Steps
-1. Human Gate：批准 B-001，范围仅 P-001？
-2. 实现 DROP SEQUENCE IF EXISTS + ORM IT
-3. 禁止改 JDBC / Ship / 升版本
+1. P-001 implementer → test → reviewer → Accept
+2. Unlock P-002 and run same pipeline
+3. No JDBC / Ship / version bump
 
 ## Last Updated
-2026-07-17T14:36:00+08:00
+2026-07-17T14:38:00+08:00

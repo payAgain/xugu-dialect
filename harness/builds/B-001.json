@@ -3,12 +3,16 @@
   "build_id": "B-001",
   "initiative_id": "I-004",
   "plan_revision": 1,
-  "status": "draft",
-  "proposed_phase_ids": ["P-001"],
-  "approved_phase_ids": [],
-  "approval": null,
-  "recommendation": "Propose B-001 = P-001 only (DROP SEQUENCE IF EXISTS). Do not start P-002 until P-001 Accept.",
+  "status": "approved",
+  "proposed_phase_ids": ["P-001", "P-002"],
+  "approved_phase_ids": ["P-001", "P-002"],
+  "approval": {
+    "reference": "批准 B-001，范围P-001~P-002",
+    "approved_at": "2026-07-17T14:38:00+08:00",
+    "approved_by": "Human Gate"
+  },
+  "recommendation": "B-001 approved = P-001 then P-002 serial (DROP SEQUENCE IF EXISTS → IDENTITY reserved-table dialect mitigation). No JDBC driver changes. No Ship.",
   "supersedes": null,
   "scope_changes": [],
-  "notes": "Version 7.4.5.Final. No JDBC driver changes. No Ship. Native dialect implementation only."
+  "notes": "Version 7.4.5.Final. Native dialect only. Orchestrator runs Phases serially."
 }

@@ -1,63 +1,71 @@
-# P-001 Test Report (independent test role)
+﻿# P-001 Test Report (independent test role)
 
 > Phase: `P-001`  
-> Initiative: `I-002`  
+> Initiative: `I-004`  
 > Build: `B-001`  
-> Invocation: `test-p001-20260715`  
-> Role: `test` (independent context from implementer `impl-p001-20260715`)  
+> Invocation: `test-p001-20260717`  
+> Step: `RP-02`  
+> Role: `test` (independent of implementer RP-01)  
 > Verdict: **PASS**  
-> Date: 2026-07-15
+> Date: 2026-07-17
 
 ## Environment
 
 | Item | Value |
 |---|---|
-| Maven | Apache Maven 3.9.9 (`C:\Users\admin\tools\apache-maven-3.9.9\bin`) |
+| Maven | Apache Maven 3.9.9 |
+| JDK | Oracle 21.0.1 |
 | Working directory | `E:\Work\java\hibernate-test` |
-| Branch | `fix/i-002-hql-pagination-sequence-metadata` |
-| Live DB | XuguDB @ 127.0.0.1:5138 (`compatiblemode=NONE`) |
+| Branch | `fix/i-004-sequence-drop-identity-reserved` |
+| HEAD (test time) | `87ebc578c9a5b53b33106c6eef4575fe06c3d611` |
 | Product code changes by test | none |
+| Live DB | XuguDB `jdbc:xugu://127.0.0.1:5138/SYSTEM?...&compatiblemode=NONE` (XuguDB JDBC Driver; XuguDialect; 12.0) |
+
+## Scope under test
+
+RP-01 delivered DROP SEQUENCE IF EXISTS via `XuguSequenceSupport.getDropSequenceString` plus unit + `XuguAutoSequenceDropIT`.
+RP-02 independently re-ran package / offline test / gated IT / project verify.
 
 ## Commands and exit codes
 
 | # | Command | Exit | Result |
 |---|---|---:|---|
-| 1 | `mvn -q test` | 0 | PASS (offline) |
-| 2 | `mvn -q test "-Dxugu.run.integration=true"` | 0 | PASS (live IT incl. `XuguHqlPaginationIT`) |
-| 3 | `python harness/scripts/verify.py --phase P-001 --evidence harness/evidence/test/P-001/verification.json` | 0 | **VERIFY PASS** |
+| 1 | `mvn -q -DskipTests package` | 0 | PASS |
+| 2 | `mvn -q test` | 0 | PASS (IT skipped under gate) |
+| 3 | `mvn -q test "-Dxugu.run.integration=true"` | 0 | PASS (live XuguDB) |
+| 4 | `python harness/scripts/verify.py --phase P-001 --evidence harness/evidence/test/P-001/verification.json` | 0 | **VERIFY PASS** |
+| 5 | `python harness/scripts/harness_check.py` | 0 | HARNESS_CHECK PASS |
+| 6 | `python harness/scripts/branch_check.py` | 0 | BRANCH_CHECK PASS |
+
+Focused confirm (surefire after verify offline overwrite):
+`mvn -q -pl dialect -am test -Dtest=XuguAutoSequenceDropIT,XuguIdentitySequenceTest -Dxugu.run.integration=true` → EXIT 0  
+- `XuguAutoSequenceDropIT`: 2/2 PASS  
+- `XuguIdentitySequenceTest`: 7/7 PASS  
+
+## Acceptance mapping
+
+| Criterion | Result | Evidence |
+|---|---|---|
+| Drop SQL contains `if exists` | PASS | unit + live SQL `drop sequence if exists HIB_I004_P001_AUTO_SEQ` |
+| AUTO create-drop / absent sequence no E7002 halt | PASS | [E7002] WARN only; EXIT 0 |
+| ORM IT PASS | PASS | `XuguAutoSequenceDropIT` 2/2 |
+| Project VERIFY | PASS | `verification.json` status PASS |
+
+## Observed flow
+
+- `orm-auto-sequence-create-drop-idempotent` → **passed** (XuguAutoSequenceDropIT on live DB)
 
 ## Project verify evidence
 
 - Path: `harness/evidence/test/P-001/verification.json`
-- Overall status: `PASS`
-- Required checks: `build` PASS (exit 0), `test` PASS (exit 0)
-- Optional: `lint` NOT_APPLICABLE
-- Embedded harness: PASS
+- Status: **PASS** (required `build` + `test`; harness PASS; lint N/A)
 
-## Spot checks
+## Forbidden respected
 
-| Check | Expected | Observed | Result |
-|---|---|---|---|
-| HQL pagination SQL | `limit` / `offset`, not `fetch first` | `select … from HIB_P001_HQL_PAGE … order by … limit ? offset ?` | PASS |
-| Factory non-null | `getSqlAstTranslatorFactory()` wired | Returns `StandardSqlAstTranslatorFactory` → `XuguSqlAstTranslator`; unit + IT assert non-null | PASS |
-| Artifact version | `7.4.5.Final` | Parent/dialect/demo POMs + JAR `xugu-dialect-7.4.5.Final.jar` (24277 bytes); Hibernate core log `7.4.5.Final` | PASS |
-| No ANSI OFFSET/FETCH | no `fetch first` / `rows only` in HQL page SQL | IT asserts + IT log has no `fetch first` | PASS |
+- No business/product code by test
+- No git commit / Accept / Ship / version bump
+- No P-002 scope
 
-## Observed affected flows
+## Next
 
-| Flow | Method | Expected | Observed | Result | Evidence |
-|---|---|---|---|---|---|
-| hql-pagination-offset-fetch-real-db | `XuguHqlPaginationIT.hqlSetFirstResultMaxResultsUsesLimitNotFetchFirst` on live XuguDB (`-Dxugu.run.integration=true`) | No E19132; SQL uses LIMIT; window ids 5,6,7 for offset 4 / max 3 | IT PASS; SQL `limit ? offset ?`; window `[5, 6, 7]` | PASS | `mvn-test-integration.log`, `IT-RESULT.txt`, this report |
-
-## Readiness dimensions (test view)
-
-| Dimension | Observation | Result |
-|---|---|---|
-| functional-correctness | Offline + gated HQL pagination IT green; correct page window | PASS |
-| performance-and-capacity | Hot path uses LimitHandler-stable `LIMIT count OFFSET offset` (no extra wrap) | PASS |
-| maintainability | Translator + factory wiring covered by unit + IT | PASS |
-| compatibility | Version stays `7.4.5.Final`; live XuGu accepts LIMIT form | PASS |
-
-## Verdict
-
-**PASS** — RP-02 `test-p001-20260715`. Flow `hql-pagination-offset-fetch-real-db` observed on real DB. Next: RP-03 reviewer (`rev-p001-20260715`).
+RP-03 reviewer

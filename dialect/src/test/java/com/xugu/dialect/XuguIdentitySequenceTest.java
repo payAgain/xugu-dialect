@@ -67,7 +67,7 @@ class XuguIdentitySequenceTest {
 		assertEquals(
 				"create sequence HIB_P005_SEQ start with 1 increment by 1",
 				support.getCreateSequenceString( "HIB_P005_SEQ", 1, 1 ) );
-		assertEquals( "drop sequence HIB_P005_SEQ", support.getDropSequenceString( "HIB_P005_SEQ" ) );
+		assertEquals( "drop sequence if exists HIB_P005_SEQ", support.getDropSequenceString( "HIB_P005_SEQ" ) );
 	}
 
 	@Test

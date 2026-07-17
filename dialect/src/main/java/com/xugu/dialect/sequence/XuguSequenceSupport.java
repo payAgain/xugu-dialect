@@ -14,8 +14,11 @@ import org.hibernate.internal.util.StringHelper;
  * <p><b>CURRVAL:</b> XuGu uses the function {@code CURRVAL('name')} — not {@code seq.currval}
  * (live probe: {@code seq.CURRVAL} fails). After NEXTVAL in the same session.
  *
- * <p>CREATE/DROP strings follow Hibernate {@link SequenceSupport} defaults, which match
- * documented {@code CREATE SEQUENCE … START WITH … INCREMENT BY …} / {@code DROP SEQUENCE}.
+ * <p>CREATE strings follow Hibernate {@link SequenceSupport} defaults
+ * ({@code CREATE SEQUENCE … START WITH … INCREMENT BY …}).
+ * DROP uses XuGu-documented {@code DROP SEQUENCE IF EXISTS …}
+ * ({@code reference/object/sequence.md}) so schema create-drop / {@code GenerationType.AUTO}
+ * does not halt on missing sequences (E7002).
  */
 public class XuguSequenceSupport implements SequenceSupport {
 
@@ -34,6 +37,14 @@ public class XuguSequenceSupport implements SequenceSupport {
 	@Override
 	public String getFromDual() {
 		return " from dual";
+	}
+
+	/**
+	 * Idempotent DROP (docs: {@code DROP SEQUENCE IF EXISTS}).
+	 */
+	@Override
+	public String getDropSequenceString(String sequenceName) {
+		return "drop sequence if exists " + sequenceName;
 	}
 
 	/**

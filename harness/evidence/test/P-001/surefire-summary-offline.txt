@@ -1,0 +1,39 @@
+﻿# Offline suite (mvn -q test) — dialect surefire after offline run (before verify overwrite note)
+# Captured during RP-02 session 2026-07-17; IT suites skipped under gate off.
+
+XuguAutoSequenceDropIT: Tests run: 2, Failures: 0, Errors: 0, Skipped: 2
+XuguBinarySchemaExportIT: Tests run: 1, Failures: 0, Errors: 0, Skipped: 1
+XuguBulkMutationIT: Tests run: 3, Failures: 0, Errors: 0, Skipped: 2
+XuguDdlIT: Tests run: 1, Failures: 0, Errors: 0, Skipped: 1
+XuguDialectResolverIT: Tests run: 3, Failures: 0, Errors: 0, Skipped: 3
+XuguExceptionMappingIT: Tests run: 1, Failures: 0, Errors: 0, Skipped: 1
+XuguFunctionRegistryIT: Tests run: 2, Failures: 0, Errors: 0, Skipped: 2
+XuguHqlPaginationIT: Tests run: 2, Failures: 0, Errors: 0, Skipped: 2
+XuguIdentitySequenceIT: Tests run: 2, Failures: 0, Errors: 0, Skipped: 2
+XuguJsonAggregateIT: Tests run: 1, Failures: 0, Errors: 0, Skipped: 1
+XuguLockIT: Tests run: 2, Failures: 0, Errors: 0, Skipped: 2
+XuguPaginationIT: Tests run: 1, Failures: 0, Errors: 0, Skipped: 1
+XuguSchemaTempCommentIT: Tests run: 1, Failures: 0, Errors: 0, Skipped: 1
+XuguSchemaValidateIT: Tests run: 2, Failures: 0, Errors: 0, Skipped: 2
+XuguTypeDdlDetailsIT: Tests run: 1, Failures: 0, Errors: 0, Skipped: 1
+XuguTypeRoundTripIT: Tests run: 4, Failures: 0, Errors: 0, Skipped: 4
+XuguWindowCteIT: Tests run: 1, Failures: 0, Errors: 0, Skipped: 1
+XuguBulkMutationSupportTest: Tests run: 2, Failures: 0, Errors: 0, Skipped: 0
+XuguDialectResolverTest: Tests run: 8, Failures: 0, Errors: 0, Skipped: 0
+XuguDialectServicesResourceTest: Tests run: 3, Failures: 0, Errors: 0, Skipped: 0
+XuguDialectTest: Tests run: 7, Failures: 0, Errors: 0, Skipped: 0
+XuguExceptionConversionTest: Tests run: 8, Failures: 0, Errors: 0, Skipped: 0
+XuguFunctionRegistryTest: Tests run: 5, Failures: 0, Errors: 0, Skipped: 0
+XuguIdentitySequenceTest: Tests run: 7, Failures: 0, Errors: 0, Skipped: 0
+XuguJsonAggregateSupportTest: Tests run: 2, Failures: 0, Errors: 0, Skipped: 0
+XuguPaginationLockTest: Tests run: 10, Failures: 0, Errors: 0, Skipped: 0
+XuguSchemaTempCommentTest: Tests run: 7, Failures: 0, Errors: 0, Skipped: 0
+XuguSqlAstTranslatorTest: Tests run: 2, Failures: 0, Errors: 0, Skipped: 0
+XuguTypeDdlDetailsTest: Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
+XuguWindowCteSupportTest: Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+demo DemoOfflineSmokeTest: Tests run: 2, Failures: 0, Errors: 0, Skipped: 0
+demo DemoPersonCrudIT: Tests run: 1, Failures: 0, Errors: 0, Skipped: 1
+
+Overall: mvn -q test EXIT 0
+P-001 unit: XuguIdentitySequenceTest 7/7 PASS (expects drop sequence if exists)
+P-001 IT under gate OFF: XuguAutoSequenceDropIT 2 skipped

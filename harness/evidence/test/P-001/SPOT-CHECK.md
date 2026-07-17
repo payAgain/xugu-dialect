@@ -1,33 +1,13 @@
-# Spot-check P-001 RP-02 (`test-p001-20260715`)
+﻿# P-001 Spot Checks (test role)
 
-## HQL pagination uses limit/offset (not fetch first)
+| Check | Result | Evidence |
+|---|---|---|
+| Unit drop string contains `if exists` | PASS | XuguIdentitySequenceTest 7/7 |
+| ORM IT XuguAutoSequenceDropIT | PASS | 2/2, Skipped 0 under gate ON |
+| SQL `drop sequence if exists HIB_I004_P001_AUTO_SEQ` | observed | mvn-test-integration.log / mvn-test-p001-focus.log |
+| Absent sequence does not halt (E7002 warning OK) | PASS | EXIT 0 with [E7002] WARN |
+| create-drop SessionFactory builds | PASS | IT SQL create then drop |
+| No product code changes by test | true | git status — test only wrote harness/evidence + handoff |
+| GAV / Ship / Accept / commit by test | forbidden respected | none |
 
-Live IT log (`mvn-test-integration.log`):
-
-```text
-Hibernate: select phpe1_0.id from HIB_P001_HQL_PAGE phpe1_0 order by phpe1_0.id limit ? offset ?
-```
-
-- Contains `limit` and `offset`
-- Does **not** contain `fetch first` / `rows only`
-- `XuguHqlPaginationIT` asserts the same and window `[5, 6, 7]` for `setFirstResult(4)` / `setMaxResults(3)`
-
-## Factory non-null
-
-- Source: `XuguDialect.getSqlAstTranslatorFactory()` returns non-null `StandardSqlAstTranslatorFactory` building `XuguSqlAstTranslator`
-- Offline: `XuguSqlAstTranslatorTest.sqlAstTranslatorFactoryIsNonNullAndBuildsXuguTranslator` (included in `mvn -q test` EXIT 0)
-- IT: asserts `new XuguDialect().getSqlAstTranslatorFactory()` non-null before SessionFactory boot
-
-## Version 7.4.5.Final
-
-| Artifact | Evidence |
-|---|---|
-| Parent POM | `<version>7.4.5.Final</version>`, `hibernate.version=7.4.5.Final` |
-| `dialect/pom.xml` | `<version>7.4.5.Final</version>` |
-| `demo-spring-boot/pom.xml` | module + `hibernate.version=7.4.5.Final` |
-| Built JAR | `dialect/target/xugu-dialect-7.4.5.Final.jar` present (24277 bytes) |
-| Runtime | Hibernate log `HHH000001: Hibernate ORM core version 7.4.5.Final` |
-
-## Observed flow
-
-`hql-pagination-offset-fetch-real-db` → PASS (see `IT-RESULT.txt`)
+Observed flow: orm-auto-sequence-create-drop-idempotent → PASS
