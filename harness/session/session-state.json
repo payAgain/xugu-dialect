@@ -27,15 +27,18 @@
   },
   "version_control_checkpoint": {
     "decision": "i004_initiative_accepted",
-    "committed": false,
+    "committed": true,
     "branch": "fix/i-004-sequence-drop-identity-reserved",
-    "candidate_commit": null,
-    "head": "96fccbe"
+    "candidate_commit": "eb17c21e67fa0cbe8df9b11f5c40834f27c2b304",
+    "head": "eb17c21e67fa0cbe8df9b11f5c40834f27c2b304"
   },
   "handoff": {
     "resume_from": "harness/handoffs/orchestrator/I-004-accepted.md"
   },
   "approved_build": "B-001",
-  "approved_phases": ["P-001", "P-002"],
+  "approved_phases": [
+    "P-001",
+    "P-002"
+  ],
   "updated_at": "2026-07-17T15:01:00+08:00"
 }
