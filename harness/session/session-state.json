@@ -29,10 +29,10 @@
   },
   "version_control_checkpoint": {
     "decision": "i005_plan_complete",
-    "committed": false,
+    "committed": true,
     "branch": "feat/i-005-production-regression-baseline",
-    "candidate_commit": null,
-    "head": null
+    "candidate_commit": "ba60dc196acf39bd89d3efd279d201c8a48fd0da",
+    "head": "ba60dc196acf39bd89d3efd279d201c8a48fd0da"
   },
   "handoff": {
     "resume_from": "harness/handoffs/orchestrator/I-005-plan-ready.md"
