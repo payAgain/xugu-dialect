@@ -28,10 +28,10 @@
   },
   "version_control_checkpoint": {
     "decision": "i004_plan_awaiting_b001",
-    "committed": false,
+    "committed": true,
     "branch": "fix/i-004-sequence-drop-identity-reserved",
-    "candidate_commit": null,
-    "head": "b7e3fc9"
+    "candidate_commit": "c48d57c8c04a5a8a50f3c8258ce62be7d6cbd2a4",
+    "head": "c48d57c8c04a5a8a50f3c8258ce62be7d6cbd2a4"
   },
   "handoff": {
     "resume_from": "harness/handoffs/orchestrator/B-001-propose.md"
