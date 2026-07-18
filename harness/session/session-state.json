@@ -21,8 +21,13 @@
     "Serial P-002…P-005 per dependencies — no parallel ask"
   ],
   "validation": {
-    "last_result": "Plan batch harness-only; branch_check/harness_check recorded in handoff"
+    "last_result": "Plan batch harness-only; BRANCH_CHECK PASS; HARNESS_CHECK PASS; commit fd7aa52"
   },
+  "version_control_checkpoint": {
+    "candidate_commit": "fd7aa526650de7aee8db4890c098eb83a89fc22e",
+    "working_branch": "feat/i-006-consumer-path-coverage"
+  },
+
   "cognitive_state": {
     "failure_count": 0,
     "current_mode": "plan_complete_awaiting_build_approval",
