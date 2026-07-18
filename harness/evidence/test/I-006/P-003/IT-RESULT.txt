@@ -1,0 +1,45 @@
+I-006 / P-003 / RP-02 live IT result
+invocation_id: inv-i006-p003-rp02-test
+timestamp: 2026-07-18T23:20:44+08:00 (approx)
+
+DB probe:
+  target: 127.0.0.1:5138
+  tcp_connect: OK
+  evidence: harness/evidence/test/I-006/P-003/live-db-probe.txt
+
+Live command:
+  $env:XUGU_RUN_IT='true'
+  mvn -pl demo-spring-boot -am test
+  exit_code: 0
+  log: harness/evidence/test/I-006/P-003/mvn-test-live-demo.log
+
+dialect (-am) under live gate:
+  Tests run: 139, Failures: 0, Errors: 0, Skipped: 22
+
+demo-spring-boot under live gate:
+  Tests run: 23, Failures: 0, Errors: 0, Skipped: 0
+  All Layer A+B gated IT executed (not skipped):
+    - DemoOfflineSmokeTest (4) always-on
+    - DemoAssociationIT (1) Layer B association
+    - DemoSequenceIT (2) Layer B SEQUENCE
+    - DemoLockIT (2) Layer B pessimistic lock / NOWAIT
+    - DemoConstraintRollbackIT (3) Layer B UNIQUE / rollback / NOT NULL
+    - DemoBootBaselineSmokeTest (5)
+    - DemoPersonCrudIT (2)
+    - DemoSchemaSurfaceIT (1)
+    - DemoSpiDialectAutoResolveIT (1)
+    - DemoStartupCrudIT (1)
+    - DemoValidateStartupIT (1)
+
+live_it_status: PASS
+real_db: true
+db_reachable: true
+SKIPPED_INFRA: false
+
+B-both confirmed:
+  association: DemoDept + DemoDeptMember
+  sequence: DemoSeqTicket + HIB_DEMO_SEQ_TICKET_SEQ
+
+closed_gap_ids:
+  A-SEQ-003, A-SEQ-004, A-SCH-011, A-SCH-012,
+  A-LCK-001, A-LCK-003, C-EXC-001, A-XCUT-004, C-EXC-002

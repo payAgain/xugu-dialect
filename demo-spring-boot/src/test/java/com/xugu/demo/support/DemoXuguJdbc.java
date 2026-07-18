@@ -15,6 +15,10 @@ public final class DemoXuguJdbc {
 	public static final String DEFAULT_URL =
 			"jdbc:xugu://127.0.0.1:5138/SYSTEM?compatiblemode=NONE";
 	public static final String PERSON_TABLE = "HIB_DEMO_PERSON";
+	public static final String DEPT_TABLE = "HIB_DEMO_DEPT";
+	public static final String DEPT_MEMBER_TABLE = "HIB_DEMO_DEPT_MEMBER";
+	public static final String SEQ_TICKET_TABLE = "HIB_DEMO_SEQ_TICKET";
+	public static final String SEQ_TICKET_SEQUENCE = "HIB_DEMO_SEQ_TICKET_SEQ";
 
 	private DemoXuguJdbc() {
 	}
@@ -67,6 +71,32 @@ public final class DemoXuguJdbc {
 		}
 	}
 
+	/**
+	 * Pre-create Layer A + Layer B tables/sequence for {@code ddl-auto=validate} startup
+	 * (DemoValidateStartupIT). Matches Hibernate export for demo entities.
+	 */
+	public static void ensureValidateSchema() throws SQLException {
+		ensurePersonTable();
+		try ( Connection c = open(); Statement st = c.createStatement() ) {
+			st.execute(
+					"CREATE TABLE IF NOT EXISTS " + DEPT_TABLE
+							+ " (id bigint identity(1,1), name varchar(128) not null, primary key (id))" );
+			st.execute(
+					"CREATE TABLE IF NOT EXISTS " + DEPT_MEMBER_TABLE
+							+ " (id bigint identity(1,1), code varchar(64) not null, name varchar(128) not null,"
+							+ " dept_id bigint not null,"
+							+ " primary key (id),"
+							+ " constraint UK_HIB_DEMO_DEPT_MEMBER_CODE unique (code),"
+							+ " constraint FK_HIB_DEMO_DEPT_MEMBER_DEPT foreign key (dept_id)"
+							+ " references " + DEPT_TABLE + " (id))" );
+			ignore( st, "CREATE SEQUENCE IF NOT EXISTS " + SEQ_TICKET_SEQUENCE
+					+ " START WITH 1 INCREMENT BY 1" );
+			st.execute(
+					"CREATE TABLE IF NOT EXISTS " + SEQ_TICKET_TABLE
+							+ " (id bigint not null, label varchar(128) not null, primary key (id))" );
+		}
+	}
+
 	public static boolean personTableExists() throws SQLException {
 		try ( Connection c = open(); Statement st = c.createStatement() ) {
 			st.executeQuery( "SELECT 1 FROM " + PERSON_TABLE + " WHERE 1=0" );
@@ -74,6 +104,15 @@ public final class DemoXuguJdbc {
 		}
 		catch ( SQLException e ) {
 			return false;
+		}
+	}
+
+	private static void ignore(Statement st, String sql) {
+		try {
+			st.execute( sql );
+		}
+		catch ( SQLException ignored ) {
+			// XuGu may lack IF NOT EXISTS on SEQUENCE; validate path tolerates pre-existing seq
 		}
 	}
 

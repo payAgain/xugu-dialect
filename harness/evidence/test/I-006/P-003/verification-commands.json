@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "note": "Direct required commands from harness/verification.json plus gated live IT; mirrors P-002 evidence shape.",
+  "started_at": "2026-07-18T23:18:40+08:00",
+  "finished_at": "2026-07-18T23:21:26+08:00",
+  "project_root": "E:\\Work\\java\\hibernate-test",
+  "phase_id": "P-003",
+  "initiative_id": "I-006",
+  "invocation_id": "inv-i006-p003-rp02-test",
+  "config": "E:\\Work\\java\\hibernate-test\\harness\\verification.json",
+  "results": [
+    {
+      "id": "branch_check",
+      "required": true,
+      "status": "PASS",
+      "command": "python harness/scripts/branch_check.py",
+      "exit_code": 0,
+      "log": "harness/evidence/test/I-006/P-003/branch-check.txt"
+    },
+    {
+      "id": "build",
+      "required": true,
+      "status": "PASS",
+      "command": "mvn -q -DskipTests package",
+      "cwd": "E:\\Work\\java\\hibernate-test",
+      "exit_code": 0,
+      "log": "harness/evidence/test/I-006/P-003/mvn-package-offline.log"
+    },
+    {
+      "id": "test",
+      "required": true,
+      "status": "PASS",
+      "command": "mvn -q test",
+      "cwd": "E:\\Work\\java\\hibernate-test",
+      "exit_code": 0,
+      "log": "harness/evidence/test/I-006/P-003/mvn-test-offline.txt",
+      "module_counts": {
+        "dialect": { "tests_run": 139, "failures": 0, "errors": 0, "skipped": 54 },
+        "demo-spring-boot": { "tests_run": 23, "failures": 0, "errors": 0, "skipped": 19 }
+      },
+      "reactor_approx": { "tests_run": 162, "failures": 0, "errors": 0, "skipped": 73 }
+    },
+    {
+      "id": "lint",
+      "required": false,
+      "status": "NOT_APPLICABLE",
+      "command": "NA"
+    },
+    {
+      "id": "live_it_demo",
+      "required": false,
+      "status": "PASS",
+      "command": "XUGU_RUN_IT=true mvn -pl demo-spring-boot -am test",
+      "exit_code": 0,
+      "log": "harness/evidence/test/I-006/P-003/mvn-test-live-demo.log",
+      "demo_counts": { "tests_run": 23, "failures": 0, "errors": 0, "skipped": 0 },
+      "dialect_counts_under_am": { "tests_run": 139, "failures": 0, "errors": 0, "skipped": 22 },
+      "db_reachable": true,
+      "skipped_infra": false
+    },
+    {
+      "id": "harness_check",
+      "required": false,
+      "status": "PASS",
+      "command": "python harness/scripts/harness_check.py",
+      "exit_code": 0,
+      "log": "harness/evidence/test/I-006/P-003/harness-check.txt"
+    },
+    {
+      "id": "verify_py",
+      "required": true,
+      "status": "PASS",
+      "command": "python harness/scripts/verify.py --phase P-003 --evidence harness/evidence/test/I-006/P-003/verification.json",
+      "exit_code": 0,
+      "log": "harness/evidence/test/I-006/P-003/verify.log",
+      "evidence": "harness/evidence/test/I-006/P-003/verification.json"
+    }
+  ]
+}

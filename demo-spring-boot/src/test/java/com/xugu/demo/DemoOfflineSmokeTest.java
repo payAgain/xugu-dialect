@@ -8,9 +8,15 @@ import java.nio.charset.StandardCharsets;
 
 import org.junit.jupiter.api.Test;
 
+import com.xugu.demo.entity.DemoDept;
+import com.xugu.demo.entity.DemoDeptMember;
 import com.xugu.demo.entity.DemoPerson;
+import com.xugu.demo.entity.DemoSeqTicket;
 
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 /**
  * Offline smoke: no live DB, no Spring context. Default {@code mvn test} stays green.
@@ -22,6 +28,35 @@ class DemoOfflineSmokeTest {
 		Table table = DemoPerson.class.getAnnotation( Table.class );
 		assertEquals( "HIB_DEMO_PERSON", table.name() );
 		assertTrue( table.name().startsWith( "HIB_DEMO_" ) );
+	}
+
+	/** Layer B offline surface: association + SEQUENCE entity annotations (HIB_DEMO_). */
+	@Test
+	void layerBEntitiesUseHibDemoPrefixAndSequence() {
+		Table dept = DemoDept.class.getAnnotation( Table.class );
+		Table member = DemoDeptMember.class.getAnnotation( Table.class );
+		Table ticket = DemoSeqTicket.class.getAnnotation( Table.class );
+		assertEquals( "HIB_DEMO_DEPT", dept.name() );
+		assertEquals( "HIB_DEMO_DEPT_MEMBER", member.name() );
+		assertEquals( "HIB_DEMO_SEQ_TICKET", ticket.name() );
+		assertTrue( dept.name().startsWith( "HIB_DEMO_" ) );
+		assertTrue( member.name().startsWith( "HIB_DEMO_" ) );
+		assertTrue( ticket.name().startsWith( "HIB_DEMO_" ) );
+
+		UniqueConstraint[] uniques = member.uniqueConstraints();
+		assertTrue( uniques.length >= 1, "A-SCH-011: UNIQUE on association child" );
+		assertEquals( "UK_HIB_DEMO_DEPT_MEMBER_CODE", uniques[0].name() );
+
+		SequenceGenerator seq = DemoSeqTicket.class.getAnnotation( SequenceGenerator.class );
+		assertEquals( "HIB_DEMO_SEQ_TICKET_SEQ", seq.sequenceName() );
+		try {
+			var idField = DemoSeqTicket.class.getDeclaredField( "id" );
+			var generated = idField.getAnnotation( jakarta.persistence.GeneratedValue.class );
+			assertEquals( GenerationType.SEQUENCE, generated.strategy() );
+		}
+		catch ( NoSuchFieldException e ) {
+			throw new AssertionError( "DemoSeqTicket.id missing", e );
+		}
 	}
 
 	@Test

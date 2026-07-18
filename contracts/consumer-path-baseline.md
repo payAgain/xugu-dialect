@@ -1,9 +1,10 @@
 # Consumer-Path Baseline (Boot-Required SSOT)
 
-> **Status:** Layer A gaps closed + RP-02 offline/live verified (I-006 / P-002) — pending reviewer  
+> **Status:** Layer A closed (P-002); Layer B **accepted** (P-003) — B-both association+SEQUENCE+lock/exception/rollback; VERIFY PASS  
 > **Initiative:** I-006 — Spring Boot consumer-path coverage  
-> **Author role:** architect-contract (P-001); Layer A status updates by implementer (P-002); verification note by test (RP-02)  
-> **invocation_id:** `inv-i006-p002-rp02-test` (verify); Layer A status `inv-i006-p002-rp01-implementer`; prior publish `inv-i006-p001-rp02-architect`  
+> **Author role:** architect-contract (P-001); Layer A by implementer (P-002); Layer B by implementer (P-003); verification by test; Accept by orchestrator  
+> **invocation_id:** `inv-i006-p003-rp03-reviewer` (Accept); test `inv-i006-p003-rp02-test`; implementer `inv-i006-p003-rp01-implementer`  
+
 > **Sources:** [`production-regression-baseline.md`](production-regression-baseline.md) (I-005), [`harness/evidence/researcher/I-006/P-001/INVENTORY.md`](../harness/evidence/researcher/I-006/P-001/INVENTORY.md), [`GAP-SUMMARY.md`](../harness/evidence/researcher/I-006/P-001/GAP-SUMMARY.md), [`harness/initiatives/I-006/brief.md`](../harness/initiatives/I-006/brief.md)  
 > **Scope:** **Boot-required** consumer-path subset only — **41** rows (Layer A=13 / B=9 / C′=19). **Not** a full 94-row Boot mirror of I-005 可实现.  
 > **GAV:** `com.xugu:xugu-dialect:7.4.5.Final` (document only; no Ship / bump in this Initiative)  
@@ -75,25 +76,27 @@ row_id | layer(A|B|C′) | status(covered|gap|dialect-it-only) | entry_class#met
 | Layer A | 13 |
 | Layer B | 9 |
 | Layer C′ | 19 |
-| **covered** | **13** |
-| **gap** | **28** |
+| **covered** | **22** |
+| **gap** | **19** |
 | I-005 可实现 (reference) | 94 |
 | Remaining 可实现 → dialect-it-only / non-Boot | 53 |
 | I-005 negative-only / 延后 (never Boot) | 34 |
 | Full 94-row Boot mirror? | **No** |
 
-### Covered today (13)
+### Covered today (22)
 
-`A-SPI-001`, `A-SPI-002`, `A-SPI-003`, `A-XCUT-003`, `A-XCUT-009`, `A-IDN-003`, `A-IDN-004`, `A-PAG-001`, `A-PAG-002`, `A-SEQ-001`, `A-DDL-001`, `A-DDL-003`, `A-DDL-004`
+Layer A (13): `A-SPI-001`, `A-SPI-002`, `A-SPI-003`, `A-XCUT-003`, `A-XCUT-009`, `A-IDN-003`, `A-IDN-004`, `A-PAG-001`, `A-PAG-002`, `A-SEQ-001`, `A-DDL-001`, `A-DDL-003`, `A-DDL-004`
+
+Layer B (9): `A-SEQ-003`, `A-SEQ-004`, `A-SCH-011`, `A-SCH-012`, `A-LCK-001`, `A-LCK-003`, `C-EXC-001`, `A-XCUT-004`, `C-EXC-002`
 
 ### Gap routing
 
 | gap_action | Open Boot-required gaps |
 |---|---:|
 | **P-002** (Layer A) | **0** |
-| **P-003** (Layer B) | **9** |
+| **P-003** (Layer B) | **0** |
 | **P-004** (Layer C′) | **19** |
-| **Total open gaps** | **28** |
+| **Total open gaps** | **19** |
 
 ---
 
@@ -129,17 +132,17 @@ row_id | layer(A|B|C′) | status(covered|gap|dialect-it-only) | entry_class#met
 
 | row_id | layer | status | entry_class#method | gate | gap_action | i005_xref |
 |---|---|---|---|---|---|---|
-| A-SEQ-003 | B | gap | — (SEQUENCE-generated entity persist under Boot) | — | P-003 | A-SEQ-003 |
-| A-SEQ-004 | B | gap | — (currval / post-NEXTVAL session smoke via SEQUENCE entity) | — | P-003 | A-SEQ-004 |
-| A-SCH-011 | B | gap | — (UNIQUE on association/person graph) | — | P-003 | A-SCH-011 |
-| A-SCH-012 | B | gap | — (FK association entity; child IDENTITY reuses A-IDN-003/004 capability) | — | P-003 | A-SCH-012 |
-| A-LCK-001 | B | gap | — (JPA `PESSIMISTIC_WRITE` / `FOR UPDATE` via Boot EM/repo) | — | P-003 | A-LCK-001 |
-| A-LCK-003 | B | gap | — (NOWAIT or WAIT timeout on Boot lock path — one representative) | — | P-003 | A-LCK-003 |
-| C-EXC-001 | B | gap | — (UNIQUE violation → `ConstraintViolationException` on Boot path) | — | P-003 | C-EXC-001 |
-| A-XCUT-004 | B | gap | — (transaction **rollback** observable under Boot `@Transactional`) | — | P-003 | A-XCUT-004 |
-| C-EXC-002 | B | gap | — (optional: NOT NULL / constraint-name extract on Boot path) | — | P-003 | C-EXC-002 |
+| A-SEQ-003 | B | covered | `DemoSequenceIT#persistSequenceTicketGeneratesIncreasingIds` | demo | — | A-SEQ-003 |
+| A-SEQ-004 | B | covered | `DemoSequenceIT#currvalMatchesLastGeneratedIdInSession` | demo | — | A-SEQ-004 |
+| A-SCH-011 | B | covered | `DemoOfflineSmokeTest#layerBEntitiesUseHibDemoPrefixAndSequence`; `DemoConstraintRollbackIT#uniqueViolationMapsToConstraintViolationException` | demo | — | A-SCH-011 |
+| A-SCH-012 | B | covered | `DemoAssociationIT#persistDeptWithMembersAndFindViaFk` | demo | — | A-SCH-012 |
+| A-LCK-001 | B | covered | `DemoLockIT#pessimisticWriteLocksPersonRow` | demo | — | A-LCK-001 |
+| A-LCK-003 | B | covered | `DemoLockIT#pessimisticWriteWithNowaitTimeoutExecutes` | demo | — | A-LCK-003 |
+| C-EXC-001 | B | covered | `DemoConstraintRollbackIT#uniqueViolationMapsToConstraintViolationException` | demo | — | C-EXC-001 |
+| A-XCUT-004 | B | covered | `DemoConstraintRollbackIT#forcedFailureRollsBackDurableMemberRow` | demo | — | A-XCUT-004 |
+| C-EXC-002 | B | covered | `DemoConstraintRollbackIT#notNullViolationExtractsConstraintNameWhenPresent` | demo | — | C-EXC-002 |
 
-**B-both reminder (brief decision #3):** deliver **both** association entity **and** SEQUENCE entity.
+**B-both reminder (brief decision #3):** deliver **both** association entity **and** SEQUENCE entity — **both landed** (`DemoDept`/`DemoDeptMember` + `DemoSeqTicket`).
 
 ### Layer C′ — remaining Boot-required entries (19)
 
@@ -269,19 +272,19 @@ Plus: `DemoStartupCrudIT#startupCrudRunnerPersistsAndFindsPerson` (`startup-crud
 
 **Out of P-002:** association / SEQUENCE / locks / UNIQUE exception / functions / JSON / bulk.
 
-### P-003 — Layer B (9 gaps)
+### P-003 — Layer B (9 gaps) — **closed** (RP-01 + RP-02 verified; awaiting RP-03)
 
-| row_id | Gap |
+| row_id | Boot evidence |
 |---|---|
-| A-SCH-012 | No association entity |
-| A-SCH-011 | No UNIQUE on Boot model |
-| A-SEQ-003 | No SEQUENCE entity |
-| A-SEQ-004 | No currval smoke |
-| A-LCK-001 | No pessimistic lock |
-| A-LCK-003 | No NOWAIT/WAIT on Boot |
-| C-EXC-001 | No UNIQUE → CVE |
-| A-XCUT-004 | No rollback assert |
-| C-EXC-002 | No NOT NULL name extract (stretch / optional within B) |
+| A-SCH-012 | `DemoAssociationIT#persistDeptWithMembersAndFindViaFk` |
+| A-SCH-011 | UNIQUE `UK_HIB_DEMO_DEPT_MEMBER_CODE` + `DemoConstraintRollbackIT#uniqueViolationMapsToConstraintViolationException` |
+| A-SEQ-003 | `DemoSequenceIT#persistSequenceTicketGeneratesIncreasingIds` |
+| A-SEQ-004 | `DemoSequenceIT#currvalMatchesLastGeneratedIdInSession` |
+| A-LCK-001 | `DemoLockIT#pessimisticWriteLocksPersonRow` |
+| A-LCK-003 | `DemoLockIT#pessimisticWriteWithNowaitTimeoutExecutes` |
+| C-EXC-001 | `DemoConstraintRollbackIT#uniqueViolationMapsToConstraintViolationException` |
+| A-XCUT-004 | `DemoConstraintRollbackIT#forcedFailureRollsBackDurableMemberRow` |
+| C-EXC-002 | `DemoConstraintRollbackIT#notNullViolationExtractsConstraintNameWhenPresent` |
 
 ### P-004 — Layer C′ (19 gaps)
 
@@ -317,3 +320,5 @@ Plus: `DemoStartupCrudIT#startupCrudRunnerPersistsAndFindsPerson` (`startup-crud
 | 2026-07-18 | Initial publish (I-006 / P-001 / RP-02): 41 Boot-required rows from researcher inventory |
 | 2026-07-18 | P-002 RP-01: Layer A 5 gaps + startup-crud → covered (`inv-i006-p002-rp01-implementer`) |
 | 2026-07-18 | P-002 RP-02: offline `mvn test` green; live `XUGU_RUN_IT=true` demo 14/0/0/0 (`inv-i006-p002-rp02-test`) |
+| 2026-07-18 | P-003 RP-01: Layer B 9 gaps → covered (B-both association+SEQUENCE; lock; UNIQUE/rollback) (`inv-i006-p003-rp01-implementer`) |
+| 2026-07-18 | P-003 RP-02: offline `mvn test` green (demo 23/0/0/19); live `XUGU_RUN_IT=true` demo 23/0/0/0; VERIFY PASS (`inv-i006-p003-rp02-test`) |

@@ -82,14 +82,22 @@ IT classes (`@EnabledIf` on `XuguIntegrationGate`):
 | `DemoSchemaSurfaceIT` | `ddl-auto=update` → `HIB_DEMO_PERSON` exists |
 | `DemoValidateStartupIT` | `ddl-auto=validate` startup with pre-created schema |
 | `DemoStartupCrudIT` | `startup-crud=true` ApplicationRunner persist/find |
+| `DemoAssociationIT` | Dept ↔ member FK association (Layer B) |
+| `DemoSequenceIT` | SEQUENCE entity persist + CURRVAL |
+| `DemoLockIT` | `PESSIMISTIC_WRITE` + NOWAIT timeout |
+| `DemoConstraintRollbackIT` | UNIQUE CVE, NOT NULL extract, txn rollback |
 
-Cleanup deletes `HIB_DEMO_PERSON` rows after each test.
+Cleanup deletes `HIB_DEMO_*` rows after each test (as applicable).
 
-## Table
+## Tables
 
-| Table | Purpose |
+| Table / sequence | Purpose |
 |---|---|
 | `HIB_DEMO_PERSON` | Demo entity (`DemoPerson`) |
+| `HIB_DEMO_DEPT` | Association parent (`DemoDept`) |
+| `HIB_DEMO_DEPT_MEMBER` | Association child + UNIQUE code (`DemoDeptMember`) |
+| `HIB_DEMO_SEQ_TICKET` | SEQUENCE entity (`DemoSeqTicket`) |
+| `HIB_DEMO_SEQ_TICKET_SEQ` | Sequence for `DemoSeqTicket` |
 
 ## Forbidden reminders
 

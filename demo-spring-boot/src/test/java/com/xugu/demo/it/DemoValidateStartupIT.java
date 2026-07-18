@@ -28,8 +28,7 @@ import jakarta.persistence.EntityManagerFactory;
 
 /**
  * Gated IT: Boot {@code ddl-auto=validate} startup when schema is pre-created (A-SEQ-001).
- * Does <em>not</em> introduce a SEQUENCE entity (Layer B / P-003); exercises validate path
- * with existing {@link DemoPerson} IDENTITY table and dialect sequence-catalog wiring.
+ * Pre-creates Layer A + Layer B tables/sequence so validate sees the full demo entity set.
  */
 @SpringBootTest
 @EnabledIf( "com.xugu.demo.support.XuguIntegrationGate#isEnabled" )
@@ -45,7 +44,7 @@ class DemoValidateStartupIT {
 		if ( !XuguIntegrationGate.isEnabled() ) {
 			return;
 		}
-		DemoXuguJdbc.ensurePersonTable();
+		DemoXuguJdbc.ensureValidateSchema();
 	}
 
 	@Autowired

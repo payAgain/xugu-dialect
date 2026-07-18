@@ -1,0 +1,139 @@
+﻿timestamp: 2026-07-18T23:19:58+08:00
+gate: offline (XUGU_RUN_IT unset)
+
+=== com.xugu.dialect.it.XuguAutoSequenceDropIT.txt ===
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 2 -- in com.xugu.dialect.it.XuguAutoSequenceDropIT
+
+=== com.xugu.dialect.it.XuguBinarySchemaExportIT.txt ===
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 1 -- in com.xugu.dialect.it.XuguBinarySchemaExportIT
+
+=== com.xugu.dialect.it.XuguBulkMutationIT.txt ===
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 2 -- in com.xugu.dialect.it.XuguBulkMutationIT
+
+=== com.xugu.dialect.it.XuguDdlIT.txt ===
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 1 -- in com.xugu.dialect.it.XuguDdlIT
+
+=== com.xugu.dialect.it.XuguDialectResolverIT.txt ===
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 3 -- in com.xugu.dialect.it.XuguDialectResolverIT
+
+=== com.xugu.dialect.it.XuguExceptionMappingIT.txt ===
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 2 -- in com.xugu.dialect.it.XuguExceptionMappingIT
+
+=== com.xugu.dialect.it.XuguFunctionRegistryIT.txt ===
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 2 -- in com.xugu.dialect.it.XuguFunctionRegistryIT
+
+=== com.xugu.dialect.it.XuguHqlPaginationIT.txt ===
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 2 -- in com.xugu.dialect.it.XuguHqlPaginationIT
+
+=== com.xugu.dialect.it.XuguIdentitySequenceIT.txt ===
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 2 -- in com.xugu.dialect.it.XuguIdentitySequenceIT
+
+=== com.xugu.dialect.it.XuguJsonAggregateIT.txt ===
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 1 -- in com.xugu.dialect.it.XuguJsonAggregateIT
+
+=== com.xugu.dialect.it.XuguLockIT.txt ===
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 2 -- in com.xugu.dialect.it.XuguLockIT
+
+=== com.xugu.dialect.it.XuguPaginationIT.txt ===
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 1 -- in com.xugu.dialect.it.XuguPaginationIT
+
+=== com.xugu.dialect.it.XuguReservedIdentityIT.txt ===
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 1 -- in com.xugu.dialect.it.XuguReservedIdentityIT
+
+=== com.xugu.dialect.it.XuguSchemaTempCommentIT.txt ===
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 1 -- in com.xugu.dialect.it.XuguSchemaTempCommentIT
+
+=== com.xugu.dialect.it.XuguSchemaValidateIT.txt ===
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 2 -- in com.xugu.dialect.it.XuguSchemaValidateIT
+
+=== com.xugu.dialect.it.XuguTypeDdlDetailsIT.txt ===
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 1 -- in com.xugu.dialect.it.XuguTypeDdlDetailsIT
+
+=== com.xugu.dialect.it.XuguTypeRoundTripIT.txt ===
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 5 -- in com.xugu.dialect.it.XuguTypeRoundTripIT
+
+=== com.xugu.dialect.it.XuguWindowCteIT.txt ===
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 1 -- in com.xugu.dialect.it.XuguWindowCteIT
+
+=== com.xugu.dialect.XuguBulkMutationSupportTest.txt ===
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0 -- in com.xugu.dialect.XuguBulkMutationSupportTest
+
+=== com.xugu.dialect.XuguDefaultColumnExportTest.txt ===
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0 -- in com.xugu.dialect.XuguDefaultColumnExportTest
+
+=== com.xugu.dialect.XuguDialectResolverTest.txt ===
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0 -- in com.xugu.dialect.XuguDialectResolverTest
+
+=== com.xugu.dialect.XuguDialectServicesResourceTest.txt ===
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0 -- in com.xugu.dialect.XuguDialectServicesResourceTest
+
+=== com.xugu.dialect.XuguDialectTest.txt ===
+Tests run: 10, Failures: 0, Errors: 0, Skipped: 0 -- in com.xugu.dialect.XuguDialectTest
+
+=== com.xugu.dialect.XuguExceptionConversionTest.txt ===
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0 -- in com.xugu.dialect.XuguExceptionConversionTest
+
+=== com.xugu.dialect.XuguFunctionRegistryTest.txt ===
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0 -- in com.xugu.dialect.XuguFunctionRegistryTest
+
+=== com.xugu.dialect.XuguIdentitySequenceTest.txt ===
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0 -- in com.xugu.dialect.XuguIdentitySequenceTest
+
+=== com.xugu.dialect.XuguJsonAggregateSupportTest.txt ===
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0 -- in com.xugu.dialect.XuguJsonAggregateSupportTest
+
+=== com.xugu.dialect.XuguNegativeRegressionBaselineTest.txt ===
+Tests run: 33, Failures: 0, Errors: 0, Skipped: 22 -- in com.xugu.dialect.XuguNegativeRegressionBaselineTest
+
+=== com.xugu.dialect.XuguPaginationLockTest.txt ===
+Tests run: 10, Failures: 0, Errors: 0, Skipped: 0 -- in com.xugu.dialect.XuguPaginationLockTest
+
+=== com.xugu.dialect.XuguSchemaTempCommentTest.txt ===
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0 -- in com.xugu.dialect.XuguSchemaTempCommentTest
+
+=== com.xugu.dialect.XuguSqlAstTranslatorTest.txt ===
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0 -- in com.xugu.dialect.XuguSqlAstTranslatorTest
+
+=== com.xugu.dialect.XuguTypeDdlDetailsTest.txt ===
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0 -- in com.xugu.dialect.XuguTypeDdlDetailsTest
+
+=== com.xugu.dialect.XuguWindowCteSupportTest.txt ===
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0 -- in com.xugu.dialect.XuguWindowCteSupportTest
+
+=== com.xugu.demo.DemoOfflineSmokeTest.txt ===
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0 -- in com.xugu.demo.DemoOfflineSmokeTest
+
+=== com.xugu.demo.it.DemoAssociationIT.txt ===
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 1 -- in com.xugu.demo.it.DemoAssociationIT
+
+=== com.xugu.demo.it.DemoBootBaselineSmokeTest.txt ===
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 5 -- in com.xugu.demo.it.DemoBootBaselineSmokeTest
+
+=== com.xugu.demo.it.DemoConstraintRollbackIT.txt ===
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 3 -- in com.xugu.demo.it.DemoConstraintRollbackIT
+
+=== com.xugu.demo.it.DemoLockIT.txt ===
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 2 -- in com.xugu.demo.it.DemoLockIT
+
+=== com.xugu.demo.it.DemoPersonCrudIT.txt ===
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 2 -- in com.xugu.demo.it.DemoPersonCrudIT
+
+=== com.xugu.demo.it.DemoSchemaSurfaceIT.txt ===
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 1 -- in com.xugu.demo.it.DemoSchemaSurfaceIT
+
+=== com.xugu.demo.it.DemoSequenceIT.txt ===
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 2 -- in com.xugu.demo.it.DemoSequenceIT
+
+=== com.xugu.demo.it.DemoSpiDialectAutoResolveIT.txt ===
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 1 -- in com.xugu.demo.it.DemoSpiDialectAutoResolveIT
+
+=== com.xugu.demo.it.DemoStartupCrudIT.txt ===
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 1 -- in com.xugu.demo.it.DemoStartupCrudIT
+
+=== com.xugu.demo.it.DemoValidateStartupIT.txt ===
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 1 -- in com.xugu.demo.it.DemoValidateStartupIT
+
+=== TOTALS (offline gate) ===
+demo-spring-boot: Tests run: 23, Failures: 0, Errors: 0, Skipped: 19
+dialect: Tests run: 139, Failures: 0, Errors: 0, Skipped: 54
+reactor approx: Tests run: 162, Failures: 0, Errors: 0, Skipped: 73

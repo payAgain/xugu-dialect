@@ -1,3 +1,13 @@
+## Entry: I-006 B-001 P-003 accepted
+
+### Summary
+P-003 **accepted**（resume after prior orchestrator disconnect）：B-both 关联+SEQUENCE；锁/UNIQUE/回滚；SSOT Layer B 9/9 covered；离线 demo 23/0/0/19；live 23/0/0/0；`verify.py` **VERIFY PASS**；reviewer `approve_with_nits`。`org/` 不提交。下一步 P-004 Layer C′。
+
+### Next
+Orchestrator 派发 P-004（implementer → test → reviewer）。
+
+---
+
 ## Entry: I-006 Plan complete — B-001 draft (P-001 only)
 
 ### Summary

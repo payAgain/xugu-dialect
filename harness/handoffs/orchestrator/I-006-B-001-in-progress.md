@@ -11,11 +11,13 @@
 | Phase | Status | SHA |
 |---|---|---|
 | P-001 | **accepted** | `e5f2428` |
-| P-002 | in_progress | — |
-| P-003…P-005 | blocked | — |
+| P-002 | **accepted** | `9f4cbd6` |
+| P-003 | **accepted** | (pending commit) |
+| P-004 | in_progress | — |
+| P-005 | blocked | — |
 
 ## Resume from
-P-002 role_pipeline RP-01 implementer (Layer A golden path)
+P-004 role_pipeline RP-01 implementer (Layer C′ remaining Boot-required)
 
 ## Constraints
 - Do not write business/demo/dialect Java as orchestrator
