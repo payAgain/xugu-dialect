@@ -1,3 +1,13 @@
+## Entry: I-005 Initiative Accept
+
+### Summary
+Human Gate「Initiative Accept I-005」。Initiative **accepted**（不含 Ship / Archive）。B-001 P-001…P-006 全部 accepted；SSOT `contracts/production-regression-baseline.md`；`XuguNegativeRegressionBaselineTest`；`DemoBootBaselineSmokeTest`；C-BULK-002 **known-limit-documented**；VERIFY PASS（`harness/evidence/test/I-005/P-006/verification.json`）；GAV `7.4.5.Final`。`org/` 仍不提交。
+
+### Next
+可选：Archive I-005；或另行授权 Ship；或开新 Initiative。
+
+---
+
 ## Entry: I-005 B-001 complete — P-006 closeout / Initiative Accept prep
 
 ### Summary

@@ -2,39 +2,39 @@
   "schema_version": 1,
   "task_id": "I-005",
   "batch_id": "B-001",
-  "status": "b001_complete_awaiting_initiative_accept",
+  "status": "initiative_accepted",
   "harness_level": "Standard",
-  "last_updated": "2026-07-17T18:00:00+08:00",
+  "last_updated": "2026-07-18T13:00:00+08:00",
   "initiative_id": "I-005",
   "initiative_type": "feature",
   "working_branch": "feat/i-005-production-regression-baseline",
   "active_plan": [
     "B-001 P-001…P-006 all accepted",
     "VERIFY PASS evidence recorded",
-    "Await Human Gate Initiative Accept"
+    "Initiative Accept I-005 recorded"
   ],
   "next_3_steps": [
-    "Human Gate: review SHAs on feat/i-005-production-regression-baseline",
-    "Human Gate: authorize Initiative Accept I-005 (NOT Ship)",
-    "Ship/tag/push: separate authorization if desired"
+    "Human Gate (optional): Archive I-005",
+    "Human Gate (optional): authorize Ship (tag/push/Central)",
+    "Or open new Initiative"
   ],
   "validation": {
-    "last_result": "VERIFY PASS; all Phases P-001…P-006 accepted"
+    "last_result": "VERIFY PASS; Initiative I-005 accepted"
   },
   "cognitive_state": {
     "failure_count": 0,
-    "current_mode": "awaiting_initiative_accept",
-    "blocked_on": "human_gate_initiative_accept"
+    "current_mode": "initiative_accepted",
+    "blocked_on": null
   },
   "version_control_checkpoint": {
-    "decision": "b001_closeout_p006_accept_prep",
+    "decision": "initiative_accept_i005",
     "committed": true,
     "branch": "feat/i-005-production-regression-baseline",
-    "candidate_commit": "301eccbb93df38ae612433a3eb6b57ec51985532",
-    "head": "301eccbb93df38ae612433a3eb6b57ec51985532"
+    "candidate_commit": "4af4ebf",
+    "head": "4af4ebf"
   },
   "handoff": {
-    "resume_from": "harness/handoffs/orchestrator/I-005-B-001-complete.md"
+    "resume_from": "harness/handoffs/orchestrator/I-005-accepted.md"
   },
   "approved_build": "B-001",
   "approved_phases": [
@@ -45,5 +45,5 @@
     "P-005",
     "P-006"
   ],
-  "updated_at": "2026-07-17T18:00:00+08:00"
+  "updated_at": "2026-07-18T13:00:00+08:00"
 }

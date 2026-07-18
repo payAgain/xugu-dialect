@@ -2,7 +2,7 @@
 
 > Scoped clarity for one change unit. Not a full product re-charter.
 > Type: feature
-> Updated: 2026-07-17T15:23:00+08:00
+> Updated: 2026-07-18T13:00:00+08:00
 
 ## Goal
 - 为**不继承 / 不移植 MySQLDialect** 的原生虚谷方言，建立**全量生产回归测试基线**：用可复现的真库入口用例验证可行性，并冻结为后续迭代的防回退门槛。
@@ -24,24 +24,29 @@
 | 7 | **Bulk insert A**：本 Initiative 内补通实库 IT **或**基线正式标为不支持/已知限制（二选一钉死） |
 | 8 | **原生实现**（禁止移植 sibling / 旧方言源码；禁止继承 MySQL/Oracle Dialect） |
 | 9 | **不要求**本 Initiative 完成 Ship / Central |
+| 10 | **Initiative Accept** — **确认**（~2026-07-18T13:00+08:00；不含 Ship） |
 
 ## Acceptance criteria
-- [ ] 基线清单 SSOT 覆盖 Definition A「可实现」+ I-003「可实现」；每项映射到可执行用例（或显式缺口关闭记录）
-- [ ] 「文档不允许」/「延后」行有负向断言或基线条目（不发明 SQL）
-- [ ] 门控真库全量基线在 `XUGU_RUN_IT=true` 下 **PASS**（作为冻结基线）
-- [ ] Demo/用户冒烟自动化纳入基线并可复现
-- [ ] Bulk insert：实库 IT PASS **或**正式「不支持/已知限制」写入基线与用户文档
-- [ ] `verify.py` **VERIFY PASS**；版本仍为 7.4.5.Final
+- [x] 基线清单 SSOT 覆盖 Definition A「可实现」+ I-003「可实现」；每项映射到可执行用例（或显式缺口关闭记录）
+- [x] 「文档不允许」/「延后」行有负向断言或基线条目（不发明 SQL）
+- [x] 门控真库全量基线在 `XUGU_RUN_IT=true` 下 **PASS**（作为冻结基线）
+- [x] Demo/用户冒烟自动化纳入基线并可复现
+- [x] Bulk insert：实库 IT PASS **或**正式「不支持/已知限制」写入基线与用户文档（**C-BULK-002 known-limit-documented**）
+- [x] `verify.py` **VERIFY PASS**；版本仍为 7.4.5.Final
 - [ ] **不要求** Ship（保持未勾选）
 
 ## Related
 - Predecessor: I-004 archived
 - Draft clarify: `harness/drafts/I-005-SCOPE-CLARIFYING.md`
 - Branch: `feat/i-005-production-regression-baseline`
+- SSOT: `contracts/production-regression-baseline.md`
+- Accept evidence: `harness/evidence/orchestrator/I-005/ACCEPTANCE.md`
 - Ship: **out of this Initiative**
 
 ## Status
-`active` — Plan complete; B-001 draft awaiting Human Gate Build approval
+`accepted` — Human Gate「Initiative Accept I-005」(~2026-07-18T13:00+08:00); **not shipped**
 
 - Scope PASS: ~2026-07-17T15:23+08:00
-- Next: orchestrator Plan → propose B-001（仅最早 ready Phase）
+- B-001 P-001…P-006: all accepted
+- Initiative Accept: ~2026-07-18T13:00+08:00
+- Archive: optional next
