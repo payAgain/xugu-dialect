@@ -1,58 +1,52 @@
 schema_version: 1
 charter_version: "1.0.0"
-initiative_id: I-005
-updated: "2026-07-17T17:40:00+08:00"
-supersedes_initiative: I-004
+initiative_id: I-006
+updated: "2026-07-18T15:13:00+08:00"
+supersedes_initiative: I-005
 notes: >
-  I-004 P-001/P-002 packets archived at harness/tasks/archive/I-004/.
-  I-003 P-003…P-006 packets archived at harness/tasks/archive/I-003/.
-  I-005 reuses P-001…P-006 IDs under new initiative scope (production regression baseline).
+  I-005 P-001…P-006 packets archived at harness/tasks/archive/I-005/.
+  I-004 packets remain at harness/tasks/archive/I-004/.
+  I-003 P-003…P-006 remain at harness/tasks/archive/I-003/.
+  I-006 reuses P-001…P-005 IDs under new initiative scope (consumer path coverage A+B-both+C′).
+  Serial dependencies only; orchestrator does not ask human about parallel execution.
 tasks:
   - task_id: P-001
-    title: "建立生产回归基线 SSOT 清单"
-    status: accepted
+    title: "建立消费者路径 Boot 必测 SSOT"
+    status: ready
     build_id: B-001
     packet: harness/tasks/P-001.md
-    acceptance_doc: harness/evidence/architect-contract/I-005/P-001/ACCEPTANCE.md
+    acceptance_doc: harness/evidence/architect-contract/I-006/P-001/ACCEPTANCE.md
     role_pipeline_summary: "researcher → architect-contract → reviewer"
     dependencies: []
   - task_id: P-002
-    title: "补齐可实现行真库入口回归用例"
-    status: accepted
-    build_id: B-001
+    title: "加固黄金路径 A（validate/CRUD/startup/SPI）"
+    status: blocked
+    build_id: null
     packet: harness/tasks/P-002.md
-    acceptance_doc: harness/evidence/implementer/I-005/P-002/ACCEPTANCE.md
+    acceptance_doc: harness/evidence/implementer/I-006/P-002/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"
     dependencies: [P-001]
   - task_id: P-003
-    title: "添加文档不允许与延后负向断言"
-    status: accepted
-    build_id: B-001
+    title: "扩展代表性模型 B（关联+SEQUENCE+锁/异常/回滚）"
+    status: blocked
+    build_id: null
     packet: harness/tasks/P-003.md
-    acceptance_doc: harness/evidence/test/I-005/P-003/ACCEPTANCE.md
-    role_pipeline_summary: "test → implementer (conditional) → reviewer"
+    acceptance_doc: harness/evidence/implementer/I-006/P-003/ACCEPTANCE.md
+    role_pipeline_summary: "implementer → test → reviewer"
     dependencies: [P-002]
   - task_id: P-004
-    title: "钉死 Bulk insert 基线策略"
-    status: accepted
-    build_id: B-001
+    title: "扫盲 C′ 剩余 Boot 必测入口"
+    status: blocked
+    build_id: null
     packet: harness/tasks/P-004.md
-    acceptance_doc: harness/evidence/implementer/I-005/P-004/ACCEPTANCE.md
+    acceptance_doc: harness/evidence/implementer/I-006/P-004/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"
     dependencies: [P-003]
   - task_id: P-005
-    title: "纳入 Demo Boot 自动化冒烟"
-    status: accepted
-    build_id: B-001
+    title: "文档对齐与 VERIFY PASS Accept 准备"
+    status: blocked
+    build_id: null
     packet: harness/tasks/P-005.md
-    acceptance_doc: harness/evidence/implementer/I-005/P-005/ACCEPTANCE.md
+    acceptance_doc: harness/evidence/implementer/I-006/P-005/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"
     dependencies: [P-004]
-  - task_id: P-006
-    title: "基线文档对齐与 VERIFY PASS Accept 准备"
-    status: accepted
-    build_id: B-001
-    packet: harness/tasks/P-006.md
-    acceptance_doc: harness/evidence/orchestrator/I-005/P-006/ACCEPTANCE.md
-    role_pipeline_summary: "implementer → test → reviewer"
-    dependencies: [P-005]

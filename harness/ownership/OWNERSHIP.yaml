@@ -26,6 +26,7 @@ owners:
     paths:
       - "demo-spring-boot/**"
       - "contracts/demo-spring-boot.contract.md"
+      - "contracts/consumer-path-baseline.md"
     writers:
       - architect-contract   # contracts only
       - implementer          # Spring Boot demo application
@@ -33,7 +34,10 @@ owners:
     notes: >
       Demo module scaffolded in P-001; depends on dialect artifact + Xugu JDBC.
       Spring Boot 4.1.0 with hibernate.version=7.4.5.Final forced.
-      Must NOT host core dialect implementation. Business demo / live-DB IT deferred.
+      Must NOT host core dialect implementation.
+      I-006 (2026-07-18): consumer-path SSOT planned at contracts/consumer-path-baseline.md
+      (Boot-required rows / Layers A+B-both+C′); architect-contract writes the contract;
+      implementer/test own demo code/tests under demo-spring-boot/**.
 
   docs:
     paths:
@@ -49,6 +53,9 @@ owners:
       Project-internal production docs live under docs/.
       Official SQL truth E:\Work\docs\content is READ-ONLY — never written from this repo ownership.
       Root PROJECT_CHARTER.md and DECISIONS/ only via approved Human Gate content + orchestrator/architect process.
+      I-006 consumer-path SSOT path is owned under demo-spring-boot (specific file) for clarity;
+      architect-contract remains the writer for that contract.
+
 
   harness:
     paths:
@@ -72,3 +79,5 @@ notes: >
   JDBC jar xugu-jdbc-12.3.6.jar at repo root is tracked dependency artifact (do not gitignore).
   I-005 (2026-07-17): production regression baseline — tests/contracts/docs/demo paths active;
   SSOT at contracts/production-regression-baseline.md (P-001 architect-contract).
+  I-006 (2026-07-18): consumer path coverage Plan — planned SSOT contracts/consumer-path-baseline.md;
+  branch feat/i-006-consumer-path-coverage; NOT Ship; GAV stays 7.4.5.Final.

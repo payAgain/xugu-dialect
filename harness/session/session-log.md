@@ -1,3 +1,23 @@
+## Entry: I-006 Plan complete — B-001 draft (P-001 only)
+
+### Summary
+Orchestrator 串行 Plan P-001→P-005（消费者路径 A + B-both + C′）；分支 `feat/i-006-consumer-path-coverage`；I-005 P-001…P-006 packets 归档至 `harness/tasks/archive/I-005/`；REGISTRY/B-001 draft/Phase packets 物化。B-001 draft = 仅 P-001（Boot 必测 SSOT）。未写方言/demo 业务 Java。`org/` 不提交。NOT Ship。
+
+### Next
+Human Gate：是否批准 B-001，范围仅 P-001？
+
+---
+
+## Entry: I-006 Scope PASS — Plan pending
+
+### Summary
+Human Gate 确认：方案 3（A→B→C′）；Layer B = **B-both**；「本 Initiative 范围已明确，可以开干」。I-006 feature **active**；GAV 7.4.5.Final；不 Ship。下一步：orchestrator 串行 Plan P-001…P-005 + 分支 `feat/i-006-consumer-path-coverage` + B-001 draft（仅 P-001）。未写业务测试代码。
+
+### Next
+Orchestrator Plan；Human Gate 批准 B-001 范围。
+
+---
+
 ## Entry: I-005 Archive
 
 ### Summary
