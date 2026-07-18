@@ -4,29 +4,30 @@
   "batch_id": "B-001",
   "status": "b001_in_progress",
   "harness_level": "Standard",
-  "last_updated": "2026-07-18T23:30:00+08:00",
+  "last_updated": "2026-07-18T23:50:00+08:00",
   "initiative_id": "I-006",
   "initiative_type": "feature",
   "working_branch": "feat/i-006-consumer-path-coverage",
   "active_plan": [
     "P-001 accepted",
     "P-002 accepted",
-    "P-003 accepted (Layer B-both; VERIFY PASS)",
-    "P-004 in_progress (Layer C′)",
-    "P-005 blocked on P-004"
+    "P-003 accepted",
+    "P-004 accepted (Layer C′; VERIFY PASS; demo @Test=28)",
+    "P-005 in_progress (docs + VERIFY Accept prep)"
   ],
   "next_3_steps": [
-    "Dispatch P-004 role_pipeline",
-    "Serial P-005 after P-004 accept",
+    "Dispatch P-005 role_pipeline",
+    "Accept + must-commit P-005",
     "Propose Initiative Accept (NOT Ship)"
   ],
   "validation": {
-    "last_result": "P-003 VERIFY PASS; live demo 23/0/0/0; harness_check PASS"
+    "last_result": "P-004 VERIFY PASS; live demo 28/0/0/0; harness_check PASS"
   },
   "version_control_checkpoint": {
-    "candidate_commit": "pending_p003_accept",
+    "candidate_commit": "3aae8f04cbc6eeb8ed3305ed41c5567923d0add9",
     "p001_accept_sha": "e5f2428ae014c914e08c42b22426e0fbe6a2736e",
     "p002_accept_sha": "9f4cbd6",
+    "p003_accept_sha": "3aae8f04cbc6eeb8ed3305ed41c5567923d0add9",
     "working_branch": "feat/i-006-consumer-path-coverage",
     "maven_home_hint": "C:\\Users\\admin\\tools\\apache-maven-3.9.9"
   },
@@ -40,7 +41,7 @@
   },
   "approved_build": "B-001",
   "approved_phases": ["P-001", "P-002", "P-003", "P-004", "P-005"],
-  "accepted_phases": ["P-001", "P-002", "P-003"],
+  "accepted_phases": ["P-001", "P-002", "P-003", "P-004"],
   "proposed_phases": ["P-001", "P-002", "P-003", "P-004", "P-005"],
-  "updated_at": "2026-07-18T23:30:00+08:00"
+  "updated_at": "2026-07-18T23:50:00+08:00"
 }

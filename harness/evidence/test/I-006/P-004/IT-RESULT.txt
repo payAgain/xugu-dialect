@@ -1,0 +1,49 @@
+I-006 / P-004 / RP-02 live IT result (re-run after implementer fix)
+invocation_id: inv-i006-p004-rp02-test
+timestamp: 2026-07-18T23:52:42+08:00
+
+DB probe:
+  target: 127.0.0.1:5138
+  tcp_connect: OK
+  evidence: harness/evidence/test/I-006/P-004/live-db-probe.txt
+
+Live command:
+  $env:XUGU_RUN_IT='true'
+  mvn -pl demo-spring-boot -am test
+  exit_code: 0
+  log: harness/evidence/test/I-006/P-004/mvn-test-live-demo.log
+  result: BUILD SUCCESS
+
+dialect (-am) under live gate:
+  Tests run: 139, Failures: 0, Errors: 0, Skipped: 22
+
+demo-spring-boot under live gate:
+  Tests run: 28, Failures: 0, Errors: 0, Skipped: 0
+
+Prior FAIL Errors (cleared on re-run):
+  1) DemoTypesIT.typedSampleRoundTripKeyTypes — was UUID E50044 → now PASS
+  2) DemoJsonIT.jsonColumnRoundTripAndArrayAgg — was missing FormatMapper → now PASS
+  3) DemoFunctionsIT.hqlFunctionSubsetSmoke — was missing FormatMapper → now PASS
+
+PASSED Layer C′ under live:
+  - DemoTypesIT#typedSampleRoundTripKeyTypes (A-TYP-001…010,012)
+  - DemoJsonIT#jsonColumnRoundTripAndArrayAgg (A-TYP-013, C-JSON-001)
+  - DemoFunctionsIT#hqlFunctionSubsetSmoke (A-FUN subset / A-FUN-017)
+  - DemoBulkMutationIT#bulkUpdatePersonNames (C-BULK-001)
+  - DemoOfflineSmokeTest (5) always-on incl. layerCEntitiesUseHibDemoPrefix
+  - Prior Layer A/B IT suite (Association/Sequence/Lock/Constraint/CRUD/…)
+
+live_it_status: PASS
+real_db: true
+db_reachable: true
+SKIPPED_INFRA: false
+
+SSOT notes:
+  Boot-required open gaps (doc): 0
+  C′ covered rows (doc): 19
+  A-TYP-011: dialect-it-only (OK)
+  Demo @Test count: 28 (OK range 25-40)
+  Live proof for types/JSON/functions/bulk: CONFIRMED green
+
+blocker: null
+recommendation: PASS

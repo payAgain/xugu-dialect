@@ -1,7 +1,7 @@
 schema_version: 1
 charter_version: "1.0.0"
 initiative_id: I-006
-updated: "2026-07-18T23:30:00+08:00"
+updated: "2026-07-18T23:50:00+08:00"
 supersedes_initiative: I-005
 notes: >
   I-005 P-001…P-006 packets archived at harness/tasks/archive/I-005/.
@@ -37,7 +37,7 @@ tasks:
     dependencies: [P-002]
   - task_id: P-004
     title: "扫盲 C′ 剩余 Boot 必测入口"
-    status: in_progress
+    status: accepted
     build_id: B-001
     packet: harness/tasks/P-004.md
     acceptance_doc: harness/evidence/implementer/I-006/P-004/ACCEPTANCE.md
@@ -45,7 +45,7 @@ tasks:
     dependencies: [P-003]
   - task_id: P-005
     title: "文档对齐与 VERIFY PASS Accept 准备"
-    status: blocked
+    status: in_progress
     build_id: B-001
     packet: harness/tasks/P-005.md
     acceptance_doc: harness/evidence/implementer/I-006/P-005/ACCEPTANCE.md

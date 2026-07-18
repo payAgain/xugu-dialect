@@ -22,6 +22,10 @@ spring:
         dialect: com.xugu.dialect.XuguDialect
         jdbc:
           time_zone: UTC
+        query:
+          hql:
+            # Required for Boot consumer HQL json_value / json_arrayagg (A-FUN-017 / C-JSON-001)
+            json_functions_enabled: true
 
 # When true (default), ApplicationRunner persists/finds a HIB_DEMO_PERSON row on startup.
 xugu:

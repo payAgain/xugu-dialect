@@ -86,6 +86,10 @@ IT classes (`@EnabledIf` on `XuguIntegrationGate`):
 | `DemoSequenceIT` | SEQUENCE entity persist + CURRVAL |
 | `DemoLockIT` | `PESSIMISTIC_WRITE` + NOWAIT timeout |
 | `DemoConstraintRollbackIT` | UNIQUE CVE, NOT NULL extract, txn rollback |
+| `DemoTypesIT` | Layer C′ typed sample round-trip (int/decimal/varchar/bool/date/ts/binary/blob/uuid-as-varchar) |
+| `DemoFunctionsIT` | Layer C′ HQL function subset (concat/substring/lower-upper/coalesce/temporal/uuid/json_value) |
+| `DemoJsonIT` | JSON column round-trip + `json_arrayagg` (shared `DemoJsonDoc`; needs Jackson on classpath) |
+| `DemoBulkMutationIT` | One HQL bulk update (C-BULK-001) |
 
 Cleanup deletes `HIB_DEMO_*` rows after each test (as applicable).
 
@@ -98,6 +102,13 @@ Cleanup deletes `HIB_DEMO_*` rows after each test (as applicable).
 | `HIB_DEMO_DEPT_MEMBER` | Association child + UNIQUE code (`DemoDeptMember`) |
 | `HIB_DEMO_SEQ_TICKET` | SEQUENCE entity (`DemoSeqTicket`) |
 | `HIB_DEMO_SEQ_TICKET_SEQ` | Sequence for `DemoSeqTicket` |
+| `HIB_DEMO_TYPED_SAMPLE` | Layer C′ typed fields (`DemoTypedSample`; `guid_val` is `varchar(36)` + converter) |
+| `HIB_DEMO_JSON_DOC` | Layer C′ JSON column (`DemoJsonDoc`) |
+
+## Mapping notes (P-004 live IT)
+
+- **UUID (A-TYP-012):** entity uses `UuidAsVarcharConverter` → `varchar(36)` instead of Hibernate `UUIDJdbcType` / SQL `guid`, because Xugu JDBC rejects `getObject(..., UUID.class)` with `[E50044]`.
+- **JSON FormatMapper:** `spring-boot-starter-jackson` is on the demo classpath so Hibernate can auto-wire a JSON `FormatMapper` for `@JdbcTypeCode(SqlTypes.JSON)`.
 
 ## Forbidden reminders
 

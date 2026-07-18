@@ -10,8 +10,10 @@ import org.junit.jupiter.api.Test;
 
 import com.xugu.demo.entity.DemoDept;
 import com.xugu.demo.entity.DemoDeptMember;
+import com.xugu.demo.entity.DemoJsonDoc;
 import com.xugu.demo.entity.DemoPerson;
 import com.xugu.demo.entity.DemoSeqTicket;
+import com.xugu.demo.entity.DemoTypedSample;
 
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.SequenceGenerator;
@@ -85,5 +87,16 @@ class DemoOfflineSmokeTest {
 			String body = new String( in.readAllBytes(), StandardCharsets.UTF_8 );
 			assertTrue( body.contains( "com.xugu.dialect.XuguDialectResolver" ), body );
 		}
+	}
+
+	/** Layer C′ offline surface: typed sample + JSON doc tables use HIB_DEMO_ prefix. */
+	@Test
+	void layerCEntitiesUseHibDemoPrefix() {
+		Table typed = DemoTypedSample.class.getAnnotation( Table.class );
+		Table json = DemoJsonDoc.class.getAnnotation( Table.class );
+		assertEquals( "HIB_DEMO_TYPED_SAMPLE", typed.name() );
+		assertEquals( "HIB_DEMO_JSON_DOC", json.name() );
+		assertTrue( typed.name().startsWith( "HIB_DEMO_" ) );
+		assertTrue( json.name().startsWith( "HIB_DEMO_" ) );
 	}
 }

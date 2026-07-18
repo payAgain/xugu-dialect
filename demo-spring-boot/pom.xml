@@ -61,6 +61,14 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-jpa</artifactId>
     </dependency>
+    <!--
+      Hibernate JSON FormatMapper (SqlTypes.JSON / json_value / json_arrayagg) auto-detects
+      Jackson 2 or Jackson 3 on the classpath. Boot 4 starter brings Jackson 3 (tools.jackson).
+    -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-jackson</artifactId>
+    </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>

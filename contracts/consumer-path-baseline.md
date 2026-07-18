@@ -1,9 +1,9 @@
 # Consumer-Path Baseline (Boot-Required SSOT)
 
-> **Status:** Layer A closed (P-002); Layer B **accepted** (P-003) — B-both association+SEQUENCE+lock/exception/rollback; VERIFY PASS  
+> **Status:** Layer A/B/C′ **accepted** — Boot-required open gaps = **0**; P-004 VERIFY PASS (demo @Test=28; live 28/0/0/0)  
 > **Initiative:** I-006 — Spring Boot consumer-path coverage  
-> **Author role:** architect-contract (P-001); Layer A by implementer (P-002); Layer B by implementer (P-003); verification by test; Accept by orchestrator  
-> **invocation_id:** `inv-i006-p003-rp03-reviewer` (Accept); test `inv-i006-p003-rp02-test`; implementer `inv-i006-p003-rp01-implementer`  
+> **Author role:** architect-contract (P-001); Layers A/B/C′ by implementer (P-002…P-004); verification by test; Accept by orchestrator  
+> **invocation_id:** `inv-i006-p004-rp03-reviewer` (Accept); test `inv-i006-p004-rp02-test`; implementer `inv-i006-p004-rp01-implementer`  
 
 > **Sources:** [`production-regression-baseline.md`](production-regression-baseline.md) (I-005), [`harness/evidence/researcher/I-006/P-001/INVENTORY.md`](../harness/evidence/researcher/I-006/P-001/INVENTORY.md), [`GAP-SUMMARY.md`](../harness/evidence/researcher/I-006/P-001/GAP-SUMMARY.md), [`harness/initiatives/I-006/brief.md`](../harness/initiatives/I-006/brief.md)  
 > **Scope:** **Boot-required** consumer-path subset only — **41** rows (Layer A=13 / B=9 / C′=19). **Not** a full 94-row Boot mirror of I-005 可实现.  
@@ -76,18 +76,20 @@ row_id | layer(A|B|C′) | status(covered|gap|dialect-it-only) | entry_class#met
 | Layer A | 13 |
 | Layer B | 9 |
 | Layer C′ | 19 |
-| **covered** | **22** |
-| **gap** | **19** |
+| **covered** | **41** |
+| **gap** | **0** |
 | I-005 可实现 (reference) | 94 |
 | Remaining 可实现 → dialect-it-only / non-Boot | 53 |
 | I-005 negative-only / 延后 (never Boot) | 34 |
 | Full 94-row Boot mirror? | **No** |
 
-### Covered today (22)
+### Covered today (41)
 
 Layer A (13): `A-SPI-001`, `A-SPI-002`, `A-SPI-003`, `A-XCUT-003`, `A-XCUT-009`, `A-IDN-003`, `A-IDN-004`, `A-PAG-001`, `A-PAG-002`, `A-SEQ-001`, `A-DDL-001`, `A-DDL-003`, `A-DDL-004`
 
 Layer B (9): `A-SEQ-003`, `A-SEQ-004`, `A-SCH-011`, `A-SCH-012`, `A-LCK-001`, `A-LCK-003`, `C-EXC-001`, `A-XCUT-004`, `C-EXC-002`
+
+Layer C′ (19): `A-TYP-001`, `A-TYP-002`, `A-TYP-004`, `A-TYP-005`, `A-TYP-006`, `A-TYP-008`, `A-TYP-009`, `A-TYP-010`, `A-TYP-012`, `A-TYP-013`, `A-FUN-001`, `A-FUN-002`, `A-FUN-004`, `A-FUN-007`, `A-FUN-010`, `A-FUN-016`, `A-FUN-017`, `C-JSON-001`, `C-BULK-001`
 
 ### Gap routing
 
@@ -95,8 +97,8 @@ Layer B (9): `A-SEQ-003`, `A-SEQ-004`, `A-SCH-011`, `A-SCH-012`, `A-LCK-001`, `A
 |---|---:|
 | **P-002** (Layer A) | **0** |
 | **P-003** (Layer B) | **0** |
-| **P-004** (Layer C′) | **19** |
-| **Total open gaps** | **19** |
+| **P-004** (Layer C′) | **0** |
+| **Total open gaps** | **0** |
 
 ---
 
@@ -148,27 +150,27 @@ Layer B (9): `A-SEQ-003`, `A-SEQ-004`, `A-SCH-011`, `A-SCH-012`, `A-LCK-001`, `A
 
 | row_id | layer | status | entry_class#method | gate | gap_action | i005_xref |
 |---|---|---|---|---|---|---|
-| A-TYP-001 | C′ | gap | — (integer field on demo entity) | — | P-004 | A-TYP-001 |
-| A-TYP-002 | C′ | gap | — (decimal/numeric field) | — | P-004 | A-TYP-002 |
-| A-TYP-004 | C′ | gap | — (varchar typed assert; partial via `name` today) | — | P-004 | A-TYP-004 |
-| A-TYP-005 | C′ | gap | — (boolean field) | — | P-004 | A-TYP-005 |
-| A-TYP-006 | C′ | gap | — (date field) | — | P-004 | A-TYP-006 |
-| A-TYP-008 | C′ | gap | — (timestamp field) | — | P-004 | A-TYP-008 |
-| A-TYP-009 | C′ | gap | — (optional small BINARY/VARBINARY field) | — | P-004 | A-TYP-009 |
-| A-TYP-010 | C′ | gap | — (optional BLOB — one LOB representative; pick 010 **or** 011) | — | P-004 | A-TYP-010 |
-| A-TYP-012 | C′ | gap | — (UUID/GUID field) | — | P-004 | A-TYP-012 |
-| A-TYP-013 | C′ | gap | — (JSON column field) | — | P-004 | A-TYP-013 |
-| A-FUN-001 | C′ | gap | — (HQL string concat family smoke) | — | P-004 | A-FUN-001 |
-| A-FUN-002 | C′ | gap | — (substring / left-right family — one probe) | — | P-004 | A-FUN-002 |
-| A-FUN-004 | C′ | gap | — (lower/upper) | — | P-004 | A-FUN-004 |
-| A-FUN-007 | C′ | gap | — (coalesce/nullif consumer probe) | — | P-004 | A-FUN-007 |
-| A-FUN-010 | C′ | gap | — (current_date / current_timestamp) | — | P-004 | A-FUN-010 |
-| A-FUN-016 | C′ | gap | — (uuid() / GUID function) | — | P-004 | A-FUN-016 |
-| A-FUN-017 | C′ | gap | — (json_value subset via HQL) | — | P-004 | A-FUN-017 |
-| C-JSON-001 | C′ | gap | — (optional JSON round-trip / one aggregate — may share entity with A-TYP-013) | — | P-004 | C-JSON-001 |
-| C-BULK-001 | C′ | gap | — (**one** HQL bulk update **or** delete via Boot EM) | — | P-004 | C-BULK-001 |
+| A-TYP-001 | C′ | covered | `DemoTypesIT#typedSampleRoundTripKeyTypes` | demo | — | A-TYP-001 |
+| A-TYP-002 | C′ | covered | `DemoTypesIT#typedSampleRoundTripKeyTypes` | demo | — | A-TYP-002 |
+| A-TYP-004 | C′ | covered | `DemoTypesIT#typedSampleRoundTripKeyTypes` | demo | — | A-TYP-004 |
+| A-TYP-005 | C′ | covered | `DemoTypesIT#typedSampleRoundTripKeyTypes` | demo | — | A-TYP-005 |
+| A-TYP-006 | C′ | covered | `DemoTypesIT#typedSampleRoundTripKeyTypes` | demo | — | A-TYP-006 |
+| A-TYP-008 | C′ | covered | `DemoTypesIT#typedSampleRoundTripKeyTypes` | demo | — | A-TYP-008 |
+| A-TYP-009 | C′ | covered | `DemoTypesIT#typedSampleRoundTripKeyTypes` | demo | — | A-TYP-009 |
+| A-TYP-010 | C′ | covered | `DemoTypesIT#typedSampleRoundTripKeyTypes` (BLOB LOB; A-TYP-011 CLOB stays dialect-it-only) | demo | — | A-TYP-010 |
+| A-TYP-012 | C′ | covered | `DemoTypesIT#typedSampleRoundTripKeyTypes` | demo | — | A-TYP-012 |
+| A-TYP-013 | C′ | covered | `DemoJsonIT#jsonColumnRoundTripAndArrayAgg` | demo | — | A-TYP-013 |
+| A-FUN-001 | C′ | covered | `DemoFunctionsIT#hqlFunctionSubsetSmoke` | demo | — | A-FUN-001 |
+| A-FUN-002 | C′ | covered | `DemoFunctionsIT#hqlFunctionSubsetSmoke` | demo | — | A-FUN-002 |
+| A-FUN-004 | C′ | covered | `DemoFunctionsIT#hqlFunctionSubsetSmoke` | demo | — | A-FUN-004 |
+| A-FUN-007 | C′ | covered | `DemoFunctionsIT#hqlFunctionSubsetSmoke` | demo | — | A-FUN-007 |
+| A-FUN-010 | C′ | covered | `DemoFunctionsIT#hqlFunctionSubsetSmoke` | demo | — | A-FUN-010 |
+| A-FUN-016 | C′ | covered | `DemoFunctionsIT#hqlFunctionSubsetSmoke` | demo | — | A-FUN-016 |
+| A-FUN-017 | C′ | covered | `DemoFunctionsIT#hqlFunctionSubsetSmoke` (shared `DemoJsonDoc`) | demo | — | A-FUN-017 |
+| C-JSON-001 | C′ | covered | `DemoJsonIT#jsonColumnRoundTripAndArrayAgg` | demo | — | C-JSON-001 |
+| C-BULK-001 | C′ | covered | `DemoBulkMutationIT#bulkUpdatePersonNames` (bulk update only; delete not duplicated) | demo | — | C-BULK-001 |
 
-**C′ implementer note:** consolidate multi-assert / shared fixtures so total demo `@Test` stays ~25–40. **Reject** 1:1 “one `@Test` per matrix row” if it trends toward a 94-row Boot mirror.
+**C′ implementer note:** consolidated multi-assert / shared fixtures so total demo `@Test` stays ~25–40. **Reject** 1:1 “one `@Test` per matrix row” if it trends toward a 94-row Boot mirror. LOB pick: **A-TYP-010** (BLOB); **A-TYP-011** remains dialect-it-only.
 
 ---
 
@@ -286,14 +288,22 @@ Plus: `DemoStartupCrudIT#startupCrudRunnerPersistsAndFindsPerson` (`startup-crud
 | A-XCUT-004 | `DemoConstraintRollbackIT#forcedFailureRollsBackDurableMemberRow` |
 | C-EXC-002 | `DemoConstraintRollbackIT#notNullViolationExtractsConstraintNameWhenPresent` |
 
-### P-004 — Layer C′ (19 gaps)
+### P-004 — Layer C′ (19 gaps) — entrypoints closed; live green after implementer rework
 
-| Domain | row_ids | Count |
-|---|---|---:|
-| Types | A-TYP-001, 002, 004, 005, 006, 008, 009, 010, 012, 013 | 10 |
-| Functions | A-FUN-001, 002, 004, 007, 010, 016, 017 | 7 |
-| JSON optional | C-JSON-001 | 1 |
-| Bulk one-shot | C-BULK-001 | 1 |
+| Domain | row_ids | Boot evidence | Live (after UUID/Jackson fix) |
+|---|---|---|---|
+| Types | A-TYP-001,002,004,005,006,008,009,010,012 | `DemoTypesIT#typedSampleRoundTripKeyTypes` | PASS (UUID→varchar+converter) |
+| JSON type | A-TYP-013 | `DemoJsonIT#jsonColumnRoundTripAndArrayAgg` | PASS (Jackson FormatMapper) |
+| Functions | A-FUN-001,002,004,007,010,016,017 | `DemoFunctionsIT#hqlFunctionSubsetSmoke` | PASS (Jackson FormatMapper) |
+| JSON agg | C-JSON-001 | `DemoJsonIT#jsonColumnRoundTripAndArrayAgg` | PASS (Jackson FormatMapper) |
+| Bulk | C-BULK-001 | `DemoBulkMutationIT#bulkUpdatePersonNames` | PASS |
+
+LOB pick: **A-TYP-010** (BLOB). **A-TYP-011** remains dialect-it-only (exclusion appendix).
+
+**Fix notes (implementer rework after RP-02 FAIL):**
+- A-TYP-012: `UuidAsVarcharConverter` + `guid_val varchar(36)` — avoids Xugu JDBC `[E50044]` on `UUIDJdbcType` extract.
+- JSON: `spring-boot-starter-jackson` on demo classpath for Hibernate JSON `FormatMapper`.
+- Dialect module unchanged; GAV `7.4.5.Final`.
 
 ---
 
@@ -322,3 +332,7 @@ Plus: `DemoStartupCrudIT#startupCrudRunnerPersistsAndFindsPerson` (`startup-crud
 | 2026-07-18 | P-002 RP-02: offline `mvn test` green; live `XUGU_RUN_IT=true` demo 14/0/0/0 (`inv-i006-p002-rp02-test`) |
 | 2026-07-18 | P-003 RP-01: Layer B 9 gaps → covered (B-both association+SEQUENCE; lock; UNIQUE/rollback) (`inv-i006-p003-rp01-implementer`) |
 | 2026-07-18 | P-003 RP-02: offline `mvn test` green (demo 23/0/0/19); live `XUGU_RUN_IT=true` demo 23/0/0/0; VERIFY PASS (`inv-i006-p003-rp02-test`) |
+| 2026-07-18 | P-004 RP-01: Layer C′ 19 gaps → covered (types/functions/JSON/bulk; LOB=A-TYP-010); Demo `@Test` ~28 (`inv-i006-p004-rp01-implementer`) |
+| 2026-07-18 | P-004 RP-02 (first): offline green (demo 28/0/0/23); live FAIL (28/0/3/0) — UUID extract + missing JSON FormatMapper; VERIFY PASS offline; A-TYP-011 dialect-it-only (`inv-i006-p004-rp02-test`) |
+| 2026-07-18 | P-004 implementer rework: UUID→varchar+converter; add `spring-boot-starter-jackson`; claimed live demo 28/0/0/0; dialect unchanged |
+| 2026-07-18 | P-004 RP-02 re-run: offline 28/0/0/23; live 28/0/0/0 PASS; VERIFY PASS; C′ open gaps 0; A-TYP-011 dialect-it-only; Demo `@Test`=28 (`inv-i006-p004-rp02-test`) |

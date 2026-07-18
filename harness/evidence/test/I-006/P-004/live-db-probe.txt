@@ -1,0 +1,4 @@
+﻿timestamp: 2026-07-18T23:51:50+08:00
+target: 127.0.0.1:5138
+tcp_connect: OK
+reachable: true

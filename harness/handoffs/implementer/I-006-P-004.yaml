@@ -1,0 +1,108 @@
+schema_version: 1
+role: implementer
+phase_id: P-004
+build_id: B-001
+initiative_id: I-006
+invocation_id: inv-i006-p004-rp01-implementer-fix
+step_id: RP-01
+status: completed_awaiting_test_review
+updated_at: "2026-07-18T23:49:00+08:00"
+
+summary: >
+  Rework after RP-02 live FAIL (3 errors). Fixed A-TYP-012 via UuidAsVarcharConverter
+  + varchar(36) (avoid UUIDJdbcType E50044). Fixed JSON FormatMapper by adding
+  spring-boot-starter-jackson. Offline 28/0/0/23; live XUGU_RUN_IT=true 28/0/0/0.
+  Dialect module untouched; GAV 7.4.5.Final; C′ 19 covered; A-TYP-011 dialect-it-only;
+  Demo @Test still 28.
+
+fix_applied:
+  - id: uuid-e50044
+    files:
+      - demo-spring-boot/src/main/java/com/xugu/demo/entity/UuidAsVarcharConverter.java
+      - demo-spring-boot/src/main/java/com/xugu/demo/entity/DemoTypedSample.java
+      - demo-spring-boot/src/test/java/com/xugu/demo/support/DemoXuguJdbc.java
+      - demo-spring-boot/src/test/java/com/xugu/demo/it/DemoTypesIT.java
+    approach: "VARCHAR(36) + AttributeConverter; recreate typed-sample table for stale guid columns"
+  - id: json-format-mapper
+    files:
+      - demo-spring-boot/pom.xml
+    approach: "spring-boot-starter-jackson for Hibernate Jackson3 FormatMapper auto-detect"
+
+closed_gap_ids:
+  - A-TYP-001
+  - A-TYP-002
+  - A-TYP-004
+  - A-TYP-005
+  - A-TYP-006
+  - A-TYP-008
+  - A-TYP-009
+  - A-TYP-010
+  - A-TYP-012
+  - A-TYP-013
+  - A-FUN-001
+  - A-FUN-002
+  - A-FUN-004
+  - A-FUN-007
+  - A-FUN-010
+  - A-FUN-016
+  - A-FUN-017
+  - C-JSON-001
+  - C-BULK-001
+
+deferred_or_known_limit:
+  - row_id: A-TYP-011
+    status: dialect-it-only
+    justification: "LOB representative is A-TYP-010 BLOB; CLOB remains dialect IT"
+
+delivered:
+  - demo-spring-boot/src/main/java/com/xugu/demo/entity/UuidAsVarcharConverter.java
+  - demo-spring-boot/src/main/java/com/xugu/demo/entity/DemoTypedSample.java
+  - demo-spring-boot/pom.xml
+  - demo-spring-boot/src/test/java/com/xugu/demo/support/DemoXuguJdbc.java
+  - demo-spring-boot/src/test/java/com/xugu/demo/it/DemoTypesIT.java
+  - demo-spring-boot/README.md
+  - contracts/consumer-path-baseline.md
+  - harness/evidence/implementer/I-006/P-004/ACCEPTANCE.md
+  - harness/evidence/implementer/I-006/P-004/FIX-NOTES.md
+  - harness/evidence/implementer/I-006/P-004/mvn-test-offline-fix.txt
+  - harness/evidence/implementer/I-006/P-004/mvn-test-live-fix.txt
+
+test_counts:
+  demo_total_at_test: 28
+  target_range: "25-40"
+  offline:
+    tests_run: 28
+    failures: 0
+    errors: 0
+    skipped: 23
+  live:
+    tests_run: 28
+    failures: 0
+    errors: 0
+    skipped: 0
+    db_probe: "127.0.0.1:5138 OK"
+
+validation:
+  offline:
+    command: "mvn -pl demo-spring-boot -am test"
+    exit_code: 0
+    evidence: harness/evidence/implementer/I-006/P-004/mvn-test-offline-fix.txt
+  live:
+    command: "$env:XUGU_RUN_IT='true'; mvn -pl demo-spring-boot -am test"
+    exit_code: 0
+    evidence: harness/evidence/implementer/I-006/P-004/mvn-test-live-fix.txt
+
+not_done:
+  - RP-02 test formal re-verification + verification.json
+  - RP-03 reviewer
+  - git commit (orchestrator after Accept)
+  - Ship
+
+next:
+  - RP-02 test re-run (confirm live Layer C′ green + VERIFY)
+  - RP-03 reviewer
+
+blocker: null
+residual_live_errors: []
+dialect_module_changed: false
+ssot_boot_required_open_gaps: 0

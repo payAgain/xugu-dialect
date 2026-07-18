@@ -12,12 +12,12 @@
 |---|---|---|
 | P-001 | **accepted** | `e5f2428` |
 | P-002 | **accepted** | `9f4cbd6` |
-| P-003 | **accepted** | (pending commit) |
-| P-004 | in_progress | — |
-| P-005 | blocked | — |
+| P-003 | **accepted** | `3aae8f0` |
+| P-004 | **accepted** | (pending commit) |
+| P-005 | in_progress | — |
 
 ## Resume from
-P-004 role_pipeline RP-01 implementer (Layer C′ remaining Boot-required)
+P-005 role_pipeline RP-01 implementer (docs + VERIFY Accept prep)
 
 ## Constraints
 - Do not write business/demo/dialect Java as orchestrator

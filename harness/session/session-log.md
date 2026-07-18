@@ -1,3 +1,13 @@
+## Entry: I-006 B-001 P-004 accepted
+
+### Summary
+P-004 **accepted**：Layer C′ 19 Boot-required gaps closed；Demo `@Test`=28；离线 28/0/0/23；live 28/0/0/0（UUID varchar + jackson 修复后）；`verify.py` **VERIFY PASS**；reviewer `approve_with_nits`。无 94 镜像膨胀。`org/` 不提交。下一步 P-005。
+
+### Next
+Orchestrator 派发 P-005（implementer → test → reviewer）。
+
+---
+
 ## Entry: I-006 B-001 P-003 accepted
 
 ### Summary
