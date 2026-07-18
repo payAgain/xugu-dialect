@@ -18,7 +18,8 @@
 
 - Pre-Archive HEAD: `21186f9e812365c97a17ea28815cbad45e05d487`
 - Initiative Accept: `32b960bd1eeef48af33a39eef3fe34e1fd37d382`
-- Archive must-commit: *(see below after commit)*
+- Archive must-commit: `f700d2d2a9ee41d9737e6367091661006b57fe05`
+- **Final HEAD:** `fbfbfef332813d11e51f831cc81c69a371f01db5`
 
 ## Evidence
 
