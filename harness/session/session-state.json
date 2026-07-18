@@ -2,39 +2,41 @@
   "schema_version": 1,
   "task_id": "I-005",
   "batch_id": "B-001",
-  "status": "initiative_accepted",
+  "status": "initiative_archived",
   "harness_level": "Standard",
-  "last_updated": "2026-07-18T13:00:00+08:00",
+  "last_updated": "2026-07-18T14:23:00+08:00",
   "initiative_id": "I-005",
   "initiative_type": "feature",
   "working_branch": "feat/i-005-production-regression-baseline",
   "active_plan": [
     "B-001 P-001…P-006 all accepted",
     "VERIFY PASS evidence recorded",
-    "Initiative Accept I-005 recorded"
+    "Initiative Accept I-005 recorded",
+    "Archive I-005 recorded"
   ],
   "next_3_steps": [
-    "Human Gate (optional): Archive I-005",
     "Human Gate (optional): authorize Ship (tag/push/Central)",
-    "Or open new Initiative"
+    "Or open new Initiative",
+    "(no active Build / Phase)"
   ],
   "validation": {
-    "last_result": "VERIFY PASS; Initiative I-005 accepted"
+    "last_result": "VERIFY PASS; Initiative I-005 archived"
   },
   "cognitive_state": {
     "failure_count": 0,
-    "current_mode": "initiative_accepted",
+    "current_mode": "initiative_archived",
     "blocked_on": null
   },
   "version_control_checkpoint": {
-    "decision": "initiative_accept_i005",
+    "decision": "archive_i005",
     "committed": true,
     "branch": "feat/i-005-production-regression-baseline",
     "candidate_commit": "32b960bd1eeef48af33a39eef3fe34e1fd37d382",
-    "head": "82a6643188aa3fcbcedb745732a964da8369cb74"
+    "pre_archive_head": "21186f9e812365c97a17ea28815cbad45e05d487",
+    "head": null
   },
   "handoff": {
-    "resume_from": "harness/handoffs/orchestrator/I-005-accepted.md"
+    "resume_from": "harness/handoffs/orchestrator/I-005-archived.md"
   },
   "approved_build": "B-001",
   "approved_phases": [
@@ -45,5 +47,5 @@
     "P-005",
     "P-006"
   ],
-  "updated_at": "2026-07-18T13:00:00+08:00"
+  "updated_at": "2026-07-18T14:23:00+08:00"
 }

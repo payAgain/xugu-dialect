@@ -2,7 +2,7 @@
 
 > Scoped clarity for one change unit. Not a full product re-charter.
 > Type: feature
-> Updated: 2026-07-18T13:00:00+08:00
+> Updated: 2026-07-18T14:23:00+08:00
 
 ## Goal
 - 为**不继承 / 不移植 MySQLDialect** 的原生虚谷方言，建立**全量生产回归测试基线**：用可复现的真库入口用例验证可行性，并冻结为后续迭代的防回退门槛。
@@ -44,9 +44,10 @@
 - Ship: **out of this Initiative**
 
 ## Status
-`accepted` — Human Gate「Initiative Accept I-005」(~2026-07-18T13:00+08:00); **not shipped**
+`archived` — Human Gate「Archive I-005」(~2026-07-18T14:23+08:00); **not shipped**
 
 - Scope PASS: ~2026-07-17T15:23+08:00
 - B-001 P-001…P-006: all accepted
 - Initiative Accept: ~2026-07-18T13:00+08:00
-- Archive: optional next
+- Archive: ~2026-07-18T14:23+08:00
+- Archive doc: `harness/initiatives/I-005/ARCHIVE.md`

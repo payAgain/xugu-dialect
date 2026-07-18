@@ -1,3 +1,13 @@
+## Entry: I-005 Archive
+
+### Summary
+Human Gate「Archive I-005」。Initiative **archived**（NOT Ship）。B-001 P-001…P-006 全部 accepted；SSOT `contracts/production-regression-baseline.md`；C-BULK-002 **known-limit-documented**；VERIFY PASS；GAV `7.4.5.Final`。Pre-Archive HEAD `21186f9`；Accept SHA `32b960b`。`org/` 仍不提交。
+
+### Next
+可选：另行授权 Ship；或开新 Initiative。
+
+---
+
 ## Entry: I-005 Initiative Accept
 
 ### Summary
