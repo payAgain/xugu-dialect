@@ -24,7 +24,7 @@ Human Gate「Initiative Accept I-005」→ Initiative **accepted**
 
 - Pre-Accept HEAD: `4af4ebf`
 - Accept must-commit: `32b960bd1eeef48af33a39eef3fe34e1fd37d382`
-- **Final HEAD:** `32b960bd1eeef48af33a39eef3fe34e1fd37d382`
+- **Final HEAD:** `cf9c6e946b5b734af3f28ca2cc63db4f70f61f0d`
 
 ## Evidence
 
