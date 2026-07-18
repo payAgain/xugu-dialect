@@ -1,0 +1,129 @@
+schema_version: 1
+role: test
+phase_id: P-002
+initiative_id: I-006
+build_id: B-001
+invocation_id: inv-i006-p002-rp02-test
+step_id: RP-02
+status: completed_awaiting_reviewer
+required: true
+completed_at: "2026-07-18T22:48:30+08:00"
+purpose: offline mvn test green; when XUGU_RUN_IT=true exercise Layer A live paths; confirm SSOT A rows covered
+
+inputs:
+  - harness/tasks/P-002.md
+  - harness/handoffs/implementer/I-006-P-002.yaml
+  - harness/evidence/implementer/I-006/P-002/ACCEPTANCE.md
+  - contracts/consumer-path-baseline.md
+  - agents/test.md
+
+outputs:
+  - harness/evidence/test/I-006/P-002/TEST-REPORT.md
+  - harness/evidence/test/I-006/P-002/verification.json
+  - harness/evidence/test/I-006/P-002/verification-commands.json
+  - harness/evidence/test/I-006/P-002/IT-RESULT.txt
+  - harness/evidence/test/I-006/P-002/mvn-package-offline.log
+  - harness/evidence/test/I-006/P-002/mvn-test-offline.log
+  - harness/evidence/test/I-006/P-002/mvn-test-live-demo.log
+  - harness/evidence/test/I-006/P-002/live-db-probe.txt
+  - harness/evidence/test/I-006/P-002/surefire-summary-offline.txt
+  - harness/evidence/test/I-006/P-002/surefire-summary-live-demo.txt
+  - harness/evidence/test/I-006/P-002/harness-check.log
+  - harness/evidence/test/I-006/P-002/verify.log
+  - contracts/consumer-path-baseline.md
+  - harness/handoffs/test/I-006-P-002.yaml
+
+commands:
+  - { cmd: "mvn -q -DskipTests package", exit: 0 }
+  - { cmd: "mvn test", exit: 0 }
+  - { cmd: "XUGU_RUN_IT=true mvn -pl demo-spring-boot -am test", exit: 0 }
+  - { cmd: "python harness/scripts/harness_check.py", exit: 1 }
+  - { cmd: "python harness/scripts/verify.py --phase P-002 --evidence harness/evidence/test/I-006/P-002/verification.json", exit: 1 }
+
+validation:
+  package:
+    command: "mvn -q -DskipTests package"
+    exit_code: 0
+    status: PASS
+  test_offline:
+    command: "mvn test"
+    exit_code: 0
+    status: PASS
+    dialect_counts:
+      tests_run: 139
+      failures: 0
+      errors: 0
+      skipped: 54
+    demo_counts:
+      tests_run: 14
+      failures: 0
+      errors: 0
+      skipped: 11
+  test_live_it:
+    command: "XUGU_RUN_IT=true mvn -pl demo-spring-boot -am test"
+    exit_code: 0
+    status: PASS
+    live_it_status: PASS
+    real_db: true
+    db_reachable: true
+    skipped_infra: false
+    demo_counts:
+      tests_run: 14
+      failures: 0
+      errors: 0
+      skipped: 0
+    dialect_counts_under_am:
+      tests_run: 139
+      failures: 0
+      errors: 0
+      skipped: 22
+  verify_py:
+    status: VERIFY FAIL
+    blocker: harness_check pre-existing P-001 acceptance metadata
+  ssot_contract:
+    artifact: contracts/consumer-path-baseline.md
+    layer_a_p002_open_gaps: 0
+    layer_a_covered_rows: 13
+    closed_gap_ids_confirmed:
+      - A-SPI-002
+      - A-SPI-003
+      - A-IDN-004
+      - A-SEQ-001
+      - A-DDL-001
+    status: PASS
+
+spot_checks:
+  build_exit_zero: true
+  default_test_exit_zero: true
+  it_skipped_offline: true
+  live_db_reachable: true
+  live_it_all_green: true
+  ssot_layer_a_gaps_zero: true
+  no_product_code_by_test: true
+
+observed_flows:
+  - id: layer-a-golden-path-boot-validate-crud-startup-spi
+    result: passed
+    evidence: harness/evidence/test/I-006/P-002/TEST-REPORT.md
+
+notes_for_orchestrator: |
+  Offline reactor green (demo 14 run / 11 skip). Live demo IT green (14/0/0/0) against 127.0.0.1:5138.
+  SSOT Layer A confirmed covered; header/changelog updated for RP-02.
+  verify.py / harness_check FAIL is pre-existing P-001 acceptance hygiene — not a P-002 Layer A product failure.
+  Next: RP-03 reviewer. No commit by test.
+
+notes_for_reviewer: |
+  Independent RP-02 evidence under harness/evidence/test/I-006/P-002/.
+  Boot-level live IT exercised (not dialect-unit-only): DemoValidateStartupIT, DemoStartupCrudIT,
+  DemoPersonCrudIT, DemoBootBaselineSmokeTest, DemoSpiDialectAutoResolveIT, DemoSchemaSurfaceIT.
+  Recommend PASS on P-002 technical criteria; nit harness_check / VERIFY FAIL out-of-phase.
+
+forbidden_reminder:
+  - no product code rewrite by test
+  - no git commit / Accept / Ship by test
+
+next_step: RP-03 reviewer
+blocker: null
+real_db_it_passed: true
+verdict: PASS
+recommendation: PASS

@@ -76,10 +76,14 @@ IT classes (`@EnabledIf` on `XuguIntegrationGate`):
 
 | Class | Purpose |
 |---|---|
-| `DemoPersonCrudIT` | Spring Boot + JPA persist/find + IDENTITY |
+| `DemoPersonCrudIT` | Spring Boot + JPA full CRUD (persist/find/update/delete) + IDENTITY |
 | `DemoBootBaselineSmokeTest` | SessionFactory explicit dialect, JDBC pool, JPQL, Pageable pagination |
+| `DemoSpiDialectAutoResolveIT` | SPI resolve without explicit `hibernate.dialect` |
+| `DemoSchemaSurfaceIT` | `ddl-auto=update` → `HIB_DEMO_PERSON` exists |
+| `DemoValidateStartupIT` | `ddl-auto=validate` startup with pre-created schema |
+| `DemoStartupCrudIT` | `startup-crud=true` ApplicationRunner persist/find |
 
-Cleanup deletes `HIB_DEMO_PERSON` rows after each test; `@AfterAll` drops the demo table.
+Cleanup deletes `HIB_DEMO_PERSON` rows after each test.
 
 ## Table
 

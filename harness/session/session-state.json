@@ -4,29 +4,30 @@
   "batch_id": "B-001",
   "status": "b001_in_progress",
   "harness_level": "Standard",
-  "last_updated": "2026-07-18T22:45:00+08:00",
+  "last_updated": "2026-07-18T22:55:00+08:00",
   "initiative_id": "I-006",
   "initiative_type": "feature",
   "working_branch": "feat/i-006-consumer-path-coverage",
   "active_plan": [
-    "P-001 建立消费者路径 Boot 必测 SSOT (accepted)",
-    "P-002 加固黄金路径 A (in_progress)",
-    "P-003 扩展代表性模型 B-both (blocked on P-002; build B-001)",
-    "P-004 扫盲 C′ 剩余 Boot 必测入口 (blocked on P-003; build B-001)",
-    "P-005 文档对齐与 VERIFY PASS Accept 准备 (blocked on P-004; build B-001)"
+    "P-001 accepted",
+    "P-002 accepted (VERIFY PASS)",
+    "P-003 in_progress (Layer B-both)",
+    "P-004 blocked on P-003",
+    "P-005 blocked on P-004"
   ],
   "next_3_steps": [
-    "Dispatch P-002 role_pipeline (implementer → test → reviewer)",
-    "Serial P-003…P-005 after each Accept + must-commit",
-    "After P-005: propose Initiative Accept (NOT Ship)"
+    "Dispatch P-003 role_pipeline",
+    "Serial P-004 → P-005",
+    "Propose Initiative Accept (NOT Ship)"
   ],
   "validation": {
-    "last_result": "P-001 ACCEPT PASS; harness_check PASS; BRANCH_CHECK PASS; reviewer approve_with_nits"
+    "last_result": "P-002 VERIFY PASS; harness_check PASS; live demo 14/0/0/0"
   },
   "version_control_checkpoint": {
-    "candidate_commit": null,
+    "candidate_commit": "e5f2428ae014c914e08c42b22426e0fbe6a2736e",
+    "p001_accept_sha": "e5f2428ae014c914e08c42b22426e0fbe6a2736e",
     "working_branch": "feat/i-006-consumer-path-coverage",
-    "pending_commit": "P-001 Accept must-commit"
+    "maven_home_hint": "C:\\Users\\admin\\tools\\apache-maven-3.9.9"
   },
   "cognitive_state": {
     "failure_count": 0,
@@ -38,7 +39,7 @@
   },
   "approved_build": "B-001",
   "approved_phases": ["P-001", "P-002", "P-003", "P-004", "P-005"],
-  "accepted_phases": ["P-001"],
+  "accepted_phases": ["P-001", "P-002"],
   "proposed_phases": ["P-001", "P-002", "P-003", "P-004", "P-005"],
-  "updated_at": "2026-07-18T22:45:00+08:00"
+  "updated_at": "2026-07-18T22:55:00+08:00"
 }

@@ -1,6 +1,7 @@
 package com.xugu.demo.it;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -122,5 +123,30 @@ class DemoBootBaselineSmokeTest {
 		assertEquals( 2, page.getContent().size() );
 		assertEquals( 3, page.getTotalElements() );
 		assertTrue( page.hasNext() );
+	}
+
+	/** Strengthen A-PAG-001/002: second page uses OFFSET (page index 1). */
+	@Test
+	void pageableSecondPageUsesOffset() {
+		assertTrue( XuguIntegrationGate.isEnabled() );
+
+		repository.save( new DemoPerson( "off-a" ) );
+		repository.save( new DemoPerson( "off-b" ) );
+		repository.save( new DemoPerson( "off-c" ) );
+		repository.flush();
+		entityManager.clear();
+
+		Page<DemoPerson> page0 = repository.findAll(
+				PageRequest.of( 0, 2, Sort.by( "id" ).ascending() ) );
+		Page<DemoPerson> page1 = repository.findAll(
+				PageRequest.of( 1, 2, Sort.by( "id" ).ascending() ) );
+
+		assertEquals( 2, page0.getContent().size() );
+		assertEquals( 1, page1.getContent().size() );
+		assertEquals( 3, page1.getTotalElements() );
+		assertFalse( page1.hasNext() );
+		assertTrue(
+				page1.getContent().get( 0 ).getId() > page0.getContent().get( 1 ).getId(),
+				"page 1 first id must be after page 0 last id (OFFSET)" );
 	}
 }

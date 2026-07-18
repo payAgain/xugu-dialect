@@ -1,7 +1,7 @@
 schema_version: 1
 charter_version: "1.0.0"
 initiative_id: I-006
-updated: "2026-07-18T22:45:00+08:00"
+updated: "2026-07-18T22:55:00+08:00"
 supersedes_initiative: I-005
 notes: >
   I-005 P-001…P-006 packets archived at harness/tasks/archive/I-005/.
@@ -21,7 +21,7 @@ tasks:
     dependencies: []
   - task_id: P-002
     title: "加固黄金路径 A（validate/CRUD/startup/SPI）"
-    status: in_progress
+    status: accepted
     build_id: B-001
     packet: harness/tasks/P-002.md
     acceptance_doc: harness/evidence/implementer/I-006/P-002/ACCEPTANCE.md
@@ -29,7 +29,7 @@ tasks:
     dependencies: [P-001]
   - task_id: P-003
     title: "扩展代表性模型 B（关联+SEQUENCE+锁/异常/回滚）"
-    status: blocked
+    status: in_progress
     build_id: B-001
     packet: harness/tasks/P-003.md
     acceptance_doc: harness/evidence/implementer/I-006/P-003/ACCEPTANCE.md

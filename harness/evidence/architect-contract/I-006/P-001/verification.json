@@ -42,8 +42,8 @@
   "summary": {
     "harness_check": "PASS",
     "ssot_published": "PASS",
-    "reviewer_rp03": "pending",
-    "overall_accept_gate": "PASS_PENDING_REVIEWER"
+    "reviewer_rp03": "approve_with_nits",
+    "overall_accept_gate": "PASS"
   },
-  "notes": "Architect RP-02 draft ready. Phase Accept requires reviewer RP-03 PASS. No commit from this role."
+  "notes": "Phase Accept after reviewer RP-03. Accept SHA e5f2428. Build B-001 status=approved for harness_check."
 }

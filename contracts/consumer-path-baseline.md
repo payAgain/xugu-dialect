@@ -1,9 +1,9 @@
 # Consumer-Path Baseline (Boot-Required SSOT)
 
-> **Status:** Draft published (I-006 / P-001 / RP-02) — pending reviewer RP-03  
+> **Status:** Layer A gaps closed + RP-02 offline/live verified (I-006 / P-002) — pending reviewer  
 > **Initiative:** I-006 — Spring Boot consumer-path coverage  
-> **Author role:** architect-contract  
-> **invocation_id:** `inv-i006-p001-rp02-architect`  
+> **Author role:** architect-contract (P-001); Layer A status updates by implementer (P-002); verification note by test (RP-02)  
+> **invocation_id:** `inv-i006-p002-rp02-test` (verify); Layer A status `inv-i006-p002-rp01-implementer`; prior publish `inv-i006-p001-rp02-architect`  
 > **Sources:** [`production-regression-baseline.md`](production-regression-baseline.md) (I-005), [`harness/evidence/researcher/I-006/P-001/INVENTORY.md`](../harness/evidence/researcher/I-006/P-001/INVENTORY.md), [`GAP-SUMMARY.md`](../harness/evidence/researcher/I-006/P-001/GAP-SUMMARY.md), [`harness/initiatives/I-006/brief.md`](../harness/initiatives/I-006/brief.md)  
 > **Scope:** **Boot-required** consumer-path subset only — **41** rows (Layer A=13 / B=9 / C′=19). **Not** a full 94-row Boot mirror of I-005 可实现.  
 > **GAV:** `com.xugu:xugu-dialect:7.4.5.Final` (document only; no Ship / bump in this Initiative)  
@@ -75,25 +75,25 @@ row_id | layer(A|B|C′) | status(covered|gap|dialect-it-only) | entry_class#met
 | Layer A | 13 |
 | Layer B | 9 |
 | Layer C′ | 19 |
-| **covered** | **8** |
-| **gap** | **33** |
+| **covered** | **13** |
+| **gap** | **28** |
 | I-005 可实现 (reference) | 94 |
 | Remaining 可实现 → dialect-it-only / non-Boot | 53 |
 | I-005 negative-only / 延后 (never Boot) | 34 |
 | Full 94-row Boot mirror? | **No** |
 
-### Covered today (8)
+### Covered today (13)
 
-`A-SPI-001`, `A-XCUT-003`, `A-XCUT-009`, `A-IDN-003`, `A-PAG-001`, `A-PAG-002`, `A-DDL-003`, `A-DDL-004`
+`A-SPI-001`, `A-SPI-002`, `A-SPI-003`, `A-XCUT-003`, `A-XCUT-009`, `A-IDN-003`, `A-IDN-004`, `A-PAG-001`, `A-PAG-002`, `A-SEQ-001`, `A-DDL-001`, `A-DDL-003`, `A-DDL-004`
 
 ### Gap routing
 
 | gap_action | Open Boot-required gaps |
 |---|---:|
-| **P-002** (Layer A) | **5** |
+| **P-002** (Layer A) | **0** |
 | **P-003** (Layer B) | **9** |
 | **P-004** (Layer C′) | **19** |
-| **Total open gaps** | **33** |
+| **Total open gaps** | **28** |
 
 ---
 
@@ -104,26 +104,26 @@ row_id | layer(A|B|C′) | status(covered|gap|dialect-it-only) | entry_class#met
 | row_id | layer | status | entry_class#method | gate | gap_action | i005_xref |
 |---|---|---|---|---|---|---|
 | A-SPI-001 | A | covered | `DemoBootBaselineSmokeTest#sessionFactoryUsesExplicitXuguDialectFromApplicationYml` | demo | — | A-SPI-001 |
-| A-SPI-002 | A | gap | — (need Boot context **without** explicit `hibernate.dialect`; SPI resolve) | — | P-002 | A-SPI-002 |
-| A-SPI-003 | A | gap | — (may share SPI-auto Boot test with A-SPI-002) | — | P-002 | A-SPI-003 |
+| A-SPI-002 | A | covered | `DemoSpiDialectAutoResolveIT#sessionFactoryResolvesXuguDialectWithoutExplicitConfig`; `DemoOfflineSmokeTest#dialectResolverServicesFileOnClasspath` | demo | — | A-SPI-002 |
+| A-SPI-003 | A | covered | `DemoSpiDialectAutoResolveIT#sessionFactoryResolvesXuguDialectWithoutExplicitConfig` | demo | — | A-SPI-003 |
 | A-XCUT-003 | A | covered | `DemoOfflineSmokeTest#applicationYmlDocumentsExplicitDialectAndEnvKeys`; `DemoBootBaselineSmokeTest#datasourceUrlIncludesCompatibleModeNone` | demo | — | A-XCUT-003 |
-| A-XCUT-009 | A | covered | `DemoOfflineSmokeTest#demoPersonTableUsesHibDemoPrefix`; `DemoOfflineSmokeTest#applicationYmlDocumentsExplicitDialectAndEnvKeys`; `DemoPersonCrudIT#persistAndFindPerson`; `DemoBootBaselineSmokeTest#sessionFactoryUsesExplicitXuguDialectFromApplicationYml`; `#jpaPersistAndJpqlQueryRoundTrip`; `#pageableFindAllUsesLimitOffset` | demo | — | A-XCUT-009 |
+| A-XCUT-009 | A | covered | `DemoOfflineSmokeTest#demoPersonTableUsesHibDemoPrefix`; `DemoOfflineSmokeTest#applicationYmlDocumentsExplicitDialectAndEnvKeys`; `DemoPersonCrudIT#persistAndFindPerson`; `DemoBootBaselineSmokeTest#sessionFactoryUsesExplicitXuguDialectFromApplicationYml`; `#jpaPersistAndJpqlQueryRoundTrip`; `#pageableFindAllUsesLimitOffset`; `#pageableSecondPageUsesOffset` | demo | — | A-XCUT-009 |
 | A-IDN-003 | A | covered | `DemoPersonCrudIT#persistAndFindPerson` (IDENTITY id backfill) | demo | — | A-IDN-003 |
-| A-IDN-004 | A | gap | — (`DemoPersonCrudIT#persistAndFindPerson` covers insert+find only; need **update + delete** for full CRUD) | — | P-002 | A-IDN-004 |
-| A-PAG-001 | A | covered | `DemoBootBaselineSmokeTest#pageableFindAllUsesLimitOffset` | demo | — | A-PAG-001 |
-| A-PAG-002 | A | covered | `DemoBootBaselineSmokeTest#pageableFindAllUsesLimitOffset` | demo | — | A-PAG-002 |
-| A-SEQ-001 | A | gap | — (Boot **`ddl-auto=validate`** startup with sequence metadata visible) | — | P-002 | A-SEQ-001 |
-| A-DDL-001 | A | gap | — (validate/update schema path proves CREATE TABLE consumer surface under Boot) | — | P-002 | A-DDL-001 |
+| A-IDN-004 | A | covered | `DemoPersonCrudIT#updateAndDeletePerson` | demo | — | A-IDN-004 |
+| A-PAG-001 | A | covered | `DemoBootBaselineSmokeTest#pageableFindAllUsesLimitOffset`; `#pageableSecondPageUsesOffset` | demo | — | A-PAG-001 |
+| A-PAG-002 | A | covered | `DemoBootBaselineSmokeTest#pageableFindAllUsesLimitOffset`; `#pageableSecondPageUsesOffset` | demo | — | A-PAG-002 |
+| A-SEQ-001 | A | covered | `DemoValidateStartupIT#validateStartupSucceedsWithPreCreatedSchema` | demo | — | A-SEQ-001 |
+| A-DDL-001 | A | covered | `DemoSchemaSurfaceIT#hibDemoPersonTableExistsAfterUpdateStartup` | demo | — | A-DDL-001 |
 | A-DDL-003 | A | covered | Implied by `DemoPerson` PK + `DemoPersonCrudIT#persistAndFindPerson` | demo | — | A-DDL-003 |
 | A-DDL-004 | A | covered | Implied by `DemoPerson.name` `nullable=false` + persist IT | demo | — | A-DDL-004 |
 
-**Layer A non-matrix behavioral gap (P-002 must close; not a separate matrix row):**
+**Layer A non-matrix behavioral (closed in P-002; not a separate matrix row):**
 
 | Concern | Current | gap_action |
 |---|---|---|
-| `DemoStartupCrudRunner` live path | Main code exists; IT forces `startup-crud=false`; **no `@Test`** asserts ApplicationRunner persist/find | **P-002** |
+| `DemoStartupCrudRunner` live path | Covered by `DemoStartupCrudIT#startupCrudRunnerPersistsAndFindsPerson` (`startup-crud=true`) | — |
 | JPQL select round-trip | Covered by `DemoBootBaselineSmokeTest#jpaPersistAndJpqlQueryRoundTrip` | — |
-| Offline config smoke | Covered by `DemoOfflineSmokeTest` (2 methods); must stay green without live DB | — |
+| Offline config smoke | Covered by `DemoOfflineSmokeTest` (3 methods); must stay green without live DB | — |
 
 ### Layer B — B-both model expansion (9)
 
@@ -255,17 +255,17 @@ All **34** negative-only / deferred rows in I-005 baseline (e.g. A-PAG-005, A-LC
 
 ## Gap summary by Phase (must-close for P-002+)
 
-### P-002 — Layer A (5 SSOT gaps + startup-crud behavioral)
+### P-002 — Layer A (5 SSOT gaps + startup-crud behavioral) — **closed** (RP-01 + RP-02 verified)
 
-| row_id | Gap | Suggested Boot evidence |
+| row_id | Gap | Boot evidence |
 |---|---|---|
-| A-SPI-002 | No Boot SPI-auto path | `@SpringBootTest` **without** explicit `hibernate.dialect`; assert resolved `XuguDialect` |
-| A-SPI-003 | Same as SPI-auto product resolve | May **share one** test method with A-SPI-002 |
-| A-SEQ-001 | No `ddl-auto=validate` Boot startup | Test profile: schema pre-created then `validate` starts clean |
-| A-DDL-001 | Schema consumer surface under Boot | Assert EM/SF starts with `HIB_DEMO_*` tables (validate/update path) |
-| A-IDN-004 | Persist+find only | Extend CRUD: **update** + **delete** + re-find empty |
+| A-SPI-002 | Boot SPI-auto path | `DemoSpiDialectAutoResolveIT#sessionFactoryResolvesXuguDialectWithoutExplicitConfig` |
+| A-SPI-003 | SPI-auto product resolve | shared with A-SPI-002 |
+| A-SEQ-001 | `ddl-auto=validate` Boot startup | `DemoValidateStartupIT#validateStartupSucceedsWithPreCreatedSchema` |
+| A-DDL-001 | Schema consumer surface under Boot | `DemoSchemaSurfaceIT#hibDemoPersonTableExistsAfterUpdateStartup` |
+| A-IDN-004 | Persist+find only | `DemoPersonCrudIT#updateAndDeletePerson` |
 
-Plus: gated test with `startup-crud=true` proving `DemoStartupCrudRunner` persist/find.
+Plus: `DemoStartupCrudIT#startupCrudRunnerPersistsAndFindsPerson` (`startup-crud=true`).
 
 **Out of P-002:** association / SEQUENCE / locks / UNIQUE exception / functions / JSON / bulk.
 
@@ -315,3 +315,5 @@ Plus: gated test with `startup-crud=true` proving `DemoStartupCrudRunner` persis
 | Date | Change |
 |---|---|
 | 2026-07-18 | Initial publish (I-006 / P-001 / RP-02): 41 Boot-required rows from researcher inventory |
+| 2026-07-18 | P-002 RP-01: Layer A 5 gaps + startup-crud → covered (`inv-i006-p002-rp01-implementer`) |
+| 2026-07-18 | P-002 RP-02: offline `mvn test` green; live `XUGU_RUN_IT=true` demo 14/0/0/0 (`inv-i006-p002-rp02-test`) |

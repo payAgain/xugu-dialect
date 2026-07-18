@@ -8,6 +8,16 @@ Human Gate：是否批准 B-001，范围仅 P-001？
 
 ---
 
+## Entry: I-006 B-001 P-002 accepted
+
+### Summary
+P-002 **accepted**：Layer A 黄金路径；SSOT A 13 covered / P-002 gap 0；离线 demo 14/0/0/11；live `XUGU_RUN_IT=true` demo 14/0/0/0；`verify.py` **VERIFY PASS**；reviewer approve_with_nits。Maven：`C:\Users\admin\tools\apache-maven-3.9.9`。下一步 P-003 B-both。
+
+### Next
+Orchestrator 派发 P-003（implementer → test → reviewer）。
+
+---
+
 ## Entry: I-006 B-001 P-001 accepted
 
 ### Summary

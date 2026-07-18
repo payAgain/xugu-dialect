@@ -94,8 +94,9 @@ Reviewer RP-03 readonly audit → then orchestrator may advance P-002.
 
 ## Acceptance decision
 
-- Decision: `accepted-pending-reviewer` (architect RP-02 complete; Phase Accept waits RP-03)
-- Decided by: architect-contract (this step)
-- Date: 2026-07-18T22:40:00+08:00
+- Decision: `accepted`
+- Decided by: orchestrator
+- Date: 2026-07-18T22:45:00+08:00
 - Phase verification: `harness/evidence/architect-contract/I-006/P-001/verification.json`
-- Reviewer audit: pending
+- Reviewer audit: `harness/evidence/reviewer/I-006/P-001/REVIEW.md` (approve_with_nits)
+- Accept SHA: `e5f2428ae014c914e08c42b22426e0fbe6a2736e`

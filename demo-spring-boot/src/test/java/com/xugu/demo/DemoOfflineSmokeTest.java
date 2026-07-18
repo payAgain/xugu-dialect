@@ -36,4 +36,19 @@ class DemoOfflineSmokeTest {
 			assertTrue( yaml.contains( "com.xugu.cloudjdbc.Driver" ) );
 		}
 	}
+
+	/**
+	 * Offline SPI packaging smoke (A-SPI-002 support): dialect jar registers
+	 * {@code DialectResolver} via META-INF/services. Live Boot resolve is
+	 * {@code DemoSpiDialectAutoResolveIT} under the IT gate.
+	 */
+	@Test
+	void dialectResolverServicesFileOnClasspath() throws Exception {
+		String resource = "META-INF/services/org.hibernate.engine.jdbc.dialect.spi.DialectResolver";
+		try ( InputStream in = DemoApplication.class.getClassLoader().getResourceAsStream( resource ) ) {
+			assertTrue( in != null, resource + " missing from demo classpath (xugu-dialect jar)" );
+			String body = new String( in.readAllBytes(), StandardCharsets.UTF_8 );
+			assertTrue( body.contains( "com.xugu.dialect.XuguDialectResolver" ), body );
+		}
+	}
 }

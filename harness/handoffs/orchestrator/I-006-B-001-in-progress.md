@@ -3,17 +3,19 @@
 ## Status
 - Initiative: I-006 (feature, active)
 - Build: B-001 approved / in_progress
-- Approval: 「批准 B-001，范围仅 P-001～P-005」(~2026-07-18T22:26+08:00)
 - Approved phases: P-001 → P-005 (serial)
 - Working branch: `feat/i-006-consumer-path-coverage`
-- BRANCH_CHECK: PASS
 - NOT Ship; GAV 7.4.5.Final; native dialect only
 
-## Resume from
-P-001 role_pipeline RP-01 researcher (inventory → Boot-required subset proposal)
+## Progress
+| Phase | Status | SHA |
+|---|---|---|
+| P-001 | **accepted** | `e5f2428` |
+| P-002 | in_progress | — |
+| P-003…P-005 | blocked | — |
 
-## Last SHA before B-001 execution
-`204cd75` (Plan handoff SHA record)
+## Resume from
+P-002 role_pipeline RP-01 implementer (Layer A golden path)
 
 ## Constraints
 - Do not write business/demo/dialect Java as orchestrator

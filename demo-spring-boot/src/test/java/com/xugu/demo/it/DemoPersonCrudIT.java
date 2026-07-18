@@ -1,6 +1,7 @@
 package com.xugu.demo.it;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -20,7 +21,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
 /**
- * Gated IT: Spring Boot + JPA persist/find against real XuguDB.
+ * Gated IT: Spring Boot + JPA full CRUD against real XuguDB (A-IDN-003/004).
  * Default {@code mvn test} skips (gate off). Enable with
  * {@code -Dxugu.run.integration=true} or env {@code XUGU_RUN_IT=true}.
  */
@@ -58,5 +59,34 @@ class DemoPersonCrudIT {
 				.orElseThrow( () -> new AssertionError( "findById returned empty" ) );
 		assertEquals( "it-person", found.getName() );
 		assertEquals( saved.getId(), found.getId() );
+	}
+
+	/** A-IDN-004: update + delete round-trip (full CRUD beyond persist+find). */
+	@Test
+	void updateAndDeletePerson() {
+		assertTrue( XuguIntegrationGate.isEnabled() );
+
+		DemoPerson saved = repository.save( new DemoPerson( "crud-before" ) );
+		Long id = saved.getId();
+		assertNotNull( id );
+		repository.flush();
+		entityManager.clear();
+
+		DemoPerson toUpdate = repository.findById( id )
+				.orElseThrow( () -> new AssertionError( "missing row before update" ) );
+		toUpdate.setName( "crud-after" );
+		repository.save( toUpdate );
+		repository.flush();
+		entityManager.clear();
+
+		DemoPerson updated = repository.findById( id )
+				.orElseThrow( () -> new AssertionError( "missing row after update" ) );
+		assertEquals( "crud-after", updated.getName() );
+
+		repository.delete( updated );
+		repository.flush();
+		entityManager.clear();
+
+		assertFalse( repository.findById( id ).isPresent(), "row must be gone after delete" );
 	}
 }
