@@ -11,6 +11,8 @@
 | **[`contracts/feature-matrix-i003-ruler-c.md`](../../contracts/feature-matrix-i003-ruler-c.md)** | **I-003 ruler C SSOT** — C-* 生产能力扩展（异常/JSON/Window-CTE/bulk/DDL） |
 | [`docs/feature-matrix-i003-ruler-c.md`](../feature-matrix-i003-ruler-c.md) | I-003 导航 stub / pointer |
 | **[`contracts/production-regression-baseline.md`](../../contracts/production-regression-baseline.md)** | **I-005 回归基线 SSOT** — 94 可实现 + 34 negative-only → `entry_class#method` |
+| **[`contracts/consumer-path-baseline.md`](../../contracts/consumer-path-baseline.md)** | **I-006 Boot 消费者路径 SSOT** — 41 Boot-required（A/B/C′）；非 94 行镜像 |
+| [`docs/consumer-path-baseline.md`](../consumer-path-baseline.md) | I-006 导航 stub / pointer |
 | [`contracts/xugu-dialect.contract.md`](../../contracts/xugu-dialect.contract.md) | 公共接入面 + 能力边界绑定矩阵（§7 + §7.1） |
 
 本用户指南 **只解释状态含义并给链接**，不重复 100+ 行矩阵正文。
@@ -63,9 +65,20 @@
 
 验证门控：[03-verify.md § Frozen baseline](03-verify.md#frozen-baseline--i-005-冻结基线门控)。
 
+## I-006 consumer-path counts（冻结）
+
+| Bucket | Count | SSOT status |
+|---|---:|---|
+| Boot-required (Layer A+B+C′) | 41 | All **covered**；open gaps = **0** |
+| Layer A / B / C′ | 13 / 9 / 19 | See consumer-path SSOT |
+| Remaining I-005 可实现 → dialect-it-only | 53 | Exclusion appendix — not Boot gaps |
+
+如何跑：[06-consumer-path.md](06-consumer-path.md)。验证门控：[03-verify.md § Consumer-path](03-verify.md#consumer-path-baseline--i-006-消费者路径门控)。
+
 ## Cross-links
 
 - Contract §7 Capability scope → Definition A matrix；§7.1 → I-003 ruler C  
 - I-005 baseline SSOT → [`production-regression-baseline.md`](../../contracts/production-regression-baseline.md)  
+- I-006 consumer-path SSOT → [`consumer-path-baseline.md`](../../contracts/consumer-path-baseline.md)  
 - User guide index: [README.md](README.md)  
-- Demo 仅证明接入路径，**不以 demo 覆盖矩阵全行**
+- Demo 证明 **Boot 消费者路径**（41 行），**不以 demo 覆盖** I-005 全量 94 可实现行

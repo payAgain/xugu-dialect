@@ -2,7 +2,7 @@
 
 > Scoped clarity for one change unit. Not a full product re-charter.
 > Type: feature
-> Updated: 2026-07-18T15:09:00+08:00
+> Updated: 2026-07-19T00:10:00+08:00 (B-001 complete; await Initiative Accept — NOT Ship)
 
 ## Goal
 - 在 I-005 生产回归基线之上，建立 **Spring Boot 消费者路径全面覆盖**：黄金路径加固（A）+ 代表性模型扩展（B）+ SSOT 消费者相关行扫盲（C′）。

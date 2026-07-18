@@ -1,6 +1,6 @@
 # 05 — Troubleshooting / 故障排查
 
-← [04-feature-matrix.md](04-feature-matrix.md) · [Index](README.md)
+← [04-feature-matrix.md](04-feature-matrix.md) · [Index](README.md) · Next: [06-consumer-path.md](06-consumer-path.md)
 
 ## 1. LIMIT vs FOR UPDATE 顺序错误
 

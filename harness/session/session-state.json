@@ -2,9 +2,9 @@
   "schema_version": 1,
   "task_id": "I-006",
   "batch_id": "B-001",
-  "status": "b001_in_progress",
+  "status": "b001_complete_awaiting_initiative_accept",
   "harness_level": "Standard",
-  "last_updated": "2026-07-18T23:50:00+08:00",
+  "last_updated": "2026-07-19T00:10:00+08:00",
   "initiative_id": "I-006",
   "initiative_type": "feature",
   "working_branch": "feat/i-006-consumer-path-coverage",
@@ -12,36 +12,38 @@
     "P-001 accepted",
     "P-002 accepted",
     "P-003 accepted",
-    "P-004 accepted (Layer C′; VERIFY PASS; demo @Test=28)",
-    "P-005 in_progress (docs + VERIFY Accept prep)"
+    "P-004 accepted",
+    "P-005 accepted (docs + VERIFY PASS)",
+    "B-001 complete — await Initiative Accept (NOT Ship)"
   ],
   "next_3_steps": [
-    "Dispatch P-005 role_pipeline",
-    "Accept + must-commit P-005",
-    "Propose Initiative Accept (NOT Ship)"
+    "Human Gate: Initiative Accept I-006?",
+    "Optional Archive after Accept",
+    "Ship only if separately authorized"
   ],
   "validation": {
-    "last_result": "P-004 VERIFY PASS; live demo 28/0/0/0; harness_check PASS"
+    "last_result": "P-005 VERIFY PASS; live demo 28/0/0/0; harness_check PASS; SSOT gaps 0"
   },
   "version_control_checkpoint": {
-    "candidate_commit": "3aae8f04cbc6eeb8ed3305ed41c5567923d0add9",
+    "candidate_commit": "929be220124055b028328a15ad004afef3936707",
     "p001_accept_sha": "e5f2428ae014c914e08c42b22426e0fbe6a2736e",
     "p002_accept_sha": "9f4cbd6",
     "p003_accept_sha": "3aae8f04cbc6eeb8ed3305ed41c5567923d0add9",
+    "p004_accept_sha": "929be220124055b028328a15ad004afef3936707",
     "working_branch": "feat/i-006-consumer-path-coverage",
     "maven_home_hint": "C:\\Users\\admin\\tools\\apache-maven-3.9.9"
   },
   "cognitive_state": {
     "failure_count": 0,
-    "current_mode": "b001_in_progress",
-    "blocked_on": null
+    "current_mode": "b001_complete_awaiting_initiative_accept",
+    "blocked_on": "human_gate_initiative_accept"
   },
   "handoff": {
-    "resume_from": "harness/handoffs/orchestrator/I-006-B-001-in-progress.md"
+    "resume_from": "harness/handoffs/orchestrator/I-006-B-001-complete.md"
   },
   "approved_build": "B-001",
   "approved_phases": ["P-001", "P-002", "P-003", "P-004", "P-005"],
-  "accepted_phases": ["P-001", "P-002", "P-003", "P-004"],
+  "accepted_phases": ["P-001", "P-002", "P-003", "P-004", "P-005"],
   "proposed_phases": ["P-001", "P-002", "P-003", "P-004", "P-005"],
-  "updated_at": "2026-07-18T23:50:00+08:00"
+  "updated_at": "2026-07-19T00:10:00+08:00"
 }

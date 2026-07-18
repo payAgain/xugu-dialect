@@ -1,3 +1,13 @@
+## Entry: I-006 B-001 complete — await Initiative Accept
+
+### Summary
+P-001…P-005 **全部 accepted**。消费者路径 A + B-both + C′ 覆盖完成；SSOT open gaps=0；Demo `@Test`≈28；P-005 docs 对齐 + VERIFY PASS + live 28/0/0/0。`org/` 不提交。**NOT Ship**。
+
+### Next
+Human Gate：是否 **Initiative Accept I-006**？（不含 Ship）
+
+---
+
 ## Entry: I-006 B-001 P-004 accepted
 
 ### Summary

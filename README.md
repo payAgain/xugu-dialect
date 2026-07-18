@@ -8,12 +8,16 @@ I-003 feature parity (same GAV **7.4.5.Final**): exception mapping, JSON aggrega
 
 I-005 production regression baseline (same GAV **7.4.5.Final**): **94** 可实现 + **34** negative-only rows frozen with test entrypoints; demo smoke in baseline. SSOT: [contracts/production-regression-baseline.md](contracts/production-regression-baseline.md). Frozen IT gate: `XUGU_RUN_IT=true mvn -q test` (see [docs/user-guide/03-verify.md](docs/user-guide/03-verify.md)).
 
+I-006 Spring Boot consumer-path (same GAV **7.4.5.Final**): **41** Boot-required rows (Layer A/B/C′), open gaps = **0**. SSOT: [contracts/consumer-path-baseline.md](contracts/consumer-path-baseline.md). How to run offline + gated live: [docs/user-guide/06-consumer-path.md](docs/user-guide/06-consumer-path.md). **Not** a full 94-row Boot mirror; **Ship out of scope**.
+
 ## Start here
 
 - **User guide:** [docs/user-guide/README.md](docs/user-guide/README.md)
+- **Consumer-path (I-006):** [docs/user-guide/06-consumer-path.md](docs/user-guide/06-consumer-path.md)
 - **Public contract:** [contracts/xugu-dialect.contract.md](contracts/xugu-dialect.contract.md)
 - **Definition A feature matrix (SSOT):** [contracts/feature-matrix-definition-a.md](contracts/feature-matrix-definition-a.md)
 - **I-003 ruler C matrix (SSOT):** [contracts/feature-matrix-i003-ruler-c.md](contracts/feature-matrix-i003-ruler-c.md)
+- **I-006 consumer-path baseline (SSOT):** [contracts/consumer-path-baseline.md](contracts/consumer-path-baseline.md)
 - **Spring Boot demo:** [demo-spring-boot/README.md](demo-spring-boot/README.md)
 
 ## Modules
@@ -36,7 +40,10 @@ Live DB integration (optional gate):
 ```text
 mvn -q test -Dxugu.run.integration=true
 mvn -q -pl demo-spring-boot -am test -Dxugu.run.integration=true
+# or: XUGU_RUN_IT=true mvn -q test
 ```
+
+Consumer-path details (Layers A/B/C′, Accept prep): [docs/user-guide/06-consumer-path.md](docs/user-guide/06-consumer-path.md).
 
 ## Agent / harness
 

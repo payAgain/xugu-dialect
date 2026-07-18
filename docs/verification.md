@@ -90,6 +90,33 @@ User-facing procedure: [`docs/user-guide/03-verify.md`](user-guide/03-verify.md#
 
 **C-BULK-002** bulk insert: **known-limit-documented** — live IT waived; offline wiring via `XuguBulkMutationSupportTest#fallbackSqmInsertStrategyWired_C_BULK_002`.
 
+## I-006 consumer-path baseline (frozen)
+
+Initiative **I-006** freezes the Spring Boot **consumer-path** subset. SSOT:
+
+[`contracts/consumer-path-baseline.md`](../contracts/consumer-path-baseline.md)
+
+| Bucket | Count | Accept requirement |
+|---|---:|---|
+| Boot-required rows (A+B+C′) | 41 | Each row maps to demo `entry_class#method`; open gaps = **0** |
+| Demo `@Test` | ≈28 | Target band 25–40; not a 94-row Boot mirror |
+| GAV | `7.4.5.Final` | Unchanged; no Ship in this Initiative |
+
+### IT gate for consumer-path
+
+| Gate | Enable | Effect |
+|---|---|---|
+| JVM property | `-Dxugu.run.integration=true` | Surefire runs gated dialect + demo IT |
+| Environment | `XUGU_RUN_IT=true` | Same (`XuguIntegrationGate`) |
+
+**Daily default:** `mvn -q test` (gate OFF) — sufficient for `verify.py` **VERIFY PASS**.
+
+**I-006 Initiative Accept (when DB available):** `XUGU_RUN_IT=true mvn -q test` (or `mvn -q -pl demo-spring-boot -am test` with gate ON) must be **all green** for demo. When no live DB, document `SKIPPED_INFRA` in Phase evidence; offline wiring remains required.
+
+User-facing procedure: [`docs/user-guide/06-consumer-path.md`](user-guide/06-consumer-path.md). Docs pointer: [`docs/consumer-path-baseline.md`](consumer-path-baseline.md).
+
+**Ship / Maven Central:** out of I-006 scope (Human Gate may Accept Initiative without Ship).
+
 ## Change-Type Matrix
 
 | Change Type | Required Validation |

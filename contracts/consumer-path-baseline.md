@@ -1,15 +1,16 @@
 # Consumer-Path Baseline (Boot-Required SSOT)
 
-> **Status:** Layer A/B/C′ **accepted** — Boot-required open gaps = **0**; P-004 VERIFY PASS (demo @Test=28; live 28/0/0/0)  
+> **Status:** **FROZEN** for Initiative Accept prep (P-005) — Layer A/B/C′ **accepted**; Boot-required open gaps = **0**; docs ↔ SSOT ↔ Demo aligned  
 > **Initiative:** I-006 — Spring Boot consumer-path coverage  
-> **Author role:** architect-contract (P-001); Layers A/B/C′ by implementer (P-002…P-004); verification by test; Accept by orchestrator  
-> **invocation_id:** `inv-i006-p004-rp03-reviewer` (Accept); test `inv-i006-p004-rp02-test`; implementer `inv-i006-p004-rp01-implementer`  
+> **Author role:** architect-contract (P-001); Layers A/B/C′ by implementer (P-002…P-004); docs freeze by implementer (P-005); verification by test; Accept by orchestrator  
+> **invocation_id:** `inv-i006-p005-rp01-implementer` (docs freeze); prior Accept `inv-i006-p004-rp03-reviewer`  
 
 > **Sources:** [`production-regression-baseline.md`](production-regression-baseline.md) (I-005), [`harness/evidence/researcher/I-006/P-001/INVENTORY.md`](../harness/evidence/researcher/I-006/P-001/INVENTORY.md), [`GAP-SUMMARY.md`](../harness/evidence/researcher/I-006/P-001/GAP-SUMMARY.md), [`harness/initiatives/I-006/brief.md`](../harness/initiatives/I-006/brief.md)  
+> **User guide:** [`docs/user-guide/06-consumer-path.md`](../docs/user-guide/06-consumer-path.md) · pointer [`docs/consumer-path-baseline.md`](../docs/consumer-path-baseline.md)  
 > **Scope:** **Boot-required** consumer-path subset only — **41** rows (Layer A=13 / B=9 / C′=19). **Not** a full 94-row Boot mirror of I-005 可实现.  
 > **GAV:** `com.xugu:xugu-dialect:7.4.5.Final` (document only; no Ship / bump in this Initiative)  
 > **Demo IT gate:** `XuguIntegrationGate.isEnabled()` ← env `XUGU_RUN_IT=true` or JVM `-Dxugu.run.integration=true`  
-> **Ownership note:** file listed under demo-spring-boot in `OWNERSHIP.yaml`; **writer** for contracts remains architect-contract
+> **Ownership note:** file listed under demo-spring-boot in `OWNERSHIP.yaml`; **writer** for contracts remains architect-contract; P-005 may only update freeze-status notes
 
 ## Purpose
 
@@ -336,3 +337,5 @@ LOB pick: **A-TYP-010** (BLOB). **A-TYP-011** remains dialect-it-only (exclusion
 | 2026-07-18 | P-004 RP-02 (first): offline green (demo 28/0/0/23); live FAIL (28/0/3/0) — UUID extract + missing JSON FormatMapper; VERIFY PASS offline; A-TYP-011 dialect-it-only (`inv-i006-p004-rp02-test`) |
 | 2026-07-18 | P-004 implementer rework: UUID→varchar+converter; add `spring-boot-starter-jackson`; claimed live demo 28/0/0/0; dialect unchanged |
 | 2026-07-18 | P-004 RP-02 re-run: offline 28/0/0/23; live 28/0/0/0 PASS; VERIFY PASS; C′ open gaps 0; A-TYP-011 dialect-it-only; Demo `@Test`=28 (`inv-i006-p004-rp02-test`) |
+| 2026-07-19 | P-005 RP-01: docs ↔ SSOT ↔ Demo aligned; user guide `06-consumer-path.md`; freeze status **FROZEN** (Boot open gaps remain **0**); Initiative Accept prep (**NOT Ship**); GAV `7.4.5.Final` (`inv-i006-p005-rp01-implementer`) |
+| 2026-07-19 | P-005 RP-02 (test): offline 28/0/0/23; live 28/0/0/0 PASS; VERIFY PASS; docs `06-consumer-path.md` spot-check OK; SSOT remains **FROZEN** gaps **0**; GAV `7.4.5.Final` confirmed (`inv-i006-p005-rp02-test`) |

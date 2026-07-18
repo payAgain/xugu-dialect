@@ -93,6 +93,30 @@ I-005 将 **Definition A 可实现 (78)** + **I-003 ruler C 可实现 (16)** = *
 - **C-BULK-002** bulk insert：SSOT 标 **known-limit-documented**；真库 bulk insert IT waived — 见 [05-troubleshooting.md §10](05-troubleshooting.md#10-bulk-insertjoined--identity已知限制)。
 - Demo 可选路径（validate / function-HQL / bulk demo）为 SSOT 可选 gap，不阻塞 I-005 Accept。
 
+## Consumer-path baseline — I-006 消费者路径门控
+
+I-006 冻结 Spring Boot **消费者路径**子集（**不是** 94 行 Boot 镜像）。SSOT：
+
+[`contracts/consumer-path-baseline.md`](../../contracts/consumer-path-baseline.md)
+
+| Bucket | Count |
+|---|---:|
+| Boot-required (A+B+C′) | **41** |
+| Open Boot gaps | **0** |
+| Demo `@Test` (approx.) | **28** |
+
+### 日常 vs 消费者路径验收
+
+| Mode | Command | When |
+|---|---|---|
+| **Daily / offline** | `mvn -q test` | 默认 CI、无真库；gated IT 跳过 |
+| **Consumer-path live (I-006)** | `XUGU_RUN_IT=true mvn -q test` 或 `mvn -q -pl demo-spring-boot -am test` + gate ON | 有可达 XuguDB；期望 demo 全绿 |
+| **Harness contract** | `python harness/scripts/verify.py` | Accept 须 **VERIFY PASS**（offline required checks） |
+
+完整步骤、Layer 说明与边界：[06-consumer-path.md](06-consumer-path.md)。
+
+**GAV 不变：** `com.xugu:xugu-dialect:7.4.5.Final`。**Ship / Central** 不在 I-006 范围。
+
 ## Checklist（集成方自测）
 
 - [ ] 依赖可解析：`com.xugu:xugu-dialect:7.4.5.Final` + JDBC 驱动在 classpath
@@ -101,5 +125,6 @@ I-005 将 **Definition A 可实现 (78)** + **I-003 ruler C 可实现 (16)** = *
 - [ ] URL 含 `compatiblemode=NONE`（或会话等价设置）
 - [ ] 凭据来自 env / 密钥库，未提交生产密码
 - [ ] （可选）gate ON 时 demo IT / dialect IT 通过
+- [ ] （I-006）消费者路径：对照 [06-consumer-path.md](06-consumer-path.md)；Boot open gaps = 0
 
 排障见 [05-troubleshooting.md](05-troubleshooting.md)。

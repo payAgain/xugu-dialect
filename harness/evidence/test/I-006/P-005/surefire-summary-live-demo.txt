@@ -1,0 +1,3 @@
+=== Live surefire summary (XUGU_RUN_IT=true, -pl demo-spring-boot -am) ===
+dialect (-am): Tests run: 139, Failures: 0, Errors: 0, Skipped: 22
+demo-spring-boot: Tests run: 28, Failures: 0, Errors: 0, Skipped: 0

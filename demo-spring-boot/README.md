@@ -2,6 +2,8 @@
 
 Spring Boot **4.1.0** demo that uses `com.xugu:xugu-dialect:7.4.5.Final` and the repo-root Xugu JDBC jar against a real XuguDB.
 
+**I-006 consumer-path:** this module hosts the Boot-required baseline (**41** SSOT rows, Layers A + B-both + C′). Open gaps = **0**. How to run offline / gated live for Accept: [`docs/user-guide/06-consumer-path.md`](../docs/user-guide/06-consumer-path.md). SSOT: [`contracts/consumer-path-baseline.md`](../contracts/consumer-path-baseline.md).
+
 ## Requirements
 
 - JDK 17+ (compiler release 17)
@@ -61,6 +63,14 @@ Disable startup CRUD: `--xugu.demo.startup-crud=false`
 
 ## Tests
 
+Consumer-path verification modes:
+
+| Mode | Command | Expectation |
+|---|---|---|
+| Offline | `mvn -q -pl demo-spring-boot -am test` | Gated IT skipped; offline smoke green |
+| Live | `$env:XUGU_RUN_IT='true'; mvn -q -pl demo-spring-boot -am test` | Demo ≈28 tests green (last Accept: 28/0/0/0) |
+| Harness | `python harness/scripts/verify.py` (repo root) | **VERIFY PASS** |
+
 ```bash
 # offline (default) — skips gated IT
 mvn -q test
@@ -70,6 +80,9 @@ mvn -q -pl demo-spring-boot -am test
 mvn -q -pl demo-spring-boot -am test -Dxugu.run.integration=true
 # or full reactor:
 mvn -q test -Dxugu.run.integration=true
+# PowerShell env alternative:
+#   $env:XUGU_RUN_IT = "true"
+#   mvn -q -pl demo-spring-boot -am test
 ```
 
 IT classes (`@EnabledIf` on `XuguIntegrationGate`):
