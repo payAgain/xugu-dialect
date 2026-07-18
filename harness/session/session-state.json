@@ -31,7 +31,7 @@
     "committed": true,
     "branch": "feat/i-005-production-regression-baseline",
     "candidate_commit": "32b960bd1eeef48af33a39eef3fe34e1fd37d382",
-    "head": "cf9c6e946b5b734af3f28ca2cc63db4f70f61f0d"
+    "head": "e3c7947e2b5419b9d8f6d82f831a81acaf10ebae"
   },
   "handoff": {
     "resume_from": "harness/handoffs/orchestrator/I-005-accepted.md"
