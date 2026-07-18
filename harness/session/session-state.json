@@ -30,8 +30,8 @@
     "decision": "initiative_accept_i005",
     "committed": true,
     "branch": "feat/i-005-production-regression-baseline",
-    "candidate_commit": "4af4ebf",
-    "head": "4af4ebf"
+    "candidate_commit": "32b960bd1eeef48af33a39eef3fe34e1fd37d382",
+    "head": "32b960bd1eeef48af33a39eef3fe34e1fd37d382"
   },
   "handoff": {
     "resume_from": "harness/handoffs/orchestrator/I-005-accepted.md"
