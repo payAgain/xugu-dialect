@@ -1,0 +1,117 @@
+schema_version: 1
+role: architect-contract
+phase_id: P-001
+build_id: B-001
+initiative_id: I-006
+invocation_id: inv-i006-p001-rp02-architect
+step_id: RP-02
+status: passed
+required: true
+completed_at: "2026-07-18T22:40:00+08:00"
+purpose: publish consumer-path Boot-required SSOT (C′ subset); cross-ref I-005; tag A/B/C′ and gap_action Phases
+
+inputs:
+  - harness/evidence/researcher/I-006/P-001/INVENTORY.md
+  - harness/evidence/researcher/I-006/P-001/GAP-SUMMARY.md
+  - contracts/production-regression-baseline.md
+  - harness/tasks/P-001.md
+  - harness/initiatives/I-006/brief.md
+
+outputs:
+  baseline_ssot: contracts/consumer-path-baseline.md
+  evidence_acceptance: harness/evidence/architect-contract/I-006/P-001/ACCEPTANCE.md
+  evidence_verification: harness/evidence/architect-contract/I-006/P-001/verification.json
+  evidence_gap_summary: harness/evidence/architect-contract/I-006/P-001/GAP-SUMMARY.md
+  handoff: harness/handoffs/architect-contract/I-006-P-001.yaml
+
+baseline_summary:
+  boot_required_rows: 41
+  layer_counts:
+    A: 13
+    B: 9
+    C_prime: 19
+  status_counts:
+    covered: 8
+    gap: 33
+  full_94_boot_mirror: false
+  covered_ids:
+    - A-SPI-001
+    - A-XCUT-003
+    - A-XCUT-009
+    - A-IDN-003
+    - A-PAG-001
+    - A-PAG-002
+    - A-DDL-003
+    - A-DDL-004
+  gap_action_routing:
+    P-002:
+      - A-SPI-002
+      - A-SPI-003
+      - A-IDN-004
+      - A-SEQ-001
+      - A-DDL-001
+      - startup_crud_behavioral
+    P-003:
+      - A-SEQ-003
+      - A-SEQ-004
+      - A-SCH-011
+      - A-SCH-012
+      - A-LCK-001
+      - A-LCK-003
+      - C-EXC-001
+      - A-XCUT-004
+      - C-EXC-002
+    P-004:
+      - A-TYP-001
+      - A-TYP-002
+      - A-TYP-004
+      - A-TYP-005
+      - A-TYP-006
+      - A-TYP-008
+      - A-TYP-009
+      - A-TYP-010
+      - A-TYP-012
+      - A-TYP-013
+      - A-FUN-001
+      - A-FUN-002
+      - A-FUN-004
+      - A-FUN-007
+      - A-FUN-010
+      - A-FUN-016
+      - A-FUN-017
+      - C-JSON-001
+      - C-BULK-001
+
+explicit_callouts:
+  not_full_94_mirror: true
+  dialect_it_only_exclusions: documented_in_ssot_appendix
+  gav: 7.4.5.Final
+  no_java_changes: true
+  c_prime_definition: Boot-required SSOT rows only
+
+notes_for_reviewer_rp03: |
+  Audit contracts/consumer-path-baseline.md:
+  - Primary Boot-required table has exactly 41 rows (A=13, B=9, C′=19)
+  - NOT a full 94-row Boot mirror of I-005 可实现
+  - Exclusion appendix keeps dialect SPI/hooks as dialect-it-only (not Boot gaps)
+  - Every gap has gap_action in {P-002, P-003, P-004}; no invented row_ids
+  - i005_xref matches production-regression-baseline matrix_id
+  - A-IDN-004 correctly gap (needs update+delete beyond persist/find)
+  - C-EXC-002 retained in Layer B / P-003 (stretch, not defer)
+  - Reviewer should reject any silent expansion toward 94 Boot rows
+
+notes_for_orchestrator: |
+  P-001 architect-contract RP-02 complete. Next: reviewer RP-03 readonly audit.
+  After RP-03 PASS, P-002 may close Layer A gaps (SPI-auto, validate, full CRUD, startup-crud).
+  Do not modify dialect/demo Java in P-001.
+  Do not commit from this role instance (orchestrator/Human Gate owns commit).
+
+forbidden_reminder:
+  - no dialect Java changes
+  - no demo Java changes
+  - no full 94-row Boot mirror
+  - GAV remains 7.4.5.Final
+  - no commit/push/tag from this role
+
+next_step: RP-03 reviewer
+blocker: null

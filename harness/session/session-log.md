@@ -8,6 +8,26 @@ Human Gate：是否批准 B-001，范围仅 P-001？
 
 ---
 
+## Entry: I-006 B-001 P-001 accepted
+
+### Summary
+P-001 **accepted**：`contracts/consumer-path-baseline.md`（41 Boot-required：A=13/B=9/C′=19；covered=8/gap=33）。Pipeline researcher→architect-contract→reviewer（approve_with_nits）。harness_check PASS。未改 demo/dialect Java。`org/` 不提交。下一步 P-002 Layer A。
+
+### Next
+Orchestrator 派发 P-002（implementer → test → reviewer）。
+
+---
+
+## Entry: I-006 B-001 approved — P-001~P-005 serial
+
+### Summary
+Human Gate「批准 B-001，范围仅 P-001～P-005」(~2026-07-18T22:26+08:00)。Build **approved** / `in_progress`（扩大 draft 的仅 P-001 为全 Plan）。`approved_phase_ids=P-001…P-005`。REGISTRY：P-001 `in_progress`；P-002…P-005 `blocked` + `build_id=B-001`。Orchestrator **串行**执行 P-001→P-005；不并行策略问询；不 Ship；GAV 7.4.5.Final；A→B-both→C′。
+
+### Next
+Orchestrator 派发 P-001 role_pipeline（researcher → architect-contract → reviewer），随后按依赖推进至 P-005。
+
+---
+
 ## Entry: I-006 Scope PASS — Plan pending
 
 ### Summary

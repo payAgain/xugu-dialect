@@ -1,0 +1,11 @@
+invocation_id: inv-i006-p001-rp03-reviewer
+phase: P-001
+initiative: I-006
+build: B-001
+verdict: approve_with_nits
+recommendation: accept_phase
+risk_score: 2
+ssot_row_count: 41
+is_full_94_mirror: false
+persisted_review: harness/evidence/reviewer/I-006/P-001/REVIEW.md
+reviewed_at: "2026-07-18T22:40:00+08:00"

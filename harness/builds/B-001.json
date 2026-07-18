@@ -3,14 +3,25 @@
   "build_id": "B-001",
   "initiative_id": "I-006",
   "plan_revision": 1,
-  "status": "draft",
-  "approved": false,
-  "proposed_phase_ids": ["P-001"],
-  "approved_phase_ids": [],
-  "approval": null,
+  "status": "in_progress",
+  "approved": true,
+  "proposed_phase_ids": ["P-001", "P-002", "P-003", "P-004", "P-005"],
+  "approved_phase_ids": ["P-001", "P-002", "P-003", "P-004", "P-005"],
+  "approval": {
+    "phrase": "批准 B-001，范围仅 P-001～P-005",
+    "approved_at": "2026-07-18T22:26:00+08:00",
+    "scope_note": "Expand draft (P-001 only) to full Plan serial P-001→P-005. NOT Ship. GAV 7.4.5.Final. Native dialect only."
+  },
   "completion": null,
-  "recommendation": "B-001 draft = earliest ready Phase only (P-001 consumer-path Boot-required SSOT). Full Plan is serial P-001→P-005; expand Build scope only via Human Gate approval. No Ship. GAV 7.4.5.Final. Native dialect only.",
+  "recommendation": "B-001 approved full Plan serial P-001→P-005 (consumer-path A + B-both + C′). Orchestrator executes serially; no parallel ask. No Ship. GAV 7.4.5.Final. Native dialect only.",
   "supersedes": "I-005-B-001",
-  "scope_changes": [],
-  "notes": "Await Human Gate Build approval (scope only — not parallel strategy). Do not start role_pipeline until approved."
+  "scope_changes": [
+    {
+      "at": "2026-07-18T22:26:00+08:00",
+      "from": ["P-001"],
+      "to": ["P-001", "P-002", "P-003", "P-004", "P-005"],
+      "reason": "Human Gate authorized full Plan serial scope"
+    }
+  ],
+  "notes": "Human Gate approved. Orchestrator serial P-001→P-005. Stay on feat/i-006-consumer-path-coverage. Do not commit org/ dumps. NOT Ship."
 }
