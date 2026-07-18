@@ -14,7 +14,7 @@
 | P-002 | accepted | `9f4cbd6` |
 | P-003 | accepted | `3aae8f0` |
 | P-004 | accepted | `929be22` |
-| P-005 | accepted | (this commit) |
+| P-005 | accepted | `7566e1c` |
 
 ## Validation snapshot
 - SSOT Boot-required open gaps: **0** (41 covered; not 94 mirror)

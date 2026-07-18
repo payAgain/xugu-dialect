@@ -13,7 +13,7 @@
 | P-002 | Layer A | accepted | `9f4cbd6` |
 | P-003 | Layer B (B-both) | accepted | `3aae8f0` |
 | P-004 | Layer C′ | accepted | `929be22` |
-| P-005 | Docs + VERIFY Accept prep | accepted | (pending P-005 commit) |
+| P-005 | Docs + VERIFY Accept prep | accepted | `7566e1c` |
 
 ## Functional / SSOT
 

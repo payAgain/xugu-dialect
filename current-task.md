@@ -9,7 +9,7 @@ P-001…P-005 **全部 accepted**。SSOT Boot-required open gaps = **0**；Demo 
 ## Active Batch / Tasks
 - Initiative: **I-006** `active` → propose **accepted**
 - Build: **B-001** complete（P-001…P-005 all accepted）
-- Key SHAs: P-001 `e5f2428` · P-002 `9f4cbd6` · P-003 `3aae8f0` · P-004 `929be22` · P-005 (pending commit)
+- Key SHAs: P-001 `e5f2428` · P-002 `9f4cbd6` · P-003 `3aae8f0` · P-004 `929be22` · P-005 `7566e1c`
 - Checklist: `harness/evidence/implementer/I-006/P-005/INITIATIVE-ACCEPT-CHECKLIST.md`
 
 ## Next 3 Steps

@@ -25,11 +25,12 @@
     "last_result": "P-005 VERIFY PASS; live demo 28/0/0/0; harness_check PASS; SSOT gaps 0"
   },
   "version_control_checkpoint": {
-    "candidate_commit": "929be220124055b028328a15ad004afef3936707",
+    "candidate_commit": "7566e1cf7b9867421c22bf3e9998561ee83e7e71",
     "p001_accept_sha": "e5f2428ae014c914e08c42b22426e0fbe6a2736e",
     "p002_accept_sha": "9f4cbd6",
     "p003_accept_sha": "3aae8f04cbc6eeb8ed3305ed41c5567923d0add9",
     "p004_accept_sha": "929be220124055b028328a15ad004afef3936707",
+    "p005_accept_sha": "7566e1cf7b9867421c22bf3e9998561ee83e7e71",
     "working_branch": "feat/i-006-consumer-path-coverage",
     "maven_home_hint": "C:\\Users\\admin\\tools\\apache-maven-3.9.9"
   },
