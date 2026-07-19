@@ -1,3 +1,23 @@
+## Entry: I-006 archived (NOT Ship)
+
+### Summary
+Orchestrator Archive I-006 on `feat/i-006-consumer-path-coverage`（Human Gate Scope phrase）。`ARCHIVE.md` + INDEX completed/archived + brief archived + handoff。**NOT Ship**。Pre-Archive HEAD `aa3e9db`。下一步：开 `feat/i-007-capability-hardening-abc` 并 Plan I-007。
+
+### Next
+Orchestrator Plan I-007 P-001…P-006 + B-001 draft（仅 P-001）。
+
+---
+
+## Entry: I-007 Scope PASS — Archive I-006 + Plan pending
+
+### Summary
+Human Gate「Archive I-006；类型 feature；其余按推荐；本 Initiative 范围已明确，可以开干」。I-007 feature **active**：A（C-BULK-002 优先打通 + 证据硬化）→ B（Flyway + Demo 加深）→ C（JSON 子集 + ARRAY + ALTER SEQUENCE）；NONE；不升版；不 Ship。下一步：orchestrator Archive I-006 + 串行 Plan P-001…P-006 + 分支 `feat/i-007-capability-hardening-abc` + B-001 draft（仅 P-001）。
+
+### Next
+Orchestrator Archive + Plan；Human Gate 批准 B-001 范围。
+
+---
+
 ## Entry: I-006 Initiative Accept
 
 ### Summary

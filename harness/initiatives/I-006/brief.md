@@ -2,7 +2,7 @@
 
 > Scoped clarity for one change unit. Not a full product re-charter.
 > Type: feature
-> Updated: 2026-07-19T11:07:00+08:00 (Initiative Accept confirmed — NOT Ship / NOT Archive)
+> Updated: 2026-07-19T13:53:00+08:00 (archived — NOT Ship)
 
 ## Goal
 - 在 I-005 生产回归基线之上，建立 **Spring Boot 消费者路径全面覆盖**：黄金路径加固（A）+ 代表性模型扩展（B）+ SSOT 消费者相关行扫盲（C′）。
@@ -47,10 +47,11 @@
 - Ship: **out of this Initiative**
 
 ## Status
-`accepted` — Human Gate「Initiative Accept I-006」(~2026-07-19T11:07+08:00); **not shipped**; **not archived**
+`archived` — Human Gate「Archive I-006」(~2026-07-19T13:50+08:00 via I-007 Scope); **not shipped**
 
 - Scope PASS: ~2026-07-18T15:09+08:00
 - Plan complete: ~2026-07-18T15:13+08:00
 - B-001 approved / P-001…P-005 all accepted
 - Initiative Accept: ~2026-07-19T11:07+08:00
-- Archive: optional next
+- Archive: ~2026-07-19T13:53+08:00 — `harness/initiatives/I-006/ARCHIVE.md`
+- Successor: **I-007** (`harness/initiatives/I-007/brief.md`)
