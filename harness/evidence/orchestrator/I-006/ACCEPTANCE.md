@@ -33,7 +33,7 @@ Build **B-001** / Phases **P-001 … P-005** all **accepted**.
 
 - Working branch: `feat/i-006-consumer-path-coverage`
 - Pre-Accept HEAD: `f438cd3`
-- Accept must-commit: *(filled after commit)*
+- Accept must-commit: `3c14d993d6528da2e0e8094a334762045a0897e5`
 
 ## Key delivery SHAs
 
