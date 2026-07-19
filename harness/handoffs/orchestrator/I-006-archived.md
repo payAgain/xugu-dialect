@@ -19,8 +19,8 @@
 
 - Pre-Archive HEAD: `aa3e9dba01c58d607e359d837ab4c47afe648d37`
 - Initiative Accept: `3c14d993d6528da2e0e8094a334762045a0897e5`
-- Archive must-commit: *(filled after Archive commit)*
-- **Final HEAD:** *(filled after Archive commit / closeout)*
+- Archive must-commit: `58d0ce80064dba4b9650c6b54d52b54ae5a7ba07`
+- **Final HEAD:** *(filled after Archive closeout)*
 
 ## Evidence
 

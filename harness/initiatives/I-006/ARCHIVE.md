@@ -46,6 +46,7 @@ Phases **P-001 → P-005** accepted under Build **B-001**. Initiative Accept rec
 | P-005 | `7566e1c` |
 | Initiative Accept | `3c14d99` |
 | Pre-Archive HEAD | `aa3e9db` |
+| Archive must-commit | `58d0ce8` |
 
 ## Ship deferred (explicit)
 
