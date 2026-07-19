@@ -34,7 +34,7 @@ Human Gate「Initiative Accept I-007」→ Initiative **accepted**
 
 - Pre-Accept HEAD: `45125f6`
 - Accept must-commit: `95d4739b208f0ad5f1d6825dbab8c96c36712550`
-- **Final HEAD:** *(closeout chore may follow)*
+- **Final HEAD:** `c570aebc761f1399c17a4619f5e092022db4443e`
 
 ## Evidence
 
