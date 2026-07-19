@@ -1,3 +1,13 @@
+## Entry: I-007 B-001 complete — await Initiative Accept
+
+### Summary
+P-001…P-006 **全部 accepted**。C-BULK-002=**covered-live**；Track C 四行 covered-live；Track B Flyway+Demo；`verify.py` **VERIFY PASS**。GAV 7.4.5.Final；NONE；**NOT Ship**。`org/` 不提交。
+
+### Next
+Human Gate：是否 **Initiative Accept I-007**？（不含 Ship）
+
+---
+
 ## Entry: I-007 B-001 P-005 accepted — Track B consumers
 
 ### Summary

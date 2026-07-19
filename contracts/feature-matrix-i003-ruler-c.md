@@ -61,7 +61,7 @@
 | ID | Theme | Capability | Hibernate surface | Xugu doc ref | Sibling (read-only) | Status | Target Phase | app_entrypoint | Acceptance hint |
 |---|---|---|---|---|---|---|---|---|---|
 | C-BULK-001 | Bulk | Multi-table mutation fallback | `getFallbackSqmMutationStrategy` (local temp) | `reference/object/table/create.md` (#临时表); existing temp strategies | `LocalTemporaryTableMutationStrategy` wiring | 可实现 | P-005 | HQL bulk `update`/`delete` on inheritance or join path needing temp strategy | ✅ I-003/P-005 `XuguBulkMutationIT` update/delete |
-| C-BULK-002 | Bulk | Multi-table insert fallback | `getFallbackSqmInsertStrategy` | same | `LocalTemporaryTableInsertStrategy` | 可实现 | P-005 | Bulk insert path requiring strategy (as applicable to mapping) | ✅ wired; live IT **N/A** (GetGeneratedKeys blocker documented) |
+| C-BULK-002 | Bulk | Multi-table insert fallback | `getFallbackSqmInsertStrategy` | same | `LocalTemporaryTableInsertStrategy` | 可实现 | P-005 | Bulk insert path requiring strategy (as applicable to mapping) | ✅ I-007/P-002 `XuguBulkMutationIT#bulkInsertOnJoinedInheritanceWithIdentitySucceeds_C_BULK_002` (**covered-live**) |
 | C-BULK-003 | Bulk | Subquery on mutating table | `supportsSubqueryOnMutatingTable()` | select/subquery + DML docs | sibling returns false-like MySQL | 可实现 | P-005 | Bulk HQL that would self-reference target if unsupported | ✅ `supportsSubqueryOnMutatingTable=false` + temp fallback IT |
 
 ---
@@ -90,7 +90,7 @@
 |---|---|---|
 | 可实现 | **16** | **All delivered** in P-002…P-006 (Acceptance hints ✅) |
 | 文档不允许 | **2** (C-DDL-004 ENUM, C-SKIP-001) | Remain forbidden — ENUM returns null; no SKIP LOCKED |
-| 延后 | **5** (C-JSON-005, C-JSON-006, C-DDL-005, C-SRV-001, C-SEL-001) | Remain deferred — out of I-003 first batch |
+| 延后 | **3** (C-JSON-006, C-SRV-001, C-SEL-001) | Remain deferred — out of I-003 first batch; **C-JSON-005 / C-DDL-005 closed I-007/P-004** |
 | 已有 | **1** (C-LOCK-001) | Covered by I-001/I-002 |
 | **Total new C-* rows** | **24** | |
 
@@ -99,7 +99,7 @@
 | P-002 | C-EXC-001, C-EXC-002 | `XuguExceptionMappingIT` |
 | P-003 | C-JSON-001…004 | `XuguJsonAggregateIT` |
 | P-004 | C-WIN-001, C-CTE-001 | `XuguWindowCteIT` |
-| P-005 | C-BULK-001…003 | `XuguBulkMutationIT` (insert live IT N/A documented) |
+| P-005 | C-BULK-001…003 | `XuguBulkMutationIT` (C-BULK-002 insert **covered-live** I-007/P-002) |
 | P-006 | C-DDL-001…003, C-CAT-001, C-GUID-001 (+ C-DDL-004 null) | `XuguTypeDdlDetailsIT` |
 | P-007 | Docs/matrix align | — (no new dialect capability) |
 ## Method notes (ruler C)

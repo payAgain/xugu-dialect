@@ -181,7 +181,7 @@ I-006 **41/41** remains **FROZEN**; items below are **incremental consumer deepe
 
 | gap_id | item | demo entry | gate |
 |---|---|---|---|
-| **B-FLY-001** | Flyway integration | `DemoFlywayIT#flywayMigratesMarkerTableOnXugu`; offline `DemoOfflineSmokeTest#flywayMigrationResourceOnClasspath` | demo |
+| **B-FLY-001** | Flyway integration | `DemoFlywayIT#flywayMigratesMarkerTableOnXugu`; offline `DemoOfflineSmokeTest#flywayXuguPluginAndMigrationOnClasspath` | demo |
 | **B-DEMO-001** | Demo bulk delete | `DemoBulkMutationIT#bulkDeletePersonNames` | demo |
 | **B-DEMO-002** | Function/HQL smoke deepen | `DemoFunctionsIT#hqlFunctionSubsetSmoke` (+ trim/length/locate/case/json_length) | demo |
 | **B-DEMO-003** | Read-only tx smoke | `DemoReadOnlyTxIT#readOnlyTransactionQueriesPersistedRow` | demo |
@@ -264,7 +264,7 @@ These remain covered by dialect unit/IT under [`production-regression-baseline.m
 | C-JSON-004 | dialect-it-only | Extra JSON agg variants — dialect IT | C-JSON-004 |
 | C-WIN-001 | dialect-it-only | Window — dialect IT (`XuguWindowCteIT`); out of C′ Boot scope | C-WIN-001 |
 | C-CTE-001 | dialect-it-only | CTE — dialect IT; out of C′ Boot scope | C-CTE-001 |
-| C-BULK-002 | dialect-it-only | Bulk **insert** fallback — `known-limit-documented`; no Boot bulk-insert requirement | C-BULK-002 |
+| C-BULK-002 | dialect-it-only | Bulk **insert** fallback — **covered-live** (I-007/P-002); no Boot bulk-insert requirement | C-BULK-002 |
 | C-BULK-003 | dialect-it-only | `supportsSubqueryOnMutatingTable` flag — dialect unit/IT | C-BULK-003 |
 | C-LOCK-001 | dialect-it-only | Audit anchor for NOWAIT/WAIT flags — dialect (Boot uses A-LCK-003) | C-LOCK-001 |
 

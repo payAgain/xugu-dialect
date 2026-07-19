@@ -88,10 +88,10 @@ I-005 将 **Definition A 可实现 (78)** + **I-003 ruler C 可实现 (16)** = *
 4. 运行 `python harness/scripts/verify.py` → **VERIFY PASS**（build + offline test）。
 5. **GAV 不变**：`com.xugu:xugu-dialect:7.4.5.Final`。
 
-### 已知限制（非 gap）
+### I-007 后 C-BULK-002 状态
 
-- **C-BULK-002** bulk insert：SSOT 标 **known-limit-documented**；真库 bulk insert IT waived — 见 [05-troubleshooting.md §10](05-troubleshooting.md#10-bulk-insertjoined--identity已知限制)。
-- Demo 可选路径（validate / function-HQL / bulk demo）为 SSOT 可选 gap，不阻塞 I-005 Accept。
+- **C-BULK-002** bulk insert：**covered-live**（I-007/P-002）— 门控真库 IT `XuguBulkMutationIT#bulkInsertOnJoinedInheritanceWithIdentitySucceeds_C_BULK_002` PASS；见 [05-troubleshooting.md §10](05-troubleshooting.md#10-bulk-insertjoined--identity已知限制) 与 SSOT [`production-regression-baseline.md`](../../contracts/production-regression-baseline.md)。
+- I-005 冻结时曾为 **known-limit-documented**；I-007 Track A 已关闭为 **covered-live**（非 gap）。
 
 ## Consumer-path baseline — I-006 消费者路径门控
 
@@ -116,6 +116,22 @@ I-006 冻结 Spring Boot **消费者路径**子集（**不是** 94 行 Boot 镜�
 完整步骤、Layer 说明与边界：[06-consumer-path.md](06-consumer-path.md)。
 
 **GAV 不变：** `com.xugu:xugu-dialect:7.4.5.Final`。**Ship / Central** 不在 I-006 范围。
+
+## I-007 capability hardening — Accept 准备门控
+
+Initiative **I-007**（A/B/C tracks）在 I-005/I-006 基线之上硬化能力；SSOT：[`contracts/i007-capability-hardening-plan.md`](../../contracts/i007-capability-hardening-plan.md)。
+
+| Track | Outcome | User doc pointer |
+|---|---|---|
+| **A** | C-BULK-002 **covered-live** | 本节 + [05-troubleshooting.md §10](05-troubleshooting.md#10-bulk-insertjoined--identity已知限制) |
+| **B** | Flyway + Demo 加深（Boot SSOT **41** 不变） | [06-consumer-path.md § I-007 Track B](06-consumer-path.md#i-007-track-b-deepeningp-005) |
+| **C** | JSON 子集 / ARRAY / ALTER SEQUENCE **covered-live** | [`docs/p004-track-c-capabilities.md`](../p004-track-c-capabilities.md) + [04-feature-matrix.md](04-feature-matrix.md) |
+
+| Mode | Command | When |
+|---|---|---|
+| **Daily / offline** | `mvn -q test` + `python harness/scripts/verify.py` | Accept 须 **VERIFY PASS** |
+| **Live (when DB available)** | `XUGU_RUN_IT=true mvn -q test` | dialect + demo gated IT；Accept 证据见 `harness/evidence/test/I-007/P-00*/` |
+| **GAV / compat** | `7.4.5.Final` + `compatiblemode=NONE` | 不升版；**NOT Ship** |
 
 ## Checklist（集成方自测）
 

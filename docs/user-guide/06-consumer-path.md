@@ -134,7 +134,7 @@ I-005 全量冻结步骤仍见 [03-verify.md § Frozen baseline](03-verify.md#fr
 
 | gap_id | 内容 | Demo 入口 |
 |---|---|---|
-| **B-FLY-001** | Flyway 迁移路径 | `DemoFlywayIT#flywayMigratesMarkerTableOnXugu`（gated）；离线 `DemoOfflineSmokeTest#flywayMigrationResourceOnClasspath` |
+| **B-FLY-001** | Flyway 迁移路径 | `DemoFlywayIT#flywayMigratesMarkerTableOnXugu`（gated）；离线 `DemoOfflineSmokeTest#flywayXuguPluginAndMigrationOnClasspath` |
 | **B-DEMO-001** | Demo bulk delete | `DemoBulkMutationIT#bulkDeletePersonNames` |
 | **B-DEMO-002** | 函数/HQL 冒烟加深 | `DemoFunctionsIT#hqlFunctionSubsetSmoke`（trim/length/locate/case/json_length） |
 | **B-DEMO-003** | 只读事务冒烟 | `DemoReadOnlyTxIT#readOnlyTransactionQueriesPersistedRow` |
@@ -146,7 +146,6 @@ spring:
   flyway:
     enabled: true
     locations: classpath:db/migration
-    baseline-on-migrate: true
     baseline-on-migrate: true
     # Xugu: demo registers com.xugu.demo.flyway.XuguFlywayDatabaseType (Flyway 12 plugin SPI)
   jpa:

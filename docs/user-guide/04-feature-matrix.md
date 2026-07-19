@@ -10,6 +10,7 @@
 | [`docs/feature-matrix-definition-a.md`](../feature-matrix-definition-a.md) | 导航 stub / pointer，指向 contracts SSOT |
 | **[`contracts/feature-matrix-i003-ruler-c.md`](../../contracts/feature-matrix-i003-ruler-c.md)** | **I-003 ruler C SSOT** — C-* 生产能力扩展（异常/JSON/Window-CTE/bulk/DDL） |
 | [`docs/feature-matrix-i003-ruler-c.md`](../feature-matrix-i003-ruler-c.md) | I-003 导航 stub / pointer |
+| [`docs/p004-track-c-capabilities.md`](../p004-track-c-capabilities.md) | **I-007 Track C** — C-JSON-005 / ARRAY / ALTER SEQUENCE 用户向摘要 |
 | **[`contracts/production-regression-baseline.md`](../../contracts/production-regression-baseline.md)** | **I-005 回归基线 SSOT** — 94 可实现 + 34 negative-only → `entry_class#method` |
 | **[`contracts/consumer-path-baseline.md`](../../contracts/consumer-path-baseline.md)** | **I-006 Boot 消费者路径 SSOT** — 41 Boot-required（A/B/C′）；非 94 行镜像 |
 | [`docs/consumer-path-baseline.md`](../consumer-path-baseline.md) | I-006 导航 stub / pointer |
@@ -50,16 +51,17 @@
 | A-SEQ-001 | 可实现 | `hbm2ddl validate` 经 `all_sequences` 读取序列元数据（I-002/P-002；见排障 §3） |
 | A-LCK-004 SKIP LOCKED | 文档不允许 | `supportsSkipLocked=false`；不会发出该关键字 |
 | A-TYP-014 INTERVAL 等 | 延后 | 暂勿当作已交付能力 |
-| C-EXC-* / C-JSON-* / C-WIN-* / C-CTE-* / C-BULK-001/003 / C-DDL-* | 可实现（I-003） | 见 ruler-C 矩阵 Acceptance hint（✅ + IT 类名） |
-| C-BULK-002 bulk insert | known-limit-documented（I-005/P-004） | 策略已接线 + 单元测试；真库 bulk insert IT  waived — 见 [05-troubleshooting.md §10](05-troubleshooting.md#10-bulk-insertjoined--identity已知限制) |
+| C-EXC-* / C-JSON-001…004 / C-WIN-* / C-CTE-* / C-BULK-001/003 / C-DDL-001…003 / C-CAT-001 / C-GUID-001 | 可实现（I-003） | 见 ruler-C 矩阵 Acceptance hint（✅ + IT 类名） |
+| C-BULK-002 bulk insert | **covered-live**（I-007/P-002） | 门控真库 IT PASS — 见 [05-troubleshooting.md §10](05-troubleshooting.md#10-bulk-insertjoined--identity已知限制) |
+| C-JSON-005 / A-TYP-015 / C-DDL-005 / A-SEQ-006 | **covered-live**（I-007/P-004） | 见 [`p004-track-c-capabilities.md`](../p004-track-c-capabilities.md) |
 | C-DDL-004 ENUM / C-SKIP-001 | 文档不允许 | 不发出 MySQL ENUM / SKIP LOCKED |
-| C-JSON-005/006 等 | 延后 | I-003 首批之外 |
+| C-JSON-006 / C-SRV-001 / C-SEL-001 等 | 延后 | I-003 首批之外 |
 
 ## I-005 baseline counts（冻结）
 
 | Bucket | Count | SSOT status |
 |---|---:|---|
-| 可实现 (Definition A + ruler C) | 94 | 93 covered + 1 known-limit-documented (C-BULK-002) |
+| 可实现 (Definition A + ruler C) | 94 | **94 covered-live**（I-007/P-002 C-BULK-002 + P-004 Track C 四主题） |
 | negative-only (文档不允许 + 延后) | 34 | All have `entry_class#method` |
 | Demo smoke | 7 | See baseline SSOT demo table |
 

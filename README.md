@@ -10,6 +10,8 @@ I-005 production regression baseline (same GAV **7.4.5.Final**): **94** 可实�
 
 I-006 Spring Boot consumer-path (same GAV **7.4.5.Final**): **41** Boot-required rows (Layer A/B/C′), open gaps = **0**. SSOT: [contracts/consumer-path-baseline.md](contracts/consumer-path-baseline.md). How to run offline + gated live: [docs/user-guide/06-consumer-path.md](docs/user-guide/06-consumer-path.md). **Not** a full 94-row Boot mirror; **Ship out of scope**.
 
+I-007 capability hardening (same GAV **7.4.5.Final**): Track **A** C-BULK-002 **covered-live**; Track **B** Flyway + Demo deepening; Track **C** JSON subset / ARRAY / ALTER SEQUENCE **covered-live**. SSOT: [contracts/i007-capability-hardening-plan.md](contracts/i007-capability-hardening-plan.md). Track C user summary: [docs/p004-track-c-capabilities.md](docs/p004-track-c-capabilities.md). **NOT Ship**.
+
 ## Start here
 
 - **User guide:** [docs/user-guide/README.md](docs/user-guide/README.md)

@@ -1,0 +1,55 @@
+handoff:
+  initiative_id: I-007
+  build_id: B-001
+  phase_id: P-006
+  step_id: RP-01
+  role: implementer
+  invocation_id: inv-i007-p006-rp01-implementer
+  branch: feat/i-007-capability-hardening-abc
+  status: complete
+  verdict: PASS
+
+summary: |
+  Aligned user/project docs with I-007 A/B/C outcomes — C-BULK-002 covered-live (stale known-limit
+  removed); Track C xref p004-track-c-capabilities.md; Track B Flyway/Demo consumer-path docs
+  (Flyway offline method name fix); ruler-C rollup C-JSON-005/C-DDL-005 no longer 延后.
+  Produced Initiative Accept checklist (NOT Ship). Deleted dialect/Probe.java scratch.
+  VERIFY PASS evidence path prepared for test RP-02. No commit; no Ship.
+
+docs_aligned:
+  c_bulk_002: covered-live
+  track_c: p004-track-c-capabilities.md
+  track_b: consumer-path-06
+  ruler_c_rollup: fixed
+  flyway_offline_method: flywayXuguPluginAndMigrationOnClasspath
+
+verification:
+  offline: prep_only
+  verify_py: pending_rp02
+  evidence_path: harness/evidence/test/I-007/P-006/verification.json
+
+artifacts:
+  - harness/evidence/implementer/I-007/P-006/INITIATIVE-ACCEPT-CHECKLIST.md
+  - harness/evidence/implementer/I-007/P-006/ACCEPTANCE.md
+  - harness/evidence/implementer/I-007/P-006/NOTES.md
+  - docs/user-guide/03-verify.md
+  - docs/user-guide/04-feature-matrix.md
+  - docs/user-guide/06-consumer-path.md
+  - docs/verification.md
+  - docs/p004-track-c-capabilities.md
+  - contracts/feature-matrix-i003-ruler-c.md
+  - contracts/consumer-path-baseline.md
+  - README.md
+
+phase_shas:
+  P-001: d0c57b1
+  P-002: 682c65d
+  P-003: 0af1e5e
+  P-004: 6a3385d
+  P-005: f713248
+
+next:
+  - RP-02 test: verify.py --phase P-006 → VERIFY PASS + verification.json
+  - RP-03 reviewer: readonly docs/SSOT audit; Initiative Accept readiness (NOT Ship)
+
+blockers: none

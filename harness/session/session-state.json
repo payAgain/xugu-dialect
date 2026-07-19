@@ -2,46 +2,48 @@
   "schema_version": 1,
   "task_id": "I-007",
   "batch_id": "B-001",
-  "status": "build_in_progress",
+  "status": "build_complete_await_initiative_accept",
   "harness_level": "Standard",
-  "last_updated": "2026-07-19T14:33:00+08:00",
+  "last_updated": "2026-07-19T16:00:00+08:00",
   "initiative_id": "I-007",
   "initiative_type": "feature",
   "working_branch": "feat/i-007-capability-hardening-abc",
   "active_plan": [
-    "B-001 approved full Plan P-001…P-006 serial",
-    "P-001 accepted — C-BULK-002 prefer-live-unblock locked",
-    "P-002 ready (implementer → test → reviewer)"
+    "B-001 full Plan P-001…P-006 accepted",
+    "C-BULK-002 covered-live",
+    "VERIFY PASS at P-006",
+    "Await Human Gate Initiative Accept (NOT Ship)"
   ],
   "next_3_steps": [
-    "Must-commit P-001 (exclude org/)",
-    "Dispatch P-002 role_pipeline",
-    "Serial P-003…P-006; propose Initiative Accept (NOT Ship)"
+    "Must-commit P-006",
+    "Human Gate: Initiative Accept I-007? (NOT Ship)",
+    "Optional later: Archive / Ship under separate authorization"
   ],
   "validation": {
-    "last_result": "P-001 harness_check PASS; branch_check PASS; reviewer approve_with_nits"
+    "last_result": "P-006 verify.py VERIFY PASS; offline+live green"
   },
   "version_control_checkpoint": {
-    "decision": "accept_p001",
+    "decision": "b001_complete",
     "committed": false,
     "branch": "feat/i-007-capability-hardening-abc",
-    "candidate_commit": null,
-    "plan_sha": "13df9bd98895e7ebcfc5ff87e6de3b7a5ea2594c",
-    "awaiting_phase_commit": "P-001"
+    "p001_accept_sha": "d0c57b1eab5904c1c0de612366bc0614d0914569",
+    "p002_accept_sha": "682c65d4d98bf3b1c8c5ec360db3df5da3d3deaa",
+    "p003_accept_sha": "0af1e5e7c016510df4c8f60b6ab9fb7e5c5900b2",
+    "p004_accept_sha": "6a3385d8133334839ee3464fb4532f5aed6fb16c",
+    "p005_accept_sha": "f713248eb7575efdc50d6100b5492a108e7fa6ae",
+    "p006_accept_sha": null,
+    "c_bulk_002_outcome": "covered-live"
   },
   "cognitive_state": {
     "failure_count": 0,
-    "current_mode": "build_execute_serial",
-    "blocked_on": null,
-    "active_phase": "P-002",
-    "active_role_step": null,
-    "c_bulk_002_strategy": "prefer-live-unblock"
+    "current_mode": "await_initiative_accept",
+    "blocked_on": "human_gate_initiative_accept_i007"
   },
   "handoff": {
-    "resume_from": "harness/handoffs/orchestrator/I-007-B-001-P-001-complete.md"
+    "resume_from": "harness/handoffs/orchestrator/I-007-B-001-complete.md"
   },
   "approved_build": "B-001",
   "approved_phases": ["P-001", "P-002", "P-003", "P-004", "P-005", "P-006"],
-  "accepted_phases": ["P-001"],
-  "updated_at": "2026-07-19T14:33:00+08:00"
+  "accepted_phases": ["P-001", "P-002", "P-003", "P-004", "P-005", "P-006"],
+  "updated_at": "2026-07-19T16:00:00+08:00"
 }

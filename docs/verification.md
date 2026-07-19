@@ -69,7 +69,7 @@ Initiative **I-005** freezes a full regression baseline. SSOT:
 
 | Bucket | Count | Accept requirement |
 |---|---:|---|
-| 可实现 rows | 94 | Each row maps to `entry_class#method` (93 covered + 1 known-limit-documented) |
+| 可实现 rows | 94 | Each row maps to `entry_class#method` (**94 covered-live** after I-007/P-002 + P-004) |
 | negative-only rows | 34 | Explicit non-support or `@Disabled` defer anchors |
 | Demo smoke | 7 entrypoints | Offline + gated live paths in SSOT |
 
@@ -86,9 +86,9 @@ Initiative **I-005** freezes a full regression baseline. SSOT:
 
 User-facing procedure: [`docs/user-guide/03-verify.md`](user-guide/03-verify.md#frozen-baseline--i-005-冻结基线门控).
 
-### Known limitation (not a gap)
+### C-BULK-002 (I-007 Track A closure)
 
-**C-BULK-002** bulk insert: **known-limit-documented** — live IT waived; offline wiring via `XuguBulkMutationSupportTest#fallbackSqmInsertStrategyWired_C_BULK_002`.
+**C-BULK-002** bulk insert: **covered-live** (I-007/P-002) — live IT `XuguBulkMutationIT#bulkInsertOnJoinedInheritanceWithIdentitySucceeds_C_BULK_002` plus unit wiring `XuguBulkMutationSupportTest#fallbackSqmInsertStrategyWired_C_BULK_002`. Supersedes I-005 **known-limit-documented** closure.
 
 ## I-006 consumer-path baseline (frozen)
 
@@ -116,6 +116,26 @@ Initiative **I-006** freezes the Spring Boot **consumer-path** subset. SSOT:
 User-facing procedure: [`docs/user-guide/06-consumer-path.md`](user-guide/06-consumer-path.md). Docs pointer: [`docs/consumer-path-baseline.md`](consumer-path-baseline.md).
 
 **Ship / Maven Central:** out of I-006 scope (Human Gate may Accept Initiative without Ship).
+
+## I-007 capability hardening (Accept prep)
+
+Initiative **I-007** hardens Tracks **A / B / C** on the same GAV **`7.4.5.Final`** and **`compatiblemode=NONE`**. SSOT: [`contracts/i007-capability-hardening-plan.md`](../contracts/i007-capability-hardening-plan.md).
+
+| Track | Key outcome | Docs |
+|---|---|---|
+| **A** | C-BULK-002 **covered-live** | [`docs/user-guide/03-verify.md`](user-guide/03-verify.md) + [`05-troubleshooting.md`](user-guide/05-troubleshooting.md) §10 |
+| **B** | Flyway + Demo consumer deepening (Boot SSOT **41** unchanged) | [`docs/user-guide/06-consumer-path.md`](user-guide/06-consumer-path.md) |
+| **C** | C-JSON-005 / ARRAY / ALTER SEQUENCE **covered-live** | [`docs/p004-track-c-capabilities.md`](p004-track-c-capabilities.md) |
+
+**Daily default:** `mvn -q test` + `python harness/scripts/verify.py` → **VERIFY PASS** (required for P-006 Accept prep).
+
+**Live when DB available:** `XUGU_RUN_IT=true mvn -q test` — archive evidence under `harness/evidence/test/I-007/P-00*/`. Phase-bound verify output for P-006:
+
+```text
+python harness/scripts/verify.py --phase P-006 --evidence harness/evidence/test/I-007/P-006/verification.json
+```
+
+**Ship / tag / push / Central:** out of I-007 Accept scope.
 
 ## Change-Type Matrix
 
