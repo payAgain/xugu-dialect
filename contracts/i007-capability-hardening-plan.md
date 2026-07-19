@@ -38,7 +38,7 @@ Extend I-005 production-regression and I-006 consumer-path baselines with an **I
 | **I-005 baseline status (pre-P-002)** | **known-limit-documented** (provisional — re-opened by I-007 Scope) |
 | **P-001 strategy lock** | **prefer-live-unblock** |
 | **P-002 execution mandate** | Attempt gated live IT on JOINED + IDENTITY bulk **insert** via `LocalTemporaryTableInsertStrategy` path; deposit success **or** failure artifacts |
-| **P-002 outcome (exactly one)** | **`covered-live`** **OR** re-affirmed **`known-limit-documented`** — **not both open** |
+| **P-002 outcome (exactly one)** | **`covered-live`** — live IT PASS (I-007/P-002 implementer RP-01) |
 | **Permanent-limit gate** | Only after good-faith live attempt with **logged** JDBC failure (GetGeneratedKeys / `distillTbName` per I-004/P-005); SSOT row + `docs/user-guide/05-troubleshooting.md` §10 updated in same Phase |
 | **Code surface (unchanged in P-001)** | `XuguDialect#getFallbackSqmInsertStrategy()` → `LocalTemporaryTableInsertStrategy` |
 | **Offline wiring (existing)** | `XuguBulkMutationSupportTest#fallbackSqmInsertStrategyWired_C_BULK_002` |
@@ -114,9 +114,9 @@ notes=…
 
 | gap_id | item | current_status | owner | P-002 action |
 |---|---|---|---|---|
-| **C-BULK-002** | Bulk insert fallback | known-limit-documented (I-005) | **P-002** | Execute strategy lock: live IT → `covered-live` **or** permanent-limit + docs |
-| **EV-LIVE-001** | No I-007 live logs | absent | **P-002** | First deposit under `harness/evidence/test/I-007/P-002/` |
-| **EV-LIVE-002** | No C-BULK-002 live attempt | absent | **P-002** | Success or failure artifact per strategy tree |
+| **C-BULK-002** | Bulk insert fallback | **covered-live** (P-002 PASS) | **P-002** | Closed: live IT + dialect insert-strategy fix |
+| **EV-LIVE-001** | No I-007 live logs | **deposited** | **P-002** | `harness/evidence/test/I-007/P-002/mvn-test-live-it.log` |
+| **EV-LIVE-002** | No C-BULK-002 live attempt | **PASS artifact** | **P-002** | `XuguBulkMutationIT#bulkInsertOnJoinedInheritanceWithIdentitySucceeds_C_BULK_002` |
 
 **I-006 consumer-path:** C-BULK-002 remains **dialect-it-only** / known-limit in Boot SSOT until P-002 changes I-005 row status. No silent Boot row addition.
 

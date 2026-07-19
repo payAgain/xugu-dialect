@@ -1,3 +1,13 @@
+## Entry: I-007 B-001 P-002 accepted — C-BULK-002 covered-live
+
+### Summary
+P-002 **accepted**（implementer → test → reviewer `approve_with_nits`）。C-BULK-002 outcome=**covered-live**（方言 insert strategy ctor 修复 + live IT 4/4）。证据 `harness/evidence/test/I-007/P-002/`。下一步 P-003 thin-fold。`org/` 不提交。NOT Ship。
+
+### Next
+Must-commit P-002；派发 P-003 thin Phase。
+
+---
+
 ## Entry: I-007 B-001 P-001 accepted
 
 ### Summary

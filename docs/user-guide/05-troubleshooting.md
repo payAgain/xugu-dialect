@@ -109,18 +109,16 @@ hibernate.query.json_functions_enabled=true
 
 （或等价 `QuerySettings.JSON_FUNCTIONS_ENABLED`）。方言已注册虚谷原生 `json_arrayagg` / `json_objectagg`（I-003 C-JSON-*）。见矩阵 [`feature-matrix-i003-ruler-c.md`](../../contracts/feature-matrix-i003-ruler-c.md)。
 
-## 10. Bulk insert（JOINED + IDENTITY）— 已知限制
+## 10. Bulk insert（JOINED + IDENTITY）
 
-**症状：** 多表 HQL bulk **insert**（JOINED 继承 + IDENTITY 根实体）在部分驱动场景下失败，例如 JDBC `GetGeneratedKeys` / `distillTbName` 异常。
+**基线状态（C-BULK-002）：** **covered-live**（I-007/P-002）— 方言 `getFallbackSqmInsertStrategy` → `LocalTemporaryTableInsertStrategy`（与 update/delete 同一本地临时表 DDL 策略）。离线单元测试 `XuguBulkMutationSupportTest#fallbackSqmInsertStrategyWired_C_BULK_002`；门控真库 IT `XuguBulkMutationIT#bulkInsertOnJoinedInheritanceWithIdentitySucceeds_C_BULK_002`（`XUGU_RUN_IT=true`）。
 
-**基线状态（C-BULK-002）：** **known-limit-documented** — 方言已接线 `getFallbackSqmInsertStrategy` → `LocalTemporaryTableInsertStrategy`（本地临时表，与 update/delete 同一 DDL 策略），并由离线单元测试 `XuguBulkMutationSupportTest#fallbackSqmInsertStrategyWired_C_BULK_002` 断言接线。**真库 bulk insert IT 暂不纳入回归**（Xugu JDBC 12.3.6 已知边界；见 I-004 `getDefaultUseGetGeneratedKeys=false` 与 P-005 证据）。
-
-**已验证路径：** bulk **update/delete** 经 `XuguBulkMutationIT` 在门控真库下 PASS（C-BULK-001）。
+**已验证路径：** bulk **update/delete/insert** 经 `XuguBulkMutationIT` 在门控真库下 PASS（C-BULK-001 + C-BULK-002）。
 
 **集成建议：**
 
-- 生产环境优先使用已验证的 bulk update/delete 回退路径。
-- 若必须 bulk insert 多表 JOINED 实体，改用逐条 `persist` / 原生 SQL / ETL，或等待驱动/方言对齐后再启用 live IT。
+- 生产环境可使用 bulk update/delete/**insert** 回退路径（JOINED + IDENTITY 映射）。
+- 若遇 JDBC 异常，确认 `compatiblemode=NONE` 与显式 `XuguDialect`；IDENTITY 常规 persist 仍走 `getDefaultUseGetGeneratedKeys=false` + `last_insert_id()`（I-004）。
 - 回归基线 SSOT：[`contracts/production-regression-baseline.md`](../../contracts/production-regression-baseline.md) C-BULK-002 行。
 
 ## 11. Native ENUM DDL 不会发出

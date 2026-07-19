@@ -1,0 +1,67 @@
+schema_version: 1
+role: implementer
+phase_id: P-002
+build_id: B-001
+initiative_id: I-007
+invocation_id: inv-i007-p002-rp01-implementer
+step_id: RP-01
+status: completed_awaiting_test_review
+updated_at: "2026-07-19T14:37:00+08:00"
+
+summary: >
+  C-BULK-002 closed covered-live: gated live bulk-insert IT PASS on JOINED+IDENTITY;
+  dialect fix uses LocalTemporaryTableInsertStrategy(EntityMappingType, context)
+  instead of mistaken EntityMappingType createEntityTable id-table delegate.
+  SSOT + user doc §10 updated; first I-007 live-log deposited.
+
+decision:
+  path: covered-live
+  rationale: >
+    prefer-live-unblock strategy: XuguBulkMutationIT#bulkInsertOnJoinedInheritanceWithIdentitySucceeds_C_BULK_002
+    PASS with XUGU_RUN_IT=true after insert-strategy wiring fix.
+
+closed_gap_ids:
+  - C-BULK-002
+  - EV-LIVE-001
+  - EV-LIVE-002
+
+delivered:
+  - dialect/src/main/java/com/xugu/dialect/XuguDialect.java
+  - dialect/src/test/java/com/xugu/dialect/it/XuguBulkMutationIT.java
+  - dialect/src/test/java/com/xugu/dialect/it/entities/I003P005BulkPerson.java
+  - contracts/production-regression-baseline.md
+  - contracts/i007-capability-hardening-plan.md
+  - docs/user-guide/05-troubleshooting.md
+  - harness/evidence/implementer/I-007/P-002/NOTES.md
+  - harness/evidence/implementer/I-007/P-002/ACCEPTANCE.md
+  - harness/evidence/test/I-007/P-002/mvn-test-live-it.log
+  - harness/evidence/test/I-007/P-002/IT-RESULT.txt
+
+tests_added:
+  live_it:
+    - XuguBulkMutationIT#bulkInsertOnJoinedInheritanceWithIdentitySucceeds_C_BULK_002
+
+validation:
+  build:
+    command: "mvn -q -DskipTests package"
+    exit_code: 0
+  test_offline:
+    command: "mvn -q test"
+    exit_code: 0
+  test_live:
+    command: "XUGU_RUN_IT=true mvn -q -pl dialect -am test -Dtest=XuguBulkMutationIT"
+    exit_code: 0
+    tests_run: 4
+    failures: 0
+
+not_done:
+  - RP-02 test review
+  - RP-03 reviewer
+  - git commit
+  - Accept / Ship
+
+next:
+  - RP-02 test: confirm offline green + live log artifact
+  - RP-03 reviewer: audit covered-live closure + no compatmode creep
+
+blocker: null

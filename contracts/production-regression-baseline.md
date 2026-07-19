@@ -174,7 +174,7 @@ Columns: `matrix_id | status | entry_class#method | gate | gap_action`
 | C-WIN-001 | covered | `XuguWindowCteIT#hqlWindowAndWithClauseOnLiveSession`; `XuguWindowCteSupportTest#dialectEnablesWindowAndWithClause` | IT | N/A |
 | C-CTE-001 | covered | `XuguWindowCteIT#hqlWindowAndWithClauseOnLiveSession` | IT | N/A |
 | C-BULK-001 | covered | `XuguBulkMutationIT#bulkUpdateOnJoinedInheritanceSucceeds`; `#bulkDeleteOnJoinedInheritanceSucceeds`; `XuguBulkMutationSupportTest#localTemporaryTableStrategyForBulkMutation_C_BULK_001` | IT | N/A |
-| C-BULK-002 | known-limit-documented | `XuguBulkMutationSupportTest#fallbackSqmInsertStrategyWired_C_BULK_002`; live IT waived — `docs/user-guide/05-troubleshooting.md` §10 | unit | N/A |
+| C-BULK-002 | covered-live | `XuguBulkMutationIT#bulkInsertOnJoinedInheritanceWithIdentitySucceeds_C_BULK_002`; `XuguBulkMutationSupportTest#fallbackSqmInsertStrategyWired_C_BULK_002` | IT | N/A |
 | C-BULK-003 | covered | `XuguBulkMutationSupportTest#supportsSubqueryOnMutatingTableIsFalse_C_BULK_003`; `XuguBulkMutationIT#dialectExposesLocalTempBulkStrategyFlags` | IT | N/A |
 | C-DDL-001 | covered | `XuguTypeDdlDetailsTest#createTableIfNotExists_C_DDL_001`; `XuguTypeDdlDetailsIT#typeDdlDetailsOnLiveDb` | IT | N/A |
 | C-DDL-002 | covered | `XuguTypeDdlDetailsTest#alterColumnType_C_DDL_002`; `XuguTypeDdlDetailsIT#typeDdlDetailsOnLiveDb` | IT | N/A |
@@ -250,14 +250,14 @@ Matrix status **文档不允许** or **延后**; baseline records explicit non-s
 | Field | Value |
 |---|---|
 | **matrix_id** | C-BULK-002 |
-| **status** | **known-limit-documented** |
-| **Code surface** | `XuguDialect#getFallbackSqmInsertStrategy()` → `LocalTemporaryTableInsertStrategy` |
-| **Test evidence** | `XuguBulkMutationSupportTest#fallbackSqmInsertStrategyWired_C_BULK_002` (offline wiring) |
-| **Related tests** | `XuguBulkMutationIT` (update/delete live); `XuguBulkMutationSupportTest` (C-BULK-001/003 flags + C-BULK-002 insert wiring) |
-| **Live IT** | **Waived** — JOINED bulk insert + IDENTITY root can hit Xugu JDBC 12.3.6 `GetGeneratedKeys` / `distillTbName` failures (I-004/P-005); dialect uses `getDefaultUseGetGeneratedKeys=false` for normal persist but bulk-insert temp-table path remains unproven on live DB |
-| **User doc** | [`docs/user-guide/05-troubleshooting.md`](../docs/user-guide/05-troubleshooting.md) §10 |
-| **gap_action** | **N/A** — closed in I-005/P-004 (known-limit path) |
-| **I-007 re-open** | **Yes** — Scope PASS re-opens provisional I-005 closure; **P-001 strategy lock:** **prefer-live-unblock** (attempt live bulk-insert IT in **P-002**); outcome → **`covered-live`** **or** re-affirmed **`known-limit-documented`** (binary, not ambiguous). SSOT: [`i007-capability-hardening-plan.md`](i007-capability-hardening-plan.md) § C-BULK-002 STRATEGY LOCK. **Do not** mark `covered-live` until P-002 live PASS + evidence. |
+| **status** | **covered-live** |
+| **Code surface** | `XuguDialect#getFallbackSqmInsertStrategy()` → `LocalTemporaryTableInsertStrategy` (EntityMappingType ctor — full entity temp table, aligned with Hibernate MySQLDialect) |
+| **Test evidence** | `XuguBulkMutationSupportTest#fallbackSqmInsertStrategyWired_C_BULK_002` (offline wiring); **`XuguBulkMutationIT#bulkInsertOnJoinedInheritanceWithIdentitySucceeds_C_BULK_002`** (live JOINED + IDENTITY bulk insert) |
+| **Related tests** | `XuguBulkMutationIT` (update/delete + insert live); `XuguBulkMutationSupportTest` (C-BULK-001/003 flags + C-BULK-002 insert wiring) |
+| **Live IT** | **PASS** (I-007/P-002) — gated `XUGU_RUN_IT=true`; dialect fix: use `LocalTemporaryTableInsertStrategy(EntityMappingType, …)` instead of mistaken `TemporaryTable.createEntityTable(EntityMappingType, …)` id-table delegate |
+| **User doc** | [`docs/user-guide/05-troubleshooting.md`](../docs/user-guide/05-troubleshooting.md) §10 (updated P-002) |
+| **gap_action** | **N/A** — closed **covered-live** in I-007/P-002 |
+| **I-007 re-open** | **Closed** — P-002 prefer-live-unblock **PASS**; evidence: `harness/evidence/test/I-007/P-002/`. SSOT: [`i007-capability-hardening-plan.md`](i007-capability-hardening-plan.md) § C-BULK-002 STRATEGY LOCK. |
 
 ---
 
@@ -335,7 +335,7 @@ Source: [`harness/evidence/researcher/I-005/P-001/GAP-SUMMARY.md`](../harness/ev
 
 | matrix_id | gap | Owner |
 |---|---|---|
-| C-BULK-002 | No insert fallback strategy test | **Closed P-004** — unit wiring + known-limit SSOT |
+| C-BULK-002 | Bulk insert fallback live IT | **Closed I-007/P-002** — **`covered-live`** via `XuguBulkMutationIT#bulkInsertOnJoinedInheritanceWithIdentitySucceeds_C_BULK_002`; supersedes I-005/P-004 known-limit closure — see [`i007-capability-hardening-plan.md`](i007-capability-hardening-plan.md) § C-BULK-002 STRATEGY LOCK |
 
 ### 6. Demo smoke (routed)
 
@@ -347,7 +347,7 @@ Source: [`harness/evidence/researcher/I-005/P-001/GAP-SUMMARY.md`](../harness/ev
 
 `A-TYP-019`, `A-DDL-005`, `A-XCUT-001`, `A-XCUT-005`, `A-SCH-014`, `C-EXC-002`
 
-*(C-BULK-002 closed as **known-limit-documented** in P-004; A-TYP-007 stretch live TIME IT in P-002.)*
+*(C-BULK-002 promoted to **covered-live** in I-007/P-002; A-TYP-007 stretch live TIME IT in P-002.)*
 
 ---
 
@@ -356,8 +356,8 @@ Source: [`harness/evidence/researcher/I-005/P-001/GAP-SUMMARY.md`](../harness/ev
 | Bucket | Count |
 |---|---:|
 | **可实现 rows (SSOT primary)** | **94** |
-| covered (可实现) | 93 |
-| known-limit-documented (可实现) | 1 |
+| covered (可实现) | 94 |
+| known-limit-documented (可实现) | 0 |
 | gap (可实现) | 0 |
 | negative-only (文档不允许 + 延后 + C defer) | 34 |
 | Ruler C 已有 (C-LOCK-001) | 1 |
@@ -368,7 +368,7 @@ Source: [`harness/evidence/researcher/I-005/P-001/GAP-SUMMARY.md`](../harness/ev
 | gap_action | matrix_ids |
 |---|---|
 | P-002 | *(closed in I-005/P-002)* |
-| P-004 | *(closed — C-BULK-002 known-limit-documented)* |
+| P-004 | *(superseded for C-BULK-002 — see I-007/P-002 covered-live)* |
 | P-005 | *(closed — A-XCUT-009 demo boot smoke)* |
 
 ---

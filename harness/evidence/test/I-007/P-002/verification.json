@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "started_at": "2026-07-19T14:39:00+08:00",
+  "finished_at": "2026-07-19T14:42:30+08:00",
+  "project_root": "E:\\Work\\java\\hibernate-test",
+  "initiative_id": "I-007",
+  "phase_id": "P-002",
+  "build_id": "B-001",
+  "invocation_id": "inv-i007-p002-rp02-test",
+  "step_id": "RP-02",
+  "role": "test",
+  "branch": "feat/i-007-capability-hardening-abc",
+  "head_sha": "d0c57b1",
+  "verdict": "PASS",
+  "closure_path": "covered-live",
+  "matrix_id": "C-BULK-002",
+  "config": "E:\\Work\\java\\hibernate-test\\harness\\verification.json",
+  "results": [
+    {
+      "id": "build",
+      "required": true,
+      "status": "PASS",
+      "command": "mvn -q -DskipTests package",
+      "cwd": "E:\\Work\\java\\hibernate-test",
+      "exit_code": 0,
+      "log": "harness/evidence/test/I-007/P-002/mvn-package-offline.log"
+    },
+    {
+      "id": "test",
+      "required": true,
+      "status": "PASS",
+      "command": "mvn -q test",
+      "cwd": "E:\\Work\\java\\hibernate-test",
+      "exit_code": 0,
+      "log": "harness/evidence/test/I-007/P-002/mvn-test-offline.log",
+      "counts": {
+        "dialect": {
+          "tests_run": 140,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 55
+        },
+        "demo": {
+          "tests_run": 28,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 23
+        }
+      },
+      "summary_artifact": "harness/evidence/test/I-007/P-002/surefire-summary-offline.txt"
+    },
+    {
+      "id": "test_live_dialect_am",
+      "required": true,
+      "status": "PASS",
+      "command": "XUGU_RUN_IT=true mvn -q -pl dialect -am test",
+      "cwd": "E:\\Work\\java\\hibernate-test",
+      "exit_code": 0,
+      "log": "harness/evidence/test/I-007/P-002/mvn-test-live-it.log",
+      "real_db": true,
+      "counts": {
+        "dialect": {
+          "tests_run": 140,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 22
+        }
+      },
+      "summary_artifact": "harness/evidence/test/I-007/P-002/surefire-summary-live-dialect.txt"
+    },
+    {
+      "id": "test_live_c_bulk_002",
+      "required": true,
+      "status": "PASS",
+      "command": "XUGU_RUN_IT=true mvn test -pl dialect -am -Dtest=XuguBulkMutationIT",
+      "cwd": "E:\\Work\\java\\hibernate-test",
+      "exit_code": 0,
+      "log": "harness/evidence/test/I-007/P-002/mvn-test-live-bulk-it-summary.log",
+      "matrix_id": "C-BULK-002",
+      "target_method": "bulkInsertOnJoinedInheritanceWithIdentitySucceeds_C_BULK_002",
+      "counts": {
+        "XuguBulkMutationIT": {
+          "tests_run": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "surefire": [
+        "harness/evidence/test/I-007/P-002/surefire-live/com.xugu.dialect.it.XuguBulkMutationIT.txt",
+        "harness/evidence/test/I-007/P-002/surefire-live/TEST-com.xugu.dialect.it.XuguBulkMutationIT.xml"
+      ],
+      "it_result": "harness/evidence/test/I-007/P-002/IT-RESULT.txt"
+    },
+    {
+      "id": "ssot_c_bulk_002_audit",
+      "required": true,
+      "status": "PASS",
+      "artifact": "contracts/production-regression-baseline.md",
+      "c_bulk_002_status": "covered-live",
+      "rewrite_required": false,
+      "note": "Read-only audit confirms SSOT already covered-live; no rewrite by test"
+    },
+    {
+      "id": "lint",
+      "required": false,
+      "status": "NOT_APPLICABLE",
+      "command": "NA"
+    }
+  ],
+  "summary": {
+    "build": "PASS",
+    "test_offline": "PASS",
+    "test_live": "PASS",
+    "c_bulk_002": "covered-live",
+    "ssot_audit": "PASS",
+    "overall": "PASS"
+  }
+}

@@ -1,7 +1,7 @@
 schema_version: 1
 charter_version: "1.0.0"
 initiative_id: I-007
-updated: "2026-07-19T14:32:00+08:00"
+updated: "2026-07-19T14:46:00+08:00"
 supersedes_initiative: I-006
 notes: >
   I-006 P-001…P-005 packets archived at harness/tasks/archive/I-006/.
@@ -23,7 +23,7 @@ tasks:
     dependencies: []
   - task_id: P-002
     title: "A：C-BULK-002 打通或永久限制 + 证据硬化"
-    status: ready
+    status: accepted
     build_id: B-001
     packet: harness/tasks/P-002.md
     acceptance_doc: harness/evidence/implementer/I-007/P-002/ACCEPTANCE.md
@@ -31,7 +31,7 @@ tasks:
     dependencies: [P-001]
   - task_id: P-003
     title: "A′/急项（可 thin / fold into P-004）"
-    status: blocked
+    status: ready
     build_id: B-001
     packet: harness/tasks/P-003.md
     acceptance_doc: harness/evidence/implementer/I-007/P-003/ACCEPTANCE.md

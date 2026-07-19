@@ -82,7 +82,10 @@ class XuguBulkMutationIT {
 			}
 
 			try ( Session session = sf.openSession() ) {
-				I003P005BulkDoctor sample = session.find( I003P005BulkDoctor.class, 1 );
+				I003P005BulkDoctor sample = session.createQuery(
+						"from I003P005BulkDoctor d where d.name = 'bulk-updated'", I003P005BulkDoctor.class )
+						.setMaxResults( 1 )
+						.getSingleResult();
 				assertNotNull( sample );
 				assertEquals( "bulk-updated", sample.getName() );
 			}
@@ -161,12 +164,58 @@ class XuguBulkMutationIT {
 				.buildMetadata();
 	}
 
+	@Test
+	void bulkInsertOnJoinedInheritanceWithIdentitySucceeds_C_BULK_002() {
+		Assumptions.assumeTrue( XuguITGate.isEnabled(), "integration gate off" );
+
+		cleanup();
+
+		StandardServiceRegistry registry = buildRegistry();
+		SessionFactory sf = null;
+		try {
+			Metadata metadata = buildMetadata( registry );
+			export( metadata, registry, Action.CREATE_ONLY );
+			sf = metadata.buildSessionFactory();
+
+			try ( Session session = sf.openSession() ) {
+				session.beginTransaction();
+				int inserted = session.createMutationQuery(
+						"insert into I003P005BulkDoctor (name, employed) values ('bulk-insert-doctor', true)" )
+						.executeUpdate();
+				assertEquals( 1, inserted, "C-BULK-002: bulk insert row count" );
+				session.getTransaction().commit();
+			}
+
+			try ( Session session = sf.openSession() ) {
+				Long count = session.createQuery(
+						"select count(d) from I003P005BulkDoctor d where d.name = 'bulk-insert-doctor'",
+						Long.class )
+						.getSingleResult();
+				assertEquals( 1L, count, "C-BULK-002: bulk-inserted doctor visible after commit" );
+			}
+
+			export( metadata, registry, Action.DROP );
+		}
+		catch ( AssertionError e ) {
+			throw e;
+		}
+		catch ( Exception e ) {
+			fail( "Bulk insert IT failed: " + e.getMessage(), e );
+		}
+		finally {
+			if ( sf != null ) {
+				sf.close();
+			}
+			StandardServiceRegistryBuilder.destroy( registry );
+			cleanup();
+		}
+	}
+
 	private static void seedDoctorsOnly(SessionFactory sf) {
 		try ( Session session = sf.openSession() ) {
 			session.beginTransaction();
 			for ( int i = 0; i < ENTITY_COUNT; i++ ) {
 				I003P005BulkDoctor doctor = new I003P005BulkDoctor();
-				doctor.setId( i + 1 );
 				doctor.setName( "doctor-" + i );
 				doctor.setEmployed( i % 2 == 0 );
 				session.persist( doctor );

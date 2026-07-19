@@ -1,0 +1,138 @@
+schema_version: 1
+role: test
+phase_id: P-002
+initiative_id: I-007
+build_id: B-001
+invocation_id: inv-i007-p002-rp02-test
+step_id: RP-02
+status: completed_awaiting_reviewer
+required: true
+completed_at: "2026-07-19T14:42:30+08:00"
+purpose: independent offline + live verification of C-BULK-002 covered-live closure; refresh live-log artifacts
+
+inputs:
+  - harness/tasks/P-002.md
+  - harness/handoffs/implementer/I-007-P-002.yaml
+  - harness/evidence/implementer/I-007/P-002/NOTES.md
+  - harness/evidence/implementer/I-007/P-002/ACCEPTANCE.md
+  - contracts/production-regression-baseline.md
+  - agents/test.md
+
+outputs:
+  - harness/evidence/test/I-007/P-002/TEST-REPORT.md
+  - harness/evidence/test/I-007/P-002/verification.json
+  - harness/evidence/test/I-007/P-002/IT-RESULT.txt
+  - harness/evidence/test/I-007/P-002/mvn-package-offline.log
+  - harness/evidence/test/I-007/P-002/mvn-test-offline.log
+  - harness/evidence/test/I-007/P-002/mvn-test-live-it.log
+  - harness/evidence/test/I-007/P-002/mvn-test-live-bulk-it-summary.log
+  - harness/evidence/test/I-007/P-002/surefire-summary-offline.txt
+  - harness/evidence/test/I-007/P-002/surefire-summary-live-dialect.txt
+  - harness/evidence/test/I-007/P-002/surefire-live/
+  - harness/handoffs/test/I-007-P-002.yaml
+
+commands:
+  - { cmd: "mvn -q -DskipTests package", exit: 0 }
+  - { cmd: "mvn -q test", exit: 0 }
+  - { cmd: "XUGU_RUN_IT=true mvn -q -pl dialect -am test", exit: 0 }
+  - { cmd: "XUGU_RUN_IT=true mvn test -pl dialect -am -Dtest=XuguBulkMutationIT", exit: 0 }
+
+validation:
+  package:
+    command: "mvn -q -DskipTests package"
+    exit_code: 0
+    status: PASS
+  test_offline:
+    command: "mvn -q test"
+    exit_code: 0
+    status: PASS
+    dialect_counts:
+      tests_run: 140
+      failures: 0
+      errors: 0
+      skipped: 55
+    demo_counts:
+      tests_run: 28
+      failures: 0
+      errors: 0
+      skipped: 23
+  test_live_it:
+    command: "XUGU_RUN_IT=true mvn -q -pl dialect -am test"
+    exit_code: 0
+    status: PASS
+    live_it_status: PASS
+    real_db: true
+    db_reachable: true
+    dialect_counts:
+      tests_run: 140
+      failures: 0
+      errors: 0
+      skipped: 22
+    xugu_bulk_mutation_it:
+      tests_run: 4
+      failures: 0
+      errors: 0
+      skipped: 0
+      target_method: bulkInsertOnJoinedInheritanceWithIdentitySucceeds_C_BULK_002
+      matrix_id: C-BULK-002
+      result: PASS
+    errors: []
+  ssot_audit:
+    artifact: contracts/production-regression-baseline.md
+    c_bulk_002_status: covered-live
+    rewrite_required: false
+    status: OK
+  gav:
+    expected: "com.xugu:xugu-dialect:7.4.5.Final"
+    confirmed: true
+    status: OK
+
+spot_checks:
+  build_exit_zero: true
+  default_test_exit_zero: true
+  it_skipped_offline: true
+  live_db_reachable: true
+  live_it_all_green: true
+  c_bulk_002_live_pass: true
+  ssot_covered_live_confirmed: true
+  no_product_code_by_test: true
+  org_untouched_by_test: true
+  ship_out_of_scope: true
+
+observed_flows:
+  - id: track-a-c-bulk-002-live-or-permanent-limit-plus-evidence-hardening
+    result: passed
+    closure_path: covered-live
+    evidence: harness/evidence/test/I-007/P-002/TEST-REPORT.md
+    note: "C-BULK-002 live bulk insert JOINED+IDENTITY PASS; SSOT already covered-live"
+
+notes_for_orchestrator: |
+  RP-02 PASS for P-002.
+  Offline reactor green (dialect 140/55 skip; demo 28/23 skip).
+  Live dialect -am PASS (140/0/0/22). XuguBulkMutationIT 4/4 incl C-BULK-002 bulk insert.
+  SSOT read-only audit: C-BULK-002 already covered-live — no rewrite.
+  Advance to RP-03 reviewer. No commit by test. Never touched org/. Ship remains out of scope.
+
+notes_for_implementer: |
+  Independent RP-02 confirms RP-01 covered-live claim.
+  Live log refreshed under harness/evidence/test/I-007/P-002/.
+  No further test blockers for RP-02.
+
+notes_for_reviewer: |
+  Independent RP-02 evidence under harness/evidence/test/I-007/P-002/.
+  Recommend PASS on P-002 technical acceptance: offline green + live C-BULK-002 IT PASS + SSOT covered-live.
+  Audit insert-strategy ctor fix + no compatmode creep per P-002 constraints.
+
+forbidden_reminder:
+  - no product code rewrite by test
+  - no git commit / Accept / Ship by test
+  - did not edit harness/tasks/P-002.md role_pipeline status
+  - did not rewrite SSOT (status already correct)
+
+next_step: reviewer_rp03
+blocker: null
+real_db_it_passed: true
+verdict: PASS
+recommendation: PASS
+closure_path: covered-live
+matrix_id: C-BULK-002
