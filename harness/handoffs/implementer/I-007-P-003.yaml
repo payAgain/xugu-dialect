@@ -1,0 +1,64 @@
+schema_version: 1
+role: implementer
+phase_id: P-003
+build_id: B-001
+initiative_id: I-007
+invocation_id: inv-i007-p003-rp01-implementer
+step_id: RP-01
+status: completed_awaiting_test_review
+updated_at: "2026-07-19T14:50:00+08:00"
+
+summary: >
+  P-003 thin fold into P-004: zero independent urgent A′ items after P-001 inventory
+  and P-002 covered-live closure. Residual deferred matrix rows C-JSON-005, A-TYP-015,
+  C-DDL-005, A-SEQ-006 explicitly mapped to P-004 — no silent drop. Docs-only; no
+  dialect/demo Java.
+
+decision:
+  path: thin-fold-into-P-004
+  rationale: >
+    P-001 locked thin fold; researcher inventory + GAP-SUMMARY show 0 standalone A′ gaps;
+    P-002 closed Track A without urgent exception outside C themes.
+
+mode: thin-fold-into-P-004
+
+independent_urgent_items: 0
+
+p002_exception_surfaced: false
+
+folded_into_p004:
+  themes:
+    - JSON subset deepen (C-JSON-005)
+    - ARRAY type + DDL (A-TYP-015, C-DDL-005)
+    - ALTER SEQUENCE (A-SEQ-006)
+  matrix_ids:
+    - C-JSON-005
+    - A-TYP-015
+    - C-DDL-005
+    - A-SEQ-006
+
+closed_gap_ids: []
+
+delivered:
+  - harness/evidence/implementer/I-007/P-003/FOLD-NOTE.md
+  - harness/evidence/implementer/I-007/P-003/ACCEPTANCE.md
+  - harness/handoffs/implementer/I-007-P-003.yaml
+  - contracts/i007-capability-hardening-plan.md
+
+code_changes: none
+
+validation:
+  note: docs-only thin fold; offline mvn test attestation deferred to RP-02
+
+not_done:
+  - RP-02 test review + verification.json
+  - RP-03 reviewer fold confirmation
+  - git commit
+  - Accept / Ship
+
+next:
+  - RP-02 test: confirm offline green unchanged; deposit verification.json
+  - RP-03 reviewer: audit FOLD-NOTE + no silent drop of C-JSON-005 / A-TYP-015 / C-DDL-005 / A-SEQ-006
+  - Orchestrator: Accept P-003 on fold evidence; dispatch P-004
+
+blocker: null

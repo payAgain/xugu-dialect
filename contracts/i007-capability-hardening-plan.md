@@ -107,6 +107,10 @@ notes=…
 | **Rationale** | No independent urgent A′ matrix rows outside C themes (researcher RP-01); I-005 negative consolidation closed; brief decision #2 allows merging urgent items into C |
 | **P-003 Accept rule** | May Accept with **fold-into-P-004** evidence if no independent urgent items surface in P-002 |
 | **Exception path** | If P-002 surfaces urgent deferred **outside** C-JSON-005 / ARRAY / A-SEQ-006, orchestrator documents exception in P-003 handoff — **not** default |
+| **P-003 execution (RP-01)** | **folded-into-P-004** — 0 independent urgent A′ items; fold note + ownership map deposited |
+| **P-003 status** | **accepted-pending** — awaiting RP-02 test + RP-03 reviewer (orchestrator Accept) |
+| **invocation_id (RP-01)** | `inv-i007-p003-rp01-implementer` |
+| **Fold evidence** | `harness/evidence/implementer/I-007/P-003/FOLD-NOTE.md` |
 
 ---
 
@@ -156,7 +160,7 @@ All rows **negative-only / 延后** in I-005 SSOT; delivery pattern: **doc → i
 | Phase | Track | Intent | Open gaps | Count |
 |---|---|---|---|---:|
 | **P-002** | **A** | C-BULK-002 binary execution + first live-log deposit | C-BULK-002, EV-LIVE-001, EV-LIVE-002 | 3 |
-| **P-003** | **A′** | Thin fold — no standalone deliverables unless P-002 exception | P-003-fold | 0 |
+| **P-003** | **A′** | Thin fold — **folded into P-004** (RP-01); accepted-pending | P-003-fold → P-004 | 0 |
 | **P-004** | **C** | JSON + ARRAY + ALTER SEQUENCE | C-JSON-005, A-TYP-015, C-DDL-005, A-SEQ-006 | 4 |
 | **P-005** | **B** | Flyway + Demo deepening | B-FLY-001, B-DEMO-001, B-DEMO-002, (+ optional B-DEMO-003) | 3–4 |
 | **P-006** | Docs + Accept | VERIFY PASS; docs alignment; final live log | (Accept prep) | — |
@@ -194,3 +198,4 @@ All rows **negative-only / 延后** in I-005 SSOT; delivery pattern: **doc → i
 | Date | Change |
 |---|---|
 | 2026-07-19 | Initial publish (I-007 / P-001 / RP-02): gap map A/B/C, C-BULK-002 prefer-live-unblock lock, live-log convention, P-003 thin-fold |
+| 2026-07-19 | P-003 RP-01 implementer: thin fold executed — status **folded-into-P-004** / **accepted-pending**; 0 independent urgent A′; C-JSON-005 / A-TYP-015 / C-DDL-005 / A-SEQ-006 remain P-004-owned |

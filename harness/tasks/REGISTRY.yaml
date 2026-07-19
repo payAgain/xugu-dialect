@@ -31,7 +31,7 @@ tasks:
     dependencies: [P-001]
   - task_id: P-003
     title: "A′/急项（可 thin / fold into P-004）"
-    status: ready
+    status: accepted
     build_id: B-001
     packet: harness/tasks/P-003.md
     acceptance_doc: harness/evidence/implementer/I-007/P-003/ACCEPTANCE.md
@@ -39,7 +39,7 @@ tasks:
     dependencies: [P-002]
   - task_id: P-004
     title: "C：JSON 深化子集 + ARRAY + ALTER SEQUENCE"
-    status: blocked
+    status: ready
     build_id: B-001
     packet: harness/tasks/P-004.md
     acceptance_doc: harness/evidence/implementer/I-007/P-004/ACCEPTANCE.md

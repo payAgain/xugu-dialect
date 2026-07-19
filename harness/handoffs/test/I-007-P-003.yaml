@@ -1,0 +1,120 @@
+schema_version: 1
+role: test
+phase_id: P-003
+initiative_id: I-007
+build_id: B-001
+invocation_id: inv-i007-p003-rp02-test
+step_id: RP-02
+status: completed_awaiting_reviewer
+required: true
+completed_at: "2026-07-19T14:48:30+08:00"
+purpose: confirm thin-fold-into-P-004 leaves offline reactor green unchanged; deposit verification.json
+
+inputs:
+  - harness/tasks/P-003.md
+  - harness/handoffs/implementer/I-007-P-003.yaml
+  - harness/evidence/implementer/I-007/P-003/FOLD-NOTE.md
+  - harness/evidence/implementer/I-007/P-003/ACCEPTANCE.md
+  - agents/test.md
+
+outputs:
+  - harness/evidence/test/I-007/P-003/TEST-REPORT.md
+  - harness/evidence/test/I-007/P-003/verification.json
+  - harness/evidence/test/I-007/P-003/mvn-package-offline.txt
+  - harness/evidence/test/I-007/P-003/mvn-test-offline.txt
+  - harness/evidence/test/I-007/P-003/surefire-summary-offline.txt
+  - harness/handoffs/test/I-007-P-003.yaml
+
+mode: thin-fold-into-P-004
+
+independent_urgent_items: 0
+
+folded_into_p004:
+  matrix_ids:
+    - C-JSON-005
+    - A-TYP-015
+    - C-DDL-005
+    - A-SEQ-006
+
+commands:
+  - { cmd: "mvn -q -DskipTests package", exit: 0 }
+  - { cmd: "mvn -q test", exit: 0 }
+  - { cmd: "python harness/scripts/verify.py --phase P-003", exit: 0 }
+
+validation:
+  package:
+    command: "mvn -q -DskipTests package"
+    exit_code: 0
+    status: PASS
+  test_offline:
+    command: "mvn -q test"
+    exit_code: 0
+    status: PASS
+    dialect_counts:
+      tests_run: 140
+      failures: 0
+      errors: 0
+      skipped: 55
+    demo_counts:
+      tests_run: 28
+      failures: 0
+      errors: 0
+      skipped: 23
+  test_live:
+    status: NOT_APPLICABLE
+    note: thin-fold docs-only; live IT owned by P-004 themes
+  fold_note_audit:
+    artifact: harness/evidence/implementer/I-007/P-003/FOLD-NOTE.md
+    independent_urgent_items: 0
+    silent_scope_drop: false
+    status: PASS
+  verify_py:
+    command: "python harness/scripts/verify.py --phase P-003"
+    exit_code: 0
+    status: PASS
+
+spot_checks:
+  build_exit_zero: true
+  default_test_exit_zero: true
+  offline_counts_match_p002_baseline: true
+  fold_note_present: true
+  no_p003_product_code: true
+  no_product_code_by_test: true
+  org_untouched_by_test: true
+  live_na_for_thin_fold: true
+  ship_out_of_scope: true
+
+observed_flows:
+  - id: track-a-prime-urgent-deferred-or-thin-fold-into-p004
+    result: passed
+    mode: thin-fold-into-P-004
+    evidence: harness/evidence/test/I-007/P-003/TEST-REPORT.md
+    note: "0 independent urgent A′ items; residual C-JSON-005/A-TYP-015/C-DDL-005/A-SEQ-006 mapped to P-004; offline green unchanged"
+
+notes_for_orchestrator: |
+  RP-02 PASS for P-003 thin fold.
+  Offline reactor green (dialect 140/55 skip; demo 28/23 skip) — matches P-002 baseline.
+  Live IT N/A for docs-only fold; P-004 owns residual matrix rows.
+  Advance to RP-03 reviewer. No commit by test. Never touched org/. Ship remains out of scope.
+
+notes_for_implementer: |
+  Independent RP-02 confirms thin-fold evidence + offline green unchanged.
+  No further test blockers for RP-02.
+
+notes_for_reviewer: |
+  Independent RP-02 evidence under harness/evidence/test/I-007/P-003/.
+  Recommend PASS on fold note + no silent drop audit (C-JSON-005, A-TYP-015, C-DDL-005, A-SEQ-006 → P-004).
+
+forbidden_reminder:
+  - no product code rewrite by test
+  - no git commit / Accept / Ship by test
+  - did not edit harness/tasks/P-003.md role_pipeline status
+  - did not touch org/
+
+next_step: reviewer_rp03
+blocker: null
+real_db_it_passed: false
+real_db_it_status: NOT_APPLICABLE
+verdict: PASS
+recommendation: PASS
+mode: thin-fold-into-P-004

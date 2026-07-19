@@ -1,3 +1,13 @@
+## Entry: I-007 B-001 P-003 accepted — thin-fold into P-004
+
+### Summary
+P-003 **accepted**（thin-fold-into-P-004；0 independent urgent items）。C-JSON-005 / A-TYP-015 / C-DDL-005 / A-SEQ-006 仍归 P-004。离线绿。下一步 P-004 Track C。`org/` 不提交。NOT Ship。
+
+### Next
+Must-commit P-003；派发 P-004（implementer → test → reviewer；risk≥8）。
+
+---
+
 ## Entry: I-007 B-001 P-002 accepted — C-BULK-002 covered-live
 
 ### Summary
