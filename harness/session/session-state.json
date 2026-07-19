@@ -21,6 +21,16 @@
   "validation": {
     "last_result": "Plan batch: branch_check PASS; harness_check PASS"
   },
+  "version_control_checkpoint": {
+    "decision": "plan_i007",
+    "committed": true,
+    "branch": "feat/i-007-capability-hardening-abc",
+    "candidate_commit": "13df9bd98895e7ebcfc5ff87e6de3b7a5ea2594c",
+    "archive_i006_sha": "58d0ce80064dba4b9650c6b54d52b54ae5a7ba07",
+    "archive_tip": "176990921476ea0e37e3c53af4bc2e380fb40339",
+    "plan_sha": "13df9bd98895e7ebcfc5ff87e6de3b7a5ea2594c",
+    "head": "13df9bd98895e7ebcfc5ff87e6de3b7a5ea2594c"
+  },
   "cognitive_state": {
     "failure_count": 0,
     "current_mode": "plan_complete_await_build_approval",
