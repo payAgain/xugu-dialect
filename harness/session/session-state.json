@@ -23,10 +23,10 @@
   },
   "version_control_checkpoint": {
     "decision": "initiative_accepted",
-    "committed": false,
+    "committed": true,
     "branch": "feat/i-007-capability-hardening-abc",
-    "pre_accept_head": "45125f6",
-    "candidate_commit": "45125f6",
+    "pre_accept_head": "45125f62c2d0fcd927786f9c5833798e73500015",
+    "candidate_commit": "95d4739b208f0ad5f1d6825dbab8c96c36712550",
     "p001_accept_sha": "d0c57b1eab5904c1c0de612366bc0614d0914569",
     "p002_accept_sha": "682c65d4d98bf3b1c8c5ec360db3df5da3d3deaa",
     "p003_accept_sha": "0af1e5e7c016510df4c8f60b6ab9fb7e5c5900b2",
@@ -34,7 +34,7 @@
     "p005_accept_sha": "f713248eb7575efdc50d6100b5492a108e7fa6ae",
     "p006_accept_sha": "94a58e922e115be153e495edd6ced19e497dce66",
     "c_bulk_002_outcome": "covered-live",
-    "accept_sha": null
+    "accept_sha": "95d4739b208f0ad5f1d6825dbab8c96c36712550"
   },
   "cognitive_state": {
     "failure_count": 0,

@@ -35,7 +35,7 @@ Build **B-001** / Phases **P-001 … P-006** all **accepted**.
 
 - Working branch: `feat/i-007-capability-hardening-abc`
 - Pre-Accept HEAD: `45125f6`
-- Accept must-commit: *(filled after must-commit)*
+- Accept must-commit: `95d4739b208f0ad5f1d6825dbab8c96c36712550`
 
 ## Key delivery SHAs
 
