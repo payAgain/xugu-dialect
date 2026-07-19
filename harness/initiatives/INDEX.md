@@ -10,7 +10,7 @@
 | I-003 | feature | 生产能力补齐（尺子 C：MySQLDialect∩虚谷文档 + 只读对照 hibernate-dialect 差集；入口 IT；版本 7.4.5.Final） | feat/i-003-production-capability-parity | completed | 2026-07-17T14:32:00+08:00（archived） |
 | I-004 | hotfix | DROP SEQUENCE IF EXISTS + IDENTITY×保留字表名方言缓解（不改 JDBC；7.4.5.Final） | fix/i-004-sequence-drop-identity-reserved | completed | 2026-07-17T15:23:00+08:00（archived） |
 | I-005 | feature | 生产回归测试基线（Definition A + I-003 可实现全量；门控真库；未来迭代防回退） | feat/i-005-production-regression-baseline | completed | 2026-07-18T14:23:00+08:00（archived） |
-| I-006 | feature | 消费者路径全面覆盖（A 黄金路径 + B 关联/SEQUENCE + C′ Boot 必测扫盲） | feat/i-006-consumer-path-coverage | active | 2026-07-19T00:10:00+08:00（B-001 complete；await Initiative Accept） |
+| I-006 | feature | 消费者路径全面覆盖（A 黄金路径 + B 关联/SEQUENCE + C′ Boot 必测扫盲） | feat/i-006-consumer-path-coverage | accepted | 2026-07-19T11:07:00+08:00（Initiative Accept；NOT Ship；await Archive） |
 
 Status: `clarifying` | `active` | `completed` | `abandoned` | `accepted`
 

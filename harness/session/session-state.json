@@ -2,49 +2,49 @@
   "schema_version": 1,
   "task_id": "I-006",
   "batch_id": "B-001",
-  "status": "b001_complete_awaiting_initiative_accept",
+  "status": "initiative_accepted",
   "harness_level": "Standard",
-  "last_updated": "2026-07-19T00:10:00+08:00",
+  "last_updated": "2026-07-19T11:07:00+08:00",
   "initiative_id": "I-006",
   "initiative_type": "feature",
   "working_branch": "feat/i-006-consumer-path-coverage",
   "active_plan": [
-    "P-001 accepted",
-    "P-002 accepted",
-    "P-003 accepted",
-    "P-004 accepted",
-    "P-005 accepted (docs + VERIFY PASS)",
-    "B-001 complete — await Initiative Accept (NOT Ship)"
+    "B-001 P-001…P-005 all accepted",
+    "VERIFY PASS evidence recorded",
+    "Initiative Accept I-006 recorded"
   ],
   "next_3_steps": [
-    "Human Gate: Initiative Accept I-006?",
-    "Optional Archive after Accept",
-    "Ship only if separately authorized"
+    "Human Gate (optional): Archive I-006",
+    "Human Gate (optional): authorize Ship (tag/push/Central)",
+    "Or open new Initiative"
   ],
   "validation": {
-    "last_result": "P-005 VERIFY PASS; live demo 28/0/0/0; harness_check PASS; SSOT gaps 0"
+    "last_result": "VERIFY PASS; Initiative I-006 accepted; Demo ~28; SSOT gaps 0"
   },
   "version_control_checkpoint": {
-    "candidate_commit": "7566e1cf7b9867421c22bf3e9998561ee83e7e71",
+    "decision": "initiative_accept_i006",
+    "committed": true,
+    "branch": "feat/i-006-consumer-path-coverage",
+    "candidate_commit": "f438cd3",
+    "head": "f438cd3",
     "p001_accept_sha": "e5f2428ae014c914e08c42b22426e0fbe6a2736e",
     "p002_accept_sha": "9f4cbd6",
     "p003_accept_sha": "3aae8f04cbc6eeb8ed3305ed41c5567923d0add9",
     "p004_accept_sha": "929be220124055b028328a15ad004afef3936707",
     "p005_accept_sha": "7566e1cf7b9867421c22bf3e9998561ee83e7e71",
-    "working_branch": "feat/i-006-consumer-path-coverage",
     "maven_home_hint": "C:\\Users\\admin\\tools\\apache-maven-3.9.9"
   },
   "cognitive_state": {
     "failure_count": 0,
-    "current_mode": "b001_complete_awaiting_initiative_accept",
-    "blocked_on": "human_gate_initiative_accept"
+    "current_mode": "initiative_accepted",
+    "blocked_on": null
   },
   "handoff": {
-    "resume_from": "harness/handoffs/orchestrator/I-006-B-001-complete.md"
+    "resume_from": "harness/handoffs/orchestrator/I-006-initiative-accepted.md"
   },
   "approved_build": "B-001",
   "approved_phases": ["P-001", "P-002", "P-003", "P-004", "P-005"],
   "accepted_phases": ["P-001", "P-002", "P-003", "P-004", "P-005"],
   "proposed_phases": ["P-001", "P-002", "P-003", "P-004", "P-005"],
-  "updated_at": "2026-07-19T00:10:00+08:00"
+  "updated_at": "2026-07-19T11:07:00+08:00"
 }

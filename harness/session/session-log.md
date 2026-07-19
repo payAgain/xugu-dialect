@@ -1,3 +1,13 @@
+## Entry: I-006 Initiative Accept
+
+### Summary
+Human Gate「Initiative Accept I-006」(~2026-07-19T11:07+08:00)。Initiative **accepted**（不含 Ship / Archive）。B-001 P-001…P-005 全部 accepted；SSOT 消费者路径 open gaps=0；Demo `@Test`≈28；Layers A + B-both + C′；VERIFY PASS（`harness/evidence/test/I-006/P-005/verification.json`）；GAV `7.4.5.Final`。`org/` 仍不提交。
+
+### Next
+可选：Archive I-006；或另行授权 Ship；或开新 Initiative。
+
+---
+
 ## Entry: I-006 B-001 complete — await Initiative Accept
 
 ### Summary

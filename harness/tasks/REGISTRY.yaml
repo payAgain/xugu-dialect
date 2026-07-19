@@ -1,7 +1,7 @@
 schema_version: 1
 charter_version: "1.0.0"
 initiative_id: I-006
-updated: "2026-07-19T00:10:00+08:00"
+updated: "2026-07-19T11:07:00+08:00"
 supersedes_initiative: I-005
 notes: >
   I-005 P-001…P-006 packets archived at harness/tasks/archive/I-005/.
@@ -10,6 +10,7 @@ notes: >
   I-006 reuses P-001…P-005 IDs under new initiative scope (consumer path coverage A+B-both+C′).
   Serial dependencies only; orchestrator does not ask human about parallel execution.
   B-001 approved 2026-07-18T22:26+08:00 for full Plan P-001→P-005.
+  Initiative Accept 2026-07-19T11:07+08:00 — NOT Ship; Archive optional.
 tasks:
   - task_id: P-001
     title: "建立消费者路径 Boot 必测 SSOT"

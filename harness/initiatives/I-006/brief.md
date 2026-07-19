@@ -2,7 +2,7 @@
 
 > Scoped clarity for one change unit. Not a full product re-charter.
 > Type: feature
-> Updated: 2026-07-19T00:10:00+08:00 (B-001 complete; await Initiative Accept — NOT Ship)
+> Updated: 2026-07-19T11:07:00+08:00 (Initiative Accept confirmed — NOT Ship / NOT Archive)
 
 ## Goal
 - 在 I-005 生产回归基线之上，建立 **Spring Boot 消费者路径全面覆盖**：黄金路径加固（A）+ 代表性模型扩展（B）+ SSOT 消费者相关行扫盲（C′）。
@@ -22,6 +22,7 @@
 | 6 | **不升版**（7.4.5.Final） |
 | 7 | **原生实现**（禁止移植 sibling / 继承 MySQL/Oracle Dialect） |
 | 8 | **不要求**本 Initiative 完成 Ship / Central |
+| 9 | **Initiative Accept** — **确认**（~2026-07-19T11:07+08:00；不含 Ship） |
 
 ## Layer summary
 
@@ -32,17 +33,24 @@
 | **C′** | 按消费者 SSOT 补齐剩余 Boot 入口（函数子集、JSON 可选、bulk update/delete 一条、关键类型字段等） |
 
 ## Acceptance criteria
-- [ ] 消费者路径 SSOT（Boot 必测清单）0 gap；与 I-005 基线交叉引用清晰
-- [ ] Layer A/B/C′ 用例落地；Demo 约 25–40 `@Test`；门控真库可全绿
-- [ ] 用户文档说明如何跑消费者路径基线
-- [ ] `verify.py` **VERIFY PASS**；版本仍为 7.4.5.Final
+- [x] 消费者路径 SSOT（Boot 必测清单）0 gap；与 I-005 基线交叉引用清晰
+- [x] Layer A/B/C′ 用例落地；Demo 约 25–40 `@Test`；门控真库可全绿
+- [x] 用户文档说明如何跑消费者路径基线
+- [x] `verify.py` **VERIFY PASS**；版本仍为 7.4.5.Final
 - [ ] **不要求** Ship（保持未勾选）
 
 ## Related
 - Predecessor: I-005 archived
-- Branch (planned): `feat/i-006-consumer-path-coverage`
-- SSOT (planned): `contracts/consumer-path-baseline.md`（或等价扩写）
+- Branch: `feat/i-006-consumer-path-coverage`
+- SSOT: `contracts/consumer-path-baseline.md`
+- Accept evidence: `harness/evidence/orchestrator/I-006/ACCEPTANCE.md`
 - Ship: **out of this Initiative**
 
 ## Status
-`active` — Scope PASS ~2026-07-18T15:09+08:00；Plan complete ~2026-07-18T15:13+08:00；B-001 **approved** / in_progress ~2026-07-18T22:26+08:00（P-001→P-005 serial）；当前 P-001
+`accepted` — Human Gate「Initiative Accept I-006」(~2026-07-19T11:07+08:00); **not shipped**; **not archived**
+
+- Scope PASS: ~2026-07-18T15:09+08:00
+- Plan complete: ~2026-07-18T15:13+08:00
+- B-001 approved / P-001…P-005 all accepted
+- Initiative Accept: ~2026-07-19T11:07+08:00
+- Archive: optional next
