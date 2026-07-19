@@ -4,6 +4,12 @@
 spring:
   application:
     name: demo-spring-boot
+  flyway:
+    # Default off so offline mvn test and ddl-auto=update IT stay unchanged.
+    # DemoFlywayIT enables explicitly (I-007 P-005 B-FLY-001).
+    enabled: false
+    locations: classpath:db/migration
+    baseline-on-migrate: true
   datasource:
     # Prefer env XUGU_JDBC_URL; default includes compatiblemode=NONE (Charter).
     url: ${XUGU_JDBC_URL:jdbc:xugu://127.0.0.1:5138/SYSTEM?compatiblemode=NONE}

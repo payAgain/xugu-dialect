@@ -23,8 +23,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
 /**
- * Gated IT: Layer C′ HQL function subset
- * (A-FUN-001/002/004/007/010/016/017). Uses DemoPerson + shared DemoJsonDoc.
+ * Gated IT: Layer C′ HQL function subset + I-007 P-005 deepening
+ * (A-FUN-001/002/004/007/010/016/017 + trim/length/locate/case + json_length).
  */
 @SpringBootTest
 @EnabledIf( "com.xugu.demo.support.XuguIntegrationGate#isEnabled" )
@@ -123,5 +123,39 @@ class DemoFunctionsIT {
 				.setParameter( "id", docId )
 				.getSingleResult();
 		assertEquals( "1", jv );
+
+		// B-DEMO-002: deepen — trim / length / locate (A-FUN-005 family)
+		String trimmed = entityManager.createQuery(
+						"select trim(p.name) from DemoPerson p where p.id = :id", String.class )
+				.setParameter( "id", personId )
+				.getSingleResult();
+		assertEquals( "Alice", trimmed );
+		Integer nameLen = entityManager.createQuery(
+						"select length(p.name) from DemoPerson p where p.id = :id", Integer.class )
+				.setParameter( "id", personId )
+				.getSingleResult();
+		assertEquals( 5, nameLen.intValue() );
+		Integer loc = entityManager.createQuery(
+						"select locate('li', p.name) from DemoPerson p where p.id = :id", Integer.class )
+				.setParameter( "id", personId )
+				.getSingleResult();
+		assertTrue( loc >= 1, "locate('li', 'Alice') should match" );
+
+		// B-DEMO-002: HQL case expression smoke
+		String caseLabel = entityManager.createQuery(
+						"select case when p.name = 'Alice' then 'match' else 'other' end"
+								+ " from DemoPerson p where p.id = :id",
+						String.class )
+				.setParameter( "id", personId )
+				.getSingleResult();
+		assertEquals( "match", caseLabel );
+
+		// B-DEMO-002: json_length on shared JSON payload (C-JSON-005 family; dialect-it also covers)
+		Integer jsonLen = entityManager.createQuery(
+						"select json_length(d.payload) from DemoJsonDoc d where d.id = :id",
+						Integer.class )
+				.setParameter( "id", docId )
+				.getSingleResult();
+		assertTrue( jsonLen >= 1, "json_length should be positive" );
 	}
 }

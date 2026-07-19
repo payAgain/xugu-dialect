@@ -1,0 +1,162 @@
+schema_version: 1
+role: test
+phase_id: P-005
+initiative_id: I-007
+build_id: B-001
+invocation_id: inv-i007-p005-rp02-test
+step_id: RP-02
+status: completed_awaiting_reviewer
+required: true
+completed_at: "2026-07-19T15:39:33+08:00"
+purpose: independent offline + live verification of Track B consumer deepening (Flyway SPI + bulk delete + HQL/function + read-only tx); confirm no multi-datasource; Boot SSOT 41 rows frozen
+
+inputs:
+  - harness/tasks/P-005.md
+  - harness/handoffs/implementer/I-007-P-005.yaml
+  - harness/evidence/implementer/I-007/P-005/ACCEPTANCE.md
+  - harness/evidence/implementer/I-007/P-005/NOTES.md
+  - contracts/consumer-path-baseline.md
+  - docs/user-guide/06-consumer-path.md
+  - agents/test.md
+
+outputs:
+  - harness/evidence/test/I-007/P-005/TEST-REPORT.md
+  - harness/evidence/test/I-007/P-005/verification.json
+  - harness/evidence/test/I-007/P-005/IT-RESULT.txt
+  - harness/evidence/test/I-007/P-005/mvn-package-offline.txt
+  - harness/evidence/test/I-007/P-005/mvn-test-offline.txt
+  - harness/evidence/test/I-007/P-005/mvn-test-live-demo.txt
+  - harness/evidence/test/I-007/P-005/surefire-summary-offline.txt
+  - harness/evidence/test/I-007/P-005/surefire-summary-live-demo.txt
+  - harness/evidence/test/I-007/P-005/verify.txt
+  - harness/evidence/test/I-007/P-005/surefire-live-demo/
+  - harness/evidence/test/I-007/P-005/TEST-com.xugu.demo.it.DemoFlywayIT.xml
+  - harness/evidence/test/I-007/P-005/TEST-com.xugu.demo.it.DemoBulkMutationIT.xml
+  - harness/evidence/test/I-007/P-005/TEST-com.xugu.demo.it.DemoFunctionsIT.xml
+  - harness/evidence/test/I-007/P-005/TEST-com.xugu.demo.it.DemoReadOnlyTxIT.xml
+  - harness/handoffs/test/I-007-P-005.yaml
+
+commands:
+  - { cmd: "mvn -q -DskipTests package", exit: 0 }
+  - { cmd: "mvn -q test", exit: 0 }
+  - { cmd: "XUGU_RUN_IT=true mvn -q -pl demo-spring-boot -am test", exit: 0 }
+  - { cmd: "python harness/scripts/verify.py --phase P-005 --evidence harness/evidence/test/I-007/P-005/verification.json", exit: 0 }
+
+validation:
+  package:
+    command: "mvn -q -DskipTests package"
+    exit_code: 0
+    status: PASS
+  test_offline:
+    command: "mvn -q test"
+    exit_code: 0
+    status: PASS
+    dialect_counts:
+      tests_run: 141
+      failures: 0
+      errors: 0
+      skipped: 54
+    demo_counts:
+      tests_run: 32
+      failures: 0
+      errors: 0
+      skipped: 26
+  test_live_demo:
+    command: "XUGU_RUN_IT=true mvn -q -pl demo-spring-boot -am test"
+    exit_code: 0
+    status: PASS
+    live_it_status: PASS
+    real_db: true
+    demo_counts:
+      tests_run: 32
+      failures: 0
+      errors: 0
+      skipped: 0
+    dialect_counts_under_am:
+      tests_run: 141
+      failures: 0
+      errors: 0
+      skipped: 18
+    errors: []
+  track_b:
+    B-FLY-001:
+      it: DemoFlywayIT#flywayMigratesMarkerTableOnXugu
+      status: PASS
+    B-DEMO-001:
+      it: DemoBulkMutationIT#bulkDeletePersonNames
+      status: PASS
+    B-DEMO-002:
+      it: DemoFunctionsIT#hqlFunctionSubsetSmoke
+      status: PASS
+    B-DEMO-003:
+      it: DemoReadOnlyTxIT#readOnlyTransactionQueriesPersistedRow
+      status: PASS
+    overall: PASS
+  verify_py:
+    status: VERIFY PASS
+    note: "offline harness/build/test PASS; live demo IT separately confirmed 32/0/0/0"
+    blocker: null
+  multi_datasource:
+    secondary_found: false
+    status: PASS
+  ssot_contract:
+    artifact: contracts/consumer-path-baseline.md
+    boot_required_rows: 41
+    expanded_to_94: false
+    track_b_non_matrix_only: true
+    status: OK
+  flyway_spi:
+    plugin: com.xugu.demo.flyway.XuguFlywayDatabaseType
+    registration: META-INF/services/org.flywaydb.core.extensibility.Plugin
+    default_enabled: false
+    status: PASS
+
+spot_checks:
+  build_exit_zero: true
+  default_test_exit_zero: true
+  it_skipped_offline: true
+  live_demo_all_green: true
+  track_b_four_themes_pass: true
+  no_multi_datasource: true
+  ssot_41_rows_unchanged: true
+  gav_7_4_5_final: true
+  no_product_code_by_test: true
+  org_untouched_by_test: true
+  ship_out_of_scope: true
+
+observed_flows:
+  - id: track-b-flyway-demo-bulk-function-hql-consumer-deepening
+    result: passed
+    evidence: harness/evidence/test/I-007/P-005/TEST-REPORT.md
+    note: "Flyway SPI + bulk delete + HQL deepen + read-only tx live green; SSOT 41 frozen"
+
+notes_for_orchestrator: |
+  RP-02 PASS for P-005.
+  Offline reactor green (demo 32 run / 26 skip; dialect 141/54 skip).
+  Live demo IT PASS (32/0/0/0) against reachable XuGuDB at 127.0.0.1:5138.
+  Track B: B-FLY-001, B-DEMO-001, B-DEMO-002, B-DEMO-003 all PASS live.
+  Flyway: XuguFlywayDatabaseType SPI (Oracle-compat shim); default flyway.enabled=false.
+  No multi-datasource confirmed.
+  Boot SSOT: 41 rows FROZEN (not expanded to 94); Track B in non-matrix table only.
+  verify.py → VERIFY PASS.
+  Advance to RP-03 reviewer. No commit by test. Never touched org/. Ship remains out of scope.
+
+notes_for_implementer: |
+  Independent verification confirms RP-01 Track B deliverables.
+  No further test blockers for RP-02. No product Java changes requested or made.
+
+notes_for_reviewer: |
+  Independent RP-02 evidence under harness/evidence/test/I-007/P-005/.
+  Recommend PASS on P-005 technical acceptance: VERIFY PASS + live demo 32/0/0/0 + Track B four themes + no multi-datasource + SSOT 41 unchanged.
+  Review Flyway SPI reproducibility and Track B scope boundary.
+
+forbidden_reminder:
+  - no product code rewrite by test
+  - no git commit / Accept / Ship by test
+  - did not edit harness/tasks/P-005.md role_pipeline status
+
+next_step: reviewer_rp03
+blocker: null
+real_db_it_passed: true
+verdict: PASS
+recommendation: PASS

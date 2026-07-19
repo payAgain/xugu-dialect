@@ -69,6 +69,16 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-jackson</artifactId>
     </dependency>
+    <!-- I-007 P-005 Track B: Flyway migration path (disabled by default; Flyway IT enables). -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-flyway</artifactId>
+    </dependency>
+    <!-- Flyway 12 splits DB support; Xugu JDBC reports "XuguDB" — use Oracle module + database-type override. -->
+    <dependency>
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-database-oracle</artifactId>
+    </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>

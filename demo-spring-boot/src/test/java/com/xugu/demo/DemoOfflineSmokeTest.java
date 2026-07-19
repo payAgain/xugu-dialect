@@ -71,6 +71,25 @@ class DemoOfflineSmokeTest {
 			assertTrue( yaml.contains( "XUGU_JDBC_URL" ) );
 			assertTrue( yaml.contains( "compatiblemode=NONE" ) );
 			assertTrue( yaml.contains( "com.xugu.cloudjdbc.Driver" ) );
+			assertTrue( yaml.contains( "flyway:" ), "Flyway config documented (B-FLY-001)" );
+			assertTrue( yaml.contains( "enabled: false" ), "Flyway default off for offline IT" );
+		}
+	}
+
+	/** I-007 P-005 Track B: Flyway Xugu plugin + migration resource (offline; no DB). */
+	@Test
+	void flywayXuguPluginAndMigrationOnClasspath() throws Exception {
+		String pluginResource = "META-INF/services/org.flywaydb.core.extensibility.Plugin";
+		try ( InputStream in = DemoApplication.class.getClassLoader().getResourceAsStream( pluginResource ) ) {
+			assertTrue( in != null, pluginResource + " missing" );
+			String body = new String( in.readAllBytes(), StandardCharsets.UTF_8 );
+			assertTrue( body.contains( "com.xugu.demo.flyway.XuguFlywayDatabaseType" ), body );
+		}
+		try ( InputStream in = DemoApplication.class.getClassLoader()
+				.getResourceAsStream( "db/migration/V1__hib_demo_flyway_marker.sql" ) ) {
+			assertTrue( in != null, "V1 Flyway migration missing from classpath" );
+			String sql = new String( in.readAllBytes(), StandardCharsets.UTF_8 );
+			assertTrue( sql.contains( "HIB_DEMO_FLYWAY_MARKER" ), sql );
 		}
 	}
 

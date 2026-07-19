@@ -1,3 +1,13 @@
+## Entry: I-007 B-001 P-005 accepted — Track B consumers
+
+### Summary
+P-005 **accepted**（Flyway SPI + Demo bulk delete + HQL/函数加深 + 只读事务；demo live 32/0/0/0）。Boot SSOT 41 未膨胀。下一步 P-006 docs + VERIFY PASS Accept prep。`org/` 不提交。NOT Ship。
+
+### Next
+Must-commit P-005；派发 P-006。
+
+---
+
 ## Entry: I-007 B-001 P-004 accepted — Track C covered-live
 
 ### Summary

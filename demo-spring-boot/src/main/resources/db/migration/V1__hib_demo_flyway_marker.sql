@@ -1,0 +1,5 @@
+CREATE TABLE HIB_DEMO_FLYWAY_MARKER (
+    id NUMBER(19) NOT NULL,
+    marker VARCHAR2(64) NOT NULL,
+    CONSTRAINT pk_hib_demo_flyway_marker PRIMARY KEY (id)
+);

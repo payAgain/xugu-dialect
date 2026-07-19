@@ -1,0 +1,24 @@
+# Live demo summary (XUGU_RUN_IT=true) — inv-i007-p005-rp02-test
+# Command: XUGU_RUN_IT=true mvn -q -pl demo-spring-boot -am test
+# Date: 2026-07-19T15:38:00+08:00
+
+dialect module under -am (excludes stale XuguTrackCProbeIT artifact):
+  tests_run: 141
+  failures: 0
+  errors: 0
+  skipped: 18
+
+demo-spring-boot module:
+  tests_run: 32
+  failures: 0
+  errors: 0
+  skipped: 0
+
+P-005 Track B live ITs:
+  DemoFlywayIT#flywayMigratesMarkerTableOnXugu: PASS
+  DemoBulkMutationIT#bulkDeletePersonNames: PASS
+  DemoBulkMutationIT#bulkUpdatePersonNames: PASS (existing SSOT row C-BULK-001)
+  DemoFunctionsIT#hqlFunctionSubsetSmoke: PASS
+  DemoReadOnlyTxIT#readOnlyTransactionQueriesPersistedRow: PASS
+
+BUILD SUCCESS (exit 0)

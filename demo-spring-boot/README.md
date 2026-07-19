@@ -68,7 +68,7 @@ Consumer-path verification modes:
 | Mode | Command | Expectation |
 |---|---|---|
 | Offline | `mvn -q -pl demo-spring-boot -am test` | Gated IT skipped; offline smoke green |
-| Live | `$env:XUGU_RUN_IT='true'; mvn -q -pl demo-spring-boot -am test` | Demo ≈28 tests green (last Accept: 28/0/0/0) |
+| Live | `$env:XUGU_RUN_IT='true'; mvn -q -pl demo-spring-boot -am test` | Demo ≈32 tests green (I-007 P-005 Track B deepening) |
 | Harness | `python harness/scripts/verify.py` (repo root) | **VERIFY PASS** |
 
 ```bash
@@ -102,7 +102,9 @@ IT classes (`@EnabledIf` on `XuguIntegrationGate`):
 | `DemoTypesIT` | Layer C′ typed sample round-trip (int/decimal/varchar/bool/date/ts/binary/blob/uuid-as-varchar) |
 | `DemoFunctionsIT` | Layer C′ HQL function subset (concat/substring/lower-upper/coalesce/temporal/uuid/json_value) |
 | `DemoJsonIT` | JSON column round-trip + `json_arrayagg` (shared `DemoJsonDoc`; needs Jackson on classpath) |
-| `DemoBulkMutationIT` | One HQL bulk update (C-BULK-001) |
+| `DemoBulkMutationIT` | HQL bulk update + bulk delete (C-BULK-001; B-DEMO-001 delete) |
+| `DemoFlywayIT` | Flyway migrate on Xugu + marker table (B-FLY-001) |
+| `DemoReadOnlyTxIT` | `@Transactional(readOnly=true)` query smoke (B-DEMO-003) |
 
 Cleanup deletes `HIB_DEMO_*` rows after each test (as applicable).
 
@@ -117,6 +119,7 @@ Cleanup deletes `HIB_DEMO_*` rows after each test (as applicable).
 | `HIB_DEMO_SEQ_TICKET_SEQ` | Sequence for `DemoSeqTicket` |
 | `HIB_DEMO_TYPED_SAMPLE` | Layer C′ typed fields (`DemoTypedSample`; `guid_val` is `varchar(36)` + converter) |
 | `HIB_DEMO_JSON_DOC` | Layer C′ JSON column (`DemoJsonDoc`) |
+| `HIB_DEMO_FLYWAY_MARKER` | Flyway-managed marker (B-FLY-001; not a JPA entity) |
 
 ## Mapping notes (P-004 live IT)
 

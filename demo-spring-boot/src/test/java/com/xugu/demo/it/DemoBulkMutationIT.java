@@ -19,7 +19,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
 /**
- * Gated IT: one HQL bulk update via Boot EM (C-BULK-001). Bulk delete not duplicated.
+ * Gated IT: HQL bulk update + bulk delete via Boot EM (C-BULK-001 deepening, B-DEMO-001).
  */
 @SpringBootTest
 @EnabledIf( "com.xugu.demo.support.XuguIntegrationGate#isEnabled" )
@@ -64,6 +64,29 @@ class DemoBulkMutationIT {
 		assertEquals( 2L, updatedCount );
 		assertEquals( 1L, repository.findAll().stream()
 				.filter( p -> "keep".equals( p.getName() ) )
+				.count() );
+	}
+
+	@Test
+	void bulkDeletePersonNames() {
+		assertTrue( XuguIntegrationGate.isEnabled() );
+
+		repository.save( new DemoPerson( "del-a" ) );
+		repository.save( new DemoPerson( "del-b" ) );
+		repository.save( new DemoPerson( "keep-del" ) );
+		repository.flush();
+		entityManager.clear();
+
+		int deleted = entityManager.createQuery(
+						"delete from DemoPerson p where p.name like :pat" )
+				.setParameter( "pat", "del-%" )
+				.executeUpdate();
+		assertEquals( 2, deleted, "B-DEMO-001: bulk delete row count" );
+		entityManager.clear();
+
+		assertEquals( 1L, repository.count() );
+		assertEquals( 1L, repository.findAll().stream()
+				.filter( p -> "keep-del".equals( p.getName() ) )
 				.count() );
 	}
 }

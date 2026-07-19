@@ -13,7 +13,7 @@
 | **GAV** | `com.xugu:xugu-dialect:7.4.5.Final`（本 Initiative **不升版**） |
 | **Boot-required rows** | **41**（Layer A=13 / B=9 / C′=19） |
 | **Open Boot gaps** | **0**（P-002…P-004 closed） |
-| **Demo `@Test`** | ≈ **28**（目标量级 25–40） |
+| **Demo `@Test`** | ≈ **32**（目标量级 25–40；I-007 P-005 Track B 加深 +4 gated/offline） |
 | **Ship / Central** | **out of scope** for I-006 |
 
 Pure dialect SPI / unit / dialect-IT hooks stay in I-005 suites and are listed as **`dialect-it-only`** in the SSOT exclusion appendix — do **not** treat them as Boot gaps.
@@ -127,3 +127,35 @@ I-005 全量冻结步骤仍见 [03-verify.md § Frozen baseline](03-verify.md#fr
 4. 能力真相以 contracts SSOT + I-005/I-003 矩阵为准；本页只说明如何跑消费者路径。
 
 排障：[05-troubleshooting.md](05-troubleshooting.md)。
+
+## I-007 Track B deepening（P-005）
+
+在 I-006 **41/41** Boot-required 冻结基线之上，I-007 Track B 做**行为加深**（不新增 SSOT 矩阵行）：
+
+| gap_id | 内容 | Demo 入口 |
+|---|---|---|
+| **B-FLY-001** | Flyway 迁移路径 | `DemoFlywayIT#flywayMigratesMarkerTableOnXugu`（gated）；离线 `DemoOfflineSmokeTest#flywayMigrationResourceOnClasspath` |
+| **B-DEMO-001** | Demo bulk delete | `DemoBulkMutationIT#bulkDeletePersonNames` |
+| **B-DEMO-002** | 函数/HQL 冒烟加深 | `DemoFunctionsIT#hqlFunctionSubsetSmoke`（trim/length/locate/case/json_length） |
+| **B-DEMO-003** | 只读事务冒烟 | `DemoReadOnlyTxIT#readOnlyTransactionQueriesPersistedRow` |
+
+**Flyway 默认关闭**（`spring.flyway.enabled=false`），避免影响现有 `ddl-auto=update` IT。启用示例：
+
+```yaml
+spring:
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    baseline-on-migrate: true
+    # Xugu: demo registers com.xugu.demo.flyway.XuguFlywayDatabaseType (Flyway 12 plugin SPI)
+  jpa:
+    hibernate:
+      ddl-auto: update   # 实体表仍由 Hibernate 管理；Flyway 仅管显式 migration
+```
+
+依赖：`spring-boot-starter-flyway` + `flyway-database-oracle`（Oracle 兼容层）+ demo SPI `XuguFlywayDatabaseType`。
+
+迁移文件：`demo-spring-boot/src/main/resources/db/migration/V1__hib_demo_flyway_marker.sql`（`HIB_DEMO_FLYWAY_MARKER`）。
+
+**不做多数据源**；GAV 仍为 `7.4.5.Final`；NONE only。

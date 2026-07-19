@@ -47,7 +47,7 @@ tasks:
     dependencies: [P-003]
   - task_id: P-005
     title: "B：Flyway + Demo bulk/函数/HQL 消费者加深"
-    status: ready
+    status: accepted
     build_id: B-001
     packet: harness/tasks/P-005.md
     acceptance_doc: harness/evidence/implementer/I-007/P-005/ACCEPTANCE.md
@@ -55,7 +55,7 @@ tasks:
     dependencies: [P-004]
   - task_id: P-006
     title: "文档对齐与 VERIFY PASS Accept 准备"
-    status: blocked
+    status: ready
     build_id: B-001
     packet: harness/tasks/P-006.md
     acceptance_doc: harness/evidence/implementer/I-007/P-006/ACCEPTANCE.md

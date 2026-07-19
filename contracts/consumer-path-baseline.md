@@ -167,11 +167,26 @@ Layer C′ (19): `A-TYP-001`, `A-TYP-002`, `A-TYP-004`, `A-TYP-005`, `A-TYP-006`
 | A-FUN-007 | C′ | covered | `DemoFunctionsIT#hqlFunctionSubsetSmoke` | demo | — | A-FUN-007 |
 | A-FUN-010 | C′ | covered | `DemoFunctionsIT#hqlFunctionSubsetSmoke` | demo | — | A-FUN-010 |
 | A-FUN-016 | C′ | covered | `DemoFunctionsIT#hqlFunctionSubsetSmoke` | demo | — | A-FUN-016 |
-| A-FUN-017 | C′ | covered | `DemoFunctionsIT#hqlFunctionSubsetSmoke` (shared `DemoJsonDoc`) | demo | — | A-FUN-017 |
+| A-FUN-017 | C′ | covered | `DemoFunctionsIT#hqlFunctionSubsetSmoke` (shared `DemoJsonDoc`; I-007 + trim/length/locate/case/json_length) | demo | — | A-FUN-017 |
 | C-JSON-001 | C′ | covered | `DemoJsonIT#jsonColumnRoundTripAndArrayAgg` | demo | — | C-JSON-001 |
-| C-BULK-001 | C′ | covered | `DemoBulkMutationIT#bulkUpdatePersonNames` (bulk update only; delete not duplicated) | demo | — | C-BULK-001 |
+| C-BULK-001 | C′ | covered | `DemoBulkMutationIT#bulkUpdatePersonNames`, `#bulkDeletePersonNames` (update=SSOT; delete=I-007 B-DEMO-001 deepen) | demo | — | C-BULK-001 |
 
 **C′ implementer note:** consolidated multi-assert / shared fixtures so total demo `@Test` stays ~25–40. **Reject** 1:1 “one `@Test` per matrix row” if it trends toward a 94-row Boot mirror. LOB pick: **A-TYP-010** (BLOB); **A-TYP-011** remains dialect-it-only.
+
+---
+
+## I-007 Track B behavioral deepening (P-005 — not Boot SSOT rows)
+
+I-006 **41/41** remains **FROZEN**; items below are **incremental consumer deepening** per [`i007-capability-hardening-plan.md`](i007-capability-hardening-plan.md) Track B. **Do not** add matrix rows without Human Gate Scope change.
+
+| gap_id | item | demo entry | gate |
+|---|---|---|---|
+| **B-FLY-001** | Flyway integration | `DemoFlywayIT#flywayMigratesMarkerTableOnXugu`; offline `DemoOfflineSmokeTest#flywayMigrationResourceOnClasspath` | demo |
+| **B-DEMO-001** | Demo bulk delete | `DemoBulkMutationIT#bulkDeletePersonNames` | demo |
+| **B-DEMO-002** | Function/HQL smoke deepen | `DemoFunctionsIT#hqlFunctionSubsetSmoke` (+ trim/length/locate/case/json_length) | demo |
+| **B-DEMO-003** | Read-only tx smoke | `DemoReadOnlyTxIT#readOnlyTransactionQueriesPersistedRow` | demo |
+
+**C-BULK-001 note:** bulk **update** remains the SSOT row; bulk **delete** is Track B deepening (dialect IT already covers delete via `XuguBulkMutationIT`).
 
 ---
 
@@ -339,3 +354,4 @@ LOB pick: **A-TYP-010** (BLOB). **A-TYP-011** remains dialect-it-only (exclusion
 | 2026-07-18 | P-004 RP-02 re-run: offline 28/0/0/23; live 28/0/0/0 PASS; VERIFY PASS; C′ open gaps 0; A-TYP-011 dialect-it-only; Demo `@Test`=28 (`inv-i006-p004-rp02-test`) |
 | 2026-07-19 | P-005 RP-01: docs ↔ SSOT ↔ Demo aligned; user guide `06-consumer-path.md`; freeze status **FROZEN** (Boot open gaps remain **0**); Initiative Accept prep (**NOT Ship**); GAV `7.4.5.Final` (`inv-i006-p005-rp01-implementer`) |
 | 2026-07-19 | P-005 RP-02 (test): offline 28/0/0/23; live 28/0/0/0 PASS; VERIFY PASS; docs `06-consumer-path.md` spot-check OK; SSOT remains **FROZEN** gaps **0**; GAV `7.4.5.Final` confirmed (`inv-i006-p005-rp02-test`) |
+| 2026-07-19 | I-007 P-005 RP-01: Track B deepening — Flyway (B-FLY-001), bulk delete (B-DEMO-001), HQL/function deepen (B-DEMO-002), read-only tx (B-DEMO-003); Boot SSOT rows unchanged (**41**); non-matrix Track B table added (`inv-i007-p005-rp01-implementer`) |

@@ -1,0 +1,15 @@
+phase=P-005
+date=2026-07-19T15:38:00+08:00
+gate=XUGU_RUN_IT=true
+branch=feat/i-007-capability-hardening-abc
+head=6a3385d
+gav=7.4.5.Final
+compatiblemode=NONE
+invocation_id=inv-i007-p005-rp02-test
+outcome=PASS
+tests_run=32
+failures=0
+errors=0
+skipped=0
+dialect_under_am=141/0/0/18
+notes=Track B live demo: FlywayIT + bulk delete + HQL deepen + readOnly tx; offline reactor mvn test PASS (demo 32/0/0/26 gated skip)
