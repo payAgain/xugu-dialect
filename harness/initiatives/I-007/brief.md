@@ -2,7 +2,7 @@
 
 > Scoped clarity for one change unit. Not a full product re-charter.
 > Type: feature
-> Updated: 2026-07-19T13:50:00+08:00
+> Updated: 2026-07-19T17:12:00+08:00
 
 ## Goal
 - 在 **`compatiblemode=NONE`** 下串行推进框架下一阶段：**A 堵坑** → **B 消费者加深** → **C 延后矩阵增量**。
@@ -44,11 +44,11 @@
 | P-006 | Docs + VERIFY PASS + Accept prep |
 
 ## Acceptance criteria
-- [ ] C-BULK-002：live IT PASS **或** 永久限制正式写入 SSOT + 用户文档（二选一钉死）
-- [ ] Accept 证据含可审计 live 日志工件（有库时）
-- [ ] C 三主题有文档依据 + 实现 + 真库入口 + SSOT 更新
-- [ ] B：Flyway 路径 + Demo bulk/函数（或 HQL）冒烟可复现
-- [ ] `verify.py` **VERIFY PASS**；GAV 7.4.5.Final；仍为 NONE
+- [x] C-BULK-002：live IT PASS **或** 永久限制正式写入 SSOT + 用户文档（二选一钉死）→ **covered-live**
+- [x] Accept 证据含可审计 live 日志工件（有库时）
+- [x] C 三主题有文档依据 + 实现 + 真库入口 + SSOT 更新
+- [x] B：Flyway 路径 + Demo bulk/函数（或 HQL）冒烟可复现
+- [x] `verify.py` **VERIFY PASS**；GAV 7.4.5.Final；仍为 NONE
 - [ ] **不要求** Ship（保持未勾选）
 
 ## Related
@@ -56,6 +56,7 @@
 - Branch: `feat/i-007-capability-hardening-abc`
 - SSOT touch: `contracts/production-regression-baseline.md`, `contracts/consumer-path-baseline.md`, feature matrices
 - Ship: **out of this Initiative**
+- Accept evidence: `harness/evidence/orchestrator/I-007/ACCEPTANCE.md`
 
 ## Status
-`active` — B-001 **complete**（P-001…P-006 accepted）；C-BULK-002 covered-live；VERIFY PASS；await Human Gate **Initiative Accept**（NOT Ship）
+`accepted` — Human Gate「Initiative Accept I-007」(~2026-07-19T17:11+08:00)。**NOT Ship** · **NOT Archive**（Archive 为可选下一步）

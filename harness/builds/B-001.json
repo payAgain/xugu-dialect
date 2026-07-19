@@ -5,6 +5,13 @@
   "plan_revision": 1,
   "status": "approved",
   "approved": true,
+  "completed": true,
+  "completion": {
+    "at": "2026-07-19T17:12:00+08:00",
+    "reason": "All phases P-001…P-006 accepted; Initiative Accept I-007 recorded (NOT Ship). status remains approved for harness_check semantic contract.",
+    "initiative_accept_phrase": "Initiative Accept I-007",
+    "verify": "harness/evidence/test/I-007/P-006/verification.json"
+  },
   "proposed_phase_ids": ["P-001", "P-002", "P-003", "P-004", "P-005", "P-006"],
   "approved_phase_ids": ["P-001", "P-002", "P-003", "P-004", "P-005", "P-006"],
   "approval": {
@@ -24,5 +31,5 @@
       "reason": "Human Gate authorized full Plan serial execution"
     }
   ],
-  "notes": "Stay on feat/i-007-capability-hardening-abc. Do not commit org/ dumps. NOT Ship. Must-commit after each Phase accept. P-001 accepted; P-002 next."
+  "notes": "B-001 completed under Initiative Accept I-007. Stay on feat/i-007-capability-hardening-abc. Do not commit org/ dumps. NOT Ship. NOT Archive."
 }

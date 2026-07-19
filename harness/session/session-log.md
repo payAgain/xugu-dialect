@@ -1,3 +1,13 @@
+## Entry: I-007 Initiative Accept — accepted (NOT Ship, NOT Archive)
+
+### Summary
+Human Gate「Initiative Accept I-007」(~2026-07-19T17:11+08:00)。Initiative **accepted**。B-001 P-001…P-006 全部 accepted；C-BULK-002=**covered-live**；Track C JSON/ARRAY/ALTER SEQUENCE covered-live；Track B Flyway+Demo；`verify.py` **VERIFY PASS**；GAV 7.4.5.Final；NONE。**NOT Ship** · **NOT Archive**。证据 `harness/evidence/orchestrator/I-007/ACCEPTANCE.md`。不提交 `org/` / `META-INF/`。
+
+### Next
+可选：Archive I-007；或授权 Ship；或开新 Initiative。
+
+---
+
 ## Entry: I-007 B-001 complete — await Initiative Accept
 
 ### Summary

@@ -11,7 +11,7 @@
 | I-004 | hotfix | DROP SEQUENCE IF EXISTS + IDENTITY×保留字表名方言缓解（不改 JDBC；7.4.5.Final） | fix/i-004-sequence-drop-identity-reserved | completed | 2026-07-17T15:23:00+08:00（archived） |
 | I-005 | feature | 生产回归测试基线（Definition A + I-003 可实现全量；门控真库；未来迭代防回退） | feat/i-005-production-regression-baseline | completed | 2026-07-18T14:23:00+08:00（archived） |
 | I-006 | feature | 消费者路径全面覆盖（A 黄金路径 + B 关联/SEQUENCE + C′ Boot 必测扫盲） | feat/i-006-consumer-path-coverage | completed | 2026-07-19T13:53:00+08:00（archived） |
-| I-007 | feature | 能力硬化 A堵坑 + B消费者加深 + C延后增量（NONE；JSON/ARRAY/ALTER SEQUENCE；Flyway） | feat/i-007-capability-hardening-abc | active | 2026-07-19T13:55:00+08:00（Plan complete；B-001 draft P-001） |
+| I-007 | feature | 能力硬化 A堵坑 + B消费者加深 + C延后增量（NONE；JSON/ARRAY/ALTER SEQUENCE；Flyway） | feat/i-007-capability-hardening-abc | accepted | 2026-07-19T17:12:00+08:00（Initiative Accept；NOT Ship；NOT Archive） |
 
 Status: `clarifying` | `active` | `completed` | `abandoned` | `accepted`
 
