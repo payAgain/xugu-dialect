@@ -20,7 +20,7 @@ B-001 **approved** 全 Plan 串行执行完毕。P-001…P-006 **全部 accepted
 | P-003 | `0af1e5e` |
 | P-004 | `6a3385d` |
 | P-005 | `f713248` |
-| P-006 | *(pending must-commit)* |
+| P-006 | `94a58e9` |
 
 ## Next 3 Steps
 1. Must-commit P-006

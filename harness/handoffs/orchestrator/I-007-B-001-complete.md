@@ -15,7 +15,7 @@ B-001 **complete** — all approved phases P-001…P-006 **accepted**.
 | P-003 | thin-fold-into-P-004 | `0af1e5e` |
 | P-004 | Track C four rows covered-live | `6a3385d` |
 | P-005 | Track B Flyway + Demo deepen | `f713248` |
-| P-006 | Docs + VERIFY PASS Accept prep | *(this commit)* |
+| P-006 | Docs + VERIFY PASS Accept prep | `94a58e9` |
 
 ## VERIFY
 

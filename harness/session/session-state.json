@@ -24,14 +24,15 @@
   },
   "version_control_checkpoint": {
     "decision": "b001_complete",
-    "committed": false,
+    "committed": true,
     "branch": "feat/i-007-capability-hardening-abc",
+    "candidate_commit": "94a58e922e115be153e495edd6ced19e497dce66",
     "p001_accept_sha": "d0c57b1eab5904c1c0de612366bc0614d0914569",
     "p002_accept_sha": "682c65d4d98bf3b1c8c5ec360db3df5da3d3deaa",
     "p003_accept_sha": "0af1e5e7c016510df4c8f60b6ab9fb7e5c5900b2",
     "p004_accept_sha": "6a3385d8133334839ee3464fb4532f5aed6fb16c",
     "p005_accept_sha": "f713248eb7575efdc50d6100b5492a108e7fa6ae",
-    "p006_accept_sha": null,
+    "p006_accept_sha": "94a58e922e115be153e495edd6ced19e497dce66",
     "c_bulk_002_outcome": "covered-live"
   },
   "cognitive_state": {
