@@ -181,6 +181,15 @@ Columns: `matrix_id | status | entry_class#method | gate | gap_action`
 | C-DDL-003 | covered | `XuguTypeDdlDetailsTest#datetimeLiteralAndFormat_C_DDL_003`; `XuguTypeDdlDetailsIT#typeDdlDetailsOnLiveDb` | IT | N/A |
 | C-CAT-001 | covered | `XuguTypeDdlDetailsTest#catalogCreateDrop_C_CAT_001`; `XuguTypeDdlDetailsIT#typeDdlDetailsOnLiveDb` | IT | N/A |
 | C-GUID-001 | covered | `XuguTypeDdlDetailsTest#selectGuidString_C_GUID_001`; `XuguTypeDdlDetailsIT#typeDdlDetailsOnLiveDb` | IT | N/A |
+| C-JSON-005 | covered-live | `XuguFunctionRegistryTest#jsonSubsetUsesStandardJsonValueNotMysqlDump`; `XuguJsonSubsetDeepenIT#jsonSubsetDeepen_Hql_C_JSON_005` | IT | N/A |
+| C-DDL-005 | covered-live | `XuguArrayTypeTest#arrayTypeHooksWired_A_TYP_015_C_DDL_005`; `XuguArrayTypeIT#arrayColumnRoundTrip_A_TYP_015_C_DDL_005` | IT | N/A |
+
+### I-007 / P-004 — promoted from 延后 (Definition A)
+
+| matrix_id | status | entry_class#method | gate | gap_action |
+|---|---|---|---|---|
+| A-TYP-015 | covered-live | `XuguArrayTypeTest#arrayTypeHooksWired_A_TYP_015_C_DDL_005`; `XuguArrayTypeIT#arrayColumnRoundTrip_A_TYP_015_C_DDL_005` | IT | N/A |
+| A-SEQ-006 | covered-live | `XuguIdentitySequenceTest#alterSequenceRestartUsesStartWith_A_SEQ_006`; `XuguAlterSequenceIT#alterSequenceStartWithAndIncrement_A_SEQ_006` | IT | N/A |
 
 ---
 
@@ -205,7 +214,6 @@ Matrix status **文档不允许** or **延后**; baseline records explicit non-s
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
 | A-TYP-014 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_TYP_014_interval` (@Disabled) | none | N/A |
-| A-TYP-015 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_TYP_015_array` (@Disabled) | none | N/A |
 | A-TYP-016 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_TYP_016_xml` (@Disabled) | none | N/A |
 | A-TYP-017 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_TYP_017_spatial` (@Disabled) | none | N/A |
 | A-TYP-018 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_TYP_018_udt` (@Disabled) | none | N/A |
@@ -216,7 +224,6 @@ Matrix status **文档不允许** or **延后**; baseline records explicit non-s
 | A-PAG-006 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_PAG_006_rownum` (@Disabled) | none | N/A |
 | A-LCK-006 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_LCK_006_lockTable` (@Disabled) | none | N/A |
 | A-IDN-005 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_IDN_005_identityMode` (@Disabled) | none | N/A |
-| A-SEQ-006 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_SEQ_006_alterSequence` (@Disabled) | none | N/A |
 | A-FUN-015 | negative-only | `XuguFunctionRegistryTest#unsupportedFunctionNotRegistered_negativeNote` | unit | N/A |
 | A-FUN-019 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_FUN_019_regexp` (@Disabled) | none | N/A |
 | A-FUN-020 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_FUN_020_geometric` (@Disabled) | none | N/A |
@@ -231,9 +238,7 @@ Matrix status **文档不允许** or **延后**; baseline records explicit non-s
 |---|---|---|---|---|
 | C-DDL-004 | negative-only | `XuguNegativeRegressionBaselineTest#enumDdlNotEmitted_C_DDL_004`; `XuguTypeDdlDetailsTest#enumTypeDeclarationIsNull_C_DDL_004` | unit | P-003 |
 | C-SKIP-001 | negative-only | `XuguNegativeRegressionBaselineTest#skipLockedNotSupported_A_LCK_004_C_SKIP_001`; `XuguPaginationLockTest#skipLockedNotSupported_A_LCK_004`; `XuguLockIT#forUpdateExecutesAndSkipLockedUnsupported` | IT | P-003 |
-| C-JSON-005 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_C_JSON_005_broaderJsonFunctions` (@Disabled); `XuguFunctionRegistryTest#jsonSubsetUsesStandardJsonValueNotMysqlDump` (json_set guard) | unit | N/A |
 | C-JSON-006 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_C_JSON_006_jsonTable` (@Disabled) | none | N/A |
-| C-DDL-005 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_C_DDL_005_arraySqlType` (@Disabled) | none | N/A |
 | C-SRV-001 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_C_SRV_001_serverConfiguration` (@Disabled) | none | N/A |
 | C-SEL-001 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_C_SEL_001_dialectSelector` (@Disabled) | none | N/A |
 
@@ -359,7 +364,8 @@ Source: [`harness/evidence/researcher/I-005/P-001/GAP-SUMMARY.md`](../harness/ev
 | covered (可实现) | 94 |
 | known-limit-documented (可实现) | 0 |
 | gap (可实现) | 0 |
-| negative-only (文档不允许 + 延后 + C defer) | 34 |
+| negative-only (文档不允许 + 延后 + C defer) | 30 |
+| I-007/P-004 promoted (covered-live) | 4 |
 | Ruler C 已有 (C-LOCK-001) | 1 |
 | **Total baseline rows** | **129** |
 

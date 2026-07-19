@@ -77,6 +77,16 @@ class XuguIdentitySequenceTest {
 	}
 
 	@Test
+	void alterSequenceRestartUsesStartWith_A_SEQ_006() {
+		SequenceSupport support = dialect.getSequenceSupport();
+		String sql = support.getRestartSequenceString( "HIB_P004_SEQ", 200L );
+		assertEquals( "alter sequence hib_p004_seq start with 200", sql.toLowerCase() );
+		assertEquals(
+				"alter sequence hib_p004_seq increment by 10",
+				XuguSequenceSupport.alterSequenceIncrementBy( "HIB_P004_SEQ", 10 ).toLowerCase() );
+	}
+
+	@Test
 	void sequenceMetadataQueryAndExtractorWired() {
 		String query = dialect.getQuerySequencesString();
 		assertNotNull( query );

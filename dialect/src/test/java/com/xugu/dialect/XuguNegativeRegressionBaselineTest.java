@@ -148,11 +148,6 @@ class XuguNegativeRegressionBaselineTest {
 	void deferred_A_TYP_014_interval() {
 	}
 
-	@Disabled( "SSOT " + SSOT + " — A-TYP-015 ARRAY deferred; aligns C-DDL-005" )
-	@Test
-	void deferred_A_TYP_015_array() {
-	}
-
 	@Disabled( "SSOT " + SSOT + " — A-TYP-016 XML deferred" )
 	@Test
 	void deferred_A_TYP_016_xml() {
@@ -198,11 +193,6 @@ class XuguNegativeRegressionBaselineTest {
 	void deferred_A_IDN_005_identityMode() {
 	}
 
-	@Disabled( "SSOT " + SSOT + " — A-SEQ-006 ALTER SEQUENCE deferred" )
-	@Test
-	void deferred_A_SEQ_006_alterSequence() {
-	}
-
 	@Disabled( "SSOT " + SSOT + " — A-FUN-019 regexp_* HQL deferred" )
 	@Test
 	void deferred_A_FUN_019_regexp() {
@@ -228,19 +218,9 @@ class XuguNegativeRegressionBaselineTest {
 	void deferred_A_XCUT_012_mavenCentralPublish() {
 	}
 
-	@Disabled( "SSOT " + SSOT + " — C-JSON-005 broader json_* HQL deferred beyond A-FUN-017 subset" )
-	@Test
-	void deferred_C_JSON_005_broaderJsonFunctions() {
-	}
-
 	@Disabled( "SSOT " + SSOT + " — C-JSON-006 json_table deferred pending doc confirm" )
 	@Test
 	void deferred_C_JSON_006_jsonTable() {
-	}
-
-	@Disabled( "SSOT " + SSOT + " — C-DDL-005 preferred SQL type for array deferred (aligns A-TYP-015)" )
-	@Test
-	void deferred_C_DDL_005_arraySqlType() {
 	}
 
 	@Disabled( "SSOT " + SSOT + " — C-SRV-001 server configuration probe deferred" )

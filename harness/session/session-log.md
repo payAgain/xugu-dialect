@@ -1,3 +1,13 @@
+## Entry: I-007 B-001 P-004 accepted — Track C covered-live
+
+### Summary
+P-004 **accepted**（risk≥8 reviewer `approve_with_nits`）。C-JSON-005 / A-TYP-015 / C-DDL-005 / A-SEQ-006 = **covered-live**；live IT 3/3。下一步 P-005 Track B（Flyway + Demo）。`org/` 不提交。NOT Ship。
+
+### Next
+Must-commit P-004；派发 P-005。
+
+---
+
 ## Entry: I-007 B-001 P-003 accepted — thin-fold into P-004
 
 ### Summary

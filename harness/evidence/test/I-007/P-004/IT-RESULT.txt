@@ -1,0 +1,26 @@
+phase=P-004
+invocation_id=inv-i007-p004-rp02-test
+date=2026-07-19T15:14:00+08:00
+gate=XUGU_RUN_IT=true
+branch=feat/i-007-capability-hardening-abc
+head_sha=0af1e5e
+gav=7.4.5.Final
+compatiblemode=NONE
+outcome=PASS
+tests_run=3
+failures=0
+errors=0
+skipped=0
+notes=C-JSON-005 XuguJsonSubsetDeepenIT#jsonSubsetDeepen_Hql_C_JSON_005 PASS; A-TYP-015/C-DDL-005 XuguArrayTypeIT#arrayColumnRoundTrip_A_TYP_015_C_DDL_005 PASS; A-SEQ-006 XuguAlterSequenceIT#alterSequenceStartWithAndIncrement_A_SEQ_006 PASS
+
+--- C-JSON-005 ---
+IT=XuguJsonSubsetDeepenIT#jsonSubsetDeepen_Hql_C_JSON_005
+status=PASS
+
+--- A-TYP-015 / C-DDL-005 ---
+IT=XuguArrayTypeIT#arrayColumnRoundTrip_A_TYP_015_C_DDL_005
+status=PASS
+
+--- A-SEQ-006 ---
+IT=XuguAlterSequenceIT#alterSequenceStartWithAndIncrement_A_SEQ_006
+status=PASS

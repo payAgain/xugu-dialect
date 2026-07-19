@@ -40,7 +40,7 @@
 | A-TYP-012 | Types | GUID / UUID column | Map UUID/`UuidJdbcType` → `GUID` type | `reference/sql/datatype/guid.md` | 可实现 | P-003 | ✅ P-003 IT |
 | A-TYP-013 | Types | JSON column | Map JSON/`SqlTypes.JSON` → `JSON` | `reference/sql/datatype/json.md` | 可实现 | P-003 | ✅ P-003 IT |
 | A-TYP-014 | Types | INTERVAL | Map Hibernate duration/interval if Dialect exposes | `reference/sql/datatype/datetime.md` | 延后 | later | Revisit if app demand + IntervalJdbcType needed |
-| A-TYP-015 | Types | ARRAY | Map SQL ARRAY / Hibernate array types | `reference/sql/datatype/array.md` | 延后 | later | Outside core MySQL/Oracle ORM default surface for I-001 |
+| A-TYP-015 | Types | ARRAY | Map SQL ARRAY / Hibernate array types | `reference/sql/datatype/array.md` | 可实现 | P-004 | ✅ I-007/P-004 ARRAY hooks + native live IT |
 | A-TYP-016 | Types | XML | Map SQLXML / XML type | `reference/sql/datatype/xml.md` | 延后 | later | Not required for definition A core |
 | A-TYP-017 | Types | Geometric / spatial | Map geometry types | `reference/sql/datatype/geometric.md` | 延后 | later | Charter: spatial out unless matrix includes; revisit on Scope |
 | A-TYP-018 | Types | UDT | User-defined types as entity columns | `reference/sql/datatype/udt.md` | 延后 | later | Not production default for Hibernate apps |
@@ -92,7 +92,7 @@
 | A-SEQ-004 | Sequence | CURRVAL | Current value function | `reference/object/sequence.md`, `reference/function/sequence-functions/currval.md` | 可实现 | P-005 | ✅ `currval('name')` after NEXTVAL same session |
 | A-SEQ-005 | Sequence | Sequence options | START/INCREMENT/MIN/MAX/CACHE/CYCLE | `reference/object/sequence.md` | 可实现 | P-005 | ✅ Hibernate maps START/INCREMENT; MIN/MAX/CACHE/CYCLE N/A via SequenceSupport API |
 
-| A-SEQ-006 | Sequence | ALTER SEQUENCE | Alter sequence options | `reference/object/sequence.md` | 延后 | later | Schema-update rare path |
+| A-SEQ-006 | Sequence | ALTER SEQUENCE | Alter sequence options | `reference/object/sequence.md` | 可实现 | P-004 | ✅ START WITH / INCREMENT BY (not RESTART WITH) — `XuguAlterSequenceIT` |
 
 ---
 

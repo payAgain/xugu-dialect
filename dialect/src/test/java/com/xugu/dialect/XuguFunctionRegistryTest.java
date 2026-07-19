@@ -117,6 +117,9 @@ class XuguFunctionRegistryTest {
 		assertNotNull( jsonValue );
 		assertInstanceOf( JsonValueFunction.class, jsonValue );
 		assertRegistered( "json_extract" );
+		assertRegistered( "json_unquote" );
+		assertRegistered( "json_length" );
+		assertRegistered( "json_type" );
 		// Documented subset only — do not register MySQL json_set as supported
 		assertNull( functions.findFunctionDescriptor( "json_set" ),
 				"json_set must not be registered (not in XuGu Hibernate subset)" );

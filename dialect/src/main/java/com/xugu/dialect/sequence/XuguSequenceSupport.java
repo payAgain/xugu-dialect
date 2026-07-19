@@ -5,7 +5,7 @@ import org.hibernate.dialect.sequence.SequenceSupport;
 import org.hibernate.internal.util.StringHelper;
 
 /**
- * XuGu SEQUENCE support (A-SEQ-001..005, A-XCUT-008).
+ * XuGu SEQUENCE support (A-SEQ-001..006, A-XCUT-008).
  *
  * <p><b>Locked NEXTVAL form (live DB + sequence.md):</b>
  * {@code select <seq>.nextval from dual}
@@ -13,6 +13,12 @@ import org.hibernate.internal.util.StringHelper;
  *
  * <p><b>CURRVAL:</b> XuGu uses the function {@code CURRVAL('name')} — not {@code seq.currval}
  * (live probe: {@code seq.CURRVAL} fails). After NEXTVAL in the same session.
+ *
+ * <p><b>ALTER SEQUENCE (A-SEQ-006):</b> XuGu documents {@code ALTER SEQUENCE … START WITH …},
+ * {@code INCREMENT BY …}, {@code MINVALUE … MAXVALUE …}. Hibernate's default
+ * {@code getRestartSequenceString} emits ANSI {@code RESTART WITH} which XuGu rejects
+ * (live E19132); this dialect maps restart to {@code START WITH}. See
+ * {@code reference/object/sequence.md}.
  *
  * <p>CREATE strings follow Hibernate {@link SequenceSupport} defaults
  * ({@code CREATE SEQUENCE … START WITH … INCREMENT BY …}).
@@ -45,6 +51,20 @@ public class XuguSequenceSupport implements SequenceSupport {
 	@Override
 	public String getDropSequenceString(String sequenceName) {
 		return "drop sequence if exists " + sequenceName;
+	}
+
+	/**
+	 * A-SEQ-006: XuGu {@code ALTER SEQUENCE name START WITH n} — not {@code RESTART WITH}
+	 * (documented {@code reference/object/sequence.md}; live-proven NONE mode).
+	 */
+	@Override
+	public String getRestartSequenceString(String sequenceName, long startValue) {
+		return "alter sequence " + sequenceName + " start with " + startValue;
+	}
+
+	/** Documented ALTER form for live IT / tooling ({@code reference/object/sequence.md}). */
+	public static String alterSequenceIncrementBy(String sequenceName, int increment) {
+		return "alter sequence " + sequenceName + " increment by " + increment;
 	}
 
 	/**

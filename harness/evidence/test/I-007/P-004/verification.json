@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "started_at": "2026-07-19T15:09:00+08:00",
+  "finished_at": "2026-07-19T15:15:00+08:00",
+  "project_root": "E:\\Work\\java\\hibernate-test",
+  "initiative_id": "I-007",
+  "phase_id": "P-004",
+  "build_id": "B-001",
+  "invocation_id": "inv-i007-p004-rp02-test",
+  "step_id": "RP-02",
+  "role": "test",
+  "branch": "feat/i-007-capability-hardening-abc",
+  "head_sha": "0af1e5e",
+  "verdict": "PASS",
+  "closure_path": "covered-live",
+  "config": "E:\\Work\\java\\hibernate-test\\harness\\verification.json",
+  "results": [
+    {
+      "id": "harness",
+      "required": true,
+      "status": "PASS",
+      "command": "python harness/scripts/verify.py --phase P-004",
+      "exit_code": 0
+    },
+    {
+      "id": "build",
+      "required": true,
+      "status": "PASS",
+      "command": "mvn -q -DskipTests package",
+      "cwd": "E:\\Work\\java\\hibernate-test",
+      "exit_code": 0,
+      "log": "harness/evidence/test/I-007/P-004/mvn-package-offline.txt"
+    },
+    {
+      "id": "test",
+      "required": true,
+      "status": "PASS",
+      "command": "mvn -q test",
+      "cwd": "E:\\Work\\java\\hibernate-test",
+      "exit_code": 0,
+      "log": "harness/evidence/test/I-007/P-004/mvn-test-offline.txt",
+      "counts": {
+        "dialect": {
+          "tests_run": 141,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 54
+        },
+        "demo": {
+          "tests_run": 28,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 23
+        }
+      },
+      "summary_artifact": "harness/evidence/test/I-007/P-004/surefire-summary-offline.txt"
+    },
+    {
+      "id": "test_live_dialect_am",
+      "required": true,
+      "status": "PASS",
+      "command": "XUGU_RUN_IT=true mvn -q -pl dialect -am test",
+      "cwd": "E:\\Work\\java\\hibernate-test",
+      "exit_code": 0,
+      "log": "harness/evidence/test/I-007/P-004/mvn-test-live-it.txt",
+      "real_db": true,
+      "counts": {
+        "dialect": {
+          "tests_run": 141,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 18
+        }
+      },
+      "summary_artifact": "harness/evidence/test/I-007/P-004/surefire-summary-live-dialect.txt"
+    },
+    {
+      "id": "test_live_p004_themes",
+      "required": true,
+      "status": "PASS",
+      "command": "XUGU_RUN_IT=true mvn -q -pl dialect test -Dtest=XuguJsonSubsetDeepenIT,XuguArrayTypeIT,XuguAlterSequenceIT",
+      "cwd": "E:\\Work\\java\\hibernate-test",
+      "exit_code": 0,
+      "log": "harness/evidence/test/I-007/P-004/mvn-test-live-p004-it.txt",
+      "counts": {
+        "theme_its": {
+          "tests_run": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "themes": {
+        "C-JSON-005": {
+          "status": "covered-live",
+          "it": "XuguJsonSubsetDeepenIT#jsonSubsetDeepen_Hql_C_JSON_005",
+          "result": "PASS"
+        },
+        "A-TYP-015": {
+          "status": "covered-live",
+          "it": "XuguArrayTypeIT#arrayColumnRoundTrip_A_TYP_015_C_DDL_005",
+          "result": "PASS"
+        },
+        "C-DDL-005": {
+          "status": "covered-live",
+          "it": "XuguArrayTypeIT#arrayColumnRoundTrip_A_TYP_015_C_DDL_005",
+          "result": "PASS"
+        },
+        "A-SEQ-006": {
+          "status": "covered-live",
+          "it": "XuguAlterSequenceIT#alterSequenceStartWithAndIncrement_A_SEQ_006",
+          "result": "PASS"
+        }
+      },
+      "surefire": [
+        "harness/evidence/test/I-007/P-004/TEST-com.xugu.dialect.it.XuguJsonSubsetDeepenIT.xml",
+        "harness/evidence/test/I-007/P-004/TEST-com.xugu.dialect.it.XuguArrayTypeIT.xml",
+        "harness/evidence/test/I-007/P-004/TEST-com.xugu.dialect.it.XuguAlterSequenceIT.xml"
+      ],
+      "it_result": "harness/evidence/test/I-007/P-004/IT-RESULT.txt"
+    },
+    {
+      "id": "ssot_theme_audit",
+      "required": true,
+      "status": "PASS",
+      "artifact": "contracts/production-regression-baseline.md",
+      "themes": {
+        "C-JSON-005": "covered-live",
+        "A-TYP-015": "covered-live",
+        "C-DDL-005": "covered-live",
+        "A-SEQ-006": "covered-live"
+      },
+      "rewrite_required": false,
+      "note": "Read-only audit confirms all four SSOT rows covered-live; no rewrite by test"
+    },
+    {
+      "id": "lint",
+      "required": false,
+      "status": "NOT_APPLICABLE",
+      "command": "NA"
+    }
+  ],
+  "summary": {
+    "build": "PASS",
+    "test_offline": "PASS",
+    "test_live": "PASS",
+    "themes": {
+      "C-JSON-005": "covered-live",
+      "A-TYP-015": "covered-live",
+      "C-DDL-005": "covered-live",
+      "A-SEQ-006": "covered-live"
+    },
+    "ssot_audit": "PASS",
+    "overall": "PASS"
+  }
+}

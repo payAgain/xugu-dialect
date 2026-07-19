@@ -127,13 +127,19 @@ import jakarta.persistence.Timeout;
  * (avoids driver re-parse dropping quotes on reserved table names such as {@code "order"}).
  *
  * <p><b>Sequence (A-SEQ-*, A-XCUT-008):</b> {@link XuguSequenceSupport} locks
- * {@code select &lt;seq&gt;.nextval from dual}; CURRVAL via {@code currval('name')}.
+ * {@code select &lt;seq&gt;.nextval from dual}; CURRVAL via {@code currval('name')};
+ * ALTER via {@code START WITH} / {@code INCREMENT BY} (not ANSI {@code RESTART WITH}).
+ *
+ * <p><b>ARRAY (A-TYP-015 / C-DDL-005):</b> {@link #supportsStandardArrays()} enables
+ * Hibernate {@code SqlTypes.ARRAY} / {@code getPreferredSqlTypeCodeForArray()} with XuGu
+ * {@code elementType[]}/{@code INTEGER ARRAY} DDL ({@code reference/sql/datatype/array.md}).
  *
  * <p><b>Functions (A-FUN-* / C-JSON-*):</b> {@link #initializeFunctionRegistry} contributes
  * XuGu-native templates via {@link XuguFunctionRegistrations}. Primary UUID SQL:
  * {@code uuid()}. JSON: {@code json_value}/{@code json_extract} plus
- * {@code json_arrayagg}/{@code json_objectagg}; JDBC writes use {@code cast(? as json)};
- * {@link #getAggregateSupport()} covers JSON embeddable component paths.
+ * {@code json_arrayagg}/{@code json_objectagg}; C-JSON-005 deepen adds {@code json_unquote},
+ * {@code json_length}, {@code json_type} (bounded subset — not full json_* registry);
+ * JDBC writes use {@code cast(? as json)}; {@link #getAggregateSupport()} covers JSON paths.
  * Hibernate {@code listagg} → XuGu {@code LISTAGG … WITHIN GROUP}.
  *
  * <p><b>Bulk mutation (C-BULK-* / I-003):</b>
@@ -273,8 +279,33 @@ public class XuguDialect extends Dialect {
 			case SqlTypes.BLOB, SqlTypes.MATERIALIZED_BLOB -> "blob";
 			case SqlTypes.UUID -> "guid";
 			case SqlTypes.JSON -> "json";
+			case SqlTypes.ARRAY -> "array";
 			default -> super.columnType( sqlTypeCode );
 		};
+	}
+
+	/**
+	 * A-TYP-015: SQL ARRAY / Hibernate array types ({@code reference/sql/datatype/array.md}).
+	 */
+	@Override
+	public boolean supportsStandardArrays() {
+		return true;
+	}
+
+	/**
+	 * C-DDL-005: prefer JDBC {@code ARRAY} ({@code SqlTypes.ARRAY}) over binary fallback.
+	 */
+	@Override
+	public int getPreferredSqlTypeCodeForArray() {
+		return SqlTypes.ARRAY;
+	}
+
+	/**
+	 * XuGu accepts {@code ARRAY[…]} literals ({@code reference/sql/datatype/array.md}).
+	 */
+	@Override
+	public boolean supportsArrayConstructor() {
+		return true;
 	}
 
 	@Override

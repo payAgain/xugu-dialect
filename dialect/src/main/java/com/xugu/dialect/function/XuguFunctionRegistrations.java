@@ -19,6 +19,8 @@ import org.hibernate.type.spi.TypeConfiguration;
  *
  * <p>JSON: {@code json_value} + {@code json_extract}, plus native
  * {@code json_arrayagg}/{@code json_objectagg} (I-003 C-JSON-001/002).
+ * C-JSON-005 bounded deepen: {@code json_unquote}, {@code json_length}, {@code json_type}
+ * ({@code reference/function/json-functions/**}) — not the full {@code XuguJsonFunctions} set.
  * HQL JSON functions require {@code hibernate.query.hql.json_functions_enabled=true}.
  *
  * <p>String aggregate: Hibernate {@code listagg} → native XuGu
@@ -90,6 +92,26 @@ public final class XuguFunctionRegistrations {
 				.register();
 		functionRegistry.register( "json_arrayagg", new XuguJsonArrayAggFunction( typeConfiguration ) );
 		functionRegistry.register( "json_objectagg", new XuguJsonObjectAggFunction( typeConfiguration ) );
+
+		// --- C-JSON-005 deepen subset (docs: reference/function/json-functions/**) ---
+		functionRegistry.namedDescriptorBuilder( "json_unquote" )
+				.setMinArgumentCount( 1 )
+				.setParameterTypes( FunctionParameterType.IMPLICIT_JSON )
+				.setInvariantType( stringType )
+				.setArgumentListSignature( "(JSON jsonDoc[, STRING path…])" )
+				.register();
+		functionRegistry.namedDescriptorBuilder( "json_length" )
+				.setMinArgumentCount( 1 )
+				.setParameterTypes( FunctionParameterType.IMPLICIT_JSON, FunctionParameterType.STRING )
+				.setInvariantType( typeConfiguration.getBasicTypeRegistry().resolve( StandardBasicTypes.INTEGER ) )
+				.setArgumentListSignature( "(JSON jsonDoc[, STRING path])" )
+				.register();
+		functionRegistry.namedDescriptorBuilder( "json_type" )
+				.setMinArgumentCount( 1 )
+				.setParameterTypes( FunctionParameterType.IMPLICIT_JSON, FunctionParameterType.STRING )
+				.setInvariantType( stringType )
+				.setArgumentListSignature( "(JSON jsonDoc[, STRING path])" )
+				.register();
 
 		// --- listagg / string_agg / group_concat (A-FUN-018) ---
 		// Hibernate HQL listagg → native LISTAGG … WITHIN GROUP (XuGu form).
