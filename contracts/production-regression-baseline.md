@@ -257,6 +257,7 @@ Matrix status **文档不允许** or **延后**; baseline records explicit non-s
 | **Live IT** | **Waived** — JOINED bulk insert + IDENTITY root can hit Xugu JDBC 12.3.6 `GetGeneratedKeys` / `distillTbName` failures (I-004/P-005); dialect uses `getDefaultUseGetGeneratedKeys=false` for normal persist but bulk-insert temp-table path remains unproven on live DB |
 | **User doc** | [`docs/user-guide/05-troubleshooting.md`](../docs/user-guide/05-troubleshooting.md) §10 |
 | **gap_action** | **N/A** — closed in I-005/P-004 (known-limit path) |
+| **I-007 re-open** | **Yes** — Scope PASS re-opens provisional I-005 closure; **P-001 strategy lock:** **prefer-live-unblock** (attempt live bulk-insert IT in **P-002**); outcome → **`covered-live`** **or** re-affirmed **`known-limit-documented`** (binary, not ambiguous). SSOT: [`i007-capability-hardening-plan.md`](i007-capability-hardening-plan.md) § C-BULK-002 STRATEGY LOCK. **Do not** mark `covered-live` until P-002 live PASS + evidence. |
 
 ---
 

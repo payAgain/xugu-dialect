@@ -58,4 +58,4 @@
 - Ship: **out of this Initiative**
 
 ## Status
-`active` — Scope PASS ~2026-07-19T13:50+08:00；I-006 archived；Plan P-001…P-006 materialized；B-001 draft（仅 P-001）await Human Gate Build approval
+`active` — Scope PASS ~2026-07-19T13:50+08:00；I-006 archived；Plan P-001…P-006 materialized；B-001 **approved** full Plan serial P-001→P-006 (~2026-07-19T14:21+08:00)；P-001 in_progress

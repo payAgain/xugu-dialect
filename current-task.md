@@ -1,24 +1,22 @@
 # Current Task
 
 ## Goal
-I-007 **Plan complete** — await Human Gate Build approval（B-001 = P-001 only）
+I-007 **Build B-001** — P-001 accepted; next **P-002** (C-BULK-002 + evidence hardening)
 
 ## Current Status
-I-006 **archived**（NOT Ship）。I-007 串行 Plan **P-001…P-006** 已物化；分支 `feat/i-007-capability-hardening-abc`；`B-001.json` draft **approved=false**（仅 P-001）。未写方言/demo 业务 Java。**NOT Ship**。
+B-001 **approved**（全 Plan P-001…P-006）。**P-001 accepted**（strategy lock `prefer-live-unblock`；SSOT `contracts/i007-capability-hardening-plan.md`；reviewer `approve_with_nits`）。**P-002 ready** → 派发 implementer → test → reviewer。GAV `7.4.5.Final`；`compatiblemode=NONE`；**NOT Ship**；不提交 `org/`。
 
 ## Active Batch / Tasks
 - Initiative: **I-007** `active` (feature)
-- Predecessor: **I-006** `archived`
-- Build: **B-001** draft → proposed **P-001** only
+- Build: **B-001** `approved`
+- Phases: P-001=accepted; P-002=ready; P-003…P-006=blocked
 - Branch: `feat/i-007-capability-hardening-abc`
-- Brief: `harness/initiatives/I-007/brief.md`
-- Plan handoff: `harness/handoffs/orchestrator/I-007-plan-complete.md`
-- REGISTRY: `harness/tasks/REGISTRY.yaml`
+- Strategy SSOT: `contracts/i007-capability-hardening-plan.md`
 
 ## Next 3 Steps
-1. Human Gate：批准 B-001 范围（仅 P-001？）
-2. 批准后 orchestrator 派发 P-001（researcher → architect-contract → reviewer）
-3. 后续串行 P-002…P-006（另批 Build 或扩大范围需再批准）
+1. Must-commit P-001（排除 `org/`）
+2. 派发 P-002 implementer（live C-BULK-002 attempt）
+3. 串行 P-003…P-006 → Initiative Accept（非 Ship）
 
 ## Last Updated
-2026-07-19T13:55:00+08:00
+2026-07-19T14:33:00+08:00

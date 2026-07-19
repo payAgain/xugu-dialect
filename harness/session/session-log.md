@@ -1,3 +1,23 @@
+## Entry: I-007 B-001 P-001 accepted
+
+### Summary
+P-001 **accepted**（researcher → architect-contract → reviewer `approve_with_nits`）。SSOT `contracts/i007-capability-hardening-plan.md`；C-BULK-002 strategy lock=**prefer-live-unblock**；P-003 thin-fold→P-004；live-log 路径约定。`harness_check` PASS。下一步 P-002。`org/` 不提交。NOT Ship。
+
+### Next
+Must-commit P-001；派发 P-002（implementer → test → reviewer）。
+
+---
+
+## Entry: I-007 B-001 execution start — P-001 in_progress
+
+### Summary
+Human Gate「批准 B-001，范围仅 P-001～P-006（串行执行全 Plan）」(~2026-07-19T14:21+08:00)。`B-001.json` approved / approved_phase_ids=P-001…P-006。REGISTRY：全 Phase 挂 B-001；P-001=in_progress；P-002…P-006=blocked（依赖未清）。派发 P-001 RP-01 researcher。GAV 7.4.5.Final；NONE；不写方言/demo Java（本 Phase）；不提交 `org/`；NOT Ship。
+
+### Next
+P-001：researcher → architect-contract → reviewer → must-commit；然后串行 P-002…P-006。
+
+---
+
 ## Entry: I-007 Plan complete — B-001 draft (P-001 only)
 
 ### Summary
@@ -15,6 +35,16 @@ Orchestrator Archive I-006 on `feat/i-006-consumer-path-coverage`（Human Gate S
 
 ### Next
 Orchestrator Plan I-007 P-001…P-006 + B-001 draft（仅 P-001）。
+
+---
+
+## Entry: I-007 B-001 approved — P-001~P-006 serial
+
+### Summary
+Human Gate「批准 B-001，范围仅 P-001～P-006（串行执行全 Plan）」。Build **approved**（扩大 draft 的仅 P-001 为全 Plan）。Orchestrator **串行**执行 P-001→P-006；不并行策略问询；不 Ship；GAV 7.4.5.Final；NONE；A→B→C 按 brief。
+
+### Next
+Orchestrator 派发 P-001 role_pipeline，随后按依赖推进至 P-006。
 
 ---
 

@@ -3,14 +3,26 @@
   "build_id": "B-001",
   "initiative_id": "I-007",
   "plan_revision": 1,
-  "status": "draft",
-  "approved": false,
-  "proposed_phase_ids": ["P-001"],
-  "approved_phase_ids": [],
-  "approval": null,
-  "execution_note": "Draft only. Default earliest ready Phase P-001 (SSOT inventory + C-BULK-002 strategy lock). Serial Plan P-001→P-006 materialized; expand Build scope only with Human Gate approval.",
-  "recommendation": "Approve B-001 scope = P-001 only. NOT Ship. GAV 7.4.5.Final. compatiblemode=NONE only. Native dialect; no sibling port.",
+  "status": "approved",
+  "approved": true,
+  "proposed_phase_ids": ["P-001", "P-002", "P-003", "P-004", "P-005", "P-006"],
+  "approved_phase_ids": ["P-001", "P-002", "P-003", "P-004", "P-005", "P-006"],
+  "approval": {
+    "reference": "批准 B-001，范围仅 P-001～P-006（串行执行全 Plan）",
+    "approved_at": "2026-07-19T14:21:00+08:00",
+    "approved_by": "Human Gate",
+    "scope_note": "Human Gate expanded draft (P-001 only) to full Plan serial P-001→P-006. NOT Ship."
+  },
+  "execution_note": "Serial only P-001→P-006. Orchestrator decides serial; never ask human about parallel. GAV 7.4.5.Final; compatiblemode=NONE only; native dialect; no sibling port; do not commit org/.",
+  "recommendation": "Execute full Plan under this Build. Prefer live unblock for C-BULK-002; permanent-limit only if proven impossible. Accept: save live IT logs when DB available. Propose Initiative Accept after P-006 — NOT Ship.",
   "supersedes": "I-006-B-001",
-  "scope_changes": [],
-  "notes": "I-006 archived. Stay on feat/i-007-capability-hardening-abc. Do not commit org/ dumps. NOT Ship. Do not start role_pipeline until Human Gate Build approval."
+  "scope_changes": [
+    {
+      "at": "2026-07-19T14:21:00+08:00",
+      "from": ["P-001"],
+      "to": ["P-001", "P-002", "P-003", "P-004", "P-005", "P-006"],
+      "reason": "Human Gate authorized full Plan serial execution"
+    }
+  ],
+  "notes": "Stay on feat/i-007-capability-hardening-abc. Do not commit org/ dumps. NOT Ship. Must-commit after each Phase accept. P-001 accepted; P-002 next."
 }

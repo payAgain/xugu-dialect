@@ -2,45 +2,46 @@
   "schema_version": 1,
   "task_id": "I-007",
   "batch_id": "B-001",
-  "status": "plan_complete_await_build_approval",
+  "status": "build_in_progress",
   "harness_level": "Standard",
-  "last_updated": "2026-07-19T13:55:00+08:00",
+  "last_updated": "2026-07-19T14:33:00+08:00",
   "initiative_id": "I-007",
   "initiative_type": "feature",
   "working_branch": "feat/i-007-capability-hardening-abc",
   "active_plan": [
-    "I-006 archived (NOT Ship)",
-    "I-007 Plan P-001…P-006 materialized (serial)",
-    "B-001 draft = P-001 only (approved=false)"
+    "B-001 approved full Plan P-001…P-006 serial",
+    "P-001 accepted — C-BULK-002 prefer-live-unblock locked",
+    "P-002 ready (implementer → test → reviewer)"
   ],
   "next_3_steps": [
-    "Human Gate: approve B-001 scope (P-001 only)",
-    "Dispatch P-001 role_pipeline",
-    "Continue serial P-002…P-006 under later Build approvals"
+    "Must-commit P-001 (exclude org/)",
+    "Dispatch P-002 role_pipeline",
+    "Serial P-003…P-006; propose Initiative Accept (NOT Ship)"
   ],
   "validation": {
-    "last_result": "Plan batch: branch_check PASS; harness_check PASS"
+    "last_result": "P-001 harness_check PASS; branch_check PASS; reviewer approve_with_nits"
   },
   "version_control_checkpoint": {
-    "decision": "plan_i007",
-    "committed": true,
+    "decision": "accept_p001",
+    "committed": false,
     "branch": "feat/i-007-capability-hardening-abc",
-    "candidate_commit": "13df9bd98895e7ebcfc5ff87e6de3b7a5ea2594c",
-    "archive_i006_sha": "58d0ce80064dba4b9650c6b54d52b54ae5a7ba07",
-    "archive_tip": "176990921476ea0e37e3c53af4bc2e380fb40339",
+    "candidate_commit": null,
     "plan_sha": "13df9bd98895e7ebcfc5ff87e6de3b7a5ea2594c",
-    "head": "3037943c907e1413327692c68d3ca79b65490a7e"
+    "awaiting_phase_commit": "P-001"
   },
   "cognitive_state": {
     "failure_count": 0,
-    "current_mode": "plan_complete_await_build_approval",
-    "blocked_on": "human_gate_build_approval_b001"
+    "current_mode": "build_execute_serial",
+    "blocked_on": null,
+    "active_phase": "P-002",
+    "active_role_step": null,
+    "c_bulk_002_strategy": "prefer-live-unblock"
   },
   "handoff": {
-    "resume_from": "harness/handoffs/orchestrator/I-007-plan-complete.md"
+    "resume_from": "harness/handoffs/orchestrator/I-007-B-001-P-001-complete.md"
   },
-  "approved_build": null,
-  "approved_phases": [],
-  "proposed_phases": ["P-001"],
-  "updated_at": "2026-07-19T13:55:00+08:00"
+  "approved_build": "B-001",
+  "approved_phases": ["P-001", "P-002", "P-003", "P-004", "P-005", "P-006"],
+  "accepted_phases": ["P-001"],
+  "updated_at": "2026-07-19T14:33:00+08:00"
 }

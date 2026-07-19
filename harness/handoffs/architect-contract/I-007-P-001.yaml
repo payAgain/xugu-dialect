@@ -1,0 +1,119 @@
+schema_version: 1
+role: architect-contract
+phase_id: P-001
+build_id: B-001
+initiative_id: I-007
+invocation_id: inv-i007-p001-rp02-architect
+step_id: RP-02
+status: passed
+required: true
+completed_at: "2026-07-19T14:26:00+08:00"
+purpose: lock C-BULK-002 prefer-live-unblock strategy; publish I-007 A/B/C gap map P-002…P-005; name Accept live-log artifact convention; lock P-003 thin-fold into P-004
+
+inputs:
+  - harness/evidence/researcher/I-007/P-001/INVENTORY.md
+  - harness/evidence/researcher/I-007/P-001/GAP-SUMMARY.md
+  - contracts/production-regression-baseline.md
+  - contracts/consumer-path-baseline.md
+  - harness/tasks/P-001.md
+  - harness/initiatives/I-007/brief.md
+
+outputs:
+  strategy_ssot: contracts/i007-capability-hardening-plan.md
+  production_regression_crossref: contracts/production-regression-baseline.md
+  evidence_acceptance: harness/evidence/architect-contract/I-007/P-001/ACCEPTANCE.md
+  evidence_verification: harness/evidence/architect-contract/I-007/P-001/verification.json
+  evidence_gap_summary: harness/evidence/architect-contract/I-007/P-001/GAP-SUMMARY.md
+  handoff: harness/handoffs/architect-contract/I-007-P-001.yaml
+
+c_bulk_002_strategy_lock:
+  p001_primary_lock: prefer-live-unblock
+  p002_mandate: attempt gated live bulk-insert IT before permanent-limit
+  allowed_outcomes:
+    - covered-live
+    - known-limit-documented
+  forbidden: ambiguous dual state without artifact
+  permanent_limit_gate: logged JDBC failure after good-faith live IT
+
+p003_thin_fold:
+  locked: yes
+  fold_into: P-004
+  standalone_gaps: 0
+  accept_rule: P-003 may accept with fold-into-P-004 evidence if no P-002 urgent exception
+
+gap_action_routing:
+  P-002:
+    - C-BULK-002
+    - EV-LIVE-001
+    - EV-LIVE-002
+  P-003:
+    - P-003-fold
+  P-004:
+    - C-JSON-005
+    - A-TYP-015
+    - C-DDL-005
+    - A-SEQ-006
+  P-005:
+    - B-FLY-001
+    - B-DEMO-001
+    - B-DEMO-002
+    - B-DEMO-003
+
+live_log_convention:
+  P-002: harness/evidence/test/I-007/P-002/
+  P-004: harness/evidence/test/I-007/P-004/
+  P-005: harness/evidence/test/I-007/P-005/
+  P-006: harness/evidence/test/I-007/P-006/
+  required_files:
+    - mvn-test-live-it.log
+    - mvn-test-live-demo.log
+    - IT-RESULT.txt
+  gate: XUGU_RUN_IT=true
+
+track_summary:
+  A:
+    gaps: 3
+    owner: P-002
+  B:
+    gaps: 3-4
+    owner: P-005
+    i006_boot_open: 0
+  C:
+    matrix_ids: 4
+    themes: 3
+    owner: P-004
+
+explicit_callouts:
+  i006_boot_ssot_frozen: true
+  no_silent_boot_expansion: true
+  gav: 7.4.5.Final
+  compatiblemode: NONE
+  no_java_changes: true
+  not_ship: true
+  c_bulk_002_status_unchanged_until_p002: known-limit-documented
+
+notes_for_reviewer_rp03: |
+  Audit contracts/i007-capability-hardening-plan.md and production-regression-baseline.md C-BULK-002 call-out:
+  - Strategy is binary: prefer-live-unblock for P-002; outcome covered-live OR known-limit-documented
+  - Do NOT mark C-BULK-002 covered-live in SSOT until P-002 live PASS + evidence
+  - Every A/B/C gap has Phase owner or P-003 fold note
+  - No MySQL/Oracle compat scope creep
+  - I-006 41-row Boot SSOT not expanded
+  - Live-log paths named under harness/evidence/test/I-007/P-00x/
+
+notes_for_orchestrator: |
+  P-001 architect-contract RP-02 complete. Next: reviewer RP-03 readonly audit.
+  After RP-03 PASS, P-002 executes C-BULK-002 live attempt per prefer-live-unblock lock.
+  P-003 is thin-fold into P-004 unless P-002 surfaces urgent exception.
+  Do not modify dialect/demo Java in P-001.
+  Do not commit from this role instance (orchestrator/Human Gate owns commit).
+
+forbidden_reminder:
+  - no dialect Java changes
+  - no demo Java changes
+  - no org/ edits
+  - GAV remains 7.4.5.Final
+  - no commit/push/tag from this role
+
+next_step: RP-03 reviewer
+blocker: null
