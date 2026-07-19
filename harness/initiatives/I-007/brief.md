@@ -53,9 +53,9 @@
 
 ## Related
 - Predecessor: I-006 → Archive as part of this Scope
-- Branch (planned): `feat/i-007-capability-hardening-abc`
+- Branch: `feat/i-007-capability-hardening-abc`
 - SSOT touch: `contracts/production-regression-baseline.md`, `contracts/consumer-path-baseline.md`, feature matrices
 - Ship: **out of this Initiative**
 
 ## Status
-`active` — Scope PASS ~2026-07-19T13:50+08:00；Archive I-006 + Plan / Build 待 orchestrator
+`active` — Scope PASS ~2026-07-19T13:50+08:00；I-006 archived；Plan P-001…P-006 materialized；B-001 draft（仅 P-001）await Human Gate Build approval

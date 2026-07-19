@@ -1,3 +1,13 @@
+## Entry: I-007 Plan complete — B-001 draft (P-001 only)
+
+### Summary
+Orchestrator 串行 Plan P-001→P-006（A 堵坑 → A′/急项 → C 延后三件套 → B 消费者加深 → docs/VERIFY）；分支 `feat/i-007-capability-hardening-abc`；I-006 packets 归档至 `harness/tasks/archive/I-006/`；REGISTRY/B-001 draft/Phase packets 物化。B-001 draft = 仅 P-001。未写方言/demo 业务 Java。`org/` 不提交。NOT Ship。
+
+### Next
+Human Gate：是否批准 B-001，范围仅 P-001？
+
+---
+
 ## Entry: I-006 archived (NOT Ship)
 
 ### Summary

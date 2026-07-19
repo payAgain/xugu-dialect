@@ -20,7 +20,7 @@
 - Pre-Archive HEAD: `aa3e9dba01c58d607e359d837ab4c47afe648d37`
 - Initiative Accept: `3c14d993d6528da2e0e8094a334762045a0897e5`
 - Archive must-commit: `58d0ce80064dba4b9650c6b54d52b54ae5a7ba07`
-- **Final HEAD:** *(filled after Archive closeout)*
+- **Final HEAD:** `176990921476ea0e37e3c53af4bc2e380fb40339` (Archive tip before I-007 Plan branch)
 
 ## Evidence
 

@@ -2,35 +2,35 @@
   "schema_version": 1,
   "task_id": "I-007",
   "batch_id": "B-001",
-  "status": "i006_archived_plan_pending",
+  "status": "plan_complete_await_build_approval",
   "harness_level": "Standard",
-  "last_updated": "2026-07-19T13:53:00+08:00",
+  "last_updated": "2026-07-19T13:55:00+08:00",
   "initiative_id": "I-007",
   "initiative_type": "feature",
-  "working_branch": "feat/i-006-consumer-path-coverage",
-  "planned_branch": "feat/i-007-capability-hardening-abc",
+  "working_branch": "feat/i-007-capability-hardening-abc",
   "active_plan": [
     "I-006 archived (NOT Ship)",
-    "Await orchestrator Plan I-007 P-001…P-006",
-    "B-001 draft = P-001 only"
+    "I-007 Plan P-001…P-006 materialized (serial)",
+    "B-001 draft = P-001 only (approved=false)"
   ],
   "next_3_steps": [
-    "Orchestrator: Plan + branch feat/i-007-capability-hardening-abc",
-    "Human Gate: approve B-001 scope",
-    "Dispatch P-001 role_pipeline"
+    "Human Gate: approve B-001 scope (P-001 only)",
+    "Dispatch P-001 role_pipeline",
+    "Continue serial P-002…P-006 under later Build approvals"
   ],
   "validation": {
-    "last_result": "I-006 archived; I-007 Scope PASS — Plan pending"
+    "last_result": "Plan batch: branch_check PASS; harness_check PASS"
   },
   "cognitive_state": {
     "failure_count": 0,
-    "current_mode": "i006_archived_plan_pending",
-    "blocked_on": "orchestrator_plan_i007"
+    "current_mode": "plan_complete_await_build_approval",
+    "blocked_on": "human_gate_build_approval_b001"
   },
   "handoff": {
-    "resume_from": "harness/handoffs/orchestrator/I-006-archived.md"
+    "resume_from": "harness/handoffs/orchestrator/I-007-plan-complete.md"
   },
   "approved_build": null,
   "approved_phases": [],
-  "updated_at": "2026-07-19T13:53:00+08:00"
+  "proposed_phases": ["P-001"],
+  "updated_at": "2026-07-19T13:55:00+08:00"
 }

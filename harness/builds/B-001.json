@@ -1,37 +1,16 @@
 {
   "schema_version": 1,
   "build_id": "B-001",
-  "initiative_id": "I-006",
+  "initiative_id": "I-007",
   "plan_revision": 1,
-  "status": "approved",
-  "approved": true,
-  "proposed_phase_ids": ["P-001", "P-002", "P-003", "P-004", "P-005"],
-  "approved_phase_ids": ["P-001", "P-002", "P-003", "P-004", "P-005"],
-  "approval": {
-    "reference": "批准 B-001，范围仅 P-001～P-005",
-    "phrase": "批准 B-001，范围仅 P-001～P-005",
-    "approved_at": "2026-07-18T22:26:00+08:00",
-    "approved_by": "Human Gate",
-    "scope_note": "Expand draft (P-001 only) to full Plan serial P-001→P-005. NOT Ship. GAV 7.4.5.Final. Native dialect only."
-  },
-  "completion": {
-    "completed_at": "2026-07-19T00:10:00+08:00",
-    "all_phases_accepted": true,
-    "accepted_phase_ids": ["P-001", "P-002", "P-003", "P-004", "P-005"],
-    "verify_status": "PASS",
-    "verification_evidence": "harness/evidence/test/I-006/P-005/verification.json",
-    "initiative_accept_at": "2026-07-19T11:07:00+08:00"
-  },
-  "execution_note": "B-001 complete. All P-001…P-005 accepted. Initiative Accept recorded 2026-07-19T11:07+08:00. NOT Ship.",
-  "recommendation": "B-001 approved full Plan serial P-001→P-005 (consumer-path A + B-both + C′). Execution complete; Initiative accepted. No Ship. GAV 7.4.5.Final. Native dialect only.",
-  "supersedes": "I-005-B-001",
-  "scope_changes": [
-    {
-      "at": "2026-07-18T22:26:00+08:00",
-      "from": ["P-001"],
-      "to": ["P-001", "P-002", "P-003", "P-004", "P-005"],
-      "reason": "Human Gate authorized full Plan serial scope"
-    }
-  ],
-  "notes": "All phases accepted with VERIFY PASS. Initiative Accept confirmed. Stay on feat/i-006-consumer-path-coverage. Do not commit org/ dumps. NOT Ship. Archive optional."
+  "status": "draft",
+  "approved": false,
+  "proposed_phase_ids": ["P-001"],
+  "approved_phase_ids": [],
+  "approval": null,
+  "execution_note": "Draft only. Default earliest ready Phase P-001 (SSOT inventory + C-BULK-002 strategy lock). Serial Plan P-001→P-006 materialized; expand Build scope only with Human Gate approval.",
+  "recommendation": "Approve B-001 scope = P-001 only. NOT Ship. GAV 7.4.5.Final. compatiblemode=NONE only. Native dialect; no sibling port.",
+  "supersedes": "I-006-B-001",
+  "scope_changes": [],
+  "notes": "I-006 archived. Stay on feat/i-007-capability-hardening-abc. Do not commit org/ dumps. NOT Ship. Do not start role_pipeline until Human Gate Build approval."
 }

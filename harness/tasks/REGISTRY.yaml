@@ -1,54 +1,63 @@
 schema_version: 1
 charter_version: "1.0.0"
-initiative_id: I-006
-updated: "2026-07-19T11:07:00+08:00"
-supersedes_initiative: I-005
+initiative_id: I-007
+updated: "2026-07-19T13:55:00+08:00"
+supersedes_initiative: I-006
 notes: >
-  I-005 P-001…P-006 packets archived at harness/tasks/archive/I-005/.
+  I-006 P-001…P-005 packets archived at harness/tasks/archive/I-006/.
+  I-005 packets remain at harness/tasks/archive/I-005/.
   I-004 packets remain at harness/tasks/archive/I-004/.
   I-003 P-003…P-006 remain at harness/tasks/archive/I-003/.
-  I-006 reuses P-001…P-005 IDs under new initiative scope (consumer path coverage A+B-both+C′).
+  I-007 reuses P-001…P-006 IDs under new initiative scope (capability hardening A→B→C).
   Serial dependencies only; orchestrator does not ask human about parallel execution.
-  B-001 approved 2026-07-18T22:26+08:00 for full Plan P-001→P-005.
-  Initiative Accept 2026-07-19T11:07+08:00 — NOT Ship; Archive optional.
+  B-001 draft = P-001 only (approved=false) until Human Gate Build approval.
+  GAV stays 7.4.5.Final; compatiblemode=NONE only; NOT Ship.
 tasks:
   - task_id: P-001
-    title: "建立消费者路径 Boot 必测 SSOT"
-    status: accepted
+    title: "盘点 A/B/C 与 SSOT；锁定 C-BULK-002 策略"
+    status: ready
     build_id: B-001
     packet: harness/tasks/P-001.md
-    acceptance_doc: harness/evidence/architect-contract/I-006/P-001/ACCEPTANCE.md
+    acceptance_doc: harness/evidence/architect-contract/I-007/P-001/ACCEPTANCE.md
     role_pipeline_summary: "researcher → architect-contract → reviewer"
     dependencies: []
   - task_id: P-002
-    title: "加固黄金路径 A（validate/CRUD/startup/SPI）"
-    status: accepted
-    build_id: B-001
+    title: "A：C-BULK-002 打通或永久限制 + 证据硬化"
+    status: blocked
+    build_id: null
     packet: harness/tasks/P-002.md
-    acceptance_doc: harness/evidence/implementer/I-006/P-002/ACCEPTANCE.md
+    acceptance_doc: harness/evidence/implementer/I-007/P-002/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"
     dependencies: [P-001]
   - task_id: P-003
-    title: "扩展代表性模型 B（关联+SEQUENCE+锁/异常/回滚）"
-    status: accepted
-    build_id: B-001
+    title: "A′/急项（可 thin / fold into P-004）"
+    status: blocked
+    build_id: null
     packet: harness/tasks/P-003.md
-    acceptance_doc: harness/evidence/implementer/I-006/P-003/ACCEPTANCE.md
+    acceptance_doc: harness/evidence/implementer/I-007/P-003/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"
     dependencies: [P-002]
   - task_id: P-004
-    title: "扫盲 C′ 剩余 Boot 必测入口"
-    status: accepted
-    build_id: B-001
+    title: "C：JSON 深化子集 + ARRAY + ALTER SEQUENCE"
+    status: blocked
+    build_id: null
     packet: harness/tasks/P-004.md
-    acceptance_doc: harness/evidence/implementer/I-006/P-004/ACCEPTANCE.md
+    acceptance_doc: harness/evidence/implementer/I-007/P-004/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"
     dependencies: [P-003]
   - task_id: P-005
-    title: "文档对齐与 VERIFY PASS Accept 准备"
-    status: accepted
-    build_id: B-001
+    title: "B：Flyway + Demo bulk/函数/HQL 消费者加深"
+    status: blocked
+    build_id: null
     packet: harness/tasks/P-005.md
-    acceptance_doc: harness/evidence/implementer/I-006/P-005/ACCEPTANCE.md
+    acceptance_doc: harness/evidence/implementer/I-007/P-005/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"
     dependencies: [P-004]
+  - task_id: P-006
+    title: "文档对齐与 VERIFY PASS Accept 准备"
+    status: blocked
+    build_id: null
+    packet: harness/tasks/P-006.md
+    acceptance_doc: harness/evidence/implementer/I-007/P-006/ACCEPTANCE.md
+    role_pipeline_summary: "implementer → test → reviewer"
+    dependencies: [P-005]
