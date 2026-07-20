@@ -28,7 +28,8 @@
   },
   "version_control_checkpoint": {
     "decision": "i008_plan_materialized",
-    "committed": false,
+    "committed": true,
+    "candidate_commit": "3305336",
     "branch": "feat/i-008-production-quality-gaps",
     "i007_archived": true
   },
