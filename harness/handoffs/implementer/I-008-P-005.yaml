@@ -1,0 +1,83 @@
+handoff:
+  initiative_id: I-008
+  build_id: B-001
+  phase_id: P-005
+  step_id: RP-01
+  role: implementer
+  invocation_id: inv-i008-p005-rp01-implementer
+  branch: feat/i-008-production-quality-gaps
+  status: complete
+  verdict: PASS
+
+summary: |
+  P-005 RP-01 implementer: closed Q2 lock semantics with offline behavioral + negative tests.
+  New XuguLockSemanticsTest (24 tests) parameterizes all dialect lock SQL fragments — proves no
+  SKIP LOCKED / FOR SHARE and PESSIMISTIC_READ→exclusive FOR UPDATE shape per P-002 docs.
+  Extended XuguLockIT with gated live anchor pessimisticReadExecutesAsForUpdateNotShare.
+  Cross-linked docs/user-guide/07-lock-integration.md. Offline mvn test green; no commit.
+
+q2_evidence:
+  negative:
+    matrix_ids:
+      - A-LCK-004
+      - C-SKIP-001
+      - A-LCK-005
+    forbidden_keywords:
+      - SKIP LOCKED
+      - FOR SHARE
+      - FOR KEY SHARE
+  behavioral:
+    requirement: PESSIMISTIC_READ maps to exclusive FOR UPDATE SQL shape
+    matrix_id: A-LCK-005
+
+test_classes:
+  new:
+    - com.xugu.dialect.XuguLockSemanticsTest
+  extended:
+    - com.xugu.dialect.it.XuguLockIT#pessimisticReadExecutesAsForUpdateNotShare
+  complementary_offline:
+    - com.xugu.dialect.XuguPaginationLockTest
+    - com.xugu.dialect.XuguNegativeRegressionBaselineTest
+
+test_results_offline:
+  com.xugu.dialect.XuguLockSemanticsTest:
+    tests: 24
+    failures: 0
+    errors: 0
+    skipped: 0
+    result: PASS
+  com.xugu.dialect.XuguPaginationLockTest:
+    tests: 10
+    failures: 0
+    errors: 0
+    skipped: 0
+    result: PASS
+  com.xugu.dialect.it.XuguLockIT:
+    tests: 3
+    failures: 0
+    errors: 0
+    skipped: 3
+    result: PASS
+    note: gated skip offline; live anchor for RP-02
+
+verification:
+  mvn_path: C:\Users\admin\tools\apache-maven-3.9.9\bin\mvn.cmd
+  mvn_package: PASS
+  mvn_test: PASS
+  surefire_report: dialect/target/surefire-reports/com.xugu.dialect.XuguLockSemanticsTest.txt
+
+docs:
+  cross_linked:
+    - docs/user-guide/07-lock-integration.md
+
+artifacts:
+  - harness/evidence/implementer/I-008/P-005/ACCEPTANCE.md
+  - dialect/src/test/java/com/xugu/dialect/XuguLockSemanticsTest.java
+  - dialect/src/test/java/com/xugu/dialect/it/XuguLockIT.java
+  - docs/user-guide/07-lock-integration.md
+
+next:
+  - RP-02 test: mvn -q test offline + optional XUGU_RUN_IT live XuguLockIT logs to harness/evidence/test/I-008/P-005/
+  - RP-03 reviewer: readonly audit no invented SKIP LOCKED/FOR SHARE; evidence cross-links P-002
+
+blockers: []

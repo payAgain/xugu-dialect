@@ -1,0 +1,15 @@
+live_lock_it_attempt_at: 2026-07-20T17:18:40+08:00
+command: XUGU_RUN_IT=true mvn -q -pl dialect -am test -Dtest=XuguLockIT
+exit_code: 1
+status: SKIPPED_INFRA
+real_db: false
+reason: 127.0.0.1:5138 Connection refused (XuguDB unreachable with integration gate ON)
+tests_run: 3
+failures: 3
+errors: 0
+skipped: 0
+note: infra unavailable; not a product regression ¡ª re-run when XuGuDB up
+anchors:
+  - XuguLockIT#pessimisticReadExecutesAsForUpdateNotShare
+  - XuguLockIT#forUpdateExecutesAndSkipLockedUnsupported
+  - XuguLockIT#limitForUpdateComboExecutes

@@ -23,8 +23,11 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Gated IT: FOR UPDATE / NOWAIT / WAIT ms against real XuguDB (A-LCK-001/003).
- * Asserts SKIP LOCKED not claimed (A-LCK-004).
+ * Asserts SKIP LOCKED not claimed (A-LCK-004) and PESSIMISTIC_READ → FOR UPDATE (A-LCK-005).
  * Also proves LIMIT + FOR UPDATE (+ WAIT) combo under compatiblemode=NONE.
+ *
+ * @see docs/user-guide/07-lock-integration.md
+ * @see com.xugu.dialect.XuguLockSemanticsTest offline Q2 evidence (I-008 P-005)
  */
 class XuguLockIT {
 
@@ -96,6 +99,56 @@ class XuguLockIT {
 	 * {@code FOR UPDATE … LIMIT ?} and {@code FOR UPDATE … LIMIT ? WAIT ms}.
 	 * Hibernate-default {@code LIMIT … FOR UPDATE} is rejected.
 	 */
+	/**
+	 * I-008 P-005 behavioral live anchor: pessimistic read uses exclusive FOR UPDATE on XuGu.
+	 */
+	@Test
+	void pessimisticReadExecutesAsForUpdateNotShare() {
+		Assumptions.assumeTrue( XuguITGate.isEnabled(), "integration gate off" );
+
+		XuguDialect dialect = new XuguDialect();
+		String readLock = dialect.getReadLockString( org.hibernate.Timeouts.WAIT_FOREVER );
+		assertFalse( readLock.toLowerCase().contains( "share" ), "A-LCK-005: no FOR SHARE" );
+		assertTrue( readLock.toLowerCase().contains( "for update" ),
+				"PESSIMISTIC_READ shim must emit FOR UPDATE — docs/user-guide/07-lock-integration.md" );
+
+		try ( Connection c = XuguTestConnection.open() ) {
+			c.setAutoCommit( false );
+			try ( Statement st = c.createStatement() ) {
+				st.execute( "DROP TABLE IF EXISTS " + TABLE );
+				st.execute( "CREATE TABLE " + TABLE + " (id INT PRIMARY KEY, name VARCHAR(32) NOT NULL)" );
+				st.execute( "INSERT INTO " + TABLE + " VALUES (1, 'one')" );
+				c.commit();
+
+				String sql = "SELECT id FROM " + TABLE + " WHERE id = 1" + readLock;
+				try ( ResultSet rs = st.executeQuery( sql ) ) {
+					assertTrue( rs.next(), "read-lock SQL must execute on XuGuDB: " + sql );
+					assertTrue( rs.getInt( 1 ) == 1 );
+				}
+				c.commit();
+			}
+			catch ( Exception e ) {
+				try {
+					c.rollback();
+				}
+				catch ( SQLException ignored ) {
+				}
+				fail( "PESSIMISTIC_READ FOR UPDATE IT failed: " + e.getMessage(), e );
+			}
+			finally {
+				try ( Statement st = c.createStatement() ) {
+					st.execute( "DROP TABLE IF EXISTS " + TABLE );
+					c.commit();
+				}
+				catch ( Exception ignored ) {
+				}
+			}
+		}
+		catch ( Exception e ) {
+			fail( "XuguDB unreachable with integration gate ON: " + e.getMessage(), e );
+		}
+	}
+
 	@Test
 	void limitForUpdateComboExecutes() {
 		Assumptions.assumeTrue( XuguITGate.isEnabled(), "integration gate off" );

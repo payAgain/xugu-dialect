@@ -60,7 +60,9 @@ Hibernate 在部分数据库上将 `PESSIMISTIC_READ` 映射为共享锁（如 `
 - **不是**「多读不互斥」的共享锁；其他事务读取同一行时 **可能阻塞**
 - 若业务需要「只防写、读者不互斥」，虚谷 + 当前方言 **不提供** PostgreSQL 式 FOR SHARE — 须在应用层重新设计
 
-Boot 消费者路径示例（门控 IT）：`DemoLockIT#pessimisticWriteLocksPersonRow`（写锁）；读锁 SQL 形状见方言 IT `XuguLockIT` 与 **P-005** 归档日志。
+Boot 消费者路径示例（门控 IT）：`DemoLockIT#pessimisticWriteLocksPersonRow`（写锁）；读锁 SQL 形状见方言 IT `XuguLockIT#pessimisticReadExecutesAsForUpdateNotShare` 与 **P-005** 归档日志。
+
+**离线负向/行为证据（P-005）：** `XuguLockSemanticsTest` — 参数化扫描全部锁 SQL 片段，断言无 `SKIP LOCKED` / `FOR SHARE`，且 `PESSIMISTIC_READ` 与 `PESSIMISTIC_WRITE` 同形 `FOR UPDATE`；与 `XuguPaginationLockTest` / `XuguNegativeRegressionBaselineTest` 互补。
 
 ---
 
@@ -95,3 +97,5 @@ Boot 消费者路径示例（门控 IT）：`DemoLockIT#pessimisticWriteLocksPer
 | [06-consumer-path.md](06-consumer-path.md) | Boot Layer B 悲观锁 demo 入口 |
 | [`docs/verification.md`](../verification.md) | I-008 真库 Accept 与离线区别 |
 | **P-005 证据** | `harness/evidence/test/I-008/P-005/` — 锁语义 live IT 归档 |
+| **P-005 离线测试** | `dialect/.../XuguLockSemanticsTest` — Q2 负向 + READ→FOR UPDATE 行为 |
+| **P-005 真库锚点** | `XuguLockIT#pessimisticReadExecutesAsForUpdateNotShare` |
