@@ -358,14 +358,21 @@ Source: [`harness/evidence/researcher/I-005/P-001/GAP-SUMMARY.md`](../harness/ev
 
 ## Summary counts
 
+> **I-008/P-001 RP-02 honest rollup** (2026-07-20): see [`harness/evidence/architect-contract/I-008/P-001/PROMOTION-MAP.md`](../harness/evidence/architect-contract/I-008/P-001/PROMOTION-MAP.md). **Do not** claim「94 covered-live」— honest live-capable today = **79/98**.
+
 | Bucket | Count |
 |---|---:|
-| **可实现 rows (SSOT primary)** | **94** |
-| covered (可实现) | 94 |
-| known-limit-documented (可实现) | 0 |
-| gap (可实现) | 0 |
+| **可实现 rows (SSOT physical)** | **98** |
+| Charter label (I-005 freeze) | **94** (+4 I-007 Track C promotions) |
+| **Honest covered-live today** (live path exists) | **79** (78 IT + 1 demo) |
+| SSOT `status=covered-live` column today | **5** |
+| unit-only-without-live | **19** → P-003 Batch A |
+| known-limit-documented (locked target, P-003) | **15** |
+| thin live IT required (P-003 Batch A) | **4** |
+| SSOT tag sweep only (P-003 A′ + P-004 B) | **73** |
+| gap (可实现) | **0** |
 | negative-only (文档不允许 + 延后 + C defer) | 30 |
-| I-007/P-004 promoted (covered-live) | 4 |
+| I-007 closed covered-live (no further promotion) | 5 |
 | Ruler C 已有 (C-LOCK-001) | 1 |
 | **Total baseline rows** | **129** |
 

@@ -1,42 +1,50 @@
 {
   "schema_version": 1,
   "task_id": "I-008",
-  "batch_id": null,
-  "status": "plan_complete_await_build_approval",
+  "batch_id": "B-001",
+  "status": "build_executing",
   "harness_level": "Standard",
-  "last_updated": "2026-07-20T16:10:00+08:00",
+  "last_updated": "2026-07-20T16:26:00+08:00",
   "initiative_id": "I-008",
   "initiative_type": "feature",
   "working_branch": "feat/i-008-production-quality-gaps",
   "active_plan": [
-    "I-008 Plan P-001…P-007 serial Q1-Q4",
-    "B-001 draft proposes P-001 only",
-    "Q5 perf/multi-version out; NOT Ship"
+    "B-001 approved P-001…P-007 serial",
+    "P-001 accepted; executing P-002"
   ],
   "next_3_steps": [
-    "Human Gate: approve B-001 scope (default P-001 only)",
-    "Orchestrator: execute P-001 role_pipeline",
-    "Serial P-002…P-007 after prior Phase accepted"
+    "P-002 docs honesty + lock/UUID/JSON integration notes",
+    "P-003…P-007 serial",
+    "Human Gate Initiative Accept"
   ],
   "validation": {
-    "last_result": "harness_check PASS; branch_check PASS (Plan batch)"
+    "last_result": "P-001 ACCEPT PASS; harness_check PASS"
   },
   "cognitive_state": {
     "failure_count": 0,
-    "current_mode": "plan",
-    "blocked_on": "human_build_approval"
+    "current_mode": "build_execution",
+    "blocked_on": null
   },
   "version_control_checkpoint": {
-    "decision": "i008_plan_materialized",
-    "committed": true,
-    "candidate_commit": "3305336",
+    "decision": "p001_accepted",
+    "committed": false,
     "branch": "feat/i-008-production-quality-gaps",
-    "i007_archived": true
+    "last_phase_accepted": "P-001"
   },
   "handoff": {
-    "resume_from": "harness/handoffs/orchestrator/I-008-plan-complete.md"
+    "resume_from": "P-002"
   },
+  "approved_build": "B-001",
+  "approved_phases": [
+    "P-001",
+    "P-002",
+    "P-003",
+    "P-004",
+    "P-005",
+    "P-006",
+    "P-007"
+  ],
+  "phases_accepted": ["P-001"],
   "ship": false,
-  "archive": false,
-  "updated_at": "2026-07-20T16:10:00+08:00"
+  "updated_at": "2026-07-20T16:26:00+08:00"
 }

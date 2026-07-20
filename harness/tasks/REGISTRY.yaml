@@ -1,7 +1,7 @@
 schema_version: 1
 charter_version: "1.0.0"
 initiative_id: I-008
-updated: "2026-07-20T16:10:00+08:00"
+updated: "2026-07-20T16:26:00+08:00"
 supersedes_initiative: I-007
 notes: >
   I-007 P-001…P-006 packets archived at harness/tasks/archive/I-007/.
@@ -13,7 +13,7 @@ notes: >
 tasks:
   - task_id: P-001
     title: "盘点 SSOT 诚实计数与升 covered-live 路线图"
-    status: planned
+    status: accepted
     build_id: B-001
     packet: harness/tasks/P-001.md
     acceptance_doc: harness/evidence/architect-contract/I-008/P-001/ACCEPTANCE.md
