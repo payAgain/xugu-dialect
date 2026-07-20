@@ -133,6 +133,29 @@ Initiative **I-007**（A/B/C tracks）在 I-005/I-006 基线之上硬化能力�
 | **Live (when DB available)** | `XUGU_RUN_IT=true mvn -q test` | dialect + demo gated IT；Accept 证据见 `harness/evidence/test/I-007/P-00*/` |
 | **GAV / compat** | `7.4.5.Final` + `compatiblemode=NONE` | 不升版；**NOT Ship** |
 
+## I-008 Accept — 全量 reactor 真库证据（Q4）
+
+Initiative **I-008** 在 I-005/I-006/I-007 基线之上闭环 Q1–Q4。**离线 `mvn test` + `verify.py` VERIFY PASS** 仅证明构建与单元/布线 — **不足以** 宣称「生产已验证」或满足 I-008 **Initiative Accept**。
+
+| Mode | Command | 证明什么 |
+|---|---|---|
+| **日常 / CI 离线** | `mvn -q test` | 默认 gate OFF；gated IT 跳过 |
+| **Harness 契约** | `python harness/scripts/verify.py` | 配置化 build + offline test — **非** 全量真库回归 |
+| **I-008 Accept（有可达 XuguDB）** | `XUGU_RUN_IT=true mvn -q test` | **全 reactor** 门控 dialect + demo IT 须全绿 |
+| **Accept 归档** | `harness/evidence/test/I-008/P-007/` | `mvn-test-live-it-final.log`、`IT-RESULT.txt`（**P-007** 写入） |
+
+子集证据（Accept 引用，非替代全量 reactor）：
+
+| Phase | 目录 | 内容 |
+|---|---|---|
+| P-005 | `harness/evidence/test/I-008/P-005/` | 锁语义 live IT |
+| P-006 | `harness/evidence/test/I-008/P-006/` | Boot UUID/JSON 开箱 live demo |
+| P-007 | `harness/evidence/test/I-008/P-007/` | **Accept 级** 全 reactor 终验 |
+
+无真库时：文档 **`SKIPPED_INFRA`** — 离线绿 **不能** 代替 Accept live log。
+
+诚实计数（Q1）：**79/98** covered-live 能力今日；目标 **83 + 15 known-limit**（P-003/P-004）— [04-feature-matrix.md § I-005 baseline counts](04-feature-matrix.md#i-005-baseline-counts冻结)。锁集成：[07-lock-integration.md](07-lock-integration.md)。
+
 ## Checklist（集成方自测）
 
 - [ ] 依赖可解析：`com.xugu:xugu-dialect:7.4.5.Final` + JDBC 驱动在 classpath

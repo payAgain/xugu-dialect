@@ -17,6 +17,8 @@
 
 **不要** 手写或假设 Hibernate 默认的 `LIMIT … FOR UPDATE` 顺序。
 
+**锁语义专节：** 无 SKIP LOCKED、无 FOR SHARE、`PESSIMISTIC_READ`→排他 `FOR UPDATE` — [07-lock-integration.md](07-lock-integration.md)。
+
 **处理：** 使用本方言（GAV `com.xugu:xugu-dialect:7.4.5.Final`）；对照矩阵 A-PAG-* / A-LCK-*。同版本行为修复，无需升版本号。
 
 ## 2. E19132 unexpected OFFSET（HQL 分页）

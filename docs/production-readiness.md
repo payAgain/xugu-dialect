@@ -36,6 +36,16 @@ Do not leave a dimension undecided before approving a production Build.
 | Compatibility | **required** | Public dialect API, SPI, GAV, Hibernate 7.4.5 alignment, config keys | Compatibility tests / matrix notes; no silent break of documented entry points |
 | Maintainability | **required** | All maintained projects | Tests, architecture/ADR updates, harness handoff |
 
+## I-008 Accept live evidence (Q4)
+
+For Initiative **I-008 Accept**, functional correctness on a reachable XuguDB additionally requires:
+
+- Gated **full reactor** green: `XUGU_RUN_IT=true mvn -q test`
+- Deposited log under `harness/evidence/test/I-008/P-007/` (`mvn-test-live-it-final.log`, `IT-RESULT.txt`)
+- **`SKIPPED_INFRA`** documented when no live DB — offline `python harness/scripts/verify.py` **VERIFY PASS** alone is **insufficient** for production / Accept claims
+
+See [`docs/verification.md`](verification.md) § I-008 and [`docs/user-guide/03-verify.md`](user-guide/03-verify.md) § I-008 Accept.
+
 ## Project verification commands
 
 The executable command contract is `harness/verification.json`.

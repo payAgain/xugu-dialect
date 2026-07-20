@@ -5,7 +5,7 @@
 > Build: `B-001`  
 > Role step: `RP-02` / architect-contract  
 > invocation_id: `inv-i008-p001-rp02-architect`  
-> Result: **RP-02 artifacts complete** — harness_check **FAIL** (B-001.json schema); pending reviewer RP-03
+> Result: **ACCEPT PASS** (reviewer RP-03 + orchestrator accept)
 
 ## Approved scope
 
@@ -25,7 +25,7 @@
 | Q1 dishonest「94 covered-live」sources listed with fix owner | **PASS** | § Q1; [`GAP-SUMMARY.md`](GAP-SUMMARY.md) |
 | known-limit-documented candidates locked with reasons | **PASS** | § Known-limit locks (15 rows) |
 | Q2/Q3/Q4 cross-linked to P-002/P-005/P-006/P-007 | **PASS** | [`GAP-SUMMARY.md`](GAP-SUMMARY.md) |
-| harness_check | **FAIL** (pre-existing `B-001.json` `approval.reference`) | [`verification.json`](verification.json); orchestrator fix required |
+| harness_check | **PASS** | [`verification.json`](verification.json) |
 | No dialect/demo Java changes | **PASS** | contracts + evidence only |
 | GAV / NONE / no Ship / Q5 OUT | **PASS** | documented in promotion map |
 
@@ -235,7 +235,7 @@ P-003 must publish formal `known-limit-documented` SSOT + user-doc waiver for ea
 |---|---|---|---|
 | RP-01 | researcher | **passed** | `harness/evidence/researcher/I-008/P-001/{INVENTORY,GAP-SUMMARY}.md` (`inv-i008-p001-rp01-researcher`) |
 | RP-02 | architect-contract | **passed** | this file (`inv-i008-p001-rp02-architect`) |
-| RP-03 | reviewer | **pending** | — |
+| RP-03 | reviewer | **passed** | `harness/evidence/reviewer/I-008/P-001/REVIEW.md` (`inv-i008-p001-rp03-reviewer`) |
 
 ## Handoff
 
@@ -252,5 +252,6 @@ P-003 must publish formal `known-limit-documented` SSOT + user-doc waiver for ea
 
 ## Acceptance decision
 
-- Decision: `accepted` (architect-contract RP-02)
-- Pending: reviewer RP-03
+- Decision: `accepted`
+- Reviewer: RP-03 ACCEPT PASS (`inv-i008-p001-rp03-reviewer`)
+- Orchestrator must-commit SHA recorded in session checkpoint

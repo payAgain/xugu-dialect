@@ -104,18 +104,18 @@ I-005 全量冻结步骤仍见 [03-verify.md § Frozen baseline](03-verify.md#fr
 
 - [ ] GAV：`com.xugu:xugu-dialect:7.4.5.Final`
 - [ ] Boot 若用 4.1.0：已强制 `hibernate.version=7.4.5.Final`
-- [ ] 离线：`mvn -q test` 绿；`python harness/scripts/verify.py` → **VERIFY PASS**
-- [ ] （有库）`XUGU_RUN_IT=true` 下 demo IT 全绿
+- [ ] 离线：`mvn -q test` 绿；`python harness/scripts/verify.py` → **VERIFY PASS**（**仅** 布线 + 单元 — **非** 生产 Accept）
+- [ ] （有库）`XUGU_RUN_IT=true` 下 demo IT 全绿 — I-008 Accept 另需 **全 reactor** live log（见 [03-verify.md § I-008 Accept](03-verify.md#i-008-accept--全量-reactor-真库证据q4)）
 - [ ] SSOT Boot-required open gaps = **0**（对照 contracts 表）
 - [ ] 未把 exclusion appendix 的 `dialect-it-only` 误当成 Boot gap
 - [ ] **不要求**本路径完成 Ship / Maven Central
 
 ## Mapping notes（消费者侧）
 
-与 demo 一致的已知规避（**方言 jar 未改**）：
+与 demo 一致的已知规避（**方言 jar 未改**；完整 Boot 清单见 [02-configuration.md § UUID/JSON](02-configuration.md#uuid--json-boot-必配清单i-008-q3)，**P-006** 开箱实现）：
 
-- **UUID（A-TYP-012）：** `UuidAsVarcharConverter` + `varchar(36)` — 避免 Xugu JDBC 对 `UUID.class` 的 `[E50044]`
-- **JSON：** classpath 需 Jackson（demo 使用 `spring-boot-starter-jackson`），以便 Hibernate JSON `FormatMapper`
+- **UUID（A-TYP-012）：** `UuidAsVarcharConverter` + `varchar(36)` + `hibernate.type.preferred_uuid_jdbc_type: VARCHAR` — 避免 Xugu JDBC `[E50044]`
+- **JSON：** `spring-boot-starter-jackson`（Hibernate JSON **`FormatMapper`**）+ `hibernate.query.hql.json_functions_enabled=true`
 
 详见 [`demo-spring-boot/README.md`](../../demo-spring-boot/README.md) § Mapping notes。
 

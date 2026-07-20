@@ -14,7 +14,7 @@
 
 **I-003：** 同一 GAV **`com.xugu:xugu-dialect:7.4.5.Final`** 下扩展生产能力（异常映射、JSON 聚合、Window/CTE、bulk、DDL 细节）；Definition A 仍有效，详见 ruler-C 矩阵。
 
-**I-005：** 生产回归测试基线 — **94 可实现** + **34 negative-only** 行映射到可执行用例；冻结门控见 [03-verify.md § Frozen baseline](03-verify.md#frozen-baseline--i-005-冻结基线门控)。
+**I-005：** 生产回归测试基线 — **98** 物理可实现行（Charter **94** + I-007 **+4**）；**诚实 covered-live 今日 79/98**；I-008 目标 **83 + 15 known-limit**；冻结门控见 [03-verify.md § Frozen baseline](03-verify.md#frozen-baseline--i-005-冻结基线门控)。
 
 **I-006：** Spring Boot **消费者路径**基线 — **41** Boot-required 行（A/B/C′），open gaps = **0**；如何离线 / `XUGU_RUN_IT=true` 跑通见 [06-consumer-path.md](06-consumer-path.md)。**不要求** Ship。
 
@@ -25,7 +25,8 @@
 3. **验证** — `mvn verify` / demo `spring-boot:run` / 集成开关 → [03-verify.md](03-verify.md)
 4. **能力边界** — Definition A + I-003 ruler C 矩阵（可实现 / 文档不允许 / 延后）→ [04-feature-matrix.md](04-feature-matrix.md)
 5. **排障** — LIMIT/FOR UPDATE、E19132 OFFSET、missing sequence、BINARY、SPI、连库失败、I-003 JSON/bulk/ENUM → [05-troubleshooting.md](05-troubleshooting.md)
-6. **消费者路径（I-006）** — Boot 基线 A/B/C′、离线与 gated live → [06-consumer-path.md](06-consumer-path.md)
+6. **悲观锁集成** — 无 SKIP LOCKED / FOR SHARE；`PESSIMISTIC_READ`→`FOR UPDATE` → [07-lock-integration.md](07-lock-integration.md)
+7. **消费者路径（I-006）** — Boot 基线 A/B/C′、离线与 gated live → [06-consumer-path.md](06-consumer-path.md)
 
 ## Index
 
@@ -37,6 +38,7 @@
 | [04-feature-matrix.md](04-feature-matrix.md) | 特性矩阵导航与状态含义 |
 | [05-troubleshooting.md](05-troubleshooting.md) | 常见失败 |
 | [06-consumer-path.md](06-consumer-path.md) | I-006 Boot 消费者路径基线（A/B/C′） |
+| [07-lock-integration.md](07-lock-integration.md) | 悲观锁集成（SKIP LOCKED / FOR SHARE / PESSIMISTIC_READ） |
 
 ## Prerequisites reminder
 

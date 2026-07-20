@@ -21,7 +21,7 @@ Orchestrator 从 P-001 起串行执行；must-commit；完成后 Human Gate Init
 ## Entry: I-008 Scope PASS — Archive I-007 — Plan pending
 
 ### Summary
-Human Gate「本 Initiative 范围已明确，可以开干」。I-008 **active**（feature）：Q1–Q4 全闭环（94 covered-live / 锁证据 / UUID·JSON Boot 开箱 / Accept 真库）；Q5 性能不做；不升版；不 Ship。I-007 **archived**。下一步：orchestrator Plan + 分支 `feat/i-008-production-quality-gaps` + B-001 draft（仅最早 ready Phase）。
+Human Gate「本 Initiative 范围已明确，可以开干」。I-008 **active**（feature）：Q1–Q4 全闭环（**goal:** promote 94 可实现 rows to covered-live or known-limit / 锁证据 / UUID·JSON Boot 开箱 / Accept 真库）；**achieved baseline P-001:** 79/98 live-capable；Q5 性能不做；不升版；不 Ship。I-007 **archived**。下一步：orchestrator Plan + 分支 `feat/i-008-production-quality-gaps` + B-001 draft（仅最早 ready Phase）。
 
 ### Next
 Orchestrator Plan；Human Gate 批 Build 范围。

@@ -69,9 +69,14 @@ Initiative **I-005** freezes a full regression baseline. SSOT:
 
 | Bucket | Count | Accept requirement |
 |---|---:|---|
-| 可实现 rows | 94 | Each row maps to `entry_class#method` (**94 covered-live** after I-007/P-002 + P-004) |
+| 可实现 rows (physical SSOT) | **98** | Charter **94** + **4** I-007 Track C promotions; each row maps to `entry_class#method` |
+| **Honest covered-live today** | **79/98** | **78** dialect/demo IT + **1** demo-live (`A-XCUT-009`); SSOT `status=covered-live` column lags (**5** tagged) |
+| unit-only-without-live | **19** | P-003 Batch A closure (thin live IT **4** or `known-limit-documented` **15**) |
+| **I-008 goal post P-003 + P-004** | **83 + 15** | **83** covered-live + **15** known-limit-documented = **98** achievable rows accounted |
 | negative-only rows | 34 | Explicit non-support or `@Disabled` defer anchors |
 | Demo smoke | 7 entrypoints | Offline + gated live paths in SSOT |
+
+> **Do not** claim「**94 covered-live**」— that conflates charter label with live evidence. SSOT rollup: [`contracts/production-regression-baseline.md`](../contracts/production-regression-baseline.md) § Summary counts; promotion map: [`harness/evidence/architect-contract/I-008/P-001/PROMOTION-MAP.md`](../harness/evidence/architect-contract/I-008/P-001/PROMOTION-MAP.md).
 
 ### IT gate for frozen baseline
 
@@ -80,9 +85,11 @@ Initiative **I-005** freezes a full regression baseline. SSOT:
 | JVM property | `-Dxugu.run.integration=true` | Surefire runs gated dialect + demo IT |
 | Environment | `XUGU_RUN_IT=true` | Same as property (read by `XuguITGate` / `XuguIntegrationGate`) |
 
-**Daily default:** `mvn -q test` (gate OFF) — sufficient for `verify.py` **VERIFY PASS**.
+**Daily default:** `mvn -q test` (gate OFF) — sufficient for `verify.py` **VERIFY PASS** (wiring + unit only).
 
-**Frozen baseline Accept (I-005):** `XUGU_RUN_IT=true mvn -q test` must be **all green** when a reachable XuguDB is available. When no live DB is present, document `SKIPPED_INFRA` in Phase evidence (same pattern as P-002/P-005); wiring is verified offline.
+**Offline `mvn test` is not production proof:** a green offline run skips gated dialect/demo IT and does **not** by itself justify「生产已验证」or Initiative **Accept**. Production / Accept claims require gated **full reactor** live evidence when DB is reachable.
+
+**Frozen baseline Accept (I-005):** `XUGU_RUN_IT=true mvn -q test` must be **all green** when a reachable XuguDB is available. When no live DB is present, document `SKIPPED_INFRA` in Phase evidence (same pattern as P-002/P-005); wiring is verified offline only.
 
 User-facing procedure: [`docs/user-guide/03-verify.md`](user-guide/03-verify.md#frozen-baseline--i-005-冻结基线门控).
 
@@ -136,6 +143,29 @@ python harness/scripts/verify.py --phase P-006 --evidence harness/evidence/test/
 ```
 
 **Ship / tag / push / Central:** out of I-007 Accept scope.
+
+## I-008 production quality gaps (docs + live evidence)
+
+Initiative **I-008** closes Q1–Q4 on GAV **`7.4.5.Final`** / **`compatiblemode=NONE`**. SSOT honest counts and promotion map: [`harness/evidence/architect-contract/I-008/P-001/`](../harness/evidence/architect-contract/I-008/P-001/).
+
+| Track | Doc / evidence owner | Requirement |
+|---|---|---|
+| **Q1** Honest counts | P-002 docs + P-003/P-004 SSOT | No inflated「94 covered-live」; **79/98** live-capable today; goal **83 + 15** |
+| **Q2** Lock semantics | P-002 user guide + P-005 live IT | No SKIP LOCKED / FOR SHARE; `PESSIMISTIC_READ`→exclusive `FOR UPDATE` — [`docs/user-guide/07-lock-integration.md`](user-guide/07-lock-integration.md) |
+| **Q3** UUID/JSON Boot | P-002 checklist + P-006 wiring | Converter + `FormatMapper` path — [`docs/user-guide/02-configuration.md`](user-guide/02-configuration.md) § UUID/JSON |
+| **Q4** Accept live log | P-002 language + P-007 artifact | Initiative Accept requires **full reactor** gated green + deposited log |
+
+### Offline vs Accept (Q4)
+
+| Mode | Command | Proves |
+|---|---|---|
+| **Daily / CI offline** | `mvn -q test` + `python harness/scripts/verify.py` | Build, unit wiring, `@Disabled` / skip semantics — **not** full production regression |
+| **Initiative Accept (I-008)** | `XUGU_RUN_IT=true mvn -q test` (full reactor) | Gated dialect + demo IT when DB reachable |
+| **Accept evidence path** | `harness/evidence/test/I-008/P-007/` | `mvn-test-live-it-final.log`, `IT-RESULT.txt` (P-007); lock subset **P-005**, Boot subset **P-006** |
+
+When no live DB is available, Phase evidence must document **`SKIPPED_INFRA`** — offline **VERIFY PASS** alone does **not** satisfy I-008 Accept.
+
+User-facing procedure: [`docs/user-guide/03-verify.md`](user-guide/03-verify.md) § I-008 Accept.
 
 ## Change-Type Matrix
 

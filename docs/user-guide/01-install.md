@@ -29,6 +29,8 @@ When the dialect is available from your Maven repository (local install / future
 
 Also depend on Hibernate ORM **7.4.5.Final** (or let Spring Boot manage it after forcing the property — see [02-configuration.md](02-configuration.md)).
 
+**Boot + UUID/JSON：** 除方言与 JDBC 外，须 `spring-boot-starter-jackson` 与 UUID `AttributeConverter` + JSON 函数开关 — 完整清单见 [02-configuration.md § UUID/JSON Boot 必配清单](02-configuration.md#uuid--json-boot-必配清单i-008-q3)（**P-006** 开箱对齐）。
+
 From this multi-module reactor, consume the sibling module:
 
 ```xml

@@ -21,8 +21,8 @@ tasks:
     dependencies: []
   - task_id: P-002
     title: "文档口径诚实 + 锁/UUID/JSON 集成须知 + 生产验证用语"
-    status: planned
-    build_id: null
+    status: accepted
+    build_id: B-001
     packet: harness/tasks/P-002.md
     acceptance_doc: harness/evidence/implementer/I-008/P-002/ACCEPTANCE.md
     role_pipeline_summary: "implementer → reviewer"

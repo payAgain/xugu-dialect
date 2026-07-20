@@ -49,7 +49,8 @@
 | A-PAG-001 / A-PAG-002 | 可实现 | HQL/Criteria 分页走 `SqlAstTranslator` → `LIMIT … [OFFSET …]`（非 ANSI FETCH）；带锁时 **FOR UPDATE → LIMIT → WAIT**（见排障 §1–§2） |
 | A-PAG-001 / A-LCK-001 | 可实现 | 分页 + `FOR UPDATE` 可用；组合时语法顺序为虚谷要求 |
 | A-SEQ-001 | 可实现 | `hbm2ddl validate` 经 `all_sequences` 读取序列元数据（I-002/P-002；见排障 §3） |
-| A-LCK-004 SKIP LOCKED | 文档不允许 | `supportsSkipLocked=false`；不会发出该关键字 |
+| A-LCK-004 SKIP LOCKED | 文档不允许 | `supportsSkipLocked=false`；不会发出该关键字 — 专节 [07-lock-integration.md](07-lock-integration.md) |
+| A-LCK-005 FOR SHARE / PESSIMISTIC_READ | 文档不允许 | 无 `FOR SHARE`；`PESSIMISTIC_READ`→排他 **`FOR UPDATE`** — [07-lock-integration.md](07-lock-integration.md) |
 | A-TYP-014 INTERVAL 等 | 延后 | 暂勿当作已交付能力 |
 | C-EXC-* / C-JSON-001…004 / C-WIN-* / C-CTE-* / C-BULK-001/003 / C-DDL-001…003 / C-CAT-001 / C-GUID-001 | 可实现（I-003） | 见 ruler-C 矩阵 Acceptance hint（✅ + IT 类名） |
 | C-BULK-002 bulk insert | **covered-live**（I-007/P-002） | 门控真库 IT PASS — 见 [05-troubleshooting.md §10](05-troubleshooting.md#10-bulk-insertjoined--identity已知限制) |
@@ -59,11 +60,16 @@
 
 ## I-005 baseline counts（冻结）
 
-| Bucket | Count | SSOT status |
+| Bucket | Count | SSOT status / 说明 |
 |---|---:|---|
-| 可实现 (Definition A + ruler C) | 94 | **94 covered-live**（I-007/P-002 C-BULK-002 + P-004 Track C 四主题） |
+| 可实现 rows（physical SSOT） | **98** | Charter **94** + **4** I-007 Track C 晋升（`C-JSON-005` 等） |
+| **诚实 covered-live 今日** | **79/98** | **78** 门控 IT + **1** demo-live（`A-XCUT-009`）；SSOT `status=covered-live` 列仅 **5** 行已打标 |
+| unit-only-without-live | **19** | **P-003** Batch A 关闭（thin live IT **4** 或 `known-limit-documented` **15**） |
+| **I-008 目标态（P-003 + P-004 后）** | **83 + 15** | **83** covered-live + **15** known-limit-documented = **98** 可实现行闭环 |
 | negative-only (文档不允许 + 延后) | 34 | All have `entry_class#method` |
 | Demo smoke | 7 | See baseline SSOT demo table |
+
+> **禁止**再写「**94 covered-live**」— 该口径把 CHARTER 标签与 live 证据混为一谈。诚实 rollup：[`production-regression-baseline.md`](../../contracts/production-regression-baseline.md) § Summary；晋升图：[`harness/evidence/architect-contract/I-008/P-001/PROMOTION-MAP.md`](../../harness/evidence/architect-contract/I-008/P-001/PROMOTION-MAP.md)。
 
 验证门控：[03-verify.md § Frozen baseline](03-verify.md#frozen-baseline--i-005-冻结基线门控)。
 

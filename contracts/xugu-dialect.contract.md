@@ -145,6 +145,20 @@ Domains for I-003 Phases:
 | P-007 | Docs/matrix align + Accept prep | **Docs align** (this Phase) — Ship still out of scope |
 
 GAV remains **`7.4.5.Final`**. Deferred / 文档不允许 rows in the I-003 matrix stay deferred / forbidden.
+
+### 7.2 Lock integration (I-008 Q2)
+
+Integrators using JPA pessimistic locking on XuguDB **must** read [`docs/user-guide/07-lock-integration.md`](../docs/user-guide/07-lock-integration.md):
+
+- **No** `SKIP LOCKED` (`supportsSkipLocked=false`; matrix A-LCK-004 / C-SKIP-001)
+- **No** `FOR SHARE` (matrix A-LCK-005 — 文档不允许)
+- **`PESSIMISTIC_READ` maps to exclusive `FOR UPDATE`**, not a PostgreSQL-style share lock
+- Pagination + lock SQL order: **`FOR UPDATE` → `LIMIT` → `WAIT`**
+
+Live behavioral evidence for I-008 Accept: **P-005** (`harness/evidence/test/I-008/P-005/`).
+
+Honest regression counts (I-008 Q1): **79/98** live-capable today; post P-003/P-004 target **83 covered-live + 15 known-limit-documented** — see [`production-regression-baseline.md`](production-regression-baseline.md) § Summary counts.
+
 ---
 
 ## 8. Versioning policy
