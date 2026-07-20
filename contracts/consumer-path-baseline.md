@@ -114,6 +114,8 @@ Layer C′ (19): `A-TYP-001`, `A-TYP-002`, `A-TYP-004`, `A-TYP-005`, `A-TYP-006`
 | A-SPI-003 | A | covered | `DemoSpiDialectAutoResolveIT#sessionFactoryResolvesXuguDialectWithoutExplicitConfig` | demo | — | A-SPI-003 |
 | A-XCUT-003 | A | covered | `DemoOfflineSmokeTest#applicationYmlDocumentsExplicitDialectAndEnvKeys`; `DemoBootBaselineSmokeTest#datasourceUrlIncludesCompatibleModeNone` | demo | — | A-XCUT-003 |
 | A-XCUT-009 | A | covered | `DemoOfflineSmokeTest#demoPersonTableUsesHibDemoPrefix`; `DemoOfflineSmokeTest#applicationYmlDocumentsExplicitDialectAndEnvKeys`; `DemoPersonCrudIT#persistAndFindPerson`; `DemoBootBaselineSmokeTest#sessionFactoryUsesExplicitXuguDialectFromApplicationYml`; `#jpaPersistAndJpqlQueryRoundTrip`; `#pageableFindAllUsesLimitOffset`; `#pageableSecondPageUsesOffset` | demo | — | A-XCUT-009 |
+
+**A-XCUT-009 demo-live note (I-008/P-004):** I-005 SSOT tags this row **covered-live** (not dialect IT). Gated Boot IT (`XuguIntegrationGate`) is the live evidence for the Layer A consumer golden path — offline `DemoOfflineSmokeTest` + default `mvn test` VERIFY do **not** substitute for integration readiness. See [`production-regression-baseline.md`](production-regression-baseline.md) § A-XCUT-009 demo-live call-out.
 | A-IDN-003 | A | covered | `DemoPersonCrudIT#persistAndFindPerson` (IDENTITY id backfill) | demo | — | A-IDN-003 |
 | A-IDN-004 | A | covered | `DemoPersonCrudIT#updateAndDeletePerson` | demo | — | A-IDN-004 |
 | A-PAG-001 | A | covered | `DemoBootBaselineSmokeTest#pageableFindAllUsesLimitOffset`; `#pageableSecondPageUsesOffset` | demo | — | A-PAG-001 |
@@ -355,3 +357,4 @@ LOB pick: **A-TYP-010** (BLOB). **A-TYP-011** remains dialect-it-only (exclusion
 | 2026-07-19 | P-005 RP-01: docs ↔ SSOT ↔ Demo aligned; user guide `06-consumer-path.md`; freeze status **FROZEN** (Boot open gaps remain **0**); Initiative Accept prep (**NOT Ship**); GAV `7.4.5.Final` (`inv-i006-p005-rp01-implementer`) |
 | 2026-07-19 | P-005 RP-02 (test): offline 28/0/0/23; live 28/0/0/0 PASS; VERIFY PASS; docs `06-consumer-path.md` spot-check OK; SSOT remains **FROZEN** gaps **0**; GAV `7.4.5.Final` confirmed (`inv-i006-p005-rp02-test`) |
 | 2026-07-19 | I-007 P-005 RP-01: Track B deepening — Flyway (B-FLY-001), bulk delete (B-DEMO-001), HQL/function deepen (B-DEMO-002), read-only tx (B-DEMO-003); Boot SSOT rows unchanged (**41**); non-matrix Track B table added (`inv-i007-p005-rp01-implementer`) |
+| 2026-07-20 | I-008 P-004 RP-01: A-XCUT-009 demo-live clarification — gated Boot IT satisfies Layer A consumer golden path; I-005 xref **covered-live** (`inv-i008-p004-rp01-implementer`) |

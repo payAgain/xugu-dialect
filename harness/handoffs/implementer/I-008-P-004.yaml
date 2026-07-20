@@ -1,0 +1,70 @@
+handoff:
+  initiative_id: I-008
+  build_id: B-001
+  phase_id: P-004
+  step_id: RP-01
+  role: implementer
+  invocation_id: inv-i008-p004-rp01-implementer
+  branch: feat/i-008-production-quality-gaps
+  status: complete
+  verdict: PASS
+
+summary: |
+  P-004 RP-01 implementer: closed P-001 Batch B (16 rows) — Ruler C SSOT tag sweep (15)
+  covered→covered-live plus A-XCUT-009 demo-live consumer golden path documentation.
+  No new tests; all live IT anchors pre-existed. SSOT rollup: 83 covered-live + 15
+  known-limit-documented; honest live-capable 83/98; tag column now matches honest count.
+  Contracts-only diff; no dialect/demo Java; no MySQL/Oracle inheritance; no commit.
+
+promotions:
+  batch_b_ruler_c_tag_sweep:
+    count: 15
+    status: covered-live
+    action: SSOT tag only; live IT pre-existed
+    matrix_ids:
+      - C-EXC-001
+      - C-EXC-002
+      - C-JSON-001
+      - C-JSON-002
+      - C-JSON-003
+      - C-JSON-004
+      - C-WIN-001
+      - C-CTE-001
+      - C-BULK-001
+      - C-BULK-003
+      - C-DDL-001
+      - C-DDL-002
+      - C-DDL-003
+      - C-CAT-001
+      - C-GUID-001
+  batch_b_demo_live_clarification:
+    count: 1
+    status: covered-live
+    matrix_id: A-XCUT-009
+    action: Document gated Boot IT satisfies Layer A consumer golden path
+    ssot_callouts:
+      - contracts/production-regression-baseline.md § A-XCUT-009 demo-live
+      - contracts/consumer-path-baseline.md Layer A note
+
+verification:
+  mvn_path: C:\Users\admin\tools\apache-maven-3.9.9\bin\mvn.cmd
+  mvn_package: PASS
+  mvn_test: PASS
+  rp02_owner: test role — optional XUGU_RUN_IT live logs for Batch B Ruler C IT
+
+ssot_post_state:
+  covered_live: 83
+  known_limit_documented: 15
+  honest_live_capable: "83/98"
+  batch_b_tag_sweep_remaining: 0
+
+artifacts:
+  - harness/evidence/implementer/I-008/P-004/ACCEPTANCE.md
+  - contracts/production-regression-baseline.md
+  - contracts/consumer-path-baseline.md
+
+next:
+  - RP-02 test: mvn -q -DskipTests package; mvn -q test; optional live IT logs for Ruler C rows
+  - RP-03 reviewer: readonly audit 94-row closure; no 94-row Boot mirror creep
+
+blockers: []

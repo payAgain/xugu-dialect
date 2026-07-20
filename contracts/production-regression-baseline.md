@@ -159,28 +159,28 @@ Columns: `matrix_id | status | entry_class#method | gate | gap_action`
 | A-XCUT-005 | known-limit-documented | `XuguDialectTest#isolationLevelHooksMatchXuguIsoLevel_A_XCUT_005` | unit | N/A |
 | A-XCUT-007 | known-limit-documented | `XuguDialectTest#keywordsIncludeTcl` | unit | N/A |
 | A-XCUT-008 | known-limit-documented | `XuguIdentitySequenceTest#sequenceSupportWired_A_SEQ_001_003_008` | unit | N/A |
-| A-XCUT-009 | covered | `DemoOfflineSmokeTest#applicationYmlDocumentsExplicitDialectAndEnvKeys`; `DemoPersonCrudIT#persistAndFindPerson`; `DemoBootBaselineSmokeTest#sessionFactoryUsesExplicitXuguDialectFromApplicationYml`; `#jpaPersistAndJpqlQueryRoundTrip`; `#pageableFindAllUsesLimitOffset` | demo | N/A |
+| A-XCUT-009 | covered-live | `DemoOfflineSmokeTest#applicationYmlDocumentsExplicitDialectAndEnvKeys`; `DemoPersonCrudIT#persistAndFindPerson`; `DemoBootBaselineSmokeTest#sessionFactoryUsesExplicitXuguDialectFromApplicationYml`; `#jpaPersistAndJpqlQueryRoundTrip`; `#pageableFindAllUsesLimitOffset` | demo | N/A |
 
 ### Ruler C — 可实现 (16)
 
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
-| C-EXC-001 | covered | `XuguExceptionMappingIT#sessionUniqueViolationMapsToConstraintViolationException`; `XuguExceptionConversionTest#conversionMapsUniqueViolation` | IT | N/A |
-| C-EXC-002 | covered | `XuguExceptionConversionTest#extractorParsesNotNullFieldName`; `#extractorReturnsNullWhenNameAbsent`; `XuguExceptionMappingIT#sessionNotNullViolationExtractsFieldNameWhenPresent` | IT | N/A |
-| C-JSON-001 | covered | `XuguJsonAggregateIT#jsonColumnRoundTripAndHqlAggregates`; `XuguJsonAggregateSupportTest#jsonAggFunctionsConstruct` | IT | N/A |
-| C-JSON-002 | covered | `XuguJsonAggregateIT#jsonColumnRoundTripAndHqlAggregates` | IT | N/A |
-| C-JSON-003 | covered | `XuguJsonAggregateIT#jsonColumnRoundTripAndHqlAggregates`; `XuguJsonAggregateSupportTest#dialectWiresAggregateSupportAndCastingJsonType` | IT | N/A |
-| C-JSON-004 | covered | `XuguJsonAggregateIT#jsonColumnRoundTripAndHqlAggregates` | IT | N/A |
-| C-WIN-001 | covered | `XuguWindowCteIT#hqlWindowAndWithClauseOnLiveSession`; `XuguWindowCteSupportTest#dialectEnablesWindowAndWithClause` | IT | N/A |
-| C-CTE-001 | covered | `XuguWindowCteIT#hqlWindowAndWithClauseOnLiveSession` | IT | N/A |
-| C-BULK-001 | covered | `XuguBulkMutationIT#bulkUpdateOnJoinedInheritanceSucceeds`; `#bulkDeleteOnJoinedInheritanceSucceeds`; `XuguBulkMutationSupportTest#localTemporaryTableStrategyForBulkMutation_C_BULK_001` | IT | N/A |
+| C-EXC-001 | covered-live | `XuguExceptionMappingIT#sessionUniqueViolationMapsToConstraintViolationException`; `XuguExceptionConversionTest#conversionMapsUniqueViolation` | IT | N/A |
+| C-EXC-002 | covered-live | `XuguExceptionConversionTest#extractorParsesNotNullFieldName`; `#extractorReturnsNullWhenNameAbsent`; `XuguExceptionMappingIT#sessionNotNullViolationExtractsFieldNameWhenPresent` | IT | N/A |
+| C-JSON-001 | covered-live | `XuguJsonAggregateIT#jsonColumnRoundTripAndHqlAggregates`; `XuguJsonAggregateSupportTest#jsonAggFunctionsConstruct` | IT | N/A |
+| C-JSON-002 | covered-live | `XuguJsonAggregateIT#jsonColumnRoundTripAndHqlAggregates` | IT | N/A |
+| C-JSON-003 | covered-live | `XuguJsonAggregateIT#jsonColumnRoundTripAndHqlAggregates`; `XuguJsonAggregateSupportTest#dialectWiresAggregateSupportAndCastingJsonType` | IT | N/A |
+| C-JSON-004 | covered-live | `XuguJsonAggregateIT#jsonColumnRoundTripAndHqlAggregates` | IT | N/A |
+| C-WIN-001 | covered-live | `XuguWindowCteIT#hqlWindowAndWithClauseOnLiveSession`; `XuguWindowCteSupportTest#dialectEnablesWindowAndWithClause` | IT | N/A |
+| C-CTE-001 | covered-live | `XuguWindowCteIT#hqlWindowAndWithClauseOnLiveSession` | IT | N/A |
+| C-BULK-001 | covered-live | `XuguBulkMutationIT#bulkUpdateOnJoinedInheritanceSucceeds`; `#bulkDeleteOnJoinedInheritanceSucceeds`; `XuguBulkMutationSupportTest#localTemporaryTableStrategyForBulkMutation_C_BULK_001` | IT | N/A |
 | C-BULK-002 | covered-live | `XuguBulkMutationIT#bulkInsertOnJoinedInheritanceWithIdentitySucceeds_C_BULK_002`; `XuguBulkMutationSupportTest#fallbackSqmInsertStrategyWired_C_BULK_002` | IT | N/A |
-| C-BULK-003 | covered | `XuguBulkMutationSupportTest#supportsSubqueryOnMutatingTableIsFalse_C_BULK_003`; `XuguBulkMutationIT#dialectExposesLocalTempBulkStrategyFlags` | IT | N/A |
-| C-DDL-001 | covered | `XuguTypeDdlDetailsTest#createTableIfNotExists_C_DDL_001`; `XuguTypeDdlDetailsIT#typeDdlDetailsOnLiveDb` | IT | N/A |
-| C-DDL-002 | covered | `XuguTypeDdlDetailsTest#alterColumnType_C_DDL_002`; `XuguTypeDdlDetailsIT#typeDdlDetailsOnLiveDb` | IT | N/A |
-| C-DDL-003 | covered | `XuguTypeDdlDetailsTest#datetimeLiteralAndFormat_C_DDL_003`; `XuguTypeDdlDetailsIT#typeDdlDetailsOnLiveDb` | IT | N/A |
-| C-CAT-001 | covered | `XuguTypeDdlDetailsTest#catalogCreateDrop_C_CAT_001`; `XuguTypeDdlDetailsIT#typeDdlDetailsOnLiveDb` | IT | N/A |
-| C-GUID-001 | covered | `XuguTypeDdlDetailsTest#selectGuidString_C_GUID_001`; `XuguTypeDdlDetailsIT#typeDdlDetailsOnLiveDb` | IT | N/A |
+| C-BULK-003 | covered-live | `XuguBulkMutationSupportTest#supportsSubqueryOnMutatingTableIsFalse_C_BULK_003`; `XuguBulkMutationIT#dialectExposesLocalTempBulkStrategyFlags` | IT | N/A |
+| C-DDL-001 | covered-live | `XuguTypeDdlDetailsTest#createTableIfNotExists_C_DDL_001`; `XuguTypeDdlDetailsIT#typeDdlDetailsOnLiveDb` | IT | N/A |
+| C-DDL-002 | covered-live | `XuguTypeDdlDetailsTest#alterColumnType_C_DDL_002`; `XuguTypeDdlDetailsIT#typeDdlDetailsOnLiveDb` | IT | N/A |
+| C-DDL-003 | covered-live | `XuguTypeDdlDetailsTest#datetimeLiteralAndFormat_C_DDL_003`; `XuguTypeDdlDetailsIT#typeDdlDetailsOnLiveDb` | IT | N/A |
+| C-CAT-001 | covered-live | `XuguTypeDdlDetailsTest#catalogCreateDrop_C_CAT_001`; `XuguTypeDdlDetailsIT#typeDdlDetailsOnLiveDb` | IT | N/A |
+| C-GUID-001 | covered-live | `XuguTypeDdlDetailsTest#selectGuidString_C_GUID_001`; `XuguTypeDdlDetailsIT#typeDdlDetailsOnLiveDb` | IT | N/A |
 | C-JSON-005 | covered-live | `XuguFunctionRegistryTest#jsonSubsetUsesStandardJsonValueNotMysqlDump`; `XuguJsonSubsetDeepenIT#jsonSubsetDeepen_Hql_C_JSON_005` | IT | N/A |
 | C-DDL-005 | covered-live | `XuguArrayTypeTest#arrayTypeHooksWired_A_TYP_015_C_DDL_005`; `XuguArrayTypeIT#arrayColumnRoundTrip_A_TYP_015_C_DDL_005` | IT | N/A |
 
@@ -291,22 +291,38 @@ Formal live IT waived per [harness/evidence/architect-contract/I-008/P-001/PROMO
 
 ---
 
+## Explicit call-out — A-XCUT-009 demo-live (consumer golden path)
+
+| Field | Value |
+|---|---|
+| **matrix_id** | A-XCUT-009 |
+| **status** | **covered-live** |
+| **Evidence class** | demo-live — gated `@SpringBootTest` / `@DataJpaTest` IT in `demo-spring-boot` |
+| **Live gate** | `XuguIntegrationGate.isEnabled()` ← `XUGU_RUN_IT=true` or `-Dxugu.run.integration=true` |
+| **Golden path covered** | Explicit dialect + env secrets (offline smoke); SessionFactory/JPA CRUD + IDENTITY; JPQL round-trip; Spring Data Pageable LIMIT-OFFSET |
+| **Gated Boot IT anchors** | `DemoPersonCrudIT#persistAndFindPerson`; `DemoBootBaselineSmokeTest#sessionFactoryUsesExplicitXuguDialectFromApplicationYml`; `#jpaPersistAndJpqlQueryRoundTrip`; `#pageableFindAllUsesLimitOffset` |
+| **Consumer-path xref** | Layer A golden path in [`consumer-path-baseline.md`](consumer-path-baseline.md) — Boot-required **41/41 FROZEN**; offline VERIFY does **not** substitute for integration readiness |
+| **Q3/Q4 cross-link** | Boot UUID/JSON out-of-box wiring remains **P-006/P-007**; demo-live proves consumer path, not dialect-module defaults |
+| **gap_action** | **N/A** — closed **covered-live** in I-008/P-004 (tag sweep; live IT pre-existed) |
+
+---
+
 ## Explicit call-out — Demo smoke baseline
 
 | Capability | entry_class#method | gate | status | gap_action |
 |---|---|---|---|---|
 | Env secrets / explicit dialect | `DemoOfflineSmokeTest#applicationYmlDocumentsExplicitDialectAndEnvKeys` | demo | covered | N/A |
 | Table prefix convention | `DemoOfflineSmokeTest#demoPersonTableUsesHibDemoPrefix` | demo | covered | N/A |
-| Spring Boot + JPA CRUD + IDENTITY | `DemoPersonCrudIT#persistAndFindPerson` | demo | covered | N/A |
-| SessionFactory + explicit dialect (consumer path) | `DemoBootBaselineSmokeTest#sessionFactoryUsesExplicitXuguDialectFromApplicationYml`; `#datasourceUrlIncludesCompatibleModeNone` | demo | covered | N/A |
-| JPA JPQL smoke | `DemoBootBaselineSmokeTest#jpaPersistAndJpqlQueryRoundTrip` | demo | covered | N/A |
-| Spring Data Pageable / LIMIT-OFFSET | `DemoBootBaselineSmokeTest#pageableFindAllUsesLimitOffset` | demo | covered | N/A |
+| Spring Boot + JPA CRUD + IDENTITY | `DemoPersonCrudIT#persistAndFindPerson` | demo | covered-live | N/A |
+| SessionFactory + explicit dialect (consumer path) | `DemoBootBaselineSmokeTest#sessionFactoryUsesExplicitXuguDialectFromApplicationYml`; `#datasourceUrlIncludesCompatibleModeNone` | demo | covered-live | N/A |
+| JPA JPQL smoke | `DemoBootBaselineSmokeTest#jpaPersistAndJpqlQueryRoundTrip` | demo | covered-live | N/A |
+| Spring Data Pageable / LIMIT-OFFSET | `DemoBootBaselineSmokeTest#pageableFindAllUsesLimitOffset` | demo | covered-live | N/A |
 | hbm2ddl validate | — | none | gap | N/A |
 | Function / HQL smoke | — | none | gap | N/A |
 | Bulk mutation | — | none | gap | N/A |
 
 **Offline (default `mvn test`):** `DemoOfflineSmokeTest` — no Spring context, no live DB.  
-**Gated live (`XUGU_RUN_IT=true` or `-Dxugu.run.integration=true`):** `DemoPersonCrudIT`, `DemoBootBaselineSmokeTest`.
+**Gated live (`XUGU_RUN_IT=true` or `-Dxugu.run.integration=true`):** `DemoPersonCrudIT`, `DemoBootBaselineSmokeTest` — these satisfy **A-XCUT-009** demo-live and the I-006 Layer A consumer golden path (see [`consumer-path-baseline.md`](consumer-path-baseline.md)).
 
 ---
 
@@ -383,18 +399,18 @@ Source: [`harness/evidence/researcher/I-005/P-001/GAP-SUMMARY.md`](../harness/ev
 
 ## Summary counts
 
-> **I-008/P-003 RP-01 rollup** (2026-07-20): Batch A + A′ closed in P-003. **Do not** claim「94 covered-live」— honest live-capable = **83/98**; SSOT `covered-live` tag = **67** (+ **15** known-limit-documented).
+> **I-008/P-003+P-004 rollup** (2026-07-20): Batch A + A′ closed in P-003; Batch B (Ruler C tag sweep + A-XCUT-009 demo-live) closed in P-004. SSOT `covered-live` tag = **83**; honest live-capable = **83/98** (+ **15** known-limit-documented).
 
 | Bucket | Count |
 |---|---:|
 | **可实现 rows (SSOT physical)** | **98** |
 | Charter label (I-005 freeze) | **94** (+4 I-007 Track C promotions) |
 | **Honest covered-live today** (live path exists) | **83** (82 IT + 1 demo) |
-| SSOT `status=covered-live` column today | **67** |
+| SSOT `status=covered-live` column today | **83** |
 | unit-only-without-live | **0** (P-003 Batch A closed) |
 | known-limit-documented (P-003 Batch A closed) | **15** |
 | thin live IT required (P-003 Batch A) | **0** (closed) |
-| SSOT tag sweep only (P-004 Batch B remaining) | **15** |
+| SSOT tag sweep only (P-004 Batch B) | **0** (closed) |
 | gap (可实现) | **0** |
 | negative-only (文档不允许 + 延后 + C defer) | 30 |
 | I-007 closed covered-live (no further promotion) | 5 |
