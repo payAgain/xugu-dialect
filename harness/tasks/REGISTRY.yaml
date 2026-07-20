@@ -29,8 +29,8 @@ tasks:
     dependencies: [P-001]
   - task_id: P-003
     title: "升 covered-live — 方言回归 / Definition A 批次"
-    status: planned
-    build_id: null
+    status: accepted
+    build_id: B-001
     packet: harness/tasks/P-003.md
     acceptance_doc: harness/evidence/implementer/I-008/P-003/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"

@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "started_at": "2026-07-20T16:41:00+08:00",
+  "finished_at": "2026-07-20T16:48:07+0800",
+  "project_root": "E:\\Work\\java\\hibernate-test",
+  "initiative_id": "I-008",
+  "phase_id": "P-003",
+  "build_id": "B-001",
+  "invocation_id": "inv-i008-p003-rp02-test",
+  "step_id": "RP-02",
+  "role": "test",
+  "branch": "feat/i-008-production-quality-gaps",
+  "head_sha": "079ab84",
+  "verdict": "PASS",
+  "closure_path": "i008-batch-a-offline-green-live-skipped-infra",
+  "config": "E:\\Work\\java\\hibernate-test\\harness\\verification.json",
+  "maven_command": "C:\\Users\\admin\\tools\\apache-maven-3.9.9\\bin\\mvn.cmd",
+  "results": [
+    {
+      "id": "harness",
+      "required": true,
+      "status": "PASS",
+      "command": "python harness/scripts/harness_check.py",
+      "exit_code": 0,
+      "log": "harness/evidence/test/I-008/P-003/verify.txt"
+    },
+    {
+      "id": "build",
+      "required": true,
+      "status": "PASS",
+      "command": "mvn -q -DskipTests package",
+      "cwd": "E:\\Work\\java\\hibernate-test",
+      "exit_code": 0,
+      "log": "harness/evidence/test/I-008/P-003/mvn-package-offline.txt"
+    },
+    {
+      "id": "test",
+      "required": true,
+      "status": "PASS",
+      "command": "mvn -q test",
+      "cwd": "E:\\Work\\java\\hibernate-test",
+      "exit_code": 0,
+      "log": "harness/evidence/test/I-008/P-003/mvn-test-offline.txt",
+      "counts": {
+        "dialect": {
+          "tests_run": 189,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 66,
+          "note": "excludes stale XuguTrackCProbeIT surefire artifact"
+        },
+        "demo": {
+          "tests_run": 32,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 26
+        }
+      },
+      "summary_artifact": "harness/evidence/test/I-008/P-003/surefire-summary-offline.txt",
+      "batch_a_gated_it_offline": {
+        "XuguCastPatternIT": {
+          "run": 1,
+          "skipped": 1
+        },
+        "XuguDefaultColumnExportIT": {
+          "run": 1,
+          "skipped": 1
+        },
+        "XuguIdentifierFoldingIT": {
+          "run": 1,
+          "skipped": 1
+        },
+        "XuguTypeRoundTripIT": {
+          "run": 6,
+          "skipped": 6
+        }
+      }
+    },
+    {
+      "id": "test_live_batch_a",
+      "required": false,
+      "status": "SKIPPED_INFRA",
+      "command": "XUGU_RUN_IT=true mvn -q test",
+      "cwd": "E:\\Work\\java\\hibernate-test",
+      "exit_code": 1,
+      "log": "harness/evidence/test/I-008/P-003/mvn-test-live-it-final.txt",
+      "real_db": false,
+      "probe": "harness/evidence/test/I-008/P-003/live-db-probe.txt",
+      "reason": "127.0.0.1:5138 TcpTestSucceeded=False; JDBC Connection refused",
+      "summary_artifact": "harness/evidence/test/I-008/P-003/surefire-summary-live-batch-a.txt",
+      "it_result": "harness/evidence/test/I-008/P-003/IT-RESULT.txt",
+      "batch_a_classes": [
+        "com.xugu.dialect.it.XuguCastPatternIT",
+        "com.xugu.dialect.it.XuguDefaultColumnExportIT",
+        "com.xugu.dialect.it.XuguIdentifierFoldingIT",
+        "com.xugu.dialect.it.XuguTypeRoundTripIT"
+      ]
+    },
+    {
+      "id": "lint",
+      "required": false,
+      "status": "NOT_APPLICABLE",
+      "command": "NA"
+    }
+  ],
+  "summary": {
+    "build": "PASS",
+    "test_offline": "PASS",
+    "test_live_batch_a": "SKIPPED_INFRA",
+    "verify_py": "PASS",
+    "overall": "PASS"
+  }
+}

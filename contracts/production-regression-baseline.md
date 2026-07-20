@@ -47,118 +47,118 @@ Columns: `matrix_id | status | entry_class#method | gate | gap_action`
 
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
-| A-TYP-001 | covered | `XuguDialectTest#columnTypesMatchXuguDocs`; `XuguTypeRoundTripIT#typeRoundTripKeyTypes` | IT | N/A |
-| A-TYP-002 | covered | `XuguDialectTest#columnTypesMatchXuguDocs`; `XuguTypeRoundTripIT#typeRoundTripKeyTypes` | IT | N/A |
-| A-TYP-003 | covered | `XuguDialectTest#columnTypesMatchXuguDocs` (REAL→float) | unit | N/A |
-| A-TYP-004 | covered | `XuguDialectTest#columnTypesMatchXuguDocs`; `XuguDialectTest#sizeAndPrecisionDefaults` (CHAR trim); `XuguTypeRoundTripIT#typeRoundTripKeyTypes` | IT | N/A |
-| A-TYP-005 | covered | `XuguDialectTest#columnTypesMatchXuguDocs`; `XuguDialectTest#booleanLiteralsAreTrueFalse`; `XuguTypeRoundTripIT#typeRoundTripKeyTypes` | IT | N/A |
-| A-TYP-006 | covered | `XuguDialectTest#columnTypesMatchXuguDocs`; `XuguTypeRoundTripIT#typeRoundTripKeyTypes` | IT | N/A |
-| A-TYP-007 | covered | `XuguDialectTest#columnTypesMatchXuguDocs` (time `$p`); `XuguTypeRoundTripIT#jdbcTimeRoundTrip_A_TYP_007` | IT | N/A |
-| A-TYP-008 | covered | `XuguDialectTest#columnTypesMatchXuguDocs`; `XuguTypeRoundTripIT#typeRoundTripKeyTypes` | IT | N/A |
-| A-TYP-009 | covered | `XuguDialectTest#columnTypesMatchXuguDocs`; `XuguBinarySchemaExportIT#schemaExportEmitsBareBinaryAndCreatesOnDb`; `XuguTypeRoundTripIT#typeRoundTripKeyTypes` | IT | N/A |
-| A-TYP-010 | covered | `XuguDialectTest#columnTypesMatchXuguDocs`; `XuguTypeRoundTripIT#typeRoundTripKeyTypes` | IT | N/A |
-| A-TYP-011 | covered | `XuguDialectTest#columnTypesMatchXuguDocs` (NCLOB→clob); `XuguTypeRoundTripIT#typeRoundTripKeyTypes` | IT | N/A |
-| A-TYP-012 | covered | `XuguDialectTest#columnTypesMatchXuguDocs`; `XuguTypeRoundTripIT#typeRoundTripKeyTypes` | IT | N/A |
-| A-TYP-013 | covered | `XuguDialectTest#columnTypesMatchXuguDocs`; `XuguTypeRoundTripIT#typeRoundTripKeyTypes`; `XuguJsonAggregateIT#jsonColumnRoundTripAndHqlAggregates` | IT | N/A |
-| A-TYP-019 | covered | `XuguDialectTest#castPatternDefaultUsesStandardCastSyntax_A_TYP_019` | unit | N/A |
+| A-TYP-001 | covered-live | `XuguDialectTest#columnTypesMatchXuguDocs`; `XuguTypeRoundTripIT#typeRoundTripKeyTypes` | IT | N/A |
+| A-TYP-002 | covered-live | `XuguDialectTest#columnTypesMatchXuguDocs`; `XuguTypeRoundTripIT#typeRoundTripKeyTypes` | IT | N/A |
+| A-TYP-003 | covered-live | `XuguDialectTest#columnTypesMatchXuguDocs` (REAL→float); `XuguTypeRoundTripIT#jdbcRealFloatRoundTrip_A_TYP_003` | IT | N/A |
+| A-TYP-004 | covered-live | `XuguDialectTest#columnTypesMatchXuguDocs`; `XuguDialectTest#sizeAndPrecisionDefaults` (CHAR trim); `XuguTypeRoundTripIT#typeRoundTripKeyTypes` | IT | N/A |
+| A-TYP-005 | covered-live | `XuguDialectTest#columnTypesMatchXuguDocs`; `XuguDialectTest#booleanLiteralsAreTrueFalse`; `XuguTypeRoundTripIT#typeRoundTripKeyTypes` | IT | N/A |
+| A-TYP-006 | covered-live | `XuguDialectTest#columnTypesMatchXuguDocs`; `XuguTypeRoundTripIT#typeRoundTripKeyTypes` | IT | N/A |
+| A-TYP-007 | covered-live | `XuguDialectTest#columnTypesMatchXuguDocs` (time `$p`); `XuguTypeRoundTripIT#jdbcTimeRoundTrip_A_TYP_007` | IT | N/A |
+| A-TYP-008 | covered-live | `XuguDialectTest#columnTypesMatchXuguDocs`; `XuguTypeRoundTripIT#typeRoundTripKeyTypes` | IT | N/A |
+| A-TYP-009 | covered-live | `XuguDialectTest#columnTypesMatchXuguDocs`; `XuguBinarySchemaExportIT#schemaExportEmitsBareBinaryAndCreatesOnDb`; `XuguTypeRoundTripIT#typeRoundTripKeyTypes` | IT | N/A |
+| A-TYP-010 | covered-live | `XuguDialectTest#columnTypesMatchXuguDocs`; `XuguTypeRoundTripIT#typeRoundTripKeyTypes` | IT | N/A |
+| A-TYP-011 | covered-live | `XuguDialectTest#columnTypesMatchXuguDocs` (NCLOB→clob); `XuguTypeRoundTripIT#typeRoundTripKeyTypes` | IT | N/A |
+| A-TYP-012 | covered-live | `XuguDialectTest#columnTypesMatchXuguDocs`; `XuguTypeRoundTripIT#typeRoundTripKeyTypes` | IT | N/A |
+| A-TYP-013 | covered-live | `XuguDialectTest#columnTypesMatchXuguDocs`; `XuguTypeRoundTripIT#typeRoundTripKeyTypes`; `XuguJsonAggregateIT#jsonColumnRoundTripAndHqlAggregates` | IT | N/A |
+| A-TYP-019 | covered-live | `XuguDialectTest#castPatternDefaultUsesStandardCastSyntax_A_TYP_019`; `XuguCastPatternIT#castExpressionOnLiveDb_A_TYP_019` | IT | N/A |
 
 ### Definition A — P-003 DDL (6)
 
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
-| A-DDL-001 | covered | `XuguDdlIT#schemaExportCreateDropWithPkAndNotNull`; `XuguDialectTest#ddlHelpersMatchXuguSyntax` | IT | N/A |
-| A-DDL-002 | covered | `XuguDdlIT#schemaExportCreateDropWithPkAndNotNull` (ALTER ADD COLUMN) | IT | N/A |
-| A-DDL-003 | covered | `XuguDdlIT#schemaExportCreateDropWithPkAndNotNull` | IT | N/A |
-| A-DDL-004 | covered | `XuguDdlIT#schemaExportCreateDropWithPkAndNotNull` (NOT NULL reject) | IT | N/A |
-| A-DDL-005 | covered | `XuguDefaultColumnExportTest#schemaExportEmitsDefaultColumn_A_DDL_005` | unit | N/A |
-| A-DDL-006 | covered | `XuguDdlIT#schemaExportCreateDropWithPkAndNotNull`; `XuguDialectTest#ddlHelpersMatchXuguSyntax` | IT | N/A |
+| A-DDL-001 | covered-live | `XuguDdlIT#schemaExportCreateDropWithPkAndNotNull`; `XuguDialectTest#ddlHelpersMatchXuguSyntax` | IT | N/A |
+| A-DDL-002 | covered-live | `XuguDdlIT#schemaExportCreateDropWithPkAndNotNull` (ALTER ADD COLUMN) | IT | N/A |
+| A-DDL-003 | covered-live | `XuguDdlIT#schemaExportCreateDropWithPkAndNotNull` | IT | N/A |
+| A-DDL-004 | covered-live | `XuguDdlIT#schemaExportCreateDropWithPkAndNotNull` (NOT NULL reject) | IT | N/A |
+| A-DDL-005 | covered-live | `XuguDefaultColumnExportTest#schemaExportEmitsDefaultColumn_A_DDL_005`; `XuguDefaultColumnExportIT#schemaExportEmitsDefaultColumnAndAppliesOnDb_A_DDL_005` | IT | N/A |
+| A-DDL-006 | covered-live | `XuguDdlIT#schemaExportCreateDropWithPkAndNotNull`; `XuguDialectTest#ddlHelpersMatchXuguSyntax` | IT | N/A |
 
 ### Definition A — P-004 Pagination (3)
 
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
-| A-PAG-001 | covered | `XuguPaginationLockTest#limitOnlyUsesBindMarker_A_PAG_001_003`; `XuguPaginationIT#limitAndOffsetReturnExpectedRows`; `XuguHqlPaginationIT#hqlSetFirstResultMaxResultsUsesLimitNotFetchFirst` | IT | N/A |
-| A-PAG-002 | covered | `XuguPaginationLockTest#limitOffsetStableForm_A_PAG_002`; `XuguPaginationIT#limitAndOffsetReturnExpectedRows`; `XuguHqlPaginationIT#hqlSetFirstResultMaxResultsUsesLimitNotFetchFirst` | IT | N/A |
-| A-PAG-003 | covered | `XuguPaginationLockTest#limitOnlyUsesBindMarker_A_PAG_001_003`; `XuguPaginationIT#limitAndOffsetReturnExpectedRows` | IT | N/A |
+| A-PAG-001 | covered-live | `XuguPaginationLockTest#limitOnlyUsesBindMarker_A_PAG_001_003`; `XuguPaginationIT#limitAndOffsetReturnExpectedRows`; `XuguHqlPaginationIT#hqlSetFirstResultMaxResultsUsesLimitNotFetchFirst` | IT | N/A |
+| A-PAG-002 | covered-live | `XuguPaginationLockTest#limitOffsetStableForm_A_PAG_002`; `XuguPaginationIT#limitAndOffsetReturnExpectedRows`; `XuguHqlPaginationIT#hqlSetFirstResultMaxResultsUsesLimitNotFetchFirst` | IT | N/A |
+| A-PAG-003 | covered-live | `XuguPaginationLockTest#limitOnlyUsesBindMarker_A_PAG_001_003`; `XuguPaginationIT#limitAndOffsetReturnExpectedRows` | IT | N/A |
 
 ### Definition A — P-004 Locks (3)
 
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
-| A-LCK-001 | covered | `XuguPaginationLockTest#forUpdateBasic_A_LCK_001`; `XuguLockIT#forUpdateExecutesAndSkipLockedUnsupported`; `XuguHqlPaginationIT#hqlLockAndPageEmitsForUpdateBeforeLimitAndWaitAfter` | IT | N/A |
-| A-LCK-002 | covered | `XuguPaginationLockTest#forUpdateOf_A_LCK_002`; `XuguLockIT#forUpdateExecutesAndSkipLockedUnsupported` | IT | N/A |
-| A-LCK-003 | covered | `XuguPaginationLockTest#nowaitAndWaitMilliseconds_A_LCK_003`; `XuguLockIT#forUpdateExecutesAndSkipLockedUnsupported`; `XuguLockIT#limitForUpdateComboExecutes`; `XuguHqlPaginationIT#hqlLockAndPageEmitsForUpdateBeforeLimitAndWaitAfter` | IT | N/A |
+| A-LCK-001 | covered-live | `XuguPaginationLockTest#forUpdateBasic_A_LCK_001`; `XuguLockIT#forUpdateExecutesAndSkipLockedUnsupported`; `XuguHqlPaginationIT#hqlLockAndPageEmitsForUpdateBeforeLimitAndWaitAfter` | IT | N/A |
+| A-LCK-002 | covered-live | `XuguPaginationLockTest#forUpdateOf_A_LCK_002`; `XuguLockIT#forUpdateExecutesAndSkipLockedUnsupported` | IT | N/A |
+| A-LCK-003 | covered-live | `XuguPaginationLockTest#nowaitAndWaitMilliseconds_A_LCK_003`; `XuguLockIT#forUpdateExecutesAndSkipLockedUnsupported`; `XuguLockIT#limitForUpdateComboExecutes`; `XuguHqlPaginationIT#hqlLockAndPageEmitsForUpdateBeforeLimitAndWaitAfter` | IT | N/A |
 
 ### Definition A — P-005 Identity & Sequence (9)
 
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
-| A-IDN-001 | covered | `XuguIdentitySequenceTest#identitySupportWired_A_IDN_001` | unit | N/A |
-| A-IDN-002 | covered | `XuguIdentitySequenceTest#identitySupportWired_A_IDN_001` (no AUTO_INCREMENT) | unit | N/A |
-| A-IDN-003 | covered | `XuguIdentitySequenceTest#identitySelectFallback_A_IDN_003`; `XuguIdentitySequenceIT#identityPersistBackfillsId_A_IDN_003_004` | IT | N/A |
-| A-IDN-004 | covered | `XuguIdentitySequenceIT#identityPersistBackfillsId_A_IDN_003_004`; `DemoPersonCrudIT#persistAndFindPerson` | IT | N/A |
-| A-SEQ-001 | covered | `XuguIdentitySequenceTest#createDropSequenceStrings_A_SEQ_001_002_005`; `XuguIdentitySequenceTest#sequenceMetadataQueryAndExtractorWired`; `XuguSchemaValidateIT#schemaValidateSucceedsWhenSequenceExists` | IT | N/A |
-| A-SEQ-002 | covered | `XuguIdentitySequenceTest#createDropSequenceStrings_A_SEQ_001_002_005` | unit | N/A |
-| A-SEQ-003 | covered | `XuguIdentitySequenceTest#sequenceSupportWired_A_SEQ_001_003_008`; `XuguIdentitySequenceIT#sequenceGeneratorPersist_A_SEQ_003_004_008` | IT | N/A |
-| A-SEQ-004 | covered | `XuguIdentitySequenceTest#currvalFunctionForm_A_SEQ_004`; `XuguIdentitySequenceIT#sequenceGeneratorPersist_A_SEQ_003_004_008` | IT | N/A |
-| A-SEQ-005 | covered | `XuguIdentitySequenceTest#createDropSequenceStrings_A_SEQ_001_002_005` | unit | N/A |
+| A-IDN-001 | known-limit-documented | `XuguIdentitySequenceTest#identitySupportWired_A_IDN_001` | unit | N/A |
+| A-IDN-002 | known-limit-documented | `XuguIdentitySequenceTest#identitySupportWired_A_IDN_001` (no AUTO_INCREMENT) | unit | N/A |
+| A-IDN-003 | covered-live | `XuguIdentitySequenceTest#identitySelectFallback_A_IDN_003`; `XuguIdentitySequenceIT#identityPersistBackfillsId_A_IDN_003_004` | IT | N/A |
+| A-IDN-004 | covered-live | `XuguIdentitySequenceIT#identityPersistBackfillsId_A_IDN_003_004`; `DemoPersonCrudIT#persistAndFindPerson` | IT | N/A |
+| A-SEQ-001 | covered-live | `XuguIdentitySequenceTest#createDropSequenceStrings_A_SEQ_001_002_005`; `XuguIdentitySequenceTest#sequenceMetadataQueryAndExtractorWired`; `XuguSchemaValidateIT#schemaValidateSucceedsWhenSequenceExists` | IT | N/A |
+| A-SEQ-002 | known-limit-documented | `XuguIdentitySequenceTest#createDropSequenceStrings_A_SEQ_001_002_005` | unit | N/A |
+| A-SEQ-003 | covered-live | `XuguIdentitySequenceTest#sequenceSupportWired_A_SEQ_001_003_008`; `XuguIdentitySequenceIT#sequenceGeneratorPersist_A_SEQ_003_004_008` | IT | N/A |
+| A-SEQ-004 | covered-live | `XuguIdentitySequenceTest#currvalFunctionForm_A_SEQ_004`; `XuguIdentitySequenceIT#sequenceGeneratorPersist_A_SEQ_003_004_008` | IT | N/A |
+| A-SEQ-005 | known-limit-documented | `XuguIdentitySequenceTest#createDropSequenceStrings_A_SEQ_001_002_005` | unit | N/A |
 
 ### Definition A — P-006 Functions (17)
 
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
-| A-FUN-001 | covered | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
-| A-FUN-002 | covered | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
-| A-FUN-003 | covered | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered` | unit | N/A |
-| A-FUN-004 | covered | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
-| A-FUN-005 | covered | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered` | unit | N/A |
-| A-FUN-006 | covered | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered` | unit | N/A |
-| A-FUN-007 | covered | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered` | unit | N/A |
-| A-FUN-008 | covered | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` (abs) | IT | N/A |
-| A-FUN-009 | covered | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered` | unit | N/A |
-| A-FUN-010 | covered | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
-| A-FUN-011 | covered | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
-| A-FUN-012 | covered | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguTypeDdlDetailsIT#typeDdlDetailsOnLiveDb` (to_char path) | IT | N/A |
-| A-FUN-013 | covered | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
-| A-FUN-014 | covered | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
-| A-FUN-016 | covered | `XuguFunctionRegistryTest#uuidPrimaryIsUuid`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
-| A-FUN-017 | covered | `XuguFunctionRegistryTest#jsonSubsetUsesStandardJsonValueNotMysqlDump`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
-| A-FUN-018 | covered | `XuguFunctionRegistryTest#listaggUsesNativeListaggFunction`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
+| A-FUN-001 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
+| A-FUN-002 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
+| A-FUN-003 | known-limit-documented | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered` | unit | N/A |
+| A-FUN-004 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
+| A-FUN-005 | known-limit-documented | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered` | unit | N/A |
+| A-FUN-006 | known-limit-documented | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered` | unit | N/A |
+| A-FUN-007 | known-limit-documented | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered` | unit | N/A |
+| A-FUN-008 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` (abs) | IT | N/A |
+| A-FUN-009 | known-limit-documented | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered` | unit | N/A |
+| A-FUN-010 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
+| A-FUN-011 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
+| A-FUN-012 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguTypeDdlDetailsIT#typeDdlDetailsOnLiveDb` (to_char path) | IT | N/A |
+| A-FUN-013 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
+| A-FUN-014 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
+| A-FUN-016 | covered-live | `XuguFunctionRegistryTest#uuidPrimaryIsUuid`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
+| A-FUN-017 | covered-live | `XuguFunctionRegistryTest#jsonSubsetUsesStandardJsonValueNotMysqlDump`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
+| A-FUN-018 | covered-live | `XuguFunctionRegistryTest#listaggUsesNativeListaggFunction`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
 
 ### Definition A — P-007 Schema / temp / comment / constraints (14)
 
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
-| A-SCH-001 | covered | `XuguSchemaTempCommentTest#schemaCreateDropCommands_A_SCH_001`; `XuguSchemaTempCommentIT#schemaTempCommentFkTruncate_A_SCH` | IT | N/A |
-| A-SCH-002 | covered | `XuguSchemaTempCommentTest#nameQualifierIsSchemaOnly_A_SCH_002_not_003`; `XuguSchemaTempCommentIT#schemaTempCommentFkTruncate_A_SCH` | IT | N/A |
-| A-SCH-004 | covered | `XuguSchemaTempCommentTest#localTempStrategy_A_SCH_004_006`; `XuguSchemaTempCommentIT#schemaTempCommentFkTruncate_A_SCH` | IT | N/A |
-| A-SCH-005 | covered | `XuguSchemaTempCommentTest#globalTempStrategy_A_SCH_005_006_preconditionDocumented`; `XuguSchemaTempCommentIT#schemaTempCommentFkTruncate_A_SCH` (gated skip if OFF) | IT | N/A |
-| A-SCH-006 | covered | `XuguSchemaTempCommentTest#localTempStrategy_A_SCH_004_006`; `XuguSchemaTempCommentTest#globalTempStrategy_A_SCH_005_006_preconditionDocumented` | unit | N/A |
-| A-SCH-008 | covered | `XuguSchemaTempCommentTest#commentOnAndInline_A_SCH_008_009_010`; `XuguSchemaTempCommentIT#schemaTempCommentFkTruncate_A_SCH` | IT | N/A |
-| A-SCH-009 | covered | same as A-SCH-008 | IT | N/A |
-| A-SCH-010 | covered | same as A-SCH-008 | IT | N/A |
-| A-SCH-011 | covered | `XuguSchemaTempCommentTest#uniqueFkCheckAlterTruncateIndex_A_SCH_011_to_016`; `XuguSchemaTempCommentIT#schemaTempCommentFkTruncate_A_SCH` | IT | N/A |
-| A-SCH-012 | covered | same as A-SCH-011 | IT | N/A |
-| A-SCH-013 | covered | same as A-SCH-011 | IT | N/A |
-| A-SCH-014 | covered | `XuguSchemaTempCommentTest#uniqueFkCheckAlterTruncateIndex_A_SCH_011_to_016`; `XuguSchemaTempCommentIT#schemaTempCommentFkTruncate_A_SCH` (DROP CONSTRAINT live) | IT | N/A |
-| A-SCH-015 | covered | `XuguSchemaTempCommentTest#uniqueFkCheckAlterTruncateIndex_A_SCH_011_to_016`; `XuguSchemaTempCommentIT#schemaTempCommentFkTruncate_A_SCH` | IT | N/A |
-| A-SCH-016 | covered | same as A-SCH-015 | IT | N/A |
+| A-SCH-001 | covered-live | `XuguSchemaTempCommentTest#schemaCreateDropCommands_A_SCH_001`; `XuguSchemaTempCommentIT#schemaTempCommentFkTruncate_A_SCH` | IT | N/A |
+| A-SCH-002 | covered-live | `XuguSchemaTempCommentTest#nameQualifierIsSchemaOnly_A_SCH_002_not_003`; `XuguSchemaTempCommentIT#schemaTempCommentFkTruncate_A_SCH` | IT | N/A |
+| A-SCH-004 | covered-live | `XuguSchemaTempCommentTest#localTempStrategy_A_SCH_004_006`; `XuguSchemaTempCommentIT#schemaTempCommentFkTruncate_A_SCH` | IT | N/A |
+| A-SCH-005 | covered-live | `XuguSchemaTempCommentTest#globalTempStrategy_A_SCH_005_006_preconditionDocumented`; `XuguSchemaTempCommentIT#schemaTempCommentFkTruncate_A_SCH` (gated skip if OFF) | IT | N/A |
+| A-SCH-006 | known-limit-documented | `XuguSchemaTempCommentTest#localTempStrategy_A_SCH_004_006`; `XuguSchemaTempCommentTest#globalTempStrategy_A_SCH_005_006_preconditionDocumented` | unit | N/A |
+| A-SCH-008 | covered-live | `XuguSchemaTempCommentTest#commentOnAndInline_A_SCH_008_009_010`; `XuguSchemaTempCommentIT#schemaTempCommentFkTruncate_A_SCH` | IT | N/A |
+| A-SCH-009 | covered-live | same as A-SCH-008 | IT | N/A |
+| A-SCH-010 | covered-live | same as A-SCH-008 | IT | N/A |
+| A-SCH-011 | covered-live | `XuguSchemaTempCommentTest#uniqueFkCheckAlterTruncateIndex_A_SCH_011_to_016`; `XuguSchemaTempCommentIT#schemaTempCommentFkTruncate_A_SCH` | IT | N/A |
+| A-SCH-012 | covered-live | same as A-SCH-011 | IT | N/A |
+| A-SCH-013 | covered-live | same as A-SCH-011 | IT | N/A |
+| A-SCH-014 | covered-live | `XuguSchemaTempCommentTest#uniqueFkCheckAlterTruncateIndex_A_SCH_011_to_016`; `XuguSchemaTempCommentIT#schemaTempCommentFkTruncate_A_SCH` (DROP CONSTRAINT live) | IT | N/A |
+| A-SCH-015 | covered-live | `XuguSchemaTempCommentTest#uniqueFkCheckAlterTruncateIndex_A_SCH_011_to_016`; `XuguSchemaTempCommentIT#schemaTempCommentFkTruncate_A_SCH` | IT | N/A |
+| A-SCH-016 | covered-live | same as A-SCH-015 | IT | N/A |
 
 ### Definition A — P-008 SPI & cross-cutting (12: SPI 4 + cross-cutting 8)
 
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
-| A-SPI-001 | covered | `XuguDialectResolverIT#explicitDialect_sessionFactorySimpleQuery` | IT | N/A |
-| A-SPI-002 | covered | `XuguDialectServicesResourceTest#servicesFileOnClasspathListsXuguDialectResolver`; `XuguDialectResolverIT#spiAutoResolve_sessionFactoryWithoutExplicitDialect` | IT | N/A |
-| A-SPI-003 | covered | `XuguDialectResolverTest#resolvesXuguProductName_withDatabaseVersion`; `XuguDialectResolverIT#spiAutoResolve_sessionFactoryWithoutExplicitDialect` | IT | N/A |
-| A-SPI-004 | covered | `XuguDialectResolverTest#returnsNullForMySQL`; `#returnsNullForOracle`; `#returnsNullForPostgreSQL` | unit | N/A |
-| A-XCUT-001 | covered | `XuguDialectTest#unquotedIdentifiersFoldToUppercase_A_XCUT_001` | unit | N/A |
-| A-XCUT-002 | covered | `XuguDialectTest#quoteCharsAreDoubleQuote` | unit | N/A |
-| A-XCUT-003 | covered | `DemoOfflineSmokeTest#applicationYmlDocumentsExplicitDialectAndEnvKeys`; `XuguDialectResolverIT` (jdbcUrl compatiblemode=NONE via `XuguTestConnection`) | IT | N/A |
-| A-XCUT-004 | covered | `XuguDialectTest#keywordsIncludeTcl`; `XuguTypeRoundTripIT#jdbcTransactionCommitRollbackSmoke` | IT | N/A |
-| A-XCUT-005 | covered | `XuguDialectTest#isolationLevelHooksMatchXuguIsoLevel_A_XCUT_005` | unit | N/A |
-| A-XCUT-007 | covered | `XuguDialectTest#keywordsIncludeTcl` | unit | N/A |
-| A-XCUT-008 | covered | `XuguIdentitySequenceTest#sequenceSupportWired_A_SEQ_001_003_008` | unit | N/A |
+| A-SPI-001 | covered-live | `XuguDialectResolverIT#explicitDialect_sessionFactorySimpleQuery` | IT | N/A |
+| A-SPI-002 | covered-live | `XuguDialectServicesResourceTest#servicesFileOnClasspathListsXuguDialectResolver`; `XuguDialectResolverIT#spiAutoResolve_sessionFactoryWithoutExplicitDialect` | IT | N/A |
+| A-SPI-003 | covered-live | `XuguDialectResolverTest#resolvesXuguProductName_withDatabaseVersion`; `XuguDialectResolverIT#spiAutoResolve_sessionFactoryWithoutExplicitDialect` | IT | N/A |
+| A-SPI-004 | known-limit-documented | `XuguDialectResolverTest#returnsNullForMySQL`; `#returnsNullForOracle`; `#returnsNullForPostgreSQL` | unit | N/A |
+| A-XCUT-001 | covered-live | `XuguDialectTest#unquotedIdentifiersFoldToUppercase_A_XCUT_001`; `XuguIdentifierFoldingIT#unquotedIdentifiersFoldToUppercase_A_XCUT_001` | IT | N/A |
+| A-XCUT-002 | known-limit-documented | `XuguDialectTest#quoteCharsAreDoubleQuote` | unit | N/A |
+| A-XCUT-003 | covered-live | `DemoOfflineSmokeTest#applicationYmlDocumentsExplicitDialectAndEnvKeys`; `XuguDialectResolverIT` (jdbcUrl compatiblemode=NONE via `XuguTestConnection`) | IT | N/A |
+| A-XCUT-004 | covered-live | `XuguDialectTest#keywordsIncludeTcl`; `XuguTypeRoundTripIT#jdbcTransactionCommitRollbackSmoke` | IT | N/A |
+| A-XCUT-005 | known-limit-documented | `XuguDialectTest#isolationLevelHooksMatchXuguIsoLevel_A_XCUT_005` | unit | N/A |
+| A-XCUT-007 | known-limit-documented | `XuguDialectTest#keywordsIncludeTcl` | unit | N/A |
+| A-XCUT-008 | known-limit-documented | `XuguIdentitySequenceTest#sequenceSupportWired_A_SEQ_001_003_008` | unit | N/A |
 | A-XCUT-009 | covered | `DemoOfflineSmokeTest#applicationYmlDocumentsExplicitDialectAndEnvKeys`; `DemoPersonCrudIT#persistAndFindPerson`; `DemoBootBaselineSmokeTest#sessionFactoryUsesExplicitXuguDialectFromApplicationYml`; `#jpaPersistAndJpqlQueryRoundTrip`; `#pageableFindAllUsesLimitOffset` | demo | N/A |
 
 ### Ruler C — 可实现 (16)
@@ -247,6 +247,31 @@ Matrix status **文档不允许** or **延后**; baseline records explicit non-s
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
 | C-LOCK-001 | covered | `XuguPaginationLockTest#nowaitAndWaitMilliseconds_A_LCK_003` (`supportsNoWait/Wait`); `XuguLockIT#forUpdateExecutesAndSkipLockedUnsupported` | IT | N/A |
+
+---
+
+
+## Explicit call-out — P-003 Batch A known-limit waivers (15)
+
+Formal live IT waived per [harness/evidence/architect-contract/I-008/P-001/PROMOTION-MAP.md](../harness/evidence/architect-contract/I-008/P-001/PROMOTION-MAP.md) Batch A locks. User-doc sync optional via P-002.
+
+| matrix_id | waiver_reason | live_bundle |
+|---|---|---|
+| A-IDN-001 | Wiring unit only | A-IDN-003/004 IT |
+| A-IDN-002 | No AUTO_INCREMENT wiring unit | A-IDN-003/004 IT |
+| A-SEQ-002 | DROP SEQUENCE string unit | A-SEQ-001 IT |
+| A-SEQ-005 | Sequence options unit | A-SEQ-001/003 IT |
+| A-FUN-003 | Registry unit slice | A-FUN-001/004/010 IT |
+| A-FUN-005 | Registry unit slice | A-FUN-001/004/010 IT |
+| A-FUN-006 | Registry unit slice | A-FUN-001/004/010 IT |
+| A-FUN-007 | Registry unit slice | A-FUN-001/004/010 IT |
+| A-FUN-009 | Registry unit slice | A-FUN-001/004/010 IT |
+| A-SCH-006 | Temp strategy flag unit | A-SCH-004/005 IT |
+| A-SPI-004 | Resolver non-match negatives — no live path by design | — |
+| A-XCUT-002 | Quote-char constant only | — |
+| A-XCUT-005 | Isolation hook not independently live-testable | — |
+| A-XCUT-007 | TCL keyword unit duplicate | A-XCUT-004 IT |
+| A-XCUT-008 | SequenceSupport flag unit | A-SEQ-003 IT |
 
 ---
 
@@ -358,18 +383,18 @@ Source: [`harness/evidence/researcher/I-005/P-001/GAP-SUMMARY.md`](../harness/ev
 
 ## Summary counts
 
-> **I-008/P-001 RP-02 honest rollup** (2026-07-20): see [`harness/evidence/architect-contract/I-008/P-001/PROMOTION-MAP.md`](../harness/evidence/architect-contract/I-008/P-001/PROMOTION-MAP.md). **Do not** claim「94 covered-live」— honest live-capable today = **79/98**.
+> **I-008/P-003 RP-01 rollup** (2026-07-20): Batch A + A′ closed in P-003. **Do not** claim「94 covered-live」— honest live-capable = **83/98**; SSOT `covered-live` tag = **67** (+ **15** known-limit-documented).
 
 | Bucket | Count |
 |---|---:|
 | **可实现 rows (SSOT physical)** | **98** |
 | Charter label (I-005 freeze) | **94** (+4 I-007 Track C promotions) |
-| **Honest covered-live today** (live path exists) | **79** (78 IT + 1 demo) |
-| SSOT `status=covered-live` column today | **5** |
-| unit-only-without-live | **19** → P-003 Batch A |
-| known-limit-documented (locked target, P-003) | **15** |
-| thin live IT required (P-003 Batch A) | **4** |
-| SSOT tag sweep only (P-003 A′ + P-004 B) | **73** |
+| **Honest covered-live today** (live path exists) | **83** (82 IT + 1 demo) |
+| SSOT `status=covered-live` column today | **67** |
+| unit-only-without-live | **0** (P-003 Batch A closed) |
+| known-limit-documented (P-003 Batch A closed) | **15** |
+| thin live IT required (P-003 Batch A) | **0** (closed) |
+| SSOT tag sweep only (P-004 Batch B remaining) | **15** |
 | gap (可实现) | **0** |
 | negative-only (文档不允许 + 延后 + C defer) | 30 |
 | I-007 closed covered-live (no further promotion) | 5 |

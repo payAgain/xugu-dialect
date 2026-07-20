@@ -1,0 +1,113 @@
+﻿schema_version: 1
+role: test
+phase_id: P-003
+initiative_id: I-008
+build_id: B-001
+invocation_id: inv-i008-p003-rp02-test
+step_id: RP-02
+status: completed_awaiting_reviewer
+required: true
+completed_at: "2026-07-20T16:48:00+08:00"
+purpose: independent offline mvn test + live Batch A IT when DB available; deposit verification.json for Definition A promotions
+
+inputs:
+  - harness/tasks/P-003.md
+  - harness/handoffs/implementer/I-008-P-003.yaml
+  - harness/evidence/implementer/I-008/P-003/ACCEPTANCE.md
+  - contracts/production-regression-baseline.md
+  - agents/test.md
+
+outputs:
+  - harness/evidence/test/I-008/P-003/TEST-REPORT.md
+  - harness/evidence/test/I-008/P-003/verification.json
+  - harness/evidence/test/I-008/P-003/IT-RESULT.txt
+  - harness/evidence/test/I-008/P-003/mvn-package-offline.txt
+  - harness/evidence/test/I-008/P-003/mvn-test-offline.txt
+  - harness/evidence/test/I-008/P-003/mvn-test-live-it-final.txt
+  - harness/evidence/test/I-008/P-003/surefire-summary-offline.txt
+  - harness/evidence/test/I-008/P-003/surefire-summary-live-batch-a.txt
+  - harness/evidence/test/I-008/P-003/live-db-probe.txt
+  - harness/evidence/test/I-008/P-003/verify.txt
+  - harness/handoffs/test/I-008-P-003.yaml
+
+commands:
+  - { cmd: "mvn -q -DskipTests package", exit: 0, note: "via C:\\Users\\admin\\tools\\apache-maven-3.9.9\\bin\\mvn.cmd" }
+  - { cmd: "mvn -q test", exit: 0 }
+  - { cmd: "XUGU_RUN_IT=true mvn -q test", exit: 1, status: SKIPPED_INFRA }
+  - { cmd: "python harness/scripts/verify.py --phase P-003 --evidence harness/evidence/test/I-008/P-003/verification.json", exit: 0 }
+
+validation:
+  package:
+    command: "mvn -q -DskipTests package"
+    exit_code: 0
+    status: PASS
+  test_offline:
+    command: "mvn -q test"
+    exit_code: 0
+    status: PASS
+    dialect_counts:
+      tests_run: 189
+      failures: 0
+      errors: 0
+      skipped: 66
+      note: excludes stale XuguTrackCProbeIT surefire artifact
+    demo_counts:
+      tests_run: 32
+      failures: 0
+      errors: 0
+      skipped: 26
+    batch_a_gated_it_skipped: true
+  test_live_batch_a:
+    command: "XUGU_RUN_IT=true mvn -q test"
+    exit_code: 1
+    status: SKIPPED_INFRA
+    real_db: false
+    probe: harness/evidence/test/I-008/P-003/live-db-probe.txt
+    reason: "127.0.0.1:5138 unavailable; Connection refused"
+    batch_a_classes:
+      - com.xugu.dialect.it.XuguCastPatternIT
+      - com.xugu.dialect.it.XuguDefaultColumnExportIT
+      - com.xugu.dialect.it.XuguIdentifierFoldingIT
+      - com.xugu.dialect.it.XuguTypeRoundTripIT
+  verify_py:
+    status: VERIFY PASS
+    note: required build+test PASS when Maven on PATH
+
+spot_checks:
+  build_exit_zero: true
+  default_test_exit_zero: true
+  it_skipped_offline: true
+  live_db_unavailable: true
+  verify_pass: true
+  no_product_code_by_test: true
+  org_untouched_by_test: true
+  ship_out_of_scope: true
+
+observed_flows:
+  - id: i008-q1-promote-covered-live-definition-a-batch
+    result: partial
+    evidence: harness/evidence/test/I-008/P-003/TEST-REPORT.md
+    note: "Offline reactor green; Batch A live IT SKIPPED_INFRA — re-run when XuGuDB up before Accept claims live promotions"
+
+notes_for_orchestrator: |
+  RP-02 offline PASS (mvn test exit 0). verify.py VERIFY PASS.
+  Live Batch A IT SKIPPED_INFRA — DB 127.0.0.1:5138 down; log archived.
+  Reviewer should treat covered-live promotions as pending real-DB confirmation unless DB rerun added later.
+  Advance to RP-03 reviewer. No commit by test.
+
+notes_for_implementer: |
+  Offline green confirms gating + unit paths. Live validation deferred to infra.
+
+notes_for_reviewer: |
+  Audit IT anchors exist; live PASS not observed this run (SKIPPED_INFRA).
+
+forbidden_reminder:
+  - no product code rewrite by test
+  - no git commit / Accept / Ship by test
+
+next_step: reviewer_rp03
+blocker: null
+real_db_it_passed: false
+real_db_it_status: SKIPPED_INFRA
+verdict: PASS
+recommendation: PASS

@@ -228,6 +228,51 @@ class XuguTypeRoundTripIT {
 
 	@Test
 	@Order( 5 )
+	void jdbcRealFloatRoundTrip_A_TYP_003() throws Exception {
+		Assumptions.assumeTrue( XuguITGate.isEnabled(), "integration gate off" );
+
+		String table = "HIB_P003_REAL_RT";
+		float expected = 3.14f;
+		try ( Connection c = XuguTestConnection.open() ) {
+			c.setAutoCommit( false );
+			try ( Statement st = c.createStatement() ) {
+				st.execute( "DROP TABLE IF EXISTS " + table );
+				st.execute( "CREATE TABLE " + table + " (id INTEGER PRIMARY KEY, c_real REAL NOT NULL)" );
+
+				try ( PreparedStatement ps = c.prepareStatement(
+						"INSERT INTO " + table + " (id, c_real) VALUES (?, ?)" ) ) {
+					ps.setInt( 1, 1 );
+					ps.setFloat( 2, expected );
+					assertEquals( 1, ps.executeUpdate() );
+				}
+
+				try ( PreparedStatement ps = c.prepareStatement(
+						"SELECT c_real FROM " + table + " WHERE id = 1" );
+						ResultSet rs = ps.executeQuery() ) {
+					assertTrue( rs.next() );
+					assertEquals( expected, rs.getFloat( 1 ), 0.0001f );
+					assertFalse( rs.next() );
+				}
+
+				c.commit();
+			}
+			catch ( Exception e ) {
+				c.rollback();
+				throw e;
+			}
+			finally {
+				try ( Statement st = c.createStatement() ) {
+					st.execute( "DROP TABLE IF EXISTS " + table );
+					c.commit();
+				}
+				catch ( Exception ignored ) {
+				}
+			}
+		}
+	}
+
+	@Test
+	@Order( 6 )
 	void illegalTypeFailsDiagnosablyAndCleansUp() throws Exception {
 		Assumptions.assumeTrue( XuguITGate.isEnabled(), "integration gate off" );
 		String table = "HIB_P003_BAD";

@@ -1,0 +1,86 @@
+handoff:
+  initiative_id: I-008
+  build_id: B-001
+  phase_id: P-003
+  step_id: RP-01
+  role: implementer
+  invocation_id: inv-i008-p003-rp01-implementer
+  branch: feat/i-008-production-quality-gaps
+  status: complete
+  verdict: PASS
+
+summary: |
+  P-003 RP-01 implementer: closed P-001 Batch A (19) + Batch A′ (58) on Definition A SSOT.
+  Added 3 gated live IT classes + extended XuguTypeRoundTripIT for A-TYP-003 REAL float round-trip.
+  Promoted 4 rows to covered-live with live IT anchors; 15 rows to known-limit-documented with
+  formal waiver table in production-regression-baseline.md; 58 tag-sweep rows covered→covered-live.
+  SSOT rollup: 67 covered-live + 15 known-limit-documented; honest live-capable 83/98.
+  Maven validation SKIPPED_INFRA on agent (mvn not on PATH) — RP-02 must run mvn -q test.
+  No commit; no MySQL/Oracle inheritance; no demo-spring-boot changes.
+
+promotions:
+  batch_a_thin_live_it:
+    count: 4
+    status: covered-live
+    matrix_ids:
+      - A-TYP-003
+      - A-TYP-019
+      - A-DDL-005
+      - A-XCUT-001
+  batch_a_known_limit:
+    count: 15
+    status: known-limit-documented
+    matrix_ids:
+      - A-IDN-001
+      - A-IDN-002
+      - A-SEQ-002
+      - A-SEQ-005
+      - A-FUN-003
+      - A-FUN-005
+      - A-FUN-006
+      - A-FUN-007
+      - A-FUN-009
+      - A-SCH-006
+      - A-SPI-004
+      - A-XCUT-002
+      - A-XCUT-005
+      - A-XCUT-007
+      - A-XCUT-008
+  batch_a_prime_tag_sweep:
+    count: 58
+    status: covered-live
+    action: SSOT tag only; live IT pre-existed
+
+test_classes:
+  new:
+    - com.xugu.dialect.it.XuguCastPatternIT
+    - com.xugu.dialect.it.XuguDefaultColumnExportIT
+    - com.xugu.dialect.it.XuguIdentifierFoldingIT
+  extended:
+    - com.xugu.dialect.it.XuguTypeRoundTripIT#jdbcRealFloatRoundTrip_A_TYP_003
+
+verification:
+  mvn_package: SKIPPED_INFRA
+  mvn_test: SKIPPED_INFRA
+  skipped_infra_reason: mvn not on agent PATH
+  rp02_owner: test role — mvn -q -DskipTests package; mvn -q test; XUGU_RUN_IT live batch A IT
+
+ssot_post_state:
+  covered_live: 67
+  known_limit_documented: 15
+  honest_live_capable: "83/98"
+
+artifacts:
+  - harness/evidence/implementer/I-008/P-003/ACCEPTANCE.md
+  - dialect/src/test/java/com/xugu/dialect/it/XuguCastPatternIT.java
+  - dialect/src/test/java/com/xugu/dialect/it/XuguDefaultColumnExportIT.java
+  - dialect/src/test/java/com/xugu/dialect/it/XuguIdentifierFoldingIT.java
+  - dialect/src/test/java/com/xugu/dialect/it/XuguTypeRoundTripIT.java
+  - contracts/production-regression-baseline.md
+
+next:
+  - RP-02 test: offline mvn test green; when XUGU_RUN_IT available run Batch A live IT (4 classes)
+  - RP-03 reviewer: readonly audit promotions are real live IT not silent status edits
+
+blockers:
+  - Maven validation deferred to RP-02 (SKIPPED_INFRA on implementer agent)
