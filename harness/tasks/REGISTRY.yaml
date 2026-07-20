@@ -1,63 +1,69 @@
 schema_version: 1
 charter_version: "1.0.0"
-initiative_id: I-007
-updated: "2026-07-19T14:46:00+08:00"
-supersedes_initiative: I-006
+initiative_id: I-008
+updated: "2026-07-20T16:10:00+08:00"
+supersedes_initiative: I-007
 notes: >
-  I-006 P-001…P-005 packets archived at harness/tasks/archive/I-006/.
-  I-005 packets remain at harness/tasks/archive/I-005/.
-  I-004 packets remain at harness/tasks/archive/I-004/.
-  I-003 P-003…P-006 remain at harness/tasks/archive/I-003/.
-  I-007 reuses P-001…P-006 IDs under new initiative scope (capability hardening A→B→C).
+  I-007 P-001…P-006 packets archived at harness/tasks/archive/I-007/.
+  I-006 packets remain at harness/tasks/archive/I-006/.
+  I-008 Plan P-001…P-007 serial (Q1–Q4 full close; Q5 out).
   Serial dependencies only; orchestrator does not ask human about parallel execution.
-  B-001 approved = P-001…P-006 serial (Human Gate 2026-07-19T14:21+08:00).
+  B-001 draft proposes P-001 only until Human Gate approves Build scope.
   GAV stays 7.4.5.Final; compatiblemode=NONE only; NOT Ship.
 tasks:
   - task_id: P-001
-    title: "盘点 A/B/C 与 SSOT；锁定 C-BULK-002 策略"
-    status: accepted
+    title: "盘点 SSOT 诚实计数与升 covered-live 路线图"
+    status: planned
     build_id: B-001
     packet: harness/tasks/P-001.md
-    acceptance_doc: harness/evidence/architect-contract/I-007/P-001/ACCEPTANCE.md
+    acceptance_doc: harness/evidence/architect-contract/I-008/P-001/ACCEPTANCE.md
     role_pipeline_summary: "researcher → architect-contract → reviewer"
     dependencies: []
   - task_id: P-002
-    title: "A：C-BULK-002 打通或永久限制 + 证据硬化"
-    status: accepted
-    build_id: B-001
+    title: "文档口径诚实 + 锁/UUID/JSON 集成须知 + 生产验证用语"
+    status: planned
+    build_id: null
     packet: harness/tasks/P-002.md
-    acceptance_doc: harness/evidence/implementer/I-007/P-002/ACCEPTANCE.md
-    role_pipeline_summary: "implementer → test → reviewer"
+    acceptance_doc: harness/evidence/implementer/I-008/P-002/ACCEPTANCE.md
+    role_pipeline_summary: "implementer → reviewer"
     dependencies: [P-001]
   - task_id: P-003
-    title: "A′/急项（可 thin / fold into P-004）"
-    status: accepted
-    build_id: B-001
+    title: "升 covered-live — 方言回归 / Definition A 批次"
+    status: planned
+    build_id: null
     packet: harness/tasks/P-003.md
-    acceptance_doc: harness/evidence/implementer/I-007/P-003/ACCEPTANCE.md
+    acceptance_doc: harness/evidence/implementer/I-008/P-003/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"
-    dependencies: [P-002]
+    dependencies: [P-001, P-002]
   - task_id: P-004
-    title: "C：JSON 深化子集 + ARRAY + ALTER SEQUENCE"
-    status: accepted
-    build_id: B-001
+    title: "升 covered-live — Ruler C / 消费者路径余量批次"
+    status: planned
+    build_id: null
     packet: harness/tasks/P-004.md
-    acceptance_doc: harness/evidence/implementer/I-007/P-004/ACCEPTANCE.md
+    acceptance_doc: harness/evidence/implementer/I-008/P-004/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"
     dependencies: [P-003]
   - task_id: P-005
-    title: "B：Flyway + Demo bulk/函数/HQL 消费者加深"
-    status: accepted
-    build_id: B-001
+    title: "锁语义行为与负向真库证据"
+    status: planned
+    build_id: null
     packet: harness/tasks/P-005.md
-    acceptance_doc: harness/evidence/implementer/I-007/P-005/ACCEPTANCE.md
+    acceptance_doc: harness/evidence/implementer/I-008/P-005/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"
-    dependencies: [P-004]
+    dependencies: [P-002]
   - task_id: P-006
-    title: "文档对齐与 VERIFY PASS Accept 准备"
-    status: accepted
-    build_id: B-001
+    title: "Boot UUID/JSON 开箱对齐 + IT"
+    status: planned
+    build_id: null
     packet: harness/tasks/P-006.md
-    acceptance_doc: harness/evidence/implementer/I-007/P-006/ACCEPTANCE.md
+    acceptance_doc: harness/evidence/implementer/I-008/P-006/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"
-    dependencies: [P-005]
+    dependencies: [P-002, P-004]
+  - task_id: P-007
+    title: "文档终对齐 + 全 reactor 真库证据 + VERIFY PASS Accept 准备"
+    status: planned
+    build_id: null
+    packet: harness/tasks/P-007.md
+    acceptance_doc: harness/evidence/implementer/I-008/P-007/ACCEPTANCE.md
+    role_pipeline_summary: "implementer → test → reviewer"
+    dependencies: [P-003, P-004, P-005, P-006]

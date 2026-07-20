@@ -85,3 +85,6 @@ notes: >
   I-007 (2026-07-19): capability hardening A/B/C Plan — branch feat/i-007-capability-hardening-abc;
   C-BULK-002 strategy + JSON/ARRAY/ALTER SEQUENCE + Flyway/Demo deepen; NONE only; NOT Ship; GAV 7.4.5.Final.
   production-regression-baseline.md remains under dialect ownership; consumer-path under demo-spring-boot.
+  I-008 (2026-07-20): production quality gaps Q1–Q4 — branch feat/i-008-production-quality-gaps;
+  honest SSOT counts + 94-row covered-live promotion + lock evidence + Boot UUID/JSON out-of-box + Accept live proof;
+  Q5 perf/multi-version out; NONE only; NOT Ship; GAV 7.4.5.Final.

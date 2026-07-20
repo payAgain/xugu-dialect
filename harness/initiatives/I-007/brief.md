@@ -59,4 +59,4 @@
 - Accept evidence: `harness/evidence/orchestrator/I-007/ACCEPTANCE.md`
 
 ## Status
-`accepted` — Human Gate「Initiative Accept I-007」(~2026-07-19T17:11+08:00)。**NOT Ship** · **NOT Archive**（Archive 为可选下一步）
+`completed` / **archived** — 见 `harness/initiatives/I-007/ARCHIVE.md`（2026-07-20；I-008 Scope PASS）。**NOT Ship**。

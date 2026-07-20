@@ -1,35 +1,17 @@
 {
   "schema_version": 1,
   "build_id": "B-001",
-  "initiative_id": "I-007",
+  "initiative_id": "I-008",
   "plan_revision": 1,
-  "status": "approved",
-  "approved": true,
-  "completed": true,
-  "completion": {
-    "at": "2026-07-19T17:12:00+08:00",
-    "reason": "All phases P-001…P-006 accepted; Initiative Accept I-007 recorded (NOT Ship). status remains approved for harness_check semantic contract.",
-    "initiative_accept_phrase": "Initiative Accept I-007",
-    "verify": "harness/evidence/test/I-007/P-006/verification.json"
-  },
-  "proposed_phase_ids": ["P-001", "P-002", "P-003", "P-004", "P-005", "P-006"],
-  "approved_phase_ids": ["P-001", "P-002", "P-003", "P-004", "P-005", "P-006"],
-  "approval": {
-    "reference": "批准 B-001，范围仅 P-001～P-006（串行执行全 Plan）",
-    "approved_at": "2026-07-19T14:21:00+08:00",
-    "approved_by": "Human Gate",
-    "scope_note": "Human Gate expanded draft (P-001 only) to full Plan serial P-001→P-006. NOT Ship."
-  },
-  "execution_note": "Serial only P-001→P-006. Orchestrator decides serial; never ask human about parallel. GAV 7.4.5.Final; compatiblemode=NONE only; native dialect; no sibling port; do not commit org/.",
-  "recommendation": "Execute full Plan under this Build. Prefer live unblock for C-BULK-002; permanent-limit only if proven impossible. Accept: save live IT logs when DB available. Propose Initiative Accept after P-006 — NOT Ship.",
-  "supersedes": "I-006-B-001",
-  "scope_changes": [
-    {
-      "at": "2026-07-19T14:21:00+08:00",
-      "from": ["P-001"],
-      "to": ["P-001", "P-002", "P-003", "P-004", "P-005", "P-006"],
-      "reason": "Human Gate authorized full Plan serial execution"
-    }
-  ],
-  "notes": "B-001 completed under Initiative Accept I-007. Stay on feat/i-007-capability-hardening-abc. Do not commit org/ dumps. NOT Ship. NOT Archive."
+  "status": "draft",
+  "approved": false,
+  "completed": false,
+  "proposed_phase_ids": ["P-001"],
+  "approved_phase_ids": [],
+  "approval": null,
+  "execution_note": "Serial Plan P-001→P-007. Orchestrator decides serial; never ask human about parallel. GAV 7.4.5.Final; compatiblemode=NONE only; native dialect; no sibling port; do not commit org/. NOT Ship.",
+  "recommendation": "Approve B-001 scope P-001 only first — SSOT audit + promotion map before any covered-live promotions or Boot wiring.",
+  "supersedes": "I-007-B-001",
+  "scope_changes": [],
+  "notes": "I-008 production quality gaps Q1–Q4. Q5 perf/multi-version out. Draft awaits Human Gate Build approval."
 }

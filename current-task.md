@@ -1,33 +1,22 @@
 # Current Task
 
 ## Goal
-I-007 **Initiative Accept confirmed** — accepted（NOT Ship · NOT Archive）
+I-008 Plan materialized — await Human Gate Build approval (B-001 → P-001)
 
 ## Current Status
-Human Gate「Initiative Accept I-007」(~2026-07-19T17:11+08:00)。Initiative **accepted**。B-001 P-001…P-006 全部 accepted；C-BULK-002=**covered-live**；Track C JSON/ARRAY/ALTER SEQUENCE covered-live；Track B Flyway+Demo；`verify.py` **VERIFY PASS**；GAV `7.4.5.Final`；NONE。**NOT Ship**；**NOT Archive**（可选下一步）。不提交 `org/` / `META-INF/`。
+Initiative **I-008** active（feature；Q1–Q4 全闭环；Q5 不做；GAV 7.4.5.Final；不 Ship）。I-007 **archived**。  
+Plan 已物化：P-001…P-007 串行；**B-001 draft** 仅提议 **P-001**。分支 `feat/i-008-production-quality-gaps`。
 
 ## Active Batch / Tasks
-- Initiative: **I-007** `accepted` (feature)
-- Build: **B-001** `completed` — all phases accepted
-- Branch: `feat/i-007-capability-hardening-abc`
-- Evidence: `harness/evidence/orchestrator/I-007/ACCEPTANCE.md`
-- Handoff: `harness/handoffs/orchestrator/I-007-initiative-accepted.md`
-
-## Key SHAs
-| Phase | SHA |
-|---|---|
-| P-001 | `d0c57b1` |
-| P-002 | `682c65d` |
-| P-003 | `0af1e5e` |
-| P-004 | `6a3385d` |
-| P-005 | `f713248` |
-| P-006 | `94a58e9` |
-| **Accept** | `95d4739` |
+- Initiative: **I-008** `active`
+- Stage: Plan complete → await Build scope approval
+- Branch: `feat/i-008-production-quality-gaps`
+- Next Build: **B-001** → **P-001**（draft）
 
 ## Next 3 Steps
-1. Optional: Human Gate 授权 **Archive I-007**
-2. Optional: Human Gate 授权 **Ship**（tag / push / Maven Central）
-3. Or: 开新 Initiative（`skills/initiative.md`）
+1. Human Gate：批准 B-001 范围（默认仅 P-001）
+2. Orchestrator：串行执行 P-001（researcher → architect-contract → reviewer）
+3. 后续 Phase 按 REGISTRY 依赖推进（must-commit）
 
 ## Last Updated
-2026-07-19T17:12:00+08:00
+2026-07-20T16:10:00+08:00

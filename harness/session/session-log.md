@@ -1,3 +1,23 @@
+## Entry: I-008 Plan complete — await Build approval
+
+### Summary
+Orchestrator 物化 Plan **P-001…P-007**（Q1–Q4 串行；Q5 out）；分支 `feat/i-008-production-quality-gaps`；**B-001 draft** 仅提议 **P-001**（SSOT 盘点 + promotion map）。I-007 packets 归档至 `harness/tasks/archive/I-007/`。`harness_check` + `branch_check` PASS。
+
+### Next
+Human Gate：是否批准 **B-001** 范围（默认仅 P-001）？
+
+---
+
+## Entry: I-008 Scope PASS — Archive I-007 — Plan pending
+
+### Summary
+Human Gate「本 Initiative 范围已明确，可以开干」。I-008 **active**（feature）：Q1–Q4 全闭环（94 covered-live / 锁证据 / UUID·JSON Boot 开箱 / Accept 真库）；Q5 性能不做；不升版；不 Ship。I-007 **archived**。下一步：orchestrator Plan + 分支 `feat/i-008-production-quality-gaps` + B-001 draft（仅最早 ready Phase）。
+
+### Next
+Orchestrator Plan；Human Gate 批 Build 范围。
+
+---
+
 ## Entry: I-007 Initiative Accept — accepted (NOT Ship, NOT Archive)
 
 ### Summary
