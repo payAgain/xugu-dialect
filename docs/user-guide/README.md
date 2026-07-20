@@ -14,7 +14,9 @@
 
 **I-003：** 同一 GAV **`com.xugu:xugu-dialect:7.4.5.Final`** 下扩展生产能力（异常映射、JSON 聚合、Window/CTE、bulk、DDL 细节）；Definition A 仍有效，详见 ruler-C 矩阵。
 
-**I-005：** 生产回归测试基线 — **98** 物理可实现行（Charter **94** + I-007 **+4**）；**诚实 covered-live 今日 79/98**；I-008 目标 **83 + 15 known-limit**；冻结门控见 [03-verify.md § Frozen baseline](03-verify.md#frozen-baseline--i-005-冻结基线门控)。
+**I-005：** 生产回归测试基线 — **98** 物理可实现行（Charter **94** + I-007 **+4**）；**诚实 covered-live 83/98**（**15** known-limit-documented）；冻结门控见 [03-verify.md § Frozen baseline](03-verify.md#frozen-baseline--i-005-冻结基线门控)。
+
+**I-008：** Q1–Q4 已闭环（诚实计数、锁语义、Boot UUID/JSON 开箱、Accept 真库清单）；**Q5 性能/多版本矩阵 out of scope**；Initiative Accept 须全 reactor 真库证据 — [03-verify.md § I-008 Accept](03-verify.md#i-008-accept--全量-reactor-真库证据q4)。**不 Ship**。
 
 **I-006：** Spring Boot **消费者路径**基线 — **41** Boot-required 行（A/B/C′），open gaps = **0**；如何离线 / `XUGU_RUN_IT=true` 跑通见 [06-consumer-path.md](06-consumer-path.md)。**不要求** Ship。
 

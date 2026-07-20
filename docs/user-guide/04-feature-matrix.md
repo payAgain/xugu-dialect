@@ -63,9 +63,9 @@
 | Bucket | Count | SSOT status / 说明 |
 |---|---:|---|
 | 可实现 rows（physical SSOT） | **98** | Charter **94** + **4** I-007 Track C 晋升（`C-JSON-005` 等） |
-| **诚实 covered-live 今日** | **79/98** | **78** 门控 IT + **1** demo-live（`A-XCUT-009`）；SSOT `status=covered-live` 列仅 **5** 行已打标 |
-| unit-only-without-live | **19** | **P-003** Batch A 关闭（thin live IT **4** 或 `known-limit-documented` **15**） |
-| **I-008 目标态（P-003 + P-004 后）** | **83 + 15** | **83** covered-live + **15** known-limit-documented = **98** 可实现行闭环 |
+| **诚实 covered-live（I-008 Q1 已达成）** | **83/98** | **82** 门控 dialect/demo IT + **1** demo-live（`A-XCUT-009`）；SSOT `status=covered-live` = **83** |
+| known-limit-documented | **15** | **P-003** Batch A 关闭（thin live IT **4** + waiver **15**） |
+| unit-only-without-live | **0** | P-003/P-004 后无未文档化的 unit-only 可实现行 |
 | negative-only (文档不允许 + 延后) | 34 | All have `entry_class#method` |
 | Demo smoke | 7 | See baseline SSOT demo table |
 

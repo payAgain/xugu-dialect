@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "started_at": "2026-07-20T18:04:30+08:00",
+  "finished_at": "2026-07-20T18:11:30+08:00",
+  "project_root": "E:\\\\Work\\\\java\\\\hibernate-test",
+  "initiative_id": "I-008",
+  "phase_id": "P-007",
+  "build_id": "B-001",
+  "invocation_id": "inv-i008-p007-rp02-test",
+  "step_id": "RP-02",
+  "role": "test",
+  "branch": "feat/i-008-production-quality-gaps",
+  "head_sha": "1b2f29b",
+  "verdict": "PASS",
+  "closure_path": "i008-q4-full-reactor-live-evidence-verify-pass-accept-prep",
+  "config": "E:\\\\Work\\\\java\\\\hibernate-test\\\\harness\\\\verification.json",
+  "maven_command": "C:\\\\Users\\\\admin\\\\tools\\\\apache-maven-3.9.9\\\\bin\\\\mvn.cmd",
+  "harness_fix": {
+    "issue": "ACCEPTED WITHOUT VALID VERIFICATION on P-004",
+    "root_cause": "UTF-8 BOM in harness/evidence/test/I-008/P-004/verification.json",
+    "action": "Rewrote JSON without BOM; harness_check PASS"
+  },
+  "results": [
+    {
+      "id": "harness",
+      "required": true,
+      "status": "PASS",
+      "command": "python harness/scripts/harness_check.py",
+      "exit_code": 0,
+      "log": "harness/evidence/test/I-008/P-007/verify-harness.txt"
+    },
+    {
+      "id": "build",
+      "required": true,
+      "status": "PASS",
+      "command": "mvn -q -DskipTests package",
+      "cwd": "E:\\\\Work\\\\java\\\\hibernate-test",
+      "exit_code": 0,
+      "log": "harness/evidence/test/I-008/P-007/mvn-package.txt"
+    },
+    {
+      "id": "test",
+      "required": true,
+      "status": "PASS",
+      "command": "mvn -q test",
+      "cwd": "E:\\\\Work\\\\java\\\\hibernate-test",
+      "exit_code": 0,
+      "log": "harness/evidence/test/I-008/P-007/mvn-test-offline.txt",
+      "counts": {
+        "dialect": {
+          "tests_run": 215,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 67
+        },
+        "demo": {
+          "tests_run": 36,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 28
+        }
+      },
+      "summary_artifact": "harness/evidence/test/I-008/P-007/surefire-summary-offline.txt"
+    },
+    {
+      "id": "verify_py",
+      "required": true,
+      "status": "PASS",
+      "command": "python harness/scripts/verify.py --phase P-007",
+      "exit_code": 0,
+      "log": "harness/evidence/test/I-008/P-007/verify-py-run.txt",
+      "artifact": "harness/evidence/verification-latest.json"
+    },
+    {
+      "id": "test_live_full_reactor",
+      "required": false,
+      "status": "SKIPPED_INFRA",
+      "command": "XUGU_RUN_IT=true mvn -q test",
+      "cwd": "E:\\\\Work\\\\java\\\\hibernate-test",
+      "exit_code": 1,
+      "log": "harness/evidence/test/I-008/P-007/mvn-test-live-full-reactor.txt",
+      "real_db": false,
+      "probe": "harness/evidence/test/I-008/P-007/live-db-probe.txt",
+      "reason": "127.0.0.1:5138 TcpTestSucceeded=False; JDBC Connection refused",
+      "it_result": "harness/evidence/test/I-008/P-007/IT-RESULT.txt"
+    },
+    {
+      "id": "lint",
+      "required": false,
+      "status": "NOT_APPLICABLE",
+      "command": "NA"
+    }
+  ],
+  "summary": {
+    "build": "PASS",
+    "test_offline": "PASS",
+    "verify_py": "VERIFY PASS",
+    "test_live_full_reactor": "SKIPPED_INFRA",
+    "overall": "PASS"
+  }
+}

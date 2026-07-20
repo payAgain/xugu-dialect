@@ -70,9 +70,9 @@ Initiative **I-005** freezes a full regression baseline. SSOT:
 | Bucket | Count | Accept requirement |
 |---|---:|---|
 | 可实现 rows (physical SSOT) | **98** | Charter **94** + **4** I-007 Track C promotions; each row maps to `entry_class#method` |
-| **Honest covered-live today** | **79/98** | **78** dialect/demo IT + **1** demo-live (`A-XCUT-009`); SSOT `status=covered-live` column lags (**5** tagged) |
-| unit-only-without-live | **19** | P-003 Batch A closure (thin live IT **4** or `known-limit-documented` **15**) |
-| **I-008 goal post P-003 + P-004** | **83 + 15** | **83** covered-live + **15** known-limit-documented = **98** achievable rows accounted |
+| **Honest covered-live (I-008 Q1 achieved)** | **83/98** | **82** dialect/demo IT + **1** demo-live (`A-XCUT-009`); SSOT `status=covered-live` = **83** |
+| known-limit-documented | **15** | P-003 Batch A waivers |
+| unit-only-without-live | **0** | Closed in P-003/P-004 |
 | negative-only rows | 34 | Explicit non-support or `@Disabled` defer anchors |
 | Demo smoke | 7 entrypoints | Offline + gated live paths in SSOT |
 
@@ -150,10 +150,11 @@ Initiative **I-008** closes Q1–Q4 on GAV **`7.4.5.Final`** / **`compatiblemode
 
 | Track | Doc / evidence owner | Requirement |
 |---|---|---|
-| **Q1** Honest counts | P-002 docs + P-003/P-004 SSOT | No inflated「94 covered-live」; **79/98** live-capable today; goal **83 + 15** |
+| **Q1** Honest counts | P-002 docs + P-003/P-004 SSOT | No inflated「94 covered-live」; **83/98** covered-live + **15** known-limit-documented |
 | **Q2** Lock semantics | P-002 user guide + P-005 live IT | No SKIP LOCKED / FOR SHARE; `PESSIMISTIC_READ`→exclusive `FOR UPDATE` — [`docs/user-guide/07-lock-integration.md`](user-guide/07-lock-integration.md) |
-| **Q3** UUID/JSON Boot | P-002 checklist + P-006 wiring | Converter + `FormatMapper` path — [`docs/user-guide/02-configuration.md`](user-guide/02-configuration.md) § UUID/JSON |
+| **Q3** UUID/JSON Boot | P-002 checklist + P-006 wiring | Converter + `FormatMapper` path — [`docs/user-guide/02-configuration.md`](user-guide/02-configuration.md) § UUID/JSON (**P-006 implemented**) |
 | **Q4** Accept live log | P-002 language + P-007 artifact | Initiative Accept requires **full reactor** gated green + deposited log |
+| **Q5** Performance / multi-version matrix | Scope PASS | **Out of scope** — one-line declaration in user guide + this table |
 
 ### Offline vs Accept (Q4)
 
@@ -164,6 +165,8 @@ Initiative **I-008** closes Q1–Q4 on GAV **`7.4.5.Final`** / **`compatiblemode
 | **Accept evidence path** | `harness/evidence/test/I-008/P-007/` | `mvn-test-live-it-final.log`, `IT-RESULT.txt` (P-007); lock subset **P-005**, Boot subset **P-006** |
 
 When no live DB is available, Phase evidence must document **`SKIPPED_INFRA`** — offline **VERIFY PASS** alone does **not** satisfy I-008 Accept.
+
+**Q5 out of scope:** performance benchmarks and Hibernate multi-version compatibility matrix are **not** in I-008 scope (see [`docs/user-guide/README.md`](user-guide/README.md) I-008 line).
 
 User-facing procedure: [`docs/user-guide/03-verify.md`](user-guide/03-verify.md) § I-008 Accept.
 

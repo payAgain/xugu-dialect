@@ -1,3 +1,13 @@
+## Entry: I-008 B-001 complete — await Initiative Accept
+
+### Summary
+Orchestrator resume after connection failure. P-007 **accepted** (implementer → test VERIFY PASS → reviewer ACCEPT PASS). B-001 **complete** — P-001…P-007 all accepted. Offline `verify.py` **VERIFY PASS**; full reactor live **SKIPPED_INFRA** (127.0.0.1:5138). Q5 out-of-scope documented. **NOT Initiative Accept** · **NOT Ship**. 不提交 `org/` / `META-INF/`。
+
+### Next
+Human Gate：是否 **Initiative Accept I-008**？（须知晓 live gap）
+
+---
+
 ## Entry: I-008 Plan complete — await Build approval
 
 ### Summary

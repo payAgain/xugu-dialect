@@ -101,7 +101,7 @@ jdbc:xugu://127.0.0.1:5138/SYSTEM?compatiblemode=NONE
 
 ## UUID / JSON Boot 必配清单（I-008 Q3）
 
-Hibernate **7.4.5.Final** + Spring Boot 消费者在虚谷上使用 **UUID** 与 **JSON** 类型时，方言 jar **单独**不足以「开箱即用」——须按下列清单配置（**P-006** 将实现 demo 同款 wiring 为产品路径；本节为集成方 SSOT 草案）。
+Hibernate **7.4.5.Final** + Spring Boot 消费者在虚谷上使用 **UUID** 与 **JSON** 类型时，方言 jar **单独**不足以「开箱即用」——须按下列清单配置（**P-006** 已在 `demo-spring-boot` 落地同款 wiring；本节为集成方 SSOT）。
 
 | # | 必配项 | 原因 |
 |---|---|---|
@@ -112,7 +112,7 @@ Hibernate **7.4.5.Final** + Spring Boot 消费者在虚谷上使用 **UUID** 与
 
 ### 推荐 `application.yml` 片段
 
-与 demo 一致的最小模板（**P-006** 目标态；见 `demo-spring-boot`）：
+与 demo 一致的最小模板（**P-006** 已落地；见 `demo-spring-boot` / [`contracts/demo-spring-boot.contract.md`](../../contracts/demo-spring-boot.contract.md)）：
 
 ```yaml
 spring:

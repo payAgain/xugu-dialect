@@ -5,7 +5,8 @@
   "plan_revision": 1,
   "status": "approved",
   "approved": true,
-  "completed": false,
+  "completed": true,
+  "completed_at": "2026-07-20T18:35:00+08:00",
   "proposed_phase_ids": ["P-001", "P-002", "P-003", "P-004", "P-005", "P-006", "P-007"],
   "approved_phase_ids": ["P-001", "P-002", "P-003", "P-004", "P-005", "P-006", "P-007"],
   "approval": {

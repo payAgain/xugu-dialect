@@ -154,7 +154,25 @@ Initiative **I-008** 在 I-005/I-006/I-007 基线之上闭环 Q1–Q4。**离线
 
 无真库时：文档 **`SKIPPED_INFRA`** — 离线绿 **不能** 代替 Accept live log。
 
-诚实计数（Q1）：**79/98** covered-live 能力今日；目标 **83 + 15 known-limit**（P-003/P-004）— [04-feature-matrix.md § I-005 baseline counts](04-feature-matrix.md#i-005-baseline-counts冻结)。锁集成：[07-lock-integration.md](07-lock-integration.md)。
+诚实计数（Q1，P-003/P-004 已达成）：**83/98** covered-live + **15** known-limit-documented — [04-feature-matrix.md § I-005 baseline counts](04-feature-matrix.md#i-005-baseline-counts冻结)。锁集成（Q2）：[07-lock-integration.md](07-lock-integration.md)。Boot UUID/JSON 开箱（Q3）：[02-configuration.md § UUID/JSON](02-configuration.md#uuid--json-boot-必配清单i-008-q3)。
+
+**Q5 out of scope：** 性能基准与 Hibernate 多版本兼容矩阵 **未做**（I-008 Scope PASS 明示）。
+
+### I-008 Accept — 黄金路径 manifest（Q4 冻结）
+
+Initiative Accept 须 **`XUGU_RUN_IT=true mvn -q test`** 全 reactor 绿，且下列路径在真库上均有 live IT 覆盖（离线 skip **不足以** Accept）：
+
+| 域 | 矩阵 / 能力 | 主 live IT 锚点 |
+|---|---|---|
+| **Pagination** | A-PAG-001…003 | `XuguHqlPaginationIT#hqlSetFirstResultMaxResultsUsesLimitNotFetchFirst`; `XuguPaginationIT#limitAndOffsetReturnExpectedRows`; `DemoBootBaselineSmokeTest#pageableFindAllUsesLimitOffset` |
+| **Lock** | A-LCK-001/003/005 | `XuguLockIT#pessimisticReadExecutesAsForUpdateNotShare`; `XuguHqlPaginationIT#hqlLockAndPageEmitsForUpdateBeforeLimitAndWaitAfter` |
+| **SEQUENCE** | A-SEQ-001/003/004/006 | `XuguIdentitySequenceIT#sequenceGeneratorPersist_A_SEQ_003_004_008`; `XuguSchemaValidateIT#schemaValidateSucceedsWhenSequenceExists`; `XuguAlterSequenceIT#alterSequenceStartWithAndIncrement_A_SEQ_006` |
+| **IDENTITY** | A-IDN-003/004 | `XuguIdentitySequenceIT#identityPersistBackfillsId_A_IDN_003_004`; `DemoPersonCrudIT#persistAndFindPerson` |
+| **UUID** | A-TYP-012 | `DemoUuidJsonOutOfBoxIT#uuidAndJsonGoldenPathWithDefaultBootWiring` |
+| **JSON** | A-TYP-013, C-JSON-001…004 | `DemoUuidJsonOutOfBoxIT#uuidAndJsonGoldenPathWithDefaultBootWiring`; `XuguJsonAggregateIT#jsonColumnRoundTripAndHqlAggregates` |
+| **HQL** | A-PAG + Layer A JPQL | `XuguHqlPaginationIT`（分页/锁组合）; `DemoBootBaselineSmokeTest#jpaPersistAndJpqlQueryRoundTrip` |
+
+子集 Phase 证据（**非**替代全量 reactor）：P-005 锁 — `harness/evidence/test/I-008/P-005/`；P-006 Boot UUID/JSON — `harness/evidence/test/I-008/P-006/`。Accept 终验归档 — `harness/evidence/test/I-008/P-007/`（`mvn-test-live-it-final.log`, `IT-RESULT.txt`）。Implementer Accept 准备清单 — `harness/evidence/implementer/I-008/P-007/ACCEPTANCE.md`。
 
 ## Checklist（集成方自测）
 

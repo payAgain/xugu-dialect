@@ -46,6 +46,8 @@ For Initiative **I-008 Accept**, functional correctness on a reachable XuguDB ad
 
 See [`docs/verification.md`](verification.md) § I-008 and [`docs/user-guide/03-verify.md`](user-guide/03-verify.md) § I-008 Accept.
 
+**Q5 out of scope:** performance / multi-version matrix — not in I-008 scope.
+
 ## Project verification commands
 
 The executable command contract is `harness/verification.json`.
