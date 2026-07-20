@@ -1,0 +1,67 @@
+handoff:
+  initiative_id: I-008
+  build_id: B-001
+  phase_id: P-006
+  step_id: RP-01
+  role: implementer
+  invocation_id: inv-i008-p006-rp01-implementer
+  branch: feat/i-008-production-quality-gaps
+  status: complete
+  verdict: PASS
+
+summary: |
+  P-006 RP-01 implementer: closed I-008 Q3 Boot UUID/JSON out-of-box path. Added missing
+  hibernate.type.preferred_uuid_jdbc_type VARCHAR to demo application.yml (P-002 checklist item 3).
+  New DemoUuidJsonOutOfBoxIT proves UUID converter + JSON FormatMapper + json_arrayagg on default
+  application.yml without extra Hibernate property overrides. Extended DemoOfflineSmokeTest with
+  offline checklist smokes. Published contracts/demo-spring-boot.contract.md; updated consumer-path
+  baseline + demo README. Offline mvn test green; no JDBC changes; no commit.
+
+q3_checklist_alignment:
+  ssot: docs/user-guide/02-configuration.md
+  items:
+    - spring-boot-starter-jackson: demo-spring-boot/pom.xml (pre-existing)
+    - UuidAsVarcharConverter + varchar36: DemoTypedSample#guidVal (pre-existing)
+    - preferred_uuid_jdbc_type VARCHAR: application.yml (added P-006)
+    - hql json_functions_enabled true: application.yml (pre-existing)
+
+test_classes:
+  new:
+    - com.xugu.demo.it.DemoUuidJsonOutOfBoxIT
+  extended:
+    - com.xugu.demo.DemoOfflineSmokeTest
+
+test_anchors:
+  offline:
+    - DemoOfflineSmokeTest#applicationYmlDocumentsExplicitDialectAndEnvKeys
+    - DemoOfflineSmokeTest#jacksonOnClasspathForHibernateJsonFormatMapper
+    - DemoOfflineSmokeTest#typedSampleGuidUsesUuidAsVarcharConverter
+  gated_live:
+    - DemoUuidJsonOutOfBoxIT#defaultApplicationYmlExposesUuidJsonChecklist
+    - DemoUuidJsonOutOfBoxIT#uuidAndJsonGoldenPathWithDefaultBootWiring
+
+observed_flow:
+  id: i008-q3-boot-uuid-json-out-of-box-wiring-and-it
+  status: wiring_complete_offline_green
+  live_proof_owner: RP-02 test
+
+verification:
+  mvn_path: C:\Users\admin\tools\apache-maven-3.9.9\bin\mvn.cmd
+  mvn_test: PASS
+  mvn_test_exit: 0
+  note: full reactor offline; DemoUuidJsonOutOfBoxIT skipped 2/2 (gate off)
+
+artifacts:
+  - harness/evidence/implementer/I-008/P-006/ACCEPTANCE.md
+  - demo-spring-boot/src/main/resources/application.yml
+  - demo-spring-boot/src/test/java/com/xugu/demo/it/DemoUuidJsonOutOfBoxIT.java
+  - demo-spring-boot/src/test/java/com/xugu/demo/DemoOfflineSmokeTest.java
+  - contracts/demo-spring-boot.contract.md
+  - contracts/consumer-path-baseline.md
+  - demo-spring-boot/README.md
+
+next:
+  - RP-02 test: mvn verify + optional XUGU_RUN_IT live DemoUuidJsonOutOfBoxIT
+  - RP-03 reviewer: readonly audit P-002 checklist vs demo defaults; no JDBC driver diff
+
+blockers: []

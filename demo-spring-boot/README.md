@@ -123,8 +123,8 @@ Cleanup deletes `HIB_DEMO_*` rows after each test (as applicable).
 
 ## Mapping notes (P-004 live IT)
 
-- **UUID (A-TYP-012):** entity uses `UuidAsVarcharConverter` → `varchar(36)` instead of Hibernate `UUIDJdbcType` / SQL `guid`, because Xugu JDBC rejects `getObject(..., UUID.class)` with `[E50044]`.
-- **JSON FormatMapper:** `spring-boot-starter-jackson` is on the demo classpath so Hibernate can auto-wire a JSON `FormatMapper` for `@JdbcTypeCode(SqlTypes.JSON)`.
+- **UUID (A-TYP-012):** entity uses `UuidAsVarcharConverter` → `varchar(36)` instead of Hibernate `UUIDJdbcType` / SQL `guid`, because Xugu JDBC rejects `getObject(..., UUID.class)` with `[E50044]`. `application.yml` sets `hibernate.type.preferred_uuid_jdbc_type: VARCHAR`.
+- **JSON FormatMapper:** `spring-boot-starter-jackson` is on the demo classpath so Hibernate can auto-wire a JSON `FormatMapper` for `@JdbcTypeCode(SqlTypes.JSON)`. `hibernate.query.hql.json_functions_enabled=true` is enabled in default `application.yml`.
 
 ## Forbidden reminders
 

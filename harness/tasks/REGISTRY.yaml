@@ -53,8 +53,8 @@ tasks:
     dependencies: [P-002]
   - task_id: P-006
     title: "Boot UUID/JSON 开箱对齐 + IT"
-    status: planned
-    build_id: null
+    status: accepted
+    build_id: B-001
     packet: harness/tasks/P-006.md
     acceptance_doc: harness/evidence/implementer/I-008/P-006/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"

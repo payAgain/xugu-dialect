@@ -26,6 +26,9 @@ spring:
         # Explicit dialect for clarity. DialectResolver SPI also works when unset
         # (META-INF/services/...DialectResolver in xugu-dialect).
         dialect: com.xugu.dialect.XuguDialect
+        type:
+          # Align UUID mapping with UuidAsVarcharConverter + varchar(36) (A-TYP-012; I-008 Q3)
+          preferred_uuid_jdbc_type: VARCHAR
         jdbc:
           time_zone: UTC
         query:

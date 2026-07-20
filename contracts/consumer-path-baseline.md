@@ -310,8 +310,8 @@ Plus: `DemoStartupCrudIT#startupCrudRunnerPersistsAndFindsPerson` (`startup-crud
 
 | Domain | row_ids | Boot evidence | Live (after UUID/Jackson fix) |
 |---|---|---|---|
-| Types | A-TYP-001,002,004,005,006,008,009,010,012 | `DemoTypesIT#typedSampleRoundTripKeyTypes` | PASS (UUID→varchar+converter) |
-| JSON type | A-TYP-013 | `DemoJsonIT#jsonColumnRoundTripAndArrayAgg` | PASS (Jackson FormatMapper) |
+| Types | A-TYP-001,002,004,005,006,008,009,010,012 | `DemoTypesIT#typedSampleRoundTripKeyTypes`; **I-008 Q3:** `DemoUuidJsonOutOfBoxIT#uuidAndJsonGoldenPathWithDefaultBootWiring` | PASS (UUID→varchar+converter) |
+| JSON type | A-TYP-013 | `DemoJsonIT#jsonColumnRoundTripAndArrayAgg`; **I-008 Q3:** `DemoUuidJsonOutOfBoxIT#uuidAndJsonGoldenPathWithDefaultBootWiring` | PASS (Jackson FormatMapper) |
 | Functions | A-FUN-001,002,004,007,010,016,017 | `DemoFunctionsIT#hqlFunctionSubsetSmoke` | PASS (Jackson FormatMapper) |
 | JSON agg | C-JSON-001 | `DemoJsonIT#jsonColumnRoundTripAndArrayAgg` | PASS (Jackson FormatMapper) |
 | Bulk | C-BULK-001 | `DemoBulkMutationIT#bulkUpdatePersonNames` | PASS |
@@ -358,3 +358,4 @@ LOB pick: **A-TYP-010** (BLOB). **A-TYP-011** remains dialect-it-only (exclusion
 | 2026-07-19 | P-005 RP-02 (test): offline 28/0/0/23; live 28/0/0/0 PASS; VERIFY PASS; docs `06-consumer-path.md` spot-check OK; SSOT remains **FROZEN** gaps **0**; GAV `7.4.5.Final` confirmed (`inv-i006-p005-rp02-test`) |
 | 2026-07-19 | I-007 P-005 RP-01: Track B deepening — Flyway (B-FLY-001), bulk delete (B-DEMO-001), HQL/function deepen (B-DEMO-002), read-only tx (B-DEMO-003); Boot SSOT rows unchanged (**41**); non-matrix Track B table added (`inv-i007-p005-rp01-implementer`) |
 | 2026-07-20 | I-008 P-004 RP-01: A-XCUT-009 demo-live clarification — gated Boot IT satisfies Layer A consumer golden path; I-005 xref **covered-live** (`inv-i008-p004-rp01-implementer`) |
+| 2026-07-20 | I-008 P-006 RP-01: Q3 out-of-box — `preferred_uuid_jdbc_type: VARCHAR` in demo `application.yml`; `DemoUuidJsonOutOfBoxIT` + offline checklist smokes; `contracts/demo-spring-boot.contract.md` (`inv-i008-p006-rp01-implementer`) |

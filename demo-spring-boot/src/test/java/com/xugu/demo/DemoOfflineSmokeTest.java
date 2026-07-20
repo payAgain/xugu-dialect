@@ -14,7 +14,9 @@ import com.xugu.demo.entity.DemoJsonDoc;
 import com.xugu.demo.entity.DemoPerson;
 import com.xugu.demo.entity.DemoSeqTicket;
 import com.xugu.demo.entity.DemoTypedSample;
+import com.xugu.demo.entity.UuidAsVarcharConverter;
 
+import jakarta.persistence.Convert;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -73,7 +75,26 @@ class DemoOfflineSmokeTest {
 			assertTrue( yaml.contains( "com.xugu.cloudjdbc.Driver" ) );
 			assertTrue( yaml.contains( "flyway:" ), "Flyway config documented (B-FLY-001)" );
 			assertTrue( yaml.contains( "enabled: false" ), "Flyway default off for offline IT" );
+			assertTrue( yaml.contains( "preferred_uuid_jdbc_type: VARCHAR" ),
+					"I-008 Q3 checklist: UUID JDBC type alignment" );
+			assertTrue( yaml.contains( "json_functions_enabled: true" ),
+					"I-008 Q3 checklist: HQL JSON functions" );
 		}
+	}
+
+	/** I-008 Q3: Jackson 3 on classpath enables Hibernate JSON FormatMapper (Boot 4 starter). */
+	@Test
+	void jacksonOnClasspathForHibernateJsonFormatMapper() throws Exception {
+		Class.forName( "tools.jackson.databind.ObjectMapper" );
+	}
+
+	/** I-008 Q3: entity UUID mapping uses varchar converter (A-TYP-012). */
+	@Test
+	void typedSampleGuidUsesUuidAsVarcharConverter() throws Exception {
+		var field = DemoTypedSample.class.getDeclaredField( "guidVal" );
+		Convert convert = field.getAnnotation( Convert.class );
+		assertTrue( convert != null, "guidVal must use AttributeConverter" );
+		assertEquals( UuidAsVarcharConverter.class, convert.converter() );
 	}
 
 	/** I-007 P-005 Track B: Flyway Xugu plugin + migration resource (offline; no DB). */
