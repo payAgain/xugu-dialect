@@ -27,9 +27,10 @@
   },
   "version_control_checkpoint": {
     "decision": "p007_accepted_b001_complete",
-    "committed": false,
+    "committed": true,
     "branch": "feat/i-008-production-quality-gaps",
-    "last_phase_accepted": "P-007"
+    "last_phase_accepted": "P-007",
+    "candidate_commit": "bfbb396"
   },
   "handoff": {
     "resume_from": "Human Gate Initiative Accept"

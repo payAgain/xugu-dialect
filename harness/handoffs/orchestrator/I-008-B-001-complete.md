@@ -16,7 +16,7 @@ B-001 **complete** — all approved phases P-001…P-007 **accepted**.
 | P-004 | Ruler C / consumer-path batch B | `322f0be` |
 | P-005 | Lock semantics + negative evidence | `58cff86` |
 | P-006 | Boot UUID/JSON out-of-box | `1b2f29b` |
-| P-007 | Docs终对齐 + VERIFY PASS Accept prep | *(this closeout commit)* |
+| P-007 | Docs终对齐 + VERIFY PASS Accept prep | `bfbb396` |
 
 ## VERIFY
 
