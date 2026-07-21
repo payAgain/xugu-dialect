@@ -1,0 +1,100 @@
+﻿{
+  "schema_version": 1,
+  "status": "PASS",
+  "started_at": "2026-07-21T10:22:30+08:00",
+  "finished_at": "2026-07-21T10:24:57+08:00",
+  "project_root": "E:\\Work\\java\\hibernate-test",
+  "initiative_id": "I-009",
+  "phase_id": "P-004",
+  "build_id": "B-001",
+  "invocation_id": "inv-i009-p004-rp02-test",
+  "step_id": "RP-02",
+  "role": "test",
+  "branch": "feat/i-009-deferred-matrix-delivery",
+  "head_sha": "acb3488",
+  "verdict": "PASS",
+  "closure_path": "i009-a-typ-017-a-fun-020-spatial-types-and-functions",
+  "config": "E:\\Work\\java\\hibernate-test\\harness\\verification.json",
+  "maven_command": "C:\\Users\\admin\\tools\\apache-maven-3.9.9\\bin\\mvn.cmd",
+  "results": [
+    {
+      "id": "build",
+      "required": true,
+      "status": "PASS",
+      "command": "mvn package",
+      "cwd": "E:\\Work\\java\\hibernate-test",
+      "exit_code": 0,
+      "log": "harness/evidence/test/I-009/P-004/mvn-package.txt"
+    },
+    {
+      "id": "test",
+      "required": true,
+      "status": "PASS",
+      "command": "mvn test (XUGU_RUN_IT unset)",
+      "cwd": "E:\\Work\\java\\hibernate-test",
+      "exit_code": 0,
+      "log": "harness/evidence/test/I-009/P-004/mvn-test.txt",
+      "counts": {
+        "dialect": {
+          "tests_run": 178,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 59,
+          "note": "reactor summary from mvn test; IT gated offline"
+        },
+        "demo": {
+          "tests_run": 36,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 28
+        }
+      },
+      "p004_focus": {
+        "XuguGeometricTypeTest": {
+          "tests_run": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "XuguFunctionRegistryTest_geometricSubset": {
+          "tests_run": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "note": "method geometricSubsetRegistered_A_FUN_020 via focus re-run"
+        },
+        "XuguGeometricTypeAndFunctionsIT": {
+          "tests_run": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 2,
+          "note": "gated offline via XuguITGate"
+        }
+      },
+      "focus_log": "harness/evidence/test/I-009/P-004/mvn-test-p004-focus-offline.txt"
+    },
+    {
+      "id": "test_live_geometric_it",
+      "required": false,
+      "status": "SKIPPED_INFRA",
+      "command": "XUGU_RUN_IT=true; mvn -q test -Dtest=XuguGeometricTypeAndFunctionsIT -pl dialect -am",
+      "cwd": "E:\\Work\\java\\hibernate-test",
+      "exit_code": 1,
+      "log": "harness/evidence/test/I-009/P-004/mvn-test-live-geometric-it.txt",
+      "real_db": false,
+      "probe": "harness/evidence/test/I-009/P-004/live-db-probe.txt",
+      "reason": "127.0.0.1:5138 and 192.168.2.239:5138 TcpTestSucceeded=False; JDBC Connection refused (E50025)",
+      "summary_artifact": "harness/evidence/test/I-009/P-004/IT-RESULT.txt",
+      "it_anchors": [
+        "com.xugu.dialect.it.XuguGeometricTypeAndFunctionsIT#geometricTypesNativeRoundTrip_A_TYP_017",
+        "com.xugu.dialect.it.XuguGeometricTypeAndFunctionsIT#geometricFunctionsNativeSubset_A_FUN_020"
+      ]
+    }
+  ],
+  "summary": {
+    "build": "PASS",
+    "test_offline": "PASS",
+    "test_live_geometric_it": "SKIPPED_INFRA",
+    "overall": "PASS"
+  }
+}
