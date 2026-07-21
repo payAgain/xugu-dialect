@@ -14,7 +14,7 @@
 | I-007 | feature | 能力硬化 A堵坑 + B消费者加深 + C延后增量（NONE；JSON/ARRAY/ALTER SEQUENCE；Flyway） | feat/i-007-capability-hardening-abc | completed | 2026-07-20T15:55:00+08:00（archived） |
 | I-008 | feature | 生产质量短板补全 Q1–Q4 全闭环（covered-live / 锁 / UUID·JSON 开箱 / 真库证明；Q5 不做） | feat/i-008-production-quality-gaps | completed | 2026-07-21T09:32:00+08:00（archived） |
 | I-009 | feature | 交付矩阵全部「延后」项；文档不允许继续 skip；不升版；不 Ship | feat/i-009-deferred-matrix-delivery | completed | 2026-07-21T14:40:00+08:00（archived；Accept 已记；NOT Ship） |
-| I-010 | feature | 质量完善：ORM/HQL 深度 + SSOT/文档对齐（INTERVAL/XML/POINT；HQL live；不计 Ship） | feat/i-010-orm-hql-quality-completion | clarifying | 2026-07-21T14:40:00+08:00（Plan 物化；await Scope PASS + Build） |
+| I-010 | feature | 质量完善：ORM/HQL 深度 + SSOT/文档对齐（INTERVAL/XML/POINT；HQL live；不计 Ship） | feat/i-010-orm-hql-quality-completion | active | 2026-07-21T14:48:00+08:00（B-001 P-001~P-010 serial Build） |
 
 Status: `clarifying` | `active` | `completed` | `abandoned` | `accepted`
 

@@ -358,12 +358,12 @@ Formal live IT waived per [harness/evidence/architect-contract/I-008/P-001/PROMO
 | SessionFactory + explicit dialect (consumer path) | `DemoBootBaselineSmokeTest#sessionFactoryUsesExplicitXuguDialectFromApplicationYml`; `#datasourceUrlIncludesCompatibleModeNone` | demo | covered-live | N/A |
 | JPA JPQL smoke | `DemoBootBaselineSmokeTest#jpaPersistAndJpqlQueryRoundTrip` | demo | covered-live | N/A |
 | Spring Data Pageable / LIMIT-OFFSET | `DemoBootBaselineSmokeTest#pageableFindAllUsesLimitOffset` | demo | covered-live | N/A |
-| hbm2ddl validate | — | none | gap | N/A |
-| Function / HQL smoke | — | none | gap | N/A |
-| Bulk mutation | — | none | gap | N/A |
+| hbm2ddl validate | `DemoValidateStartupIT#validateStartupSucceedsWithPreCreatedSchema` | demo | covered-live | **N/A** (I-006/I-007 — not a gap) |
+| Function / HQL smoke | `DemoFunctionsIT#hqlFunctionSubsetSmoke` | demo | covered-live | **N/A** (I-006/I-007 B-DEMO-002 — not a gap) |
+| Bulk mutation | `DemoBulkMutationIT#bulkUpdatePersonNames`; `#bulkDeletePersonNames` | demo | covered-live | **N/A** (I-006/I-007 B-DEMO-001 — not a gap) |
 
 **Offline (default `mvn test`):** `DemoOfflineSmokeTest` — no Spring context, no live DB.  
-**Gated live (`XUGU_RUN_IT=true` or `-Dxugu.run.integration=true`):** `DemoPersonCrudIT`, `DemoBootBaselineSmokeTest` — these satisfy **A-XCUT-009** demo-live and the I-006 Layer A consumer golden path (see [`consumer-path-baseline.md`](consumer-path-baseline.md)).
+**Gated live (`XUGU_RUN_IT=true` or `-Dxugu.run.integration=true`):** `DemoPersonCrudIT`, `DemoBootBaselineSmokeTest`, `DemoValidateStartupIT`, `DemoFunctionsIT`, `DemoBulkMutationIT` — satisfy **A-XCUT-009** demo-live, I-006 Layer A/C′ consumer path, and I-007 Track B demo deepen (see [`consumer-path-baseline.md`](consumer-path-baseline.md)).
 
 ---
 
@@ -426,7 +426,7 @@ Source: [`harness/evidence/researcher/I-005/P-001/GAP-SUMMARY.md`](../harness/ev
 
 | gap | Owner |
 |---|---|
-| HQL pagination, validate, function/HQL, bulk mutation demo paths | **Closed P-005** — Pageable + SessionFactory/JPA smoke in `DemoBootBaselineSmokeTest`; validate/function/bulk remain optional demo gaps |
+| HQL pagination, validate, function/HQL, bulk mutation demo paths | **Closed** — Pageable + SessionFactory/JPA in `DemoBootBaselineSmokeTest` (I-005/P-005); validate / Function-HQL / bulk closed **covered-live** via `DemoValidateStartupIT` / `DemoFunctionsIT` / `DemoBulkMutationIT` (I-006 + I-007 Track B) — **no open demo gaps** |
 
 ### Hard gap IDs (6 total, 可实现 rows — all closed in I-005 first batch)
 
@@ -451,7 +451,7 @@ Source: [`harness/evidence/researcher/I-005/P-001/GAP-SUMMARY.md`](../harness/ev
 | thin live IT required (P-003 Batch A) | **0** (closed) |
 | SSOT tag sweep only (P-004 Batch B) | **0** (closed) |
 | gap (可实现) | **0** |
-| **I-009 deferred inventory (P-001)** | **20/20 closed** (7 covered-live · 12 known-limit · 1 doc-forbidden negative) |
+| **I-009 deferred inventory (P-001)** | **20/20 closed** (**6** covered-live · **13** known-limit · **1** doc-forbidden negative) — row-level: A-FUN-021 = **known-limit-documented** (XMLTABLE cluster); do not cite stale 7/12 |
 | Open matrix **延后** (product delivery) | **0** (`A-XCUT-012` Ship defer anchor only) |
 | negative-only (文档不允许 + explicit defer anchors) | **11** (7 Def A + 3 Ruler C incl. C-JSON-006 + A-XCUT-012) |
 | I-007 closed covered-live (no further promotion) | 5 |

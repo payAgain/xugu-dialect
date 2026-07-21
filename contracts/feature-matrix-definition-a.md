@@ -39,11 +39,11 @@
 | A-TYP-011 | Types | CLOB | Map `CLOB` / materialize character LOB | `reference/sql/datatype/large-object.md` | 可实现 | P-003 | ✅ P-003; NCLOB→CLOB |
 | A-TYP-012 | Types | GUID / UUID column | Map UUID/`UuidJdbcType` → `GUID` type | `reference/sql/datatype/guid.md` | 可实现 | P-003 | ✅ P-003 IT |
 | A-TYP-013 | Types | JSON column | Map JSON/`SqlTypes.JSON` → `JSON` | `reference/sql/datatype/json.md` | 可实现 | P-003 | ✅ P-003 IT |
-| A-TYP-014 | Types | INTERVAL | Map Hibernate duration/interval if Dialect exposes | `reference/sql/datatype/datetime.md` | 延后 | **I-009/P-002** | 13 subtypes + DEF_INTERVAL_STYLE; known-limit if Hibernate surface absent — see [`i009-deferred-batch-map.md`](i009-deferred-batch-map.md) |
+| A-TYP-014 | Types | INTERVAL | Map Hibernate duration/interval if Dialect exposes | `reference/sql/datatype/datetime.md` | 可实现 | **I-009/P-002** | ✅ **known-limit-documented** — 13 subtypes + DEF_INTERVAL_STYLE; `XuguIntervalTypeIT`; baseline [`production-regression-baseline.md`](production-regression-baseline.md) § A-TYP-014 |
 | A-TYP-015 | Types | ARRAY | Map SQL ARRAY / Hibernate array types | `reference/sql/datatype/array.md` | 可实现 | P-004 | ✅ I-007/P-004 ARRAY hooks + native live IT |
-| A-TYP-016 | Types | XML | Map SQLXML / XML type | `reference/sql/datatype/xml.md` | 延后 | **I-009/P-003** | Pair A-FUN-021; XMLTABLE cluster note — [`i009-deferred-batch-map.md`](i009-deferred-batch-map.md) |
-| A-TYP-017 | Types | Geometric / spatial | Map geometry types | `reference/sql/datatype/geometric.md` | 延后 | **I-009/P-004** | Simple 2D only — not PostGIS; pair A-FUN-020 |
-| A-TYP-018 | Types | UDT | User-defined types as entity columns | `reference/sql/datatype/udt.md` | 延后 | **I-009/P-005** | High known-limit risk for ORM entity columns |
+| A-TYP-016 | Types | XML | Map SQLXML / XML type | `reference/sql/datatype/xml.md` | 可实现 | **I-009/P-003** | ✅ **known-limit-documented** — `XuguXmlTypeAndFunctionsIT#xmlTypeNativeRoundTrip_A_TYP_016`; pair A-FUN-021; baseline § A-TYP-016 |
+| A-TYP-017 | Types | Geometric / spatial | Map geometry types | `reference/sql/datatype/geometric.md` | 可实现 | **I-009/P-004** | ✅ **known-limit-documented** — simple 2D only (not PostGIS); `XuguGeometricTypeAndFunctionsIT`; pair A-FUN-020 |
+| A-TYP-018 | Types | UDT | User-defined types as entity columns | `reference/sql/datatype/udt.md` | 可实现 | **I-009/P-005** | ✅ **known-limit-documented** — native SQL IT; ORM entity column mapping not claimed — baseline § A-TYP-018 |
 | A-TYP-019 | Types | Type conversion CAST | Dialect/app CAST between types | `reference/sql/type_conversion.md`, `reference/sql/expression/type_conversion.md` | 可实现 | P-003 | ✅ castPattern default |
 | A-DDL-001 | DDL | CREATE TABLE basics | Schema export `create table` with columns/nullability/defaults | `reference/object/table/create.md` | 可实现 | P-003 | ✅ schema export IT |
 | A-DDL-002 | DDL | ALTER TABLE add/drop column | Schema update add/modify column | `reference/object/table/alter.md` | 可实现 | P-003 | ✅ ALTER ADD COLUMN IT |
@@ -119,8 +119,8 @@
 | A-FUN-017 | Functions | JSON functions | `json_value` / `json_extract` / operators | `reference/function/json-functions/`, `reference/sql/operators/json-operators/` | 可实现 | P-006 | ✅ subset: json_value + json_extract; HQL needs JSON_FUNCTIONS_ENABLED |
 | A-FUN-018 | Functions | listagg / string_agg / group_concat | string aggregate | `reference/function/aggregate-functions/listagg.md`, `string_agg.md`, `group_concat.md` | 可实现 | P-006 | ✅ HQL listagg → `LISTAGG … WITHIN GROUP`; string_agg/group_concat named |
 | A-FUN-019 | Functions | regexp_* | regex HQL | `reference/function/string-functions/regexp_like.md`, `regexp_replace.md`, `regexp_substr.md` | 可实现 | **I-009/P-006** | ✅ regexp_like/replace/substr registered + native IT |
-| A-FUN-020 | Functions | geometric functions | spatial HQL | `reference/function/geometric-functions/` | 延后 | **I-009/P-004** | Paired with A-TYP-017 |
-| A-FUN-021 | Functions | XML functions | XML HQL | `reference/function/xml-functions/` | 延后 | **I-009/P-003** | Paired with A-TYP-016; XMLTABLE ≠ json_table |
+| A-FUN-020 | Functions | geometric functions | spatial HQL | `reference/function/geometric-functions/` | 可实现 | **I-009/P-004** | ✅ **covered-live** — `XuguGeometricTypeAndFunctionsIT#geometricFunctionsNativeSubset_A_FUN_020`; pair A-TYP-017 |
+| A-FUN-021 | Functions | XML functions | XML HQL | `reference/function/xml-functions/` | 可实现 | **I-009/P-003** | ✅ **known-limit-documented** — XMLTABLE single-node / cluster skip; `XuguXmlTypeAndFunctionsIT#xmlFunctionsNativeSubset_A_FUN_021`; ≠ json_table (C-JSON-006) — baseline § A-FUN-021 |
 
 ---
 
@@ -189,26 +189,27 @@
 | P-007 | A-SCH-* | Schema, temp, comment, constraints, truncate, indexes |
 | P-008 | A-SPI-*, A-XCUT-003/005/006 | SPI + explicit + isolation notes |
 | P-009 | A-XCUT-009 (demo) | Env secrets in demo |
-| I-009/P-002…P-010 | 17 A-* 延后 rows | I-009 deferred delivery — see [`i009-deferred-batch-map.md`](i009-deferred-batch-map.md) |
-| later / Ship | A-XCUT-012 | Ship OUT per I-009 brief |
+| I-009/P-002…P-010 | 17 A-* promoted (closed) | I-009 deferred delivery closed — [`i009-deferred-batch-map.md`](i009-deferred-batch-map.md) + [`production-regression-baseline.md`](production-regression-baseline.md) |
+| later / Ship | A-XCUT-012 | Ship OUT — only open Definition A **延后** |
 
-## Counts (architect RP-01)
+## Counts (architect RP-01; I-010/P-001 refreshed)
 
 | Status | Count |
 |---|---|
-| 可实现 | 78 |
+| 可实现 | 97 |
 | 文档不允许 | 7 |
-| 延后 | 20 |
+| 延后 | 1 |
 | **Total** | **105** |
 
-> **I-009 note (2026-07-21):** 17 Definition A **延后** rows assigned to I-009/P-002…P-009; Ruler C C-JSON-006 reclassified **文档不允许** (companion matrix); C-SRV-001/C-SEL-001 → I-009/P-010. Batch map SSOT: [`i009-deferred-batch-map.md`](i009-deferred-batch-map.md).
+> **I-010/P-001 note (2026-07-21):** I-009 closed all product deferred inventory. Open Definition A **延后** = **1** (`A-XCUT-012` Ship anchor only). Honest per-row regression status (covered-live / known-limit) is SSOT in [`production-regression-baseline.md`](production-regression-baseline.md) — I-009 rollup **6 covered-live · 13 known-limit · 1 doc-forbidden** (A-FUN-021 = **known-limit-documented** for XMLTABLE cluster; do not cite stale 7/12).
 
 Derivation detail: `harness/evidence/architect-contract/P-002/NOTES.md`.
 
 ## Orchestrator note
 
-Prefer this file as SSOT for **definition A** (I-001/I-002).  
-**I-003** production-gap rows live in [`feature-matrix-i003-ruler-c.md`](feature-matrix-i003-ruler-c.md) (ruler C). Both are required reading for I-003 implementers.  
-**I-009** deferred delivery batch map: [`i009-deferred-batch-map.md`](i009-deferred-batch-map.md) (P-002…P-010 serial assignments).
+Prefer this file as SSOT for **definition A** status labels (可实现 / 文档不允许 / 延后).  
+Honest live/known-limit evidence for closed rows: [`production-regression-baseline.md`](production-regression-baseline.md).  
+**I-003** production-gap rows live in [`feature-matrix-i003-ruler-c.md`](feature-matrix-i003-ruler-c.md) (ruler C).  
+**I-009** batch map (historical assignment): [`i009-deferred-batch-map.md`](i009-deferred-batch-map.md).
 
 If product docs should link it, add a short cross-ref in `docs/architecture.md` and/or `docs/feature-matrix-definition-a.md` → point here (architect cannot write those paths in this Phase packet for architect role; see evidence NOTES).

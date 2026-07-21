@@ -1,45 +1,47 @@
 {
   "schema_version": 1,
   "task_id": "I-010",
-  "batch_id": null,
-  "status": "plan_ready_await_scope_and_build",
+  "batch_id": "B-001",
+  "status": "build_in_progress",
   "harness_level": "Standard",
-  "last_updated": "2026-07-21T14:40:00+08:00",
+  "last_updated": "2026-07-21T14:48:00+08:00",
   "initiative_id": "I-010",
   "initiative_type": "feature",
   "working_branch": "feat/i-010-orm-hql-quality-completion",
   "active_plan": [
-    "I-009 archived (Accept already recorded; NOT Ship)",
-    "I-010 Plan P-001…P-010 materialized (ORM/HQL depth + SSOT/doc)",
-    "B-001 draft proposes P-001 only until Build scope approval"
+    "Scope PASS + B-001 approved P-001…P-010 serial",
+    "Executing P-001 first (SSOT/doc alignment)",
+    "NOT Ship"
   ],
   "next_3_steps": [
-    "Human Gate: Scope PASS phrase for I-010",
-    "Human Gate: approve B-001 Build scope (P-001 or P-001~P-010)",
-    "Orchestrator serial execute approved phases; NOT Ship"
+    "Complete P-001 → accept",
+    "Serial P-002…P-010",
+    "VERIFY PASS then Human Gate Initiative Accept (NOT Ship)"
   ],
   "validation": {
-    "last_result": "Plan materialized; Build not started; prior I-009 VERIFY PASS retained"
+    "last_result": "Build approved; execution starting at P-001"
   },
   "cognitive_state": {
     "failure_count": 0,
-    "current_mode": "await_scope_and_build_approval",
-    "blocked_on": "Human Gate Scope PASS + Build scope approval"
+    "current_mode": "build_executing",
+    "blocked_on": null
   },
   "version_control_checkpoint": {
-    "decision": "i010_plan_ready",
+    "decision": "b001_approved_executing",
     "committed": true,
     "branch": "feat/i-010-orm-hql-quality-completion",
-    "base_tip": "2ab5cc6",
     "plan_commit": "ae360bcc4c804e4bd8ed9dd728cecf84c6a7cdfe",
-    "i009_accept_commit": "e1c1f761b34c68241a9fd8792390f2f757700bc7"
+    "tip": "aa8f0a36d165fbc91c0a260e17d7111e06549105"
   },
   "handoff": {
     "resume_from": "harness/handoffs/orchestrator/I-010-plan-ready-await-build.md"
   },
-  "approved_build": null,
-  "approved_phases": [],
+  "approved_build": "B-001",
+  "approved_phases": [
+    "P-001", "P-002", "P-003", "P-004", "P-005",
+    "P-006", "P-007", "P-008", "P-009", "P-010"
+  ],
   "ship": false,
   "archive": false,
-  "updated_at": "2026-07-21T14:40:00+08:00"
+  "updated_at": "2026-07-21T14:48:00+08:00"
 }

@@ -18,7 +18,7 @@
 
 **I-008：** Q1–Q4 已闭环（诚实计数、锁语义、Boot UUID/JSON 开箱、Accept 真库清单）；**Q5 性能/多版本矩阵 out of scope**；Initiative Accept 须全 reactor 真库证据 — [03-verify.md § I-008 Accept](03-verify.md#i-008-accept--全量-reactor-真库证据q4)。**不 Ship**。
 
-**I-009：** 延后矩阵 **20/20** 关闭（covered-live 或 known-limit-documented；C-JSON-006 doc-forbidden negative-only）；Charter **98** 诚实 rollup **83/98** 不变 — [03-verify.md § I-009 Accept prep](03-verify.md#i-009-accept-prep--延后矩阵全量交付--verify-pass)、[04-feature-matrix.md § I-009](04-feature-matrix.md#i-009-deferred-closure终态)。**NOT Ship**。
+**I-009：** 延后矩阵 **20/20** 关闭（**6** covered-live · **13** known-limit · **1** doc-forbidden；**A-FUN-021** = known-limit）；Charter **98** 诚实 rollup **83/98** 不变 — [03-verify.md § I-009 Accept prep](03-verify.md#i-009-accept-prep--延后矩阵全量交付--verify-pass)、[04-feature-matrix.md § I-009](04-feature-matrix.md#i-009-deferred-closure终态)。**NOT Ship**。
 
 **I-006：** Spring Boot **消费者路径**基线 — **41** Boot-required 行（A/B/C′），open gaps = **0**；如何离线 / `XUGU_RUN_IT=true` 跑通见 [06-consumer-path.md](06-consumer-path.md)。**不要求** Ship。
 

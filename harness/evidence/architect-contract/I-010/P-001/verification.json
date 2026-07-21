@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "started_at": "2026-07-21T14:50:00+08:00",
+  "finished_at": "2026-07-21T14:56:00+08:00",
+  "project_root": "E:\\Work\\java\\hibernate-test",
+  "initiative_id": "I-010",
+  "phase_id": "P-001",
+  "build_id": "B-001",
+  "step_id": "RP-01+RP-02",
+  "role": "architect-contract+docs",
+  "invocation_id": "inv-i010-p001-architect-docs",
+  "branch": "feat/i-010-orm-hql-quality-completion",
+  "commit_sha": "pending",
+  "results": [
+    {
+      "id": "harness_check",
+      "required": true,
+      "status": "PASS",
+      "command": "python harness/scripts/harness_check.py",
+      "exit_code": 0,
+      "output": "HARNESS_CHECK PASS (level=Standard, layout=tool-agnostic)"
+    },
+    {
+      "id": "branch_check",
+      "required": true,
+      "status": "PASS",
+      "command": "python harness/scripts/branch_check.py",
+      "exit_code": 0,
+      "output": "BRANCH_CHECK PASS: feat/i-010-orm-hql-quality-completion"
+    },
+    {
+      "id": "i010-ssot-doc-alignment",
+      "required": true,
+      "status": "PASS",
+      "observed_flow": "i010-ssot-doc-alignment",
+      "artifact": "harness/evidence/architect-contract/I-010/P-001/ACCEPTANCE.md",
+      "notes": "Definition A 延后 closed except A-XCUT-012; A-FUN-021/I-009 6/13; Demo smoke gaps cleared; troubleshooting §13-15"
+    }
+  ],
+  "summary": {
+    "harness_check": "PASS",
+    "branch_check": "PASS",
+    "ssot_alignment": "PASS",
+    "reviewer": "pending_RP-03",
+    "blocker": null
+  }
+}

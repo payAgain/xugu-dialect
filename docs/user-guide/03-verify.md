@@ -172,9 +172,11 @@ Initiative **I-009** 在 I-005/I-006/I-007/I-008 基线之上交付 **20 行**�
 
 | 终态 | 行数 | 示例 |
 |---|---:|---|
-| **covered-live** | 7 | A-FUN-019/020, A-LCK-006, A-IDN-005, A-DDL-007, C-SRV-001, A-FUN-021 |
-| **known-limit-documented** | 12 | A-TYP-014/016/017/018, A-PAG-004/006, A-SCH-003/017, A-DDL-008/009, A-FUN-015, C-SEL-001 |
+| **covered-live** | **6** | A-FUN-019/020, A-LCK-006, A-IDN-005, A-DDL-007, C-SRV-001 |
+| **known-limit-documented** | **13** | A-TYP-014/016/017/018, A-PAG-004/006, A-SCH-003/017, A-DDL-008/009, A-FUN-015, **A-FUN-021**, C-SEL-001 |
 | **doc-forbidden negative-only** | 1 | C-JSON-006（禁止发明 `json_table`） |
+
+> **A-FUN-021：** baseline 行级 SSOT = **known-limit-documented**（XMLTABLE 单节点 / 集群 skip）— 勿写 covered-live 或陈旧 **7/12**。见 [`production-regression-baseline.md`](../../contracts/production-regression-baseline.md) § A-FUN-021。
 
 Charter **98** 可实现诚实 rollup **不变**：**83/98** covered-live + **15** known-limit-documented — 见 [04-feature-matrix.md § I-009](04-feature-matrix.md#i-009-deferred-closure终态)。
 

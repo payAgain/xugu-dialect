@@ -53,6 +53,7 @@
 | A-LCK-005 FOR SHARE / PESSIMISTIC_READ | 文档不允许 | 无 `FOR SHARE`；`PESSIMISTIC_READ`→排他 **`FOR UPDATE`** — [07-lock-integration.md](07-lock-integration.md) |
 | A-TYP-014 INTERVAL | **known-limit-documented**（I-009/P-002） | 13 子类型 + native SQL IT；非完整 ORM `@JdbcTypeCode` 往返 |
 | A-TYP-016/017/018 XML/几何/UDT | **known-limit-documented**（I-009/P-003…P-005） | native SQL 诚实路径；见 baseline SSOT call-outs |
+| A-FUN-021 XML functions | **known-limit-documented**（I-009/P-003） | 注册 + native 子集；XMLTABLE **单节点** / 集群 skip — **非** covered-live |
 | C-EXC-* / C-JSON-001…004 / C-WIN-* / C-CTE-* / C-BULK-001/003 / C-DDL-001…003 / C-CAT-001 / C-GUID-001 | 可实现（I-003） | 见 ruler-C 矩阵 Acceptance hint（✅ + IT 类名） |
 | C-BULK-002 bulk insert | **covered-live**（I-007/P-002） | 门控真库 IT PASS — 见 [05-troubleshooting.md §10](05-troubleshooting.md#10-bulk-insertjoined--identity已知限制) |
 | C-JSON-005 / A-TYP-015 / C-DDL-005 / A-SEQ-006 | **covered-live**（I-007/P-004） | 见 [`p004-track-c-capabilities.md`](../p004-track-c-capabilities.md) |
@@ -81,10 +82,10 @@
 | Bucket | Count | 说明 |
 |---|---:|---|
 | P-001 延后库存 | **20** | P-002…P-010 全部关闭 |
-| covered-live（延后交付） | **7** | 含 A-FUN-019/020、A-LCK-006、A-IDN-005、A-DDL-007、C-SRV-001、A-FUN-021 |
-| known-limit-documented（延后交付） | **12** | 含 INTERVAL/XML/几何/UDT、TOP/ROWNUM、catalog/索引、partition/encrypt、C-SEL-001 |
+| covered-live（延后交付） | **6** | A-FUN-019/020、A-LCK-006、A-IDN-005、A-DDL-007、C-SRV-001 |
+| known-limit-documented（延后交付） | **13** | INTERVAL/XML/几何/UDT、**A-FUN-021**、TOP/ROWNUM、catalog/索引、partition/encrypt、bit_and、C-SEL-001 |
 | doc-forbidden negative-only | **1** | C-JSON-006 |
-| Open matrix **延后** | **0** | `A-XCUT-012` Ship defer 锚点保留 |
+| Open matrix **延后** | **0**（产品交付） | Definition A 仅保留 `A-XCUT-012` Ship defer 锚点 |
 | Charter **98** rollup（不膨胀） | **83/98** + **15** | 与 I-008 Q1 诚实计数一致 |
 
 验证门控：[03-verify.md § I-009 Accept prep](03-verify.md#i-009-accept-prep--延后矩阵全量交付--verify-pass)。

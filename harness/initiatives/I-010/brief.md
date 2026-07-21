@@ -36,7 +36,7 @@
 - [ ] 不 Ship
 
 ## Status
-`clarifying` → Plan 已物化草稿；**await Scope PASS + Build 批准**（「继续完善」= 开 Initiative / 收窄范围意图；Build 仍须 Human Gate）
+`active` — Scope PASS + B-001（P-001~P-010）approved (~2026-07-21T14:48+08:00)；Build in progress；**NOT Ship**
 
 ## Branch
 `feat/i-010-orm-hql-quality-completion`

@@ -1,3 +1,13 @@
+## Entry: I-010 B-001 approved — P-001~P-010 serial
+
+### Summary
+Human Gate Scope PASS「本 Initiative 范围已明确，可以开干」+「批准 B-001，范围 P-001~P-010」。Build **approved**（扩大 draft 仅 P-001 为全 Plan）。Orchestrator **串行** P-001→P-010；不问并行；不 Ship；GAV 7.4.5.Final；NONE；P0+P1 全做。
+
+### Next
+Orchestrator 从 P-001 执行；完成后 Human Gate Initiative Accept（仍 NOT Ship）。
+
+---
+
 ## Entry: I-010 Plan ready — await Scope PASS + Build
 
 ### Summary

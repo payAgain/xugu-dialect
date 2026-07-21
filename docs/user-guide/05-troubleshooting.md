@@ -137,11 +137,36 @@ hibernate.query.json_functions_enabled=true
 
 **处理：** IT / 示例勿与业务表名硬撞车；方言侧保留字仍须双引号（如 `"select"` / `"order"`）。回归 IT 使用 `"select"` 覆盖同一 quoting + IDENTITY 回填路径。见矩阵 A-IDN-* / `XuguReservedIdentityIT`。
 
-## 13. ENCRYPT BY / XMLTABLE 在集群或权限不足时
+## 13. ENCRYPT BY / PARTITION / catalog 工具边界
 
-**ENCRYPT BY：** 建加密器需 SYSSSO / `ACL_SSO`；无可见 encryptor 或 `sys_encryptors` 权限不足（如 E18012）时，方言 **不** 在 schema export 中声称 ENCRYPT（A-DDL-009 known-limit）。门控 IT 应 **skip**，不应把 assumption 包成失败。
+**ENCRYPT BY（A-DDL-009）：** 建加密器需 SYSSSO / `ACL_SSO`；无可见 encryptor 或 `sys_encryptors` 权限不足（如 E18012）时，方言 **不** 在 schema export 中声称 ENCRYPT（**known-limit-documented**）。门控 IT 应 **skip**，不应把 assumption 包成失败。应用侧可经 **native SQL** 使用文档允许的 `ENCRYPT BY` 子句；勿假设 `hbm2ddl` 自动导出加密列。
 
-**XMLTABLE：** 文档注明当前版本 **仅单节点**、不支持集群。集群上可能空结果；勿当作 ORM 集群能力。EXTRACT / XMLELEMENT / XMLQUERY 仍可按文档使用。见 A-FUN-021。
+**PARTITION BY（A-DDL-008）：** 文档允许 `PARTITION BY` LIST 等；方言提供锁定 SQL 辅助与 native LIST IT。**schema export 不声称** 分区表 DDL（known-limit）。生产分区表请用迁移脚本 / native DDL，勿依赖 Hibernate 自动建分区。
+
+**Catalog 限定（A-SCH-003）：** JDBC 可对齐 `current_db()`；对象名渲染保持 **`schema.table`**（DATABASE 非会话 SET）。勿期望 Hibernate 发出 `catalog.schema.table` 三层限定作为默认对象名。
+
+**高级索引（A-SCH-017）：** functional / BITMAP 等走 native DDL 辅助；schema export 仍以 B-tree（A-SCH-016）为主 — 勿把高级索引当作 export 覆盖面。
+
+## 14. INTERVAL / XML 列 / 几何 / UDT 深度类型边界
+
+| 能力 | 矩阵 | 基线状态 | 集成边界 |
+|---|---|---|---|
+| **INTERVAL** | A-TYP-014 | **known-limit-documented** | 13 子类型 DDL 字符串 + native 往返 IT；Hibernate 7.4 仅暴露 DURATION / INTERVAL_SECOND；输出受 `DEF_INTERVAL_STYLE` 影响。**勿**声称完整 `@JdbcTypeCode` ORM 实体往返。 |
+| **XML 列** | A-TYP-016 | **known-limit-documented** | `SqlTypes.SQLXML` → `xml` DDL；native SQL 字符串往返。**勿**声称已验证 JDBC `java.sql.SQLXML` ORM 实体路径。 |
+| **几何 / 空间** | A-TYP-017 / A-FUN-020 | 类型 **known-limit**；函数 **covered-live** | 简单 2D（非 PostGIS）；POINT 等 native IT + 几何函数注册子集。复杂空间索引 / 地理坐标系超出声明面。 |
+| **UDT** | A-TYP-018 | **known-limit-documented** | CREATE TYPE / constructor / DROP TYPE 的 native 路径；**不**声称 ORM 实体列映射 UDT。 |
+
+排障提示：若实体映射失败，先对照 baseline call-out 与门控 IT（`XuguIntervalTypeIT` / `XuguXmlTypeAndFunctionsIT` / `XuguGeometricTypeAndFunctionsIT` / `XuguUdtTypeIT`），确认是否在 known-limit 范围内。
+
+## 15. XML 函数 / XMLTABLE（A-FUN-021）
+
+**基线状态：** **known-limit-documented**（I-009/P-003）— **不是** covered-live。SSOT：[`production-regression-baseline.md`](../../contracts/production-regression-baseline.md) § A-FUN-021。
+
+**已注册 / 可探测：** HQL 子集 `xmlelement` / `xmlquery` / `xmltable`；XML `EXTRACT` 走 native SQL（勿与时间 `extract(field from …)` 混淆）。
+
+**XMLTABLE：** 文档注明当前版本 **仅单节点**、不支持集群。集群上可能空结果；门控 IT 对空结果做 assumption **skip**。勿当作 ORM 集群能力或 covered-live。
+
+**对比：** `json_table` **文档不允许**（C-JSON-006）— 禁止发明 SQL；与 XMLTABLE 无关。
 
 ## Still stuck?
 
