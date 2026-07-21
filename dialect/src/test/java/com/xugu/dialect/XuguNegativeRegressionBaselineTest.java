@@ -113,10 +113,8 @@ class XuguNegativeRegressionBaselineTest {
 	}
 
 	@Test
-	void definitionAIfNotExistsDeferred_A_DDL_007() {
-		// Matrix A-DDL-007 remains 延后 at Definition A scope; I-003 C-DDL-001 covers IF NOT EXISTS wiring.
-		assertTrue( dialect.supportsIfExistsBeforeTableName(),
-				"C-DDL-001 anchor — row A-DDL-007 stays deferred in SSOT, not promoted to Definition A 可实现" );
+	void ifNotExistsPromotedViaC_DDL_001_A_DDL_007() {
+		assertTrue( dialect.supportsIfExistsBeforeTableName(), "A-DDL-007 promoted via C-DDL-001" );
 		assertEquals( "create table if not exists", dialect.getCreateTableString() );
 	}
 
@@ -143,16 +141,6 @@ class XuguNegativeRegressionBaselineTest {
 	// 延后 rows — @Disabled SSOT anchors (no positive SQL invention)
 	// -------------------------------------------------------------------------
 
-	@Disabled( "SSOT " + SSOT + " — A-DDL-008 table partitioning deferred" )
-	@Test
-	void deferred_A_DDL_008_partitioning() {
-	}
-
-	@Disabled( "SSOT " + SSOT + " — A-DDL-009 column/table ENCRYPT deferred" )
-	@Test
-	void deferred_A_DDL_009_encrypt() {
-	}
-
 	@Disabled( "SSOT " + SSOT + " — A-PAG-004 TOP syntax deferred; LIMIT preferred" )
 	@Test
 	void deferred_A_PAG_004_top() {
@@ -171,11 +159,6 @@ class XuguNegativeRegressionBaselineTest {
 	@Disabled( "SSOT " + SSOT + " — A-IDN-005 identity_mode session params deferred" )
 	@Test
 	void deferred_A_IDN_005_identityMode() {
-	}
-
-	@Disabled( "SSOT " + SSOT + " — A-FUN-019 regexp_* HQL deferred" )
-	@Test
-	void deferred_A_FUN_019_regexp() {
 	}
 
 	@Disabled( "SSOT " + SSOT + " — A-SCH-017 advanced index types deferred" )

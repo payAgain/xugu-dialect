@@ -60,7 +60,7 @@ class XuguDdlIT {
 					.buildMetadata();
 
 			Map<String, Object> create = new HashMap<>();
-			// CREATE_ONLY avoids drop-before-create noise when table is absent (IF EXISTS deferred A-DDL-007)
+			// CREATE_ONLY avoids drop-before-create noise when table is absent (A-DDL-007 IF NOT EXISTS via C-DDL-001)
 			create.put( SchemaToolingSettings.JAKARTA_HBM2DDL_DATABASE_ACTION, Action.CREATE_ONLY );
 			SchemaManagementToolCoordinator.process( metadata, registry, create, action -> {
 			} );

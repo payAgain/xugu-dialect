@@ -15,8 +15,10 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import com.xugu.dialect.function.XuguBitAggregateFunctions;
 import com.xugu.dialect.function.XuguFunctionRegistrations;
 import com.xugu.dialect.function.XuguGeometricFunctions;
+import com.xugu.dialect.function.XuguRegexpFunctions;
 import com.xugu.dialect.support.OfflineConnectionProvider;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -156,11 +158,29 @@ class XuguFunctionRegistryTest {
 	}
 
 	@Test
+	void regexpSubsetRegistered_A_FUN_019() {
+		for ( String name : XuguRegexpFunctions.DOCUMENTED_NAMES ) {
+			assertRegistered( name );
+		}
+		assertEquals( 3, XuguRegexpFunctions.DOCUMENTED_NAMES.size() );
+		assertNull( functions.findFunctionDescriptor( "regexp_instr" ),
+				"regexp_instr not in bounded A-FUN-019 subset" );
+	}
+
+	@Test
+	void bitAggregateRegistered_A_FUN_015() {
+		for ( String name : XuguBitAggregateFunctions.DOCUMENTED_NAMES ) {
+			assertRegistered( name );
+		}
+		assertEquals( 2, XuguBitAggregateFunctions.DOCUMENTED_NAMES.size() );
+		assertNull( functions.findFunctionDescriptor( "bit_xor" ),
+				"bit_xor not in bounded A-FUN-015 subset" );
+	}
+
+	@Test
 	void unsupportedFunctionNotRegistered_negativeNote() {
 		// Diagnosability: unregistered name has no descriptor; HQL failure covered in gated IT.
 		assertNull( functions.findFunctionDescriptor( "xugu_unsupported_fn_xyz" ) );
-		assertNull( functions.findFunctionDescriptor( "bit_and" ),
-				"A-FUN-015 bit_and deferred — must not appear as registered support" );
 	}
 
 	private static void assertRegistered(String name) {

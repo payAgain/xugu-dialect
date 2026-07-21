@@ -1,0 +1,17 @@
+﻿I-009 P-006 regexp/bit live IT — SKIPPED_INFRA
+==============================================
+
+Date: 2026-07-21T10:46:00+08:00
+Gate: XUGU_RUN_IT=true
+Command: mvn -q -pl dialect -am test -Dtest=XuguRegexpAndBitFunctionsIT
+Exit: 1
+
+Reason: JDBC Connection refused (E50025) host 127.0.0.1 port 5138
+Real DB: false (TcpTestSucceeded=False)
+
+IT anchors:
+- com.xugu.dialect.it.XuguRegexpAndBitFunctionsIT#regexpFunctionsNativeSubset_A_FUN_019
+- com.xugu.dialect.it.XuguRegexpAndBitFunctionsIT#bitAggregatesNativeSubset_A_FUN_015
+
+Not a product assertion failure — live XuguDB unavailable.
+Offline gate (XUGU_RUN_IT unset): IT methods skipped via Assumptions — mvn test exit 0.

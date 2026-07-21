@@ -72,6 +72,9 @@ Columns: `matrix_id | status | entry_class#method | gate | gap_action`
 | A-DDL-004 | covered-live | `XuguDdlIT#schemaExportCreateDropWithPkAndNotNull` (NOT NULL reject) | IT | N/A |
 | A-DDL-005 | covered-live | `XuguDefaultColumnExportTest#schemaExportEmitsDefaultColumn_A_DDL_005`; `XuguDefaultColumnExportIT#schemaExportEmitsDefaultColumnAndAppliesOnDb_A_DDL_005` | IT | N/A |
 | A-DDL-006 | covered-live | `XuguDdlIT#schemaExportCreateDropWithPkAndNotNull`; `XuguDialectTest#ddlHelpersMatchXuguSyntax` | IT | N/A |
+| A-DDL-007 | covered-live | `XuguTableDdlExtensionsTest#ifNotExistsPromotedViaC_DDL_001_A_DDL_007`; `XuguTypeDdlDetailsTest#createTableIfNotExists_C_DDL_001`; `XuguTypeDdlDetailsIT#typeDdlDetailsOnLiveDb` | IT | **N/A** (I-009/P-007 closed — SSOT promotion via C-DDL-001) |
+| A-DDL-008 | known-limit-documented | `XuguTableDdlExtensionsTest#partitionSqlMatchesPartitionDoc_A_DDL_008`; `XuguTableDdlExtensionsTest#dialectDoesNotClaimPartitionInSchemaExport_A_DDL_008`; `XuguTableDdlExtensionsIT#listPartitionNativeRoundTrip_A_DDL_008` | IT | **N/A** (I-009/P-007 closed) |
+| A-DDL-009 | known-limit-documented | `XuguTableDdlExtensionsTest#encryptSqlMatchesCreateDoc_A_DDL_009`; `XuguTableDdlExtensionsTest#dialectDoesNotClaimEncryptInSchemaExport_A_DDL_009`; `XuguTableDdlExtensionsIT#encryptByNativeWhenEncryptorAvailable_A_DDL_009` | IT | **N/A** (I-009/P-007 closed) |
 
 ### Definition A — P-004 Pagination (3)
 
@@ -103,7 +106,7 @@ Columns: `matrix_id | status | entry_class#method | gate | gap_action`
 | A-SEQ-004 | covered-live | `XuguIdentitySequenceTest#currvalFunctionForm_A_SEQ_004`; `XuguIdentitySequenceIT#sequenceGeneratorPersist_A_SEQ_003_004_008` | IT | N/A |
 | A-SEQ-005 | known-limit-documented | `XuguIdentitySequenceTest#createDropSequenceStrings_A_SEQ_001_002_005` | unit | N/A |
 
-### Definition A — P-006 Functions (17)
+### Definition A — P-006 Functions (19)
 
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
@@ -121,9 +124,11 @@ Columns: `matrix_id | status | entry_class#method | gate | gap_action`
 | A-FUN-012 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguTypeDdlDetailsIT#typeDdlDetailsOnLiveDb` (to_char path) | IT | N/A |
 | A-FUN-013 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
 | A-FUN-014 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
+| A-FUN-015 | known-limit-documented | `XuguFunctionRegistryTest#bitAggregateRegistered_A_FUN_015`; `XuguRegexpAndBitFunctionsIT#bitAggregatesNativeSubset_A_FUN_015` | IT | **N/A** (I-009/P-006 closed) |
 | A-FUN-016 | covered-live | `XuguFunctionRegistryTest#uuidPrimaryIsUuid`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
 | A-FUN-017 | covered-live | `XuguFunctionRegistryTest#jsonSubsetUsesStandardJsonValueNotMysqlDump`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
 | A-FUN-018 | covered-live | `XuguFunctionRegistryTest#listaggUsesNativeListaggFunction`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
+| A-FUN-019 | covered-live | `XuguFunctionRegistryTest#regexpSubsetRegistered_A_FUN_019`; `XuguRegexpAndBitFunctionsIT#regexpFunctionsNativeSubset_A_FUN_019` | IT | **N/A** (I-009/P-006 closed) |
 
 ### Definition A — P-007 Schema / temp / comment / constraints (14)
 
@@ -204,6 +209,21 @@ Columns: `matrix_id | status | entry_class#method | gate | gap_action`
 | A-TYP-017 | known-limit-documented | `XuguGeometricTypeTest#pointTypeHooksWired_A_TYP_017`; `XuguGeometricTypeTest#allDocumentedKindsLocked_A_TYP_017`; `XuguGeometricTypeAndFunctionsIT#geometricTypesNativeRoundTrip_A_TYP_017`; `XuguDialectTest#columnTypesMatchXuguDocs` (POINT/GEOMETRY) | IT | N/A |
 | A-FUN-020 | covered-live | `XuguFunctionRegistryTest#geometricSubsetRegistered_A_FUN_020`; `XuguGeometricTypeAndFunctionsIT#geometricFunctionsNativeSubset_A_FUN_020` | IT | N/A |
 
+### I-009 / P-006 — promoted from 延后 (Definition A)
+
+| matrix_id | status | entry_class#method | gate | gap_action |
+|---|---|---|---|---|
+| A-FUN-015 | known-limit-documented | `XuguFunctionRegistryTest#bitAggregateRegistered_A_FUN_015`; `XuguRegexpAndBitFunctionsIT#bitAggregatesNativeSubset_A_FUN_015` | IT | N/A |
+| A-FUN-019 | covered-live | `XuguFunctionRegistryTest#regexpSubsetRegistered_A_FUN_019`; `XuguRegexpAndBitFunctionsIT#regexpFunctionsNativeSubset_A_FUN_019` | IT | N/A |
+
+### I-009 / P-007 — promoted from 延后 (Definition A)
+
+| matrix_id | status | entry_class#method | gate | gap_action |
+|---|---|---|---|---|
+| A-DDL-007 | covered-live | `XuguTableDdlExtensionsTest#ifNotExistsPromotedViaC_DDL_001_A_DDL_007`; `XuguTypeDdlDetailsTest#createTableIfNotExists_C_DDL_001`; `XuguTypeDdlDetailsIT#typeDdlDetailsOnLiveDb` | IT | N/A |
+| A-DDL-008 | known-limit-documented | `XuguTableDdlExtensionsTest#partitionSqlMatchesPartitionDoc_A_DDL_008`; `XuguTableDdlExtensionsTest#dialectDoesNotClaimPartitionInSchemaExport_A_DDL_008`; `XuguTableDdlExtensionsIT#listPartitionNativeRoundTrip_A_DDL_008` | IT | N/A |
+| A-DDL-009 | known-limit-documented | `XuguTableDdlExtensionsTest#encryptSqlMatchesCreateDoc_A_DDL_009`; `XuguTableDdlExtensionsTest#dialectDoesNotClaimEncryptInSchemaExport_A_DDL_009`; `XuguTableDdlExtensionsIT#encryptByNativeWhenEncryptorAvailable_A_DDL_009` | IT | N/A |
+
 ### I-009 / P-005 — promoted from 延后 (Definition A)
 
 | matrix_id | status | entry_class#method | gate | gap_action |
@@ -235,7 +255,7 @@ Matrix status **文档不允许** or **延后**; baseline records explicit non-s
 | A-XCUT-010 | negative-only | `XuguNegativeRegressionBaselineTest#charterNoMySqlOracleInheritance_A_XCUT_010` | unit | P-003 |
 | A-XCUT-011 | negative-only | `XuguNegativeRegressionBaselineTest#charterNoSiblingDialectPort_A_XCUT_011` | unit | P-003 |
 
-### Definition A — 延后 (20)
+### Definition A — 延后 (15)
 
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
@@ -243,15 +263,10 @@ Matrix status **文档不允许** or **延后**; baseline records explicit non-s
 | A-TYP-016 | known-limit-documented | `XuguXmlTypeTest#xmlTypeHooksWired_A_TYP_016`; `XuguXmlTypeTest#documentedXmlConstantsLocked_A_TYP_016`; `XuguXmlTypeAndFunctionsIT#xmlTypeNativeRoundTrip_A_TYP_016`; `XuguDialectTest#columnTypesMatchXuguDocs` (SQLXML) | IT | **N/A** (I-009/P-003 closed) |
 | A-TYP-017 | known-limit-documented | `XuguGeometricTypeTest#pointTypeHooksWired_A_TYP_017`; `XuguGeometricTypeTest#allDocumentedKindsLocked_A_TYP_017`; `XuguGeometricTypeAndFunctionsIT#geometricTypesNativeRoundTrip_A_TYP_017`; `XuguDialectTest#columnTypesMatchXuguDocs` (POINT/GEOMETRY) | IT | **N/A** (I-009/P-004 closed) |
 | A-TYP-018 | known-limit-documented | `XuguUdtTypeTest#documentedKindsLocked_A_TYP_018`; `XuguUdtTypeTest#createTypeSqlMatchesUdtDoc_A_TYP_018`; `XuguUdtTypeTest#dialectDoesNotClaimOrmUdtEntityMapping_A_TYP_018`; `XuguUdtTypeIT#udtNativeRoundTrip_A_TYP_018` | IT | **N/A** (I-009/P-005 closed) |
-| A-DDL-007 | negative-only | `XuguNegativeRegressionBaselineTest#definitionAIfNotExistsDeferred_A_DDL_007`; `XuguDdlIT` comment (CREATE_ONLY defers IF NOT EXISTS) | unit | **I-009/P-007** (SSOT promotion via C-DDL-001) |
-| A-DDL-008 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_DDL_008_partitioning` (@Disabled) | none | **I-009/P-007** |
-| A-DDL-009 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_DDL_009_encrypt` (@Disabled) | none | **I-009/P-007** |
 | A-PAG-004 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_PAG_004_top` (@Disabled) | none | **I-009/P-009** |
 | A-PAG-006 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_PAG_006_rownum` (@Disabled) | none | **I-009/P-009** |
 | A-LCK-006 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_LCK_006_lockTable` (@Disabled) | none | **I-009/P-009** |
 | A-IDN-005 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_IDN_005_identityMode` (@Disabled) | none | **I-009/P-009** |
-| A-FUN-015 | negative-only | `XuguFunctionRegistryTest#unsupportedFunctionNotRegistered_negativeNote` | unit | **I-009/P-006** |
-| A-FUN-019 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_FUN_019_regexp` (@Disabled) | none | **I-009/P-006** |
 | A-FUN-020 | covered-live | `XuguFunctionRegistryTest#geometricSubsetRegistered_A_FUN_020`; `XuguGeometricTypeAndFunctionsIT#geometricFunctionsNativeSubset_A_FUN_020` | IT | **N/A** (I-009/P-004 closed) |
 | A-FUN-021 | known-limit-documented | `XuguFunctionRegistryTest#xmlSubsetRegistered_A_FUN_021`; `XuguXmlTypeAndFunctionsIT#xmlFunctionsNativeSubset_A_FUN_021` | IT (live SKIPPED_INFRA) | **N/A** (I-009/P-003 closed) |
 | A-SCH-003 | negative-only | `XuguNegativeRegressionBaselineTest#catalogsNotSupported_negativeOnly_A_SCH_003`; `XuguSchemaTempCommentTest#nameQualifierIsSchemaOnly_A_SCH_002_not_003` (supportsCatalogs=false) | unit | **I-009/P-008** |
@@ -366,8 +381,6 @@ All **must-add** and **consolidate** negatives from the P-001 gap audit are **cl
 | A-LCK-005 | `XuguNegativeRegressionBaselineTest#forShareNotSupported_A_LCK_005` | **Closed P-003** |
 | A-SCH-007 | `XuguNegativeRegressionBaselineTest#tempTableFkNotEmitted_A_SCH_007` + IT | **Closed P-003** |
 | C-DDL-004 | `XuguNegativeRegressionBaselineTest#enumDdlNotEmitted_C_DDL_004` | **Closed P-003** |
-
-Optional negatives (also covered): A-DDL-007 (IF NOT EXISTS defer), A-FUN-015 (bit_and not registered).
 
 ---
 
@@ -496,12 +509,40 @@ Source: [`harness/evidence/researcher/I-005/P-001/GAP-SUMMARY.md`](../harness/ev
 | **P-010 outcome** | Negative-only — **MUST NOT** invent JSON_TABLE SQL |
 | **Contrast** | XMLTABLE → A-FUN-021 (`xml-functions/xmltable.md`) |
 
-### A-DDL-007 partial wiring
+### A-DDL-007 IF NOT EXISTS (I-009/P-007 closed)
 
 | Field | Value |
 |---|---|
-| **Code** | C-DDL-001 covered-live (`XuguTypeDdlDetailsTest/IT`) |
-| **P-007** | SSOT promotion — align A-DDL-007 with C-DDL-001; no duplicate DDL |
+| **matrix_id** | A-DDL-007 |
+| **status** | **covered-live** |
+| **Doc citation** | `reference/object/table/create.md` (`IF NOT EXISTS`) |
+| **Dialect surface** | Promotion-only via C-DDL-001 — `getCreateTableString()` / `supportsIfExistsBeforeTableName()`; SSOT constant in `XuguTableDdlSupport` |
+| **Live IT** | Existing `XuguTypeDdlDetailsIT` (C-DDL-001) + `XuguTableDdlExtensionsTest#ifNotExistsPromotedViaC_DDL_001_A_DDL_007` |
+| **gap_action** | **N/A** — closed I-009/P-007 |
+
+### A-DDL-008 PARTITION BY (I-009/P-007 closed)
+
+| Field | Value |
+|---|---|
+| **matrix_id** | A-DDL-008 |
+| **status** | **known-limit-documented** |
+| **Doc citation** | `reference/object/table/partition.md` (LIST/RANGE/HASH); `create.md` (`PARTITION BY`) |
+| **Dialect surface** | `XuguTableDdlSupport` locks LIST/RANGE/HASH CREATE shapes; `supportsPartitionByInSchemaExport()` is `false` |
+| **Known-limit reason** | Hibernate schema export does not emit `PARTITION BY` — native SQL IT is the honest path |
+| **Live IT** | `XuguTableDdlExtensionsIT#listPartitionNativeRoundTrip_A_DDL_008` (partition.md example 1) |
+| **gap_action** | **N/A** — closed I-009/P-007 |
+
+### A-DDL-009 ENCRYPT BY (I-009/P-007 closed)
+
+| Field | Value |
+|---|---|
+| **matrix_id** | A-DDL-009 |
+| **status** | **known-limit-documented** |
+| **Doc citation** | `reference/object/table/create.md` (`ENCRYPT BY`); `reference/object/encryptor.md` (SYSSSO / `ACL_SSO`) |
+| **Dialect surface** | `XuguTableDdlSupport` locks `ENCRYPT BY` / `CREATE ENCRYPTOR` shapes; `supportsEncryptByInSchemaExport()` is `false` |
+| **Known-limit reason** | Encryptor creation requires SYSSSO; schema tooling does not emit encrypt clauses |
+| **Live IT** | `XuguTableDdlExtensionsIT#encryptByNativeWhenEncryptorAvailable_A_DDL_009` (skips when no encryptor visible) |
+| **gap_action** | **N/A** — closed I-009/P-007 |
 
 ### A-TYP-016 XML known-limit (I-009/P-003)
 

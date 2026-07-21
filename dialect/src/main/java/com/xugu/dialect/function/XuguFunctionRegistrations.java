@@ -34,6 +34,12 @@ import org.hibernate.type.spi.TypeConfiguration;
  * {@code reference/function/geometric-functions/} — paired with A-TYP-017 literals; native
  * SQL IT for representative calls ({@code area}/{@code center}/{@code point}/{@code box}/
  * {@code circle}).
+ *
+ * <p>Regexp (A-FUN-019): {@code regexp_like}/{@code regexp_replace}/{@code regexp_substr}
+ * ({@code reference/function/string-functions/regexp_*.md}).
+ *
+ * <p>Bit aggregates (A-FUN-015): {@code bit_and}/{@code bit_or} on {@code VARBIT}
+ * ({@code reference/function/aggregate-functions/bit_*.md}); native SQL IT only — no VARBIT ORM hook.
  */
 public final class XuguFunctionRegistrations {
 
@@ -145,6 +151,12 @@ public final class XuguFunctionRegistrations {
 		// --- Geometric subset (A-FUN-020) — docs: reference/function/geometric-functions/** ---
 		registerGeometricFunctions( functionRegistry, stringType, typeConfiguration );
 
+		// --- Regexp subset (A-FUN-019) — docs: reference/function/string-functions/regexp_*.md ---
+		registerRegexpFunctions( functionRegistry, stringType, typeConfiguration );
+
+		// --- Bit aggregates (A-FUN-015) — docs: reference/function/aggregate-functions/bit_*.md ---
+		registerBitAggregateFunctions( functionRegistry, stringType );
+
 		// --- listagg / string_agg / group_concat (A-FUN-018) ---
 		// Hibernate HQL listagg → native LISTAGG … WITHIN GROUP (XuGu form).
 		functionFactory.listagg( null );
@@ -160,6 +172,64 @@ public final class XuguFunctionRegistrations {
 				.setInvariantType( stringType )
 				.setArgumentListSignature( "(STRING expr[, …] [ORDER BY …] [SEPARATOR delimiter])" )
 				.register();
+	}
+
+	private static void registerRegexpFunctions(
+			SqmFunctionRegistry functionRegistry,
+			BasicType<String> stringType,
+			TypeConfiguration typeConfiguration) {
+		final BasicType<Boolean> booleanType = typeConfiguration.getBasicTypeRegistry()
+				.resolve( StandardBasicTypes.BOOLEAN );
+		final BasicType<Integer> integerType = typeConfiguration.getBasicTypeRegistry()
+				.resolve( StandardBasicTypes.INTEGER );
+
+		functionRegistry.namedDescriptorBuilder( "regexp_like" )
+				.setArgumentCountBetween( 2, 3 )
+				.setParameterTypes( FunctionParameterType.STRING, FunctionParameterType.STRING )
+				.setInvariantType( booleanType )
+				.setArgumentListSignature( "(STRING expr, STRING pattern[, STRING match_mode])" )
+				.register();
+		functionRegistry.namedDescriptorBuilder( "regexp_replace" )
+				.setArgumentCountBetween( 2, 6 )
+				.setParameterTypes(
+						FunctionParameterType.STRING,
+						FunctionParameterType.STRING,
+						FunctionParameterType.STRING,
+						FunctionParameterType.INTEGER,
+						FunctionParameterType.INTEGER,
+						FunctionParameterType.STRING
+				)
+				.setInvariantType( stringType )
+				.setArgumentListSignature(
+						"(STRING expr, STRING pattern[, STRING replacement[, INTEGER start[, INTEGER occurrence[, STRING match_mode]]]])"
+				)
+				.register();
+		functionRegistry.namedDescriptorBuilder( "regexp_substr" )
+				.setArgumentCountBetween( 2, 5 )
+				.setParameterTypes(
+						FunctionParameterType.STRING,
+						FunctionParameterType.STRING,
+						FunctionParameterType.INTEGER,
+						FunctionParameterType.INTEGER,
+						FunctionParameterType.STRING
+				)
+				.setInvariantType( stringType )
+				.setArgumentListSignature(
+						"(STRING expr, STRING pattern[, INTEGER start[, INTEGER occurrence[, STRING match_mode]]])"
+				)
+				.register();
+	}
+
+	private static void registerBitAggregateFunctions(
+			SqmFunctionRegistry functionRegistry,
+			BasicType<String> stringType) {
+		for ( String name : XuguBitAggregateFunctions.DOCUMENTED_NAMES ) {
+			functionRegistry.namedDescriptorBuilder( name )
+					.setExactArgumentCount( 1 )
+					.setInvariantType( stringType )
+					.setArgumentListSignature( "(VARBIT expr)" )
+					.register();
+		}
 	}
 
 	private static void registerGeometricFunctions(

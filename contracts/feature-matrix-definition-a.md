@@ -51,9 +51,9 @@
 | A-DDL-004 | DDL | NOT NULL | Column nullability | `reference/object/constraints.md` | 可实现 | P-003 | ✅ NOT NULL IT |
 | A-DDL-005 | DDL | DEFAULT value | Column default in DDL | `reference/object/table/create.md` | 可实现 | P-003 | ✅ default exporter path |
 | A-DDL-006 | DDL | DROP TABLE | Schema drop | `reference/object/table/alter.md` (drop via object lifecycle; see table docs) | 可实现 | P-003 | ✅ drop table IT |
-| A-DDL-007 | DDL | IF NOT EXISTS create | Optional IF NOT EXISTS | `reference/object/table/create.md` | 延后 | **I-009/P-007** | **Partial wiring:** C-DDL-001 covered-live — P-007 SSOT promotion only |
-| A-DDL-008 | DDL | Table partitioning | PARTITION BY in CREATE | `reference/object/table/partition.md`, `reference/object/table/create.md` | 延后 | **I-009/P-007** | Native DDL IT; schema export likely known-limit |
-| A-DDL-009 | DDL | Column/table ENCRYPT | Encryptor clauses | `reference/object/table/create.md`, `reference/object/encryptor.md` | 延后 | **I-009/P-007** | SYSSSO encryptor prerequisite — known-limit likely |
+| A-DDL-007 | DDL | IF NOT EXISTS create | Optional IF NOT EXISTS | `reference/object/table/create.md` | 可实现 | **I-009/P-007** | ✅ SSOT promotion via C-DDL-001 — no duplicate DDL |
+| A-DDL-008 | DDL | Table partitioning | PARTITION BY in CREATE | `reference/object/table/partition.md`, `reference/object/table/create.md` | 可实现 | **I-009/P-007** | ✅ native LIST IT; schema export known-limit |
+| A-DDL-009 | DDL | Column/table ENCRYPT | Encryptor clauses | `reference/object/table/create.md`, `reference/object/encryptor.md` | 可实现 | **I-009/P-007** | ✅ SQL locked; SYSSSO encryptor known-limit |
 
 ---
 
@@ -114,11 +114,11 @@
 | A-FUN-012 | Functions | to_char / to_date / to_timestamp | format/parse | `reference/function/date-and-time-functions/to_char.md`, `to_date.md`, `to_timestamp.md` | 可实现 | P-006 | ✅ registered; live probe OK |
 | A-FUN-013 | Functions | cast | HQL cast | `reference/sql/expression/type_conversion.md` | 可实现 | P-006 | ✅ cast IT |
 | A-FUN-014 | Functions | aggregates avg/sum/min/max/count | standard aggregates | `reference/function/aggregate-functions/avg.md`, `sum.md`, `min.md`, `max.md` | 可实现 | P-006 | ✅ count/sum IT |
-| A-FUN-015 | Functions | bit_and / bit_or | bitwise aggregates/ops if used | `reference/function/aggregate-functions/bit_and.md`, `bit_or.md` | 延后 | **I-009/P-006** | VARBIT prerequisite — HQL may be known-limit |
+| A-FUN-015 | Functions | bit_and / bit_or | bitwise aggregates/ops if used | `reference/function/aggregate-functions/bit_and.md`, `bit_or.md` | 可实现 | **I-009/P-006** | ✅ registry + native IT; VARBIT HQL known-limit |
 | A-FUN-016 | Functions | UUID generators | `uuid()`, `sys_guid()`, `gen_random_uuid()` | `reference/function/uuid-functions/uuid.md`, `sys_guid.md`, `gen_random_uuid.md`, `newid.md`, `sys_uuid.md` | 可实现 | P-006 | ✅ primary=`uuid()` (dashed VARCHAR); alts registered |
 | A-FUN-017 | Functions | JSON functions | `json_value` / `json_extract` / operators | `reference/function/json-functions/`, `reference/sql/operators/json-operators/` | 可实现 | P-006 | ✅ subset: json_value + json_extract; HQL needs JSON_FUNCTIONS_ENABLED |
 | A-FUN-018 | Functions | listagg / string_agg / group_concat | string aggregate | `reference/function/aggregate-functions/listagg.md`, `string_agg.md`, `group_concat.md` | 可实现 | P-006 | ✅ HQL listagg → `LISTAGG … WITHIN GROUP`; string_agg/group_concat named |
-| A-FUN-019 | Functions | regexp_* | regex HQL | `reference/function/string-functions/regexp_like.md`, `regexp_replace.md`, `regexp_substr.md` | 延后 | **I-009/P-006** | Low risk — expect covered-live |
+| A-FUN-019 | Functions | regexp_* | regex HQL | `reference/function/string-functions/regexp_like.md`, `regexp_replace.md`, `regexp_substr.md` | 可实现 | **I-009/P-006** | ✅ regexp_like/replace/substr registered + native IT |
 | A-FUN-020 | Functions | geometric functions | spatial HQL | `reference/function/geometric-functions/` | 延后 | **I-009/P-004** | Paired with A-TYP-017 |
 | A-FUN-021 | Functions | XML functions | XML HQL | `reference/function/xml-functions/` | 延后 | **I-009/P-003** | Paired with A-TYP-016; XMLTABLE ≠ json_table |
 

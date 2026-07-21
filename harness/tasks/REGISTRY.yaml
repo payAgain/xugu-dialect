@@ -52,7 +52,7 @@ tasks:
     dependencies: [P-004]
   - task_id: P-006
     title: "regexp_* 与 bit_and/bit_or 聚合"
-    status: ready
+    status: accepted
     build_id: B-001
     packet: harness/tasks/P-006.md
     acceptance_doc: harness/evidence/implementer/I-009/P-006/ACCEPTANCE.md

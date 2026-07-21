@@ -188,15 +188,22 @@ import jakarta.persistence.Timeout;
  * backed by {@link XuguLocalTemporaryTableStrategy} ({@code CREATE LOCAL TEMPORARY TABLE}).
  *
  * <p><b>Type / DDL details (C-DDL-* / C-CAT-* / C-GUID-* / I-003 P-006):</b>
- * {@code CREATE TABLE IF NOT EXISTS} via {@link #getCreateTableString()} +
- * {@link #supportsIfExistsBeforeTableName()}; {@code ALTER COLUMN} type change;
+	 * {@code CREATE TABLE IF NOT EXISTS} via {@link #getCreateTableString()} +
+	 * {@link #supportsIfExistsBeforeTableName()} (A-DDL-007 SSOT cross-ref C-DDL-001);
+	 * {@code ALTER COLUMN} type change;
  * XuGu {@code date '…'}/{@code timestamp '…'} literals and MySQL-style datetime
  * format tokens (via {@link MySQLDialect#datetimeFormat} helper, not inheritance);
  * {@link #getEnumTypeDeclaration} returns {@code null} (no native ENUM);
  * {@code CREATE}/{@code DROP DATABASE} catalog commands; {@code select sys_guid()}
- * for GUID select (function registry primary remains {@code uuid()}).
- *
- * <p><b>Schema / temp / comment / constraints (A-SCH-* , P-007):</b>
+	 * for GUID select (function registry primary remains {@code uuid()}).
+	 *
+	 * <p><b>Table DDL extensions (A-DDL-007/008/009 / I-009 P-007):</b>
+	 * A-DDL-007 is promotion-only via C-DDL-001 above. {@code PARTITION BY} and
+	 * {@code ENCRYPT BY} shapes live in {@link com.xugu.dialect.ddl.XuguTableDdlSupport}
+	 * for native SQL; {@link #supportsPartitionByInSchemaExport()} and
+	 * {@link #supportsEncryptByInSchemaExport()} are {@code false} (schema-tool known-limit).
+	 *
+	 * <p><b>Schema / temp / comment / constraints (A-SCH-* , I-007 P-007):</b>
  * {@code CREATE}/{@code DROP SCHEMA}; schema-qualified names
  * ({@link NameQualifierSupport#SCHEMA}); catalog create/drop via
  * {@link #canCreateCatalog()} (C-CAT-001) — name qualification stays schema-only;
@@ -490,12 +497,27 @@ public class XuguDialect extends Dialect {
 	// -------------------------------------------------------------------------
 
 	/**
-	 * C-DDL-001: {@code CREATE TABLE IF NOT EXISTS}
-	 * ({@code reference/object/table/create.md}).
+	 * C-DDL-001 / A-DDL-007: {@code CREATE TABLE IF NOT EXISTS}
+	 * ({@code reference/object/table/create.md#if_not_exists}).
 	 */
 	@Override
 	public String getCreateTableString() {
-		return "create table if not exists";
+		return com.xugu.dialect.ddl.XuguTableDdlSupport.CREATE_TABLE_IF_NOT_EXISTS_PREFIX;
+	}
+
+	/**
+	 * A-DDL-008 known-limit: Hibernate schema export does not emit {@code PARTITION BY}.
+	 */
+	public boolean supportsPartitionByInSchemaExport() {
+		return false;
+	}
+
+	/**
+	 * A-DDL-009 known-limit: {@code ENCRYPT BY} requires a pre-existing encryptor (SYSSSO);
+	 * schema tooling does not emit encrypt clauses.
+	 */
+	public boolean supportsEncryptByInSchemaExport() {
+		return false;
 	}
 
 	/**
