@@ -28,9 +28,10 @@
   },
   "version_control_checkpoint": {
     "decision": "i010_plan_ready",
-    "committed": false,
+    "committed": true,
     "branch": "feat/i-010-orm-hql-quality-completion",
     "base_tip": "2ab5cc6",
+    "plan_commit": "ae360bcc4c804e4bd8ed9dd728cecf84c6a7cdfe",
     "i009_accept_commit": "e1c1f761b34c68241a9fd8792390f2f757700bc7"
   },
   "handoff": {
