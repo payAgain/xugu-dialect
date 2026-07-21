@@ -1,3 +1,13 @@
+## Entry: I-009 Initiative Accept — NOT Ship · NOT Archive
+
+### Summary
+Human Gate「Initiative Accept I-009」(~2026-07-21T14:11+08:00)。Orchestrator 落盘 `harness/evidence/orchestrator/I-009/ACCEPTANCE.md`；INDEX/brief → **accepted**；B-001 P-001…P-011 已 accept；live triage ReservedIdentity fixed + ENCRYPT/XMLTABLE known-limit；dialect **208/0/0/3**；VERIFY PASS。延后矩阵 **20/20**；Charter **83/98** + **15** known-limit。**NOT Ship** · **NOT Archive**。
+
+### Next
+Human Gate 可选：Archive I-009 / 授权 Ship / 开新 Initiative。
+
+---
+
 ## Entry: I-009 live IT @5287 triage — dialect green
 
 ### Summary

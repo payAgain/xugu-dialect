@@ -1,7 +1,7 @@
 # Initiative Brief: I-009
 
 > Type: **feature**  
-> Updated: 2026-07-21T09:45:00+08:00
+> Updated: 2026-07-21T14:15:00+08:00
 
 ## Goal
 交付特性矩阵中全部 **「延后」** 且虚谷文档允许的能力（类型/函数/DDL/分页备选/锁/JSON/配置等）；**「文档不允许」** 继续 skip/负向；GAV **7.4.5.Final**；**不 Ship**（含 A-XCUT-012）。
@@ -27,13 +27,14 @@
 - 多兼容模式产品线
 
 ## Acceptance criteria
-- [ ] 延后行 → 可实现 + covered-live（或诚实 known-limit）
-- [ ] 负向基线仅保留文档不允许锚点
-- [ ] 真库 `XUGU_RUN_IT` 绿；VERIFY PASS
-- [ ] GAV 7.4.5.Final；NONE；不 Ship
+- [x] 延后行 → 可实现 + covered-live（或诚实 known-limit）
+- [x] 负向基线仅保留文档不允许锚点
+- [x] 真库 `XUGU_RUN_IT` 绿；VERIFY PASS
+- [x] GAV 7.4.5.Final；NONE；不 Ship
 
 ## Status
-`active` — Plan complete (P-001…P-011)；awaiting Build approval
+`accepted` — Human Gate「Initiative Accept I-009」(~2026-07-21T14:11+08:00)；**NOT Ship** · **NOT Archive**  
+Evidence: `harness/evidence/orchestrator/I-009/ACCEPTANCE.md`
 
 ## Branch
-`feat/i-009-deferred-matrix-delivery`（orchestrator 创建）
+`feat/i-009-deferred-matrix-delivery`

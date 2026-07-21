@@ -2,38 +2,41 @@
   "schema_version": 1,
   "task_id": "I-009",
   "batch_id": "B-001",
-  "status": "build_complete_awaiting_accept",
+  "status": "initiative_accepted",
   "harness_level": "Standard",
-  "last_updated": "2026-07-21T14:10:00+08:00",
+  "last_updated": "2026-07-21T14:15:00+08:00",
   "initiative_id": "I-009",
   "initiative_type": "feature",
   "working_branch": "feat/i-009-deferred-matrix-delivery",
   "active_plan": [
     "B-001 P-001…P-011 all accepted",
-    "Live dialect triage @5287 complete: 208/0 fail; VERIFY PASS"
+    "Live dialect triage @5287: 208/0/0/3; VERIFY PASS",
+    "Initiative Accept I-009 recorded (NOT Ship, NOT Archive)"
   ],
   "next_3_steps": [
-    "Human Gate review triage SHA + dispositions",
-    "Decide Initiative Accept I-009",
-    "Archive I-009 NOT Ship"
+    "Optional Human Gate: Archive I-009",
+    "Ship only with separate Human Gate authorization",
+    "Or open new Initiative"
   ],
   "validation": {
-    "last_result": "VERIFY PASS; live-it-5287-rerun dialect 208/0/0/3"
+    "last_result": "VERIFY PASS; live-it-5287-rerun dialect 208/0/0/3; Initiative accepted"
   },
   "cognitive_state": {
     "failure_count": 0,
-    "current_mode": "awaiting_accept",
+    "current_mode": "accepted_awaiting_optional_archive_or_ship",
     "blocked_on": null
   },
   "version_control_checkpoint": {
-    "decision": "live_triage_complete",
-    "committed": true,
+    "decision": "initiative_accepted",
+    "committed": false,
     "branch": "feat/i-009-deferred-matrix-delivery",
-    "plan_head": "8d1de76",
-    "triage_commit": "8d1de762ff99c2de6883292dca58e8c0c08cc171"
+    "plan_head": "01181f2",
+    "triage_commit": "8d1de762ff99c2de6883292dca58e8c0c08cc171",
+    "pre_accept_head": "01181f2ee62e10d9671cd821df4c8122adda0a8b",
+    "accept_commit": null
   },
   "handoff": {
-    "resume_from": "harness/handoffs/orchestrator/I-009-live-it-5287-rerun.md"
+    "resume_from": "harness/handoffs/orchestrator/I-009-initiative-accepted.md"
   },
   "approved_build": "B-001",
   "approved_phases": [
@@ -41,5 +44,6 @@
     "P-007", "P-008", "P-009", "P-010", "P-011"
   ],
   "ship": false,
-  "updated_at": "2026-07-21T14:10:00+08:00"
+  "archive": false,
+  "updated_at": "2026-07-21T14:15:00+08:00"
 }
