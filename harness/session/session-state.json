@@ -28,12 +28,12 @@
   },
   "version_control_checkpoint": {
     "decision": "initiative_accepted",
-    "committed": false,
+    "committed": true,
     "branch": "feat/i-009-deferred-matrix-delivery",
     "plan_head": "01181f2",
     "triage_commit": "8d1de762ff99c2de6883292dca58e8c0c08cc171",
     "pre_accept_head": "01181f2ee62e10d9671cd821df4c8122adda0a8b",
-    "accept_commit": null
+    "accept_commit": "e1c1f761b34c68241a9fd8792390f2f757700bc7"
   },
   "handoff": {
     "resume_from": "harness/handoffs/orchestrator/I-009-initiative-accepted.md"

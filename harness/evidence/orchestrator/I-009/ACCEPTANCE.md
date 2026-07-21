@@ -40,7 +40,7 @@
 | Branch | `feat/i-009-deferred-matrix-delivery` |
 | Pre-Accept HEAD | `01181f2ee62e10d9671cd821df4c8122adda0a8b` |
 | Live triage | `8d1de762ff99c2de6883292dca58e8c0c08cc171` |
-| Accept must-commit | *(filled after commit)* |
+| Accept must-commit | `e1c1f761b34c68241a9fd8792390f2f757700bc7` |
 
 ### Phase accept SHAs (B-001)
 
