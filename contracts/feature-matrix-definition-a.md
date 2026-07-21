@@ -120,7 +120,7 @@
 | A-FUN-018 | Functions | listagg / string_agg / group_concat | string aggregate | `reference/function/aggregate-functions/listagg.md`, `string_agg.md`, `group_concat.md` | 可实现 | P-006 | ✅ HQL listagg → `LISTAGG … WITHIN GROUP`; string_agg/group_concat named |
 | A-FUN-019 | Functions | regexp_* | regex HQL | `reference/function/string-functions/regexp_like.md`, `regexp_replace.md`, `regexp_substr.md` | 可实现 | **I-009/P-006** | ✅ regexp_like/replace/substr registered + native IT |
 | A-FUN-020 | Functions | geometric functions | spatial HQL | `reference/function/geometric-functions/` | 可实现 | **I-009/P-004** | ✅ **covered-live** — `XuguGeometricTypeAndFunctionsIT#geometricFunctionsNativeSubset_A_FUN_020`; pair A-TYP-017 |
-| A-FUN-021 | Functions | XML functions | XML HQL | `reference/function/xml-functions/` | 可实现 | **I-009/P-003** | ✅ **known-limit-documented** — XMLTABLE single-node / cluster skip; `XuguXmlTypeAndFunctionsIT#xmlFunctionsNativeSubset_A_FUN_021`; ≠ json_table (C-JSON-006) — baseline § A-FUN-021 |
+| A-FUN-021 | Functions | XML functions | XML HQL | `reference/function/xml-functions/` | 可实现 | **I-009/P-003** / **I-010/P-005** | ✅ **known-limit-documented** — HQL Session `xmlelement`/`xmlquery` (`xmlFunctionsHqlSession_A_FUN_021`); XMLTABLE single-node / empty→skip (never covered-live); ≠ json_table (C-JSON-006) — baseline § A-FUN-021 |
 
 ---
 

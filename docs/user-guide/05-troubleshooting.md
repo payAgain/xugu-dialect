@@ -160,11 +160,11 @@ hibernate.query.json_functions_enabled=true
 
 ## 15. XML 函数 / XMLTABLE（A-FUN-021）
 
-**基线状态：** **known-limit-documented**（I-009/P-003）— **不是** covered-live。SSOT：[`production-regression-baseline.md`](../../contracts/production-regression-baseline.md) § A-FUN-021。
+**基线状态：** **known-limit-documented**（I-009/P-003；HQL Session I-010/P-005）— **不是** covered-live。SSOT：[`production-regression-baseline.md`](../../contracts/production-regression-baseline.md) § A-FUN-021。
 
-**已注册 / 可探测：** HQL 子集 `xmlelement` / `xmlquery` / `xmltable`；XML `EXTRACT` 走 native SQL（勿与时间 `extract(field from …)` 混淆）。
+**已注册 / 可探测：** HQL `Session.createQuery` 正例 `xmlelement` / `xmlquery`（`xmlquery` 渲染 `PASSING … RETURNING CONTENT`）；`xmltable` 仅注册名；XML `EXTRACT` 走 native SQL（勿与时间 `extract(field from …)` 混淆）。
 
-**XMLTABLE：** 文档注明当前版本 **仅单节点**、不支持集群。集群上可能空结果；门控 IT 对空结果做 assumption **skip**。勿当作 ORM 集群能力或 covered-live。
+**XMLTABLE：** 文档注明当前版本 **仅单节点**、不支持集群。单节点/集群上空结果时门控 IT 做 assumption **skip**（永不硬失败）。勿当作 ORM 集群能力或 covered-live。
 
 **对比：** `json_table` **文档不允许**（C-JSON-006）— 禁止发明 SQL；与 XMLTABLE 无关。
 

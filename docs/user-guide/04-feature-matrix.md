@@ -53,7 +53,7 @@
 | A-LCK-005 FOR SHARE / PESSIMISTIC_READ | 文档不允许 | 无 `FOR SHARE`；`PESSIMISTIC_READ`→排他 **`FOR UPDATE`** — [07-lock-integration.md](07-lock-integration.md) |
 | A-TYP-014 INTERVAL | **known-limit-documented**（I-009/P-002） | 13 子类型 + native SQL IT；非完整 ORM `@JdbcTypeCode` 往返 |
 | A-TYP-016/017/018 XML/几何/UDT | **known-limit-documented**（I-009/P-003…P-005） | native SQL 诚实路径；见 baseline SSOT call-outs |
-| A-FUN-021 XML functions | **known-limit-documented**（I-009/P-003） | 注册 + native 子集；XMLTABLE **单节点** / 集群 skip — **非** covered-live |
+| A-FUN-021 XML functions | **known-limit-documented**（I-009/P-003；HQL Session I-010/P-005） | HQL `Session` 正例 `xmlelement`/`xmlquery`；XMLTABLE **单节点** / 空结果 assumption skip — **非** covered-live |
 | C-EXC-* / C-JSON-001…004 / C-WIN-* / C-CTE-* / C-BULK-001/003 / C-DDL-001…003 / C-CAT-001 / C-GUID-001 | 可实现（I-003） | 见 ruler-C 矩阵 Acceptance hint（✅ + IT 类名） |
 | C-BULK-002 bulk insert | **covered-live**（I-007/P-002） | 门控真库 IT PASS — 见 [05-troubleshooting.md §10](05-troubleshooting.md#10-bulk-insertjoined--identity已知限制) |
 | C-JSON-005 / A-TYP-015 / C-DDL-005 / A-SEQ-006 | **covered-live**（I-007/P-004） | 见 [`p004-track-c-capabilities.md`](../p004-track-c-capabilities.md) |

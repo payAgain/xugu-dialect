@@ -38,10 +38,13 @@ import static org.junit.jupiter.api.Assertions.fail;
  * <p>SQL shapes from {@code reference/sql/datatype/xml.md} and
  * {@code reference/function/xml-functions/{extract,xmlelement,xmlquery,xmltable}.md}.
  * {@code XMLTABLE} is documented single-node only ({@code xmltable.md} note) — IT uses
- * native SQL, not cluster-safe claim.
+ * native SQL with empty→assumption skip; never fail as covered-live / cluster-safe.
  *
  * <p>Entity path (I-010/P-003) uses {@link XuguXmlJdbcType} for
  * {@code String} + {@code @JdbcTypeCode(SQLXML)} persist/load.
+ *
+ * <p>HQL Session path (I-010/P-005 / A-FUN-021): {@code Session.createQuery} positive
+ * for {@code xmlelement} / {@code xmlquery}; XMLTABLE remains native known-limit only.
  */
 class XuguXmlTypeAndFunctionsIT {
 
@@ -148,6 +151,68 @@ class XuguXmlTypeAndFunctionsIT {
 		}
 		catch ( Exception e ) {
 			fail( "XML entity ORM IT failed: " + e.getMessage(), e );
+		}
+		finally {
+			if ( sf != null ) {
+				sf.close();
+			}
+			StandardServiceRegistryBuilder.destroy( registry );
+			cleanupEntityTable();
+		}
+	}
+
+	/**
+	 * I-010/P-005: HQL {@code Session.createQuery} live positive for {@code xmlelement}
+	 * and {@code xmlquery}. Reuses {@link I010P003XmlEntity} XML column for xmlquery PASSING.
+	 * XMLTABLE is intentionally not exercised here (native known-limit only).
+	 */
+	@Test
+	void xmlFunctionsHqlSession_A_FUN_021() {
+		Assumptions.assumeTrue( XuguITGate.isEnabled(), "integration gate off" );
+		cleanupEntityTable();
+
+		final String payload = "<PDRecord><PDName>Daniel Morgan</PDName></PDRecord>";
+
+		StandardServiceRegistry registry = buildRegistry();
+		SessionFactory sf = null;
+		try {
+			Metadata metadata = new MetadataSources( registry )
+					.addAnnotatedClass( I010P003XmlEntity.class )
+					.buildMetadata();
+			export( metadata, registry, Action.CREATE_ONLY );
+			sf = metadata.buildSessionFactory();
+
+			try ( Session session = sf.openSession() ) {
+				session.beginTransaction();
+				session.persist( new I010P003XmlEntity( 1, payload ) );
+				session.getTransaction().commit();
+			}
+
+			try ( Session session = sf.openSession() ) {
+				// XMLELEMENT — HQL named function → XMLELEMENT(xmlname[, xmlvalue])
+				String element = session.createQuery(
+						"select xmlelement('name', 'xxx')", String.class )
+						.getSingleResult();
+				assertNotNull( element );
+				assertTrue( element.contains( "name" ) && element.contains( "xxx" ),
+						"XMLELEMENT HQL result: " + element );
+
+				// XMLQUERY — HQL pattern → xmlquery(?1 PASSING ?2 RETURNING CONTENT)
+				String query = session.createQuery(
+						"select xmlquery('/PDRecord/PDName', e.xml) from I010P003XmlEntity e where e.id = 1",
+						String.class )
+						.getSingleResult();
+				assertNotNull( query );
+				assertTrue( query.contains( "Daniel Morgan" ), "XMLQUERY HQL result: " + query );
+			}
+
+			export( metadata, registry, Action.DROP );
+		}
+		catch ( AssertionError e ) {
+			throw e;
+		}
+		catch ( Exception e ) {
+			fail( "XML HQL Session IT failed: " + e.getMessage(), e );
 		}
 		finally {
 			if ( sf != null ) {

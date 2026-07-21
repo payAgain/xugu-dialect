@@ -9,6 +9,7 @@ import org.hibernate.cfg.JdbcSettings;
 import org.hibernate.dialect.function.ListaggFunction;
 import org.hibernate.dialect.function.json.JsonValueFunction;
 import org.hibernate.engine.spi.SessionFactoryImplementor;
+import org.hibernate.query.sqm.function.PatternBasedSqmFunctionDescriptor;
 import org.hibernate.query.sqm.function.SqmFunctionDescriptor;
 import org.hibernate.query.sqm.function.SqmFunctionRegistry;
 import org.junit.jupiter.api.AfterAll;
@@ -145,6 +146,10 @@ class XuguFunctionRegistryTest {
 		assertRegistered( "xmlelement" );
 		assertRegistered( "xmlquery" );
 		assertRegistered( "xmltable" );
+		// I-010/P-005: xmlquery must be pattern-based (PASSING … RETURNING CONTENT), not csv named()
+		assertInstanceOf( PatternBasedSqmFunctionDescriptor.class,
+				functions.findFunctionDescriptor( "xmlquery" ),
+				"xmlquery HQL must render PASSING/RETURNING CONTENT pattern" );
 		// EXTRACT(XML,xpath) is native-SQL only — temporal extract(field from …) keeps Dialect default
 		assertNotNull( functions.findFunctionDescriptor( "extract" ) );
 		assertNull( functions.findFunctionDescriptor( "extractvalue" ),

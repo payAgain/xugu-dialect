@@ -196,7 +196,7 @@ Columns: `matrix_id | status | entry_class#method | gate | gap_action`
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
 | A-TYP-016 | known-limit-documented | `XuguXmlTypeTest#xmlTypeHooksWired_A_TYP_016`; `XuguXmlTypeTest#documentedXmlConstantsLocked_A_TYP_016`; `XuguXmlTypeTest#xmlJdbcTypeContributed_A_TYP_016`; `XuguXmlTypeAndFunctionsIT#xmlTypeNativeRoundTrip_A_TYP_016`; `XuguXmlTypeAndFunctionsIT#xmlEntityOrmRoundTrip_A_TYP_016`; `XuguDialectTest#columnTypesMatchXuguDocs` (SQLXML) | IT | N/A (I-010/P-003 entity ORM path; live pending) |
-| A-FUN-021 | known-limit-documented | `XuguFunctionRegistryTest#xmlSubsetRegistered_A_FUN_021`; `XuguXmlTypeAndFunctionsIT#xmlFunctionsNativeSubset_A_FUN_021` | IT (live SKIPPED_INFRA) | N/A |
+| A-FUN-021 | known-limit-documented | `XuguFunctionRegistryTest#xmlSubsetRegistered_A_FUN_021`; `XuguXmlTypeAndFunctionsIT#xmlFunctionsHqlSession_A_FUN_021`; `XuguXmlTypeAndFunctionsIT#xmlFunctionsNativeSubset_A_FUN_021` | IT (live SKIPPED_INFRA) | N/A (I-010/P-005 HQL Session path; XMLTABLE remains known-limit) |
 
 ### I-010 / P-003 — A-TYP-016 entity ORM path
 
@@ -288,7 +288,7 @@ Matrix status **文档不允许** or **延后**; baseline records explicit non-s
 | A-LCK-006 | covered-live | `XuguLockPaginationIdentityExtensionsTest#lockTableSqlMatchesLockDoc_A_LCK_006`; `XuguLockPaginationIdentityIT#lockTableExclusiveNativeRoundTrip_A_LCK_006` | IT | **N/A** (I-009/P-009 closed) |
 | A-IDN-005 | covered-live | `XuguLockPaginationIdentityExtensionsTest#identityModeSqlMatchesIdentityModeDoc_A_IDN_005`; `XuguLockPaginationIdentityIT#identityModeNullAsAutoIncrement_A_IDN_005` | IT | **N/A** (I-009/P-009 closed) |
 | A-FUN-020 | covered-live | `XuguFunctionRegistryTest#geometricSubsetRegistered_A_FUN_020`; `XuguGeometricTypeAndFunctionsIT#geometricFunctionsNativeSubset_A_FUN_020` | IT | **N/A** (I-009/P-004 closed) |
-| A-FUN-021 | known-limit-documented | `XuguFunctionRegistryTest#xmlSubsetRegistered_A_FUN_021`; `XuguXmlTypeAndFunctionsIT#xmlFunctionsNativeSubset_A_FUN_021` | IT (live SKIPPED_INFRA) | **N/A** (I-009/P-003 closed) |
+| A-FUN-021 | known-limit-documented | `XuguFunctionRegistryTest#xmlSubsetRegistered_A_FUN_021`; `XuguXmlTypeAndFunctionsIT#xmlFunctionsHqlSession_A_FUN_021`; `XuguXmlTypeAndFunctionsIT#xmlFunctionsNativeSubset_A_FUN_021` | IT (live SKIPPED_INFRA) | **N/A** (I-010/P-005 HQL Session; XMLTABLE known-limit) |
 | A-SCH-003 | known-limit-documented | `XuguCatalogAndIndexExtensionsTest#catalogMetadataQueryLocked_A_SCH_003`; `XuguCatalogAndIndexExtensionsTest#nameQualifierRemainsSchemaOnly_A_SCH_003`; `XuguCatalogAndIndexExtensionsTest#dialectDoesNotClaimCatalogInObjectNames_A_SCH_003`; `XuguCatalogAndIndexExtensionsIT#jdbcCatalogAlignsWithCurrentDb_A_SCH_003` | IT | **N/A** (I-009/P-008 closed) |
 | A-SCH-017 | known-limit-documented | `XuguCatalogAndIndexExtensionsTest#functionalIndexSqlMatchesIndexesDoc_A_SCH_017`; `XuguCatalogAndIndexExtensionsTest#bitmapIndexSqlMatchesIndexesDoc_A_SCH_017`; `XuguCatalogAndIndexExtensionsTest#dialectDoesNotClaimAdvancedIndexInSchemaExport_A_SCH_017`; `XuguCatalogAndIndexExtensionsIT#functionalAndBitmapIndexNativeRoundTrip_A_SCH_017` | IT | **N/A** (I-009/P-008 closed) |
 | A-XCUT-012 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_XCUT_012_mavenCentralPublish` (@Disabled) | none | N/A |
@@ -644,18 +644,18 @@ Source: [`harness/evidence/researcher/I-005/P-001/GAP-SUMMARY.md`](../harness/ev
 | **Live IT** | Native: `XuguXmlTypeAndFunctionsIT#xmlTypeNativeRoundTrip_A_TYP_016`; Entity ORM: `XuguXmlTypeAndFunctionsIT#xmlEntityOrmRoundTrip_A_TYP_016` + `I010P003XmlEntity` |
 | **gap_action** | Re-run with `XUGU_RUN_IT=true` + live DB → if entity IT PASS, promote status to **covered-live** |
 
-### A-FUN-021 XML functions (I-009/P-003)
+### A-FUN-021 XML functions (I-009/P-003; HQL Session I-010/P-005)
 
 | Field | Value |
 |---|---|
 | **matrix_id** | A-FUN-021 |
 | **status** | **known-limit-documented** |
 | **Doc citation** | `reference/function/xml-functions/{extract,xmlelement,xmlquery,xmltable}.md` |
-| **Dialect surface** | HQL registry: `xmlelement`, `xmlquery`, `xmltable`; `EXTRACT(xml,xpath)` native SQL only (temporal `extract(field from …)` keeps Dialect default) |
-| **Known-limit reason** | `XMLTABLE` documented **single-node only** (`xmltable.md`); on cluster topologies empty result / non-support is expected — IT skips that subset rather than claiming cluster coverage. EXTRACT / XMLELEMENT / XMLQUERY remain exercised when gate ON. |
+| **Dialect surface** | HQL registry: `xmlelement` (named), `xmlquery` (pattern `xmlquery(?1 PASSING ?2 RETURNING CONTENT)`), `xmltable` (name discovery); `EXTRACT(xml,xpath)` native SQL only (temporal `extract(field from …)` keeps Dialect default) |
+| **Known-limit reason** | `XMLTABLE` documented **single-node only** (`xmltable.md`); on cluster / single-node topologies empty result / non-support is expected — IT assumption-skips that subset rather than claiming cluster coverage or covered-live. Do **not** promote whole row to covered-live while XMLTABLE remains known-limit. |
 | **Cluster note** | Not a cluster-safe claim for `XMLTABLE` |
-| **Live IT** | Native SQL subset (`XuguXmlTypeAndFunctionsIT#xmlFunctionsNativeSubset_A_FUN_021`) — XMLTABLE empty → assumption skip |
-| **gap_action** | **N/A** — closed I-009/P-003; live-it-5287 triage aligned status |
+| **Live IT** | HQL Session: `XuguXmlTypeAndFunctionsIT#xmlFunctionsHqlSession_A_FUN_021` (`xmlelement` / `xmlquery` via `Session.createQuery`); Native SQL subset: `xmlFunctionsNativeSubset_A_FUN_021` — XMLTABLE empty → assumption skip (never hard-fail) |
+| **gap_action** | Re-run with `XUGU_RUN_IT=true` + live DB for HQL Session proof; keep status **known-limit-documented** (XMLTABLE). Do not fake covered-live for XMLTABLE. |
 
 ### A-TYP-014 INTERVAL known-limit (I-009/P-002; entity ORM I-010/P-002)
 

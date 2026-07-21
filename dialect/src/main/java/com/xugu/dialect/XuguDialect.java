@@ -183,9 +183,10 @@ import jakarta.persistence.Timeout;
  * {@code json_length}, {@code json_type} (bounded subset — not full json_* registry);
  * JDBC writes use {@code cast(? as json)}; {@link #getAggregateSupport()} covers JSON paths.
  * XML (A-FUN-021): bounded subset {@code xmlelement}/{@code xmlquery}/{@code xmltable}
- * ({@code reference/function/xml-functions/**}); {@code EXTRACT(xml,xpath)} is native-SQL
+ * ({@code reference/function/xml-functions/**}); HQL Session positive for
+ * {@code xmlelement}/{@code xmlquery} (I-010/P-005); {@code EXTRACT(xml,xpath)} is native-SQL
  * only (name shared with temporal {@code extract(field from …)} HQL). {@code XMLTABLE} is
- * documented single-node only — not a cluster-safe dialect claim.
+ * documented single-node only — empty→assumption skip; not a cluster-safe / covered-live claim.
  * Hibernate {@code listagg} → XuGu {@code LISTAGG … WITHIN GROUP}.
  *
  * <p><b>Bulk mutation (C-BULK-* / I-003):</b>

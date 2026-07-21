@@ -27,8 +27,12 @@ import org.hibernate.type.spi.TypeConfiguration;
  * {@code LISTAGG(...) WITHIN GROUP (ORDER BY ...)}.
  *
  * <p>XML (A-FUN-021): bounded subset {@code xmlelement}/{@code xmlquery}/{@code xmltable}
- * ({@code reference/function/xml-functions/**}). {@code EXTRACT(XML,xpath)} is exercised via
- * native SQL IT only — temporal {@code extract(field from …)} remains the Dialect default.
+ * ({@code reference/function/xml-functions/**}). HQL Session live positive for
+ * {@code xmlelement}/{@code xmlquery} (I-010/P-005); {@code xmlquery} renders
+ * {@code xmlquery(?1 PASSING ?2 RETURNING CONTENT)}. {@code XMLTABLE} remains
+ * native-SQL IT with empty→assumption skip (single-node known-limit — not covered-live).
+ * {@code EXTRACT(XML,xpath)} is native SQL IT only — temporal {@code extract(field from …)}
+ * remains the Dialect default.
  *
  * <p>Geometric (A-FUN-020): all 21 documented functions in
  * {@code reference/function/geometric-functions/} — paired with A-TYP-017 literals; native
@@ -129,18 +133,24 @@ public final class XuguFunctionRegistrations {
 				.register();
 
 		// --- XML subset (A-FUN-021) — docs: reference/function/xml-functions/** ---
+		// HQL Session positive path (I-010/P-005): xmlelement + xmlquery.
+		// xmlquery must emit PASSING … RETURNING CONTENT (xmlquery.md), not csv args.
 		functionRegistry.namedDescriptorBuilder( "xmlelement" )
 				.setMinArgumentCount( 1 )
 				.setParameterTypes( FunctionParameterType.STRING )
 				.setInvariantType( stringType )
 				.setArgumentListSignature( "(STRING xmlname[, …])" )
 				.register();
-		functionRegistry.namedDescriptorBuilder( "xmlquery" )
-				.setMinArgumentCount( 1 )
-				.setParameterTypes( FunctionParameterType.STRING )
+		functionRegistry.patternDescriptorBuilder(
+						"xmlquery",
+						"xmlquery(?1 PASSING ?2 RETURNING CONTENT)" )
+				.setExactArgumentCount( 2 )
+				.setParameterTypes( FunctionParameterType.STRING, FunctionParameterType.STRING )
 				.setInvariantType( stringType )
-				.setArgumentListSignature( "(STRING xpath PASSING XML_data RETURNING CONTENT)" )
+				.setArgumentListSignature( "(STRING xpath, XML xmlData)" )
 				.register();
+		// xmltable: registered for name discovery; live IT uses native SQL only.
+		// XMLTABLE is single-node / known-limit — never claim HQL covered-live.
 		functionRegistry.namedDescriptorBuilder( "xmltable" )
 				.setMinArgumentCount( 1 )
 				.setParameterTypes( FunctionParameterType.STRING )
