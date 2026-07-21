@@ -14,13 +14,13 @@
 
 **I-003：** 同一 GAV **`com.xugu:xugu-dialect:7.4.5.Final`** 下扩展生产能力（异常映射、JSON 聚合、Window/CTE、bulk、DDL 细节）；Definition A 仍有效，详见 ruler-C 矩阵。
 
-**I-005：** 生产回归测试基线 — **98** 物理可实现行（Charter **94** + I-007 **+4**）；**诚实 covered-live 83/98**（**15** known-limit-documented）；冻结门控见 [03-verify.md § Frozen baseline](03-verify.md#frozen-baseline--i-005-冻结基线门控)。
+**I-005：** 生产回归测试基线 — **98** 物理可实现行（Charter **94** + I-007 **+4**）；冻结门控见 [03-verify.md § Frozen baseline](03-verify.md#frozen-baseline--i-005-冻结基线门控)。**当前**诚实 rollup 以 **I-010 Accept** 为准（下）。
 
-**I-008：** Q1–Q4 已闭环（诚实计数、锁语义、Boot UUID/JSON 开箱、Accept 真库清单）；**Q5 性能/多版本矩阵 out of scope**；Initiative Accept 须全 reactor 真库证据 — [03-verify.md § I-008 Accept](03-verify.md#i-008-accept--全量-reactor-真库证据q4)。**不 Ship**。
+**I-008：** Q1–Q4 已闭环（诚实计数、锁语义、Boot UUID/JSON 开箱、Accept 真库清单）；当时 Q1 冻结 **83/98** + **15** KL；**Q5 性能/多版本矩阵 out of scope** — [03-verify.md § I-008 Accept](03-verify.md#i-008-accept--全量-reactor-真库证据q4)。**不 Ship**。
 
-**I-009：** 延后矩阵 **20/20** 关闭（**6** covered-live · **13** known-limit · **1** doc-forbidden；**A-FUN-021** = known-limit）；Charter **98** 诚实 rollup **83/98** 不变 — [03-verify.md § I-009 Accept prep](03-verify.md#i-009-accept-prep--延后矩阵全量交付--verify-pass)、[04-feature-matrix.md § I-009](04-feature-matrix.md#i-009-deferred-closure终态)。**NOT Ship**。
+**I-009：** 延后矩阵 **20/20** 关闭（**6** covered-live · **13** known-limit · **1** doc-forbidden）；当时 Charter rollup 仍为 **83/98** + **15** — [03-verify.md § I-009 Accept prep](03-verify.md#i-009-accept-prep--延后矩阵全量交付--verify-pass)、[04-feature-matrix.md § I-009](04-feature-matrix.md#i-009-deferred-closure终态)。**NOT Ship**。
 
-**I-010：** ORM/HQL 质量完善 + xuguefcore 对照套件 — live @5287 dialect **253/0/0/4** · demo **36/0/0/0**；A-TYP-014/016/017 与 Batch A 已晋升 **covered-live**；**A-FUN-021** 仍 **known-limit**（XMLTABLE）；Charter **91/98** covered-live + **7** known-limit — [03-verify.md § I-010](03-verify.md#i-010-accept-prep--ormhql-质量完善--verify-pass)、[04-feature-matrix.md § I-010](04-feature-matrix.md#i-010-quality-completion退出清单)。**NOT Ship**。
+**I-010（当前）：** ORM/HQL 质量完善 + xuguefcore 对照套件 — live @5287 dialect **253/0/0/4** · demo **36/0/0/0**；A-TYP-014/016/017 与 Batch A 已晋升 **covered-live**；**A-FUN-021**（XMLTABLE）/ ENCRYPT / PARTITION 等仍为真实 **known-limit**；Charter **91/98** covered-live + **7** known-limit — [03-verify.md § I-010](03-verify.md#i-010-accept-prep--ormhql-质量完善--verify-pass)、[04-feature-matrix.md § I-010](04-feature-matrix.md#i-010-quality-completion退出清单)。**NOT Ship**。
 
 **I-006：** Spring Boot **消费者路径**基线 — **41** Boot-required 行（A/B/C′），open gaps = **0**；如何离线 / `XUGU_RUN_IT=true` 跑通见 [06-consumer-path.md](06-consumer-path.md)。**不要求** Ship。
 

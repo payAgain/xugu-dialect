@@ -52,13 +52,13 @@
 | A-SEQ-001 | 可实现 | `hbm2ddl validate` 经 `all_sequences` 读取序列元数据（I-002/P-002；见排障 §3） |
 | A-LCK-004 SKIP LOCKED | 文档不允许 | `supportsSkipLocked=false`；不会发出该关键字 — 专节 [07-lock-integration.md](07-lock-integration.md) |
 | A-LCK-005 FOR SHARE / PESSIMISTIC_READ | 文档不允许 | 无 `FOR SHARE`；`PESSIMISTIC_READ`→排他 **`FOR UPDATE`** — [07-lock-integration.md](07-lock-integration.md) |
-| A-TYP-014 INTERVAL | **known-limit-documented**（I-010/P-002 实体 ORM；live pending） | `XuguIntervalJdbcType` + 实体 IT（DURATION/INTERVAL_SECOND）；11 子类型仍 tooling/native — **勿**假 covered-live |
-| A-TYP-016 XML | **known-limit-documented**（I-010/P-003 实体 ORM；live pending） | 推荐 `String`+`@JdbcTypeCode(SQLXML)`；**勿**用 `java.sql.SQLXML` |
-| A-TYP-017 Geometric | **known-limit-documented**（I-010/P-004 POINT 实体 ORM；live pending） | 推荐 `String`+`@JdbcTypeCode(POINT\|GEOMETRY)`；非 POINT 子类型 native/tooling |
+| A-TYP-014 INTERVAL | **covered-live**（I-010/P-002；live @5287） | `XuguIntervalJdbcType` + 实体 IT（DURATION/INTERVAL_SECOND）；11 子类型仍 tooling/native |
+| A-TYP-016 XML | **covered-live**（I-010/P-003；live @5287） | 推荐 `String`+`@JdbcTypeCode(SQLXML)`；**勿**用 `java.sql.SQLXML` |
+| A-TYP-017 Geometric | **covered-live**（I-010/P-004 POINT；live @5287） | 推荐 `String`+`@JdbcTypeCode(POINT\|GEOMETRY)`；非 POINT 子类型 native/tooling |
 | A-TYP-018 UDT | **known-limit-documented**（I-009/P-005） | native/`CREATE TYPE` 配方见 [08-schema-tooling-recipes.md](08-schema-tooling-recipes.md)；**无** ORM 实体列映射 |
-| A-DDL-008/009 · A-SCH-017 | **known-limit-documented** | SchemaExport **never emits** — Flyway/Support 配方 [08-schema-tooling-recipes.md](08-schema-tooling-recipes.md) |
-| A-FUN-021 XML functions | **known-limit-documented**（I-009/P-003；HQL Session I-010/P-005） | HQL `Session` 正例 `xmlelement`/`xmlquery`；XMLTABLE **单节点** / 空结果 assumption skip — **非** covered-live |
-| A-FUN-003/005/006/007/009 Batch A | **known-limit-documented**（I-010/P-008 独立 HQL IT） | `XuguBatchAFunctionFamiliesIT` 五族 Session 路径已写；live **SKIPPED_INFRA** — **勿**假晋升 covered-live |
+| A-DDL-008/009 · A-SCH-017 | **known-limit-documented** | SchemaExport **never emits** — Flyway/Support 配方 [08-schema-tooling-recipes.md](08-schema-tooling-recipes.md)（ENCRYPT/PARTITION 仍为真实 KL） |
+| A-FUN-021 XML functions | **known-limit-documented**（I-009/P-003；HQL Session I-010/P-005） | HQL `Session` 正例 `xmlelement`/`xmlquery` live PASS；XMLTABLE **单节点** / 空结果 assumption skip — **非** covered-live |
+| A-FUN-003/005/006/007/009 Batch A | **covered-live**（I-010/P-008；live @5287） | `XuguBatchAFunctionFamiliesIT` 五族独立 HQL Session — 已晋升 |
 | A-FUN-019 / A-FUN-020 | **covered-live**（I-009；HQL Session I-010/P-006/P-007） | regexp / 几何函数 HQL `Session.createQuery` 加深；勿回退 |
 | C-EXC-* / C-JSON-001…004 / C-WIN-* / C-CTE-* / C-BULK-001/003 / C-DDL-001…003 / C-CAT-001 / C-GUID-001 | 可实现（I-003） | 见 ruler-C 矩阵 Acceptance hint（✅ + IT 类名） |
 | C-BULK-002 bulk insert | **covered-live**（I-007/P-002） | 门控真库 IT PASS — 见 [05-troubleshooting.md §10](05-troubleshooting.md#10-bulk-insertjoined--identity已知限制) |
@@ -68,18 +68,18 @@
 | C-SRV-001 | **covered-live**（I-009/P-010） | 只读 `SHOW` 会话参数探测 |
 | C-SEL-001 | **known-limit-documented**（I-009/P-010） | `DialectResolver` SPI 足够；`XuguDialectSelector` 为内部扩展 |
 
-## I-005 baseline counts（冻结）
+## I-005 baseline counts（冻结）→ I-010 Accept 当前口径
 
 | Bucket | Count | SSOT status / 说明 |
 |---|---:|---|
 | 可实现 rows（physical SSOT） | **98** | Charter **94** + **4** I-007 Track C 晋升（`C-JSON-005` 等） |
-| **诚实 covered-live（I-008 Q1 已达成）** | **83/98** | **82** 门控 dialect/demo IT + **1** demo-live（`A-XCUT-009`）；SSOT `status=covered-live` = **83** |
-| known-limit-documented | **15** | **P-003** Batch A 关闭（thin live IT **4** + waiver **15**） |
+| **诚实 covered-live（I-010 Accept）** | **91/98** | live @5287 晋升后；先前 I-008 Q1 冻结曾为 **83/98** |
+| known-limit-documented（Charter rollup） | **7** | I-010 Accept；先前 I-008/I-009 曾为 **15**（Batch A） |
 | unit-only-without-live | **0** | P-003/P-004 后无未文档化的 unit-only 可实现行 |
 | negative-only (文档不允许 + explicit defer) | **11** | Doc-forbidden + `@Disabled` defer anchors; open **延后** = **0** |
 | Demo smoke | 7 | See baseline SSOT demo table |
 
-> **禁止**再写「**94 covered-live**」— 该口径把 CHARTER 标签与 live 证据混为一谈。诚实 rollup：[`production-regression-baseline.md`](../../contracts/production-regression-baseline.md) § Summary；晋升图：[`harness/evidence/architect-contract/I-008/P-001/PROMOTION-MAP.md`](../../harness/evidence/architect-contract/I-008/P-001/PROMOTION-MAP.md)。
+> **禁止**再写「**94 covered-live**」或陈旧「**83/98 + 15 KL**」作为**当前**口径。诚实 rollup：[`production-regression-baseline.md`](../../contracts/production-regression-baseline.md) § Summary；I-008 晋升图（历史）：[`harness/evidence/architect-contract/I-008/P-001/PROMOTION-MAP.md`](../../harness/evidence/architect-contract/I-008/P-001/PROMOTION-MAP.md)。
 
 验证门控：[03-verify.md § Frozen baseline](03-verify.md#frozen-baseline--i-005-冻结基线门控)。
 
@@ -92,9 +92,9 @@
 | known-limit-documented（延后交付） | **13** | INTERVAL/XML/几何/UDT、**A-FUN-021**、TOP/ROWNUM、catalog/索引、partition/encrypt、bit_and、C-SEL-001 |
 | doc-forbidden negative-only | **1** | C-JSON-006 |
 | Open matrix **延后** | **0**（产品交付） | Definition A 仅保留 `A-XCUT-012` Ship defer 锚点 |
-| Charter **98** rollup（不膨胀） | **83/98** + **15** | 与 I-008 Q1 诚实计数一致 |
+| Charter **98** rollup（I-009 当时） | **83/98** + **15** | I-009 Accept 不膨胀；**已被 I-010 Accept 更新为 91/98 + 7** |
 
-验证门控：[03-verify.md § I-009 Accept prep](03-verify.md#i-009-accept-prep--延后矩阵全量交付--verify-pass)。
+验证门控：[03-verify.md § I-009 Accept prep](03-verify.md#i-009-accept-prep--延后矩阵全量交付--verify-pass)。当前口径见 [§ I-010](#i-010-quality-completion退出清单)。
 
 ## I-010 quality completion（退出清单）
 
@@ -115,10 +115,12 @@ Initiative **I-010** 在 I-009 之上做 ORM/HQL 深度闭环 + 文档配方，*
 
 | Residual | SSOT | 说明 |
 |---|---|---|
-| A-FUN-021 | **known-limit-documented** | XMLTABLE 单节点/集群上限（空结果 assumption skip）；HQL 路径已 live 绿 |
+| A-FUN-021 | **known-limit-documented** | XMLTABLE 单节点/集群上限（空结果 assumption skip）；HQL `xmlelement`/`xmlquery` 已 live 绿 |
+| A-DDL-008 / A-DDL-009 | **known-limit-documented** | PARTITION / ENCRYPT — SchemaExport 不声称；native/Flyway 配方仍有效 |
+| A-TYP-018 · A-FUN-015 · A-PAG-004/006 · A-SCH-003/017 · C-SEL-001 | **known-limit-documented** | 延后库存诚实 KL — **勿吞掉** |
 | Ship / tag / push / Central | **OUT** | Human Gate 仅 Initiative Accept；**NOT Ship** |
 
-Charter rollup（live 晋升后）：**91/98** covered-live + **7** known-limit-documented。
+Charter rollup（I-010 Accept）：**91/98** covered-live + **7** known-limit-documented。
 
 验证门控：[03-verify.md § I-010 Accept prep](03-verify.md#i-010-accept-prep--ormhql-质量完善--verify-pass)。
 

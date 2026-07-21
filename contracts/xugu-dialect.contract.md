@@ -157,7 +157,7 @@ Integrators using JPA pessimistic locking on XuguDB **must** read [`docs/user-gu
 
 Live behavioral evidence for I-008 Accept: **P-005** (`harness/evidence/test/I-008/P-005/`).
 
-Honest regression counts (I-008 Q1 achieved): **83/98** covered-live + **15** known-limit-documented — see [`production-regression-baseline.md`](production-regression-baseline.md) § Summary counts.
+Honest regression counts (I-010 Accept, live @5287): **91/98** covered-live + **7** known-limit-documented — see [`production-regression-baseline.md`](production-regression-baseline.md) § Summary counts. (I-008 Q1 freeze was **83/98** + **15** KL.)
 
 ---
 

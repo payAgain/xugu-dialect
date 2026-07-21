@@ -70,8 +70,8 @@ Initiative **I-005** freezes a full regression baseline. SSOT:
 | Bucket | Count | Accept requirement |
 |---|---:|---|
 | 可实现 rows (physical SSOT) | **98** | Charter **94** + **4** I-007 Track C promotions; each row maps to `entry_class#method` |
-| **Honest covered-live (I-008 Q1 achieved)** | **83/98** | **82** dialect/demo IT + **1** demo-live (`A-XCUT-009`); SSOT `status=covered-live` = **83** |
-| known-limit-documented | **15** | P-003 Batch A waivers |
+| **Honest covered-live (I-010 Accept)** | **91/98** | Prior I-008 Q1 freeze was **83/98**; I-010 live @5287 promoted +8 |
+| known-limit-documented (Charter rollup) | **7** | I-010 Accept; prior I-008/I-009 freeze was **15** Batch A waivers |
 | unit-only-without-live | **0** | Closed in P-003/P-004 |
 | negative-only rows | 34 | Explicit non-support or `@Disabled` defer anchors |
 | Demo smoke | 7 entrypoints | Offline + gated live paths in SSOT |
@@ -150,7 +150,7 @@ Initiative **I-008** closes Q1–Q4 on GAV **`7.4.5.Final`** / **`compatiblemode
 
 | Track | Doc / evidence owner | Requirement |
 |---|---|---|
-| **Q1** Honest counts | P-002 docs + P-003/P-004 SSOT | No inflated「94 covered-live」; **83/98** covered-live + **15** known-limit-documented |
+| **Q1** Honest counts | P-002 docs + P-003/P-004 SSOT | No inflated「94 covered-live」; I-008 freeze **83/98** + **15** KL; **current** I-010 Accept **91/98** + **7** KL |
 | **Q2** Lock semantics | P-002 user guide + P-005 live IT | No SKIP LOCKED / FOR SHARE; `PESSIMISTIC_READ`→exclusive `FOR UPDATE` — [`docs/user-guide/07-lock-integration.md`](user-guide/07-lock-integration.md) |
 | **Q3** UUID/JSON Boot | P-002 checklist + P-006 wiring | Converter + `FormatMapper` path — [`docs/user-guide/02-configuration.md`](user-guide/02-configuration.md) § UUID/JSON (**P-006 implemented**) |
 | **Q4** Accept live log | P-002 language + P-007 artifact | Initiative Accept requires **full reactor** gated green + deposited log |
@@ -178,7 +178,7 @@ Initiative **I-009** closes the **20-row** deferred inventory (P-002…P-010) on
 |---|---|---|
 | **P-002…P-010** | All deferred rows **covered-live** or **known-limit-documented** | `harness/evidence/implementer/I-009/P-00*/ACCEPTANCE.md` |
 | **C-JSON-006** | **doc-forbidden negative-only** — `supportsJsonTableFunction=false`; no invented JSON_TABLE SQL | P-010 |
-| **Charter 98 rollup** | **83/98** covered-live + **15** known-limit-documented — **not** inflated by deferred closure | P-011 docs align |
+| **Charter 98 rollup** | I-009 then **83/98** + **15** KL — **not** inflated by deferred closure; **current** I-010 Accept **91/98** + **7** KL | P-011 docs align; I-010 supersedes |
 
 ### Offline vs Accept (I-009)
 

@@ -154,7 +154,7 @@ Initiative **I-008** 在 I-005/I-006/I-007 基线之上闭环 Q1–Q4。**离线
 
 无真库时：文档 **`SKIPPED_INFRA`** — 离线绿 **不能** 代替 Accept live log。
 
-诚实计数（Q1，P-003/P-004 已达成）：**83/98** covered-live + **15** known-limit-documented — [04-feature-matrix.md § I-005 baseline counts](04-feature-matrix.md#i-005-baseline-counts冻结)。锁集成（Q2）：[07-lock-integration.md](07-lock-integration.md)。Boot UUID/JSON 开箱（Q3）：[02-configuration.md § UUID/JSON](02-configuration.md#uuid--json-boot-必配清单i-008-q3)。
+诚实计数（Q1，P-003/P-004 当时达成）：**83/98** covered-live + **15** known-limit-documented（I-008 冻结）。**当前** Charter rollup 以 I-010 Accept 为准：**91/98** + **7** KL — [04-feature-matrix.md § I-005 / I-010](04-feature-matrix.md#i-005-baseline-counts冻结i-010-accept-当前口径)。锁集成（Q2）：[07-lock-integration.md](07-lock-integration.md)。Boot UUID/JSON 开箱（Q3）：[02-configuration.md § UUID/JSON](02-configuration.md#uuid--json-boot-必配清单i-008-q3)。
 
 **Q5 out of scope：** 性能基准与 Hibernate 多版本兼容矩阵 **未做**（I-008 Scope PASS 明示）。
 
@@ -178,7 +178,7 @@ Initiative **I-009** 在 I-005/I-006/I-007/I-008 基线之上交付 **20 行**�
 
 > **A-FUN-021：** baseline 行级 SSOT = **known-limit-documented**（XMLTABLE 单节点 / 集群 skip）— 勿写 covered-live 或陈旧 **7/12**。见 [`production-regression-baseline.md`](../../contracts/production-regression-baseline.md) § A-FUN-021。
 
-Charter **98** 可实现诚实 rollup **不变**：**83/98** covered-live + **15** known-limit-documented — 见 [04-feature-matrix.md § I-009](04-feature-matrix.md#i-009-deferred-closure终态)。
+Charter **98** 可实现诚实 rollup（I-009 当时）**不膨胀**：**83/98** covered-live + **15** known-limit-documented — 见 [04-feature-matrix.md § I-009](04-feature-matrix.md#i-009-deferred-closure终态)。**其后** I-010 Accept 更新为 **91/98** + **7** KL。
 
 **NOT Ship** — Maven Central / tag 不在 I-009 范围。
 

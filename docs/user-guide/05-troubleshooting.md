@@ -153,12 +153,12 @@ hibernate.query.json_functions_enabled=true
 
 | 能力 | 矩阵 | 基线状态 | 集成边界（I-010 P-002…P-004） |
 |---|---|---|---|
-| **INTERVAL** | A-TYP-014 | **known-limit-documented**（实体 ORM 路径已落地；**covered-live pending** live IT） | Hibernate 暴露 DURATION / INTERVAL_SECOND → `XuguIntervalJdbcType` 字符串绑定；实体 IT `intervalEntityOrmRoundTrip_A_TYP_014`。其余 11 虚谷子类型仍 tooling/native；输出受 `DEF_INTERVAL_STYLE` 影响。**勿**在 live 未 PASS 前声称 covered-live。 |
-| **XML 列** | A-TYP-016 | **known-limit-documented**（实体 ORM 路径已落地；**covered-live pending** live IT） | 推荐 `String` + `@JdbcTypeCode(SqlTypes.SQLXML)`（`XuguXmlJdbcType`）；实体 IT `xmlEntityOrmRoundTrip_A_TYP_016`。**勿**映射 `java.sql.SQLXML` / 依赖默认 `XmlJdbcType`。native 往返仍保留。 |
-| **几何 / 空间** | A-TYP-017 / A-FUN-020 | 类型 **known-limit**（POINT 实体 ORM 已落地；**covered-live pending**）；函数 **covered-live**（含 HQL Session I-010/P-006） | 推荐 `String` + `@JdbcTypeCode(POINT\|GEOMETRY)`（`XuguPointJdbcType`）；实体 IT `pointEntityOrmRoundTrip_A_TYP_017`。LINE/LSEG/BOX/PATH/POLYGON/CIRCLE 仍 native/tooling。简单 2D（非 PostGIS）。 |
+| **INTERVAL** | A-TYP-014 | **covered-live**（I-010 Accept；live @5287） | Hibernate 暴露 DURATION / INTERVAL_SECOND → `XuguIntervalJdbcType` 字符串绑定；实体 IT `intervalEntityOrmRoundTrip_A_TYP_014` PASS。其余 11 虚谷子类型仍 tooling/native；输出受 `DEF_INTERVAL_STYLE` 影响。 |
+| **XML 列** | A-TYP-016 | **covered-live**（I-010 Accept；live @5287） | 推荐 `String` + `@JdbcTypeCode(SqlTypes.SQLXML)`（`XuguXmlJdbcType`）；实体 IT `xmlEntityOrmRoundTrip_A_TYP_016` PASS。**勿**映射 `java.sql.SQLXML` / 依赖默认 `XmlJdbcType`。native 往返仍保留。 |
+| **几何 / 空间** | A-TYP-017 / A-FUN-020 | 类型与函数均为 **covered-live**（POINT 实体 ORM + HQL Session；live @5287） | 推荐 `String` + `@JdbcTypeCode(POINT\|GEOMETRY)`（`XuguPointJdbcType`）；实体 IT `pointEntityOrmRoundTrip_A_TYP_017` PASS。LINE/LSEG/BOX/PATH/POLYGON/CIRCLE 仍 native/tooling。简单 2D（非 PostGIS）。 |
 | **UDT** | A-TYP-018 | **known-limit-documented** | CREATE TYPE / constructor / DROP TYPE 的 native / Flyway 路径（见 [08-recipes](08-schema-tooling-recipes.md#recipe-d--udt-create-typea-typ-018交叉)）；**不**声称 ORM 实体列映射 UDT。 |
 
-排障提示：对照 baseline call-out 与门控 IT（`XuguIntervalTypeIT` / `XuguXmlTypeAndFunctionsIT` / `XuguGeometricTypeAndFunctionsIT` / `XuguUdtTypeIT`）。live `SKIPPED_INFRA` 时保持 known-limit，勿假晋升 covered-live。
+排障提示：对照 baseline call-out 与门控 IT（`XuguIntervalTypeIT` / `XuguXmlTypeAndFunctionsIT` / `XuguGeometricTypeAndFunctionsIT` / `XuguUdtTypeIT`）。XMLTABLE（A-FUN-021）/ ENCRYPT（A-DDL-009）等真实 KL 仍见对应小节 — 勿吞掉。
 
 ## 15. XML 函数 / XMLTABLE（A-FUN-021）
 
