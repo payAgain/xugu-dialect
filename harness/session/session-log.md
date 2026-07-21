@@ -1,3 +1,13 @@
+## Entry: I-010 B-001 complete — await Initiative Accept
+
+### Summary
+Orchestrator 串行完成 P-001…P-010。P-008 曾因 covered-live 虚标 FAIL，已以 `48a8fa1` 回滚 SSOT。`verify.py` **VERIFY PASS**。Live **SKIPPED_INFRA**；A-TYP-014/016/017、Batch A、A-FUN-021 保持 known-limit。**NOT Ship** · **NOT Archive**。
+
+### Next
+Human Gate：审 SHA 后 **Initiative Accept I-010**（仍 NOT Ship）。
+
+---
+
 ## Entry: I-010 B-001 approved — P-001~P-010 serial
 
 ### Summary

@@ -1,15 +1,11 @@
 schema_version: 1
 charter_version: "1.0.0"
 initiative_id: I-010
-updated: "2026-07-21T14:40:00+08:00"
+updated: "2026-07-21T16:20:00+08:00"
 supersedes_initiative: I-009
 notes: >
-  I-009 P-001…P-011 packets archived at harness/tasks/archive/I-009/.
-  I-010 Plan P-001…P-010 serial (ORM/HQL quality depth + SSOT/doc alignment).
-  Serial dependencies only; orchestrator does not ask human about parallel execution.
-  B-001 draft proposes P-001 only until Human Gate approves Build scope.
-  GAV stays 7.4.5.Final; compatiblemode=NONE only; NOT Ship.
-  EXCLUDE: doc-forbidden features, Ship, multi-compat, UDT full ORM, env ENCRYPT/XMLTABLE as must-implement.
+  I-010 B-001 P-001…P-010 serial complete; VERIFY PASS; await Initiative Accept (NOT Ship).
+  Live SKIPPED_INFRA residuals documented; no covered-live inflation under SKIPPED_INFRA.
 tasks:
   - task_id: P-001
     title: "对齐 SSOT/文档口径（Definition A、A-FUN-021、Demo smoke、troubleshooting）"
@@ -37,7 +33,7 @@ tasks:
     dependencies: [P-002]
   - task_id: P-004
     title: "A-TYP-017 POINT 实体 persist/load 真库 IT"
-    status: in_progress
+    status: accepted
     build_id: B-001
     packet: harness/tasks/P-004.md
     acceptance_doc: harness/evidence/implementer/I-010/P-004/ACCEPTANCE.md
@@ -45,48 +41,48 @@ tasks:
     dependencies: [P-003]
   - task_id: P-005
     title: "A-FUN-021 HQL Session xmlelement/xmlquery + XMLTABLE SSOT"
-    status: planned
-    build_id: null
+    status: accepted
+    build_id: B-001
     packet: harness/tasks/P-005.md
     acceptance_doc: harness/evidence/implementer/I-010/P-005/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"
     dependencies: [P-004]
   - task_id: P-006
     title: "A-FUN-020 几何函数 HQL Session live（2–3）"
-    status: planned
-    build_id: null
+    status: accepted
+    build_id: B-001
     packet: harness/tasks/P-006.md
     acceptance_doc: harness/evidence/implementer/I-010/P-006/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"
     dependencies: [P-005]
   - task_id: P-007
     title: "A-FUN-019 regexp_* HQL Session live"
-    status: planned
-    build_id: null
+    status: accepted
+    build_id: B-001
     packet: harness/tasks/P-007.md
     acceptance_doc: harness/evidence/implementer/I-010/P-007/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"
     dependencies: [P-006]
   - task_id: P-008
     title: "Batch A A-FUN-003/005/006/007/009 独立 HQL live"
-    status: planned
-    build_id: null
+    status: accepted
+    build_id: B-001
     packet: harness/tasks/P-008.md
     acceptance_doc: harness/evidence/implementer/I-010/P-008/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"
     dependencies: [P-007]
   - task_id: P-009
     title: "Schema tooling 文档配方（PARTITION/ENCRYPT/高级索引）"
-    status: planned
-    build_id: null
+    status: accepted
+    build_id: B-001
     packet: harness/tasks/P-009.md
     acceptance_doc: harness/evidence/docs/I-010/P-009/ACCEPTANCE.md
     role_pipeline_summary: "docs → reviewer"
     dependencies: [P-008]
   - task_id: P-010
     title: "质量口径终对齐 + VERIFY PASS Accept 准备"
-    status: planned
-    build_id: null
+    status: accepted
+    build_id: B-001
     packet: harness/tasks/P-010.md
     acceptance_doc: harness/evidence/orchestrator/I-010/P-010/ACCEPTANCE.md
     role_pipeline_summary: "docs → test → reviewer"

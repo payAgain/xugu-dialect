@@ -2,39 +2,39 @@
   "schema_version": 1,
   "task_id": "I-010",
   "batch_id": "B-001",
-  "status": "build_in_progress",
+  "status": "b001_complete_await_initiative_accept",
   "harness_level": "Standard",
-  "last_updated": "2026-07-21T14:48:00+08:00",
+  "last_updated": "2026-07-21T16:20:00+08:00",
   "initiative_id": "I-010",
   "initiative_type": "feature",
   "working_branch": "feat/i-010-orm-hql-quality-completion",
   "active_plan": [
-    "Scope PASS + B-001 approved P-001…P-010 serial",
-    "Executing P-001 first (SSOT/doc alignment)",
-    "NOT Ship"
+    "B-001 P-001…P-010 all accepted",
+    "VERIFY PASS; live SKIPPED_INFRA residuals honest",
+    "Await Human Gate Initiative Accept (NOT Ship, NOT Archive)"
   ],
   "next_3_steps": [
-    "Complete P-001 → accept",
-    "Serial P-002…P-010",
-    "VERIFY PASS then Human Gate Initiative Accept (NOT Ship)"
+    "Human Gate: Initiative Accept I-010 (NOT Ship)",
+    "Optional: live retest @ reachable XuGu then promote known-limit rows",
+    "Ship only with separate Human Gate authorization"
   ],
   "validation": {
-    "last_result": "Build approved; execution starting at P-001"
+    "last_result": "VERIFY PASS; B-001 complete; live SKIPPED_INFRA"
   },
   "cognitive_state": {
     "failure_count": 0,
-    "current_mode": "build_executing",
-    "blocked_on": null
+    "current_mode": "await_initiative_accept",
+    "blocked_on": "Human Gate Initiative Accept"
   },
   "version_control_checkpoint": {
-    "decision": "b001_approved_executing",
+    "decision": "b001_complete",
     "committed": true,
     "branch": "feat/i-010-orm-hql-quality-completion",
-    "plan_commit": "ae360bcc4c804e4bd8ed9dd728cecf84c6a7cdfe",
-    "tip": "aa8f0a36d165fbc91c0a260e17d7111e06549105"
+    "p010_commit": "74ef82fae7d0a4a70e48c2096217c38fdaa5fbf2",
+    "p008_ssot_fix": "48a8fa13de19ed7a24be743bf7d354c73435a6b0"
   },
   "handoff": {
-    "resume_from": "harness/handoffs/orchestrator/I-010-plan-ready-await-build.md"
+    "resume_from": "harness/handoffs/orchestrator/I-010-B-001-complete.md"
   },
   "approved_build": "B-001",
   "approved_phases": [
@@ -43,5 +43,5 @@
   ],
   "ship": false,
   "archive": false,
-  "updated_at": "2026-07-21T14:48:00+08:00"
+  "updated_at": "2026-07-21T16:20:00+08:00"
 }
