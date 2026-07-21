@@ -88,3 +88,6 @@ notes: >
   I-008 (2026-07-20): production quality gaps Q1–Q4 — branch feat/i-008-production-quality-gaps;
   honest SSOT counts + 94-row covered-live promotion + lock evidence + Boot UUID/JSON out-of-box + Accept live proof;
   Q5 perf/multi-version out; NONE only; NOT Ship; GAV 7.4.5.Final.
+  I-009 (2026-07-21): deferred matrix full delivery — branch feat/i-009-deferred-matrix-delivery;
+  types/functions/DDL/schema/pagination-lock-identity/Ruler-C deferred rows; doc-forbidden skip/negative only;
+  NONE only; NOT Ship; GAV 7.4.5.Final; Xugu docs E:\Work\docs\content read-only.

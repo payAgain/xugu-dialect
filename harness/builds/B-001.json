@@ -1,24 +1,16 @@
 {
   "schema_version": 1,
   "build_id": "B-001",
-  "initiative_id": "I-008",
+  "initiative_id": "I-009",
   "plan_revision": 1,
-  "status": "approved",
-  "approved": true,
-  "completed": true,
-  "completed_at": "2026-07-20T18:35:00+08:00",
-  "proposed_phase_ids": ["P-001", "P-002", "P-003", "P-004", "P-005", "P-006", "P-007"],
-  "approved_phase_ids": ["P-001", "P-002", "P-003", "P-004", "P-005", "P-006", "P-007"],
-  "approval": {
-    "reference": "批准 B-001，范围 P-001~p-007",
-    "approved_at": "2026-07-20T16:04:00+08:00",
-    "approved_by": "Human Gate",
-    "scope": "P-001 through P-007 serial"
-  },
-  "execution_note": "Serial Plan P-001→P-007. Orchestrator decides serial; never ask human about parallel. GAV 7.4.5.Final; compatiblemode=NONE only; native dialect; no sibling port; do not commit org/. NOT Ship. Q5 out.",
-  "supersedes": "I-007-B-001",
-  "scope_changes": [
-    "Human Gate expanded draft (P-001 only) to full Plan P-001…P-007"
-  ],
-  "notes": "I-008 Q1–Q4 full close. Execute via orchestrator role instances; must-commit per Phase."
+  "status": "draft",
+  "approved": false,
+  "completed": false,
+  "proposed_phase_ids": ["P-001"],
+  "approved_phase_ids": [],
+  "approval": null,
+  "execution_note": "Serial Plan P-001→P-011. Orchestrator decides serial; never ask human about parallel. GAV 7.4.5.Final; compatiblemode=NONE only; native dialect; no sibling port; do not commit org/. NOT Ship. Doc-forbidden rows remain skip/negative only — never invent SQL.",
+  "supersedes": "I-008-B-001",
+  "scope_changes": [],
+  "notes": "I-009 deferred matrix full delivery. Execute via orchestrator role instances; must-commit per Phase. Draft proposes P-001 only until Human Gate approves Build scope."
 }

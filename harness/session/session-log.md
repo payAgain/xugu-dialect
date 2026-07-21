@@ -1,3 +1,13 @@
+## Entry: I-009 Plan complete — await Build approval
+
+### Summary
+Orchestrator 物化 Plan **P-001…P-011**（延后矩阵全量串行；文档不允许 skip；不升版；不 Ship）。I-008 Accept SHA `cdda6c7`；分支 `feat/i-009-deferred-matrix-delivery`；I-008 packets 归档至 `harness/tasks/archive/I-008/`；**B-001 draft** 仅提议 **P-001**（延后矩阵 SSOT 盘点 + 批次路线图）。
+
+### Next
+Human Gate：是否批准 **B-001** 范围（默认仅 P-001）？
+
+---
+
 ## Entry: I-008 B-001 complete — await Initiative Accept
 
 ### Summary

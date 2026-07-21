@@ -1,59 +1,44 @@
 {
   "schema_version": 1,
-  "task_id": "I-008",
+  "task_id": "I-009",
   "batch_id": "B-001",
-  "status": "build_complete",
+  "status": "plan_complete",
   "harness_level": "Standard",
-  "last_updated": "2026-07-20T18:35:00+08:00",
-  "initiative_id": "I-008",
+  "last_updated": "2026-07-21T09:45:00+08:00",
+  "initiative_id": "I-009",
   "initiative_type": "feature",
-  "working_branch": "feat/i-008-production-quality-gaps",
+  "working_branch": "feat/i-009-deferred-matrix-delivery",
   "active_plan": [
-    "B-001 approved P-001…P-007 serial",
-    "B-001 complete — all phases accepted"
+    "Plan P-001…P-011 serial (deferred matrix full delivery)",
+    "B-001 draft proposes P-001 only"
   ],
   "next_3_steps": [
-    "Human Gate Initiative Accept I-008 (note live SKIPPED_INFRA)",
-    "Optional: rerun full reactor live IT when DB available",
-    "NOT Ship unless separately authorized"
+    "Human Gate approve B-001 scope (default P-001 only)",
+    "Orchestrator serial execute P-001→P-011",
+    "Initiative Accept — NOT Ship"
   ],
   "validation": {
-    "last_result": "P-007 ACCEPT PASS; verify.py VERIFY PASS (offline); live SKIPPED_INFRA"
+    "last_result": "Plan batch: harness_check + branch_check PASS (pending commit)"
   },
   "cognitive_state": {
     "failure_count": 0,
-    "current_mode": "await_initiative_accept",
+    "current_mode": "await_build_approval",
     "blocked_on": null
   },
   "version_control_checkpoint": {
-    "decision": "p007_accepted_b001_complete",
-    "committed": true,
-    "branch": "feat/i-008-production-quality-gaps",
-    "last_phase_accepted": "P-007",
-    "candidate_commit": "bfbb396"
+    "decision": "i009_plan_complete",
+    "committed": false,
+    "branch": "feat/i-009-deferred-matrix-delivery",
+    "last_phase_accepted": null,
+    "candidate_commit": null,
+    "i008_accept_sha": "cdda6c7"
   },
   "handoff": {
-    "resume_from": "Human Gate Initiative Accept"
+    "resume_from": "Human Gate Build approval"
   },
-  "approved_build": "B-001",
-  "approved_phases": [
-    "P-001",
-    "P-002",
-    "P-003",
-    "P-004",
-    "P-005",
-    "P-006",
-    "P-007"
-  ],
-  "phases_accepted": [
-    "P-001",
-    "P-002",
-    "P-003",
-    "P-004",
-    "P-005",
-    "P-006",
-    "P-007"
-  ],
+  "approved_build": null,
+  "approved_phases": [],
+  "phases_accepted": [],
   "ship": false,
-  "updated_at": "2026-07-20T18:35:00+08:00"
+  "updated_at": "2026-07-21T09:45:00+08:00"
 }

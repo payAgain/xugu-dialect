@@ -1,7 +1,7 @@
 # Initiative Brief: I-009
 
 > Type: **feature**  
-> Updated: 2026-07-21T09:32:00+08:00
+> Updated: 2026-07-21T09:45:00+08:00
 
 ## Goal
 交付特性矩阵中全部 **「延后」** 且虚谷文档允许的能力（类型/函数/DDL/分页备选/锁/JSON/配置等）；**「文档不允许」** 继续 skip/负向；GAV **7.4.5.Final**；**不 Ship**（含 A-XCUT-012）。
@@ -33,7 +33,7 @@
 - [ ] GAV 7.4.5.Final；NONE；不 Ship
 
 ## Status
-`active` — Scope PASS；awaiting Plan + Build approval
+`active` — Plan complete (P-001…P-011)；awaiting Build approval
 
 ## Branch
 `feat/i-009-deferred-matrix-delivery`（orchestrator 创建）
