@@ -1,11 +1,11 @@
 schema_version: 1
 charter_version: "1.0.0"
 initiative_id: I-010
-updated: "2026-07-21T16:45:00+08:00"
+updated: "2026-07-21T17:10:00+08:00"
 supersedes_initiative: I-009
 notes: >
-  I-010 B-001 + B-002 complete (P-001…P-017 accepted). VERIFY PASS; await Initiative Accept;
-  live SKIPPED_INFRA; NOT Ship; GAV 7.4.5.Final; NONE.
+  I-010 Initiative Accept. B-001+B-002 complete. Live @5287 PASS; VERIFY PASS;
+  NOT Ship; NOT Archive; GAV 7.4.5.Final; NONE.
 tasks:
   - task_id: P-001
     title: "对齐 SSOT/文档口径（Definition A、A-FUN-021、Demo smoke、troubleshooting）"

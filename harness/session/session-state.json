@@ -1,40 +1,40 @@
 {
   "schema_version": 1,
   "task_id": "I-010",
-  "batch_id": "B-002",
-  "status": "b002_complete_await_initiative_accept",
+  "batch_id": null,
+  "status": "initiative_accepted",
   "harness_level": "Standard",
-  "last_updated": "2026-07-21T16:45:00+08:00",
+  "last_updated": "2026-07-21T17:10:00+08:00",
   "initiative_id": "I-010",
   "initiative_type": "feature",
   "working_branch": "feat/i-010-orm-hql-quality-completion",
   "active_plan": [
-    "B-001 P-001…P-010 accepted",
-    "B-002 P-011…P-017 accepted — xuguefcore parity suite 10/10",
-    "VERIFY PASS; live SKIPPED_INFRA; await Initiative Accept (NOT Ship)"
+    "I-010 Initiative Accept complete",
+    "Live @5287 PASS; SSOT promoted; VERIFY PASS",
+    "NOT Ship · NOT Archive"
   ],
   "next_3_steps": [
-    "Human Gate: Initiative Accept I-010 (NOT Ship)",
-    "Optional: live retest @ reachable XuGu then promote SSOT rows",
-    "Ship only with separate Human Gate authorization"
+    "Human Gate optional: Archive I-010",
+    "Human Gate optional: authorize Ship",
+    "Or open next Initiative"
   ],
   "validation": {
-    "last_result": "VERIFY PASS; B-002 complete; live SKIPPED_INFRA"
+    "last_result": "VERIFY PASS; live @5287 dialect 253/0/0/4 demo 36/0/0/0; Initiative Accept"
   },
   "cognitive_state": {
     "failure_count": 0,
-    "current_mode": "await_initiative_accept",
-    "blocked_on": "Human Gate Initiative Accept"
+    "current_mode": "initiative_accepted",
+    "blocked_on": null
   },
   "version_control_checkpoint": {
-    "decision": "b002_complete",
+    "decision": "initiative_accepted",
     "committed": true,
     "branch": "feat/i-010-orm-hql-quality-completion",
-    "b002_tip": "2368cbbed8beec5891179abb75ea5a2ae269be9d",
-    "p016_commits": ["b58881efe6f9cec68b658f812629aad14fb0b1f3", "441f4824aa8de2d117781c5b9b037ccf488fa407"]
+    "live_it_commit": "51de6e32ba788110ba209f9e0483b7543daba992",
+    "b002_tip": "2368cbbed8beec5891179abb75ea5a2ae269be9d"
   },
   "handoff": {
-    "resume_from": "harness/handoffs/orchestrator/I-010-B-002-complete.md"
+    "resume_from": "harness/handoffs/orchestrator/I-010-initiative-accepted.md"
   },
   "approved_build": "B-002",
   "approved_phases": [
@@ -42,5 +42,5 @@
   ],
   "ship": false,
   "archive": false,
-  "updated_at": "2026-07-21T16:45:00+08:00"
+  "updated_at": "2026-07-21T17:10:00+08:00"
 }

@@ -1,3 +1,13 @@
+## Entry: I-010 Initiative Accept — NOT Ship · NOT Archive
+
+### Summary
+Human Gate 要求先在真实虚谷 @5287 跑通门控 IT，再 **Initiative Accept I-010**。Live dialect **253/0/0/4** · demo **36/0/0/0**；修 xmlelement 双引号 / xmlquery XML 参 / trim VARCHAR 尾空格假设；SSOT 晋升 parity XP + A-TYP-014/016/017 + Batch A；A-FUN-021（XMLTABLE）仍 known-limit；Charter **91/98** + **7** known-limit；`verify.py` **VERIFY PASS**。**NOT Ship** · **NOT Archive**。
+
+### Next
+Human Gate 可选：Archive I-010 / 授权 Ship / 开新 Initiative。
+
+---
+
 ## Entry: I-010 B-002 complete — await Initiative Accept
 
 ### Summary

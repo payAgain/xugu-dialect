@@ -1,7 +1,7 @@
 # Initiative Brief: I-010
 
 > Type: **feature**  
-> Updated: 2026-07-21T16:30:00+08:00
+> Updated: 2026-07-21T17:10:00+08:00
 
 ## Goal
 质量完善：ORM/HQL 深度闭环（INTERVAL/XML/POINT 实体 + XML/几何/regexp/Batch A HQL live）+ SSOT/用户文档口径对齐；**外加**对照 xuguefcore 的高/中/低建议用例全量落地（B-002）；GAV **7.4.5.Final**；**不 Ship**；不做文档不允许能力。
@@ -46,13 +46,13 @@ SSOT：`contracts/xuguefcore-parity-suite.md`（P-011）
 - Ship / tag / push / Central
 
 ## Acceptance criteria
-- [x] B-001 质量口径退出清单 P0+P1（VERIFY PASS；live SKIPPED_INFRA 诚实）
-- [ ] B-002 10 项用例落地（可运行或诚实 document/SKIPPED_INFRA）
-- [ ] VERIFY PASS；真库证据或诚实 SKIPPED_INFRA
-- [ ] 不 Ship
+- [x] B-001 质量口径退出清单 P0+P1（VERIFY PASS；live @5287 PASS）
+- [x] B-002 10 项用例落地（XP covered-live×8 + covered-unit×2）
+- [x] VERIFY PASS；真库证据 `harness/evidence/test/I-010/live-it-5287/`
+- [x] 不 Ship
 
 ## Status
-`active` — B-001 **complete**；B-002 P-011…P-017 **complete**（VERIFY PASS；live SKIPPED_INFRA）；await **Initiative Accept**；**NOT Ship** · **NOT Archive**
+`accepted` — Initiative Accept（2026-07-21）；live @5287 dialect **253/0/0/4** · demo **36/0/0/0**；Charter **91/98** + **7** known-limit；**NOT Ship** · **NOT Archive**
 
 ## Branch
 `feat/i-010-orm-hql-quality-completion`
