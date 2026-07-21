@@ -134,18 +134,14 @@ public final class XuguFunctionRegistrations {
 
 		// --- XML subset (A-FUN-021) — docs: reference/function/xml-functions/** ---
 		// HQL Session positive path (I-010/P-005): xmlelement + xmlquery.
+		// XuGu XMLELEMENT requires double-quoted xmlname (not a string literal).
 		// xmlquery must emit PASSING … RETURNING CONTENT (xmlquery.md), not csv args.
-		functionRegistry.namedDescriptorBuilder( "xmlelement" )
-				.setMinArgumentCount( 1 )
-				.setParameterTypes( FunctionParameterType.STRING )
-				.setInvariantType( stringType )
-				.setArgumentListSignature( "(STRING xmlname[, …])" )
-				.register();
+		functionRegistry.register( "xmlelement", new XuguXmlElementFunction( typeConfiguration ) );
 		functionRegistry.patternDescriptorBuilder(
 						"xmlquery",
 						"xmlquery(?1 PASSING ?2 RETURNING CONTENT)" )
 				.setExactArgumentCount( 2 )
-				.setParameterTypes( FunctionParameterType.STRING, FunctionParameterType.STRING )
+				.setParameterTypes( FunctionParameterType.STRING, FunctionParameterType.IMPLICIT_XML )
 				.setInvariantType( stringType )
 				.setArgumentListSignature( "(STRING xpath, XML xmlData)" )
 				.register();

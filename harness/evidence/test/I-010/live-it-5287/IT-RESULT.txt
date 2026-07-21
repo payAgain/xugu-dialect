@@ -1,0 +1,34 @@
+I-010 live IT @192.168.2.239:5287 — RESULT
+
+Date: 2026-07-21
+Gate: XUGU_RUN_IT=true
+URL: jdbc:xugu://192.168.2.239:5287/SYSTEM?compatiblemode=NONE
+User: SYSDBA (password via env only; not committed)
+TCP: 5287/5288/5289 all OK; prefer 5287
+
+Full reactor:
+  dialect: 253 run / 0 fail / 0 err / 4 skip
+  demo-spring-boot: 36 / 0 / 0 / 0
+  EXIT: 0
+
+Skips (honest):
+  - XuguXmlTypeAndFunctionsIT#xmlFunctionsNativeSubset_A_FUN_021 — XMLTABLE empty (cluster known-limit)
+  - XuguTableDdlExtensionsIT#encryptByNativeWhenEncryptorAvailable_A_DDL_009 — encryptor unavailable
+  - XuguNegativeRegressionBaselineTest — 2 intentional skips
+
+B-002 IT (all PASS, 0 skip):
+  XuguOptimisticConcurrencyIT 2
+  XuguHqlGroupByCountIT 2
+  XuguHqlBulkBoundaryIT 4
+  XuguJsonLobBoundaryIT 1 (materialization success → covered-live)
+  XuguExplicitTxAtomicityIT 2
+  XuguHqlJoinFetchIT 1
+  XuguNullSemanticsIT 4
+  XuguTemporalProjectionIT 1
+
+Live fixes landed:
+  - XuguXmlElementFunction: render xmlname as double-quoted identifier
+  - xmlquery arg2: FunctionParameterType.IMPLICIT_XML
+  - A-FUN-005 trim IT: VARCHAR trailing-space via HQL literals
+
+Verdict: LIVE PASS

@@ -112,13 +112,13 @@ Columns: `matrix_id | status | entry_class#method | gate | gap_action`
 |---|---|---|---|---|
 | A-FUN-001 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
 | A-FUN-002 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
-| A-FUN-003 | known-limit-documented | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguBatchAFunctionFamiliesIT#lengthFamilyHqlSession_A_FUN_003` | IT (live SKIPPED_INFRA) | N/A (I-010/P-008 independent HQL IT present; promote to covered-live only after live PASS) |
+| A-FUN-003 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguBatchAFunctionFamiliesIT#lengthFamilyHqlSession_A_FUN_003` | IT (live SKIPPED_INFRA) | N/A (I-010/P-008 independent HQL IT present; promote to covered-live only after live PASS) |
 | A-FUN-004 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
-| A-FUN-005 | known-limit-documented | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguBatchAFunctionFamiliesIT#trimFamilyHqlSession_A_FUN_005` | IT (live SKIPPED_INFRA) | N/A (I-010/P-008 independent HQL IT present; promote to covered-live only after live PASS) |
-| A-FUN-006 | known-limit-documented | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguBatchAFunctionFamiliesIT#replaceLocateHqlSession_A_FUN_006` | IT (live SKIPPED_INFRA) | N/A (I-010/P-008 independent HQL IT present; promote to covered-live only after live PASS) |
-| A-FUN-007 | known-limit-documented | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguBatchAFunctionFamiliesIT#coalesceNvlHqlSession_A_FUN_007` | IT (live SKIPPED_INFRA) | N/A (I-010/P-008 independent HQL IT present; promote to covered-live only after live PASS) |
+| A-FUN-005 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguBatchAFunctionFamiliesIT#trimFamilyHqlSession_A_FUN_005` | IT (live SKIPPED_INFRA) | N/A (I-010/P-008 independent HQL IT present; promote to covered-live only after live PASS) |
+| A-FUN-006 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguBatchAFunctionFamiliesIT#replaceLocateHqlSession_A_FUN_006` | IT (live SKIPPED_INFRA) | N/A (I-010/P-008 independent HQL IT present; promote to covered-live only after live PASS) |
+| A-FUN-007 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguBatchAFunctionFamiliesIT#coalesceNvlHqlSession_A_FUN_007` | IT (live SKIPPED_INFRA) | N/A (I-010/P-008 independent HQL IT present; promote to covered-live only after live PASS) |
 | A-FUN-008 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` (abs) | IT | N/A |
-| A-FUN-009 | known-limit-documented | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguBatchAFunctionFamiliesIT#roundTruncHqlSession_A_FUN_009` | IT (live SKIPPED_INFRA) | N/A (I-010/P-008 independent HQL IT present; promote to covered-live only after live PASS) |
+| A-FUN-009 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguBatchAFunctionFamiliesIT#roundTruncHqlSession_A_FUN_009` | IT (live SKIPPED_INFRA) | N/A (I-010/P-008 independent HQL IT present; promote to covered-live only after live PASS) |
 | A-FUN-010 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
 | A-FUN-011 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
 | A-FUN-012 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguTypeDdlDetailsIT#typeDdlDetailsOnLiveDb` (to_char path) | IT | N/A |
@@ -195,39 +195,39 @@ Columns: `matrix_id | status | entry_class#method | gate | gap_action`
 
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
-| A-TYP-016 | known-limit-documented | `XuguXmlTypeTest#xmlTypeHooksWired_A_TYP_016`; `XuguXmlTypeTest#documentedXmlConstantsLocked_A_TYP_016`; `XuguXmlTypeTest#xmlJdbcTypeContributed_A_TYP_016`; `XuguXmlTypeAndFunctionsIT#xmlTypeNativeRoundTrip_A_TYP_016`; `XuguXmlTypeAndFunctionsIT#xmlEntityOrmRoundTrip_A_TYP_016`; `XuguDialectTest#columnTypesMatchXuguDocs` (SQLXML) | IT | N/A (I-010/P-003 entity ORM path; live pending) |
-| A-FUN-021 | known-limit-documented | `XuguFunctionRegistryTest#xmlSubsetRegistered_A_FUN_021`; `XuguXmlTypeAndFunctionsIT#xmlFunctionsHqlSession_A_FUN_021`; `XuguXmlTypeAndFunctionsIT#xmlFunctionsNativeSubset_A_FUN_021` | IT (live SKIPPED_INFRA) | N/A (I-010/P-005 HQL Session path; XMLTABLE remains known-limit) |
+| A-TYP-016 | covered-live | `XuguXmlTypeTest#xmlTypeHooksWired_A_TYP_016`; `XuguXmlTypeTest#documentedXmlConstantsLocked_A_TYP_016`; `XuguXmlTypeTest#xmlJdbcTypeContributed_A_TYP_016`; `XuguXmlTypeAndFunctionsIT#xmlTypeNativeRoundTrip_A_TYP_016`; `XuguXmlTypeAndFunctionsIT#xmlEntityOrmRoundTrip_A_TYP_016`; `XuguDialectTest#columnTypesMatchXuguDocs` (SQLXML) | IT | N/A (I-010/P-003 entity ORM path; live pending) |
+| A-FUN-021 | known-limit-documented | `XuguFunctionRegistryTest#xmlSubsetRegistered_A_FUN_021`; `XuguXmlTypeAndFunctionsIT#xmlFunctionsHqlSession_A_FUN_021` (live PASS); `XuguXmlTypeAndFunctionsIT#xmlFunctionsNativeSubset_A_FUN_021` (XMLTABLE empty→skip) | IT | HQL `xmlelement`/`xmlquery` live @5287 PASS; **XMLTABLE** remains known-limit (cluster empty→assumption skip) |
 
 ### I-010 / P-003 — A-TYP-016 entity ORM path
 
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
-| A-TYP-016 | known-limit-documented | `XuguXmlJdbcType` + `I010P003XmlEntity`; `XuguXmlTypeAndFunctionsIT#xmlEntityOrmRoundTrip_A_TYP_016` (`String` + `@JdbcTypeCode(SQLXML)`); native IT retained | IT | **Promote to covered-live only after live entity IT PASS** — do not claim covered-live while SKIPPED_INFRA |
+| A-TYP-016 | covered-live | `XuguXmlJdbcType` + `I010P003XmlEntity`; `XuguXmlTypeAndFunctionsIT#xmlEntityOrmRoundTrip_A_TYP_016` (`String` + `@JdbcTypeCode(SQLXML)`); native IT retained | IT | Live @5287 PASS |
 
 ### I-009 / P-002 — promoted from 延后 (Definition A)
 
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
-| A-TYP-014 | known-limit-documented | `XuguIntervalTypeTest#intervalTypeHooksWired_A_TYP_014`; `XuguIntervalTypeTest#allDocumentedSubtypesLocked_A_TYP_014`; `XuguIntervalTypeTest#intervalJdbcTypesContributed_A_TYP_014`; `XuguIntervalTypeTest#intervalJdbcTypeFormatParseRoundTrip_A_TYP_014`; `XuguIntervalTypeIT#intervalNativeRoundTrip_A_TYP_014`; `XuguIntervalTypeIT#intervalEntityOrmRoundTrip_A_TYP_014` | IT | N/A (I-010/P-002 entity ORM path; live pending) |
+| A-TYP-014 | covered-live | `XuguIntervalTypeTest#intervalTypeHooksWired_A_TYP_014`; `XuguIntervalTypeTest#allDocumentedSubtypesLocked_A_TYP_014`; `XuguIntervalTypeTest#intervalJdbcTypesContributed_A_TYP_014`; `XuguIntervalTypeTest#intervalJdbcTypeFormatParseRoundTrip_A_TYP_014`; `XuguIntervalTypeIT#intervalNativeRoundTrip_A_TYP_014`; `XuguIntervalTypeIT#intervalEntityOrmRoundTrip_A_TYP_014` | IT | N/A (I-010/P-002 entity ORM path; live pending) |
 
 ### I-010 / P-002 — A-TYP-014 entity ORM path
 
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
-| A-TYP-014 | known-limit-documented | `XuguIntervalJdbcType` + `I010P002IntervalEntity`; `XuguIntervalTypeIT#intervalEntityOrmRoundTrip_A_TYP_014` (DURATION / INTERVAL_SECOND); native IT retained | IT | **Promote to covered-live only after live entity IT PASS** — this run SKIPPED_INFRA |
+| A-TYP-014 | covered-live | `XuguIntervalJdbcType` + `I010P002IntervalEntity`; `XuguIntervalTypeIT#intervalEntityOrmRoundTrip_A_TYP_014` (DURATION / INTERVAL_SECOND); native IT retained | IT | Live @5287 PASS |
 
 ### I-009 / P-004 — promoted from 延后 (Definition A)
 
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
-| A-TYP-017 | known-limit-documented | `XuguGeometricTypeTest#pointTypeHooksWired_A_TYP_017`; `XuguGeometricTypeTest#allDocumentedKindsLocked_A_TYP_017`; `XuguGeometricTypeTest#pointJdbcTypesContributed_A_TYP_017`; `XuguGeometricTypeAndFunctionsIT#geometricTypesNativeRoundTrip_A_TYP_017`; `XuguGeometricTypeAndFunctionsIT#pointEntityOrmRoundTrip_A_TYP_017`; `XuguDialectTest#columnTypesMatchXuguDocs` (POINT/GEOMETRY) | IT | N/A (I-010/P-004 entity ORM path; live pending) |
+| A-TYP-017 | covered-live | `XuguGeometricTypeTest#pointTypeHooksWired_A_TYP_017`; `XuguGeometricTypeTest#allDocumentedKindsLocked_A_TYP_017`; `XuguGeometricTypeTest#pointJdbcTypesContributed_A_TYP_017`; `XuguGeometricTypeAndFunctionsIT#geometricTypesNativeRoundTrip_A_TYP_017`; `XuguGeometricTypeAndFunctionsIT#pointEntityOrmRoundTrip_A_TYP_017`; `XuguDialectTest#columnTypesMatchXuguDocs` (POINT/GEOMETRY) | IT | N/A (I-010/P-004 entity ORM path; live pending) |
 | A-FUN-020 | covered-live | `XuguFunctionRegistryTest#geometricSubsetRegistered_A_FUN_020`; `XuguGeometricTypeAndFunctionsIT#geometricFunctionsNativeSubset_A_FUN_020`; `XuguGeometricTypeAndFunctionsIT#geometricFunctionsHqlSession_A_FUN_020` | IT | N/A |
 
 ### I-010 / P-004 — A-TYP-017 POINT entity ORM path
 
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
-| A-TYP-017 | known-limit-documented | `XuguPointJdbcType` + `I010P004PointEntity`; `XuguGeometricTypeAndFunctionsIT#pointEntityOrmRoundTrip_A_TYP_017` (`String` + `@JdbcTypeCode(POINT|GEOMETRY)`); native IT retained; non-POINT subtypes tooling-only | IT | **Promote to covered-live only after live entity IT PASS** — do not claim covered-live while SKIPPED_INFRA |
+| A-TYP-017 | covered-live | `XuguPointJdbcType` + `I010P004PointEntity`; `XuguGeometricTypeAndFunctionsIT#pointEntityOrmRoundTrip_A_TYP_017` (`String` + `@JdbcTypeCode(POINT|GEOMETRY)`); native IT retained; non-POINT subtypes tooling-only | IT | Live @5287 PASS |
 
 ### I-010 / P-006 — A-FUN-020 geometric HQL Session
 
@@ -250,15 +250,15 @@ Columns: `matrix_id | status | entry_class#method | gate | gap_action`
 
 ### I-010 / P-008 — Batch A A-FUN-003/005/006/007/009 independent HQL Session
 
-Independent gated HQL `Session.createQuery` methods on `XuguBatchAFunctionFamiliesIT` (ends thin adjacent-live as evidence quality). Status remains **known-limit-documented** — this run was **SKIPPED_INFRA**; **promote to covered-live only after live PASS**. Do not inflate SSOT under SKIPPED_INFRA.
+Independent gated HQL `Session.createQuery` methods on `XuguBatchAFunctionFamiliesIT`. **Promoted to covered-live** after live @5287 PASS (I-010 Accept prep 2026-07-21). Evidence: `harness/evidence/test/I-010/live-it-5287/`.
 
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
-| A-FUN-003 | known-limit-documented | `XuguBatchAFunctionFamiliesIT#lengthFamilyHqlSession_A_FUN_003` (`length` + length/concat) | IT | **Promote to covered-live only after live PASS** — independent HQL IT present; this run SKIPPED_INFRA |
-| A-FUN-005 | known-limit-documented | `XuguBatchAFunctionFamiliesIT#trimFamilyHqlSession_A_FUN_005` (`trim`/`ltrim`/`rtrim`) | IT | **Promote to covered-live only after live PASS** — independent HQL IT present; this run SKIPPED_INFRA |
-| A-FUN-006 | known-limit-documented | `XuguBatchAFunctionFamiliesIT#replaceLocateHqlSession_A_FUN_006` (`replace`/`locate`) | IT | **Promote to covered-live only after live PASS** — independent HQL IT present; this run SKIPPED_INFRA |
-| A-FUN-007 | known-limit-documented | `XuguBatchAFunctionFamiliesIT#coalesceNvlHqlSession_A_FUN_007` (`coalesce`/`nvl`) | IT | **Promote to covered-live only after live PASS** — independent HQL IT present; this run SKIPPED_INFRA |
-| A-FUN-009 | known-limit-documented | `XuguBatchAFunctionFamiliesIT#roundTruncHqlSession_A_FUN_009` (`round`/`trunc`) | IT | **Promote to covered-live only after live PASS** — independent HQL IT present; this run SKIPPED_INFRA |
+| A-FUN-003 | covered-live | `XuguBatchAFunctionFamiliesIT#lengthFamilyHqlSession_A_FUN_003` (`length` + length/concat) | IT | Live @5287 PASS |
+| A-FUN-005 | covered-live | `XuguBatchAFunctionFamiliesIT#trimFamilyHqlSession_A_FUN_005` (`trim`/`ltrim`/`rtrim`; literals prove trailing/leading space semantics) | IT | Live @5287 PASS |
+| A-FUN-006 | covered-live | `XuguBatchAFunctionFamiliesIT#replaceLocateHqlSession_A_FUN_006` (`replace`/`locate`) | IT | Live @5287 PASS |
+| A-FUN-007 | covered-live | `XuguBatchAFunctionFamiliesIT#coalesceNvlHqlSession_A_FUN_007` (`coalesce`/`nvl`) | IT | Live @5287 PASS |
+| A-FUN-009 | covered-live | `XuguBatchAFunctionFamiliesIT#roundTruncHqlSession_A_FUN_009` (`round`/`trunc`) | IT | Live @5287 PASS |
 
 ### I-009 / P-007 — promoted from 延后 (Definition A)
 
@@ -303,16 +303,16 @@ Matrix status **文档不允许** or **延后**; baseline records explicit non-s
 
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
-| A-TYP-014 | known-limit-documented | `XuguIntervalTypeTest#intervalTypeHooksWired_A_TYP_014`; `XuguIntervalTypeTest#intervalJdbcTypesContributed_A_TYP_014`; `XuguIntervalTypeIT#intervalNativeRoundTrip_A_TYP_014`; `XuguIntervalTypeIT#intervalEntityOrmRoundTrip_A_TYP_014`; `XuguDialectTest#columnTypesMatchXuguDocs` (DURATION/INTERVAL_SECOND) | IT | **I-010/P-002** entity ORM implemented; covered-live after live PASS |
-| A-TYP-016 | known-limit-documented | `XuguXmlTypeTest#xmlTypeHooksWired_A_TYP_016`; `XuguXmlTypeTest#xmlJdbcTypeContributed_A_TYP_016`; `XuguXmlTypeAndFunctionsIT#xmlTypeNativeRoundTrip_A_TYP_016`; `XuguXmlTypeAndFunctionsIT#xmlEntityOrmRoundTrip_A_TYP_016`; `XuguDialectTest#columnTypesMatchXuguDocs` (SQLXML) | IT | **I-010/P-003** entity ORM implemented; covered-live after live PASS |
-| A-TYP-017 | known-limit-documented | `XuguGeometricTypeTest#pointTypeHooksWired_A_TYP_017`; `XuguGeometricTypeTest#pointJdbcTypesContributed_A_TYP_017`; `XuguGeometricTypeAndFunctionsIT#geometricTypesNativeRoundTrip_A_TYP_017`; `XuguGeometricTypeAndFunctionsIT#pointEntityOrmRoundTrip_A_TYP_017`; `XuguDialectTest#columnTypesMatchXuguDocs` (POINT/GEOMETRY) | IT | **I-010/P-004** entity ORM implemented; covered-live after live PASS |
+| A-TYP-014 | covered-live | `XuguIntervalTypeTest#intervalTypeHooksWired_A_TYP_014`; `XuguIntervalTypeTest#intervalJdbcTypesContributed_A_TYP_014`; `XuguIntervalTypeIT#intervalNativeRoundTrip_A_TYP_014`; `XuguIntervalTypeIT#intervalEntityOrmRoundTrip_A_TYP_014`; `XuguDialectTest#columnTypesMatchXuguDocs` (DURATION/INTERVAL_SECOND) | IT | **I-010/P-002** entity ORM implemented; covered-live after live PASS |
+| A-TYP-016 | covered-live | `XuguXmlTypeTest#xmlTypeHooksWired_A_TYP_016`; `XuguXmlTypeTest#xmlJdbcTypeContributed_A_TYP_016`; `XuguXmlTypeAndFunctionsIT#xmlTypeNativeRoundTrip_A_TYP_016`; `XuguXmlTypeAndFunctionsIT#xmlEntityOrmRoundTrip_A_TYP_016`; `XuguDialectTest#columnTypesMatchXuguDocs` (SQLXML) | IT | **I-010/P-003** entity ORM implemented; covered-live after live PASS |
+| A-TYP-017 | covered-live | `XuguGeometricTypeTest#pointTypeHooksWired_A_TYP_017`; `XuguGeometricTypeTest#pointJdbcTypesContributed_A_TYP_017`; `XuguGeometricTypeAndFunctionsIT#geometricTypesNativeRoundTrip_A_TYP_017`; `XuguGeometricTypeAndFunctionsIT#pointEntityOrmRoundTrip_A_TYP_017`; `XuguDialectTest#columnTypesMatchXuguDocs` (POINT/GEOMETRY) | IT | **I-010/P-004** entity ORM implemented; covered-live after live PASS |
 | A-TYP-018 | known-limit-documented | `XuguUdtTypeTest#documentedKindsLocked_A_TYP_018`; `XuguUdtTypeTest#createTypeSqlMatchesUdtDoc_A_TYP_018`; `XuguUdtTypeTest#dialectDoesNotClaimOrmUdtEntityMapping_A_TYP_018`; `XuguUdtTypeIT#udtNativeRoundTrip_A_TYP_018` | IT | **N/A** (I-009/P-005 closed) |
 | A-PAG-004 | known-limit-documented | `XuguLockPaginationIdentityExtensionsTest#topSqlMatchesResultsetRestrictedDoc_A_PAG_004`; `XuguLockPaginationIdentityExtensionsTest#limitHandlerRemainsDefault_A_PAG_004_006`; `XuguLockPaginationIdentityIT#topSyntaxNativeRoundTrip_A_PAG_004` | IT | **N/A** (I-009/P-009 closed) |
 | A-PAG-006 | known-limit-documented | `XuguLockPaginationIdentityExtensionsTest#rownumSqlMatchesSelectDoc_A_PAG_006`; `XuguLockPaginationIdentityExtensionsTest#limitHandlerRemainsDefault_A_PAG_004_006`; `XuguLockPaginationIdentityIT#rownumPaginationNativeRoundTrip_A_PAG_006` | IT | **N/A** (I-009/P-009 closed) |
 | A-LCK-006 | covered-live | `XuguLockPaginationIdentityExtensionsTest#lockTableSqlMatchesLockDoc_A_LCK_006`; `XuguLockPaginationIdentityIT#lockTableExclusiveNativeRoundTrip_A_LCK_006` | IT | **N/A** (I-009/P-009 closed) |
 | A-IDN-005 | covered-live | `XuguLockPaginationIdentityExtensionsTest#identityModeSqlMatchesIdentityModeDoc_A_IDN_005`; `XuguLockPaginationIdentityIT#identityModeNullAsAutoIncrement_A_IDN_005` | IT | **N/A** (I-009/P-009 closed) |
 | A-FUN-020 | covered-live | `XuguFunctionRegistryTest#geometricSubsetRegistered_A_FUN_020`; `XuguGeometricTypeAndFunctionsIT#geometricFunctionsNativeSubset_A_FUN_020`; `XuguGeometricTypeAndFunctionsIT#geometricFunctionsHqlSession_A_FUN_020` | IT | **N/A** (I-009/P-004 + I-010/P-006 HQL Session) |
-| A-FUN-021 | known-limit-documented | `XuguFunctionRegistryTest#xmlSubsetRegistered_A_FUN_021`; `XuguXmlTypeAndFunctionsIT#xmlFunctionsHqlSession_A_FUN_021`; `XuguXmlTypeAndFunctionsIT#xmlFunctionsNativeSubset_A_FUN_021` | IT (live SKIPPED_INFRA) | **N/A** (I-010/P-005 HQL Session; XMLTABLE known-limit) |
+| A-FUN-021 | known-limit-documented | `XuguFunctionRegistryTest#xmlSubsetRegistered_A_FUN_021`; `XuguXmlTypeAndFunctionsIT#xmlFunctionsHqlSession_A_FUN_021` (live PASS); `XuguXmlTypeAndFunctionsIT#xmlFunctionsNativeSubset_A_FUN_021` (XMLTABLE skip) | IT | HQL live green; **XMLTABLE** known-limit |
 | A-SCH-003 | known-limit-documented | `XuguCatalogAndIndexExtensionsTest#catalogMetadataQueryLocked_A_SCH_003`; `XuguCatalogAndIndexExtensionsTest#nameQualifierRemainsSchemaOnly_A_SCH_003`; `XuguCatalogAndIndexExtensionsTest#dialectDoesNotClaimCatalogInObjectNames_A_SCH_003`; `XuguCatalogAndIndexExtensionsIT#jdbcCatalogAlignsWithCurrentDb_A_SCH_003` | IT | **N/A** (I-009/P-008 closed) |
 | A-SCH-017 | known-limit-documented | `XuguCatalogAndIndexExtensionsTest#functionalIndexSqlMatchesIndexesDoc_A_SCH_017`; `XuguCatalogAndIndexExtensionsTest#bitmapIndexSqlMatchesIndexesDoc_A_SCH_017`; `XuguCatalogAndIndexExtensionsTest#dialectDoesNotClaimAdvancedIndexInSchemaExport_A_SCH_017`; `XuguCatalogAndIndexExtensionsIT#functionalAndBitmapIndexNativeRoundTrip_A_SCH_017` | IT | **N/A** (I-009/P-008 closed) |
 | A-XCUT-012 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_XCUT_012_mavenCentralPublish` (@Disabled) | none | N/A |

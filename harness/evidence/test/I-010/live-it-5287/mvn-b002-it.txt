@@ -1,0 +1,308 @@
+﻿mvn.cmd : 7月 21, 2026 4:59:11 下午 org.hibernate.Version logVersion
+所在位置 C:\Users\admin\AppData\Local\Temp\ps-script-6962fb4b-3894-4e92-8f83-03637137da23.ps1:101 字符: 532
++ ... n\mvn.cmd'; & $mvn -q -pl dialect test "-Dtest=XuguOptimisticConcurre ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (7月 21, 2026 4:5...sion logVersion:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+INFO: HHH000001: Hibernate ORM core version 7.4.5.Final
+7月 21, 2026 4:59:11 下午 org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProvider configure
+WARN: HHH10001002: Using built-in connection pool (not intended for production use)
+7月 21, 2026 4:59:11 下午 org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator logConnectionInfo
+INFO: HHH10001005: Database info:
+	Database JDBC URL [jdbc:xugu://192.168.2.239:5287/SYSTEM?compatiblemode=NONE&user=SYSDBA&password=***]
+	Database driver: XuguDB JDBC Driver
+	Database dialect: XuguDialect
+	Database version: 12.0
+	Default catalog/schema: SYSTEM/SYSDBA
+	Autocommit mode: false
+	Isolation level: READ_COMMITTED
+	JDBC fetch size: 1000
+	Pool: DriverManagerConnectionProvider
+	Minimum pool size: 1
+	Maximum pool size: 20
+7月 21, 2026 4:59:13 下午 org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration
+)
+7月 21, 2026 4:59:13 下午 org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProvider configure
+WARN: HHH10001002: Using built-in connection pool (not intended for production use)
+7月 21, 2026 4:59:13 下午 org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator logConnectionInfo
+INFO: HHH10001005: Database info:
+	Database JDBC URL [jdbc:xugu://192.168.2.239:5287/SYSTEM?compatiblemode=NONE&user=SYSDBA&password=***]
+	Database driver: XuguDB JDBC Driver
+	Database dialect: XuguDialect
+	Database version: 12.0
+	Default catalog/schema: SYSTEM/SYSDBA
+	Autocommit mode: false
+	Isolation level: READ_COMMITTED
+	JDBC fetch size: 1000
+	Pool: DriverManagerConnectionProvider
+	Minimum pool size: 1
+	Maximum pool size: 20
+7月 21, 2026 4:59:13 下午 org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration
+)
+7月 21, 2026 4:59:13 下午 org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProvider configure
+WARN: HHH10001002: Using built-in connection pool (not intended for production use)
+7月 21, 2026 4:59:13 下午 org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator logConnectionInfo
+INFO: HHH10001005: Database info:
+	Database JDBC URL [jdbc:xugu://192.168.2.239:5287/SYSTEM?compatiblemode=NONE&user=SYSDBA&password=***]
+	Database driver: XuguDB JDBC Driver
+	Database dialect: XuguDialect
+	Database version: 12.0
+	Default catalog/schema: SYSTEM/SYSDBA
+	Autocommit mode: false
+	Isolation level: READ_COMMITTED
+	JDBC fetch size: 1000
+	Pool: DriverManagerConnectionProvider
+	Minimum pool size: 1
+	Maximum pool size: 20
+7月 21, 2026 4:59:14 下午 org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration
+)
+7月 21, 2026 4:59:14 下午 org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProvider configure
+WARN: HHH10001002: Using built-in connection pool (not intended for production use)
+7月 21, 2026 4:59:14 下午 org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator logConnectionInfo
+INFO: HHH10001005: Database info:
+	Database JDBC URL [jdbc:xugu://192.168.2.239:5287/SYSTEM?compatiblemode=NONE&user=SYSDBA&password=***]
+	Database driver: XuguDB JDBC Driver
+	Database dialect: XuguDialect
+	Database version: 12.0
+	Default catalog/schema: SYSTEM/SYSDBA
+	Autocommit mode: false
+	Isolation level: READ_COMMITTED
+	JDBC fetch size: 1000
+	Pool: DriverManagerConnectionProvider
+	Minimum pool size: 1
+	Maximum pool size: 20
+7月 21, 2026 4:59:14 下午 org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration
+)
+7月 21, 2026 4:59:14 下午 org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProvider configure
+WARN: HHH10001002: Using built-in connection pool (not intended for production use)
+7月 21, 2026 4:59:14 下午 org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator logConnectionInfo
+INFO: HHH10001005: Database info:
+	Database JDBC URL [jdbc:xugu://192.168.2.239:5287/SYSTEM?compatiblemode=NONE&user=SYSDBA&password=***]
+	Database driver: XuguDB JDBC Driver
+	Database dialect: XuguDialect
+	Database version: 12.0
+	Default catalog/schema: SYSTEM/SYSDBA
+	Autocommit mode: false
+	Isolation level: READ_COMMITTED
+	JDBC fetch size: 1000
+	Pool: DriverManagerConnectionProvider
+	Minimum pool size: 1
+	Maximum pool size: 20
+7月 21, 2026 4:59:14 下午 org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration
+)
+7月 21, 2026 4:59:14 下午 org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProvider configure
+WARN: HHH10001002: Using built-in connection pool (not intended for production use)
+7月 21, 2026 4:59:15 下午 org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator logConnectionInfo
+INFO: HHH10001005: Database info:
+	Database JDBC URL [jdbc:xugu://192.168.2.239:5287/SYSTEM?compatiblemode=NONE&user=SYSDBA&password=***]
+	Database driver: XuguDB JDBC Driver
+	Database dialect: XuguDialect
+	Database version: 12.0
+	Default catalog/schema: SYSTEM/SYSDBA
+	Autocommit mode: false
+	Isolation level: READ_COMMITTED
+	JDBC fetch size: 1000
+	Pool: DriverManagerConnectionProvider
+	Minimum pool size: 1
+	Maximum pool size: 20
+7月 21, 2026 4:59:15 下午 org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration
+)
+7月 21, 2026 4:59:15 下午 org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProvider configure
+WARN: HHH10001002: Using built-in connection pool (not intended for production use)
+7月 21, 2026 4:59:15 下午 org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator logConnectionInfo
+INFO: HHH10001005: Database info:
+	Database JDBC URL [jdbc:xugu://192.168.2.239:5287/SYSTEM?compatiblemode=NONE&user=SYSDBA&password=***]
+	Database driver: XuguDB JDBC Driver
+	Database dialect: XuguDialect
+	Database version: 12.0
+	Default catalog/schema: SYSTEM/SYSDBA
+	Autocommit mode: false
+	Isolation level: READ_COMMITTED
+	JDBC fetch size: 1000
+	Pool: DriverManagerConnectionProvider
+	Minimum pool size: 1
+	Maximum pool size: 20
+7月 21, 2026 4:59:15 下午 org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration
+)
+7月 21, 2026 4:59:15 下午 org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProvider configure
+WARN: HHH10001002: Using built-in connection pool (not intended for production use)
+7月 21, 2026 4:59:15 下午 org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator logConnectionInfo
+INFO: HHH10001005: Database info:
+	Database JDBC URL [jdbc:xugu://192.168.2.239:5287/SYSTEM?compatiblemode=NONE&user=SYSDBA&password=***]
+	Database driver: XuguDB JDBC Driver
+	Database dialect: XuguDialect
+	Database version: 12.0
+	Default catalog/schema: SYSTEM/SYSDBA
+	Autocommit mode: false
+	Isolation level: READ_COMMITTED
+	JDBC fetch size: 1000
+	Pool: DriverManagerConnectionProvider
+	Minimum pool size: 1
+	Maximum pool size: 20
+Hibernate: create table if not exists HIB_I010_P015_CHILD (id integer not null, label varchar(64) not null, PARENT_ID integer not null, primary key (id))
+Hibernate: create table if not exists HIB_I010_P015_PARENT (id integer not null, name varchar(64) not null, primary key (id))
+Hibernate: alter table HIB_I010_P015_CHILD add constraint FKie32gc7ycgw4v87l5tbutnt4d foreign key (PARENT_ID) references HIB_I010_P015_PARENT
+7月 21, 2026 4:59:15 下午 org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration
+)
+Hibernate: insert into HIB_I010_P015_PARENT (name,id) values (?,?)
+Hibernate: insert into HIB_I010_P015_CHILD (label,PARENT_ID,id) values (?,?,?)
+Hibernate: insert into HIB_I010_P015_CHILD (label,PARENT_ID,id) values (?,?,?)
+Hibernate: insert into HIB_I010_P015_CHILD (label,PARENT_ID,id) values (?,?,?)
+Hibernate: select ipp1_0.id,c1_0.PARENT_ID,c1_0.id,c1_0.label,ipp1_0.name from HIB_I010_P015_PARENT ipp1_0 join HIB_I010_P015_CHILD c1_0 on ipp1_0.id=c1_0.PARENT_ID where ipp1_0.id=?
+Hibernate: alter table HIB_I010_P015_CHILD drop constraint FKie32gc7ycgw4v87l5tbutnt4d
+Hibernate: drop table if exists HIB_I010_P015_CHILD
+Hibernate: drop table if exists HIB_I010_P015_PARENT
+7月 21, 2026 4:59:15 下午 org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProvider configure
+WARN: HHH10001002: Using built-in connection pool (not intended for production use)
+7月 21, 2026 4:59:16 下午 org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator logConnectionInfo
+INFO: HHH10001005: Database info:
+	Database JDBC URL [jdbc:xugu://192.168.2.239:5287/SYSTEM?compatiblemode=NONE&user=SYSDBA&password=***]
+	Database driver: XuguDB JDBC Driver
+	Database dialect: XuguDialect
+	Database version: 12.0
+	Default catalog/schema: SYSTEM/SYSDBA
+	Autocommit mode: false
+	Isolation level: READ_COMMITTED
+	JDBC fetch size: 1000
+	Pool: DriverManagerConnectionProvider
+	Minimum pool size: 1
+	Maximum pool size: 20
+7月 21, 2026 4:59:16 下午 org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration
+)
+7月 21, 2026 4:59:16 下午 org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProvider configure
+WARN: HHH10001002: Using built-in connection pool (not intended for production use)
+7月 21, 2026 4:59:16 下午 org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator logConnectionInfo
+INFO: HHH10001005: Database info:
+	Database JDBC URL [jdbc:xugu://192.168.2.239:5287/SYSTEM?compatiblemode=NONE&user=SYSDBA&password=***]
+	Database driver: XuguDB JDBC Driver
+	Database dialect: XuguDialect
+	Database version: 12.0
+	Default catalog/schema: SYSTEM/SYSDBA
+	Autocommit mode: false
+	Isolation level: READ_COMMITTED
+	JDBC fetch size: 1000
+	Pool: DriverManagerConnectionProvider
+	Minimum pool size: 1
+	Maximum pool size: 20
+7月 21, 2026 4:59:16 下午 org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration
+)
+7月 21, 2026 4:59:16 下午 org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProvider configure
+WARN: HHH10001002: Using built-in connection pool (not intended for production use)
+7月 21, 2026 4:59:16 下午 org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator logConnectionInfo
+INFO: HHH10001005: Database info:
+	Database JDBC URL [jdbc:xugu://192.168.2.239:5287/SYSTEM?compatiblemode=NONE&user=SYSDBA&password=***]
+	Database driver: XuguDB JDBC Driver
+	Database dialect: XuguDialect
+	Database version: 12.0
+	Default catalog/schema: SYSTEM/SYSDBA
+	Autocommit mode: false
+	Isolation level: READ_COMMITTED
+	JDBC fetch size: 1000
+	Pool: DriverManagerConnectionProvider
+	Minimum pool size: 1
+	Maximum pool size: 20
+7月 21, 2026 4:59:16 下午 org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration
+)
+7月 21, 2026 4:59:16 下午 org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProvider configure
+WARN: HHH10001002: Using built-in connection pool (not intended for production use)
+7月 21, 2026 4:59:16 下午 org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator logConnectionInfo
+INFO: HHH10001005: Database info:
+	Database JDBC URL [jdbc:xugu://192.168.2.239:5287/SYSTEM?compatiblemode=NONE&user=SYSDBA&password=***]
+	Database driver: XuguDB JDBC Driver
+	Database dialect: XuguDialect
+	Database version: 12.0
+	Default catalog/schema: SYSTEM/SYSDBA
+	Autocommit mode: false
+	Isolation level: READ_COMMITTED
+	JDBC fetch size: 1000
+	Pool: DriverManagerConnectionProvider
+	Minimum pool size: 1
+	Maximum pool size: 20
+7月 21, 2026 4:59:16 下午 org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration
+)
+7月 21, 2026 4:59:16 下午 org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProvider configure
+WARN: HHH10001002: Using built-in connection pool (not intended for production use)
+7月 21, 2026 4:59:16 下午 org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator logConnectionInfo
+INFO: HHH10001005: Database info:
+	Database JDBC URL [jdbc:xugu://192.168.2.239:5287/SYSTEM?compatiblemode=NONE&user=SYSDBA&password=***]
+	Database driver: XuguDB JDBC Driver
+	Database dialect: XuguDialect
+	Database version: 12.0
+	Default catalog/schema: SYSTEM/SYSDBA
+	Autocommit mode: false
+	Isolation level: READ_COMMITTED
+	JDBC fetch size: 1000
+	Pool: DriverManagerConnectionProvider
+	Minimum pool size: 1
+	Maximum pool size: 20
+7月 21, 2026 4:59:16 下午 org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration
+)
+7月 21, 2026 4:59:16 下午 org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProvider configure
+WARN: HHH10001002: Using built-in connection pool (not intended for production use)
+7月 21, 2026 4:59:16 下午 org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator logConnectionInfo
+INFO: HHH10001005: Database info:
+	Database JDBC URL [jdbc:xugu://192.168.2.239:5287/SYSTEM?compatiblemode=NONE&user=SYSDBA&password=***]
+	Database driver: XuguDB JDBC Driver
+	Database dialect: XuguDialect
+	Database version: 12.0
+	Default catalog/schema: SYSTEM/SYSDBA
+	Autocommit mode: false
+	Isolation level: READ_COMMITTED
+	JDBC fetch size: 1000
+	Pool: DriverManagerConnectionProvider
+	Minimum pool size: 1
+	Maximum pool size: 20
+7月 21, 2026 4:59:16 下午 org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration
+)
+7月 21, 2026 4:59:17 下午 org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProvider configure
+WARN: HHH10001002: Using built-in connection pool (not intended for production use)
+7月 21, 2026 4:59:17 下午 org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator logConnectionInfo
+INFO: HHH10001005: Database info:
+	Database JDBC URL [jdbc:xugu://192.168.2.239:5287/SYSTEM?compatiblemode=NONE&user=SYSDBA&password=***]
+	Database driver: XuguDB JDBC Driver
+	Database dialect: XuguDialect
+	Database version: 12.0
+	Default catalog/schema: SYSTEM/SYSDBA
+	Autocommit mode: false
+	Isolation level: READ_COMMITTED
+	JDBC fetch size: 1000
+	Pool: DriverManagerConnectionProvider
+	Minimum pool size: 1
+	Maximum pool size: 20
+7月 21, 2026 4:59:17 下午 org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration
+)
+7月 21, 2026 4:59:17 下午 org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProvider configure
+WARN: HHH10001002: Using built-in connection pool (not intended for production use)
+7月 21, 2026 4:59:17 下午 org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator logConnectionInfo
+INFO: HHH10001005: Database info:
+	Database JDBC URL [jdbc:xugu://192.168.2.239:5287/SYSTEM?compatiblemode=NONE&user=SYSDBA&password=***]
+	Database driver: XuguDB JDBC Driver
+	Database dialect: XuguDialect
+	Database version: 12.0
+	Default catalog/schema: SYSTEM/SYSDBA
+	Autocommit mode: false
+	Isolation level: READ_COMMITTED
+	JDBC fetch size: 1000
+	Pool: DriverManagerConnectionProvider
+	Minimum pool size: 1
+	Maximum pool size: 20
+7月 21, 2026 4:59:17 下午 org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration
+)
+

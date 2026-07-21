@@ -192,18 +192,18 @@ Initiative **I-010** 交付 ORM 实体深度（INTERVAL/XML/POINT）+ HQL Sessio
 | **Accept prep 真库（有 DB）** | `XUGU_RUN_IT=true mvn -q test` | **全 reactor** 门控 dialect + demo IT；新 ORM/HQL IT 须 live 绿才能晋升 covered-live |
 | **Accept 归档** | `harness/evidence/test/I-010/P-010/` · `harness/evidence/orchestrator/I-010/P-010/` | `verification.json`、`TEST-REPORT.md`、live log 或 **`SKIPPED_INFRA`** |
 
-### I-010 诚实残差（勿膨胀 98 计数）
+### I-010 诚实残差（live @5287 后）
 
 | Residual | 状态 | 说明 |
 |---|---|---|
-| A-TYP-014 / 016 / 017 | **known-limit-documented** | 实体 ORM 路径已写；本轮 live **SKIPPED_INFRA** — **promote only after live PASS** |
-| Batch A（A-FUN-003/005/006/007/009） | **known-limit-documented** | 独立 HQL Session IT 已写；live **SKIPPED_INFRA** — 勿假晋升 |
-| A-FUN-021 | **known-limit-documented** | HQL `xmlelement`/`xmlquery` 正例在；**XMLTABLE** 仍 known-limit |
-| A-FUN-019 / 020 | **covered-live**（保持） | I-010 加深 HQL Session；勿因 SKIPPED_INFRA 回退口径 |
+| A-TYP-014 / 016 / 017 | **covered-live** | 实体 ORM live @5287 PASS — 已晋升 |
+| Batch A（A-FUN-003/005/006/007/009） | **covered-live** | 独立 HQL Session live @5287 PASS — 已晋升 |
+| A-FUN-021 | **known-limit-documented** | HQL `xmlelement`/`xmlquery` live PASS；**XMLTABLE** 仍 known-limit（集群空结果 assumption skip） |
+| A-FUN-019 / 020 | **covered-live**（保持） | I-010 加深 HQL Session；live 再确认绿 |
 
-Charter **98** 诚实 rollup **不变**：**83/98** covered-live + **15** known-limit-documented。
+Charter **98** 诚实 rollup（live 晋升后）：**91/98** covered-live + **7** known-limit-documented。
 
-**NOT Ship** — Maven Central / tag / push **不在** I-010 范围。Human Gate 下一步是 **Initiative Accept**（非 Ship / 非 Archive）。
+**NOT Ship** — Maven Central / tag / push **不在** I-010 范围。Human Gate：**Initiative Accept**（非 Ship / 非 Archive）。
 
 ## I-010 B-002 xuguefcore parity suite
 
@@ -224,16 +224,17 @@ Initiative **I-010** Build **B-002**（Phase **P-011…P-017**）对照只读参
 
 **NOT Ship** — Maven Central / tag / push **不在** B-002 / I-010 范围。
 
-### I-010 B-002 Accept prep（2026-07-21）
+### I-010 B-002 Accept prep（2026-07-21 · live @5287）
 
 | Gate | Result |
 |---|---|
 | `python harness/scripts/verify.py` | **VERIFY PASS** |
 | Offline `mvn -q test` | **PASS**（gated IT assume-skip） |
-| Live `XUGU_RUN_IT=true` | **SKIPPED_INFRA**（`:5138` 不可达） |
-| Suite SSOT 10/10 | 非 `planned` — 见 [`xuguefcore-parity-suite.md`](../../contracts/xuguefcore-parity-suite.md) |
+| Live `XUGU_RUN_IT=true` @5287 | dialect **253/0/0/4** · demo **36/0/0/0** |
+| Suite SSOT | XP-001…005/007…009 **covered-live**；XP-006/010 **covered-unit** — [`xuguefcore-parity-suite.md`](../../contracts/xuguefcore-parity-suite.md) |
+| Evidence | `harness/evidence/test/I-010/live-it-5287/` |
 
-Human Gate 下一步：**Initiative Accept I-010**（非 Ship / 非 Archive）。有库后再晋升 `covered-live`。
+Human Gate：**Initiative Accept I-010**（非 Ship / 非 Archive）。
 
 ### I-008 Accept — 黄金路径 manifest（Q4 冻结）
 

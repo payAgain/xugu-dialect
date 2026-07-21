@@ -1,0 +1,225 @@
+﻿mvn.cmd : 7月 21, 2026 5:04:45 下午 org.hibernate.Version logVersion
+所在位置 C:\Users\admin\AppData\Local\Temp\ps-script-484ab6ff-cb9d-47d8-8d0c-962c8343605e.ps1:101 字符: 220
++ ... n\mvn.cmd'; & $mvn -q -pl dialect test "-Dtest=XuguBatchAFunctionFami ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (7月 21, 2026 5:0...sion logVersion:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+INFO: HHH000001: Hibernate ORM core version 7.4.5.Final
+7月 21, 2026 5:04:46 下午 org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProvider configure
+WARN: HHH10001002: Using built-in connection pool (not intended for production use)
+7月 21, 2026 5:04:46 下午 org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator logConnectionInfo
+INFO: HHH10001005: Database info:
+	Database JDBC URL [jdbc:xugu://192.168.2.239:5287/SYSTEM?compatiblemode=NONE&user=SYSDBA&password=***]
+	Database driver: XuguDB JDBC Driver
+	Database dialect: XuguDialect
+	Database version: 12.0
+	Default catalog/schema: SYSTEM/SYSDBA
+	Autocommit mode: false
+	Isolation level: READ_COMMITTED
+	JDBC fetch size: 1000
+	Pool: DriverManagerConnectionProvider
+	Minimum pool size: 1
+	Maximum pool size: 20
+7月 21, 2026 5:04:50 下午 org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration
+)
+7月 21, 2026 5:04:53 下午 org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProvider configure
+WARN: HHH10001002: Using built-in connection pool (not intended for production use)
+7月 21, 2026 5:04:53 下午 org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator logConnectionInfo
+INFO: HHH10001005: Database info:
+	Database JDBC URL [jdbc:xugu://192.168.2.239:5287/SYSTEM?compatiblemode=NONE&user=SYSDBA&password=***]
+	Database driver: XuguDB JDBC Driver
+	Database dialect: XuguDialect
+	Database version: 12.0
+	Default catalog/schema: SYSTEM/SYSDBA
+	Autocommit mode: false
+	Isolation level: READ_COMMITTED
+	JDBC fetch size: 1000
+	Pool: DriverManagerConnectionProvider
+	Minimum pool size: 1
+	Maximum pool size: 20
+7月 21, 2026 5:04:53 下午 org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration
+)
+7月 21, 2026 5:04:53 下午 org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProvider configure
+WARN: HHH10001002: Using built-in connection pool (not intended for production use)
+7月 21, 2026 5:04:53 下午 org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator logConnectionInfo
+INFO: HHH10001005: Database info:
+	Database JDBC URL [jdbc:xugu://192.168.2.239:5287/SYSTEM?compatiblemode=NONE&user=SYSDBA&password=***]
+	Database driver: XuguDB JDBC Driver
+	Database dialect: XuguDialect
+	Database version: 12.0
+	Default catalog/schema: SYSTEM/SYSDBA
+	Autocommit mode: false
+	Isolation level: READ_COMMITTED
+	JDBC fetch size: 1000
+	Pool: DriverManagerConnectionProvider
+	Minimum pool size: 1
+	Maximum pool size: 20
+7月 21, 2026 5:04:53 下午 org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration
+)
+7月 21, 2026 5:04:54 下午 org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProvider configure
+WARN: HHH10001002: Using built-in connection pool (not intended for production use)
+7月 21, 2026 5:04:54 下午 org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator logConnectionInfo
+INFO: HHH10001005: Database info:
+	Database JDBC URL [jdbc:xugu://192.168.2.239:5287/SYSTEM?compatiblemode=NONE&user=SYSDBA&password=***]
+	Database driver: XuguDB JDBC Driver
+	Database dialect: XuguDialect
+	Database version: 12.0
+	Default catalog/schema: SYSTEM/SYSDBA
+	Autocommit mode: false
+	Isolation level: READ_COMMITTED
+	JDBC fetch size: 1000
+	Pool: DriverManagerConnectionProvider
+	Minimum pool size: 1
+	Maximum pool size: 20
+7月 21, 2026 5:04:54 下午 org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration
+)
+7月 21, 2026 5:04:54 下午 org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProvider configure
+WARN: HHH10001002: Using built-in connection pool (not intended for production use)
+7月 21, 2026 5:04:54 下午 org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator logConnectionInfo
+INFO: HHH10001005: Database info:
+	Database JDBC URL [jdbc:xugu://192.168.2.239:5287/SYSTEM?compatiblemode=NONE&user=SYSDBA&password=***]
+	Database driver: XuguDB JDBC Driver
+	Database dialect: XuguDialect
+	Database version: 12.0
+	Default catalog/schema: SYSTEM/SYSDBA
+	Autocommit mode: false
+	Isolation level: READ_COMMITTED
+	JDBC fetch size: 1000
+	Pool: DriverManagerConnectionProvider
+	Minimum pool size: 1
+	Maximum pool size: 20
+7月 21, 2026 5:04:54 下午 org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration
+)
+7月 21, 2026 5:04:54 下午 org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProvider configure
+WARN: HHH10001002: Using built-in connection pool (not intended for production use)
+7月 21, 2026 5:04:54 下午 org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator logConnectionInfo
+INFO: HHH10001005: Database info:
+	Database JDBC URL [jdbc:xugu://192.168.2.239:5287/SYSTEM?compatiblemode=NONE&user=SYSDBA&password=***]
+	Database driver: XuguDB JDBC Driver
+	Database dialect: XuguDialect
+	Database version: 12.0
+	Default catalog/schema: SYSTEM/SYSDBA
+	Autocommit mode: false
+	Isolation level: READ_COMMITTED
+	JDBC fetch size: 1000
+	Pool: DriverManagerConnectionProvider
+	Minimum pool size: 1
+	Maximum pool size: 20
+7月 21, 2026 5:04:55 下午 org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration
+)
+7月 21, 2026 5:05:00 下午 org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProvider configure
+WARN: HHH10001002: Using built-in connection pool (not intended for production use)
+7月 21, 2026 5:05:00 下午 org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator logConnectionInfo
+INFO: HHH10001005: Database info:
+	Database JDBC URL [jdbc:xugu://192.168.2.239:5287/SYSTEM?compatiblemode=NONE&user=SYSDBA&password=***]
+	Database driver: XuguDB JDBC Driver
+	Database dialect: XuguDialect
+	Database version: 12.0
+	Default catalog/schema: SYSTEM/SYSDBA
+	Autocommit mode: false
+	Isolation level: READ_COMMITTED
+	JDBC fetch size: 1000
+	Pool: DriverManagerConnectionProvider
+	Minimum pool size: 1
+	Maximum pool size: 20
+7月 21, 2026 5:05:01 下午 org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration
+)
+[ERROR] Tests run: 4, Failures: 1, Errors: 0, Skipped: 1, Time elapsed: 6.774 s <<< FAILURE! -- in com.xugu.dialect.it.XuguXmlTypeAndFunctionsIT
+[ERROR] com.xugu.dialect.it.XuguXmlTypeAndFunctionsIT.xmlFunctionsHqlSession_A_FUN_021 -- Time elapsed: 0.164 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: XML HQL Session IT failed: org.hibernate.query.sqm.produce.function.FunctionArgumentException: Parameter 2 of function 'xmlquery()' has type 'STRING', but argument is of type 'java.lang.String' mapped to '2009'
+	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:42)
+	at org.junit.jupiter.api.Assertions.fail(Assertions.java:150)
+	at com.xugu.dialect.it.XuguXmlTypeAndFunctionsIT.xmlFunctionsHqlSession_A_FUN_021(XuguXmlTypeAndFunctionsIT.java:215)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+Caused by: java.lang.IllegalArgumentException: org.hibernate.query.sqm.produce.function.FunctionArgumentException: Parameter 2 of function 'xmlquery()' has type 'STRING', but argument is of type 'java.lang.String' mapped to '2009'
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:134)
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:173)
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:179)
+	at org.hibernate.internal.AbstractSharedSessionContract.createQuery(AbstractSharedSessionContract.java:1102)
+	at org.hibernate.internal.SessionImpl.createQuery(SessionImpl.java:158)
+	at org.hibernate.internal.AbstractSharedSessionContract.createQuery(AbstractSharedSessionContract.java:154)
+	at com.xugu.dialect.it.XuguXmlTypeAndFunctionsIT.xmlFunctionsHqlSession_A_FUN_021(XuguXmlTypeAndFunctionsIT.java:201)
+	... 3 more
+Caused by: org.hibernate.query.sqm.produce.function.FunctionArgumentException: Parameter 2 of function 'xmlquery()' has type 'STRING', but argument is of type 'java.lang.String' mapped to '2009'
+	at org.hibernate.query.sqm.produce.function.ArgumentTypesValidator.throwError(ArgumentTypesValidator.java:283)
+	at org.hibernate.query.sqm.produce.function.ArgumentTypesValidator.checkArgumentType(ArgumentTypesValidator.java:233)
+	at org.hibernate.query.sqm.produce.function.ArgumentTypesValidator.checkArgumentType(ArgumentTypesValidator.java:136)
+	at org.hibernate.query.sqm.produce.function.ArgumentTypesValidator.validate(ArgumentTypesValidator.java:87)
+	at org.hibernate.query.sqm.function.AbstractSqmFunctionDescriptor.generateSqmExpression(AbstractSqmFunctionDescriptor.java:101)
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitGenericFunction(SemanticQueryBuilder.java:4583)
+	at org.hibernate.grammars.hql.HqlParser$GenericFunctionContext.accept(HqlParser.java:12626)
+	at org.antlr.v4.runtime.tree.AbstractParseTreeVisitor.visitChildren(AbstractParseTreeVisitor.java:46)
+	at org.hibernate.grammars.hql.HqlParserBaseVisitor.visitFunction(HqlParserBaseVisitor.java:1293)
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitFunctionExpression(SemanticQueryBuilder.java:1835)
+	at org.hibernate.grammars.hql.HqlParser$FunctionExpressionContext.accept(HqlParser.java:7727)
+	at org.antlr.v4.runtime.tree.AbstractParseTreeVisitor.visitChildren(AbstractParseTreeVisitor.java:46)
+	at org.hibernate.grammars.hql.HqlParserBaseVisitor.visitBarePrimaryExpression(HqlParserBaseVisitor.java:761)
+	at org.hibernate.grammars.hql.HqlParser$BarePrimaryExpressionContext.accept(HqlParser.java:7296)
+	at org.antlr.v4.runtime.tree.AbstractParseTreeVisitor.visitChildren(AbstractParseTreeVisitor.java:46)
+	at org.hibernate.grammars.hql.HqlParserBaseVisitor.visitExpressionOrPredicate(HqlParserBaseVisitor.java:894)
+	at org.hibernate.grammars.hql.HqlParser$ExpressionOrPredicateContext.accept(HqlParser.java:8079)
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitSelectableNode(SemanticQueryBuilder.java:1377)
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitSelection(SemanticQueryBuilder.java:1354)
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitSelectClause(SemanticQueryBuilder.java:1347)
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitQuery(SemanticQueryBuilder.java:1158)
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitQuerySpecExpression(SemanticQueryBuilder.java:956)
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitQuerySpecExpression(SemanticQueryBuilder.java:247)
+	at org.hibernate.grammars.hql.HqlParser$QuerySpecExpressionContext.accept(HqlParser.java:2113)
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitQueryExpression(SemanticQueryBuilder.java:985)
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitQueryExpression(SemanticQueryBuilder.java:247)
+	at org.hibernate.grammars.hql.HqlParser$QueryExpressionContext.accept(HqlParser.java:2003)
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitSelectStatement(SemanticQueryBuilder.java:472)
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitStatement(SemanticQueryBuilder.java:431)
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.buildSemanticModel(SemanticQueryBuilder.java:292)
+	at org.hibernate.query.hql.internal.StandardHqlTranslator.translate(StandardHqlTranslator.java:61)
+	at org.hibernate.query.internal.QueryInterpretationCacheStandardImpl.createHqlInterpretation(QueryInterpretationCacheStandardImpl.java:165)
+	at org.hibernate.query.internal.QueryInterpretationCacheStandardImpl.resolveHqlInterpretation(QueryInterpretationCacheStandardImpl.java:147)
+	at org.hibernate.query.spi.QueryEngine.interpretHql(QueryEngine.java:61)
+	at org.hibernate.internal.AbstractSharedSessionContract.interpretHql(AbstractSharedSessionContract.java:1043)
+	at org.hibernate.internal.AbstractSharedSessionContract.createQuery(AbstractSharedSessionContract.java:1094)
+	... 6 more
+
+7月 21, 2026 5:05:01 下午 org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator logConnectionInfo
+INFO: HHH10001005: Database info:
+	Database JDBC URL [undefined/unknown]
+	Database driver: undefined/unknown
+	Database dialect: XuguDialect
+	Database version: 12.0
+	Default catalog/schema: unknown/unknown
+	Autocommit mode: undefined/unknown
+	Isolation level: <unknown>
+	JDBC fetch size: undefined/unknown
+	Pool: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+7月 21, 2026 5:05:01 下午 org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration
+)
+7月 21, 2026 5:05:01 下午 org.hibernate.engine.jdbc.connections.internal.ConnectionProviderInitiator instantiateNamedConne
+ctionProvider
+INFO: HHH102002: Instantiating explicit connection provider: com.xugu.dialect.support.OfflineConnectionProvider
+[ERROR] Failures: 
+[ERROR]   XuguXmlTypeAndFunctionsIT.xmlFunctionsHqlSession_A_FUN_021:215 XML HQL Session IT failed: org.hibernate.query.sqm.produce.function.FunctionArgumentException: Parameter 2 of function 'xmlquery()' has type 'STRING', but argument is of type 'java.lang.String' mapped to '2009'
+[ERROR] Tests run: 18, Failures: 1, Errors: 0, Skipped: 1
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.5.2:test (default-test) on project xugu-dialect: There are test failures.
+[ERROR] 
+[ERROR] See E:\Work\java\hibernate-test\dialect\target\surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+

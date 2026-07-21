@@ -52,15 +52,15 @@ Columns: `id | pri | theme | layer | planned class(es) | ref (xuguefcore) | stat
 
 | id | pri | theme | layer | planned class(es) | ref (xuguefcore) | status | Phase |
 |---|---|---|---|---|---|---|---|
-| XP-001 | 高 | `@Version` 乐观锁陈旧写失败 → OptimisticLockException（或 Hibernate 等价） | IT | `XuguOptimisticConcurrencyIT` | OptimisticConcurrencyTests / AffectedRowsProbeTests | implemented | P-012 |
-| XP-002 | 高 | HQL GroupBy / Count 投影物化（scalar count + group-by count → Int） | IT | `XuguHqlGroupByCountIT` | RuntimeGapBaselineTests（Count·GroupBy） | implemented | P-012 |
-| XP-003 | 中 | HQL bulk 支持/拒绝边界（Hibernate JOINED / SINGLE_TABLE；order by / limit mutation；**勿** EF Owned） | Unit+IT | `XuguHqlBulkBoundaryTest` + `XuguHqlBulkBoundaryIT` | ExecuteBulkBoundaryTests | covered-unit | P-013 |
-| XP-004 | 中 | 大 JSON LOB 物化边界（失败则诚实 document / known-limit） | IT | `XuguJsonLobBoundaryIT` | JsonBoundaryTests | skipped-infra | P-014 |
-| XP-005 | 中 | ORM 显式事务原子性 multi-persist（或 Demo 加强） | IT | `XuguExplicitTxAtomicityIT` | — | skipped-infra | P-014 |
+| XP-001 | 高 | `@Version` 乐观锁陈旧写失败 → OptimisticLockException（或 Hibernate 等价） | IT | `XuguOptimisticConcurrencyIT` | OptimisticConcurrencyTests / AffectedRowsProbeTests | covered-live | P-012 |
+| XP-002 | 高 | HQL GroupBy / Count 投影物化（scalar count + group-by count → Int） | IT | `XuguHqlGroupByCountIT` | RuntimeGapBaselineTests（Count·GroupBy） | covered-live | P-012 |
+| XP-003 | 中 | HQL bulk 支持/拒绝边界（Hibernate JOINED / SINGLE_TABLE；order by / limit mutation；**勿** EF Owned） | Unit+IT | `XuguHqlBulkBoundaryTest` + `XuguHqlBulkBoundaryIT` | ExecuteBulkBoundaryTests | covered-live | P-013 |
+| XP-004 | 中 | 大 JSON LOB 物化边界（失败则诚实 document / known-limit） | IT | `XuguJsonLobBoundaryIT` | JsonBoundaryTests | covered-live | P-014 |
+| XP-005 | 中 | ORM 显式事务原子性 multi-persist（或 Demo 加强） | IT | `XuguExplicitTxAtomicityIT` | — | covered-live | P-014 |
 | XP-006 | 中 | 方言 SQL 金标 LIMIT / 锁序 / IDENTITY DDL | Unit | `XuguNativeSqlBaselineTest` + `src/test/resources` baselines | NativeSqlBaselineTests | covered-unit | P-015 |
-| XP-007 | 中 | HQL join fetch / 一对多烟测 | IT | `XuguHqlJoinFetchIT` | RuntimeGap Include | skipped-infra | P-015 |
-| XP-008 | 低 | Null 语义子集（IS NULL / 三值 / coalesce；**3–5** 条） | IT | `XuguNullSemanticsIT` (4 methods) | — | known-limit-documented | P-016 |
-| XP-009 | 低 | 时间函数投影（**仅**文档允许：`year` / `month` / `day` / `extract` / `current_date` / `current_timestamp`） | IT | `XuguTemporalProjectionIT` | — | known-limit-documented | P-016 |
+| XP-007 | 中 | HQL join fetch / 一对多烟测 | IT | `XuguHqlJoinFetchIT` | RuntimeGap Include | covered-live | P-015 |
+| XP-008 | 低 | Null 语义子集（IS NULL / 三值 / coalesce；**3–5** 条） | IT | `XuguNullSemanticsIT` (4 methods) | — | covered-live | P-016 |
+| XP-009 | 低 | 时间函数投影（**仅**文档允许：`year` / `month` / `day` / `extract` / `current_date` / `current_timestamp`） | IT | `XuguTemporalProjectionIT` | — | covered-live | P-016 |
 | XP-010 | 低 | 锁超时 / 死锁（加强 Unit；optional live IT） | Unit(+optional IT) | strengthen `XuguExceptionConversionTest` (no live IT) | — | covered-unit | P-016 |
 
 ### Priority rollup
@@ -83,20 +83,31 @@ Columns: `id | pri | theme | layer | planned class(es) | ref (xuguefcore) | stat
 
 | id | status | note |
 |---|---|---|
-| XP-008 | known-limit-documented | `XuguNullSemanticsIT` landed (IS NULL / IS NOT NULL / three-valued `=:null` / coalesce); offline gate-skip; promote **covered-live** only after live PASS |
-| XP-009 | known-limit-documented | `XuguTemporalProjectionIT` landed (year/month/day/extract/current_date/current_timestamp only; fixed seed 2024-03-15); offline gate-skip; promote **covered-live** only after live PASS |
+| XP-008 | covered-live | Live @5287 PASS (`XuguNullSemanticsIT` 4/0/0/0) — IS NULL / IS NOT NULL / three-valued `=:null` / coalesce |
+| XP-009 | covered-live | Live @5287 PASS (`XuguTemporalProjectionIT` 1/0/0/0) — year/month/day/extract/current_date/current_timestamp only |
 | XP-010 | covered-unit | `XuguExceptionConversionTest` strengthened (DEADLOCK→LockAcquisitionException; LOCK_TIMEOUT / DETAIL / UPGRADE→LockTimeoutException via JDBC / SQLState / `[E#####]` message). Optional live `XuguLockTimeoutIT` **not** added — **live-unstable** (dual-connection NOWAIT/WAIT not stably reproducible here) |
 
 ## Phase status notes
 
-- **XP-001 / XP-002 (P-012):** status `implemented` — gated ITs + entities landed; offline suite green via `Assumptions.assumeTrue(XuguITGate.isEnabled())`. Live DB not required for this status; promote to `covered-live` only after gate-on live PASS. If gate-on + unreachable DB, document `skipped-infra` in Phase evidence (do not invent `covered-live`).
-- **XP-003 (P-013):** status `covered-unit` — `XuguHqlBulkBoundaryTest` offline PASS (dialect bulk/temp flags; HQL update/delete + `order by`/`limit` → `SyntaxException`; `MutationQuery` API has no `setMaxResults`; `Query.setMaxResults` soft no-op). Gated `XuguHqlBulkBoundaryIT` + SINGLE_TABLE entities landed; live TCP refused → evidence `SKIPPED_INFRA`. Promote **covered-live** only after gate-on live PASS.
+- **XP-001 / XP-002 (P-012):** status `covered-live` — Live @5287 PASS (`XuguOptimisticConcurrencyIT` 2/0/0/0; `XuguHqlGroupByCountIT` 2/0/0/0). Evidence: `harness/evidence/test/I-010/live-it-5287/`.
+- **XP-003 (P-013):** status `covered-live` — Unit goldens retained; Live @5287 PASS (`XuguHqlBulkBoundaryIT` 4/0/0/0).
+- **XP-007 (P-015):** status `covered-live` — Live @5287 PASS (`XuguHqlJoinFetchIT` 1/0/0/0). XP-006 remains `covered-unit` (offline SQL goldens only).
+
 ## P-014 outcome notes (test · XP-004/005)
 
 | id | status | note |
 |---|---|---|
-| XP-004 | skipped-infra | `XuguJsonLobBoundaryIT` + `I010P014JsonDoc` landed (~512KiB JSON `@JdbcTypeCode(JSON)`; success→length assert / fail→document limitation; optional `json_value` scalar). Offline gate-skip green. Live `:5138` refused — **not** `covered-live` / **not** `known-limit-documented` until live run observes either branch. Evidence: `harness/evidence/test/I-010/P-014/` |
-| XP-005 | skipped-infra | `XuguExplicitTxAtomicityIT` + `I010P014TxEntity` landed (`Session.beginTransaction()` multi-persist commit→2 rows / rollback→0). Offline gate-skip green. Same infra block. Promote **covered-live** only after live PASS. |
+| XP-004 | covered-live | Live @5287 PASS — ~512KiB JSON entity materialization succeeded (no known-limit branch). Evidence: `harness/evidence/test/I-010/live-it-5287/` |
+| XP-005 | covered-live | Live @5287 PASS (`XuguExplicitTxAtomicityIT` 2/0/0/0) — multi-persist commit/rollback |
+
+## Live promotion (I-010 Accept prep · 2026-07-21 @5287)
+
+| Gate | Result |
+|---|---|
+| JDBC | `jdbc:xugu://192.168.2.239:5287/SYSTEM?compatiblemode=NONE` (nodes 5288/5289 also TCP OK; prefer 5287) |
+| dialect | **253 run / 0 fail / 0 err / 4 skip** |
+| demo | **36 / 0 / 0 / 0** |
+| Suite IT promote | XP-001…005, XP-007…009 → **covered-live**; XP-006/010 remain **covered-unit** |
 
 ## Out of scope (explicit)
 

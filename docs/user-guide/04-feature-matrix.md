@@ -105,22 +105,20 @@ Initiative **I-010** 在 I-009 之上做 ORM/HQL 深度闭环 + 文档配方，*
 | # | Scope 项 | 终态（诚实） |
 |---|---|---|
 | 1 | P0 SSOT/文档无陈旧「延后」与虚假 Demo gap；A-FUN-021 计数一致 | **勾选** — P-001 SSOT/docs 对齐 |
-| 2 | A-TYP-014/016/017 实体 ORM live 或诚实负向 | **勾选（known-limit 保留）** — 实体 ORM 路径已落地；本轮 live **SKIPPED_INFRA** → **勿**假晋升 covered-live |
-| 3 | A-FUN-021 HQL Session；XMLTABLE known-limit | **勾选** — HQL `xmlelement`/`xmlquery` 正例；**A-FUN-021** 仍 **known-limit-documented**（XMLTABLE） |
-| 4 | P1 A-FUN-020/019 HQL；Batch A 五族独立 HQL；tooling 配方 | **勾选** — A-FUN-020/019 保持 **covered-live**（HQL Session 加深）；Batch A（A-FUN-003/005/006/007/009）独立 HQL IT 已写，SSOT **known-limit** until live PASS；[08-recipes](08-schema-tooling-recipes.md) |
-| 5 | `verify.py` VERIFY PASS；有 DB 时全 reactor live | **P-010 门控** — 离线 VERIFY 必过；live 见 [03-verify § I-010](03-verify.md#i-010-accept-prep--ormhql-质量完善--verify-pass) |
+| 2 | A-TYP-014/016/017 实体 ORM live 或诚实负向 | **勾选（covered-live）** — live @5287 实体 ORM PASS；已晋升 |
+| 3 | A-FUN-021 HQL Session；XMLTABLE known-limit | **勾选** — HQL `xmlelement`/`xmlquery` live PASS；**A-FUN-021** 仍 **known-limit-documented**（XMLTABLE） |
+| 4 | P1 A-FUN-020/019 HQL；Batch A 五族独立 HQL；tooling 配方 | **勾选** — A-FUN-020/019 **covered-live**；Batch A（A-FUN-003/005/006/007/009）live @5287 PASS → **covered-live**；[08-recipes](08-schema-tooling-recipes.md) |
+| 5 | `verify.py` VERIFY PASS；有 DB 时全 reactor live | **勾选** — VERIFY PASS；live @5287 dialect 253/0/0/4 · demo 36/0/0/0 |
 | 6 | GAV 7.4.5.Final；NONE；**不 Ship** | **勾选** — 本 Initiative **NOT Ship** |
 
 ### I-010 residual（Accept 须诚实列出）
 
 | Residual | SSOT | 说明 |
 |---|---|---|
-| A-TYP-014 / 016 / 017 | **known-limit-documented** | 实体 ORM IT 锚点在；live **SKIPPED_INFRA** → covered-live **pending** |
-| Batch A A-FUN-003/005/006/007/009 | **known-limit-documented** | 五族独立 HQL Session IT 已写；live **SKIPPED_INFRA** → 勿假晋升 |
-| A-FUN-021 | **known-limit-documented** | XMLTABLE 单节点/集群上限；非 covered-live |
+| A-FUN-021 | **known-limit-documented** | XMLTABLE 单节点/集群上限（空结果 assumption skip）；HQL 路径已 live 绿 |
 | Ship / tag / push / Central | **OUT** | Human Gate 仅 Initiative Accept；**NOT Ship** |
 
-Charter rollup **不变**：**83/98** covered-live + **15** known-limit-documented。
+Charter rollup（live 晋升后）：**91/98** covered-live + **7** known-limit-documented。
 
 验证门控：[03-verify.md § I-010 Accept prep](03-verify.md#i-010-accept-prep--ormhql-质量完善--verify-pass)。
 
@@ -141,7 +139,7 @@ Build **B-002**（**P-011** SSOT + 文档入口；**P-012…P-016** 落地；**P
 | 低 | 时间函数投影（文档允许） | **IT** | `XuguTemporalProjectionIT` |
 | 低 | 锁超时 / 死锁 live 或加强 Unit | **Unit(+IT)** | strengthen `XuguExceptionConversionTest` / optional live |
 
-门控与离线说明：[03-verify.md § I-010 B-002](03-verify.md#i-010-b-002-xuguefcore-parity-suite)。**不**膨胀 Charter **98** / **83** covered-live；**NOT Ship**。
+门控与离线说明：[03-verify.md § I-010 B-002](03-verify.md#i-010-b-002-xuguefcore-parity-suite)。Parity suite 行**不**计入 Charter **98**；Definition A live 晋升后 rollup **91/98**；**NOT Ship**。
 
 ## I-006 consumer-path counts（冻结）
 

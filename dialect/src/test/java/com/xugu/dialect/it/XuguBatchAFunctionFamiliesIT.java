@@ -25,6 +25,7 @@ import com.xugu.dialect.support.XuguITGate;
 import com.xugu.dialect.support.XuguTestConnection;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -67,6 +68,8 @@ class XuguBatchAFunctionFamiliesIT {
 	/** A-FUN-005: trim / ltrim / rtrim. */
 	@Test
 	void trimFamilyHqlSession_A_FUN_005() {
+		// Entity VARCHAR may not preserve trailing blanks on persist/read; prove
+		// leading/trailing semantics via HQL string literals (live-proven on XuGu).
 		runFamily( "  Alice  ", 0, session -> {
 			String trimmed = session.createQuery(
 					"select trim(e.name) from P006FunEntity e where e.id = 1",
@@ -79,21 +82,31 @@ class XuguBatchAFunctionFamiliesIT {
 					String.class )
 					.getSingleResult();
 			assertTrue( ltrimmed.startsWith( "Alice" ), "ltrim=" + ltrimmed );
-			assertTrue( ltrimmed.endsWith( "  " ) || ltrimmed.equals( "Alice  " ),
-					"ltrim should keep trailing spaces: " + ltrimmed );
+			assertFalse( ltrimmed.startsWith( " " ),
+					"ltrim should remove leading spaces: " + ltrimmed );
 
 			String rtrimmed = session.createQuery(
 					"select rtrim(e.name) from P006FunEntity e where e.id = 1",
 					String.class )
 					.getSingleResult();
 			assertTrue( rtrimmed.endsWith( "Alice" ), "rtrim=" + rtrimmed );
-			assertTrue( rtrimmed.startsWith( "  " ) || rtrimmed.equals( "  Alice" ),
-					"rtrim should keep leading spaces: " + rtrimmed );
+			assertFalse( rtrimmed.endsWith( " " ),
+					"rtrim should remove trailing spaces: " + rtrimmed );
 
 			String trimLiteral = session.createQuery(
 					"select trim('  x  ')", String.class )
 					.getSingleResult();
 			assertEquals( "x", trimLiteral );
+
+			String ltrimLiteral = session.createQuery(
+					"select ltrim('  Alice  ')", String.class )
+					.getSingleResult();
+			assertEquals( "Alice  ", ltrimLiteral );
+
+			String rtrimLiteral = session.createQuery(
+					"select rtrim('  Alice  ')", String.class )
+					.getSingleResult();
+			assertEquals( "  Alice", rtrimLiteral );
 		} );
 	}
 
