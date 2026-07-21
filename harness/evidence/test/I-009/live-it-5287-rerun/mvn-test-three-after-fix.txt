@@ -1,0 +1,30 @@
+﻿mvn.cmd : 7月 21, 2026 2:07:04 下午 org.hibernate.Version logVersion
+所在位置 C:\Users\admin\AppData\Local\Temp\ps-script-9e45ca7f-bc7a-4a83-abd0-a8f87cfa11e9.ps1:99 字符: 338
++ ... D='SYSDBA'; & 'C:\Users\admin\tools\apache-maven-3.9.9\bin\mvn.cmd' - ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (7月 21, 2026 2:0...sion logVersion:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+INFO: HHH000001: Hibernate ORM core version 7.4.5.Final
+7月 21, 2026 2:07:04 下午 org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProvider configure
+WARN: HHH10001002: Using built-in connection pool (not intended for production use)
+7月 21, 2026 2:07:04 下午 org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator logConnectionInfo
+INFO: HHH10001005: Database info:
+	Database JDBC URL [jdbc:xugu://192.168.2.239:5287/SYSTEM?compatiblemode=NONE&user=SYSDBA&password=***]
+	Database driver: XuguDB JDBC Driver
+	Database dialect: XuguDialect
+	Database version: 12.0
+	Default catalog/schema: SYSTEM/SYSDBA
+	Autocommit mode: false
+	Isolation level: READ_COMMITTED
+	JDBC fetch size: 1000
+	Pool: DriverManagerConnectionProvider
+	Minimum pool size: 1
+	Maximum pool size: 20
+Hibernate: create table if not exists "select" (id integer identity(1,1), name varchar(64) not null, primary key (id))
+7月 21, 2026 2:07:05 下午 org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration
+)
+Hibernate: insert into "select" (name) values (?)
+Hibernate: select last_insert_id() from dual
+Hibernate: drop table if exists "select"

@@ -474,7 +474,7 @@ Source: [`harness/evidence/researcher/I-005/P-001/GAP-SUMMARY.md`](../harness/ev
 |---|---|---|
 | I-002 validate hotfix | `XuguSchemaValidateIT#schemaValidateSucceedsWhenSequenceExists` | A-SEQ-001 metadata |
 | I-002 HQL pagination | `XuguHqlPaginationIT` | A-PAG-* ORM entry |
-| I-004 reserved table identity | `XuguReservedIdentityIT#identityPersistOnReservedTableOrderBackfillsId` | A-IDN-003/004 edge |
+| I-004 reserved table identity | `XuguReservedIdentityIT#identityPersistOnReservedTableOrderBackfillsId` (`"select"`; avoids live `Order` collision) | A-IDN-003/004 edge |
 | I-004 sequence drop guard | `XuguAutoSequenceDropIT` | A-SEQ-002 drop safety |
 | SqlAst translator wiring | `XuguSqlAstTranslatorTest` | A-PAG-001/002 AST path |
 
@@ -563,9 +563,9 @@ Source: [`harness/evidence/researcher/I-005/P-001/GAP-SUMMARY.md`](../harness/ev
 | **status** | **known-limit-documented** |
 | **Doc citation** | `reference/object/table/create.md` (`ENCRYPT BY`); `reference/object/encryptor.md` (SYSSSO / `ACL_SSO`) |
 | **Dialect surface** | `XuguTableDdlSupport` locks `ENCRYPT BY` / `CREATE ENCRYPTOR` shapes; `supportsEncryptByInSchemaExport()` is `false` |
-| **Known-limit reason** | Encryptor creation requires SYSSSO; schema tooling does not emit encrypt clauses |
-| **Live IT** | `XuguTableDdlExtensionsIT#encryptByNativeWhenEncryptorAvailable_A_DDL_009` (skips when no encryptor visible) |
-| **gap_action** | **N/A** — closed I-009/P-007 |
+| **Known-limit reason** | Encryptor creation requires SYSSSO / `ACL_SSO`; `sys_encryptors` may return E18012; schema tooling does not emit encrypt clauses |
+| **Live IT** | `XuguTableDdlExtensionsIT#encryptByNativeWhenEncryptorAvailable_A_DDL_009` (honest **skip** when no encryptor visible — must not wrap `TestAbortedException` as failure) |
+| **gap_action** | **N/A** — closed I-009/P-007; live-it-5287 triage confirmed skip path |
 
 ### A-LCK-006 LOCK TABLE (I-009/P-009 closed)
 
@@ -630,12 +630,13 @@ Source: [`harness/evidence/researcher/I-005/P-001/GAP-SUMMARY.md`](../harness/ev
 | Field | Value |
 |---|---|
 | **matrix_id** | A-FUN-021 |
-| **status** | **covered-live** |
+| **status** | **known-limit-documented** |
 | **Doc citation** | `reference/function/xml-functions/{extract,xmlelement,xmlquery,xmltable}.md` |
 | **Dialect surface** | HQL registry: `xmlelement`, `xmlquery`, `xmltable`; `EXTRACT(xml,xpath)` native SQL only (temporal `extract(field from …)` keeps Dialect default) |
-| **Cluster note** | `XMLTABLE` documented single-node only (`xmltable.md`) — not a cluster-safe claim |
-| **Live IT** | Native SQL subset (`XuguXmlTypeAndFunctionsIT#xmlFunctionsNativeSubset_A_FUN_021`) |
-| **gap_action** | **N/A** — closed I-009/P-003 |
+| **Known-limit reason** | `XMLTABLE` documented **single-node only** (`xmltable.md`); on cluster topologies empty result / non-support is expected — IT skips that subset rather than claiming cluster coverage. EXTRACT / XMLELEMENT / XMLQUERY remain exercised when gate ON. |
+| **Cluster note** | Not a cluster-safe claim for `XMLTABLE` |
+| **Live IT** | Native SQL subset (`XuguXmlTypeAndFunctionsIT#xmlFunctionsNativeSubset_A_FUN_021`) — XMLTABLE empty → assumption skip |
+| **gap_action** | **N/A** — closed I-009/P-003; live-it-5287 triage aligned status |
 
 ### A-TYP-014 INTERVAL known-limit (I-009/P-002)
 

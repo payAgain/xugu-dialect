@@ -129,6 +129,20 @@ hibernate.query.json_functions_enabled=true
 
 **原因：** 虚谷无明确 native ENUM 文档；`getEnumTypeDeclaration` 返回 **`null`**（C-DDL-004 文档不允许）。改用字符串/校验约束等文档允许映射。
 
+## 12. 保留字表 IDENTITY：`字段NAME不存在`（E16007）
+
+**症状：** 对保留字物理表做 IDENTITY persist 时报 `[E16007] 字段NAME不存在`；或 `CREATE TABLE IF NOT EXISTS "order"` 日志伴随「表已存在」警告。
+
+**原因：** 目标库若已有应用表 `Order`（列集不同），`CREATE IF NOT EXISTS` 不会重建；且存在依赖时 `DROP "order"` 可能失败（E5025）。插入列与实表不一致即触发 E16007。这与方言 `getDefaultUseGetGeneratedKeys=false` + `last_insert_id()` 修复无关。
+
+**处理：** IT / 示例勿与业务表名硬撞车；方言侧保留字仍须双引号（如 `"select"` / `"order"`）。回归 IT 使用 `"select"` 覆盖同一 quoting + IDENTITY 回填路径。见矩阵 A-IDN-* / `XuguReservedIdentityIT`。
+
+## 13. ENCRYPT BY / XMLTABLE 在集群或权限不足时
+
+**ENCRYPT BY：** 建加密器需 SYSSSO / `ACL_SSO`；无可见 encryptor 或 `sys_encryptors` 权限不足（如 E18012）时，方言 **不** 在 schema export 中声称 ENCRYPT（A-DDL-009 known-limit）。门控 IT 应 **skip**，不应把 assumption 包成失败。
+
+**XMLTABLE：** 文档注明当前版本 **仅单节点**、不支持集群。集群上可能空结果；勿当作 ORM 集群能力。EXTRACT / XMLELEMENT / XMLQUERY 仍可按文档使用。见 A-FUN-021。
+
 ## Still stuck?
 
 - Contract: [`contracts/xugu-dialect.contract.md`](../../contracts/xugu-dialect.contract.md)  

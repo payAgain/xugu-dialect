@@ -4,21 +4,21 @@
   "batch_id": "B-001",
   "status": "build_complete_awaiting_accept",
   "harness_level": "Standard",
-  "last_updated": "2026-07-21T11:40:00+08:00",
+  "last_updated": "2026-07-21T14:10:00+08:00",
   "initiative_id": "I-009",
   "initiative_type": "feature",
   "working_branch": "feat/i-009-deferred-matrix-delivery",
   "active_plan": [
     "B-001 P-001…P-011 all accepted",
-    "VERIFY PASS offline; live SKIPPED_INFRA"
+    "Live dialect triage @5287 complete: 208/0 fail; VERIFY PASS"
   ],
   "next_3_steps": [
-    "Human Gate Initiative Accept",
-    "Optional live IT re-run",
+    "Human Gate review triage SHA + dispositions",
+    "Decide Initiative Accept I-009",
     "Archive I-009 NOT Ship"
   ],
   "validation": {
-    "last_result": "VERIFY PASS; B-001 completed"
+    "last_result": "VERIFY PASS; live-it-5287-rerun dialect 208/0/0/3"
   },
   "cognitive_state": {
     "failure_count": 0,
@@ -26,13 +26,13 @@
     "blocked_on": null
   },
   "version_control_checkpoint": {
-    "decision": "b001_complete",
-    "committed": true,
+    "decision": "live_triage_complete",
+    "committed": false,
     "branch": "feat/i-009-deferred-matrix-delivery",
-    "plan_head": "6965c3a"
+    "plan_head": "e415600"
   },
   "handoff": {
-    "resume_from": "harness/handoffs/orchestrator/I-009-B-001-complete.md"
+    "resume_from": "harness/handoffs/orchestrator/I-009-live-it-5287-rerun.md"
   },
   "approved_build": "B-001",
   "approved_phases": [
@@ -40,5 +40,5 @@
     "P-007", "P-008", "P-009", "P-010", "P-011"
   ],
   "ship": false,
-  "updated_at": "2026-07-21T11:40:00+08:00"
+  "updated_at": "2026-07-21T14:10:00+08:00"
 }

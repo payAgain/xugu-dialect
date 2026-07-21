@@ -8,12 +8,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 /**
- * I-004 / P-002: IDENTITY entity mapped to reserved-word physical table {@code ORDER}.
- * Hibernate quoted-identifier form {@code "order"} forces double-quote rendering
+ * I-004 / P-002: IDENTITY entity mapped to reserved-word physical table {@code SELECT}.
+ * Hibernate quoted-identifier form {@code "select"} forces double-quote rendering
  * ({@link com.xugu.dialect.XuguDialect#openQuote()} / {@code closeQuote()}).
+ *
+ * <p>Uses {@code "select"} rather than {@code "order"} so live IT does not collide with
+ * pre-existing application tables named {@code Order} that {@code CREATE TABLE IF NOT EXISTS}
+ * cannot replace (and often cannot {@code DROP} due to dependents).
  */
 @Entity
-@Table(name = "\"order\"")
+@Table(name = "\"select\"")
 public class I004P002OrderEntity {
 
 	@Id

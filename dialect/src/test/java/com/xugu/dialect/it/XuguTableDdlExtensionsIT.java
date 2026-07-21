@@ -6,6 +6,7 @@ import java.sql.Statement;
 
 import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
+import org.opentest4j.TestAbortedException;
 
 import com.xugu.dialect.ddl.XuguTableDdlSupport;
 import com.xugu.dialect.support.XuguITGate;
@@ -123,6 +124,10 @@ class XuguTableDdlExtensionsIT {
 				catch ( Exception ignored ) {
 				}
 			}
+		}
+		catch ( TestAbortedException abort ) {
+			// known-limit skip (no encryptor / ACL_SSO) must remain skipped, not AssertionFailedError
+			throw abort;
 		}
 		catch ( Exception e ) {
 			fail( "ENCRYPT BY native IT failed: " + e.getMessage(), e );

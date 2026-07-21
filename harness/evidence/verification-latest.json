@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "status": "PASS",
-  "started_at": "2026-07-21T11:41:58+08:00",
-  "finished_at": "2026-07-21T11:42:25+08:00",
+  "started_at": "2026-07-21T14:07:48+08:00",
+  "finished_at": "2026-07-21T14:08:37+08:00",
   "project_root": "E:\\Work\\java\\hibernate-test",
   "phase_id": null,
   "config": "E:\\Work\\java\\hibernate-test\\harness\\verification.json",

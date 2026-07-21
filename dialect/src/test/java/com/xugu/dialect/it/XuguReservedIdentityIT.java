@@ -1,6 +1,7 @@
 package com.xugu.dialect.it;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Locale;
@@ -30,14 +31,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 /**
- * I-004 / P-002: IDENTITY persist into reserved-word table {@code "order"} must
+ * I-004 / P-002: IDENTITY persist into reserved-word table {@code "select"} must
  * backfill id without JDBC {@code RETURN_GENERATED_KEYS} re-parse errors
- * ({@code unexpected ORDER}).
+ * (e.g. {@code unexpected SELECT} / {@code unexpected ORDER} on reserved names).
+ *
+ * <p>Table is {@code "select"} (not {@code "order"}) to avoid colliding with demo/app
+ * {@code Order} tables that block DROP and make {@code CREATE IF NOT EXISTS} a no-op.
  */
 class XuguReservedIdentityIT {
 
 	/** Quoted reserved identifier — matches Dialect openQuote/closeQuote '"'. */
-	private static final String QUOTED_ORDER_TABLE = "\"order\"";
+	private static final String QUOTED_RESERVED_TABLE = "\"select\"";
 
 	@Test
 	void identityPersistOnReservedTableOrderBackfillsId() {
@@ -53,11 +57,13 @@ class XuguReservedIdentityIT {
 					.buildMetadata();
 			export( metadata, registry, Action.CREATE_ONLY );
 
+			assertReservedTableHasNameColumn();
+
 			sf = metadata.buildSessionFactory();
 			Integer id;
 			try ( Session session = sf.openSession() ) {
 				session.beginTransaction();
-				I004P002OrderEntity e = new I004P002OrderEntity( "reserved-order-1" );
+				I004P002OrderEntity e = new I004P002OrderEntity( "reserved-select-1" );
 				session.persist( e );
 				session.flush();
 				id = e.getId();
@@ -70,9 +76,11 @@ class XuguReservedIdentityIT {
 		}
 		catch ( Exception e ) {
 			String msg = rootMessage( e );
-			assertFalse( msg.toUpperCase( Locale.ROOT ).contains( "UNEXPECTED ORDER" )
+			assertFalse( msg.toUpperCase( Locale.ROOT ).contains( "UNEXPECTED SELECT" )
+							|| msg.toUpperCase( Locale.ROOT ).contains( "UNEXPECTED \"SELECT\"" )
+							|| msg.toUpperCase( Locale.ROOT ).contains( "UNEXPECTED ORDER" )
 							|| msg.toUpperCase( Locale.ROOT ).contains( "UNEXPECTED \"ORDER\"" ),
-					"must not fail with reserved-word ORDER parse error: " + msg );
+					"must not fail with reserved-word parse error: " + msg );
 			fail( "Reserved IDENTITY IT failed: " + msg, e );
 		}
 		finally {
@@ -102,9 +110,20 @@ class XuguReservedIdentityIT {
 		} );
 	}
 
+	/**
+	 * Guard against CREATE IF NOT EXISTS colliding with an unrelated table of the same
+	 * unquoted name (live symptom: E16007 字段NAME不存在 on insert).
+	 */
+	private static void assertReservedTableHasNameColumn() throws Exception {
+		try ( Connection c = XuguTestConnection.open(); Statement st = c.createStatement();
+			ResultSet rs = st.executeQuery( "select name from " + QUOTED_RESERVED_TABLE + " where 1=0" ) ) {
+			assertNotNull( rs.getMetaData() );
+		}
+	}
+
 	private static void cleanup() {
 		try ( Connection c = XuguTestConnection.open(); Statement st = c.createStatement() ) {
-			ignore( st, "DROP TABLE IF EXISTS " + QUOTED_ORDER_TABLE );
+			ignore( st, "DROP TABLE IF EXISTS " + QUOTED_RESERVED_TABLE );
 		}
 		catch ( Exception ignored ) {
 		}

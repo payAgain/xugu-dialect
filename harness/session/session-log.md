@@ -1,3 +1,23 @@
+## Entry: I-009 live IT @5287 triage — dialect green
+
+### Summary
+Triage prior 3 dialect live failures: (1) ReservedIdentity **fixed** — IT table `"select"` avoids colliding SYSDBA `Order`; (2) ENCRYPT **known-limit** — rethrow assumption skip (E18012 / no encryptor); (3) XMLTABLE **known-limit** — empty → skip; SSOT A-FUN-021 aligned. Retest dialect **208/0/0/3**; `verify.py` **VERIFY PASS**. Evidence `harness/evidence/test/I-009/live-it-5287-rerun/`. **NOT Ship**.
+
+### Next
+Human Gate：审 SHA + dispositions 后可 **Initiative Accept I-009**（仍 NOT Ship）。
+
+---
+
+## Entry: I-009 optional live IT @5287 — partial
+
+### Summary
+User cluster ports **5287/5288/5289** all JDBC OK (prefer 5287). Full reactor `XUGU_RUN_IT=true`: dialect **208/3 fail/0 err/2 skip**; demo **36/0/0/0**. Failures: ReservedIdentity NAME、ENCRYPT assumption wrap、XMLTABLE. Evidence `harness/evidence/test/I-009/live-it-5287/`. Compatible-mode multi-product line remains **out of scope** (I-007/I-008/I-009). **NOT Accept** · **NOT Ship**. No commit of secrets/org/.
+
+### Next
+Human Gate：先审 3 个 dialect live failure，再决定是否 **Initiative Accept I-009**。
+
+---
+
 ## Entry: I-009 Plan complete — await Build approval
 
 ### Summary
