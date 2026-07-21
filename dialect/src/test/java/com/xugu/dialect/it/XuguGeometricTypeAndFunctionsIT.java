@@ -39,6 +39,9 @@ import static org.junit.jupiter.api.Assertions.fail;
  * Simple 2D types only — not PostGIS. Entity path (I-010/P-004) uses
  * {@link XuguPointJdbcType} for {@code String} + {@code @JdbcTypeCode(POINT|GEOMETRY)}.
  * Non-POINT subtypes remain native/tooling only.
+ *
+ * <p>HQL Session path (I-010/P-006 / A-FUN-020): {@code Session.createQuery} positive
+ * for {@code area}/{@code center}/{@code point} (same shapes as native subset).
  */
 class XuguGeometricTypeAndFunctionsIT {
 
@@ -163,6 +166,81 @@ class XuguGeometricTypeAndFunctionsIT {
 		}
 		catch ( Exception e ) {
 			fail( "POINT entity ORM IT failed: " + e.getMessage(), e );
+		}
+		finally {
+			if ( sf != null ) {
+				sf.close();
+			}
+			StandardServiceRegistryBuilder.destroy( registry );
+			cleanupEntityTable();
+		}
+	}
+
+	/**
+	 * I-010/P-006: HQL {@code Session.createQuery} live positive for {@code area},
+	 * {@code center}, and {@code point}. Reuses {@link I010P004PointEntity} SessionFactory
+	 * bootstrap (same as entity ORM IT). Native subset retained separately.
+	 */
+	@Test
+	void geometricFunctionsHqlSession_A_FUN_020() {
+		Assumptions.assumeTrue( XuguITGate.isEnabled(), "integration gate off" );
+		cleanupEntityTable();
+
+		StandardServiceRegistry registry = buildRegistry();
+		SessionFactory sf = null;
+		try {
+			Metadata metadata = new MetadataSources( registry )
+					.addAnnotatedClass( I010P004PointEntity.class )
+					.buildMetadata();
+			export( metadata, registry, Action.CREATE_ONLY );
+			sf = metadata.buildSessionFactory();
+
+			try ( Session session = sf.openSession() ) {
+				session.beginTransaction();
+				session.persist( new I010P004PointEntity( 1, "(1,1)", "(2,3)" ) );
+				session.getTransaction().commit();
+			}
+
+			try ( Session session = sf.openSession() ) {
+				// area.md — CIRCLE area via nested HQL constructors
+				Double area = session.createQuery(
+						"select area(circle('((5, 0), 1)'))", Double.class )
+						.getSingleResult();
+				assertNotNull( area );
+				assertTrue( area > 3.0 && area < 3.2, "AREA circle HQL ≈ π, got " + area );
+
+				// center.md — BOX center
+				String center = session.createQuery(
+						"select center(box('(1, 2), (0, 0)'))", String.class )
+						.getSingleResult();
+				assertNotNull( center );
+				assertTrue( center.contains( "0.5" ) && center.contains( "1" ),
+						"CENTER(BOX) HQL: " + center );
+
+				// point.md — coordinate construct
+				String pt = session.createQuery(
+						"select point(23.4, -44.5)", String.class )
+						.getSingleResult();
+				assertNotNull( pt );
+				assertTrue( pt.contains( "23.4" ) && pt.contains( "-44.5" ),
+						"POINT HQL: " + pt );
+
+				// Session entity still resolvable (reuse I010P004PointEntity)
+				String entityPoint = session.createQuery(
+						"select e.point from I010P004PointEntity e where e.id = 1",
+						String.class )
+						.getSingleResult();
+				assertTrue( containsCoords( entityPoint, "1", "1" ),
+						"entity POINT via HQL: " + entityPoint );
+			}
+
+			export( metadata, registry, Action.DROP );
+		}
+		catch ( AssertionError e ) {
+			throw e;
+		}
+		catch ( Exception e ) {
+			fail( "Geometric HQL Session IT failed: " + e.getMessage(), e );
 		}
 		finally {
 			if ( sf != null ) {

@@ -6,7 +6,8 @@ import java.util.List;
  * Documented XuGu geometric function names ({@code reference/function/geometric-functions/}).
  *
  * <p>Bounded A-FUN-020 subset — all 21 doc files; native SQL IT exercises representative
- * calls; HQL registry uses lowercase names matching XuGu SQL.
+ * calls; HQL registry uses lowercase names matching XuGu SQL. I-010/P-006 adds HQL
+ * {@code Session.createQuery} live anchors for {@code area}/{@code center}/{@code point}.
  */
 public final class XuguGeometricFunctions {
 

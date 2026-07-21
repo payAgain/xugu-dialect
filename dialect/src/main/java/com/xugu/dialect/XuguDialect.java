@@ -163,7 +163,9 @@ import jakarta.persistence.Timeout;
  * binding for entity {@code String} + {@code @JdbcTypeCode(POINT|GEOMETRY)} ORM round-trip.
  * All seven subtype DDL strings locked for native SQL; LINE/LSEG/BOX/PATH/POLYGON/CIRCLE
  * remain tooling / native-SQL only (no Hibernate ORM claim). Geometric functions (A-FUN-020):
- * bounded 21-function registry per {@code reference/function/geometric-functions/}.
+ * bounded 21-function registry per {@code reference/function/geometric-functions/};
+ * HQL Session live anchors ({@code area}/{@code center}/{@code point}) via
+ * {@code XuguGeometricTypeAndFunctionsIT#geometricFunctionsHqlSession_A_FUN_020}.
  *
  * <p><b>UDT (A-TYP-018):</b> XuGu documents schema-defined {@code OBJECT}/{@code VARRAY}/
  * {@code TABLE} families ({@code reference/sql/datatype/udt.md}). Hibernate 7.4 exposes no

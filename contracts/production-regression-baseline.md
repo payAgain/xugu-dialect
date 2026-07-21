@@ -221,13 +221,19 @@ Columns: `matrix_id | status | entry_class#method | gate | gap_action`
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
 | A-TYP-017 | known-limit-documented | `XuguGeometricTypeTest#pointTypeHooksWired_A_TYP_017`; `XuguGeometricTypeTest#allDocumentedKindsLocked_A_TYP_017`; `XuguGeometricTypeTest#pointJdbcTypesContributed_A_TYP_017`; `XuguGeometricTypeAndFunctionsIT#geometricTypesNativeRoundTrip_A_TYP_017`; `XuguGeometricTypeAndFunctionsIT#pointEntityOrmRoundTrip_A_TYP_017`; `XuguDialectTest#columnTypesMatchXuguDocs` (POINT/GEOMETRY) | IT | N/A (I-010/P-004 entity ORM path; live pending) |
-| A-FUN-020 | covered-live | `XuguFunctionRegistryTest#geometricSubsetRegistered_A_FUN_020`; `XuguGeometricTypeAndFunctionsIT#geometricFunctionsNativeSubset_A_FUN_020` | IT | N/A |
+| A-FUN-020 | covered-live | `XuguFunctionRegistryTest#geometricSubsetRegistered_A_FUN_020`; `XuguGeometricTypeAndFunctionsIT#geometricFunctionsNativeSubset_A_FUN_020`; `XuguGeometricTypeAndFunctionsIT#geometricFunctionsHqlSession_A_FUN_020` | IT | N/A |
 
 ### I-010 / P-004 — A-TYP-017 POINT entity ORM path
 
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
 | A-TYP-017 | known-limit-documented | `XuguPointJdbcType` + `I010P004PointEntity`; `XuguGeometricTypeAndFunctionsIT#pointEntityOrmRoundTrip_A_TYP_017` (`String` + `@JdbcTypeCode(POINT|GEOMETRY)`); native IT retained; non-POINT subtypes tooling-only | IT | **Promote to covered-live only after live entity IT PASS** — do not claim covered-live while SKIPPED_INFRA |
+
+### I-010 / P-006 — A-FUN-020 geometric HQL Session
+
+| matrix_id | status | entry_class#method | gate | gap_action |
+|---|---|---|---|---|
+| A-FUN-020 | covered-live | `XuguGeometricTypeAndFunctionsIT#geometricFunctionsHqlSession_A_FUN_020` (`area`/`center`/`point` via `Session.createQuery`); native subset retained; registry unit retained | IT | **Strengthen HQL anchors; do not regress covered-live** — live may SKIPPED_INFRA |
 
 ### I-009 / P-006 — promoted from 延后 (Definition A)
 
@@ -287,7 +293,7 @@ Matrix status **文档不允许** or **延后**; baseline records explicit non-s
 | A-PAG-006 | known-limit-documented | `XuguLockPaginationIdentityExtensionsTest#rownumSqlMatchesSelectDoc_A_PAG_006`; `XuguLockPaginationIdentityExtensionsTest#limitHandlerRemainsDefault_A_PAG_004_006`; `XuguLockPaginationIdentityIT#rownumPaginationNativeRoundTrip_A_PAG_006` | IT | **N/A** (I-009/P-009 closed) |
 | A-LCK-006 | covered-live | `XuguLockPaginationIdentityExtensionsTest#lockTableSqlMatchesLockDoc_A_LCK_006`; `XuguLockPaginationIdentityIT#lockTableExclusiveNativeRoundTrip_A_LCK_006` | IT | **N/A** (I-009/P-009 closed) |
 | A-IDN-005 | covered-live | `XuguLockPaginationIdentityExtensionsTest#identityModeSqlMatchesIdentityModeDoc_A_IDN_005`; `XuguLockPaginationIdentityIT#identityModeNullAsAutoIncrement_A_IDN_005` | IT | **N/A** (I-009/P-009 closed) |
-| A-FUN-020 | covered-live | `XuguFunctionRegistryTest#geometricSubsetRegistered_A_FUN_020`; `XuguGeometricTypeAndFunctionsIT#geometricFunctionsNativeSubset_A_FUN_020` | IT | **N/A** (I-009/P-004 closed) |
+| A-FUN-020 | covered-live | `XuguFunctionRegistryTest#geometricSubsetRegistered_A_FUN_020`; `XuguGeometricTypeAndFunctionsIT#geometricFunctionsNativeSubset_A_FUN_020`; `XuguGeometricTypeAndFunctionsIT#geometricFunctionsHqlSession_A_FUN_020` | IT | **N/A** (I-009/P-004 + I-010/P-006 HQL Session) |
 | A-FUN-021 | known-limit-documented | `XuguFunctionRegistryTest#xmlSubsetRegistered_A_FUN_021`; `XuguXmlTypeAndFunctionsIT#xmlFunctionsHqlSession_A_FUN_021`; `XuguXmlTypeAndFunctionsIT#xmlFunctionsNativeSubset_A_FUN_021` | IT (live SKIPPED_INFRA) | **N/A** (I-010/P-005 HQL Session; XMLTABLE known-limit) |
 | A-SCH-003 | known-limit-documented | `XuguCatalogAndIndexExtensionsTest#catalogMetadataQueryLocked_A_SCH_003`; `XuguCatalogAndIndexExtensionsTest#nameQualifierRemainsSchemaOnly_A_SCH_003`; `XuguCatalogAndIndexExtensionsTest#dialectDoesNotClaimCatalogInObjectNames_A_SCH_003`; `XuguCatalogAndIndexExtensionsIT#jdbcCatalogAlignsWithCurrentDb_A_SCH_003` | IT | **N/A** (I-009/P-008 closed) |
 | A-SCH-017 | known-limit-documented | `XuguCatalogAndIndexExtensionsTest#functionalIndexSqlMatchesIndexesDoc_A_SCH_017`; `XuguCatalogAndIndexExtensionsTest#bitmapIndexSqlMatchesIndexesDoc_A_SCH_017`; `XuguCatalogAndIndexExtensionsTest#dialectDoesNotClaimAdvancedIndexInSchemaExport_A_SCH_017`; `XuguCatalogAndIndexExtensionsIT#functionalAndBitmapIndexNativeRoundTrip_A_SCH_017` | IT | **N/A** (I-009/P-008 closed) |
