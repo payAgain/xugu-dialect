@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "initiative_id": "I-010",
+  "started_at": "2026-07-21T16:35:15+08:00",
+  "finished_at": "2026-07-21T16:35:51+08:00",
+  "project_root": "E:\\Work\\java\\hibernate-test",
+  "phase_id": "P-016",
+  "build_id": "B-002",
+  "invocation_id": "inv-i010-p016-rp01-test",
+  "config": "E:\\Work\\java\\hibernate-test\\harness\\verification.json",
+  "results": [
+    {
+      "id": "harness",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "id": "build",
+      "required": true,
+      "status": "PASS",
+      "command": "C:\\Users\\admin\\tools\\apache-maven-3.9.9\\bin\\mvn.cmd -q -DskipTests package",
+      "cwd": "E:\\Work\\java\\hibernate-test",
+      "exit_code": 0
+    },
+    {
+      "id": "test",
+      "required": true,
+      "status": "PASS",
+      "command": "C:\\Users\\admin\\tools\\apache-maven-3.9.9\\bin\\mvn.cmd -q test",
+      "cwd": "E:\\Work\\java\\hibernate-test",
+      "exit_code": 0
+    },
+    {
+      "id": "lint",
+      "required": false,
+      "status": "NOT_APPLICABLE",
+      "command": "NA"
+    }
+  ],
+  "dialect_module_test": {
+    "command": "mvn -q -pl dialect test",
+    "status": "PASS",
+    "exit_code": 0
+  },
+  "focused": {
+    "command": "mvn -pl dialect -Dtest=XuguNullSemanticsIT,XuguTemporalProjectionIT,XuguExceptionConversionTest test",
+    "XuguNullSemanticsIT": "Tests run: 4, Failures: 0, Errors: 0, Skipped: 4",
+    "XuguTemporalProjectionIT": "Tests run: 1, Failures: 0, Errors: 0, Skipped: 1",
+    "XuguExceptionConversionTest": "Tests run: 10, Failures: 0, Errors: 0, Skipped: 0"
+  },
+  "live_it": {
+    "command": "XUGU_RUN_IT=true mvn -q -pl dialect test",
+    "jdbc": "jdbc:xugu://192.168.2.239:5138/SYSTEM?compatiblemode=NONE",
+    "status": "SKIPPED_INFRA",
+    "exit_code": null,
+    "detail": "TCP 192.168.2.239:5138 and 127.0.0.1:5138 refused (TcpTestSucceeded=False); live IT not attempted"
+  },
+  "summary": {
+    "verify": "PASS",
+    "offline_test": "PASS",
+    "dialect_pl_test": "PASS",
+    "live_full_reactor": "SKIPPED_INFRA",
+    "observed_flows": [
+      "i010-null-semantics",
+      "i010-temporal-proj",
+      "i010-lock-timeout"
+    ]
+  }
+}

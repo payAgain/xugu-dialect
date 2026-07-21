@@ -79,6 +79,67 @@ class XuguExceptionConversionTest {
 		);
 	}
 
+	/** XP-010: DEADLOCK → LockAcquisitionException via JDBC code / SQLState / [E14001] message. */
+	@Test
+	void conversionMapsDeadlockViaSqlStateAndMessageVariants() {
+		SQLExceptionConversionDelegate delegate = XuguSQLExceptionConversionDelegate.create(
+				XuguViolatedConstraintNameExtractor.INSTANCE );
+
+		assertInstanceOf(
+				LockAcquisitionException.class,
+				delegate.convert(
+						new SQLException( "deadlock detected", "xugu14001", 0 ),
+						"acquire",
+						"select … for update" )
+		);
+		assertInstanceOf(
+				LockAcquisitionException.class,
+				delegate.convert(
+						new SQLException( "[E14001] 检测到死锁，事务已回滚", null, 0 ),
+						"acquire",
+						"update t" )
+		);
+	}
+
+	/**
+	 * XP-010: LOCK_TIMEOUT / LOCK_TIMEOUT_DETAIL / LOCK_UPGRADE_CONFLICT → LockTimeoutException
+	 * across JDBC code, SQLState, and message-token resolution.
+	 */
+	@Test
+	void conversionMapsLockTimeoutVariantsViaSqlStateAndMessage() {
+		SQLExceptionConversionDelegate delegate = XuguSQLExceptionConversionDelegate.create(
+				XuguViolatedConstraintNameExtractor.INSTANCE );
+
+		assertInstanceOf(
+				LockTimeoutException.class,
+				delegate.convert(
+						new SQLException( "resource busy", "xugu14011", 0 ),
+						"lock",
+						"select … for update nowait" )
+		);
+		assertInstanceOf(
+				LockTimeoutException.class,
+				delegate.convert(
+						new SQLException( "named lock busy", "xugu14012", XuguErrorCodes.LOCK_TIMEOUT_DETAIL ),
+						"lock",
+						"select … for update wait 100" )
+		);
+		assertInstanceOf(
+				LockTimeoutException.class,
+				delegate.convert(
+						new SQLException( "[E19013] 锁升级冲突或超时", null, 0 ),
+						"upgrade",
+						"select … for update" )
+		);
+		assertInstanceOf(
+				LockTimeoutException.class,
+				delegate.convert(
+						new SQLException( "[E14011] 资源忙（锁超时）", "xugu14011", 0 ),
+						"lock",
+						"sql" )
+		);
+	}
+
 	@Test
 	void extractorParsesNotNullFieldName() {
 		SQLException ex = new SQLException( "[E16005] 字段 email 不能取空值", "xugu16005", XuguErrorCodes.NOT_NULL_VIOLATION );

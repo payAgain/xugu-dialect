@@ -1,0 +1,4 @@
+﻿ComputerName  RemotePort TcpTestSucceeded
+127.0.0.1           5138            False
+192.168.2.239       5138            False
+detail: TCP refused; live IT not attempted (SKIPPED_INFRA)
