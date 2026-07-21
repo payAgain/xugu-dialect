@@ -29,7 +29,7 @@ tasks:
     dependencies: [P-001]
   - task_id: P-003
     title: "A-TYP-016 XML 实体 @JdbcTypeCode(SQLXML) 真库往返（或诚实负向）"
-    status: in_progress
+    status: accepted
     build_id: B-001
     packet: harness/tasks/P-003.md
     acceptance_doc: harness/evidence/implementer/I-010/P-003/ACCEPTANCE.md
@@ -37,8 +37,8 @@ tasks:
     dependencies: [P-002]
   - task_id: P-004
     title: "A-TYP-017 POINT 实体 persist/load 真库 IT"
-    status: planned
-    build_id: null
+    status: in_progress
+    build_id: B-001
     packet: harness/tasks/P-004.md
     acceptance_doc: harness/evidence/implementer/I-010/P-004/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"
