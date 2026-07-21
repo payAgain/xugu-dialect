@@ -1,50 +1,44 @@
 {
   "schema_version": 1,
-  "task_id": "I-009",
-  "batch_id": "B-001",
-  "status": "initiative_accepted",
+  "task_id": "I-010",
+  "batch_id": null,
+  "status": "plan_ready_await_scope_and_build",
   "harness_level": "Standard",
-  "last_updated": "2026-07-21T14:15:00+08:00",
-  "initiative_id": "I-009",
+  "last_updated": "2026-07-21T14:40:00+08:00",
+  "initiative_id": "I-010",
   "initiative_type": "feature",
-  "working_branch": "feat/i-009-deferred-matrix-delivery",
+  "working_branch": "feat/i-010-orm-hql-quality-completion",
   "active_plan": [
-    "B-001 P-001…P-011 all accepted",
-    "Live dialect triage @5287: 208/0/0/3; VERIFY PASS",
-    "Initiative Accept I-009 recorded (NOT Ship, NOT Archive)"
+    "I-009 archived (Accept already recorded; NOT Ship)",
+    "I-010 Plan P-001…P-010 materialized (ORM/HQL depth + SSOT/doc)",
+    "B-001 draft proposes P-001 only until Build scope approval"
   ],
   "next_3_steps": [
-    "Optional Human Gate: Archive I-009",
-    "Ship only with separate Human Gate authorization",
-    "Or open new Initiative"
+    "Human Gate: Scope PASS phrase for I-010",
+    "Human Gate: approve B-001 Build scope (P-001 or P-001~P-010)",
+    "Orchestrator serial execute approved phases; NOT Ship"
   ],
   "validation": {
-    "last_result": "VERIFY PASS; live-it-5287-rerun dialect 208/0/0/3; Initiative accepted"
+    "last_result": "Plan materialized; Build not started; prior I-009 VERIFY PASS retained"
   },
   "cognitive_state": {
     "failure_count": 0,
-    "current_mode": "accepted_awaiting_optional_archive_or_ship",
-    "blocked_on": null
+    "current_mode": "await_scope_and_build_approval",
+    "blocked_on": "Human Gate Scope PASS + Build scope approval"
   },
   "version_control_checkpoint": {
-    "decision": "initiative_accepted",
-    "committed": true,
-    "branch": "feat/i-009-deferred-matrix-delivery",
-    "plan_head": "01181f2",
-    "triage_commit": "8d1de762ff99c2de6883292dca58e8c0c08cc171",
-    "pre_accept_head": "01181f2ee62e10d9671cd821df4c8122adda0a8b",
-    "accept_commit": "e1c1f761b34c68241a9fd8792390f2f757700bc7",
-    "tip": "471221cd6aa4434c37bc4dbd11510727e14f8897"
+    "decision": "i010_plan_ready",
+    "committed": false,
+    "branch": "feat/i-010-orm-hql-quality-completion",
+    "base_tip": "2ab5cc6",
+    "i009_accept_commit": "e1c1f761b34c68241a9fd8792390f2f757700bc7"
   },
   "handoff": {
-    "resume_from": "harness/handoffs/orchestrator/I-009-initiative-accepted.md"
+    "resume_from": "harness/handoffs/orchestrator/I-010-plan-ready-await-build.md"
   },
-  "approved_build": "B-001",
-  "approved_phases": [
-    "P-001", "P-002", "P-003", "P-004", "P-005", "P-006",
-    "P-007", "P-008", "P-009", "P-010", "P-011"
-  ],
+  "approved_build": null,
+  "approved_phases": [],
   "ship": false,
   "archive": false,
-  "updated_at": "2026-07-21T14:15:00+08:00"
+  "updated_at": "2026-07-21T14:40:00+08:00"
 }

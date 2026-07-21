@@ -1,3 +1,13 @@
+## Entry: I-010 Plan ready — await Scope PASS + Build
+
+### Summary
+Human Gate「继续完善」。Orchestrator：Archive I-009；开 I-010 feature（ORM/HQL 深度 + SSOT/文档对齐）；Scope 自质量缺口分析收窄（P0+P1）；Plan **P-001…P-010** 物化；分支 `feat/i-010-orm-hql-quality-completion`；B-001 draft = 仅 P-001。**未**开 Build · **NOT Ship**。
+
+### Next
+Human Gate：①「本 Initiative 范围已明确，可以开干」②「批准 B-001，范围 P-001~P-010」（或仅 P-001）。
+
+---
+
 ## Entry: I-009 Initiative Accept — NOT Ship · NOT Archive
 
 ### Summary

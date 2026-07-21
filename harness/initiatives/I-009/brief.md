@@ -33,8 +33,8 @@
 - [x] GAV 7.4.5.Final；NONE；不 Ship
 
 ## Status
-`accepted` — Human Gate「Initiative Accept I-009」(~2026-07-21T14:11+08:00)；**NOT Ship** · **NOT Archive**  
-Evidence: `harness/evidence/orchestrator/I-009/ACCEPTANCE.md`
+`completed` / **archived** — Accept (~2026-07-21T14:11+08:00)；Archive (~2026-07-21T14:40+08:00，开 I-010)；**NOT Ship**  
+Evidence: `harness/evidence/orchestrator/I-009/ACCEPTANCE.md` · Archive: `harness/initiatives/I-009/ARCHIVE.md`
 
 ## Branch
 `feat/i-009-deferred-matrix-delivery`

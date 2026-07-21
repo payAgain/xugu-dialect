@@ -1,22 +1,22 @@
 # Current Task
 
 ## Goal
-I-009 **Initiative Accept** recorded — **NOT Ship** · **NOT Archive**
+I-010 **质量完善**（ORM/HQL 深度 + SSOT/文档对齐）— Plan 已物化；**await Scope PASS + Build 批准** · **NOT Ship**
 
 ## Current Status
-Human Gate「Initiative Accept I-009」(~2026-07-21T14:11+08:00). B-001 P-001…P-011 accepted; live triage @5287 dialect **208/0/0/3**; VERIFY PASS. Charter honest **83/98** covered-live + **15** known-limit. Deferred matrix **20/20** closed.
+Human Gate「继续完善」(~2026-07-21)。I-009 archived；I-010 feature Scope 自质量缺口分析收窄（P0+P1）；Plan **P-001…P-010** 物化；分支 `feat/i-010-orm-hql-quality-completion`。Build **未**批准。
 
 ## Active Batch / Tasks
-- Initiative: **I-009** `accepted` (feature)
-- Build: **B-001** `completed` / accepted
-- Branch: `feat/i-009-deferred-matrix-delivery`
-- Accept evidence: `harness/evidence/orchestrator/I-009/ACCEPTANCE.md`
-- Handoff: `harness/handoffs/orchestrator/I-009-initiative-accepted.md`
+- Initiative: **I-010** `clarifying` → ready for Scope+Build (feature)
+- Build: **B-001** draft → default **P-001** only
+- Branch: `feat/i-010-orm-hql-quality-completion`
+- Scope: `harness/drafts/I-010-SCOPE-CLARIFYING.md`
+- Handoff: `harness/handoffs/orchestrator/I-010-plan-ready-await-build.md`
 
 ## Next 3 Steps
-1. Human Gate: optional **Archive I-009**
-2. Human Gate: decide **Ship** only with explicit authorization (see Accept Part B)
-3. Or open a **new Initiative** (compat mode / deep ORM / Central prep)
+1. Human Gate：Scope 口令「本 Initiative 范围已明确，可以开干」（确认 Archive I-009 + P0+P1）
+2. Human Gate：批准 Build「批准 B-001，范围 P-001~P-010」（或仅 P-001）
+3. Orchestrator 串行执行批准 Phase；must-commit；不 Ship
 
 ## Last Updated
-2026-07-21T14:15:00+08:00
+2026-07-21T14:40:00+08:00

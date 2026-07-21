@@ -1,100 +1,93 @@
 schema_version: 1
 charter_version: "1.0.0"
-initiative_id: I-009
-updated: "2026-07-21T09:45:00+08:00"
-supersedes_initiative: I-008
+initiative_id: I-010
+updated: "2026-07-21T14:40:00+08:00"
+supersedes_initiative: I-009
 notes: >
-  I-008 P-001…P-007 packets archived at harness/tasks/archive/I-008/.
-  I-009 Plan P-001…P-011 serial (deferred matrix full delivery; doc-forbidden skip only).
+  I-009 P-001…P-011 packets archived at harness/tasks/archive/I-009/.
+  I-010 Plan P-001…P-010 serial (ORM/HQL quality depth + SSOT/doc alignment).
   Serial dependencies only; orchestrator does not ask human about parallel execution.
   B-001 draft proposes P-001 only until Human Gate approves Build scope.
   GAV stays 7.4.5.Final; compatiblemode=NONE only; NOT Ship.
+  EXCLUDE: doc-forbidden features, Ship, multi-compat, UDT full ORM, env ENCRYPT/XMLTABLE as must-implement.
 tasks:
   - task_id: P-001
-    title: "盘点延后矩阵 SSOT 与批次路线图"
-    status: accepted
-    build_id: B-001
+    title: "对齐 SSOT/文档口径（Definition A、A-FUN-021、Demo smoke、troubleshooting）"
+    status: planned
+    build_id: null
     packet: harness/tasks/P-001.md
-    acceptance_doc: harness/evidence/architect-contract/I-009/P-001/ACCEPTANCE.md
-    role_pipeline_summary: "researcher → architect-contract → reviewer"
+    acceptance_doc: harness/evidence/architect-contract/I-010/P-001/ACCEPTANCE.md
+    role_pipeline_summary: "architect-contract → docs → reviewer"
     dependencies: []
   - task_id: P-002
-    title: "INTERVAL 类型方言 + 门控真库 IT"
-    status: accepted
-    build_id: B-001
+    title: "A-TYP-014 INTERVAL 实体 ORM 真库往返（或诚实负向）"
+    status: planned
+    build_id: null
     packet: harness/tasks/P-002.md
-    acceptance_doc: harness/evidence/implementer/I-009/P-002/ACCEPTANCE.md
+    acceptance_doc: harness/evidence/implementer/I-010/P-002/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"
     dependencies: [P-001]
   - task_id: P-003
-    title: "XML 类型 + XML 函数"
-    status: accepted
-    build_id: B-001
+    title: "A-TYP-016 XML 实体 @JdbcTypeCode(SQLXML) 真库往返（或诚实负向）"
+    status: planned
+    build_id: null
     packet: harness/tasks/P-003.md
-    acceptance_doc: harness/evidence/implementer/I-009/P-003/ACCEPTANCE.md
+    acceptance_doc: harness/evidence/implementer/I-010/P-003/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"
     dependencies: [P-002]
   - task_id: P-004
-    title: "空间/几何类型 + 几何函数"
-    status: accepted
-    build_id: B-001
+    title: "A-TYP-017 POINT 实体 persist/load 真库 IT"
+    status: planned
+    build_id: null
     packet: harness/tasks/P-004.md
-    acceptance_doc: harness/evidence/implementer/I-009/P-004/ACCEPTANCE.md
+    acceptance_doc: harness/evidence/implementer/I-010/P-004/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"
     dependencies: [P-003]
   - task_id: P-005
-    title: "UDT 用户定义类型"
-    status: accepted
-    build_id: B-001
+    title: "A-FUN-021 HQL Session xmlelement/xmlquery + XMLTABLE SSOT"
+    status: planned
+    build_id: null
     packet: harness/tasks/P-005.md
-    acceptance_doc: harness/evidence/implementer/I-009/P-005/ACCEPTANCE.md
+    acceptance_doc: harness/evidence/implementer/I-010/P-005/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"
     dependencies: [P-004]
   - task_id: P-006
-    title: "regexp_* 与 bit_and/bit_or 聚合"
-    status: accepted
-    build_id: B-001
+    title: "A-FUN-020 几何函数 HQL Session live（2–3）"
+    status: planned
+    build_id: null
     packet: harness/tasks/P-006.md
-    acceptance_doc: harness/evidence/implementer/I-009/P-006/ACCEPTANCE.md
+    acceptance_doc: harness/evidence/implementer/I-010/P-006/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"
     dependencies: [P-005]
   - task_id: P-007
-    title: "DDL — IF NOT EXISTS / 分区 / ENCRYPT"
-    status: accepted
-    build_id: B-001
+    title: "A-FUN-019 regexp_* HQL Session live"
+    status: planned
+    build_id: null
     packet: harness/tasks/P-007.md
-    acceptance_doc: harness/evidence/implementer/I-009/P-007/ACCEPTANCE.md
+    acceptance_doc: harness/evidence/implementer/I-010/P-007/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"
     dependencies: [P-006]
   - task_id: P-008
-    title: "catalog 限定 + 高级索引"
-    status: accepted
-    build_id: B-001
+    title: "Batch A A-FUN-003/005/006/007/009 独立 HQL live"
+    status: planned
+    build_id: null
     packet: harness/tasks/P-008.md
-    acceptance_doc: harness/evidence/implementer/I-009/P-008/ACCEPTANCE.md
+    acceptance_doc: harness/evidence/implementer/I-010/P-008/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"
     dependencies: [P-007]
   - task_id: P-009
-    title: "LOCK TABLE + TOP/ROWNUM 分页备选 + IDENTITY_MODE"
-    status: accepted
-    build_id: B-001
+    title: "Schema tooling 文档配方（PARTITION/ENCRYPT/高级索引）"
+    status: planned
+    build_id: null
     packet: harness/tasks/P-009.md
-    acceptance_doc: harness/evidence/implementer/I-009/P-009/ACCEPTANCE.md
-    role_pipeline_summary: "implementer → test → reviewer"
+    acceptance_doc: harness/evidence/docs/I-010/P-009/ACCEPTANCE.md
+    role_pipeline_summary: "docs → reviewer"
     dependencies: [P-008]
   - task_id: P-010
-    title: "Ruler C — json_table / ServerConfig / DialectSelector"
-    status: accepted
-    build_id: B-001
+    title: "质量口径终对齐 + VERIFY PASS Accept 准备"
+    status: planned
+    build_id: null
     packet: harness/tasks/P-010.md
-    acceptance_doc: harness/evidence/implementer/I-009/P-010/ACCEPTANCE.md
-    role_pipeline_summary: "implementer → test → reviewer"
+    acceptance_doc: harness/evidence/orchestrator/I-010/P-010/ACCEPTANCE.md
+    role_pipeline_summary: "docs → test → reviewer"
     dependencies: [P-009]
-  - task_id: P-011
-    title: "文档终对齐 + 全 reactor 真库 + VERIFY PASS Accept 准备"
-    status: accepted
-    build_id: B-001
-    packet: harness/tasks/P-011.md
-    acceptance_doc: harness/evidence/implementer/I-009/P-011/ACCEPTANCE.md
-    role_pipeline_summary: "implementer → test → reviewer"
-    dependencies: [P-010]
