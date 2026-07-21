@@ -1,0 +1,12 @@
+I-009 P-005 UDT live IT — SKIPPED_INFRA
+=======================================
+
+Date: 2026-07-21
+Gate: XUGU_RUN_IT=true
+Command: mvn -q -pl dialect -am test -Dtest=XuguUdtTypeIT
+Exit: 1
+
+Reason: JDBC Connection refused (E50025) host 127.0.0.1 port 5138
+IT anchor: com.xugu.dialect.it.XuguUdtTypeIT#udtNativeRoundTrip_A_TYP_018
+
+Not a product assertion failure — live XuguDB unavailable.

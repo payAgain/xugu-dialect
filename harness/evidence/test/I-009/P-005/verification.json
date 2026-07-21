@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "started_at": "2026-07-21T10:34:00+08:00",
+  "finished_at": "2026-07-21T10:36:45+08:00",
+  "project_root": "E:\\Work\\java\\hibernate-test",
+  "initiative_id": "I-009",
+  "phase_id": "P-005",
+  "build_id": "B-001",
+  "invocation_id": "inv-i009-p005-rp02-test",
+  "step_id": "RP-02",
+  "role": "test",
+  "branch": "feat/i-009-deferred-matrix-delivery",
+  "head_sha": "2e39f40",
+  "verdict": "PASS",
+  "closure_path": "i009-a-typ-018-udt-dialect-and-live-it",
+  "config": "E:\\Work\\java\\hibernate-test\\harness\\verification.json",
+  "maven_command": "C:\\Users\\admin\\tools\\apache-maven-3.9.9\\bin\\mvn.cmd",
+  "results": [
+    {
+      "id": "build",
+      "required": true,
+      "status": "PASS",
+      "command": "mvn -q -DskipTests package",
+      "cwd": "E:\\Work\\java\\hibernate-test",
+      "exit_code": 0,
+      "log": "harness/evidence/test/I-009/P-005/mvn-package.txt"
+    },
+    {
+      "id": "test",
+      "required": true,
+      "status": "PASS",
+      "command": "mvn -q test (XUGU_RUN_IT unset)",
+      "cwd": "E:\\Work\\java\\hibernate-test",
+      "exit_code": 0,
+      "log": "harness/evidence/test/I-009/P-005/mvn-test.txt",
+      "counts": {
+        "dialect": {
+          "tests_run": 181,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 59,
+          "note": "aggregated from dialect/target/surefire-reports after mvn test"
+        },
+        "demo": {
+          "tests_run": 36,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 28
+        }
+      },
+      "p005_focus": {
+        "XuguUdtTypeTest": {
+          "tests_run": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "XuguUdtTypeIT": {
+          "tests_run": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 1,
+          "note": "gated offline via XuguITGate when XUGU_RUN_IT unset"
+        }
+      },
+      "focus_log": "harness/evidence/test/I-009/P-005/mvn-test-p005-focus-offline.txt"
+    },
+    {
+      "id": "test_live_udt_it",
+      "required": false,
+      "status": "SKIPPED_INFRA",
+      "command": "XUGU_RUN_IT=true; mvn -q -pl dialect -am test -Dtest=XuguUdtTypeIT",
+      "cwd": "E:\\Work\\java\\hibernate-test",
+      "exit_code": 1,
+      "log": "harness/evidence/test/I-009/P-005/mvn-test-live-udt-it.txt",
+      "real_db": false,
+      "reason": "127.0.0.1:5138 Connection refused (E50025)",
+      "summary_artifact": "harness/evidence/test/I-009/P-005/IT-RESULT.txt",
+      "it_anchors": [
+        "com.xugu.dialect.it.XuguUdtTypeIT#udtNativeRoundTrip_A_TYP_018"
+      ],
+      "note": "prior implementer probe retained; not re-run this invocation"
+    }
+  ],
+  "summary": {
+    "build": "PASS",
+    "test_offline": "PASS",
+    "test_live_udt_it": "SKIPPED_INFRA",
+    "overall": "PASS"
+  }
+}

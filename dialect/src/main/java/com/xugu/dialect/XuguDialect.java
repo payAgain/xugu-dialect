@@ -78,6 +78,7 @@ import com.xugu.dialect.type.XuguCastingJsonArrayJdbcTypeConstructor;
 import com.xugu.dialect.type.XuguCastingJsonJdbcType;
 import com.xugu.dialect.type.XuguGeometricTypeSupport;
 import com.xugu.dialect.type.XuguIntervalTypeSupport;
+import com.xugu.dialect.type.XuguUdtTypeSupport;
 import com.xugu.dialect.type.XuguXmlTypeSupport;
 
 import jakarta.persistence.TemporalType;
@@ -155,6 +156,13 @@ import jakarta.persistence.Timeout;
  * Full ORM mapping of every geometric column type is <em>known-limit-documented</em>.
  * Geometric functions (A-FUN-020): bounded 21-function registry per
  * {@code reference/function/geometric-functions/}.
+ *
+ * <p><b>UDT (A-TYP-018):</b> XuGu documents schema-defined {@code OBJECT}/{@code VARRAY}/
+ * {@code TABLE} families ({@code reference/sql/datatype/udt.md}). Hibernate 7.4 exposes no
+ * {@code SqlTypes} for UDT entity columns; {@link #supportsJdbcUserDefinedTypes()} is
+ * {@code false}. Documented {@code CREATE TYPE}/{@code DROP TYPE} helpers live in
+ * {@link XuguUdtTypeSupport} for native SQL / schema tooling; full ORM UDT attribute mapping is
+ * <em>known-limit-documented</em>.
  *
  * <p><b>ARRAY (A-TYP-015 / C-DDL-005):</b> {@link #supportsStandardArrays()} enables
  * Hibernate {@code SqlTypes.ARRAY} / {@code getPreferredSqlTypeCodeForArray()} with XuGu
@@ -316,6 +324,14 @@ public class XuguDialect extends Dialect {
 			case SqlTypes.POINT, SqlTypes.GEOMETRY -> XuguGeometricTypeSupport.POINT_DDL;
 			default -> super.columnType( sqlTypeCode );
 		};
+	}
+
+	/**
+	 * A-TYP-018: XuGu UDT columns are schema-defined type names ({@code udt.md}) — Hibernate
+	 * has no verified JDBC UDT / STRUCT entity mapping on Xugu; native SQL IT is the honest path.
+	 */
+	public boolean supportsJdbcUserDefinedTypes() {
+		return false;
 	}
 
 	/**

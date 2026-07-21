@@ -143,11 +143,6 @@ class XuguNegativeRegressionBaselineTest {
 	// 延后 rows — @Disabled SSOT anchors (no positive SQL invention)
 	// -------------------------------------------------------------------------
 
-	@Disabled( "SSOT " + SSOT + " — A-TYP-018 UDT deferred" )
-	@Test
-	void deferred_A_TYP_018_udt() {
-	}
-
 	@Disabled( "SSOT " + SSOT + " — A-DDL-008 table partitioning deferred" )
 	@Test
 	void deferred_A_DDL_008_partitioning() {

@@ -44,7 +44,7 @@ tasks:
     dependencies: [P-003]
   - task_id: P-005
     title: "UDT 用户定义类型"
-    status: ready
+    status: accepted
     build_id: B-001
     packet: harness/tasks/P-005.md
     acceptance_doc: harness/evidence/implementer/I-009/P-005/ACCEPTANCE.md

@@ -197,6 +197,19 @@ Columns: `matrix_id | status | entry_class#method | gate | gap_action`
 |---|---|---|---|---|
 | A-TYP-014 | known-limit-documented | `XuguIntervalTypeTest#intervalTypeHooksWired_A_TYP_014`; `XuguIntervalTypeTest#allDocumentedSubtypesLocked_A_TYP_014`; `XuguIntervalTypeIT#intervalNativeRoundTrip_A_TYP_014` | IT | N/A |
 
+### I-009 / P-004 — promoted from 延后 (Definition A)
+
+| matrix_id | status | entry_class#method | gate | gap_action |
+|---|---|---|---|---|
+| A-TYP-017 | known-limit-documented | `XuguGeometricTypeTest#pointTypeHooksWired_A_TYP_017`; `XuguGeometricTypeTest#allDocumentedKindsLocked_A_TYP_017`; `XuguGeometricTypeAndFunctionsIT#geometricTypesNativeRoundTrip_A_TYP_017`; `XuguDialectTest#columnTypesMatchXuguDocs` (POINT/GEOMETRY) | IT | N/A |
+| A-FUN-020 | covered-live | `XuguFunctionRegistryTest#geometricSubsetRegistered_A_FUN_020`; `XuguGeometricTypeAndFunctionsIT#geometricFunctionsNativeSubset_A_FUN_020` | IT | N/A |
+
+### I-009 / P-005 — promoted from 延后 (Definition A)
+
+| matrix_id | status | entry_class#method | gate | gap_action |
+|---|---|---|---|---|
+| A-TYP-018 | known-limit-documented | `XuguUdtTypeTest#documentedKindsLocked_A_TYP_018`; `XuguUdtTypeTest#createTypeSqlMatchesUdtDoc_A_TYP_018`; `XuguUdtTypeTest#dialectDoesNotClaimOrmUdtEntityMapping_A_TYP_018`; `XuguUdtTypeIT#udtNativeRoundTrip_A_TYP_018` | IT | N/A |
+
 ### I-007 / P-004 — promoted from 延后 (Definition A)
 
 | matrix_id | status | entry_class#method | gate | gap_action |
@@ -229,7 +242,7 @@ Matrix status **文档不允许** or **延后**; baseline records explicit non-s
 | A-TYP-014 | known-limit-documented | `XuguIntervalTypeTest#intervalTypeHooksWired_A_TYP_014`; `XuguIntervalTypeTest#allDocumentedSubtypesLocked_A_TYP_014`; `XuguIntervalTypeIT#intervalNativeRoundTrip_A_TYP_014`; `XuguDialectTest#columnTypesMatchXuguDocs` (DURATION/INTERVAL_SECOND) | IT | **N/A** (I-009/P-002 closed) |
 | A-TYP-016 | known-limit-documented | `XuguXmlTypeTest#xmlTypeHooksWired_A_TYP_016`; `XuguXmlTypeTest#documentedXmlConstantsLocked_A_TYP_016`; `XuguXmlTypeAndFunctionsIT#xmlTypeNativeRoundTrip_A_TYP_016`; `XuguDialectTest#columnTypesMatchXuguDocs` (SQLXML) | IT | **N/A** (I-009/P-003 closed) |
 | A-TYP-017 | known-limit-documented | `XuguGeometricTypeTest#pointTypeHooksWired_A_TYP_017`; `XuguGeometricTypeTest#allDocumentedKindsLocked_A_TYP_017`; `XuguGeometricTypeAndFunctionsIT#geometricTypesNativeRoundTrip_A_TYP_017`; `XuguDialectTest#columnTypesMatchXuguDocs` (POINT/GEOMETRY) | IT | **N/A** (I-009/P-004 closed) |
-| A-TYP-018 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_TYP_018_udt` (@Disabled) | none | **I-009/P-005** |
+| A-TYP-018 | known-limit-documented | `XuguUdtTypeTest#documentedKindsLocked_A_TYP_018`; `XuguUdtTypeTest#createTypeSqlMatchesUdtDoc_A_TYP_018`; `XuguUdtTypeTest#dialectDoesNotClaimOrmUdtEntityMapping_A_TYP_018`; `XuguUdtTypeIT#udtNativeRoundTrip_A_TYP_018` | IT | **N/A** (I-009/P-005 closed) |
 | A-DDL-007 | negative-only | `XuguNegativeRegressionBaselineTest#definitionAIfNotExistsDeferred_A_DDL_007`; `XuguDdlIT` comment (CREATE_ONLY defers IF NOT EXISTS) | unit | **I-009/P-007** (SSOT promotion via C-DDL-001) |
 | A-DDL-008 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_DDL_008_partitioning` (@Disabled) | none | **I-009/P-007** |
 | A-DDL-009 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_DDL_009_encrypt` (@Disabled) | none | **I-009/P-007** |
@@ -525,6 +538,18 @@ Source: [`harness/evidence/researcher/I-005/P-001/GAP-SUMMARY.md`](../harness/ev
 | **Known-limit reason** | Hibernate 7.4 exposes only DURATION + INTERVAL_SECOND — not 13 XuGu subtypes; output format depends on server `DEF_INTERVAL_STYLE`; no invented JDBC interval ORM mapping |
 | **Live IT** | Native SQL round-trip (`XuguIntervalTypeIT`) — not full entity `@JdbcTypeCode` round-trip |
 | **gap_action** | **N/A** — closed I-009/P-002 |
+
+### A-TYP-018 UDT known-limit (I-009/P-005)
+
+| Field | Value |
+|---|---|
+| **matrix_id** | A-TYP-018 |
+| **status** | **known-limit-documented** |
+| **Doc citation** | `reference/sql/datatype/udt.md` (OBJECT / VARRAY / TABLE; CREATE TYPE, constructor insert, DROP TYPE) |
+| **Dialect surface** | `XuguUdtTypeSupport` locks three UDT families + documented CREATE/DROP TYPE SQL; `XuguDialect#supportsJdbcUserDefinedTypes()` is `false` |
+| **Known-limit reason** | Hibernate 7.4 has no `SqlTypes` for schema UDT columns; no verified JDBC STRUCT/custom ORM entity mapping — native SQL IT is the honest path |
+| **Live IT** | Native SQL round-trip (`XuguUdtTypeIT#udtNativeRoundTrip_A_TYP_018`) — OBJECT/VARRAY/TABLE per udt.md examples |
+| **gap_action** | **N/A** — closed I-009/P-005 |
 
 ### gap_action routing (20 inventory rows)
 
