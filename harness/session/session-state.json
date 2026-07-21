@@ -2,43 +2,43 @@
   "schema_version": 1,
   "task_id": "I-009",
   "batch_id": "B-001",
-  "status": "plan_complete",
+  "status": "build_approved_executing",
   "harness_level": "Standard",
-  "last_updated": "2026-07-21T09:45:00+08:00",
+  "last_updated": "2026-07-21T10:00:00+08:00",
   "initiative_id": "I-009",
   "initiative_type": "feature",
   "working_branch": "feat/i-009-deferred-matrix-delivery",
   "active_plan": [
-    "Plan P-001…P-011 serial (deferred matrix full delivery)",
-    "B-001 draft proposes P-001 only"
+    "B-001 approved P-001…P-011 serial",
+    "Deliver all deferred matrix rows; 文档不允许 skip"
   ],
   "next_3_steps": [
-    "Human Gate approve B-001 scope (default P-001 only)",
-    "Orchestrator serial execute P-001→P-011",
-    "Initiative Accept — NOT Ship"
+    "Orchestrator: serial P-001→P-011",
+    "Must-commit per Phase",
+    "Human Gate Initiative Accept after all Phases accepted"
   ],
   "validation": {
-    "last_result": "Plan batch: harness_check + branch_check PASS; commit 9e8b02f"
+    "last_result": "P-001 accepted; harness_check PASS; starting P-002"
   },
   "cognitive_state": {
     "failure_count": 0,
-    "current_mode": "await_build_approval",
+    "current_mode": "build_execution",
     "blocked_on": null
   },
   "version_control_checkpoint": {
-    "decision": "i009_plan_complete",
+    "decision": "p001_accepted",
     "committed": true,
     "branch": "feat/i-009-deferred-matrix-delivery",
-    "last_phase_accepted": null,
-    "candidate_commit": "9e8b02f",
-    "i008_accept_sha": "cdda6c7"
+    "plan_head": "6965c3a"
   },
   "handoff": {
-    "resume_from": "Human Gate Build approval"
+    "resume_from": "harness/builds/B-001.json"
   },
-  "approved_build": null,
-  "approved_phases": [],
-  "phases_accepted": [],
+  "approved_build": "B-001",
+  "approved_phases": [
+    "P-001", "P-002", "P-003", "P-004", "P-005", "P-006",
+    "P-007", "P-008", "P-009", "P-010", "P-011"
+  ],
   "ship": false,
-  "updated_at": "2026-07-21T09:45:00+08:00"
+  "updated_at": "2026-07-21T09:40:00+08:00"
 }

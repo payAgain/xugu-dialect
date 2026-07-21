@@ -213,23 +213,23 @@ Matrix status **文档不允许** or **延后**; baseline records explicit non-s
 
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
-| A-TYP-014 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_TYP_014_interval` (@Disabled) | none | N/A |
-| A-TYP-016 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_TYP_016_xml` (@Disabled) | none | N/A |
-| A-TYP-017 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_TYP_017_spatial` (@Disabled) | none | N/A |
-| A-TYP-018 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_TYP_018_udt` (@Disabled) | none | N/A |
-| A-DDL-007 | negative-only | `XuguNegativeRegressionBaselineTest#definitionAIfNotExistsDeferred_A_DDL_007`; `XuguDdlIT` comment (CREATE_ONLY defers IF NOT EXISTS) | unit | P-003 |
-| A-DDL-008 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_DDL_008_partitioning` (@Disabled) | none | N/A |
-| A-DDL-009 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_DDL_009_encrypt` (@Disabled) | none | N/A |
-| A-PAG-004 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_PAG_004_top` (@Disabled) | none | N/A |
-| A-PAG-006 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_PAG_006_rownum` (@Disabled) | none | N/A |
-| A-LCK-006 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_LCK_006_lockTable` (@Disabled) | none | N/A |
-| A-IDN-005 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_IDN_005_identityMode` (@Disabled) | none | N/A |
-| A-FUN-015 | negative-only | `XuguFunctionRegistryTest#unsupportedFunctionNotRegistered_negativeNote` | unit | N/A |
-| A-FUN-019 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_FUN_019_regexp` (@Disabled) | none | N/A |
-| A-FUN-020 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_FUN_020_geometric` (@Disabled) | none | N/A |
-| A-FUN-021 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_FUN_021_xmlFunctions` (@Disabled) | none | N/A |
-| A-SCH-003 | negative-only | `XuguNegativeRegressionBaselineTest#catalogsNotSupported_negativeOnly_A_SCH_003`; `XuguSchemaTempCommentTest#nameQualifierIsSchemaOnly_A_SCH_002_not_003` (supportsCatalogs=false) | unit | N/A |
-| A-SCH-017 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_SCH_017_advancedIndexes` (@Disabled) | none | N/A |
+| A-TYP-014 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_TYP_014_interval` (@Disabled) | none | **I-009/P-002** |
+| A-TYP-016 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_TYP_016_xml` (@Disabled) | none | **I-009/P-003** |
+| A-TYP-017 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_TYP_017_spatial` (@Disabled) | none | **I-009/P-004** |
+| A-TYP-018 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_TYP_018_udt` (@Disabled) | none | **I-009/P-005** |
+| A-DDL-007 | negative-only | `XuguNegativeRegressionBaselineTest#definitionAIfNotExistsDeferred_A_DDL_007`; `XuguDdlIT` comment (CREATE_ONLY defers IF NOT EXISTS) | unit | **I-009/P-007** (SSOT promotion via C-DDL-001) |
+| A-DDL-008 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_DDL_008_partitioning` (@Disabled) | none | **I-009/P-007** |
+| A-DDL-009 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_DDL_009_encrypt` (@Disabled) | none | **I-009/P-007** |
+| A-PAG-004 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_PAG_004_top` (@Disabled) | none | **I-009/P-009** |
+| A-PAG-006 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_PAG_006_rownum` (@Disabled) | none | **I-009/P-009** |
+| A-LCK-006 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_LCK_006_lockTable` (@Disabled) | none | **I-009/P-009** |
+| A-IDN-005 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_IDN_005_identityMode` (@Disabled) | none | **I-009/P-009** |
+| A-FUN-015 | negative-only | `XuguFunctionRegistryTest#unsupportedFunctionNotRegistered_negativeNote` | unit | **I-009/P-006** |
+| A-FUN-019 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_FUN_019_regexp` (@Disabled) | none | **I-009/P-006** |
+| A-FUN-020 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_FUN_020_geometric` (@Disabled) | none | **I-009/P-004** |
+| A-FUN-021 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_FUN_021_xmlFunctions` (@Disabled) | none | **I-009/P-003** |
+| A-SCH-003 | negative-only | `XuguNegativeRegressionBaselineTest#catalogsNotSupported_negativeOnly_A_SCH_003`; `XuguSchemaTempCommentTest#nameQualifierIsSchemaOnly_A_SCH_002_not_003` (supportsCatalogs=false) | unit | **I-009/P-008** |
+| A-SCH-017 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_SCH_017_advancedIndexes` (@Disabled) | none | **I-009/P-008** |
 | A-XCUT-012 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_XCUT_012_mavenCentralPublish` (@Disabled) | none | N/A |
 
 ### Ruler C — 文档不允许 / 延后 (7)
@@ -238,9 +238,9 @@ Matrix status **文档不允许** or **延后**; baseline records explicit non-s
 |---|---|---|---|---|
 | C-DDL-004 | negative-only | `XuguNegativeRegressionBaselineTest#enumDdlNotEmitted_C_DDL_004`; `XuguTypeDdlDetailsTest#enumTypeDeclarationIsNull_C_DDL_004` | unit | P-003 |
 | C-SKIP-001 | negative-only | `XuguNegativeRegressionBaselineTest#skipLockedNotSupported_A_LCK_004_C_SKIP_001`; `XuguPaginationLockTest#skipLockedNotSupported_A_LCK_004`; `XuguLockIT#forUpdateExecutesAndSkipLockedUnsupported` | IT | P-003 |
-| C-JSON-006 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_C_JSON_006_jsonTable` (@Disabled) | none | N/A |
-| C-SRV-001 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_C_SRV_001_serverConfiguration` (@Disabled) | none | N/A |
-| C-SEL-001 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_C_SEL_001_dialectSelector` (@Disabled) | none | N/A |
+| C-JSON-006 | negative-only (**doc-forbidden**) | `XuguNegativeRegressionBaselineTest#deferred_C_JSON_006_jsonTable` (@Disabled) | none | **I-009/P-010** |
+| C-SRV-001 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_C_SRV_001_serverConfiguration` (@Disabled) | none | **I-009/P-010** |
+| C-SEL-001 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_C_SEL_001_dialectSelector` (@Disabled) | none | **I-009/P-010** |
 
 ### Ruler C — 已有 (audit anchor, outside 94 可实现 count)
 
@@ -436,6 +436,50 @@ Source: [`harness/evidence/researcher/I-005/P-001/GAP-SUMMARY.md`](../harness/ev
 | I-004 reserved table identity | `XuguReservedIdentityIT#identityPersistOnReservedTableOrderBackfillsId` | A-IDN-003/004 edge |
 | I-004 sequence drop guard | `XuguAutoSequenceDropIT` | A-SEQ-002 drop safety |
 | SqlAst translator wiring | `XuguSqlAstTranslatorTest` | A-PAG-001/002 AST path |
+
+---
+
+## I-009 deferred delivery routing (P-001 architect-contract RP-02)
+
+> **Initiative:** I-009 — deferred matrix full delivery  
+> **Batch map SSOT:** [`i009-deferred-batch-map.md`](i009-deferred-batch-map.md)  
+> **Evidence:** `harness/evidence/architect-contract/I-009/P-001/{ACCEPTANCE,BATCH-MAP}.md`  
+> **GAV:** `7.4.5.Final` · **compatiblemode:** `NONE` · **NOT Ship**
+
+### Batch summary
+
+| Phase | Row IDs | Theme |
+|---|---|---|
+| P-002 | A-TYP-014 | INTERVAL |
+| P-003 | A-TYP-016, A-FUN-021 | XML |
+| P-004 | A-TYP-017, A-FUN-020 | Geometric |
+| P-005 | A-TYP-018 | UDT |
+| P-006 | A-FUN-015, A-FUN-019 | bit + regexp |
+| P-007 | A-DDL-007, A-DDL-008, A-DDL-009 | DDL extensions |
+| P-008 | A-SCH-003, A-SCH-017 | Catalog + indexes |
+| P-009 | A-LCK-006, A-PAG-004, A-PAG-006, A-IDN-005 | Lock/pagination/identity |
+| P-010 | C-JSON-006, C-SRV-001, C-SEL-001 | Ruler C closure |
+
+### C-JSON-006 doc-forbidden callout
+
+| Field | Value |
+|---|---|
+| **matrix_id** | C-JSON-006 |
+| **Audit** | Zero `json_table` under `E:\Work\docs\content/reference/function/json-functions/**` (2026-07-21) |
+| **Matrix SSOT** | Reclassified **文档不允许** in `feature-matrix-i003-ruler-c.md` |
+| **P-010 outcome** | Negative-only — **MUST NOT** invent JSON_TABLE SQL |
+| **Contrast** | XMLTABLE → A-FUN-021 (`xml-functions/xmltable.md`) |
+
+### A-DDL-007 partial wiring
+
+| Field | Value |
+|---|---|
+| **Code** | C-DDL-001 covered-live (`XuguTypeDdlDetailsTest/IT`) |
+| **P-007** | SSOT promotion — align A-DDL-007 with C-DDL-001; no duplicate DDL |
+
+### gap_action routing (20 inventory rows)
+
+All 20 deferred inventory rows now route to **I-009/P-002…P-010** via `gap_action` column above. Implementers close per batch map; honest **known-limit-documented** acceptable with doc citation.
 
 ---
 

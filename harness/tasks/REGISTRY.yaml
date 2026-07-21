@@ -12,7 +12,7 @@ notes: >
 tasks:
   - task_id: P-001
     title: "盘点延后矩阵 SSOT 与批次路线图"
-    status: ready
+    status: accepted
     build_id: B-001
     packet: harness/tasks/P-001.md
     acceptance_doc: harness/evidence/architect-contract/I-009/P-001/ACCEPTANCE.md

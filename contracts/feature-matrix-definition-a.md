@@ -39,11 +39,11 @@
 | A-TYP-011 | Types | CLOB | Map `CLOB` / materialize character LOB | `reference/sql/datatype/large-object.md` | 可实现 | P-003 | ✅ P-003; NCLOB→CLOB |
 | A-TYP-012 | Types | GUID / UUID column | Map UUID/`UuidJdbcType` → `GUID` type | `reference/sql/datatype/guid.md` | 可实现 | P-003 | ✅ P-003 IT |
 | A-TYP-013 | Types | JSON column | Map JSON/`SqlTypes.JSON` → `JSON` | `reference/sql/datatype/json.md` | 可实现 | P-003 | ✅ P-003 IT |
-| A-TYP-014 | Types | INTERVAL | Map Hibernate duration/interval if Dialect exposes | `reference/sql/datatype/datetime.md` | 延后 | later | Revisit if app demand + IntervalJdbcType needed |
+| A-TYP-014 | Types | INTERVAL | Map Hibernate duration/interval if Dialect exposes | `reference/sql/datatype/datetime.md` | 延后 | **I-009/P-002** | 13 subtypes + DEF_INTERVAL_STYLE; known-limit if Hibernate surface absent — see [`i009-deferred-batch-map.md`](i009-deferred-batch-map.md) |
 | A-TYP-015 | Types | ARRAY | Map SQL ARRAY / Hibernate array types | `reference/sql/datatype/array.md` | 可实现 | P-004 | ✅ I-007/P-004 ARRAY hooks + native live IT |
-| A-TYP-016 | Types | XML | Map SQLXML / XML type | `reference/sql/datatype/xml.md` | 延后 | later | Not required for definition A core |
-| A-TYP-017 | Types | Geometric / spatial | Map geometry types | `reference/sql/datatype/geometric.md` | 延后 | later | Charter: spatial out unless matrix includes; revisit on Scope |
-| A-TYP-018 | Types | UDT | User-defined types as entity columns | `reference/sql/datatype/udt.md` | 延后 | later | Not production default for Hibernate apps |
+| A-TYP-016 | Types | XML | Map SQLXML / XML type | `reference/sql/datatype/xml.md` | 延后 | **I-009/P-003** | Pair A-FUN-021; XMLTABLE cluster note — [`i009-deferred-batch-map.md`](i009-deferred-batch-map.md) |
+| A-TYP-017 | Types | Geometric / spatial | Map geometry types | `reference/sql/datatype/geometric.md` | 延后 | **I-009/P-004** | Simple 2D only — not PostGIS; pair A-FUN-020 |
+| A-TYP-018 | Types | UDT | User-defined types as entity columns | `reference/sql/datatype/udt.md` | 延后 | **I-009/P-005** | High known-limit risk for ORM entity columns |
 | A-TYP-019 | Types | Type conversion CAST | Dialect/app CAST between types | `reference/sql/type_conversion.md`, `reference/sql/expression/type_conversion.md` | 可实现 | P-003 | ✅ castPattern default |
 | A-DDL-001 | DDL | CREATE TABLE basics | Schema export `create table` with columns/nullability/defaults | `reference/object/table/create.md` | 可实现 | P-003 | ✅ schema export IT |
 | A-DDL-002 | DDL | ALTER TABLE add/drop column | Schema update add/modify column | `reference/object/table/alter.md` | 可实现 | P-003 | ✅ ALTER ADD COLUMN IT |
@@ -51,9 +51,9 @@
 | A-DDL-004 | DDL | NOT NULL | Column nullability | `reference/object/constraints.md` | 可实现 | P-003 | ✅ NOT NULL IT |
 | A-DDL-005 | DDL | DEFAULT value | Column default in DDL | `reference/object/table/create.md` | 可实现 | P-003 | ✅ default exporter path |
 | A-DDL-006 | DDL | DROP TABLE | Schema drop | `reference/object/table/alter.md` (drop via object lifecycle; see table docs) | 可实现 | P-003 | ✅ drop table IT |
-| A-DDL-007 | DDL | IF NOT EXISTS create | Optional IF NOT EXISTS | `reference/object/table/create.md` | 延后 | later | Hibernate rarely requires; revisit if tooling needs |
-| A-DDL-008 | DDL | Table partitioning | PARTITION BY in CREATE | `reference/object/table/partition.md`, `reference/object/table/create.md` | 延后 | later | Not required for standard ORM schema export |
-| A-DDL-009 | DDL | Column/table ENCRYPT | Encryptor clauses | `reference/object/table/create.md`, `reference/object/encryptor.md` | 延后 | later | Security product feature, not Dialect core |
+| A-DDL-007 | DDL | IF NOT EXISTS create | Optional IF NOT EXISTS | `reference/object/table/create.md` | 延后 | **I-009/P-007** | **Partial wiring:** C-DDL-001 covered-live — P-007 SSOT promotion only |
+| A-DDL-008 | DDL | Table partitioning | PARTITION BY in CREATE | `reference/object/table/partition.md`, `reference/object/table/create.md` | 延后 | **I-009/P-007** | Native DDL IT; schema export likely known-limit |
+| A-DDL-009 | DDL | Column/table ENCRYPT | Encryptor clauses | `reference/object/table/create.md`, `reference/object/encryptor.md` | 延后 | **I-009/P-007** | SYSSSO encryptor prerequisite — known-limit likely |
 
 ---
 
@@ -64,15 +64,15 @@
 | A-PAG-001 | Pagination | LIMIT only | `LimitHandler` + HQL/Criteria `SqlAstTranslator` limit without offset | `reference/sql/select/resultset-restricted.md` | 可实现 | P-004 | ✅ `LIMIT ?` via XuguLimitHandler **and** `XuguSqlAstTranslator` (I-002/P-001); with locks: FOR UPDATE → LIMIT (XuGu grammar) |
 | A-PAG-002 | Pagination | LIMIT + OFFSET | `supportsLimitOffset` / HQL `setFirstResult`+`setMaxResults` | `reference/sql/select/resultset-restricted.md` | 可实现 | P-004 | ✅ stable form `LIMIT count [OFFSET offset]` (**not** ANSI `OFFSET…FETCH`); I-002/P-001 AST path; with locks: **FOR UPDATE → LIMIT → WAIT** |
 | A-PAG-003 | Pagination | Parameter binding | Limit/offset as JDBC parameters | `reference/sql/select/resultset-restricted.md` (`?` / named) | 可实现 | P-004 | ✅ bind markers; reverse order count→offset |
-| A-PAG-004 | Pagination | TOP syntax | Alternate top-N | `reference/sql/select/resultset-restricted.md` (#top) | 延后 | later | Prefer LIMIT for Hibernate; TOP not required |
+| A-PAG-004 | Pagination | TOP syntax | Alternate top-N | `reference/sql/select/resultset-restricted.md` (#top) | 延后 | **I-009/P-009** | TOP ⊥ LIMIT — default LimitHandler unchanged |
 | A-PAG-005 | Pagination | ANSI FETCH FIRST | `FETCH FIRST n ROWS ONLY` | — (not documented under resultset-restricted) | 文档不允许 | P-004 | ✅ not emitted (unit + IT assert); I-002/P-001 closed E19132 `unexpected OFFSET` on HQL page path |
-| A-PAG-006 | Pagination | ROWNUM pagination | Oracle-style ROWNUM wrappers | `reference/sql/select/select.md` (#ROWNUM) | 延后 | later | Documented but LIMIT preferred; revisit only if LIMIT blocked |
+| A-PAG-006 | Pagination | ROWNUM pagination | Oracle-style ROWNUM wrappers | `reference/sql/select/select.md` (#ROWNUM) | 延后 | **I-009/P-009** | Alternate native path; LIMIT remains default |
 | A-LCK-001 | Locks | FOR UPDATE | Pessimistic write lock clause | `reference/sql/select/select.md` (#opt_for_update_clause) | 可实现 | P-004 | ✅ `for update` + IT; combo with page: FOR UPDATE before LIMIT (LimitHandler + SqlAstTranslator) |
 | A-LCK-002 | Locks | FOR UPDATE OF columns | Optional column list | `reference/sql/select/select.md` | 可实现 | P-004 | ✅ `for update of …` + IT |
 | A-LCK-003 | Locks | Lock wait / NOWAIT | `LockOptions.NOWAIT` / timeout | `reference/sql/select/select.md` (`opt_wait`: NOWAIT / WAIT / WAIT ms); also `reference/object/table/lock.md` | 可实现 | P-004 | ✅ ms pass-through; with page: trailing WAIT after LIMIT (I-002/P-001 IT) |
 | A-LCK-004 | Locks | SKIP LOCKED | `LockOptions.SKIP_LOCKED` | — (no SKIP LOCKED in select FOR UPDATE grammar) | 文档不允许 | P-004 | ✅ `supportsSkipLocked=false`; no keyword |
 | A-LCK-005 | Locks | FOR SHARE / read lock | Pessimistic read share clause | — (FOR UPDATE / FOR READ ONLY only) | 文档不允许 | P-004 | ✅ 文档不允许 retained; Hibernate shim only — no FOR SHARE; PESSIMISTIC_READ→exclusive FOR UPDATE (not share); concurrent readers may block |
-| A-LCK-006 | Locks | LOCK TABLE (explicit) | Rare Dialect helper for table locks | `reference/object/table/lock.md` | 延后 | later | Not required for JPA LockMode path |
+| A-LCK-006 | Locks | LOCK TABLE (explicit) | Rare Dialect helper for table locks | `reference/object/table/lock.md` | 延后 | **I-009/P-009** | Native SQL helper — not JPA LockMode path |
 
 ---
 
@@ -85,7 +85,7 @@
 | A-IDN-003 | Identity | Retrieve generated keys | `getGeneratedKeys` / identity select | `reference/object/table/create.md`; JDBC driver behavior | 可实现 | P-005 | ✅ JDBC getGeneratedKeys primary; `LAST_INSERT_ID()` select fallback |
 | A-IDN-004 | Identity | Insert with identity | Insert omitting identity column | `reference/object/table/create.md` | 可实现 | P-005 | ✅ INSERT omits id column; id backfilled |
 
-| A-IDN-005 | Identity | Identity mode session params | Dialect-specific identity_mode knobs | `reference/system-configuration-parameter/session-parameter/identity_mode.md`, `reference/system-configuration-parameter/xugu.ini/compatible/def_identity_mode.md` | 延后 | later | Revisit if generated-key edge cases appear |
+| A-IDN-005 | Identity | Identity mode session params | Dialect-specific identity_mode knobs | `reference/system-configuration-parameter/session-parameter/identity_mode.md`, `reference/system-configuration-parameter/xugu.ini/compatible/def_identity_mode.md` | 延后 | **I-009/P-009** | NULL/ZERO-as-auto-increment modes (v12.0.6+) |
 | A-SEQ-001 | Sequence | CREATE SEQUENCE | `SequenceSupport.getCreateSequenceString` | `reference/object/sequence.md` | 可实现 | P-005 | ✅ `create sequence … [start with N increment by M]`; I-002/P-002: `getQuerySequencesString`→`select * from all_sequences` + Xugu extractor (`seq_name`/`min_val`/`max_val`/`step_val`) so `hbm2ddl.auto=validate` sees existing sequences |
 | A-SEQ-002 | Sequence | DROP SEQUENCE | Drop sequence DDL | `reference/object/sequence.md` | 可实现 | P-005 | ✅ `drop sequence name` |
 | A-SEQ-003 | Sequence | NEXTVAL | `nextval` for SEQUENCE generator | `reference/object/sequence.md`, `reference/function/sequence-functions/nextval.md` | 可实现 | P-005 | ✅ Locked: `select seq.nextval from dual` (not internal NEXTVAL()) |
@@ -114,13 +114,13 @@
 | A-FUN-012 | Functions | to_char / to_date / to_timestamp | format/parse | `reference/function/date-and-time-functions/to_char.md`, `to_date.md`, `to_timestamp.md` | 可实现 | P-006 | ✅ registered; live probe OK |
 | A-FUN-013 | Functions | cast | HQL cast | `reference/sql/expression/type_conversion.md` | 可实现 | P-006 | ✅ cast IT |
 | A-FUN-014 | Functions | aggregates avg/sum/min/max/count | standard aggregates | `reference/function/aggregate-functions/avg.md`, `sum.md`, `min.md`, `max.md` | 可实现 | P-006 | ✅ count/sum IT |
-| A-FUN-015 | Functions | bit_and / bit_or | bitwise aggregates/ops if used | `reference/function/aggregate-functions/bit_and.md`, `bit_or.md` | 延后 | later | Only if app HQL needs |
+| A-FUN-015 | Functions | bit_and / bit_or | bitwise aggregates/ops if used | `reference/function/aggregate-functions/bit_and.md`, `bit_or.md` | 延后 | **I-009/P-006** | VARBIT prerequisite — HQL may be known-limit |
 | A-FUN-016 | Functions | UUID generators | `uuid()`, `sys_guid()`, `gen_random_uuid()` | `reference/function/uuid-functions/uuid.md`, `sys_guid.md`, `gen_random_uuid.md`, `newid.md`, `sys_uuid.md` | 可实现 | P-006 | ✅ primary=`uuid()` (dashed VARCHAR); alts registered |
 | A-FUN-017 | Functions | JSON functions | `json_value` / `json_extract` / operators | `reference/function/json-functions/`, `reference/sql/operators/json-operators/` | 可实现 | P-006 | ✅ subset: json_value + json_extract; HQL needs JSON_FUNCTIONS_ENABLED |
 | A-FUN-018 | Functions | listagg / string_agg / group_concat | string aggregate | `reference/function/aggregate-functions/listagg.md`, `string_agg.md`, `group_concat.md` | 可实现 | P-006 | ✅ HQL listagg → `LISTAGG … WITHIN GROUP`; string_agg/group_concat named |
-| A-FUN-019 | Functions | regexp_* | regex HQL | `reference/function/string-functions/regexp_like.md`, `regexp_replace.md`, `regexp_substr.md` | 延后 | later | Revisit if Criteria/HQL regex used |
-| A-FUN-020 | Functions | geometric functions | spatial HQL | `reference/function/geometric-functions/` | 延后 | later | Paired with A-TYP-017 |
-| A-FUN-021 | Functions | XML functions | XML HQL | `reference/function/xml-functions/` | 延后 | later | Paired with A-TYP-016 |
+| A-FUN-019 | Functions | regexp_* | regex HQL | `reference/function/string-functions/regexp_like.md`, `regexp_replace.md`, `regexp_substr.md` | 延后 | **I-009/P-006** | Low risk — expect covered-live |
+| A-FUN-020 | Functions | geometric functions | spatial HQL | `reference/function/geometric-functions/` | 延后 | **I-009/P-004** | Paired with A-TYP-017 |
+| A-FUN-021 | Functions | XML functions | XML HQL | `reference/function/xml-functions/` | 延后 | **I-009/P-003** | Paired with A-TYP-016; XMLTABLE ≠ json_table |
 
 ---
 
@@ -130,7 +130,7 @@
 |---|---|---|---|---|---|---|---|
 | A-SCH-001 | Schema | CREATE / DROP SCHEMA | Schema management | `reference/object/schema.md` | 可实现 | P-007 | ✅ P-007 Locked: `create schema` / `drop schema`; IT `HIB_P007_SCH` |
 | A-SCH-002 | Schema | Qualified names schema.table | `schema.table` rendering | `reference/object/schema.md`, `reference/sql/identifier.md` | 可实现 | P-007 | ✅ P-007 `NameQualifierSupport.SCHEMA`; IT `schema.table` |
-| A-SCH-003 | Catalog | Catalog (database) qualifier | `catalog.schema.table` | `reference/object/database.md` | 延后 | later | Xugu “database” ≠ Hibernate catalog always; revisit after JDBC metadata study |
+| A-SCH-003 | Catalog | Catalog (database) qualifier | `catalog.schema.table` | `reference/object/database.md` | 延后 | **I-009/P-008** | JDBC catalog vs Xugu database; DATABASE not session-SET |
 | A-SCH-004 | Temp | Local temporary tables | Hibernate temp table strategy (local) | `reference/object/table/create.md` (#2-OptTemp) | 可实现 | P-007 | ✅ P-007 Locked: `create local temporary table` |
 | A-SCH-005 | Temp | Global temporary tables | Persistent global temp | `reference/object/table/create.md`; `reference/system-configuration-parameter/xugu.ini/sql-engine/support_global_tab.md` | 可实现 | P-007 | ✅ P-007 Locked: `create global temporary table`; **precondition `support_global_tab=ON`**; IT gated/skip if OFF |
 | A-SCH-006 | Temp | ON COMMIT DELETE/PRESERVE | Temp table commit behavior | `reference/object/table/create.md` | 可实现 | P-007 | ✅ P-007 Local: `on commit preserve rows`; Global: `on commit delete rows` |
@@ -144,7 +144,7 @@
 | A-SCH-014 | Constraints | ALTER ADD/DROP CONSTRAINT | Constraint management | `reference/object/constraints.md`, `reference/object/table/alter.md` | 可实现 | P-007 | ✅ P-007 `drop constraint` for FK/UK |
 | A-SCH-015 | Truncate | TRUNCATE TABLE | `truncate` / multi-table clear | `reference/object/table/truncate.md` | 可实现 | P-007 | ✅ P-007 Locked: `truncate table {name}` |
 | A-SCH-016 | Indexes | CREATE INDEX basics | Index export for unique/non-unique | `reference/object/indexes.md` | 可实现 | P-007 | ✅ P-007 `create index` / `create unique index` |
-| A-SCH-017 | Indexes | Advanced index types | Partial/functional/spatial indexes | `reference/object/indexes.md` | 延后 | later | Beyond standard ORM export |
+| A-SCH-017 | Indexes | Advanced index types | Partial/functional/spatial indexes | `reference/object/indexes.md` | 延后 | **I-009/P-008** | BITMAP/functional subset or known-limit |
 
 ---
 
@@ -189,7 +189,8 @@
 | P-007 | A-SCH-* | Schema, temp, comment, constraints, truncate, indexes |
 | P-008 | A-SPI-*, A-XCUT-003/005/006 | SPI + explicit + isolation notes |
 | P-009 | A-XCUT-009 (demo) | Env secrets in demo |
-| later / Ship | 延后 rows + A-XCUT-012 | Deferred |
+| I-009/P-002…P-010 | 17 A-* 延后 rows | I-009 deferred delivery — see [`i009-deferred-batch-map.md`](i009-deferred-batch-map.md) |
+| later / Ship | A-XCUT-012 | Ship OUT per I-009 brief |
 
 ## Counts (architect RP-01)
 
@@ -200,11 +201,14 @@
 | 延后 | 20 |
 | **Total** | **105** |
 
+> **I-009 note (2026-07-21):** 17 Definition A **延后** rows assigned to I-009/P-002…P-009; Ruler C C-JSON-006 reclassified **文档不允许** (companion matrix); C-SRV-001/C-SEL-001 → I-009/P-010. Batch map SSOT: [`i009-deferred-batch-map.md`](i009-deferred-batch-map.md).
+
 Derivation detail: `harness/evidence/architect-contract/P-002/NOTES.md`.
 
 ## Orchestrator note
 
 Prefer this file as SSOT for **definition A** (I-001/I-002).  
-**I-003** production-gap rows live in [`feature-matrix-i003-ruler-c.md`](feature-matrix-i003-ruler-c.md) (ruler C). Both are required reading for I-003 implementers.
+**I-003** production-gap rows live in [`feature-matrix-i003-ruler-c.md`](feature-matrix-i003-ruler-c.md) (ruler C). Both are required reading for I-003 implementers.  
+**I-009** deferred delivery batch map: [`i009-deferred-batch-map.md`](i009-deferred-batch-map.md) (P-002…P-010 serial assignments).
 
 If product docs should link it, add a short cross-ref in `docs/architecture.md` and/or `docs/feature-matrix-definition-a.md` → point here (architect cannot write those paths in this Phase packet for architect role; see evidence NOTES).

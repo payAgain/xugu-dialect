@@ -28,6 +28,16 @@ Human Gate：是否批准 **B-001** 范围（默认仅 P-001）？
 
 ---
 
+## Entry: I-009 B-001 approved — P-001~P-011 serial
+
+### Summary
+Human Gate「批准 B-001，范围 P-001~P-011」。Build **approved**（扩大 draft 仅 P-001 为全 Plan）。Orchestrator **串行** P-001→P-011；不问并行；不 Ship；延后全做；文档不允许 skip；GAV 7.4.5.Final；NONE。
+
+### Next
+Orchestrator 从 P-001 执行；完成后 Human Gate Initiative Accept。
+
+---
+
 ## Entry: I-009 Scope PASS — Accept+Archive I-008 — Plan pending
 
 ### Summary
