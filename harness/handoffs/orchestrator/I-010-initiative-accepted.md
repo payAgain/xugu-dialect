@@ -27,7 +27,7 @@ Human Gate「真实虚谷跑通后门控 → Initiative Accept I-010」→ Initi
 |---|---|
 | B-002 tip | `2368cbbed8beec5891179abb75ea5a2ae269be9d` |
 | Live IT + SSOT promote | `51de6e32ba788110ba209f9e0483b7543daba992` |
-| Accept must-commit | *(see git log after Accept commit)* |
+| Accept must-commit | `294644c17ffad5bbd1fe403f78b8d6f23c77a0cb` |
 
 ## Evidence
 

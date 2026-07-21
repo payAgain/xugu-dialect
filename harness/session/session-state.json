@@ -31,6 +31,7 @@
     "committed": true,
     "branch": "feat/i-010-orm-hql-quality-completion",
     "live_it_commit": "51de6e32ba788110ba209f9e0483b7543daba992",
+    "accept_commit": "294644c17ffad5bbd1fe403f78b8d6f23c77a0cb",
     "b002_tip": "2368cbbed8beec5891179abb75ea5a2ae269be9d"
   },
   "handoff": {

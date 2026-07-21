@@ -44,7 +44,7 @@
 | Branch | `feat/i-010-orm-hql-quality-completion` |
 | B-002 tip | `2368cbbed8beec5891179abb75ea5a2ae269be9d` |
 | Live IT + SSOT promote | `51de6e32ba788110ba209f9e0483b7543daba992` |
-| Accept must-commit | *(this Accept commit)* |
+| Accept must-commit | `294644c17ffad5bbd1fe403f78b8d6f23c77a0cb` |
 
 ## Live / verification evidence
 
