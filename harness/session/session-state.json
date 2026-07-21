@@ -1,25 +1,25 @@
 {
   "schema_version": 1,
   "task_id": "I-010",
-  "batch_id": "B-001",
-  "status": "b001_complete_await_initiative_accept",
+  "batch_id": "B-002",
+  "status": "b002_complete_await_initiative_accept",
   "harness_level": "Standard",
-  "last_updated": "2026-07-21T16:20:00+08:00",
+  "last_updated": "2026-07-21T16:45:00+08:00",
   "initiative_id": "I-010",
   "initiative_type": "feature",
   "working_branch": "feat/i-010-orm-hql-quality-completion",
   "active_plan": [
-    "B-001 P-001…P-010 all accepted",
-    "VERIFY PASS; live SKIPPED_INFRA residuals honest",
-    "Await Human Gate Initiative Accept (NOT Ship, NOT Archive)"
+    "B-001 P-001…P-010 accepted",
+    "B-002 P-011…P-017 accepted — xuguefcore parity suite 10/10",
+    "VERIFY PASS; live SKIPPED_INFRA; await Initiative Accept (NOT Ship)"
   ],
   "next_3_steps": [
     "Human Gate: Initiative Accept I-010 (NOT Ship)",
-    "Optional: live retest @ reachable XuGu then promote known-limit rows",
+    "Optional: live retest @ reachable XuGu then promote SSOT rows",
     "Ship only with separate Human Gate authorization"
   ],
   "validation": {
-    "last_result": "VERIFY PASS; B-001 complete; live SKIPPED_INFRA"
+    "last_result": "VERIFY PASS; B-002 complete; live SKIPPED_INFRA"
   },
   "cognitive_state": {
     "failure_count": 0,
@@ -27,21 +27,19 @@
     "blocked_on": "Human Gate Initiative Accept"
   },
   "version_control_checkpoint": {
-    "decision": "b001_complete",
-    "committed": true,
+    "decision": "b002_complete",
+    "committed": false,
     "branch": "feat/i-010-orm-hql-quality-completion",
-    "p010_commit": "74ef82fae7d0a4a70e48c2096217c38fdaa5fbf2",
-    "p008_ssot_fix": "48a8fa13de19ed7a24be743bf7d354c73435a6b0"
+    "p016_commits": ["b58881e", "441f482"]
   },
   "handoff": {
-    "resume_from": "harness/handoffs/orchestrator/I-010-B-001-complete.md"
+    "resume_from": "harness/handoffs/orchestrator/I-010-B-002-complete.md"
   },
-  "approved_build": "B-001",
+  "approved_build": "B-002",
   "approved_phases": [
-    "P-001", "P-002", "P-003", "P-004", "P-005",
-    "P-006", "P-007", "P-008", "P-009", "P-010"
+    "P-011", "P-012", "P-013", "P-014", "P-015", "P-016", "P-017"
   ],
   "ship": false,
   "archive": false,
-  "updated_at": "2026-07-21T16:20:00+08:00"
+  "updated_at": "2026-07-21T16:45:00+08:00"
 }

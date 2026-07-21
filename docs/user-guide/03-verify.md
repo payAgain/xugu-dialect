@@ -205,6 +205,36 @@ Charter **98** 诚实 rollup **不变**：**83/98** covered-live + **15** known-
 
 **NOT Ship** — Maven Central / tag / push **不在** I-010 范围。Human Gate 下一步是 **Initiative Accept**（非 Ship / 非 Archive）。
 
+## I-010 B-002 xuguefcore parity suite
+
+Initiative **I-010** Build **B-002**（Phase **P-011…P-017**）对照只读参考仓 `xuguefcore`，在 Hibernate 侧补充 **10** 项建议用例（高/中/低）。套件 SSOT（**P-011** 落地；若文件尚未提交，链接为占位）：
+
+[`contracts/xuguefcore-parity-suite.md`](../../contracts/xuguefcore-parity-suite.md)
+
+主题清单与 Unit/IT 落点见 [04-feature-matrix.md § I-010 B-002](04-feature-matrix.md#i-010-b-002-xuguefcore-parity-suite)。
+
+| Mode | Command | 证明什么 |
+|---|---|---|
+| **Unit / 离线** | `mvn -q test`（默认 gate OFF） | 金标 / 边界 Unit 可离线绿；gated IT **assume-skip** |
+| **门控 IT（有可达 XuguDB）** | `XUGU_RUN_IT=true` **或** `-Dxugu.run.integration=true` → `mvn -q test` | 套件 Integration 行 live 绿 |
+| **无库诚实** | 同上但缺库 | IT **assume-skip** / 证据记 **`SKIPPED_INFRA`** — 离线绿 **不能** 假装 live PASS |
+| **Harness 契约** | `python harness/scripts/verify.py` | 配置化 build + offline test（Accept 须 **VERIFY PASS**） |
+
+**不照搬：** EF Spec 8500、Migrations、Retry、compatible 双方言、RETURNING/ADO、Owned API、文档不允许项（SKIP LOCKED / FOR SHARE / `json_table` / ENUM 等）。
+
+**NOT Ship** — Maven Central / tag / push **不在** B-002 / I-010 范围。
+
+### I-010 B-002 Accept prep（2026-07-21）
+
+| Gate | Result |
+|---|---|
+| `python harness/scripts/verify.py` | **VERIFY PASS** |
+| Offline `mvn -q test` | **PASS**（gated IT assume-skip） |
+| Live `XUGU_RUN_IT=true` | **SKIPPED_INFRA**（`:5138` 不可达） |
+| Suite SSOT 10/10 | 非 `planned` — 见 [`xuguefcore-parity-suite.md`](../../contracts/xuguefcore-parity-suite.md) |
+
+Human Gate 下一步：**Initiative Accept I-010**（非 Ship / 非 Archive）。有库后再晋升 `covered-live`。
+
 ### I-008 Accept — 黄金路径 manifest（Q4 冻结）
 
 Initiative Accept 须 **`XUGU_RUN_IT=true mvn -q test`** 全 reactor 绿，且下列路径在真库上均有 live IT 覆盖（离线 skip **不足以** Accept）：

@@ -1,0 +1,114 @@
+schema_version: 1
+role: architect-contract
+phase_id: P-011
+build_id: B-002
+initiative_id: I-010
+invocation_id: inv-i010-p011-architect-contract
+step_id: RP-01
+status: passed
+required: true
+completed_at: "2026-07-21T16:20:00+08:00"
+purpose: Create contracts/xuguefcore-parity-suite.md SSOT for all 10 Human-approved themes; link baseline/docs; no covered-live inflation
+
+inputs:
+  - harness/tasks/P-011.md
+  - harness/builds/B-002.json
+  - harness/initiatives/I-010/brief.md
+  - harness/drafts/I-010-SCOPE-CLARIFYING.md
+  - contracts/production-regression-baseline.md
+
+outputs:
+  parity_suite_ssot: contracts/xuguefcore-parity-suite.md
+  evidence_acceptance: harness/evidence/architect-contract/I-010/P-011/ACCEPTANCE.md
+  handoff: harness/handoffs/architect-contract/I-010-P-011.yaml
+
+suite_rows:
+  total: 10
+  initial_status: planned
+  rows:
+    - id: XP-001
+      pri: high
+      class: XuguOptimisticConcurrencyIT
+      layer: IT
+    - id: XP-002
+      pri: high
+      class: XuguHqlGroupByCountIT
+      layer: IT
+    - id: XP-003
+      pri: medium
+      class: XuguHqlBulkBoundaryTest + XuguHqlBulkBoundaryIT
+      layer: Unit+IT
+    - id: XP-004
+      pri: medium
+      class: XuguJsonLobBoundaryIT
+      layer: IT
+    - id: XP-005
+      pri: medium
+      class: XuguExplicitTxAtomicityIT
+      layer: IT
+    - id: XP-006
+      pri: medium
+      class: XuguNativeSqlBaselineTest + resources
+      layer: Unit
+    - id: XP-007
+      pri: medium
+      class: XuguHqlJoinFetchIT
+      layer: IT
+    - id: XP-008
+      pri: low
+      class: XuguNullSemanticsIT
+      layer: IT
+    - id: XP-009
+      pri: low
+      class: XuguTemporalProjectionIT
+      layer: IT
+    - id: XP-010
+      pri: low
+      class: strengthen XuguExceptionConversionTest / optional live
+      layer: Unit(+optional IT)
+
+explicit_callouts:
+  gav: 7.4.5.Final
+  compatiblemode: NONE
+  not_ship: true
+  it_gate: "XUGU_RUN_IT=true or -Dxugu.run.integration=true"
+  no_java_changes: true
+  no_covered_live_inflation: true
+
+out_of_scope:
+  - SKIP LOCKED
+  - FOR SHARE
+  - json_table
+  - ENUM
+  - EF Spec 8500
+  - Migrations
+  - Retry
+  - RETURNING
+  - ADO
+  - Owned EF copy
+  - compatible dual-dialect
+
+notes_for_docs_rp02: |
+  Point docs/user-guide/03-verify.md and 04-feature-matrix.md at
+  contracts/xuguefcore-parity-suite.md; document IT gate XUGU_RUN_IT /
+  -Dxugu.run.integration=true; GAV 7.4.5.Final; compatiblemode=NONE; NOT Ship.
+
+notes_for_reviewer_rp03: |
+  Audit:
+  - All 10 Human-approved themes present with pri/theme/layer/planned class/status=planned
+  - Out-of-scope exclusions honored (no doc-forbidden positive rows)
+  - No dialect/demo Java; no covered-live claims; NOT Ship
+
+notes_for_orchestrator: |
+  RP-01 architect-contract complete.
+  Next: docs RP-02 → reviewer RP-03.
+  After Phase Accept, unblock P-012…P-016 (serial default; parallel OK when independent).
+
+forbidden_reminder:
+  - no dialect Java changes
+  - no demo Java changes
+  - no Ship / tag / push
+  - no covered-live inflation in SSOT
+  - GAV remains 7.4.5.Final
+
+next_step: RP-02 docs

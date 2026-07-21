@@ -1,3 +1,23 @@
+## Entry: I-010 B-002 complete — await Initiative Accept
+
+### Summary
+Orchestrator 完成 B-002 P-011…P-017（xuguefcore 对照 10 项）。`verify.py` **VERIFY PASS**。Live **SKIPPED_INFRA**。SSOT `contracts/xuguefcore-parity-suite.md` 10/10 非 planned。**NOT Ship** · **NOT Archive**。
+
+### Next
+Human Gate：审 SHA 后 **Initiative Accept I-010**（仍 NOT Ship）。
+
+---
+
+## Entry: I-010 B-002 approved — xuguefcore parity suite
+
+### Summary
+Human Gate 批准：对照 xuguefcore 的**全部**建议用例直接补充进 **I-010**（不新开 Initiative）。Orchestrator 判定 B-001 已 complete → 开 **B-002**（P-011…P-017）；串行默认，P-011 SSOT 后可并行独立测试 Phase。分支不变 `feat/i-010-orm-hql-quality-completion`。**NOT Ship**。
+
+### Next
+P-011 SSOT → P-012…P-016 测试落地 → P-017 VERIFY PASS → Human Gate Initiative Accept。
+
+---
+
 ## Entry: I-010 B-001 complete — await Initiative Accept
 
 ### Summary

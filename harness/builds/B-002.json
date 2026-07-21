@@ -1,22 +1,24 @@
 {
   "schema_version": 1,
   "build_id": "B-002",
-  "initiative_id": "I-003",
+  "initiative_id": "I-010",
   "plan_revision": 1,
   "status": "approved",
+  "approved": true,
+  "completed": true,
   "proposed_phase_ids": [
-    "P-002"
+    "P-011", "P-012", "P-013", "P-014", "P-015", "P-016", "P-017"
   ],
   "approved_phase_ids": [
-    "P-002"
+    "P-011", "P-012", "P-013", "P-014", "P-015", "P-016", "P-017"
   ],
   "approval": {
-    "reference": "批准 B-002，范围仅 P-002",
-    "approved_at": "2026-07-16T13:31:00+08:00",
-    "approved_by": "Human Gate"
+    "reference": "Human Gate: 对照 xuguefcore 全部建议用例直接补充进 I-010（高/中/低全落地）",
+    "human_gate_phrase": "把对照 xuguefcore 得出的全部建议用例，直接补充进当前 I-010",
+    "approved_at": "2026-07-21T16:13:00+08:00",
+    "approved_by": "Human Gate",
+    "scope": "P-011 through P-017 serial (orchestrator may parallelize independent test Phases after P-011)"
   },
-  "recommendation": "B-002 approved = P-002 only (exception mapping + ORM entrypoint IT).",
-  "supersedes": null,
-  "scope_changes": [],
-  "notes": "Human Gate approved B-002 scope = P-002 only. Version 7.4.5.Final. No harness framework changes. No Ship."
+  "execution_note": "B-001 already complete. B-002 extends I-010 in-place (no new Initiative). Serial default; orchestrator may parallelize P-012…P-016 after P-011 SSOT. GAV 7.4.5.Final; compatiblemode=NONE; NOT Ship; do not invent doc-forbidden SQL; do not commit org/.",
+  "notes": "Reference repo read-only: E:\\\\Work\\\\C#\\\\xuguefcore. Map EF themes to Hibernate JOINED/SINGLE_TABLE/HQL — do not copy Owned/RETURNING/ADO/Migrations/Retry/compatible dual-dialect."
 }

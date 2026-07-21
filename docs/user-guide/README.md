@@ -20,7 +20,7 @@
 
 **I-009：** 延后矩阵 **20/20** 关闭（**6** covered-live · **13** known-limit · **1** doc-forbidden；**A-FUN-021** = known-limit）；Charter **98** 诚实 rollup **83/98** 不变 — [03-verify.md § I-009 Accept prep](03-verify.md#i-009-accept-prep--延后矩阵全量交付--verify-pass)、[04-feature-matrix.md § I-009](04-feature-matrix.md#i-009-deferred-closure终态)。**NOT Ship**。
 
-**I-010：** ORM/HQL 质量完善（INTERVAL/XML/POINT 实体 + XML/几何/regexp/Batch A HQL + schema recipes）— P0+P1 退出清单已勾选；新 ORM/HQL IT 本轮 **SKIPPED_INFRA**，A-TYP-014/016/017 与 Batch A / **A-FUN-021** 仍 **known-limit**（勿假晋升 covered-live）；Charter **83/98** 不变 — [03-verify.md § I-010 Accept prep](03-verify.md#i-010-accept-prep--ormhql-质量完善--verify-pass)、[04-feature-matrix.md § I-010](04-feature-matrix.md#i-010-quality-completion退出清单)。**NOT Ship**。
+**I-010：** ORM/HQL 质量完善（INTERVAL/XML/POINT 实体 + XML/几何/regexp/Batch A HQL + schema recipes）— P0+P1 退出清单已勾选；新 ORM/HQL IT 本轮 **SKIPPED_INFRA**，A-TYP-014/016/017 与 Batch A / **A-FUN-021** 仍 **known-limit**（勿假晋升 covered-live）；Charter **83/98** 不变 — [03-verify.md § I-010 Accept prep](03-verify.md#i-010-accept-prep--ormhql-质量完善--verify-pass)、[04-feature-matrix.md § I-010](04-feature-matrix.md#i-010-quality-completion退出清单)。**B-002 扩展：** xuguefcore 对照套件 10 主题入口 — [03-verify.md § I-010 B-002](03-verify.md#i-010-b-002-xuguefcore-parity-suite)、[04-feature-matrix.md § B-002](04-feature-matrix.md#i-010-b-002-xuguefcore-parity-suite)。**NOT Ship**。
 
 **I-006：** Spring Boot **消费者路径**基线 — **41** Boot-required 行（A/B/C′），open gaps = **0**；如何离线 / `XUGU_RUN_IT=true` 跑通见 [06-consumer-path.md](06-consumer-path.md)。**不要求** Ship。
 

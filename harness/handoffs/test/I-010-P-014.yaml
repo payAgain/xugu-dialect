@@ -1,0 +1,47 @@
+schema_version: 1
+initiative_id: I-010
+build_id: B-002
+phase_id: P-014
+role: test
+step_id: RP-01
+status: complete
+branch: feat/i-010-orm-hql-quality-completion
+completed_at: "2026-07-21T16:32:00+08:00"
+summary: >
+  XuguJsonLobBoundaryIT + XuguExplicitTxAtomicityIT landed (dialect Session, no Spring).
+  Offline mvn -pl dialect test PASS (gate-off skip). Live SKIPPED_INFRA (:5138 refused).
+  SSOT XP-004/XP-005 → skipped-infra. dialect main untouched. must-commit pending.
+commands:
+  - mvn -q -pl dialect test -Dtest=XuguJsonLobBoundaryIT,XuguExplicitTxAtomicityIT
+  - mvn -q -pl dialect test
+  - python harness/scripts/branch_check.py
+results:
+  offline_dialect_test: PASS
+  live: SKIPPED_INFRA
+  ssot_XP-004: skipped-infra
+  ssot_XP-005: skipped-infra
+evidence:
+  - harness/evidence/test/I-010/P-014/ACCEPTANCE.md
+  - harness/evidence/test/I-010/P-014/TEST-REPORT.md
+  - harness/evidence/test/I-010/P-014/verification.json
+  - harness/evidence/test/I-010/P-014/IT-RESULT.txt
+  - harness/evidence/test/I-010/P-014/live-db-probe.txt
+  - harness/evidence/test/I-010/P-014/mvn-test-offline-dialect.txt
+  - harness/evidence/test/I-010/P-014/TEST-com.xugu.dialect.it.XuguJsonLobBoundaryIT.xml
+  - harness/evidence/test/I-010/P-014/TEST-com.xugu.dialect.it.XuguExplicitTxAtomicityIT.xml
+deliverables:
+  - dialect/src/test/java/com/xugu/dialect/it/XuguJsonLobBoundaryIT.java
+  - dialect/src/test/java/com/xugu/dialect/it/entities/I010P014JsonDoc.java
+  - dialect/src/test/java/com/xugu/dialect/it/XuguExplicitTxAtomicityIT.java
+  - dialect/src/test/java/com/xugu/dialect/it/entities/I010P014TxEntity.java
+  - contracts/xuguefcore-parity-suite.md
+observed_flows:
+  - i010-json-lob
+  - i010-tx-atomicity
+residuals:
+  - live IT pending (promote covered-live or known-limit-documented after gate-on run)
+  - must-commit pending
+  - NOT Ship
+next:
+  - reviewer RP-02 readonly
+  - orchestrator must-commit after VERIFY

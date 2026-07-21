@@ -1,0 +1,7 @@
+observed_flow: i010-join-fetch
+offline: PASS (XuguHqlJoinFetchIT gate-skip when XUGU_RUN_IT unset)
+live: SKIPPED_INFRA (192.168.2.239:5138 / 127.0.0.1:5138 TcpTestSucceeded=False)
+disposition: XP-007=skipped-infra; IT + Parent/Child entities landed; live re-prove when DB up
+method: hqlJoinFetchInitializesChildrenCollection
+hql: select p from Parent p join fetch p.children where p.id = :id
+tables: HIB_I010_P015_PARENT, HIB_I010_P015_CHILD

@@ -56,14 +56,36 @@
 | 4 | **不 Ship** |
 | 5 | 文档不允许 / 平台上限 **继续 skip / known-limit**；禁止发明 SQL |
 
+## B-002 扩展（2026-07-21 Human Gate 批准）
+对照 `E:\Work\C#\xuguefcore` 建议用例**全部**补充进 I-010（不新开 Initiative）：
+
+| Pri | Theme | Layer |
+|---|---|---|
+| 高 | `@Version` 乐观锁陈旧写失败 | Integration |
+| 高 | HQL GroupBy / Count 投影物化 | Integration |
+| 中 | HQL bulk 支持/拒绝边界（JOINED/SINGLE_TABLE；order by/limit mutation） | Unit+IT |
+| 中 | 大 JSON LOB 物化边界（失败诚实 document） | Integration |
+| 中 | 显式事务原子性 multi-persist | Integration/Demo |
+| 中 | 方言 SQL 金标 LIMIT/锁序/IDENTITY | Unit |
+| 中 | HQL join fetch / 一对多烟测 | Integration |
+| 低 | Null 语义 IS NULL/三值/coalesce | Integration |
+| 低 | 时间函数投影（文档允许） | Integration |
+| 低 | 锁超时/死锁 live 或加强 Unit | Unit(+IT) |
+
+**不照搬：** EF Spec 8500、Migrations、Retry、compatible 双方言、RETURNING/ADO、Owned API、文档不允许项。
+
+Plan：**P-011…P-017** · Build **B-002** approved。
+
 ## 验收（Initiative 级）
-- [ ] P0 SSOT/文档无陈旧「延后」与虚假 Demo gap；A-FUN-021 计数一致
-- [ ] A-TYP-014/016/017 实体 ORM live 或诚实负向
-- [ ] A-FUN-021 HQL Session live；XMLTABLE known-limit 一致
-- [ ] P1：A-FUN-020/019 + Batch A 五族独立 HQL live；tooling 文档配方
+- [x] P0 SSOT/文档无陈旧「延后」与虚假 Demo gap；A-FUN-021 计数一致（B-001）
+- [x] A-TYP-014/016/017 实体 ORM live 或诚实负向（B-001；SKIPPED_INFRA 诚实）
+- [x] A-FUN-021 HQL Session；XMLTABLE known-limit 一致（B-001）
+- [x] P1：A-FUN-020/019 + Batch A 五族独立 HQL；tooling 配方（B-001）
+- [ ] B-002：上表 10 项用例落地
 - [ ] `python harness/scripts/verify.py` **VERIFY PASS**；有 DB 时 `XUGU_RUN_IT=true` 绿
 - [ ] GAV 7.4.5.Final；NONE；不 Ship
 
 ## Human Gate 口令
-1. Scope：**「本 Initiative 范围已明确，可以开干」**（或确认上表决策）  
-2. Build（Plan 已物化后）：**「批准 B-001，范围 P-001~P-010」**（或仅最早 Phase）
+1. Scope：**「本 Initiative 范围已明确，可以开干」**（已过）  
+2. Build B-001：**「批准 B-001，范围 P-001~P-010」**（已过 / complete）  
+3. Build B-002：**对照 xuguefcore 全部建议用例补充进 I-010**（已批准）

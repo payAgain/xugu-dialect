@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "initiative_id": "I-010",
+  "started_at": "2026-07-21T16:30:00+08:00",
+  "finished_at": "2026-07-21T16:32:00+08:00",
+  "project_root": "E:\\Work\\java\\hibernate-test",
+  "phase_id": "P-014",
+  "build_id": "B-002",
+  "invocation_id": "inv-i010-p014-rp01-test",
+  "config": "E:\\Work\\java\\hibernate-test\\harness\\verification.json",
+  "results": [
+    {
+      "id": "build",
+      "required": true,
+      "status": "PASS",
+      "command": "C:\\Users\\admin\\tools\\apache-maven-3.9.9\\bin\\mvn.cmd -q -pl dialect -DskipTests package",
+      "cwd": "E:\\Work\\java\\hibernate-test",
+      "exit_code": 0,
+      "note": "covered by dialect test reactor compile+test"
+    },
+    {
+      "id": "test",
+      "required": true,
+      "status": "PASS",
+      "command": "C:\\Users\\admin\\tools\\apache-maven-3.9.9\\bin\\mvn.cmd -q -pl dialect test",
+      "cwd": "E:\\Work\\java\\hibernate-test",
+      "exit_code": 0
+    }
+  ],
+  "live_it": {
+    "command": "XUGU_RUN_IT=true mvn -q -pl dialect test -Dtest=XuguJsonLobBoundaryIT,XuguExplicitTxAtomicityIT",
+    "jdbc": "jdbc:xugu://127.0.0.1:5138/SYSTEM?compatiblemode=NONE",
+    "status": "SKIPPED_INFRA",
+    "exit_code": null,
+    "detail": "TCP 192.168.2.239:5138 and 127.0.0.1:5138 refused (TcpTestSucceeded=False); live IT not attempted"
+  },
+  "summary": {
+    "verify": "PASS",
+    "offline_test": "PASS",
+    "live_full_reactor": "SKIPPED_INFRA",
+    "observed_flows": ["i010-json-lob", "i010-tx-atomicity"],
+    "ssot": {
+      "XP-004": "skipped-infra",
+      "XP-005": "skipped-infra"
+    }
+  }
+}

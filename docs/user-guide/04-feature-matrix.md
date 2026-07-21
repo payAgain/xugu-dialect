@@ -14,6 +14,7 @@
 | **[`contracts/production-regression-baseline.md`](../../contracts/production-regression-baseline.md)** | **I-005 回归基线 SSOT** — 94 可实现 + 34 negative-only → `entry_class#method` |
 | **[`contracts/consumer-path-baseline.md`](../../contracts/consumer-path-baseline.md)** | **I-006 Boot 消费者路径 SSOT** — 41 Boot-required（A/B/C′）；非 94 行镜像 |
 | [`docs/consumer-path-baseline.md`](../consumer-path-baseline.md) | I-006 导航 stub / pointer |
+| **[`contracts/xuguefcore-parity-suite.md`](../../contracts/xuguefcore-parity-suite.md)** | **I-010 B-002** xuguefcore 对照套件 SSOT（10 主题；**P-011** 占位可先链） |
 | [`contracts/xugu-dialect.contract.md`](../../contracts/xugu-dialect.contract.md) | 公共接入面 + 能力边界绑定矩阵（§7 + §7.1） |
 
 本用户指南 **只解释状态含义并给链接**，不重复 100+ 行矩阵正文。
@@ -122,6 +123,25 @@ Initiative **I-010** 在 I-009 之上做 ORM/HQL 深度闭环 + 文档配方，*
 Charter rollup **不变**：**83/98** covered-live + **15** known-limit-documented。
 
 验证门控：[03-verify.md § I-010 Accept prep](03-verify.md#i-010-accept-prep--ormhql-质量完善--verify-pass)。
+
+## I-010 B-002 xuguefcore parity suite
+
+Build **B-002**（**P-011** SSOT + 文档入口；**P-012…P-016** 落地；**P-017** VERIFY）对照 `xuguefcore` 建议用例 **10** 项。全行状态 / planned class / 禁区：**SSOT** [`contracts/xuguefcore-parity-suite.md`](../../contracts/xuguefcore-parity-suite.md)（**P-011**；若尚不存在则为占位链接）。
+
+| Pri | Theme | Unit / IT | Planned anchor（P-011） |
+|---|---|---|---|
+| 高 | `@Version` 乐观锁陈旧写 → OptimisticLockException | **IT** | `XuguOptimisticConcurrencyIT` |
+| 高 | HQL GroupBy / Count 投影物化 | **IT** | `XuguHqlGroupByCountIT` |
+| 中 | HQL bulk 支持/拒绝边界（JOINED/SINGLE_TABLE；order by/limit mutation） | **Unit+IT** | `XuguHqlBulkBoundaryTest` + `XuguHqlBulkBoundaryIT` |
+| 中 | 大 JSON LOB 物化边界（失败诚实 document） | **IT** | `XuguJsonLobBoundaryIT` |
+| 中 | 显式事务原子性 multi-persist | **IT**（dialect 或 Demo） | `XuguExplicitTxAtomicityIT` / Demo 加强 |
+| 中 | 方言 SQL 金标 LIMIT / 锁序 / IDENTITY DDL | **Unit** | `XuguNativeSqlBaselineTest` + baseline files |
+| 中 | HQL join fetch / 一对多烟测 | **IT** | `XuguHqlJoinFetchIT` |
+| 低 | Null 语义 IS NULL / 三值 / coalesce | **IT** | `XuguNullSemanticsIT` |
+| 低 | 时间函数投影（文档允许） | **IT** | `XuguTemporalProjectionIT` |
+| 低 | 锁超时 / 死锁 live 或加强 Unit | **Unit(+IT)** | strengthen `XuguExceptionConversionTest` / optional live |
+
+门控与离线说明：[03-verify.md § I-010 B-002](03-verify.md#i-010-b-002-xuguefcore-parity-suite)。**不**膨胀 Charter **98** / **83** covered-live；**NOT Ship**。
 
 ## I-006 consumer-path counts（冻结）
 

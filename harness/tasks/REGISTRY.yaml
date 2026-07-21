@@ -1,11 +1,11 @@
 schema_version: 1
 charter_version: "1.0.0"
 initiative_id: I-010
-updated: "2026-07-21T16:20:00+08:00"
+updated: "2026-07-21T16:45:00+08:00"
 supersedes_initiative: I-009
 notes: >
-  I-010 B-001 P-001…P-010 serial complete; VERIFY PASS; await Initiative Accept (NOT Ship).
-  Live SKIPPED_INFRA residuals documented; no covered-live inflation under SKIPPED_INFRA.
+  I-010 B-001 + B-002 complete (P-001…P-017 accepted). VERIFY PASS; await Initiative Accept;
+  live SKIPPED_INFRA; NOT Ship; GAV 7.4.5.Final; NONE.
 tasks:
   - task_id: P-001
     title: "对齐 SSOT/文档口径（Definition A、A-FUN-021、Demo smoke、troubleshooting）"
@@ -87,3 +87,59 @@ tasks:
     acceptance_doc: harness/evidence/orchestrator/I-010/P-010/ACCEPTANCE.md
     role_pipeline_summary: "docs → test → reviewer"
     dependencies: [P-009]
+  - task_id: P-011
+    title: "xuguefcore 对照套件 SSOT / 文档入口（B-002）"
+    status: accepted
+    build_id: B-002
+    packet: harness/tasks/P-011.md
+    acceptance_doc: harness/evidence/architect-contract/I-010/P-011/ACCEPTANCE.md
+    role_pipeline_summary: "architect-contract → docs → reviewer"
+    dependencies: []
+  - task_id: P-012
+    title: "高：@Version 乐观锁 + HQL GroupBy/Count IT"
+    status: accepted
+    build_id: B-002
+    packet: harness/tasks/P-012.md
+    acceptance_doc: harness/evidence/test/I-010/P-012/ACCEPTANCE.md
+    role_pipeline_summary: "test → reviewer"
+    dependencies: [P-011]
+  - task_id: P-013
+    title: "中：HQL bulk 支持/拒绝边界 Unit+IT"
+    status: accepted
+    build_id: B-002
+    packet: harness/tasks/P-013.md
+    acceptance_doc: harness/evidence/test/I-010/P-013/ACCEPTANCE.md
+    role_pipeline_summary: "test → reviewer"
+    dependencies: [P-011]
+  - task_id: P-014
+    title: "中：JSON LOB 边界 + 显式事务原子性 IT"
+    status: accepted
+    build_id: B-002
+    packet: harness/tasks/P-014.md
+    acceptance_doc: harness/evidence/test/I-010/P-014/ACCEPTANCE.md
+    role_pipeline_summary: "test → reviewer"
+    dependencies: [P-011]
+  - task_id: P-015
+    title: "中：方言 SQL 金标 Unit + HQL join fetch IT"
+    status: accepted
+    build_id: B-002
+    packet: harness/tasks/P-015.md
+    acceptance_doc: harness/evidence/test/I-010/P-015/ACCEPTANCE.md
+    role_pipeline_summary: "test → reviewer"
+    dependencies: [P-011]
+  - task_id: P-016
+    title: "低：Null 语义 + 时间投影 + 锁超时/死锁"
+    status: accepted
+    build_id: B-002
+    packet: harness/tasks/P-016.md
+    acceptance_doc: harness/evidence/test/I-010/P-016/ACCEPTANCE.md
+    role_pipeline_summary: "test → reviewer"
+    dependencies: [P-011]
+  - task_id: P-017
+    title: "B-002 终对齐 + VERIFY PASS Accept 准备"
+    status: accepted
+    build_id: B-002
+    packet: harness/tasks/P-017.md
+    acceptance_doc: harness/evidence/orchestrator/I-010/P-017/ACCEPTANCE.md
+    role_pipeline_summary: "docs → test → reviewer"
+    dependencies: [P-012, P-013, P-014, P-015, P-016]
