@@ -4,7 +4,7 @@
 > Initiative: I-009 feature  
 > Time: 2026-07-21T09:45:00+08:00  
 > Branch: `feat/i-009-deferred-matrix-delivery`  
-> Commit: *(pending Plan commit)*
+> Commit: `9e8b02f`
 
 ## Prior Archive
 

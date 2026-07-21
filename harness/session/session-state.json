@@ -18,7 +18,7 @@
     "Initiative Accept — NOT Ship"
   ],
   "validation": {
-    "last_result": "Plan batch: harness_check + branch_check PASS (pending commit)"
+    "last_result": "Plan batch: harness_check + branch_check PASS; commit 9e8b02f"
   },
   "cognitive_state": {
     "failure_count": 0,
@@ -27,10 +27,10 @@
   },
   "version_control_checkpoint": {
     "decision": "i009_plan_complete",
-    "committed": false,
+    "committed": true,
     "branch": "feat/i-009-deferred-matrix-delivery",
     "last_phase_accepted": null,
-    "candidate_commit": null,
+    "candidate_commit": "9e8b02f",
     "i008_accept_sha": "cdda6c7"
   },
   "handoff": {
