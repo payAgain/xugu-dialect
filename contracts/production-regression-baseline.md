@@ -128,7 +128,7 @@ Columns: `matrix_id | status | entry_class#method | gate | gap_action`
 | A-FUN-016 | covered-live | `XuguFunctionRegistryTest#uuidPrimaryIsUuid`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
 | A-FUN-017 | covered-live | `XuguFunctionRegistryTest#jsonSubsetUsesStandardJsonValueNotMysqlDump`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
 | A-FUN-018 | covered-live | `XuguFunctionRegistryTest#listaggUsesNativeListaggFunction`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
-| A-FUN-019 | covered-live | `XuguFunctionRegistryTest#regexpSubsetRegistered_A_FUN_019`; `XuguRegexpAndBitFunctionsIT#regexpFunctionsNativeSubset_A_FUN_019` | IT | **N/A** (I-009/P-006 closed) |
+| A-FUN-019 | covered-live | `XuguFunctionRegistryTest#regexpSubsetRegistered_A_FUN_019`; `XuguRegexpAndBitFunctionsIT#regexpFunctionsNativeSubset_A_FUN_019`; `XuguRegexpAndBitFunctionsIT#regexpFunctionsHqlSession_A_FUN_019` | IT | **N/A** (I-009/P-006 + I-010/P-007 HQL Session) |
 
 ### Definition A — P-007 Schema / temp / comment / constraints (14)
 
@@ -240,7 +240,13 @@ Columns: `matrix_id | status | entry_class#method | gate | gap_action`
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
 | A-FUN-015 | known-limit-documented | `XuguFunctionRegistryTest#bitAggregateRegistered_A_FUN_015`; `XuguRegexpAndBitFunctionsIT#bitAggregatesNativeSubset_A_FUN_015` | IT | N/A |
-| A-FUN-019 | covered-live | `XuguFunctionRegistryTest#regexpSubsetRegistered_A_FUN_019`; `XuguRegexpAndBitFunctionsIT#regexpFunctionsNativeSubset_A_FUN_019` | IT | N/A |
+| A-FUN-019 | covered-live | `XuguFunctionRegistryTest#regexpSubsetRegistered_A_FUN_019`; `XuguRegexpAndBitFunctionsIT#regexpFunctionsNativeSubset_A_FUN_019`; `XuguRegexpAndBitFunctionsIT#regexpFunctionsHqlSession_A_FUN_019` | IT | N/A |
+
+### I-010 / P-007 — A-FUN-019 regexp HQL Session
+
+| matrix_id | status | entry_class#method | gate | gap_action |
+|---|---|---|---|---|
+| A-FUN-019 | covered-live | `XuguRegexpAndBitFunctionsIT#regexpFunctionsHqlSession_A_FUN_019` (`regexp_like`/`regexp_replace`/`regexp_substr` via `Session.createQuery`); native subset retained; registry unit retained; no `regexp_instr` | IT | **Strengthen HQL anchors; do not regress covered-live** — live may SKIPPED_INFRA |
 
 ### I-009 / P-007 — promoted from 延后 (Definition A)
 

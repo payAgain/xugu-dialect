@@ -7,6 +7,8 @@ import java.util.List;
  *
  * <p>Bounded A-FUN-019 subset — {@code regexp_like}, {@code regexp_replace},
  * {@code regexp_substr} per matrix scope; native SQL IT uses doc examples only.
+ * I-010/P-007 adds HQL {@code Session.createQuery} live anchors for the same three
+ * names. Unregistered aliases (e.g. {@code regexp_instr}) are out of scope.
  */
 public final class XuguRegexpFunctions {
 

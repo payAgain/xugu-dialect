@@ -189,6 +189,10 @@ import jakarta.persistence.Timeout;
  * {@code xmlelement}/{@code xmlquery} (I-010/P-005); {@code EXTRACT(xml,xpath)} is native-SQL
  * only (name shared with temporal {@code extract(field from …)} HQL). {@code XMLTABLE} is
  * documented single-node only — empty→assumption skip; not a cluster-safe / covered-live claim.
+ * Regexp (A-FUN-019): {@code regexp_like}/{@code regexp_replace}/{@code regexp_substr};
+ * HQL Session live anchors via
+ * {@code XuguRegexpAndBitFunctionsIT#regexpFunctionsHqlSession_A_FUN_019}
+ * (I-010/P-007; does not claim {@code regexp_instr}).
  * Hibernate {@code listagg} → XuGu {@code LISTAGG … WITHIN GROUP}.
  *
  * <p><b>Bulk mutation (C-BULK-* / I-003):</b>
