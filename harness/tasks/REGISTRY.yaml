@@ -20,7 +20,7 @@ tasks:
     dependencies: []
   - task_id: P-002
     title: "INTERVAL 类型方言 + 门控真库 IT"
-    status: ready
+    status: accepted
     build_id: B-001
     packet: harness/tasks/P-002.md
     acceptance_doc: harness/evidence/implementer/I-009/P-002/ACCEPTANCE.md

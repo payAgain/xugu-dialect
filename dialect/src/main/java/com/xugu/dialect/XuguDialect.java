@@ -75,6 +75,7 @@ import com.xugu.dialect.temptable.XuguGlobalTemporaryTableStrategy;
 import com.xugu.dialect.temptable.XuguLocalTemporaryTableStrategy;
 import com.xugu.dialect.type.XuguCastingJsonArrayJdbcTypeConstructor;
 import com.xugu.dialect.type.XuguCastingJsonJdbcType;
+import com.xugu.dialect.type.XuguIntervalTypeSupport;
 
 import jakarta.persistence.TemporalType;
 import jakarta.persistence.Timeout;
@@ -129,6 +130,14 @@ import jakarta.persistence.Timeout;
  * <p><b>Sequence (A-SEQ-*, A-XCUT-008):</b> {@link XuguSequenceSupport} locks
  * {@code select &lt;seq&gt;.nextval from dual}; CURRVAL via {@code currval('name')};
  * ALTER via {@code START WITH} / {@code INCREMENT BY} (not ANSI {@code RESTART WITH}).
+ *
+ * <p><b>INTERVAL (A-TYP-014):</b> XuGu documents 13 INTERVAL subtypes
+ * ({@code reference/sql/datatype/datetime.md} §时间间隔类型); Hibernate 7.4 exposes
+ * {@code SqlTypes.DURATION} and {@code SqlTypes.INTERVAL_SECOND} only. Dialect maps
+ * DURATION → {@code INTERVAL DAY TO SECOND}, INTERVAL_SECOND → {@code INTERVAL SECOND};
+ * all subtype DDL strings live in {@link XuguIntervalTypeSupport} for native SQL / tooling.
+ * Output format depends on {@code DEF_INTERVAL_STYLE} — not controlled by the dialect.
+ * Full ORM mapping of every subtype is <em>known-limit-documented</em> (native IT path).
  *
  * <p><b>ARRAY (A-TYP-015 / C-DDL-005):</b> {@link #supportsStandardArrays()} enables
  * Hibernate {@code SqlTypes.ARRAY} / {@code getPreferredSqlTypeCodeForArray()} with XuGu
@@ -280,6 +289,8 @@ public class XuguDialect extends Dialect {
 			case SqlTypes.UUID -> "guid";
 			case SqlTypes.JSON -> "json";
 			case SqlTypes.ARRAY -> "array";
+			case SqlTypes.DURATION -> XuguIntervalTypeSupport.DURATION_DDL;
+			case SqlTypes.INTERVAL_SECOND -> XuguIntervalTypeSupport.INTERVAL_SECOND_DDL;
 			default -> super.columnType( sqlTypeCode );
 		};
 	}
@@ -314,6 +325,8 @@ public class XuguDialect extends Dialect {
 		final DdlTypeRegistry ddlTypes = typeContributions.getTypeConfiguration().getDdlTypeRegistry();
 		ddlTypes.addDescriptor( new DdlTypeImpl( SqlTypes.UUID, columnType( SqlTypes.UUID ), this ) );
 		ddlTypes.addDescriptor( new DdlTypeImpl( SqlTypes.JSON, columnType( SqlTypes.JSON ), this ) );
+		ddlTypes.addDescriptor( new DdlTypeImpl( SqlTypes.DURATION, columnType( SqlTypes.DURATION ), this ) );
+		ddlTypes.addDescriptor( new DdlTypeImpl( SqlTypes.INTERVAL_SECOND, columnType( SqlTypes.INTERVAL_SECOND ), this ) );
 	}
 
 	@Override

@@ -57,6 +57,8 @@ class XuguDialectTest {
 		assertEquals( "clob", expose( SqlTypes.NCLOB ) );
 		assertEquals( "guid", expose( SqlTypes.UUID ) );
 		assertEquals( "json", expose( SqlTypes.JSON ) );
+		assertEquals( "interval day to second", expose( SqlTypes.DURATION ) );
+		assertEquals( "interval second", expose( SqlTypes.INTERVAL_SECOND ) );
 	}
 
 	@Test

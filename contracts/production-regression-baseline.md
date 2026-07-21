@@ -184,6 +184,12 @@ Columns: `matrix_id | status | entry_class#method | gate | gap_action`
 | C-JSON-005 | covered-live | `XuguFunctionRegistryTest#jsonSubsetUsesStandardJsonValueNotMysqlDump`; `XuguJsonSubsetDeepenIT#jsonSubsetDeepen_Hql_C_JSON_005` | IT | N/A |
 | C-DDL-005 | covered-live | `XuguArrayTypeTest#arrayTypeHooksWired_A_TYP_015_C_DDL_005`; `XuguArrayTypeIT#arrayColumnRoundTrip_A_TYP_015_C_DDL_005` | IT | N/A |
 
+### I-009 / P-002 — promoted from 延后 (Definition A)
+
+| matrix_id | status | entry_class#method | gate | gap_action |
+|---|---|---|---|---|
+| A-TYP-014 | known-limit-documented | `XuguIntervalTypeTest#intervalTypeHooksWired_A_TYP_014`; `XuguIntervalTypeTest#allDocumentedSubtypesLocked_A_TYP_014`; `XuguIntervalTypeIT#intervalNativeRoundTrip_A_TYP_014` | IT | N/A |
+
 ### I-007 / P-004 — promoted from 延后 (Definition A)
 
 | matrix_id | status | entry_class#method | gate | gap_action |
@@ -213,7 +219,7 @@ Matrix status **文档不允许** or **延后**; baseline records explicit non-s
 
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
-| A-TYP-014 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_TYP_014_interval` (@Disabled) | none | **I-009/P-002** |
+| A-TYP-014 | known-limit-documented | `XuguIntervalTypeTest#intervalTypeHooksWired_A_TYP_014`; `XuguIntervalTypeTest#allDocumentedSubtypesLocked_A_TYP_014`; `XuguIntervalTypeIT#intervalNativeRoundTrip_A_TYP_014`; `XuguDialectTest#columnTypesMatchXuguDocs` (DURATION/INTERVAL_SECOND) | IT | **N/A** (I-009/P-002 closed) |
 | A-TYP-016 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_TYP_016_xml` (@Disabled) | none | **I-009/P-003** |
 | A-TYP-017 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_TYP_017_spatial` (@Disabled) | none | **I-009/P-004** |
 | A-TYP-018 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_TYP_018_udt` (@Disabled) | none | **I-009/P-005** |
@@ -476,6 +482,18 @@ Source: [`harness/evidence/researcher/I-005/P-001/GAP-SUMMARY.md`](../harness/ev
 |---|---|
 | **Code** | C-DDL-001 covered-live (`XuguTypeDdlDetailsTest/IT`) |
 | **P-007** | SSOT promotion — align A-DDL-007 with C-DDL-001; no duplicate DDL |
+
+### A-TYP-014 INTERVAL known-limit (I-009/P-002)
+
+| Field | Value |
+|---|---|
+| **matrix_id** | A-TYP-014 |
+| **status** | **known-limit-documented** |
+| **Doc citation** | `reference/sql/datatype/datetime.md` §时间间隔类型 (13 subtypes; `DEF_INTERVAL_STYLE`) |
+| **Dialect surface** | `SqlTypes.DURATION` → `interval day to second`; `SqlTypes.INTERVAL_SECOND` → `interval second`; all 13 subtype DDL strings in `XuguIntervalTypeSupport` |
+| **Known-limit reason** | Hibernate 7.4 exposes only DURATION + INTERVAL_SECOND — not 13 XuGu subtypes; output format depends on server `DEF_INTERVAL_STYLE`; no invented JDBC interval ORM mapping |
+| **Live IT** | Native SQL round-trip (`XuguIntervalTypeIT`) — not full entity `@JdbcTypeCode` round-trip |
+| **gap_action** | **N/A** — closed I-009/P-002 |
 
 ### gap_action routing (20 inventory rows)
 

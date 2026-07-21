@@ -1,0 +1,65 @@
+schema_version: 1
+role: implementer
+phase_id: P-002
+build_id: B-001
+initiative_id: I-009
+invocation_id: inv-i009-p002-rp01-implementer
+step_id: RP-01
+status: completed_awaiting_test_review
+updated_at: "2026-07-21T10:05:00+08:00"
+
+summary: >
+  A-TYP-014 INTERVAL closed known-limit-documented: dialect maps Hibernate DURATION/INTERVAL_SECOND
+  to documented XuGu DDL; XuguIntervalTypeSupport locks all 13 subtype strings from datetime.md;
+  unit tests + gated native SQL round-trip IT. SSOT promoted from 延后/negative-only.
+
+decision:
+  path: known-limit-documented
+  rationale: >
+    XuGu documents 13 INTERVAL subtypes and DEF_INTERVAL_STYLE output formats; Hibernate 7.4
+    exposes only SqlTypes.DURATION and SqlTypes.INTERVAL_SECOND. Full ORM mapping of every
+    subtype would require inventing JDBC interval descriptors — native SQL IT is the honest path.
+
+closed_gap_ids:
+  - A-TYP-014
+
+delivered:
+  - dialect/src/main/java/com/xugu/dialect/type/XuguIntervalTypeSupport.java
+  - dialect/src/main/java/com/xugu/dialect/XuguDialect.java
+  - dialect/src/test/java/com/xugu/dialect/XuguIntervalTypeTest.java
+  - dialect/src/test/java/com/xugu/dialect/it/XuguIntervalTypeIT.java
+  - dialect/src/test/java/com/xugu/dialect/XuguDialectTest.java
+  - dialect/src/test/java/com/xugu/dialect/XuguNegativeRegressionBaselineTest.java
+  - contracts/production-regression-baseline.md
+  - harness/evidence/implementer/I-009/P-002/ACCEPTANCE.md
+
+tests_added:
+  unit:
+    - XuguIntervalTypeTest#intervalTypeHooksWired_A_TYP_014
+    - XuguIntervalTypeTest#allDocumentedSubtypesLocked_A_TYP_014
+  live_it:
+    - XuguIntervalTypeIT#intervalNativeRoundTrip_A_TYP_014
+
+validation:
+  build:
+    command: "mvn -q -DskipTests package"
+    exit_code: 0
+  test_offline:
+    command: "mvn -q test"
+    exit_code: 0
+  test_live:
+    command: "XUGU_RUN_IT=true mvn -q -pl dialect -am test -Dtest=XuguIntervalTypeIT"
+    exit_code: 1
+    note: "SKIPPED_INFRA — connection refused 192.168.2.239:5138 (gate ON, DB unreachable)"
+
+not_done:
+  - RP-02 test review
+  - RP-03 reviewer
+  - git commit
+  - Accept / Ship
+
+next:
+  - RP-02 test: confirm offline green + optional live IT log
+  - RP-03 reviewer: audit INTERVAL DDL cites datetime.md only; no MySQL/Oracle inheritance
+
+blocker: null

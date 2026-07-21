@@ -143,11 +143,6 @@ class XuguNegativeRegressionBaselineTest {
 	// 延后 rows — @Disabled SSOT anchors (no positive SQL invention)
 	// -------------------------------------------------------------------------
 
-	@Disabled( "SSOT " + SSOT + " — A-TYP-014 INTERVAL deferred; revisit on app demand" )
-	@Test
-	void deferred_A_TYP_014_interval() {
-	}
-
 	@Disabled( "SSOT " + SSOT + " — A-TYP-016 XML deferred" )
 	@Test
 	void deferred_A_TYP_016_xml() {
