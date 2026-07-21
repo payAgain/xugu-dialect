@@ -27,9 +27,10 @@
   },
   "version_control_checkpoint": {
     "decision": "live_triage_complete",
-    "committed": false,
+    "committed": true,
     "branch": "feat/i-009-deferred-matrix-delivery",
-    "plan_head": "e415600"
+    "plan_head": "8d1de76",
+    "triage_commit": "8d1de762ff99c2de6883292dca58e8c0c08cc171"
   },
   "handoff": {
     "resume_from": "harness/handoffs/orchestrator/I-009-live-it-5287-rerun.md"
