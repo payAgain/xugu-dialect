@@ -28,9 +28,10 @@
   },
   "version_control_checkpoint": {
     "decision": "b002_complete",
-    "committed": false,
+    "committed": true,
     "branch": "feat/i-010-orm-hql-quality-completion",
-    "p016_commits": ["b58881e", "441f482"]
+    "b002_tip": "2368cbbed8beec5891179abb75ea5a2ae269be9d",
+    "p016_commits": ["b58881efe6f9cec68b658f812629aad14fb0b1f3", "441f4824aa8de2d117781c5b9b037ccf488fa407"]
   },
   "handoff": {
     "resume_from": "harness/handoffs/orchestrator/I-010-B-002-complete.md"
