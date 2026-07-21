@@ -5,7 +5,7 @@ import org.hibernate.engine.jdbc.dialect.spi.DialectResolutionInfo;
 import org.hibernate.engine.jdbc.dialect.spi.DialectResolver;
 
 /**
- * Hibernate 7.4 {@link DialectResolver} SPI for XuguDB (A-SPI-002/003/004).
+ * Hibernate 7.4 {@link DialectResolver} SPI for XuguDB (A-SPI-002/003/004, C-SEL-001).
  *
  * <p>Match rule (proven on live XuguDB JDBC metadata):
  * <ul>
@@ -14,6 +14,9 @@ import org.hibernate.engine.jdbc.dialect.spi.DialectResolver;
  * </ul>
  * Resolves when product or driver name contains {@code "xugu"} (case-insensitive).
  * Non-Xugu metadata (MySQL / Oracle / PostgreSQL) returns {@code null}.
+ *
+ * <p>Dialect instantiation delegates to {@link XuguDialectSelector} (C-SEL-001 closure).
+ * Hibernate 7.4 does not require a separate {@code DialectSelector} SPI registration.
  */
 public class XuguDialectResolver implements DialectResolver {
 
@@ -23,12 +26,22 @@ public class XuguDialectResolver implements DialectResolver {
 	 */
 	public static final String XUGU_NAME_TOKEN = "xugu";
 
+	private final XuguDialectSelector selector;
+
+	public XuguDialectResolver() {
+		this( XuguDialectSelector.Default.INSTANCE );
+	}
+
+	public XuguDialectResolver(XuguDialectSelector selector) {
+		this.selector = selector;
+	}
+
 	@Override
 	public Dialect resolveDialect(DialectResolutionInfo info) {
 		if ( info == null || !matchesXugu( info ) ) {
 			return null;
 		}
-		return new XuguDialect( info );
+		return selector.selectDialect( info );
 	}
 
 	/**

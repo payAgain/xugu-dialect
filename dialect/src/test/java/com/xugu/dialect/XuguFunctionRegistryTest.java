@@ -126,6 +126,8 @@ class XuguFunctionRegistryTest {
 		// Documented subset only — do not register MySQL json_set as supported
 		assertNull( functions.findFunctionDescriptor( "json_set" ),
 				"json_set must not be registered (not in XuGu Hibernate subset)" );
+		assertNull( functions.findFunctionDescriptor( "json_table" ),
+				"C-JSON-006 doc-forbidden — MUST NOT register json_table without XuGu doc" );
 	}
 
 	@Test
