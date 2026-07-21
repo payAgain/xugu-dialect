@@ -182,6 +182,29 @@ Charter **98** 可实现诚实 rollup **不变**：**83/98** covered-live + **15
 
 **NOT Ship** — Maven Central / tag 不在 I-009 范围。
 
+## I-010 Accept prep — ORM/HQL 质量完善 + VERIFY PASS
+
+Initiative **I-010** 交付 ORM 实体深度（INTERVAL/XML/POINT）+ HQL Session 加深（XML/几何/regexp/Batch A）+ schema tooling 配方。SSOT：[`contracts/production-regression-baseline.md`](../../contracts/production-regression-baseline.md) § I-010 call-outs。退出清单：[04-feature-matrix.md § I-010](04-feature-matrix.md#i-010-quality-completion退出清单)。
+
+| Mode | Command | 证明什么 |
+|---|---|---|
+| **日常 / CI 离线** | `mvn -q test` + `python harness/scripts/verify.py` | 构建 + 单元/布线 — **P-010 必须 VERIFY PASS** |
+| **Accept prep 真库（有 DB）** | `XUGU_RUN_IT=true mvn -q test` | **全 reactor** 门控 dialect + demo IT；新 ORM/HQL IT 须 live 绿才能晋升 covered-live |
+| **Accept 归档** | `harness/evidence/test/I-010/P-010/` · `harness/evidence/orchestrator/I-010/P-010/` | `verification.json`、`TEST-REPORT.md`、live log 或 **`SKIPPED_INFRA`** |
+
+### I-010 诚实残差（勿膨胀 98 计数）
+
+| Residual | 状态 | 说明 |
+|---|---|---|
+| A-TYP-014 / 016 / 017 | **known-limit-documented** | 实体 ORM 路径已写；本轮 live **SKIPPED_INFRA** — **promote only after live PASS** |
+| Batch A（A-FUN-003/005/006/007/009） | **known-limit-documented** | 独立 HQL Session IT 已写；live **SKIPPED_INFRA** — 勿假晋升 |
+| A-FUN-021 | **known-limit-documented** | HQL `xmlelement`/`xmlquery` 正例在；**XMLTABLE** 仍 known-limit |
+| A-FUN-019 / 020 | **covered-live**（保持） | I-010 加深 HQL Session；勿因 SKIPPED_INFRA 回退口径 |
+
+Charter **98** 诚实 rollup **不变**：**83/98** covered-live + **15** known-limit-documented。
+
+**NOT Ship** — Maven Central / tag / push **不在** I-010 范围。Human Gate 下一步是 **Initiative Accept**（非 Ship / 非 Archive）。
+
 ### I-008 Accept — 黄金路径 manifest（Q4 冻结）
 
 Initiative Accept 须 **`XUGU_RUN_IT=true mvn -q test`** 全 reactor 绿，且下列路径在真库上均有 live IT 覆盖（离线 skip **不足以** Accept）：

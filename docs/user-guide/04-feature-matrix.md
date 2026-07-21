@@ -57,6 +57,8 @@
 | A-TYP-018 UDT | **known-limit-documented**（I-009/P-005） | native/`CREATE TYPE` 配方见 [08-schema-tooling-recipes.md](08-schema-tooling-recipes.md)；**无** ORM 实体列映射 |
 | A-DDL-008/009 · A-SCH-017 | **known-limit-documented** | SchemaExport **never emits** — Flyway/Support 配方 [08-schema-tooling-recipes.md](08-schema-tooling-recipes.md) |
 | A-FUN-021 XML functions | **known-limit-documented**（I-009/P-003；HQL Session I-010/P-005） | HQL `Session` 正例 `xmlelement`/`xmlquery`；XMLTABLE **单节点** / 空结果 assumption skip — **非** covered-live |
+| A-FUN-003/005/006/007/009 Batch A | **known-limit-documented**（I-010/P-008 独立 HQL IT） | `XuguBatchAFunctionFamiliesIT` 五族 Session 路径已写；live **SKIPPED_INFRA** — **勿**假晋升 covered-live |
+| A-FUN-019 / A-FUN-020 | **covered-live**（I-009；HQL Session I-010/P-006/P-007） | regexp / 几何函数 HQL `Session.createQuery` 加深；勿回退 |
 | C-EXC-* / C-JSON-001…004 / C-WIN-* / C-CTE-* / C-BULK-001/003 / C-DDL-001…003 / C-CAT-001 / C-GUID-001 | 可实现（I-003） | 见 ruler-C 矩阵 Acceptance hint（✅ + IT 类名） |
 | C-BULK-002 bulk insert | **covered-live**（I-007/P-002） | 门控真库 IT PASS — 见 [05-troubleshooting.md §10](05-troubleshooting.md#10-bulk-insertjoined--identity已知限制) |
 | C-JSON-005 / A-TYP-015 / C-DDL-005 / A-SEQ-006 | **covered-live**（I-007/P-004） | 见 [`p004-track-c-capabilities.md`](../p004-track-c-capabilities.md) |
@@ -92,6 +94,34 @@
 | Charter **98** rollup（不膨胀） | **83/98** + **15** | 与 I-008 Q1 诚实计数一致 |
 
 验证门控：[03-verify.md § I-009 Accept prep](03-verify.md#i-009-accept-prep--延后矩阵全量交付--verify-pass)。
+
+## I-010 quality completion（退出清单）
+
+Initiative **I-010** 在 I-009 之上做 ORM/HQL 深度闭环 + 文档配方，**不**膨胀 Charter **98** 诚实计数。
+
+### P0 + P1 exit checklist
+
+| # | Scope 项 | 终态（诚实） |
+|---|---|---|
+| 1 | P0 SSOT/文档无陈旧「延后」与虚假 Demo gap；A-FUN-021 计数一致 | **勾选** — P-001 SSOT/docs 对齐 |
+| 2 | A-TYP-014/016/017 实体 ORM live 或诚实负向 | **勾选（known-limit 保留）** — 实体 ORM 路径已落地；本轮 live **SKIPPED_INFRA** → **勿**假晋升 covered-live |
+| 3 | A-FUN-021 HQL Session；XMLTABLE known-limit | **勾选** — HQL `xmlelement`/`xmlquery` 正例；**A-FUN-021** 仍 **known-limit-documented**（XMLTABLE） |
+| 4 | P1 A-FUN-020/019 HQL；Batch A 五族独立 HQL；tooling 配方 | **勾选** — A-FUN-020/019 保持 **covered-live**（HQL Session 加深）；Batch A（A-FUN-003/005/006/007/009）独立 HQL IT 已写，SSOT **known-limit** until live PASS；[08-recipes](08-schema-tooling-recipes.md) |
+| 5 | `verify.py` VERIFY PASS；有 DB 时全 reactor live | **P-010 门控** — 离线 VERIFY 必过；live 见 [03-verify § I-010](03-verify.md#i-010-accept-prep--ormhql-质量完善--verify-pass) |
+| 6 | GAV 7.4.5.Final；NONE；**不 Ship** | **勾选** — 本 Initiative **NOT Ship** |
+
+### I-010 residual（Accept 须诚实列出）
+
+| Residual | SSOT | 说明 |
+|---|---|---|
+| A-TYP-014 / 016 / 017 | **known-limit-documented** | 实体 ORM IT 锚点在；live **SKIPPED_INFRA** → covered-live **pending** |
+| Batch A A-FUN-003/005/006/007/009 | **known-limit-documented** | 五族独立 HQL Session IT 已写；live **SKIPPED_INFRA** → 勿假晋升 |
+| A-FUN-021 | **known-limit-documented** | XMLTABLE 单节点/集群上限；非 covered-live |
+| Ship / tag / push / Central | **OUT** | Human Gate 仅 Initiative Accept；**NOT Ship** |
+
+Charter rollup **不变**：**83/98** covered-live + **15** known-limit-documented。
+
+验证门控：[03-verify.md § I-010 Accept prep](03-verify.md#i-010-accept-prep--ormhql-质量完善--verify-pass)。
 
 ## I-006 consumer-path counts（冻结）
 

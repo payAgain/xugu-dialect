@@ -1,0 +1,7 @@
+I-010 / P-010 IT RESULT
+=======================
+offline gate (XUGU_RUN_IT unset): covered by verify.py → VERIFY PASS
+live full reactor (XUGU_RUN_IT=true): SKIPPED_INFRA
+  reason: TCP 192.168.2.239:5138 and 127.0.0.1:5138 refused (TcpTestSucceeded=False)
+  new ORM/HQL ITs (A-TYP-014/016/017 entity; A-FUN-021 HQL; Batch A HQL): not live-validated this run
+  SSOT remains known-limit-documented for those rows until live PASS
