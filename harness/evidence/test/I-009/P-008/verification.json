@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "phase_id": "P-008",
+  "initiative_id": "I-009",
+  "updated_at": "2026-07-21T11:06:00+08:00",
+  "checks": [
+    {
+      "id": "build",
+      "command": "mvn -q -DskipTests package",
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "test_offline",
+      "command": "mvn -q test (XUGU_RUN_IT unset)",
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "test_p008_focus",
+      "command": "mvn -q -pl dialect -am test -Dtest=XuguCatalogAndIndexExtensionsTest,XuguCatalogAndIndexExtensionsIT",
+      "exit_code": 0,
+      "status": "PASS",
+      "detail": "6 unit + 2 IT skipped offline"
+    }
+  ],
+  "matrix_rows": ["A-SCH-003", "A-SCH-017"],
+  "overall": "PASS"
+}

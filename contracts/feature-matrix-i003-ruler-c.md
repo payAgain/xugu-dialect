@@ -43,7 +43,7 @@
 | C-JSON-003 | JSON | AggregateSupport | `Dialect.getAggregateSupport()` | aggregate-functions + json datatype | `XuguAggregateSupport` | 可实现 | P-003 | HQL aggregation over JSON/aggregate column path exercising AggregateSupport | ✅ I-003/P-003 `XuguJsonAggregateIT` AggregateSupport path |
 | C-JSON-004 | JSON | JSON JDBC casting | `contributeTypes` JSON / JSON array JDBC types | `reference/sql/datatype/json.md` | `XuguCastingJsonJdbcType*` | 可实现 | P-003 | Entity JSON attribute round-trip persist/load via Session | ✅ I-003/P-003 JSON round-trip (`cast(? as json)`) |
 | C-JSON-005 | JSON | Broader json_* HQL set | function registry beyond value/extract | `reference/function/json-functions/**` | bounded subset in `XuguFunctionRegistrations` | 可实现 | P-004 | HQL json_unquote/json_length/json_type + baseline value/extract | ✅ I-007/P-004 `XuguJsonSubsetDeepenIT` |
-| C-JSON-006 | JSON | json_table | `supportsJsonTableFunction` etc. | — (repo-wide grep 2026-07-21: **no** `json_table` under `reference/function/json-functions/**`; contrast: `xml-functions/xmltable.md`) | sibling may flag | **文档不允许** | I-009/P-010 | — | **MUST NOT invent** JSON_TABLE SQL; `supportsJsonTableFunction=false`; negative anchor retained. Audit: I-009/P-001 RP-02 |
+| C-JSON-006 | JSON | json_table | `supportsJsonTableFunction` etc. | — (repo-wide grep 2026-07-21: **no** `json_table` under `reference/function/json-functions/**`; contrast: `xml-functions/xmltable.md`) | sibling may flag | **文档不允许** | I-009/P-010 | — | ✅ I-009/P-010 **MUST NOT invent** JSON_TABLE SQL; `supportsJsonTableFunction=false`; negative anchor retained |
 
 ---
 
@@ -79,8 +79,8 @@
 | C-GUID-001 | GUID | Select GUID string | `getSelectGUIDString()` | `reference/function/uuid-functions/**`; datatype guid | sibling override | 可实现 | P-006 | Native/UUID generator or select-guid path via Session if claimed | ✅ I-003/P-006 `select sys_guid()` IT |
 | C-LOCK-001 | Lock flags | supportsNoWait / supportsWait / supportsLockTimeouts | Dialect boolean hooks | `reference/sql/select/select.md` (WAIT/NOWAIT) | sibling true | 已有 | — | I-001/I-002 lock IT already covers FOR UPDATE WAIT/NOWAIT via LockingSupport | Ensure flags consistent; no new Phase unless audit finds mismatch |
 | C-SKIP-001 | Lock | supportsSkipLocked | Dialect flag | — (no SKIP LOCKED in grammar) | sibling may report true/false | 文档不允许 | — | — | Keep A-LCK-004; do not enable keyword |
-| C-SRV-001 | Config | Server configuration probe | optional `XuguServerConfiguration` | `reference/system-configuration-parameter/session-parameter/*.md` (30 params) | sibling class | 延后 | **I-009/P-010** | — | Read-only probe (`SHOW` / session getters); no mutating config |
-| C-SEL-001 | SPI | DialectSelector | Hibernate selector SPI | — (product SPI) | `XuguDialectSelector` | 延后 | **I-009/P-010** | — | Resolver already delivered (A-SPI-*); docs closure unless Hibernate 7.4 mandates Selector |
+| C-SRV-001 | Config | Server configuration probe | optional `XuguServerConfiguration` | `reference/system-configuration-parameter/session-parameter/*.md` (30 params) | sibling class | 可实现 | I-009/P-010 | — | ✅ I-009/P-010 read-only `SHOW` probes + gated IT |
+| C-SEL-001 | SPI | DialectSelector | Hibernate selector SPI | — (product SPI) | `XuguDialectSelector` | 可实现 | I-009/P-010 | — | ✅ I-009/P-010 Resolver + internal `XuguDialectSelector` closure (Hibernate 7.4 Resolver SPI sufficient) |
 
 ---
 
@@ -89,8 +89,8 @@
 | Status | Count (new C-* rows) | Delivery note |
 |---|---|---|
 | 可实现 | **16** | **All delivered** in P-002…P-006 (Acceptance hints ✅) |
-| 文档不允许 | **3** (C-DDL-004 ENUM, C-SKIP-001, **C-JSON-006** json_table) | Remain forbidden — ENUM returns null; no SKIP LOCKED; **no invented JSON_TABLE** (I-009/P-001 audit) |
-| 延后 | **2** (C-SRV-001, C-SEL-001) | I-009/P-010 delivery; **C-JSON-005 / C-DDL-005 closed I-007/P-004**; C-JSON-006 reclassified 文档不允许 |
+| 文档不允许 | **3** (C-DDL-004 ENUM, C-SKIP-001, **C-JSON-006** json_table) | Remain forbidden — ENUM returns null; no SKIP LOCKED; **no invented JSON_TABLE** (I-009/P-010 closed) |
+| 延后 | **0** | All Ruler C deferred rows closed I-009/P-010 |
 | 已有 | **1** (C-LOCK-001) | Covered by I-001/I-002 |
 | **Total new C-* rows** | **24** | |
 

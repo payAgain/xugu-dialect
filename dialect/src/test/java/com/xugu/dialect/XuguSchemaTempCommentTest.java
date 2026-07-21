@@ -31,10 +31,9 @@ class XuguSchemaTempCommentTest {
 	}
 
 	@Test
-	void nameQualifierIsSchemaOnly_A_SCH_002_not_003() {
+	void nameQualifierIsSchemaOnly_A_SCH_002() {
 		assertEquals( NameQualifierSupport.SCHEMA, dialect.getNameQualifierSupport() );
 		assertTrue( dialect.getNameQualifierSupport().supportsSchemas() );
-		assertFalse( dialect.getNameQualifierSupport().supportsCatalogs() );
 	}
 
 	@Test

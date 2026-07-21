@@ -61,6 +61,7 @@ import org.hibernate.type.descriptor.jdbc.spi.JdbcTypeRegistry;
 import org.hibernate.type.descriptor.sql.internal.DdlTypeImpl;
 import org.hibernate.type.descriptor.sql.spi.DdlTypeRegistry;
 
+import com.xugu.dialect.config.XuguServerConfiguration;
 import com.xugu.dialect.aggregate.XuguAggregateSupport;
 import com.xugu.dialect.exception.XuguSQLExceptionConversionDelegate;
 import com.xugu.dialect.exception.XuguViolatedConstraintNameExtractor;
@@ -203,6 +204,31 @@ import jakarta.persistence.Timeout;
 	 * for native SQL; {@link #supportsPartitionByInSchemaExport()} and
 	 * {@link #supportsEncryptByInSchemaExport()} are {@code false} (schema-tool known-limit).
 	 *
+	 * <p><b>Catalog metadata (A-SCH-003 / I-009 P-008):</b>
+	 * JDBC {@code DatabaseMetaData#getCatalog()} aligns with documented {@code current_db()}
+	 * ({@link com.xugu.dialect.metadata.XuguCatalogMetadataSupport}) on the same connection.
+	 * XuGu {@code DATABASE} is connection-scoped and not session-{@code SET}-able — Hibernate
+	 * object names remain {@code schema.table} ({@link NameQualifierSupport#SCHEMA});
+	 * {@code catalog.schema.table} is <em>known-limit-documented</em> (not emitted).
+	 *
+	 * <p><b>Advanced indexes (A-SCH-017 / I-009 P-008):</b> Functional and BITMAP index DDL
+	 * strings live in {@link com.xugu.dialect.ddl.XuguIndexDdlSupport}; Hibernate schema export
+	 * stays on basic B-tree ({@link #getCreateIndexString(boolean)} — A-SCH-016).
+	 * Spatial / LOCAL / GLOBAL partition indexes are out of scope for the P-008 subset.
+	 *
+	 * <p><b>Explicit LOCK TABLE (A-LCK-006 / I-009 P-009):</b> Native SQL helpers in
+	 * {@link com.xugu.dialect.lock.XuguLockTableSupport} — not JPA {@code LockMode} /
+	 * {@code FOR UPDATE}. Distinct from doc-forbidden SELECT {@code SKIP LOCKED} / {@code FOR SHARE}.
+	 *
+	 * <p><b>Alternate pagination (A-PAG-004/006 / I-009 P-009):</b> {@link XuguLimitHandler}
+	 * remains the Hibernate default ({@code LIMIT} / {@code LIMIT … OFFSET …}). TOP and ROWNUM
+	 * wrappers live in {@link com.xugu.dialect.pagination.XuguPaginationAlternativesSupport}
+	 * for native SQL only — doc: TOP is mutually exclusive with LIMIT.
+	 *
+	 * <p><b>Identity mode session param (A-IDN-005 / I-009 P-009):</b>
+	 * {@link com.xugu.dialect.identity.XuguIdentityModeSupport} locks {@code SET IDENTITY_MODE} /
+	 * {@code ALTER SESSION SET IDENTITY_MODE} shapes for NULL/ZERO-as-auto-increment (v12.0.6+).
+	 *
 	 * <p><b>Schema / temp / comment / constraints (A-SCH-* , I-007 P-007):</b>
  * {@code CREATE}/{@code DROP SCHEMA}; schema-qualified names
  * ({@link NameQualifierSupport#SCHEMA}); catalog create/drop via
@@ -243,6 +269,7 @@ public class XuguDialect extends Dialect {
 	public static final DatabaseVersion MINIMUM_VERSION = DatabaseVersion.make( 12, 0 );
 
 	private final UniqueDelegate uniqueDelegate = new CreateTableUniqueDelegate( this );
+	private final XuguServerConfiguration serverConfiguration;
 
 	public XuguDialect() {
 		this( MINIMUM_VERSION );
@@ -253,6 +280,7 @@ public class XuguDialect extends Dialect {
 	 */
 	public XuguDialect(DatabaseVersion version) {
 		super( version != null ? version : MINIMUM_VERSION );
+		this.serverConfiguration = null;
 		registerXuguKeywords();
 	}
 
@@ -260,8 +288,16 @@ public class XuguDialect extends Dialect {
 	 * SPI constructor: copy version from JDBC resolution info when present.
 	 */
 	public XuguDialect(DialectResolutionInfo info) {
-		this( info.makeCopyOrDefault( MINIMUM_VERSION ) );
+		super( info.makeCopyOrDefault( MINIMUM_VERSION ) );
+		this.serverConfiguration = XuguServerConfiguration.fromDialectResolutionInfo( info );
 		registerKeywords( info );
+	}
+
+	/**
+	 * Read-only session / JDBC metadata probe (C-SRV-001). {@code null} for version-only ctor.
+	 */
+	public XuguServerConfiguration getServerConfiguration() {
+		return serverConfiguration;
 	}
 
 	private void registerXuguKeywords() {
@@ -688,12 +724,21 @@ public class XuguDialect extends Dialect {
 	// -------------------------------------------------------------------------
 
 	/**
-	 * A-SCH-002: qualify with schema only. Catalog create/drop is separate (C-CAT-001);
-	 * object names stay schema-qualified, not catalog.schema.table.
+	 * A-SCH-002 / A-SCH-003: qualify with schema only. Catalog create/drop is separate
+	 * (C-CAT-001); object names stay schema-qualified, not {@code catalog.schema.table}.
+	 * JDBC catalog metadata aligns via {@link com.xugu.dialect.metadata.XuguCatalogMetadataSupport}.
 	 */
 	@Override
 	public NameQualifierSupport getNameQualifierSupport() {
 		return NameQualifierSupport.SCHEMA;
+	}
+
+	/**
+	 * A-SCH-003 known-limit: XuGu {@code DATABASE} is connection-scoped (not session-SET).
+	 * Hibernate does not emit {@code catalog.schema.table} in DDL/DML.
+	 */
+	public boolean supportsCatalogQualifierInObjectNames() {
+		return false;
 	}
 
 	/**
@@ -971,6 +1016,36 @@ public class XuguDialect extends Dialect {
 		return true;
 	}
 
+	/**
+	 * A-SCH-017 known-limit: Hibernate schema export does not emit functional/BITMAP indexes.
+	 * Documented shapes are in {@link com.xugu.dialect.ddl.XuguIndexDdlSupport} for native SQL.
+	 */
+	public boolean supportsAdvancedIndexInSchemaExport() {
+		return false;
+	}
+
+	/**
+	 * A-PAG-004 known-limit: Hibernate LimitHandler does not emit {@code TOP} — LIMIT remains default.
+	 */
+	public boolean usesTopPaginationInOrmPath() {
+		return false;
+	}
+
+	/**
+	 * A-PAG-006 known-limit: Hibernate LimitHandler does not emit ROWNUM wrappers — LIMIT preferred.
+	 */
+	public boolean usesRownumPaginationInOrmPath() {
+		return false;
+	}
+
+	/**
+	 * A-IDN-005: session {@code IDENTITY_MODE} is documented (v12.0.6+); SQL helpers in
+	 * {@link com.xugu.dialect.identity.XuguIdentityModeSupport}.
+	 */
+	public boolean supportsIdentityModeSessionParameter() {
+		return true;
+	}
+
 	// -------------------------------------------------------------------------
 	// Identifiers & keywords (A-XCUT-001/002/007)
 	// -------------------------------------------------------------------------
@@ -1042,6 +1117,15 @@ public class XuguDialect extends Dialect {
 	@Override
 	public boolean supportsWithClause() {
 		return true;
+	}
+
+	/**
+	 * XuGu docs have no {@code json_table} under {@code reference/function/json-functions/**}
+	 * (C-JSON-006 doc-forbidden). Contrast: XMLTABLE → A-FUN-021 ({@code xml-functions/xmltable.md}).
+	 * Must not invent JSON_TABLE SQL or register {@code json_table} HQL.
+	 */
+	public boolean supportsJsonTableFunction() {
+		return false;
 	}
 
 	@Override

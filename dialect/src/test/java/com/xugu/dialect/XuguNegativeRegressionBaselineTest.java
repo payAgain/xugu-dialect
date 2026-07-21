@@ -4,7 +4,6 @@ import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.MySQLDialect;
 import org.hibernate.dialect.OracleDialect;
 import org.hibernate.dialect.temptable.StandardTemporaryTableExporter;
-import org.hibernate.engine.jdbc.env.spi.NameQualifierSupport;
 import org.hibernate.query.spi.Limit;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -119,13 +118,6 @@ class XuguNegativeRegressionBaselineTest {
 	}
 
 	@Test
-	void catalogsNotSupported_negativeOnly_A_SCH_003() {
-		assertEquals( NameQualifierSupport.SCHEMA, dialect.getNameQualifierSupport() );
-		assertFalse( dialect.getNameQualifierSupport().supportsCatalogs(),
-				"catalog qualifier deferred (A-SCH-003)" );
-	}
-
-	@Test
 	void p003NegativeOnlyChecklist_coversDocForbiddenBundle() {
 		ansiFetchFirstNotEmitted_A_PAG_005();
 		skipLockedNotSupported_A_LCK_004_C_SKIP_001();
@@ -141,50 +133,18 @@ class XuguNegativeRegressionBaselineTest {
 	// 延后 rows — @Disabled SSOT anchors (no positive SQL invention)
 	// -------------------------------------------------------------------------
 
-	@Disabled( "SSOT " + SSOT + " — A-PAG-004 TOP syntax deferred; LIMIT preferred" )
-	@Test
-	void deferred_A_PAG_004_top() {
-	}
-
-	@Disabled( "SSOT " + SSOT + " — A-PAG-006 ROWNUM pagination deferred" )
-	@Test
-	void deferred_A_PAG_006_rownum() {
-	}
-
-	@Disabled( "SSOT " + SSOT + " — A-LCK-006 LOCK TABLE deferred" )
-	@Test
-	void deferred_A_LCK_006_lockTable() {
-	}
-
-	@Disabled( "SSOT " + SSOT + " — A-IDN-005 identity_mode session params deferred" )
-	@Test
-	void deferred_A_IDN_005_identityMode() {
-	}
-
-	@Disabled( "SSOT " + SSOT + " — A-SCH-017 advanced index types deferred" )
-	@Test
-	void deferred_A_SCH_017_advancedIndexes() {
-	}
-
 	@Disabled( "SSOT " + SSOT + " — A-XCUT-012 Maven Central publish deferred to Ship" )
 	@Test
 	void deferred_A_XCUT_012_mavenCentralPublish() {
 	}
 
-	@Disabled( "SSOT " + SSOT + " — C-JSON-006 json_table deferred pending doc confirm" )
+	@Disabled( "SSOT " + SSOT + " — C-JSON-006 doc-forbidden; active negative: XuguRulerCClosureTest + XuguFunctionRegistryTest" )
 	@Test
 	void deferred_C_JSON_006_jsonTable() {
 	}
 
-	@Disabled( "SSOT " + SSOT + " — C-SRV-001 server configuration probe deferred" )
-	@Test
-	void deferred_C_SRV_001_serverConfiguration() {
-	}
-
-	@Disabled( "SSOT " + SSOT + " — C-SEL-001 DialectSelector deferred; A-SPI-* resolver delivered" )
-	@Test
-	void deferred_C_SEL_001_dialectSelector() {
-	}
+	// C-SRV-001 / C-SEL-001 promoted I-009/P-010 — see XuguRulerCClosureTest, XuguServerConfigurationIT,
+	// XuguDialectSelectorTest
 
 	private static boolean declaresReadUncommittedSupport(Class<?> dialectClass) {
 		return Stream.concat(

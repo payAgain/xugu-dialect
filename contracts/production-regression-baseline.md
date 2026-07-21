@@ -187,6 +187,8 @@ Columns: `matrix_id | status | entry_class#method | gate | gap_action`
 | C-CAT-001 | covered-live | `XuguTypeDdlDetailsTest#catalogCreateDrop_C_CAT_001`; `XuguTypeDdlDetailsIT#typeDdlDetailsOnLiveDb` | IT | N/A |
 | C-GUID-001 | covered-live | `XuguTypeDdlDetailsTest#selectGuidString_C_GUID_001`; `XuguTypeDdlDetailsIT#typeDdlDetailsOnLiveDb` | IT | N/A |
 | C-JSON-005 | covered-live | `XuguFunctionRegistryTest#jsonSubsetUsesStandardJsonValueNotMysqlDump`; `XuguJsonSubsetDeepenIT#jsonSubsetDeepen_Hql_C_JSON_005` | IT | N/A |
+| C-SRV-001 | covered-live | `XuguRulerCClosureTest#serverConfigurationShowQueriesLocked_C_SRV_001`; `XuguRulerCClosureTest#serverConfigurationUrlFallback_C_SRV_001`; `XuguServerConfigurationIT#sessionParametersReadOnlyProbe_C_SRV_001` | IT | **N/A** (I-009/P-010 closed) |
+| C-SEL-001 | known-limit-documented | `XuguDialectSelectorTest#defaultSelectorReturnsSpiDialect_C_SEL_001`; `XuguDialectSelectorTest#resolverUsesDefaultSelector_C_SEL_001`; `XuguDialectResolverTest` (A-SPI-*); `XuguDialectServicesResourceTest` | unit | **N/A** (I-009/P-010 closed) |
 | C-DDL-005 | covered-live | `XuguArrayTypeTest#arrayTypeHooksWired_A_TYP_015_C_DDL_005`; `XuguArrayTypeIT#arrayColumnRoundTrip_A_TYP_015_C_DDL_005` | IT | N/A |
 
 ### I-009 / P-003 — promoted from 延后 (Definition A)
@@ -255,7 +257,7 @@ Matrix status **文档不允许** or **延后**; baseline records explicit non-s
 | A-XCUT-010 | negative-only | `XuguNegativeRegressionBaselineTest#charterNoMySqlOracleInheritance_A_XCUT_010` | unit | P-003 |
 | A-XCUT-011 | negative-only | `XuguNegativeRegressionBaselineTest#charterNoSiblingDialectPort_A_XCUT_011` | unit | P-003 |
 
-### Definition A — 延后 (15)
+### Definition A — 延后 (11)
 
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
@@ -263,10 +265,10 @@ Matrix status **文档不允许** or **延后**; baseline records explicit non-s
 | A-TYP-016 | known-limit-documented | `XuguXmlTypeTest#xmlTypeHooksWired_A_TYP_016`; `XuguXmlTypeTest#documentedXmlConstantsLocked_A_TYP_016`; `XuguXmlTypeAndFunctionsIT#xmlTypeNativeRoundTrip_A_TYP_016`; `XuguDialectTest#columnTypesMatchXuguDocs` (SQLXML) | IT | **N/A** (I-009/P-003 closed) |
 | A-TYP-017 | known-limit-documented | `XuguGeometricTypeTest#pointTypeHooksWired_A_TYP_017`; `XuguGeometricTypeTest#allDocumentedKindsLocked_A_TYP_017`; `XuguGeometricTypeAndFunctionsIT#geometricTypesNativeRoundTrip_A_TYP_017`; `XuguDialectTest#columnTypesMatchXuguDocs` (POINT/GEOMETRY) | IT | **N/A** (I-009/P-004 closed) |
 | A-TYP-018 | known-limit-documented | `XuguUdtTypeTest#documentedKindsLocked_A_TYP_018`; `XuguUdtTypeTest#createTypeSqlMatchesUdtDoc_A_TYP_018`; `XuguUdtTypeTest#dialectDoesNotClaimOrmUdtEntityMapping_A_TYP_018`; `XuguUdtTypeIT#udtNativeRoundTrip_A_TYP_018` | IT | **N/A** (I-009/P-005 closed) |
-| A-PAG-004 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_PAG_004_top` (@Disabled) | none | **I-009/P-009** |
-| A-PAG-006 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_PAG_006_rownum` (@Disabled) | none | **I-009/P-009** |
-| A-LCK-006 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_LCK_006_lockTable` (@Disabled) | none | **I-009/P-009** |
-| A-IDN-005 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_IDN_005_identityMode` (@Disabled) | none | **I-009/P-009** |
+| A-PAG-004 | known-limit-documented | `XuguLockPaginationIdentityExtensionsTest#topSqlMatchesResultsetRestrictedDoc_A_PAG_004`; `XuguLockPaginationIdentityExtensionsTest#limitHandlerRemainsDefault_A_PAG_004_006`; `XuguLockPaginationIdentityIT#topSyntaxNativeRoundTrip_A_PAG_004` | IT | **N/A** (I-009/P-009 closed) |
+| A-PAG-006 | known-limit-documented | `XuguLockPaginationIdentityExtensionsTest#rownumSqlMatchesSelectDoc_A_PAG_006`; `XuguLockPaginationIdentityExtensionsTest#limitHandlerRemainsDefault_A_PAG_004_006`; `XuguLockPaginationIdentityIT#rownumPaginationNativeRoundTrip_A_PAG_006` | IT | **N/A** (I-009/P-009 closed) |
+| A-LCK-006 | covered-live | `XuguLockPaginationIdentityExtensionsTest#lockTableSqlMatchesLockDoc_A_LCK_006`; `XuguLockPaginationIdentityIT#lockTableExclusiveNativeRoundTrip_A_LCK_006` | IT | **N/A** (I-009/P-009 closed) |
+| A-IDN-005 | covered-live | `XuguLockPaginationIdentityExtensionsTest#identityModeSqlMatchesIdentityModeDoc_A_IDN_005`; `XuguLockPaginationIdentityIT#identityModeNullAsAutoIncrement_A_IDN_005` | IT | **N/A** (I-009/P-009 closed) |
 | A-FUN-020 | covered-live | `XuguFunctionRegistryTest#geometricSubsetRegistered_A_FUN_020`; `XuguGeometricTypeAndFunctionsIT#geometricFunctionsNativeSubset_A_FUN_020` | IT | **N/A** (I-009/P-004 closed) |
 | A-FUN-021 | known-limit-documented | `XuguFunctionRegistryTest#xmlSubsetRegistered_A_FUN_021`; `XuguXmlTypeAndFunctionsIT#xmlFunctionsNativeSubset_A_FUN_021` | IT (live SKIPPED_INFRA) | **N/A** (I-009/P-003 closed) |
 | A-SCH-003 | known-limit-documented | `XuguCatalogAndIndexExtensionsTest#catalogMetadataQueryLocked_A_SCH_003`; `XuguCatalogAndIndexExtensionsTest#nameQualifierRemainsSchemaOnly_A_SCH_003`; `XuguCatalogAndIndexExtensionsTest#dialectDoesNotClaimCatalogInObjectNames_A_SCH_003`; `XuguCatalogAndIndexExtensionsIT#jdbcCatalogAlignsWithCurrentDb_A_SCH_003` | IT | **N/A** (I-009/P-008 closed) |
@@ -279,9 +281,7 @@ Matrix status **文档不允许** or **延后**; baseline records explicit non-s
 |---|---|---|---|---|
 | C-DDL-004 | negative-only | `XuguNegativeRegressionBaselineTest#enumDdlNotEmitted_C_DDL_004`; `XuguTypeDdlDetailsTest#enumTypeDeclarationIsNull_C_DDL_004` | unit | P-003 |
 | C-SKIP-001 | negative-only | `XuguNegativeRegressionBaselineTest#skipLockedNotSupported_A_LCK_004_C_SKIP_001`; `XuguPaginationLockTest#skipLockedNotSupported_A_LCK_004`; `XuguLockIT#forUpdateExecutesAndSkipLockedUnsupported` | IT | P-003 |
-| C-JSON-006 | negative-only (**doc-forbidden**) | `XuguNegativeRegressionBaselineTest#deferred_C_JSON_006_jsonTable` (@Disabled) | none | **I-009/P-010** |
-| C-SRV-001 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_C_SRV_001_serverConfiguration` (@Disabled) | none | **I-009/P-010** |
-| C-SEL-001 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_C_SEL_001_dialectSelector` (@Disabled) | none | **I-009/P-010** |
+| C-JSON-006 | negative-only (**doc-forbidden**) | `XuguRulerCClosureTest#jsonTableNotSupported_C_JSON_006`; `XuguFunctionRegistryTest#jsonSubsetUsesStandardJsonValueNotMysqlDump` (json_table null); `XuguNegativeRegressionBaselineTest#deferred_C_JSON_006_jsonTable` (@Disabled anchor) | unit | **N/A** (I-009/P-010 closed) |
 
 ### Ruler C — 已有 (audit anchor, outside 94 可实现 count)
 
@@ -438,7 +438,7 @@ Source: [`harness/evidence/researcher/I-005/P-001/GAP-SUMMARY.md`](../harness/ev
 
 ## Summary counts
 
-> **I-008/P-003+P-004 rollup** (2026-07-20): Batch A + A′ closed in P-003; Batch B (Ruler C tag sweep + A-XCUT-009 demo-live) closed in P-004. SSOT `covered-live` tag = **83**; honest live-capable = **83/98** (+ **15** known-limit-documented).
+> **I-009/P-011 final rollup** (2026-07-21): P-002…P-010 closed all **20** deferred inventory rows — each **covered-live** or **known-limit-documented**; **C-JSON-006** remains **doc-forbidden negative-only** (no invented `json_table`). Charter **98** 可实现 honest rollup unchanged from I-008: **83/98 covered-live** + **15 known-limit-documented**; **gap = 0**. Deferred delivery is **outside** the frozen 98-count (matrix **延后** rows promoted to honest SSOT status without inflating charter covered-live).
 
 | Bucket | Count |
 |---|---:|
@@ -451,7 +451,9 @@ Source: [`harness/evidence/researcher/I-005/P-001/GAP-SUMMARY.md`](../harness/ev
 | thin live IT required (P-003 Batch A) | **0** (closed) |
 | SSOT tag sweep only (P-004 Batch B) | **0** (closed) |
 | gap (可实现) | **0** |
-| negative-only (文档不允许 + 延后 + C defer) | 30 |
+| **I-009 deferred inventory (P-001)** | **20/20 closed** (7 covered-live · 12 known-limit · 1 doc-forbidden negative) |
+| Open matrix **延后** (product delivery) | **0** (`A-XCUT-012` Ship defer anchor only) |
+| negative-only (文档不允许 + explicit defer anchors) | **11** (7 Def A + 3 Ruler C incl. C-JSON-006 + A-XCUT-012) |
 | I-007 closed covered-live (no further promotion) | 5 |
 | Ruler C 已有 (C-LOCK-001) | 1 |
 | **Total baseline rows** | **129** |
@@ -506,7 +508,28 @@ Source: [`harness/evidence/researcher/I-005/P-001/GAP-SUMMARY.md`](../harness/ev
 | **matrix_id** | C-JSON-006 |
 | **Audit** | Zero `json_table` under `E:\Work\docs\content/reference/function/json-functions/**` (2026-07-21) |
 | **Matrix SSOT** | Reclassified **文档不允许** in `feature-matrix-i003-ruler-c.md` |
-| **P-010 outcome** | Negative-only — **MUST NOT** invent JSON_TABLE SQL |
+| **P-010 outcome** | Negative-only — **MUST NOT** invent JSON_TABLE SQL; `supportsJsonTableFunction=false`; active unit tests + @Disabled SSOT anchor |
+
+### C-SRV-001 Server configuration (I-009/P-010 closed)
+
+| Field | Value |
+|---|---|
+| **matrix_id** | C-SRV-001 |
+| **status** | **covered-live** |
+| **Doc citation** | `reference/system-configuration-parameter/session-parameter/*.md` (30 params) |
+| **Dialect surface** | `XuguServerConfiguration` read-only `SHOW CHAR_SET` / `SHOW COMPATIBLE_MODE` / `SHOW OPTIMIZER_MODE`; `XuguDialect#getServerConfiguration()` |
+| **Live IT** | `XuguServerConfigurationIT#sessionParametersReadOnlyProbe_C_SRV_001` |
+| **gap_action** | **N/A** — closed I-009/P-010 |
+
+### C-SEL-001 DialectSelector closure (I-009/P-010 closed)
+
+| Field | Value |
+|---|---|
+| **matrix_id** | C-SEL-001 |
+| **status** | **known-limit-documented** |
+| **SPI note** | Hibernate 7.4 autodetect via `DialectResolver` only; `XuguDialectSelector` is internal extension (not duplicate Hibernate SPI) |
+| **Unit tests** | `XuguDialectSelectorTest`; existing `XuguDialectResolver` + `META-INF/services` |
+| **gap_action** | **N/A** — closed I-009/P-010 |
 | **Contrast** | XMLTABLE → A-FUN-021 (`xml-functions/xmltable.md`) |
 
 ### A-DDL-007 IF NOT EXISTS (I-009/P-007 closed)
@@ -543,6 +566,52 @@ Source: [`harness/evidence/researcher/I-005/P-001/GAP-SUMMARY.md`](../harness/ev
 | **Known-limit reason** | Encryptor creation requires SYSSSO; schema tooling does not emit encrypt clauses |
 | **Live IT** | `XuguTableDdlExtensionsIT#encryptByNativeWhenEncryptorAvailable_A_DDL_009` (skips when no encryptor visible) |
 | **gap_action** | **N/A** — closed I-009/P-007 |
+
+### A-LCK-006 LOCK TABLE (I-009/P-009 closed)
+
+| Field | Value |
+|---|---|
+| **matrix_id** | A-LCK-006 |
+| **status** | **covered-live** |
+| **Doc citation** | `reference/object/table/lock.md` (`LOCK TABLE … IN … MODE`, NOWAIT/WAIT ms) |
+| **Dialect surface** | `XuguLockTableSupport` native SQL helpers — not JPA `LockMode` / `FOR UPDATE` |
+| **Live IT** | `XuguLockPaginationIdentityIT#lockTableExclusiveNativeRoundTrip_A_LCK_006` |
+| **gap_action** | **N/A** — closed I-009/P-009 |
+
+### A-PAG-004 TOP (I-009/P-009 closed)
+
+| Field | Value |
+|---|---|
+| **matrix_id** | A-PAG-004 |
+| **status** | **known-limit-documented** |
+| **Doc citation** | `reference/sql/select/resultset-restricted.md` (#top); `select.md` (`opt_top`) |
+| **Dialect surface** | `XuguPaginationAlternativesSupport#selectTopSql`; `usesTopPaginationInOrmPath()=false` — LimitHandler unchanged |
+| **Known-limit reason** | TOP ⊥ LIMIT; Hibernate ORM path stays `LIMIT` |
+| **Live IT** | `XuguLockPaginationIdentityIT#topSyntaxNativeRoundTrip_A_PAG_004` |
+| **gap_action** | **N/A** — closed I-009/P-009 |
+
+### A-PAG-006 ROWNUM (I-009/P-009 closed)
+
+| Field | Value |
+|---|---|
+| **matrix_id** | A-PAG-006 |
+| **status** | **known-limit-documented** |
+| **Doc citation** | `reference/sql/select/select.md` (§8.3 ROWNUM) |
+| **Dialect surface** | `XuguPaginationAlternativesSupport` ROWNUM wrappers; `usesRownumPaginationInOrmPath()=false` |
+| **Known-limit reason** | LIMIT preferred for Hibernate pagination; ROWNUM is native SQL alternate |
+| **Live IT** | `XuguLockPaginationIdentityIT#rownumPaginationNativeRoundTrip_A_PAG_006` |
+| **gap_action** | **N/A** — closed I-009/P-009 |
+
+### A-IDN-005 IDENTITY_MODE (I-009/P-009 closed)
+
+| Field | Value |
+|---|---|
+| **matrix_id** | A-IDN-005 |
+| **status** | **covered-live** |
+| **Doc citation** | `reference/system-configuration-parameter/session-parameter/identity_mode.md`; `def_identity_mode.md` |
+| **Dialect surface** | `XuguIdentityModeSupport` — `SET` / `ALTER SESSION SET` / `SHOW IDENTITY_MODE` |
+| **Live IT** | `XuguLockPaginationIdentityIT#identityModeNullAsAutoIncrement_A_IDN_005` (NULL/ZERO modes v12.0.6+) |
+| **gap_action** | **N/A** — closed I-009/P-009 |
 
 ### A-TYP-016 XML known-limit (I-009/P-003)
 
