@@ -31,6 +31,7 @@
 5. **排障** — LIMIT/FOR UPDATE、E19132 OFFSET、missing sequence、BINARY、SPI、连库失败、I-003 JSON/bulk/ENUM → [05-troubleshooting.md](05-troubleshooting.md)
 6. **悲观锁集成** — 无 SKIP LOCKED / FOR SHARE；`PESSIMISTIC_READ`→`FOR UPDATE` → [07-lock-integration.md](07-lock-integration.md)
 7. **消费者路径（I-006）** — Boot 基线 A/B/C′、离线与 gated live → [06-consumer-path.md](06-consumer-path.md)
+8. **Schema tooling 配方** — PARTITION / ENCRYPT / 高级索引 / UDT（Flyway + Support；hbm2ddl never emits）→ [08-schema-tooling-recipes.md](08-schema-tooling-recipes.md)
 
 ## Index
 
@@ -43,6 +44,7 @@
 | [05-troubleshooting.md](05-troubleshooting.md) | 常见失败 |
 | [06-consumer-path.md](06-consumer-path.md) | I-006 Boot 消费者路径基线（A/B/C′） |
 | [07-lock-integration.md](07-lock-integration.md) | 悲观锁集成（SKIP LOCKED / FOR SHARE / PESSIMISTIC_READ） |
+| [08-schema-tooling-recipes.md](08-schema-tooling-recipes.md) | PARTITION / ENCRYPT / 高级索引 / UDT 配方（I-010/P-009） |
 
 ## Prerequisites reminder
 

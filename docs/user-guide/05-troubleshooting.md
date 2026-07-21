@@ -1,6 +1,6 @@
 # 05 — Troubleshooting / 故障排查
 
-← [04-feature-matrix.md](04-feature-matrix.md) · [Index](README.md) · Next: [06-consumer-path.md](06-consumer-path.md)
+← [04-feature-matrix.md](04-feature-matrix.md) · [Index](README.md) · Next: [06-consumer-path.md](06-consumer-path.md) · Recipes: [08-schema-tooling-recipes.md](08-schema-tooling-recipes.md)
 
 ## 1. LIMIT vs FOR UPDATE 顺序错误
 
@@ -139,24 +139,26 @@ hibernate.query.json_functions_enabled=true
 
 ## 13. ENCRYPT BY / PARTITION / catalog 工具边界
 
-**ENCRYPT BY（A-DDL-009）：** 建加密器需 SYSSSO / `ACL_SSO`；无可见 encryptor 或 `sys_encryptors` 权限不足（如 E18012）时，方言 **不** 在 schema export 中声称 ENCRYPT（**known-limit-documented**）。门控 IT 应 **skip**，不应把 assumption 包成失败。应用侧可经 **native SQL** 使用文档允许的 `ENCRYPT BY` 子句；勿假设 `hbm2ddl` 自动导出加密列。
+**完整配方（Flyway + Support 拼装）：** [08-schema-tooling-recipes.md](08-schema-tooling-recipes.md) — **hbm2ddl / SchemaExport never emits** PARTITION / ENCRYPT / functional·BITMAP；**不强制**改 Exporter。
 
-**PARTITION BY（A-DDL-008）：** 文档允许 `PARTITION BY` LIST 等；方言提供锁定 SQL 辅助与 native LIST IT。**schema export 不声称** 分区表 DDL（known-limit）。生产分区表请用迁移脚本 / native DDL，勿依赖 Hibernate 自动建分区。
+**ENCRYPT BY（A-DDL-009）：** 方言 **SchemaExport 不 emit**（`supportsEncryptByInSchemaExport()=false`，**known-limit-documented**）。另：**环境**层需已有 encryptor（`CREATE ENCRYPTOR` → SYSSSO / `ACL_SSO`）；不可见或 E18012 时门控 IT **honest skip** — 与「方言缺 helper」分开看。应用侧经 **Flyway / native**（`XuguTableDdlSupport`）使用文档允许的 `ENCRYPT BY`；勿假设 `hbm2ddl` 自动导出。
+
+**PARTITION BY（A-DDL-008）：** LIST/RANGE/HASH 形状由 `XuguTableDdlSupport` 锁定；native LIST IT 存在。**schema export 不声称** 分区表（`supportsPartitionByInSchemaExport()=false`）。生产分区表请用迁移 / native，勿依赖 Hibernate 自动建分区。
 
 **Catalog 限定（A-SCH-003）：** JDBC 可对齐 `current_db()`；对象名渲染保持 **`schema.table`**（DATABASE 非会话 SET）。勿期望 Hibernate 发出 `catalog.schema.table` 三层限定作为默认对象名。
 
-**高级索引（A-SCH-017）：** functional / BITMAP 等走 native DDL 辅助；schema export 仍以 B-tree（A-SCH-016）为主 — 勿把高级索引当作 export 覆盖面。
+**高级索引（A-SCH-017）：** functional / BITMAP 走 `XuguIndexDdlSupport` + Flyway/native；schema export 仍以 B-tree（A-SCH-016）为主 — 勿把高级索引当作 export 覆盖面。
 
 ## 14. INTERVAL / XML 列 / 几何 / UDT 深度类型边界
 
-| 能力 | 矩阵 | 基线状态 | 集成边界 |
+| 能力 | 矩阵 | 基线状态 | 集成边界（I-010 P-002…P-004） |
 |---|---|---|---|
-| **INTERVAL** | A-TYP-014 | **known-limit-documented** | 13 子类型 DDL 字符串 + native 往返 IT；Hibernate 7.4 仅暴露 DURATION / INTERVAL_SECOND；输出受 `DEF_INTERVAL_STYLE` 影响。**勿**声称完整 `@JdbcTypeCode` ORM 实体往返。 |
-| **XML 列** | A-TYP-016 | **known-limit-documented** | `SqlTypes.SQLXML` → `xml` DDL；native SQL 字符串往返。**勿**声称已验证 JDBC `java.sql.SQLXML` ORM 实体路径。 |
-| **几何 / 空间** | A-TYP-017 / A-FUN-020 | 类型 **known-limit**；函数 **covered-live** | 简单 2D（非 PostGIS）；POINT 等 native IT + 几何函数注册子集。复杂空间索引 / 地理坐标系超出声明面。 |
-| **UDT** | A-TYP-018 | **known-limit-documented** | CREATE TYPE / constructor / DROP TYPE 的 native 路径；**不**声称 ORM 实体列映射 UDT。 |
+| **INTERVAL** | A-TYP-014 | **known-limit-documented**（实体 ORM 路径已落地；**covered-live pending** live IT） | Hibernate 暴露 DURATION / INTERVAL_SECOND → `XuguIntervalJdbcType` 字符串绑定；实体 IT `intervalEntityOrmRoundTrip_A_TYP_014`。其余 11 虚谷子类型仍 tooling/native；输出受 `DEF_INTERVAL_STYLE` 影响。**勿**在 live 未 PASS 前声称 covered-live。 |
+| **XML 列** | A-TYP-016 | **known-limit-documented**（实体 ORM 路径已落地；**covered-live pending** live IT） | 推荐 `String` + `@JdbcTypeCode(SqlTypes.SQLXML)`（`XuguXmlJdbcType`）；实体 IT `xmlEntityOrmRoundTrip_A_TYP_016`。**勿**映射 `java.sql.SQLXML` / 依赖默认 `XmlJdbcType`。native 往返仍保留。 |
+| **几何 / 空间** | A-TYP-017 / A-FUN-020 | 类型 **known-limit**（POINT 实体 ORM 已落地；**covered-live pending**）；函数 **covered-live**（含 HQL Session I-010/P-006） | 推荐 `String` + `@JdbcTypeCode(POINT\|GEOMETRY)`（`XuguPointJdbcType`）；实体 IT `pointEntityOrmRoundTrip_A_TYP_017`。LINE/LSEG/BOX/PATH/POLYGON/CIRCLE 仍 native/tooling。简单 2D（非 PostGIS）。 |
+| **UDT** | A-TYP-018 | **known-limit-documented** | CREATE TYPE / constructor / DROP TYPE 的 native / Flyway 路径（见 [08-recipes](08-schema-tooling-recipes.md#recipe-d--udt-create-typea-typ-018交叉)）；**不**声称 ORM 实体列映射 UDT。 |
 
-排障提示：若实体映射失败，先对照 baseline call-out 与门控 IT（`XuguIntervalTypeIT` / `XuguXmlTypeAndFunctionsIT` / `XuguGeometricTypeAndFunctionsIT` / `XuguUdtTypeIT`），确认是否在 known-limit 范围内。
+排障提示：对照 baseline call-out 与门控 IT（`XuguIntervalTypeIT` / `XuguXmlTypeAndFunctionsIT` / `XuguGeometricTypeAndFunctionsIT` / `XuguUdtTypeIT`）。live `SKIPPED_INFRA` 时保持 known-limit，勿假晋升 covered-live。
 
 ## 15. XML 函数 / XMLTABLE（A-FUN-021）
 

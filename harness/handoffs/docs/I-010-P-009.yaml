@@ -1,0 +1,54 @@
+schema_version: 1
+role: docs
+phase_id: P-009
+build_id: B-001
+initiative_id: I-010
+invocation_id: docs-i010-p009-20260721
+step_id: RP-01
+status: passed
+required: true
+completed_at: "2026-07-21T15:55:00+08:00"
+purpose: Document PARTITION/ENCRYPT/advanced-index recipes (Flyway/native Support vs hbm2ddl never emits); refresh A-TYP-014/016/017 wording
+
+inputs:
+  - harness/tasks/P-009.md
+  - agents/docs.md
+  - contracts/feature-matrix-definition-a.md
+  - contracts/production-regression-baseline.md
+  - harness/evidence/implementer/I-010/P-002/ACCEPTANCE.md
+  - harness/evidence/implementer/I-010/P-003/ACCEPTANCE.md
+  - harness/evidence/implementer/I-010/P-004/ACCEPTANCE.md
+  - dialect/src/main/java/com/xugu/dialect/ddl/XuguTableDdlSupport.java
+  - dialect/src/main/java/com/xugu/dialect/ddl/XuguIndexDdlSupport.java
+  - dialect/src/main/java/com/xugu/dialect/type/XuguUdtTypeSupport.java
+
+outputs:
+  - docs/user-guide/08-schema-tooling-recipes.md
+  - docs/user-guide/README.md
+  - docs/user-guide/04-feature-matrix.md
+  - docs/user-guide/05-troubleshooting.md
+  - harness/evidence/docs/I-010/P-009/ACCEPTANCE.md
+  - harness/handoffs/docs/I-010-P-009.yaml
+
+matrix_ids:
+  - A-DDL-008
+  - A-DDL-009
+  - A-SCH-017
+  - A-TYP-018
+  - A-TYP-014
+  - A-TYP-016
+  - A-TYP-017
+
+observed_flows:
+  - schema-tooling-recipes
+
+forbidden_reminder:
+  - no E:\\Work\\docs\\content writes
+  - no dialect SchemaExport Java changes
+  - no Ship / push / tag
+  - no fake covered-live for A-TYP-014/016/017
+
+next_step: reviewer RP-02 (no forced SchemaExport change; env ENCRYPT separate from dialect known-limit)
+blocker: null
+accept_authorized: false
+ship: false

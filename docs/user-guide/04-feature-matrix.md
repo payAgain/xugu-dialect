@@ -51,8 +51,11 @@
 | A-SEQ-001 | 可实现 | `hbm2ddl validate` 经 `all_sequences` 读取序列元数据（I-002/P-002；见排障 §3） |
 | A-LCK-004 SKIP LOCKED | 文档不允许 | `supportsSkipLocked=false`；不会发出该关键字 — 专节 [07-lock-integration.md](07-lock-integration.md) |
 | A-LCK-005 FOR SHARE / PESSIMISTIC_READ | 文档不允许 | 无 `FOR SHARE`；`PESSIMISTIC_READ`→排他 **`FOR UPDATE`** — [07-lock-integration.md](07-lock-integration.md) |
-| A-TYP-014 INTERVAL | **known-limit-documented**（I-009/P-002） | 13 子类型 + native SQL IT；非完整 ORM `@JdbcTypeCode` 往返 |
-| A-TYP-016/017/018 XML/几何/UDT | **known-limit-documented**（I-009/P-003…P-005） | native SQL 诚实路径；见 baseline SSOT call-outs |
+| A-TYP-014 INTERVAL | **known-limit-documented**（I-010/P-002 实体 ORM；live pending） | `XuguIntervalJdbcType` + 实体 IT（DURATION/INTERVAL_SECOND）；11 子类型仍 tooling/native — **勿**假 covered-live |
+| A-TYP-016 XML | **known-limit-documented**（I-010/P-003 实体 ORM；live pending） | 推荐 `String`+`@JdbcTypeCode(SQLXML)`；**勿**用 `java.sql.SQLXML` |
+| A-TYP-017 Geometric | **known-limit-documented**（I-010/P-004 POINT 实体 ORM；live pending） | 推荐 `String`+`@JdbcTypeCode(POINT\|GEOMETRY)`；非 POINT 子类型 native/tooling |
+| A-TYP-018 UDT | **known-limit-documented**（I-009/P-005） | native/`CREATE TYPE` 配方见 [08-schema-tooling-recipes.md](08-schema-tooling-recipes.md)；**无** ORM 实体列映射 |
+| A-DDL-008/009 · A-SCH-017 | **known-limit-documented** | SchemaExport **never emits** — Flyway/Support 配方 [08-schema-tooling-recipes.md](08-schema-tooling-recipes.md) |
 | A-FUN-021 XML functions | **known-limit-documented**（I-009/P-003；HQL Session I-010/P-005） | HQL `Session` 正例 `xmlelement`/`xmlquery`；XMLTABLE **单节点** / 空结果 assumption skip — **非** covered-live |
 | C-EXC-* / C-JSON-001…004 / C-WIN-* / C-CTE-* / C-BULK-001/003 / C-DDL-001…003 / C-CAT-001 / C-GUID-001 | 可实现（I-003） | 见 ruler-C 矩阵 Acceptance hint（✅ + IT 类名） |
 | C-BULK-002 bulk insert | **covered-live**（I-007/P-002） | 门控真库 IT PASS — 见 [05-troubleshooting.md §10](05-troubleshooting.md#10-bulk-insertjoined--identity已知限制) |
