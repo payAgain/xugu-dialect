@@ -112,13 +112,13 @@ Columns: `matrix_id | status | entry_class#method | gate | gap_action`
 |---|---|---|---|---|
 | A-FUN-001 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
 | A-FUN-002 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
-| A-FUN-003 | known-limit-documented | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered` | unit | N/A |
+| A-FUN-003 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguBatchAFunctionFamiliesIT#lengthFamilyHqlSession_A_FUN_003` | IT | **N/A** (I-010/P-008 independent HQL; live may SKIPPED_INFRA) |
 | A-FUN-004 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
-| A-FUN-005 | known-limit-documented | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered` | unit | N/A |
-| A-FUN-006 | known-limit-documented | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered` | unit | N/A |
-| A-FUN-007 | known-limit-documented | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered` | unit | N/A |
+| A-FUN-005 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguBatchAFunctionFamiliesIT#trimFamilyHqlSession_A_FUN_005` | IT | **N/A** (I-010/P-008 independent HQL; live may SKIPPED_INFRA) |
+| A-FUN-006 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguBatchAFunctionFamiliesIT#replaceLocateHqlSession_A_FUN_006` | IT | **N/A** (I-010/P-008 independent HQL; live may SKIPPED_INFRA) |
+| A-FUN-007 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguBatchAFunctionFamiliesIT#coalesceNvlHqlSession_A_FUN_007` | IT | **N/A** (I-010/P-008 independent HQL; live may SKIPPED_INFRA) |
 | A-FUN-008 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` (abs) | IT | N/A |
-| A-FUN-009 | known-limit-documented | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered` | unit | N/A |
+| A-FUN-009 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguBatchAFunctionFamiliesIT#roundTruncHqlSession_A_FUN_009` | IT | **N/A** (I-010/P-008 independent HQL; live may SKIPPED_INFRA) |
 | A-FUN-010 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
 | A-FUN-011 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguFunctionRegistryIT#functionFamilies_HqlAndNative_A_FUN` | IT | N/A |
 | A-FUN-012 | covered-live | `XuguFunctionRegistryTest#coreAnsiFunctionsRegistered`; `XuguTypeDdlDetailsIT#typeDdlDetailsOnLiveDb` (to_char path) | IT | N/A |
@@ -248,6 +248,18 @@ Columns: `matrix_id | status | entry_class#method | gate | gap_action`
 |---|---|---|---|---|
 | A-FUN-019 | covered-live | `XuguRegexpAndBitFunctionsIT#regexpFunctionsHqlSession_A_FUN_019` (`regexp_like`/`regexp_replace`/`regexp_substr` via `Session.createQuery`); native subset retained; registry unit retained; no `regexp_instr` | IT | **Strengthen HQL anchors; do not regress covered-live** — live may SKIPPED_INFRA |
 
+### I-010 / P-008 — Batch A A-FUN-003/005/006/007/009 independent HQL Session
+
+Ends thin adjacent-live (was registry unit + A-FUN-001/004/010 IT bundle). Each family has its own gated HQL `Session.createQuery` method on `XuguBatchAFunctionFamiliesIT`. Status promoted to **covered-live** with honesty note: live proof may be **SKIPPED_INFRA** until DB is up — code path is present; re-run `XUGU_RUN_IT=true` to confirm.
+
+| matrix_id | status | entry_class#method | gate | gap_action |
+|---|---|---|---|---|
+| A-FUN-003 | covered-live | `XuguBatchAFunctionFamiliesIT#lengthFamilyHqlSession_A_FUN_003` (`length` + length/concat) | IT | **Independent HQL; do not regress to adjacent-live** — live may SKIPPED_INFRA |
+| A-FUN-005 | covered-live | `XuguBatchAFunctionFamiliesIT#trimFamilyHqlSession_A_FUN_005` (`trim`/`ltrim`/`rtrim`) | IT | **Independent HQL; do not regress to adjacent-live** — live may SKIPPED_INFRA |
+| A-FUN-006 | covered-live | `XuguBatchAFunctionFamiliesIT#replaceLocateHqlSession_A_FUN_006` (`replace`/`locate`) | IT | **Independent HQL; do not regress to adjacent-live** — live may SKIPPED_INFRA |
+| A-FUN-007 | covered-live | `XuguBatchAFunctionFamiliesIT#coalesceNvlHqlSession_A_FUN_007` (`coalesce`/`nvl`) | IT | **Independent HQL; do not regress to adjacent-live** — live may SKIPPED_INFRA |
+| A-FUN-009 | covered-live | `XuguBatchAFunctionFamiliesIT#roundTruncHqlSession_A_FUN_009` (`round`/`trunc`) | IT | **Independent HQL; do not regress to adjacent-live** — live may SKIPPED_INFRA |
+
 ### I-009 / P-007 — promoted from 延后 (Definition A)
 
 | matrix_id | status | entry_class#method | gate | gap_action |
@@ -332,11 +344,11 @@ Formal live IT waived per [harness/evidence/architect-contract/I-008/P-001/PROMO
 | A-IDN-002 | No AUTO_INCREMENT wiring unit | A-IDN-003/004 IT |
 | A-SEQ-002 | DROP SEQUENCE string unit | A-SEQ-001 IT |
 | A-SEQ-005 | Sequence options unit | A-SEQ-001/003 IT |
-| A-FUN-003 | Registry unit slice | A-FUN-001/004/010 IT |
-| A-FUN-005 | Registry unit slice | A-FUN-001/004/010 IT |
-| A-FUN-006 | Registry unit slice | A-FUN-001/004/010 IT |
-| A-FUN-007 | Registry unit slice | A-FUN-001/004/010 IT |
-| A-FUN-009 | Registry unit slice | A-FUN-001/004/010 IT |
+| A-FUN-003 | **Closed I-010/P-008** — was registry unit + thin adjacent-live; now independent HQL Session IT | `XuguBatchAFunctionFamiliesIT#lengthFamilyHqlSession_A_FUN_003` |
+| A-FUN-005 | **Closed I-010/P-008** — was registry unit + thin adjacent-live; now independent HQL Session IT | `XuguBatchAFunctionFamiliesIT#trimFamilyHqlSession_A_FUN_005` |
+| A-FUN-006 | **Closed I-010/P-008** — was registry unit + thin adjacent-live; now independent HQL Session IT | `XuguBatchAFunctionFamiliesIT#replaceLocateHqlSession_A_FUN_006` |
+| A-FUN-007 | **Closed I-010/P-008** — was registry unit + thin adjacent-live; now independent HQL Session IT | `XuguBatchAFunctionFamiliesIT#coalesceNvlHqlSession_A_FUN_007` |
+| A-FUN-009 | **Closed I-010/P-008** — was registry unit + thin adjacent-live; now independent HQL Session IT | `XuguBatchAFunctionFamiliesIT#roundTruncHqlSession_A_FUN_009` |
 | A-SCH-006 | Temp strategy flag unit | A-SCH-004/005 IT |
 | A-SPI-004 | Resolver non-match negatives — no live path by design | — |
 | A-XCUT-002 | Quote-char constant only | — |

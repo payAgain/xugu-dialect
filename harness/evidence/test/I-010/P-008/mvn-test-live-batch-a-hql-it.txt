@@ -1,0 +1,15 @@
+LIVE IT NOT ATTEMPTED — SKIPPED_INFRA
+
+Probe (see live-db-probe.txt):
+  192.168.2.239:5138 TcpTestSucceeded=False
+  127.0.0.1:5138 TcpTestSucceeded=False
+
+Would have run (when DB reachable):
+  XUGU_RUN_IT=true mvn -pl dialect -am -Dtest=XuguBatchAFunctionFamiliesIT test
+
+Target methods:
+  lengthFamilyHqlSession_A_FUN_003
+  trimFamilyHqlSession_A_FUN_005
+  replaceLocateHqlSession_A_FUN_006
+  coalesceNvlHqlSession_A_FUN_007
+  roundTruncHqlSession_A_FUN_009

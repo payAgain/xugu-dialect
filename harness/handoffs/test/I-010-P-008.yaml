@@ -1,0 +1,33 @@
+schema_version: 1
+role: test
+phase_id: P-008
+build_id: B-001
+initiative_id: I-010
+invocation_id: inv-i010-p008-rp02-test
+step_id: RP-02
+status: completed_awaiting_reviewer
+updated_at: "2026-07-21T15:52:00+08:00"
+
+summary: >
+  Offline registry unit + XuguBatchAFunctionFamiliesIT (5 skip) PASS.
+  Live gate ON → SKIPPED_INFRA (DB refused). Five independent HQL methods present.
+
+validation:
+  offline_exit: 0
+  package_exit: 0
+  live_exit: n/a
+  live_classification: SKIPPED_INFRA
+  branch_check: PASS
+
+evidence:
+  - harness/evidence/test/I-010/P-008/TEST-REPORT.md
+  - harness/evidence/test/I-010/P-008/IT-RESULT.txt
+  - harness/evidence/test/I-010/P-008/live-db-probe.txt
+  - harness/evidence/test/I-010/P-008/mvn-test-offline.txt
+  - harness/evidence/test/I-010/P-008/mvn-test-live-batch-a-hql-it.txt
+  - harness/evidence/test/I-010/P-008/mvn-package.txt
+
+next:
+  - RP-03 reviewer
+
+blocker: null
