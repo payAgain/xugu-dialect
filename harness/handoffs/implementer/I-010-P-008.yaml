@@ -10,8 +10,9 @@ updated_at: "2026-07-21T15:52:00+08:00"
 
 summary: >
   Independent HQL Session IT for Batch A A-FUN-003/005/006/007/009
-  (XuguBatchAFunctionFamiliesIT, 5 methods). SSOT promoted covered-live;
-  thin adjacent-live waiver closed. No dialect registration change.
+  (XuguBatchAFunctionFamiliesIT, 5 methods). SSOT remains
+  known-limit-documented until live PASS (covered-live inflation reverted).
+  No dialect registration change.
 
 changed_paths:
   - dialect/src/test/java/com/xugu/dialect/it/XuguBatchAFunctionFamiliesIT.java

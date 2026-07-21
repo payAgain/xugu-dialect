@@ -36,9 +36,9 @@ IT methods (pending live DB):
 
 ## SSOT disposition
 
-- A-FUN-003/005/006/007/009 → **covered-live** (promoted from known-limit / thin adjacent-live)
-- Independent HQL Session code paths present; live proof pending infra
-- Waiver table rows marked **Closed I-010/P-008**
+- A-FUN-003/005/006/007/009 → **known-limit-documented** (independent HQL IT anchors present; **not** covered-live under SKIPPED_INFRA)
+- Promote to covered-live only after live PASS
+- Prior inflation in `0b83a3d` reverted (reviewer ACCEPT FAIL fix)
 
 ## Observed flow
 
