@@ -220,8 +220,14 @@ Columns: `matrix_id | status | entry_class#method | gate | gap_action`
 
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
-| A-TYP-017 | known-limit-documented | `XuguGeometricTypeTest#pointTypeHooksWired_A_TYP_017`; `XuguGeometricTypeTest#allDocumentedKindsLocked_A_TYP_017`; `XuguGeometricTypeAndFunctionsIT#geometricTypesNativeRoundTrip_A_TYP_017`; `XuguDialectTest#columnTypesMatchXuguDocs` (POINT/GEOMETRY) | IT | N/A |
+| A-TYP-017 | known-limit-documented | `XuguGeometricTypeTest#pointTypeHooksWired_A_TYP_017`; `XuguGeometricTypeTest#allDocumentedKindsLocked_A_TYP_017`; `XuguGeometricTypeTest#pointJdbcTypesContributed_A_TYP_017`; `XuguGeometricTypeAndFunctionsIT#geometricTypesNativeRoundTrip_A_TYP_017`; `XuguGeometricTypeAndFunctionsIT#pointEntityOrmRoundTrip_A_TYP_017`; `XuguDialectTest#columnTypesMatchXuguDocs` (POINT/GEOMETRY) | IT | N/A (I-010/P-004 entity ORM path; live pending) |
 | A-FUN-020 | covered-live | `XuguFunctionRegistryTest#geometricSubsetRegistered_A_FUN_020`; `XuguGeometricTypeAndFunctionsIT#geometricFunctionsNativeSubset_A_FUN_020` | IT | N/A |
+
+### I-010 / P-004 — A-TYP-017 POINT entity ORM path
+
+| matrix_id | status | entry_class#method | gate | gap_action |
+|---|---|---|---|---|
+| A-TYP-017 | known-limit-documented | `XuguPointJdbcType` + `I010P004PointEntity`; `XuguGeometricTypeAndFunctionsIT#pointEntityOrmRoundTrip_A_TYP_017` (`String` + `@JdbcTypeCode(POINT|GEOMETRY)`); native IT retained; non-POINT subtypes tooling-only | IT | **Promote to covered-live only after live entity IT PASS** — do not claim covered-live while SKIPPED_INFRA |
 
 ### I-009 / P-006 — promoted from 延后 (Definition A)
 
@@ -275,7 +281,7 @@ Matrix status **文档不允许** or **延后**; baseline records explicit non-s
 |---|---|---|---|---|
 | A-TYP-014 | known-limit-documented | `XuguIntervalTypeTest#intervalTypeHooksWired_A_TYP_014`; `XuguIntervalTypeTest#intervalJdbcTypesContributed_A_TYP_014`; `XuguIntervalTypeIT#intervalNativeRoundTrip_A_TYP_014`; `XuguIntervalTypeIT#intervalEntityOrmRoundTrip_A_TYP_014`; `XuguDialectTest#columnTypesMatchXuguDocs` (DURATION/INTERVAL_SECOND) | IT | **I-010/P-002** entity ORM implemented; covered-live after live PASS |
 | A-TYP-016 | known-limit-documented | `XuguXmlTypeTest#xmlTypeHooksWired_A_TYP_016`; `XuguXmlTypeTest#xmlJdbcTypeContributed_A_TYP_016`; `XuguXmlTypeAndFunctionsIT#xmlTypeNativeRoundTrip_A_TYP_016`; `XuguXmlTypeAndFunctionsIT#xmlEntityOrmRoundTrip_A_TYP_016`; `XuguDialectTest#columnTypesMatchXuguDocs` (SQLXML) | IT | **I-010/P-003** entity ORM implemented; covered-live after live PASS |
-| A-TYP-017 | known-limit-documented | `XuguGeometricTypeTest#pointTypeHooksWired_A_TYP_017`; `XuguGeometricTypeTest#allDocumentedKindsLocked_A_TYP_017`; `XuguGeometricTypeAndFunctionsIT#geometricTypesNativeRoundTrip_A_TYP_017`; `XuguDialectTest#columnTypesMatchXuguDocs` (POINT/GEOMETRY) | IT | **N/A** (I-009/P-004 closed) |
+| A-TYP-017 | known-limit-documented | `XuguGeometricTypeTest#pointTypeHooksWired_A_TYP_017`; `XuguGeometricTypeTest#pointJdbcTypesContributed_A_TYP_017`; `XuguGeometricTypeAndFunctionsIT#geometricTypesNativeRoundTrip_A_TYP_017`; `XuguGeometricTypeAndFunctionsIT#pointEntityOrmRoundTrip_A_TYP_017`; `XuguDialectTest#columnTypesMatchXuguDocs` (POINT/GEOMETRY) | IT | **I-010/P-004** entity ORM implemented; covered-live after live PASS |
 | A-TYP-018 | known-limit-documented | `XuguUdtTypeTest#documentedKindsLocked_A_TYP_018`; `XuguUdtTypeTest#createTypeSqlMatchesUdtDoc_A_TYP_018`; `XuguUdtTypeTest#dialectDoesNotClaimOrmUdtEntityMapping_A_TYP_018`; `XuguUdtTypeIT#udtNativeRoundTrip_A_TYP_018` | IT | **N/A** (I-009/P-005 closed) |
 | A-PAG-004 | known-limit-documented | `XuguLockPaginationIdentityExtensionsTest#topSqlMatchesResultsetRestrictedDoc_A_PAG_004`; `XuguLockPaginationIdentityExtensionsTest#limitHandlerRemainsDefault_A_PAG_004_006`; `XuguLockPaginationIdentityIT#topSyntaxNativeRoundTrip_A_PAG_004` | IT | **N/A** (I-009/P-009 closed) |
 | A-PAG-006 | known-limit-documented | `XuguLockPaginationIdentityExtensionsTest#rownumSqlMatchesSelectDoc_A_PAG_006`; `XuguLockPaginationIdentityExtensionsTest#limitHandlerRemainsDefault_A_PAG_004_006`; `XuguLockPaginationIdentityIT#rownumPaginationNativeRoundTrip_A_PAG_006` | IT | **N/A** (I-009/P-009 closed) |
@@ -661,6 +667,19 @@ Source: [`harness/evidence/researcher/I-005/P-001/GAP-SUMMARY.md`](../harness/ev
 | **Dialect surface** | `SqlTypes.DURATION` → `interval day to second`; `SqlTypes.INTERVAL_SECOND` → `interval second`; `XuguIntervalJdbcType` string bind/extract for entity `Duration`; all 13 subtype DDL strings in `XuguIntervalTypeSupport` |
 | **Known-limit reason** | Hibernate 7.4 exposes only DURATION + INTERVAL_SECOND — not 13 XuGu subtypes; output format depends on server `DEF_INTERVAL_STYLE`. Entity ORM for the two Hibernate codes is implemented via documented SQL_STANDARD string literals (`XuguIntervalJdbcType`); the other 11 subtypes remain tooling / native-SQL only. Live entity round-trip was **SKIPPED_INFRA** this run (DB unreachable) — do not claim covered-live yet. |
 | **Live IT** | Native: `XuguIntervalTypeIT#intervalNativeRoundTrip_A_TYP_014`; Entity ORM: `XuguIntervalTypeIT#intervalEntityOrmRoundTrip_A_TYP_014` + `I010P002IntervalEntity` |
+| **gap_action** | Re-run with `XUGU_RUN_IT=true` + live DB → if entity IT PASS, promote status to **covered-live** |
+
+### A-TYP-017 Geometric known-limit (I-009/P-004; POINT entity ORM I-010/P-004)
+
+| Field | Value |
+|---|---|
+| **matrix_id** | A-TYP-017 |
+| **status** | **known-limit-documented** (POINT entity ORM path implemented; **not** covered-live until live IT PASS) |
+| **Doc citation** | `reference/sql/datatype/geometric.md` (POINT/LINE/LSEG/BOX/PATH/POLYGON/CIRCLE; simple 2D, not PostGIS) |
+| **Dialect surface** | `SqlTypes.POINT` / `SqlTypes.GEOMETRY` → `point` DDL via `XuguGeometricTypeSupport`; `XuguPointJdbcType` string bind/extract for entity `String` + `@JdbcTypeCode(POINT|GEOMETRY)`; seven subtype DDL strings locked for native/tooling |
+| **Recommended mapping** | `String` attribute + `@JdbcTypeCode(SqlTypes.POINT)` (or `GEOMETRY` for bounded alias). Uses `XuguPointJdbcType`. Do **not** force ORM for LINE/LSEG/BOX/PATH/POLYGON/CIRCLE |
+| **Known-limit reason** | Entity ORM for POINT/GEOMETRY→POINT is implemented via string JDBC binding; live entity round-trip may be **SKIPPED_INFRA** — do not claim covered-live until live PASS. Non-POINT subtypes remain native/tooling only (no Hibernate SqlTypes / JDBC claim). Not PostGIS |
+| **Live IT** | Native: `XuguGeometricTypeAndFunctionsIT#geometricTypesNativeRoundTrip_A_TYP_017`; Entity ORM: `XuguGeometricTypeAndFunctionsIT#pointEntityOrmRoundTrip_A_TYP_017` + `I010P004PointEntity` |
 | **gap_action** | Re-run with `XUGU_RUN_IT=true` + live DB → if entity IT PASS, promote status to **covered-live** |
 
 ### A-TYP-018 UDT known-limit (I-009/P-005)

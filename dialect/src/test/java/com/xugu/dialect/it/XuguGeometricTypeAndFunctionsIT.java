@@ -3,13 +3,28 @@ package com.xugu.dialect.it;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.JdbcSettings;
+import org.hibernate.cfg.SchemaToolingSettings;
+import org.hibernate.tool.schema.Action;
+import org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator;
 import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
 
+import com.xugu.dialect.XuguDialect;
+import com.xugu.dialect.it.entities.I010P004PointEntity;
 import com.xugu.dialect.support.XuguITGate;
 import com.xugu.dialect.support.XuguTestConnection;
 import com.xugu.dialect.type.XuguGeometricTypeSupport;
+import com.xugu.dialect.type.XuguPointJdbcType;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -17,15 +32,18 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 /**
- * Gated IT: A-TYP-017 geometric types + A-FUN-020 geometric functions native SQL.
+ * Gated IT: A-TYP-017 geometric types (native + POINT entity ORM) + A-FUN-020 functions.
  *
  * <p>SQL shapes from {@code reference/sql/datatype/geometric.md} and
  * {@code reference/function/geometric-functions/{area,center,point,box,circle}.md}.
- * Simple 2D types only — not PostGIS; ORM entity mapping remains known-limit.
+ * Simple 2D types only — not PostGIS. Entity path (I-010/P-004) uses
+ * {@link XuguPointJdbcType} for {@code String} + {@code @JdbcTypeCode(POINT|GEOMETRY)}.
+ * Non-POINT subtypes remain native/tooling only.
  */
 class XuguGeometricTypeAndFunctionsIT {
 
 	private static final String TYPE_TABLE = "HIB_I009_P004_GEOM";
+	private static final String ENTITY_TABLE = "HIB_I010_P004_POINT";
 
 	@Test
 	void geometricTypesNativeRoundTrip_A_TYP_017() throws Exception {
@@ -104,6 +122,58 @@ class XuguGeometricTypeAndFunctionsIT {
 	}
 
 	@Test
+	void pointEntityOrmRoundTrip_A_TYP_017() {
+		Assumptions.assumeTrue( XuguITGate.isEnabled(), "integration gate off" );
+		cleanupEntityTable();
+
+		// geometric.md §点 — POINT literal (x,y); GEOMETRY→POINT DDL alias uses same shape
+		final String pointLiteral = "(1,1)";
+		final String geometryLiteral = "(2,3)";
+
+		StandardServiceRegistry registry = buildRegistry();
+		SessionFactory sf = null;
+		try {
+			Metadata metadata = new MetadataSources( registry )
+					.addAnnotatedClass( I010P004PointEntity.class )
+					.buildMetadata();
+			export( metadata, registry, Action.CREATE_ONLY );
+			sf = metadata.buildSessionFactory();
+
+			try ( Session session = sf.openSession() ) {
+				session.beginTransaction();
+				session.persist( new I010P004PointEntity( 1, pointLiteral, geometryLiteral ) );
+				session.getTransaction().commit();
+			}
+
+			try ( Session session = sf.openSession() ) {
+				I010P004PointEntity loaded = session.find( I010P004PointEntity.class, 1 );
+				assertNotNull( loaded, "entity must load" );
+				assertNotNull( loaded.getPoint(), "POINT column" );
+				assertNotNull( loaded.getGeometry(), "GEOMETRY→POINT column" );
+				assertTrue( containsCoords( loaded.getPoint(), "1", "1" ),
+						"POINT round-trip: " + loaded.getPoint() );
+				assertTrue( containsCoords( loaded.getGeometry(), "2", "3" ),
+						"GEOMETRY→POINT round-trip: " + loaded.getGeometry() );
+			}
+
+			export( metadata, registry, Action.DROP );
+		}
+		catch ( AssertionError e ) {
+			throw e;
+		}
+		catch ( Exception e ) {
+			fail( "POINT entity ORM IT failed: " + e.getMessage(), e );
+		}
+		finally {
+			if ( sf != null ) {
+				sf.close();
+			}
+			StandardServiceRegistryBuilder.destroy( registry );
+			cleanupEntityTable();
+		}
+	}
+
+	@Test
 	void geometricFunctionsNativeSubset_A_FUN_020() throws Exception {
 		Assumptions.assumeTrue( XuguITGate.isEnabled(), "integration gate off" );
 
@@ -163,6 +233,34 @@ class XuguGeometricTypeAndFunctionsIT {
 		}
 		catch ( Exception e ) {
 			fail( "Geometric functions native IT failed: " + e.getMessage(), e );
+		}
+	}
+
+	private static boolean containsCoords(String value, String x, String y) {
+		return value != null && value.contains( x ) && value.contains( y );
+	}
+
+	private static StandardServiceRegistry buildRegistry() {
+		return new StandardServiceRegistryBuilder()
+				.applySetting( JdbcSettings.JAKARTA_JDBC_DRIVER, XuguTestConnection.DRIVER )
+				.applySetting( JdbcSettings.JAKARTA_JDBC_URL, XuguTestConnection.jdbcUrl() )
+				.applySetting( JdbcSettings.DIALECT, XuguDialect.class.getName() )
+				.applySetting( SchemaToolingSettings.HBM2DDL_AUTO, "none" )
+				.build();
+	}
+
+	private static void export(Metadata metadata, StandardServiceRegistry registry, Action action) {
+		Map<String, Object> settings = new HashMap<>();
+		settings.put( SchemaToolingSettings.JAKARTA_HBM2DDL_DATABASE_ACTION, action );
+		SchemaManagementToolCoordinator.process( metadata, registry, settings, completion -> {
+		} );
+	}
+
+	private static void cleanupEntityTable() {
+		try ( Connection c = XuguTestConnection.open(); Statement st = c.createStatement() ) {
+			st.execute( "DROP TABLE IF EXISTS " + ENTITY_TABLE );
+		}
+		catch ( Exception ignored ) {
 		}
 	}
 }

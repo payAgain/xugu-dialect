@@ -3,13 +3,14 @@ package com.xugu.dialect.type;
 /**
  * XuGu simple 2D geometric type DDL ({@code reference/sql/datatype/geometric.md}).
  *
- * <p><b>A-TYP-017 known-limit:</b> XuGu documents seven native types — {@code POINT},
+ * <p><b>A-TYP-017:</b> XuGu documents seven native types — {@code POINT},
  * {@code LINE}, {@code LSEG}, {@code BOX}, {@code PATH}, {@code POLYGON}, {@code CIRCLE}
  * — with literal syntax only (not PostGIS {@code GEOMETRY}). Hibernate 7.4 exposes
  * {@code SqlTypes.POINT} and {@code SqlTypes.GEOMETRY} only; dialect maps both to
- * documented {@code POINT} DDL. Remaining types are locked here for native SQL / schema
- * tooling; full ORM entity mapping of every geometric subtype is
- * <em>known-limit-documented</em> without inventing JDBC descriptors.
+ * documented {@code POINT} DDL. {@link XuguPointJdbcType} contributes string-based JDBC
+ * binding for entity {@code String} + {@code @JdbcTypeCode(POINT|GEOMETRY)} ORM round-trip.
+ * Remaining subtypes (LINE/LSEG/BOX/PATH/POLYGON/CIRCLE) stay native SQL / schema tooling
+ * only — <em>known-limit-documented</em> without inventing ORM JDBC descriptors for them.
  */
 public final class XuguGeometricTypeSupport {
 

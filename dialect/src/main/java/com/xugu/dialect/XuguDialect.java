@@ -78,6 +78,7 @@ import com.xugu.dialect.type.XuguCastingJsonArrayJdbcTypeConstructor;
 import com.xugu.dialect.type.XuguCastingJsonJdbcType;
 import com.xugu.dialect.type.XuguGeometricTypeSupport;
 import com.xugu.dialect.type.XuguIntervalJdbcType;
+import com.xugu.dialect.type.XuguPointJdbcType;
 import com.xugu.dialect.type.XuguXmlJdbcType;
 import com.xugu.dialect.type.XuguIntervalTypeSupport;
 import com.xugu.dialect.type.XuguUdtTypeSupport;
@@ -158,10 +159,11 @@ import jakarta.persistence.Timeout;
  * <p><b>Geometric (A-TYP-017):</b> XuGu documents simple 2D types POINT/LINE/LSEG/BOX/PATH/
  * POLYGON/CIRCLE ({@code reference/sql/datatype/geometric.md}) — not PostGIS. Dialect maps
  * {@code SqlTypes.POINT} and bounded {@code SqlTypes.GEOMETRY} → {@code POINT} DDL via
- * {@link XuguGeometricTypeSupport}; all seven subtype DDL strings locked for native SQL.
- * Full ORM mapping of every geometric column type is <em>known-limit-documented</em>.
- * Geometric functions (A-FUN-020): bounded 21-function registry per
- * {@code reference/function/geometric-functions/}.
+ * {@link XuguGeometricTypeSupport}; {@link XuguPointJdbcType} contributes string-based JDBC
+ * binding for entity {@code String} + {@code @JdbcTypeCode(POINT|GEOMETRY)} ORM round-trip.
+ * All seven subtype DDL strings locked for native SQL; LINE/LSEG/BOX/PATH/POLYGON/CIRCLE
+ * remain tooling / native-SQL only (no Hibernate ORM claim). Geometric functions (A-FUN-020):
+ * bounded 21-function registry per {@code reference/function/geometric-functions/}.
  *
  * <p><b>UDT (A-TYP-018):</b> XuGu documents schema-defined {@code OBJECT}/{@code VARRAY}/
  * {@code TABLE} families ({@code reference/sql/datatype/udt.md}). Hibernate 7.4 exposes no
@@ -431,6 +433,9 @@ public class XuguDialect extends Dialect {
 		// Override default DurationJdbcType (NUMERIC) — XuGu INTERVAL columns are string-bound.
 		jdbcTypes.addDescriptor( SqlTypes.DURATION, XuguIntervalJdbcType.DURATION );
 		jdbcTypes.addDescriptor( SqlTypes.INTERVAL_SECOND, XuguIntervalJdbcType.INTERVAL_SECOND );
+		// Hibernate core has no PointJdbcType; XuGu POINT columns are string-bound literals.
+		jdbcTypes.addDescriptor( SqlTypes.POINT, XuguPointJdbcType.POINT );
+		jdbcTypes.addDescriptor( SqlTypes.GEOMETRY, XuguPointJdbcType.GEOMETRY );
 	}
 
 	@Override
