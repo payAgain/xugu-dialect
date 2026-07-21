@@ -12,7 +12,8 @@
 | I-005 | feature | 生产回归测试基线（Definition A + I-003 可实现全量；门控真库；未来迭代防回退） | feat/i-005-production-regression-baseline | completed | 2026-07-18T14:23:00+08:00（archived） |
 | I-006 | feature | 消费者路径全面覆盖（A 黄金路径 + B 关联/SEQUENCE + C′ Boot 必测扫盲） | feat/i-006-consumer-path-coverage | completed | 2026-07-19T13:53:00+08:00（archived） |
 | I-007 | feature | 能力硬化 A堵坑 + B消费者加深 + C延后增量（NONE；JSON/ARRAY/ALTER SEQUENCE；Flyway） | feat/i-007-capability-hardening-abc | completed | 2026-07-20T15:55:00+08:00（archived） |
-| I-008 | feature | 生产质量短板补全 Q1–Q4 全闭环（covered-live / 锁 / UUID·JSON 开箱 / 真库证明；Q5 不做） | feat/i-008-production-quality-gaps | active | 2026-07-20T16:10:00+08:00（Plan complete；B-001 draft → P-001） |
+| I-008 | feature | 生产质量短板补全 Q1–Q4 全闭环（covered-live / 锁 / UUID·JSON 开箱 / 真库证明；Q5 不做） | feat/i-008-production-quality-gaps | completed | 2026-07-21T09:32:00+08:00（archived） |
+| I-009 | feature | 交付矩阵全部「延后」项；文档不允许继续 skip；不升版；不 Ship | feat/i-009-deferred-matrix-delivery | active | 2026-07-21T09:32:00+08:00（Scope PASS；Plan pending） |
 
 Status: `clarifying` | `active` | `completed` | `abandoned` | `accepted`
 
@@ -24,3 +25,4 @@ Status: `clarifying` | `active` | `completed` | `abandoned` | `accepted`
 - I-005：见 `harness/initiatives/I-005/ARCHIVE.md`（2026-07-18）
 - I-006：见 `harness/initiatives/I-006/ARCHIVE.md`（2026-07-19）
 - I-007：见 `harness/initiatives/I-007/ARCHIVE.md`（2026-07-20）
+- I-008：见 `harness/initiatives/I-008/ARCHIVE.md`（2026-07-21）

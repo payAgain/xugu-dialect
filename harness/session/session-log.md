@@ -18,6 +18,16 @@ Human Gate：是否批准 **B-001** 范围（默认仅 P-001）？
 
 ---
 
+## Entry: I-009 Scope PASS — Accept+Archive I-008 — Plan pending
+
+### Summary
+Human Gate：先 Accept/Archive I-008；类型 feature；延后**全做**；不升版；不 Ship；「本 Initiative 范围已明确，可以开干」。I-008 **accepted/archived**（含 P-007-live 真库绿）。I-009 **active**。下一步：orchestrator Plan → 分支 `feat/i-009-deferred-matrix-delivery` → B-001 draft。
+
+### Next
+Orchestrator Plan；Human Gate 批 Build。
+
+---
+
 ## Entry: I-008 B-001 approved — P-001~P-007 serial
 
 ### Summary
