@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "started_at": "2026-07-21T10:54:30+08:00",
+  "finished_at": "2026-07-21T10:57:00+08:00",
+  "project_root": "E:\\\\Work\\\\java\\\\hibernate-test",
+  "initiative_id": "I-009",
+  "phase_id": "P-007",
+  "build_id": "B-001",
+  "invocation_id": "inv-i009-p007-rp02-test",
+  "step_id": "RP-02",
+  "role": "test",
+  "branch": "feat/i-009-deferred-matrix-delivery",
+  "head_sha": "fff15f9",
+  "verdict": "PASS",
+  "closure_path": "i009-a-ddl-007-008-009-table-ddl-extensions",
+  "config": "E:\\\\Work\\\\java\\\\hibernate-test\\\\harness\\\\verification.json",
+  "maven_command": "C:\\\\Users\\\\admin\\\\tools\\\\apache-maven-3.9.9\\\\bin\\\\mvn.cmd",
+  "results": [
+    {
+      "id": "build",
+      "required": true,
+      "status": "PASS",
+      "command": "mvn -q -DskipTests package",
+      "cwd": "E:\\\\Work\\\\java\\\\hibernate-test",
+      "exit_code": 0,
+      "log": "harness/evidence/test/I-009/P-007/mvn-package.txt"
+    },
+    {
+      "id": "test",
+      "required": true,
+      "status": "PASS",
+      "command": "mvn -q test (XUGU_RUN_IT unset)",
+      "cwd": "E:\\\\Work\\\\java\\\\hibernate-test",
+      "exit_code": 0,
+      "log": "harness/evidence/test/I-009/P-007/mvn-test.txt",
+      "counts": {
+        "dialect": {
+          "tests_run": 189,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 60
+        },
+        "demo": {
+          "tests_run": 36,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 28
+        }
+      },
+      "p007_focus": {
+        "XuguTableDdlExtensionsTest": {
+          "tests_run": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "note": "A-DDL-007/008/009 unit anchors incl. ifNotExistsPromotedViaC_DDL_001_A_DDL_007"
+        },
+        "XuguTableDdlExtensionsIT": {
+          "tests_run": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 2,
+          "note": "gated offline via XuguITGate when XUGU_RUN_IT unset"
+        }
+      },
+      "focus_log": "harness/evidence/test/I-009/P-007/mvn-test-p007-focus-offline.txt"
+    },
+    {
+      "id": "test_live_ddl_it",
+      "required": false,
+      "status": "SKIPPED_INFRA",
+      "command": "XUGU_RUN_IT=true; mvn -q -pl dialect -am test -Dtest=XuguTableDdlExtensionsIT",
+      "cwd": "E:\\\\Work\\\\java\\\\hibernate-test",
+      "exit_code": 1,
+      "log": "harness/evidence/test/I-009/P-007/mvn-test-live-ddl-it.txt",
+      "real_db": false,
+      "reason": "127.0.0.1:5138 Connection refused (E50025)",
+      "summary_artifact": "harness/evidence/test/I-009/P-007/IT-RESULT.txt",
+      "it_anchors": [
+        "com.xugu.dialect.it.XuguTableDdlExtensionsIT#listPartitionNativeRoundTrip_A_DDL_008",
+        "com.xugu.dialect.it.XuguTableDdlExtensionsIT#encryptByNativeWhenEncryptorAvailable_A_DDL_009"
+      ]
+    }
+  ],
+  "summary": {
+    "build": "PASS",
+    "test_offline": "PASS",
+    "test_live_ddl_it": "SKIPPED_INFRA",
+    "overall": "PASS"
+  }
+}

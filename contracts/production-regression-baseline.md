@@ -269,8 +269,8 @@ Matrix status **文档不允许** or **延后**; baseline records explicit non-s
 | A-IDN-005 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_IDN_005_identityMode` (@Disabled) | none | **I-009/P-009** |
 | A-FUN-020 | covered-live | `XuguFunctionRegistryTest#geometricSubsetRegistered_A_FUN_020`; `XuguGeometricTypeAndFunctionsIT#geometricFunctionsNativeSubset_A_FUN_020` | IT | **N/A** (I-009/P-004 closed) |
 | A-FUN-021 | known-limit-documented | `XuguFunctionRegistryTest#xmlSubsetRegistered_A_FUN_021`; `XuguXmlTypeAndFunctionsIT#xmlFunctionsNativeSubset_A_FUN_021` | IT (live SKIPPED_INFRA) | **N/A** (I-009/P-003 closed) |
-| A-SCH-003 | negative-only | `XuguNegativeRegressionBaselineTest#catalogsNotSupported_negativeOnly_A_SCH_003`; `XuguSchemaTempCommentTest#nameQualifierIsSchemaOnly_A_SCH_002_not_003` (supportsCatalogs=false) | unit | **I-009/P-008** |
-| A-SCH-017 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_SCH_017_advancedIndexes` (@Disabled) | none | **I-009/P-008** |
+| A-SCH-003 | known-limit-documented | `XuguCatalogAndIndexExtensionsTest#catalogMetadataQueryLocked_A_SCH_003`; `XuguCatalogAndIndexExtensionsTest#nameQualifierRemainsSchemaOnly_A_SCH_003`; `XuguCatalogAndIndexExtensionsTest#dialectDoesNotClaimCatalogInObjectNames_A_SCH_003`; `XuguCatalogAndIndexExtensionsIT#jdbcCatalogAlignsWithCurrentDb_A_SCH_003` | IT | **N/A** (I-009/P-008 closed) |
+| A-SCH-017 | known-limit-documented | `XuguCatalogAndIndexExtensionsTest#functionalIndexSqlMatchesIndexesDoc_A_SCH_017`; `XuguCatalogAndIndexExtensionsTest#bitmapIndexSqlMatchesIndexesDoc_A_SCH_017`; `XuguCatalogAndIndexExtensionsTest#dialectDoesNotClaimAdvancedIndexInSchemaExport_A_SCH_017`; `XuguCatalogAndIndexExtensionsIT#functionalAndBitmapIndexNativeRoundTrip_A_SCH_017` | IT | **N/A** (I-009/P-008 closed) |
 | A-XCUT-012 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_XCUT_012_mavenCentralPublish` (@Disabled) | none | N/A |
 
 ### Ruler C — 文档不允许 / 延后 (7)

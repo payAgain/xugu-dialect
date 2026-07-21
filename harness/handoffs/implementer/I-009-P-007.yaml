@@ -1,0 +1,76 @@
+schema_version: 1
+role: implementer
+phase_id: P-007
+build_id: B-001
+initiative_id: I-009
+invocation_id: inv-i009-p007-rp01-implementer
+step_id: RP-01
+status: completed_awaiting_test_review
+updated_at: "2026-07-21T11:00:00+08:00"
+
+summary: >
+  A-DDL-007 closed covered-live via C-DDL-001 SSOT promotion (no duplicate DDL).
+  A-DDL-008 closed known-limit-documented: XuguTableDdlSupport locks LIST/RANGE/HASH
+  PARTITION BY shapes; native LIST IT per partition.md; schema export hook false.
+  A-DDL-009 closed known-limit-documented: ENCRYPT BY / CREATE ENCRYPTOR SQL locked;
+  gated IT skips without visible encryptor (SYSSSO prerequisite).
+
+decision:
+  path:
+    A-DDL-007: covered-live
+    A-DDL-008: known-limit-documented
+    A-DDL-009: known-limit-documented
+  rationale: >
+    IF NOT EXISTS already delivered as C-DDL-001. PARTITION BY and ENCRYPT BY are native
+    DDL only — honest schema-export flags false; native IT paths per XuGu docs.
+
+closed_gap_ids:
+  - A-DDL-007
+  - A-DDL-008
+  - A-DDL-009
+
+delivered:
+  - dialect/src/main/java/com/xugu/dialect/ddl/XuguTableDdlSupport.java
+  - dialect/src/main/java/com/xugu/dialect/XuguDialect.java
+  - dialect/src/test/java/com/xugu/dialect/XuguTableDdlExtensionsTest.java
+  - dialect/src/test/java/com/xugu/dialect/it/XuguTableDdlExtensionsIT.java
+  - dialect/src/test/java/com/xugu/dialect/XuguNegativeRegressionBaselineTest.java
+  - dialect/src/test/java/com/xugu/dialect/it/XuguDdlIT.java
+  - contracts/production-regression-baseline.md
+  - contracts/feature-matrix-definition-a.md
+  - harness/evidence/implementer/I-009/P-007/ACCEPTANCE.md
+
+tests_added:
+  unit:
+    - XuguTableDdlExtensionsTest#ifNotExistsPromotedViaC_DDL_001_A_DDL_007
+    - XuguTableDdlExtensionsTest#partitionSqlMatchesPartitionDoc_A_DDL_008
+    - XuguTableDdlExtensionsTest#dialectDoesNotClaimPartitionInSchemaExport_A_DDL_008
+    - XuguTableDdlExtensionsTest#encryptSqlMatchesCreateDoc_A_DDL_009
+    - XuguTableDdlExtensionsTest#dialectDoesNotClaimEncryptInSchemaExport_A_DDL_009
+  live_it:
+    - XuguTableDdlExtensionsIT#listPartitionNativeRoundTrip_A_DDL_008
+    - XuguTableDdlExtensionsIT#encryptByNativeWhenEncryptorAvailable_A_DDL_009
+
+validation:
+  build:
+    command: "mvn -q -DskipTests package"
+    exit_code: 0
+  test_offline:
+    command: "mvn -q test"
+    exit_code: 0
+  test_live:
+    command: "XUGU_RUN_IT=true mvn -q -pl dialect -am test -Dtest=XuguTableDdlExtensionsIT"
+    exit_code: pending
+    note: "IT gated; ENCRYPT test skips when no encryptor visible"
+
+not_done:
+  - RP-02 test review
+  - RP-03 reviewer
+  - git commit
+  - Accept / Ship
+
+next:
+  - RP-02 test: confirm offline green + optional live IT log
+  - RP-03 reviewer: audit DDL shapes match create.md / partition.md / encryptor.md only
+
+blocker: null
