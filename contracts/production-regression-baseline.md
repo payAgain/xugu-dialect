@@ -195,8 +195,14 @@ Columns: `matrix_id | status | entry_class#method | gate | gap_action`
 
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
-| A-TYP-016 | known-limit-documented | `XuguXmlTypeTest#xmlTypeHooksWired_A_TYP_016`; `XuguXmlTypeTest#documentedXmlConstantsLocked_A_TYP_016`; `XuguXmlTypeAndFunctionsIT#xmlTypeNativeRoundTrip_A_TYP_016`; `XuguDialectTest#columnTypesMatchXuguDocs` (SQLXML) | IT | N/A |
+| A-TYP-016 | known-limit-documented | `XuguXmlTypeTest#xmlTypeHooksWired_A_TYP_016`; `XuguXmlTypeTest#documentedXmlConstantsLocked_A_TYP_016`; `XuguXmlTypeTest#xmlJdbcTypeContributed_A_TYP_016`; `XuguXmlTypeAndFunctionsIT#xmlTypeNativeRoundTrip_A_TYP_016`; `XuguXmlTypeAndFunctionsIT#xmlEntityOrmRoundTrip_A_TYP_016`; `XuguDialectTest#columnTypesMatchXuguDocs` (SQLXML) | IT | N/A (I-010/P-003 entity ORM path; live pending) |
 | A-FUN-021 | known-limit-documented | `XuguFunctionRegistryTest#xmlSubsetRegistered_A_FUN_021`; `XuguXmlTypeAndFunctionsIT#xmlFunctionsNativeSubset_A_FUN_021` | IT (live SKIPPED_INFRA) | N/A |
+
+### I-010 / P-003 — A-TYP-016 entity ORM path
+
+| matrix_id | status | entry_class#method | gate | gap_action |
+|---|---|---|---|---|
+| A-TYP-016 | known-limit-documented | `XuguXmlJdbcType` + `I010P003XmlEntity`; `XuguXmlTypeAndFunctionsIT#xmlEntityOrmRoundTrip_A_TYP_016` (`String` + `@JdbcTypeCode(SQLXML)`); native IT retained | IT | **Promote to covered-live only after live entity IT PASS** — do not claim covered-live while SKIPPED_INFRA |
 
 ### I-009 / P-002 — promoted from 延后 (Definition A)
 
@@ -268,7 +274,7 @@ Matrix status **文档不允许** or **延后**; baseline records explicit non-s
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
 | A-TYP-014 | known-limit-documented | `XuguIntervalTypeTest#intervalTypeHooksWired_A_TYP_014`; `XuguIntervalTypeTest#intervalJdbcTypesContributed_A_TYP_014`; `XuguIntervalTypeIT#intervalNativeRoundTrip_A_TYP_014`; `XuguIntervalTypeIT#intervalEntityOrmRoundTrip_A_TYP_014`; `XuguDialectTest#columnTypesMatchXuguDocs` (DURATION/INTERVAL_SECOND) | IT | **I-010/P-002** entity ORM implemented; covered-live after live PASS |
-| A-TYP-016 | known-limit-documented | `XuguXmlTypeTest#xmlTypeHooksWired_A_TYP_016`; `XuguXmlTypeTest#documentedXmlConstantsLocked_A_TYP_016`; `XuguXmlTypeAndFunctionsIT#xmlTypeNativeRoundTrip_A_TYP_016`; `XuguDialectTest#columnTypesMatchXuguDocs` (SQLXML) | IT | **N/A** (I-009/P-003 closed) |
+| A-TYP-016 | known-limit-documented | `XuguXmlTypeTest#xmlTypeHooksWired_A_TYP_016`; `XuguXmlTypeTest#xmlJdbcTypeContributed_A_TYP_016`; `XuguXmlTypeAndFunctionsIT#xmlTypeNativeRoundTrip_A_TYP_016`; `XuguXmlTypeAndFunctionsIT#xmlEntityOrmRoundTrip_A_TYP_016`; `XuguDialectTest#columnTypesMatchXuguDocs` (SQLXML) | IT | **I-010/P-003** entity ORM implemented; covered-live after live PASS |
 | A-TYP-017 | known-limit-documented | `XuguGeometricTypeTest#pointTypeHooksWired_A_TYP_017`; `XuguGeometricTypeTest#allDocumentedKindsLocked_A_TYP_017`; `XuguGeometricTypeAndFunctionsIT#geometricTypesNativeRoundTrip_A_TYP_017`; `XuguDialectTest#columnTypesMatchXuguDocs` (POINT/GEOMETRY) | IT | **N/A** (I-009/P-004 closed) |
 | A-TYP-018 | known-limit-documented | `XuguUdtTypeTest#documentedKindsLocked_A_TYP_018`; `XuguUdtTypeTest#createTypeSqlMatchesUdtDoc_A_TYP_018`; `XuguUdtTypeTest#dialectDoesNotClaimOrmUdtEntityMapping_A_TYP_018`; `XuguUdtTypeIT#udtNativeRoundTrip_A_TYP_018` | IT | **N/A** (I-009/P-005 closed) |
 | A-PAG-004 | known-limit-documented | `XuguLockPaginationIdentityExtensionsTest#topSqlMatchesResultsetRestrictedDoc_A_PAG_004`; `XuguLockPaginationIdentityExtensionsTest#limitHandlerRemainsDefault_A_PAG_004_006`; `XuguLockPaginationIdentityIT#topSyntaxNativeRoundTrip_A_PAG_004` | IT | **N/A** (I-009/P-009 closed) |
@@ -619,17 +625,18 @@ Source: [`harness/evidence/researcher/I-005/P-001/GAP-SUMMARY.md`](../harness/ev
 | **Live IT** | `XuguLockPaginationIdentityIT#identityModeNullAsAutoIncrement_A_IDN_005` (NULL/ZERO modes v12.0.6+) |
 | **gap_action** | **N/A** — closed I-009/P-009 |
 
-### A-TYP-016 XML known-limit (I-009/P-003)
+### A-TYP-016 XML known-limit (I-009/P-003; entity ORM I-010/P-003)
 
 | Field | Value |
 |---|---|
 | **matrix_id** | A-TYP-016 |
-| **status** | **known-limit-documented** |
+| **status** | **known-limit-documented** (entity ORM path implemented; **not** covered-live until live IT PASS) |
 | **Doc citation** | `reference/sql/datatype/xml.md` (XML/XMLTYPE synonyms, BLOB-backed, max 2GB) |
-| **Dialect surface** | `SqlTypes.SQLXML` → `xml` DDL via `XuguXmlTypeSupport`; standard `XmlJdbcType` contributed |
-| **Known-limit reason** | No verified ORM `@JdbcTypeCode(SQLXML)` entity round-trip; Xugu JDBC `java.sql.SQLXML` path unproven — native SQL string round-trip IT is the honest acceptance path |
-| **Live IT** | Native SQL CRUD (`XuguXmlTypeAndFunctionsIT#xmlTypeNativeRoundTrip_A_TYP_016`) |
-| **gap_action** | **N/A** — closed I-009/P-003 |
+| **Dialect surface** | `SqlTypes.SQLXML` → `xml` DDL via `XuguXmlTypeSupport`; `XuguXmlJdbcType` string bind/extract for entity `String` + `@JdbcTypeCode(SQLXML)` |
+| **Recommended mapping** | `String` attribute + `@JdbcTypeCode(SqlTypes.SQLXML)` (uses `XuguXmlJdbcType`). **Do not** use `java.sql.SQLXML` / default Hibernate `XmlJdbcType` — Xugu JDBC SQLXML API unproven |
+| **Known-limit reason** | Entity ORM for SQLXML is implemented via string JDBC binding; live entity round-trip may be **SKIPPED_INFRA** — do not claim covered-live until live PASS. `java.sql.SQLXML` path remains unproven / not recommended |
+| **Live IT** | Native: `XuguXmlTypeAndFunctionsIT#xmlTypeNativeRoundTrip_A_TYP_016`; Entity ORM: `XuguXmlTypeAndFunctionsIT#xmlEntityOrmRoundTrip_A_TYP_016` + `I010P003XmlEntity` |
+| **gap_action** | Re-run with `XUGU_RUN_IT=true` + live DB → if entity IT PASS, promote status to **covered-live** |
 
 ### A-FUN-021 XML functions (I-009/P-003)
 

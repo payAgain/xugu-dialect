@@ -56,7 +56,6 @@ import org.hibernate.sql.exec.spi.JdbcOperation;
 import org.hibernate.type.SqlTypes;
 import org.hibernate.type.descriptor.DateTimeUtils;
 import org.hibernate.type.descriptor.jdbc.UUIDJdbcType;
-import org.hibernate.type.descriptor.jdbc.XmlJdbcType;
 import org.hibernate.type.descriptor.jdbc.spi.JdbcTypeRegistry;
 import org.hibernate.type.descriptor.sql.internal.DdlTypeImpl;
 import org.hibernate.type.descriptor.sql.spi.DdlTypeRegistry;
@@ -79,6 +78,7 @@ import com.xugu.dialect.type.XuguCastingJsonArrayJdbcTypeConstructor;
 import com.xugu.dialect.type.XuguCastingJsonJdbcType;
 import com.xugu.dialect.type.XuguGeometricTypeSupport;
 import com.xugu.dialect.type.XuguIntervalJdbcType;
+import com.xugu.dialect.type.XuguXmlJdbcType;
 import com.xugu.dialect.type.XuguIntervalTypeSupport;
 import com.xugu.dialect.type.XuguUdtTypeSupport;
 import com.xugu.dialect.type.XuguXmlTypeSupport;
@@ -149,9 +149,11 @@ import jakarta.persistence.Timeout;
  *
  * <p><b>XML (A-TYP-016):</b> XuGu documents {@code XML}/{@code XMLTYPE} synonyms
  * ({@code reference/sql/datatype/xml.md}, BLOB-backed, max 2GB). Dialect maps
- * {@code SqlTypes.SQLXML} → {@code XML} DDL via {@link XuguXmlTypeSupport}; standard
- * {@link XmlJdbcType} contributed when JDBC supports it. Full ORM entity round-trip on
- * {@code java.sql.SQLXML} is <em>known-limit-documented</em> — native SQL IT path.
+ * {@code SqlTypes.SQLXML} → {@code XML} DDL via {@link XuguXmlTypeSupport};
+ * {@link XuguXmlJdbcType} contributes string-based JDBC binding for entity
+ * {@code String} + {@code @JdbcTypeCode(SQLXML)} ORM round-trip. Standard Hibernate
+ * {@code XmlJdbcType} ({@code java.sql.SQLXML}) is <em>not</em> recommended — Xugu JDBC
+ * SQLXML support is unproven. Native SQL string IT remains a secondary acceptance path.
  *
  * <p><b>Geometric (A-TYP-017):</b> XuGu documents simple 2D types POINT/LINE/LSEG/BOX/PATH/
  * POLYGON/CIRCLE ({@code reference/sql/datatype/geometric.md}) — not PostGIS. Dialect maps
@@ -424,7 +426,8 @@ public class XuguDialect extends Dialect {
 		jdbcTypes.addDescriptorIfAbsent( UUIDJdbcType.INSTANCE );
 		jdbcTypes.addDescriptorIfAbsent( SqlTypes.JSON, XuguCastingJsonJdbcType.INSTANCE );
 		jdbcTypes.addTypeConstructorIfAbsent( XuguCastingJsonArrayJdbcTypeConstructor.INSTANCE );
-		jdbcTypes.addDescriptorIfAbsent( SqlTypes.SQLXML, XmlJdbcType.INSTANCE );
+		// Override default XmlJdbcType (java.sql.SQLXML) — XuGu XML columns are string-bound.
+		jdbcTypes.addDescriptor( SqlTypes.SQLXML, XuguXmlJdbcType.INSTANCE );
 		// Override default DurationJdbcType (NUMERIC) — XuGu INTERVAL columns are string-bound.
 		jdbcTypes.addDescriptor( SqlTypes.DURATION, XuguIntervalJdbcType.DURATION );
 		jdbcTypes.addDescriptor( SqlTypes.INTERVAL_SECOND, XuguIntervalJdbcType.INTERVAL_SECOND );

@@ -3,13 +3,28 @@ package com.xugu.dialect.it;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.JdbcSettings;
+import org.hibernate.cfg.SchemaToolingSettings;
+import org.hibernate.tool.schema.Action;
+import org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator;
 import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
 import org.opentest4j.TestAbortedException;
 
+import com.xugu.dialect.XuguDialect;
+import com.xugu.dialect.it.entities.I010P003XmlEntity;
 import com.xugu.dialect.support.XuguITGate;
 import com.xugu.dialect.support.XuguTestConnection;
+import com.xugu.dialect.type.XuguXmlJdbcType;
 import com.xugu.dialect.type.XuguXmlTypeSupport;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,16 +33,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 /**
- * Gated IT: A-TYP-016 XML type + A-FUN-021 XML functions native SQL round-trip.
+ * Gated IT: A-TYP-016 XML type (native + entity ORM) + A-FUN-021 XML functions.
  *
  * <p>SQL shapes from {@code reference/sql/datatype/xml.md} and
  * {@code reference/function/xml-functions/{extract,xmlelement,xmlquery,xmltable}.md}.
  * {@code XMLTABLE} is documented single-node only ({@code xmltable.md} note) — IT uses
  * native SQL, not cluster-safe claim.
+ *
+ * <p>Entity path (I-010/P-003) uses {@link XuguXmlJdbcType} for
+ * {@code String} + {@code @JdbcTypeCode(SQLXML)} persist/load.
  */
 class XuguXmlTypeAndFunctionsIT {
 
 	private static final String TYPE_TABLE = "HIB_I009_P003_XML";
+	private static final String ENTITY_TABLE = "HIB_I010_P003_XML";
 	private static final String EXTRACT_TABLE = "HIB_I009_P003_EXTRACT";
 	private static final String XMLTABLE_TABLE = "HIB_I009_P003_XMLTABLE";
 
@@ -90,6 +109,52 @@ class XuguXmlTypeAndFunctionsIT {
 		}
 		catch ( Exception e ) {
 			fail( "XML type native IT failed: " + e.getMessage(), e );
+		}
+	}
+
+	@Test
+	void xmlEntityOrmRoundTrip_A_TYP_016() {
+		Assumptions.assumeTrue( XuguITGate.isEnabled(), "integration gate off" );
+		cleanupEntityTable();
+
+		final String payload = "<num>1</num>";
+
+		StandardServiceRegistry registry = buildRegistry();
+		SessionFactory sf = null;
+		try {
+			Metadata metadata = new MetadataSources( registry )
+					.addAnnotatedClass( I010P003XmlEntity.class )
+					.buildMetadata();
+			export( metadata, registry, Action.CREATE_ONLY );
+			sf = metadata.buildSessionFactory();
+
+			try ( Session session = sf.openSession() ) {
+				session.beginTransaction();
+				session.persist( new I010P003XmlEntity( 1, payload ) );
+				session.getTransaction().commit();
+			}
+
+			try ( Session session = sf.openSession() ) {
+				I010P003XmlEntity loaded = session.find( I010P003XmlEntity.class, 1 );
+				assertNotNull( loaded, "entity must load" );
+				assertNotNull( loaded.getXml(), "SQLXML column" );
+				assertEquals( payload, loaded.getXml().trim(), "SQLXML String round-trip" );
+			}
+
+			export( metadata, registry, Action.DROP );
+		}
+		catch ( AssertionError e ) {
+			throw e;
+		}
+		catch ( Exception e ) {
+			fail( "XML entity ORM IT failed: " + e.getMessage(), e );
+		}
+		finally {
+			if ( sf != null ) {
+				sf.close();
+			}
+			StandardServiceRegistryBuilder.destroy( registry );
+			cleanupEntityTable();
 		}
 	}
 
@@ -200,6 +265,30 @@ class XuguXmlTypeAndFunctionsIT {
 		}
 		catch ( Exception e ) {
 			fail( "XML functions native IT failed: " + e.getMessage(), e );
+		}
+	}
+
+	private static StandardServiceRegistry buildRegistry() {
+		return new StandardServiceRegistryBuilder()
+				.applySetting( JdbcSettings.JAKARTA_JDBC_DRIVER, XuguTestConnection.DRIVER )
+				.applySetting( JdbcSettings.JAKARTA_JDBC_URL, XuguTestConnection.jdbcUrl() )
+				.applySetting( JdbcSettings.DIALECT, XuguDialect.class.getName() )
+				.applySetting( SchemaToolingSettings.HBM2DDL_AUTO, "none" )
+				.build();
+	}
+
+	private static void export(Metadata metadata, StandardServiceRegistry registry, Action action) {
+		Map<String, Object> settings = new HashMap<>();
+		settings.put( SchemaToolingSettings.JAKARTA_HBM2DDL_DATABASE_ACTION, action );
+		SchemaManagementToolCoordinator.process( metadata, registry, settings, completion -> {
+		} );
+	}
+
+	private static void cleanupEntityTable() {
+		try ( Connection c = XuguTestConnection.open(); Statement st = c.createStatement() ) {
+			st.execute( "DROP TABLE IF EXISTS " + ENTITY_TABLE );
+		}
+		catch ( Exception ignored ) {
 		}
 	}
 }

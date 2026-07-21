@@ -21,7 +21,7 @@ tasks:
     dependencies: []
   - task_id: P-002
     title: "A-TYP-014 INTERVAL 实体 ORM 真库往返（或诚实负向）"
-    status: in_progress
+    status: accepted
     build_id: B-001
     packet: harness/tasks/P-002.md
     acceptance_doc: harness/evidence/implementer/I-010/P-002/ACCEPTANCE.md
@@ -29,8 +29,8 @@ tasks:
     dependencies: [P-001]
   - task_id: P-003
     title: "A-TYP-016 XML 实体 @JdbcTypeCode(SQLXML) 真库往返（或诚实负向）"
-    status: planned
-    build_id: null
+    status: in_progress
+    build_id: B-001
     packet: harness/tasks/P-003.md
     acceptance_doc: harness/evidence/implementer/I-010/P-003/ACCEPTANCE.md
     role_pipeline_summary: "implementer → test → reviewer"
