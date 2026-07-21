@@ -3,11 +3,12 @@ package com.xugu.dialect.type;
 /**
  * XuGu INTERVAL subtype DDL ({@code reference/sql/datatype/datetime.md} §时间间隔类型).
  *
- * <p><b>A-TYP-014 known-limit:</b> XuGu documents <strong>13</strong> INTERVAL subtypes plus
+ * <p><b>A-TYP-014:</b> XuGu documents <strong>13</strong> INTERVAL subtypes plus
  * {@code DEF_INTERVAL_STYLE} output formats; Hibernate 7.4 exposes only
  * {@code SqlTypes.DURATION} and {@code SqlTypes.INTERVAL_SECOND} — not per-subtype ORM codes.
- * This class locks documented DDL strings for schema tooling and native SQL; full entity
- * mapping of all subtypes is out of scope without inventing JDBC interval descriptors.
+ * This class locks documented DDL strings for schema tooling and native SQL. Entity ORM
+ * round-trip for the two Hibernate codes uses {@link XuguIntervalJdbcType}; the other 11
+ * subtypes remain tooling / native-SQL only.
  */
 public final class XuguIntervalTypeSupport {
 

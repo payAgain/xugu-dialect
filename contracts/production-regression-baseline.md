@@ -202,7 +202,13 @@ Columns: `matrix_id | status | entry_class#method | gate | gap_action`
 
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
-| A-TYP-014 | known-limit-documented | `XuguIntervalTypeTest#intervalTypeHooksWired_A_TYP_014`; `XuguIntervalTypeTest#allDocumentedSubtypesLocked_A_TYP_014`; `XuguIntervalTypeIT#intervalNativeRoundTrip_A_TYP_014` | IT | N/A |
+| A-TYP-014 | known-limit-documented | `XuguIntervalTypeTest#intervalTypeHooksWired_A_TYP_014`; `XuguIntervalTypeTest#allDocumentedSubtypesLocked_A_TYP_014`; `XuguIntervalTypeTest#intervalJdbcTypesContributed_A_TYP_014`; `XuguIntervalTypeTest#intervalJdbcTypeFormatParseRoundTrip_A_TYP_014`; `XuguIntervalTypeIT#intervalNativeRoundTrip_A_TYP_014`; `XuguIntervalTypeIT#intervalEntityOrmRoundTrip_A_TYP_014` | IT | N/A (I-010/P-002 entity ORM path; live pending) |
+
+### I-010 / P-002 — A-TYP-014 entity ORM path
+
+| matrix_id | status | entry_class#method | gate | gap_action |
+|---|---|---|---|---|
+| A-TYP-014 | known-limit-documented | `XuguIntervalJdbcType` + `I010P002IntervalEntity`; `XuguIntervalTypeIT#intervalEntityOrmRoundTrip_A_TYP_014` (DURATION / INTERVAL_SECOND); native IT retained | IT | **Promote to covered-live only after live entity IT PASS** — this run SKIPPED_INFRA |
 
 ### I-009 / P-004 — promoted from 延后 (Definition A)
 
@@ -261,7 +267,7 @@ Matrix status **文档不允许** or **延后**; baseline records explicit non-s
 
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
-| A-TYP-014 | known-limit-documented | `XuguIntervalTypeTest#intervalTypeHooksWired_A_TYP_014`; `XuguIntervalTypeTest#allDocumentedSubtypesLocked_A_TYP_014`; `XuguIntervalTypeIT#intervalNativeRoundTrip_A_TYP_014`; `XuguDialectTest#columnTypesMatchXuguDocs` (DURATION/INTERVAL_SECOND) | IT | **N/A** (I-009/P-002 closed) |
+| A-TYP-014 | known-limit-documented | `XuguIntervalTypeTest#intervalTypeHooksWired_A_TYP_014`; `XuguIntervalTypeTest#intervalJdbcTypesContributed_A_TYP_014`; `XuguIntervalTypeIT#intervalNativeRoundTrip_A_TYP_014`; `XuguIntervalTypeIT#intervalEntityOrmRoundTrip_A_TYP_014`; `XuguDialectTest#columnTypesMatchXuguDocs` (DURATION/INTERVAL_SECOND) | IT | **I-010/P-002** entity ORM implemented; covered-live after live PASS |
 | A-TYP-016 | known-limit-documented | `XuguXmlTypeTest#xmlTypeHooksWired_A_TYP_016`; `XuguXmlTypeTest#documentedXmlConstantsLocked_A_TYP_016`; `XuguXmlTypeAndFunctionsIT#xmlTypeNativeRoundTrip_A_TYP_016`; `XuguDialectTest#columnTypesMatchXuguDocs` (SQLXML) | IT | **N/A** (I-009/P-003 closed) |
 | A-TYP-017 | known-limit-documented | `XuguGeometricTypeTest#pointTypeHooksWired_A_TYP_017`; `XuguGeometricTypeTest#allDocumentedKindsLocked_A_TYP_017`; `XuguGeometricTypeAndFunctionsIT#geometricTypesNativeRoundTrip_A_TYP_017`; `XuguDialectTest#columnTypesMatchXuguDocs` (POINT/GEOMETRY) | IT | **N/A** (I-009/P-004 closed) |
 | A-TYP-018 | known-limit-documented | `XuguUdtTypeTest#documentedKindsLocked_A_TYP_018`; `XuguUdtTypeTest#createTypeSqlMatchesUdtDoc_A_TYP_018`; `XuguUdtTypeTest#dialectDoesNotClaimOrmUdtEntityMapping_A_TYP_018`; `XuguUdtTypeIT#udtNativeRoundTrip_A_TYP_018` | IT | **N/A** (I-009/P-005 closed) |
@@ -638,17 +644,17 @@ Source: [`harness/evidence/researcher/I-005/P-001/GAP-SUMMARY.md`](../harness/ev
 | **Live IT** | Native SQL subset (`XuguXmlTypeAndFunctionsIT#xmlFunctionsNativeSubset_A_FUN_021`) — XMLTABLE empty → assumption skip |
 | **gap_action** | **N/A** — closed I-009/P-003; live-it-5287 triage aligned status |
 
-### A-TYP-014 INTERVAL known-limit (I-009/P-002)
+### A-TYP-014 INTERVAL known-limit (I-009/P-002; entity ORM I-010/P-002)
 
 | Field | Value |
 |---|---|
 | **matrix_id** | A-TYP-014 |
-| **status** | **known-limit-documented** |
+| **status** | **known-limit-documented** (entity ORM path implemented; **not** covered-live until live IT PASS) |
 | **Doc citation** | `reference/sql/datatype/datetime.md` §时间间隔类型 (13 subtypes; `DEF_INTERVAL_STYLE`) |
-| **Dialect surface** | `SqlTypes.DURATION` → `interval day to second`; `SqlTypes.INTERVAL_SECOND` → `interval second`; all 13 subtype DDL strings in `XuguIntervalTypeSupport` |
-| **Known-limit reason** | Hibernate 7.4 exposes only DURATION + INTERVAL_SECOND — not 13 XuGu subtypes; output format depends on server `DEF_INTERVAL_STYLE`; no invented JDBC interval ORM mapping |
-| **Live IT** | Native SQL round-trip (`XuguIntervalTypeIT`) — not full entity `@JdbcTypeCode` round-trip |
-| **gap_action** | **N/A** — closed I-009/P-002 |
+| **Dialect surface** | `SqlTypes.DURATION` → `interval day to second`; `SqlTypes.INTERVAL_SECOND` → `interval second`; `XuguIntervalJdbcType` string bind/extract for entity `Duration`; all 13 subtype DDL strings in `XuguIntervalTypeSupport` |
+| **Known-limit reason** | Hibernate 7.4 exposes only DURATION + INTERVAL_SECOND — not 13 XuGu subtypes; output format depends on server `DEF_INTERVAL_STYLE`. Entity ORM for the two Hibernate codes is implemented via documented SQL_STANDARD string literals (`XuguIntervalJdbcType`); the other 11 subtypes remain tooling / native-SQL only. Live entity round-trip was **SKIPPED_INFRA** this run (DB unreachable) — do not claim covered-live yet. |
+| **Live IT** | Native: `XuguIntervalTypeIT#intervalNativeRoundTrip_A_TYP_014`; Entity ORM: `XuguIntervalTypeIT#intervalEntityOrmRoundTrip_A_TYP_014` + `I010P002IntervalEntity` |
+| **gap_action** | Re-run with `XUGU_RUN_IT=true` + live DB → if entity IT PASS, promote status to **covered-live** |
 
 ### A-TYP-018 UDT known-limit (I-009/P-005)
 

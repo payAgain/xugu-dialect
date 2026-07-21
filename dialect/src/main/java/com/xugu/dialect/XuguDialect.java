@@ -78,6 +78,7 @@ import com.xugu.dialect.temptable.XuguLocalTemporaryTableStrategy;
 import com.xugu.dialect.type.XuguCastingJsonArrayJdbcTypeConstructor;
 import com.xugu.dialect.type.XuguCastingJsonJdbcType;
 import com.xugu.dialect.type.XuguGeometricTypeSupport;
+import com.xugu.dialect.type.XuguIntervalJdbcType;
 import com.xugu.dialect.type.XuguIntervalTypeSupport;
 import com.xugu.dialect.type.XuguUdtTypeSupport;
 import com.xugu.dialect.type.XuguXmlTypeSupport;
@@ -140,9 +141,11 @@ import jakarta.persistence.Timeout;
  * ({@code reference/sql/datatype/datetime.md} §时间间隔类型); Hibernate 7.4 exposes
  * {@code SqlTypes.DURATION} and {@code SqlTypes.INTERVAL_SECOND} only. Dialect maps
  * DURATION → {@code INTERVAL DAY TO SECOND}, INTERVAL_SECOND → {@code INTERVAL SECOND};
- * all subtype DDL strings live in {@link XuguIntervalTypeSupport} for native SQL / tooling.
- * Output format depends on {@code DEF_INTERVAL_STYLE} — not controlled by the dialect.
- * Full ORM mapping of every subtype is <em>known-limit-documented</em> (native IT path).
+ * {@link XuguIntervalJdbcType} contributes string-based JDBC binding for entity
+ * {@code Duration} ORM round-trip. All 13 subtype DDL strings live in
+ * {@link XuguIntervalTypeSupport} for native SQL / tooling. Output format depends on
+ * {@code DEF_INTERVAL_STYLE} — not controlled by the dialect. The other 11 subtypes
+ * remain tooling / native-SQL only (no Hibernate {@code SqlTypes} codes).
  *
  * <p><b>XML (A-TYP-016):</b> XuGu documents {@code XML}/{@code XMLTYPE} synonyms
  * ({@code reference/sql/datatype/xml.md}, BLOB-backed, max 2GB). Dialect maps
@@ -422,6 +425,9 @@ public class XuguDialect extends Dialect {
 		jdbcTypes.addDescriptorIfAbsent( SqlTypes.JSON, XuguCastingJsonJdbcType.INSTANCE );
 		jdbcTypes.addTypeConstructorIfAbsent( XuguCastingJsonArrayJdbcTypeConstructor.INSTANCE );
 		jdbcTypes.addDescriptorIfAbsent( SqlTypes.SQLXML, XmlJdbcType.INSTANCE );
+		// Override default DurationJdbcType (NUMERIC) — XuGu INTERVAL columns are string-bound.
+		jdbcTypes.addDescriptor( SqlTypes.DURATION, XuguIntervalJdbcType.DURATION );
+		jdbcTypes.addDescriptor( SqlTypes.INTERVAL_SECOND, XuguIntervalJdbcType.INTERVAL_SECOND );
 	}
 
 	@Override

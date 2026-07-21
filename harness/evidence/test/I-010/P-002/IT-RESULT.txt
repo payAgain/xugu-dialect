@@ -1,0 +1,4 @@
+OFFLINE: PASS (XuguIntervalTypeTest 4/4; XuguIntervalTypeIT 2 skipped by gate)
+LIVE: SKIPPED_INFRA (TcpTestSucceeded=False; E50025 Connection refused 192.168.2.239:5138)
+ENTITY_ORM_PATH: implemented (positive, not honest-negative)
+SSOT: known-limit-documented retained until live entity IT PASS

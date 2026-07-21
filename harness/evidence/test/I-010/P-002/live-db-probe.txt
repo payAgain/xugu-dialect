@@ -1,0 +1,4 @@
+﻿TcpTestSucceeded=False
+host=192.168.2.239
+port=5138
+note=Connection refused — SKIPPED_INFRA for gated IT with XUGU_RUN_IT=true
