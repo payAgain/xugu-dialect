@@ -21,8 +21,11 @@
   "children": [],
   "parent": null,
   "relatedFiles": [
-    ".trellis/spec/backend/"
+    ".trellis/spec/dialect/library/",
+    ".trellis/spec/demo-spring-boot/app/",
+    ".trellis/spec/guides/",
+    ".trellis/config.yaml"
   ],
-  "notes": "First-time setup task created by trellis init (backend project)",
+  "notes": "Spec bootstrap complete 2026-07-21: replaced backend templates with dialect + demo-spring-boot package specs; guides adapted; packages wired in config.yaml.",
   "meta": {}
 }

@@ -54,27 +54,15 @@ max_journal_lines: 2000
 # Monorepo / Packages
 #-------------------------------------------------------------------------------
 
-# Declare packages for monorepo projects.
-# Trellis auto-detects workspaces during `trellis init`, but you can also
-# configure them manually here.
-#
-# packages:
-#   frontend:
-#     path: packages/frontend
-#   backend:
-#     path: packages/backend
-#   docs:
-#     path: docs-site
-#     type: submodule
-#   # For polyrepo / meta-repo layouts (independent .git in each subdir),
-#   # mark the package with `git: true`. The runtime treats it as an
-#   # independent repository for things like git-context display.
-#   webapp:
-#     path: ./webapp
-#     git: true
+# Maven reactor modules mirrored as Trellis packages (spec under .trellis/spec/<name>/).
+packages:
+  dialect:
+    path: dialect
+  demo-spring-boot:
+    path: demo-spring-boot
 
 # Default package used when --package is not specified.
-# default_package: frontend
+default_package: dialect
 
 #-------------------------------------------------------------------------------
 # Channel worker OOM guard
