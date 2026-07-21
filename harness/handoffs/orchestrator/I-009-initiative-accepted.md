@@ -27,7 +27,7 @@ Human Gate「Initiative Accept I-009」→ Initiative **accepted**
 | Live triage | `8d1de762ff99c2de6883292dca58e8c0c08cc171` |
 | P-011 accept | `9c74f53` |
 | Accept must-commit | `e1c1f761b34c68241a9fd8792390f2f757700bc7` |
-| Final HEAD (SHA fill) | *(after SHA-fill commit)* |
+| Final HEAD | `471221cd6aa4434c37bc4dbd11510727e14f8897` |
 
 ## Evidence
 
