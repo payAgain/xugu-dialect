@@ -25,6 +25,15 @@ import org.hibernate.type.spi.TypeConfiguration;
  *
  * <p>String aggregate: Hibernate {@code listagg} → native XuGu
  * {@code LISTAGG(...) WITHIN GROUP (ORDER BY ...)}.
+ *
+ * <p>XML (A-FUN-021): bounded subset {@code xmlelement}/{@code xmlquery}/{@code xmltable}
+ * ({@code reference/function/xml-functions/**}). {@code EXTRACT(XML,xpath)} is exercised via
+ * native SQL IT only — temporal {@code extract(field from …)} remains the Dialect default.
+ *
+ * <p>Geometric (A-FUN-020): all 21 documented functions in
+ * {@code reference/function/geometric-functions/} — paired with A-TYP-017 literals; native
+ * SQL IT for representative calls ({@code area}/{@code center}/{@code point}/{@code box}/
+ * {@code circle}).
  */
 public final class XuguFunctionRegistrations {
 
@@ -113,6 +122,29 @@ public final class XuguFunctionRegistrations {
 				.setArgumentListSignature( "(JSON jsonDoc[, STRING path])" )
 				.register();
 
+		// --- XML subset (A-FUN-021) — docs: reference/function/xml-functions/** ---
+		functionRegistry.namedDescriptorBuilder( "xmlelement" )
+				.setMinArgumentCount( 1 )
+				.setParameterTypes( FunctionParameterType.STRING )
+				.setInvariantType( stringType )
+				.setArgumentListSignature( "(STRING xmlname[, …])" )
+				.register();
+		functionRegistry.namedDescriptorBuilder( "xmlquery" )
+				.setMinArgumentCount( 1 )
+				.setParameterTypes( FunctionParameterType.STRING )
+				.setInvariantType( stringType )
+				.setArgumentListSignature( "(STRING xpath PASSING XML_data RETURNING CONTENT)" )
+				.register();
+		functionRegistry.namedDescriptorBuilder( "xmltable" )
+				.setMinArgumentCount( 1 )
+				.setParameterTypes( FunctionParameterType.STRING )
+				.setInvariantType( stringType )
+				.setArgumentListSignature( "(XQuery PASSING XML_data COLUMNS …)" )
+				.register();
+
+		// --- Geometric subset (A-FUN-020) — docs: reference/function/geometric-functions/** ---
+		registerGeometricFunctions( functionRegistry, stringType, typeConfiguration );
+
 		// --- listagg / string_agg / group_concat (A-FUN-018) ---
 		// Hibernate HQL listagg → native LISTAGG … WITHIN GROUP (XuGu form).
 		functionFactory.listagg( null );
@@ -128,5 +160,48 @@ public final class XuguFunctionRegistrations {
 				.setInvariantType( stringType )
 				.setArgumentListSignature( "(STRING expr[, …] [ORDER BY …] [SEPARATOR delimiter])" )
 				.register();
+	}
+
+	private static void registerGeometricFunctions(
+			SqmFunctionRegistry functionRegistry,
+			BasicType<String> stringType,
+			TypeConfiguration typeConfiguration) {
+		final BasicType<Integer> integerType = typeConfiguration.getBasicTypeRegistry()
+				.resolve( StandardBasicTypes.INTEGER );
+		final BasicType<Double> doubleType = typeConfiguration.getBasicTypeRegistry()
+				.resolve( StandardBasicTypes.DOUBLE );
+		final BasicType<Boolean> booleanType = typeConfiguration.getBasicTypeRegistry()
+				.resolve( StandardBasicTypes.BOOLEAN );
+
+		for ( String name : XuguGeometricFunctions.DOCUMENTED_NAMES ) {
+			functionRegistry.namedDescriptorBuilder( name )
+					.setMinArgumentCount( 1 )
+					.setInvariantType( geometricReturnType( name, stringType, integerType, doubleType, booleanType ) )
+					.setArgumentListSignature( geometricSignature( name ) )
+					.register();
+		}
+	}
+
+	private static BasicType<?> geometricReturnType(
+			String name,
+			BasicType<String> stringType,
+			BasicType<Integer> integerType,
+			BasicType<Double> doubleType,
+			BasicType<Boolean> booleanType) {
+		return switch ( name ) {
+			case "area", "radius", "diameter", "height", "width", "slope" -> doubleType;
+			case "npoints" -> integerType;
+			case "isclosed", "isopen" -> booleanType;
+			default -> stringType;
+		};
+	}
+
+	private static String geometricSignature(String name) {
+		return switch ( name ) {
+			case "bound_box" -> "(BOX box1, BOX box2)";
+			case "box", "circle", "line", "lseg", "point", "polygon" -> "(expr1[, expr2])";
+			case "popen", "pclose" -> "(PATH path)";
+			default -> "(expr)";
+		};
 	}
 }

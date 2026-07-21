@@ -56,6 +56,7 @@ import org.hibernate.sql.exec.spi.JdbcOperation;
 import org.hibernate.type.SqlTypes;
 import org.hibernate.type.descriptor.DateTimeUtils;
 import org.hibernate.type.descriptor.jdbc.UUIDJdbcType;
+import org.hibernate.type.descriptor.jdbc.XmlJdbcType;
 import org.hibernate.type.descriptor.jdbc.spi.JdbcTypeRegistry;
 import org.hibernate.type.descriptor.sql.internal.DdlTypeImpl;
 import org.hibernate.type.descriptor.sql.spi.DdlTypeRegistry;
@@ -75,7 +76,9 @@ import com.xugu.dialect.temptable.XuguGlobalTemporaryTableStrategy;
 import com.xugu.dialect.temptable.XuguLocalTemporaryTableStrategy;
 import com.xugu.dialect.type.XuguCastingJsonArrayJdbcTypeConstructor;
 import com.xugu.dialect.type.XuguCastingJsonJdbcType;
+import com.xugu.dialect.type.XuguGeometricTypeSupport;
 import com.xugu.dialect.type.XuguIntervalTypeSupport;
+import com.xugu.dialect.type.XuguXmlTypeSupport;
 
 import jakarta.persistence.TemporalType;
 import jakarta.persistence.Timeout;
@@ -139,6 +142,20 @@ import jakarta.persistence.Timeout;
  * Output format depends on {@code DEF_INTERVAL_STYLE} — not controlled by the dialect.
  * Full ORM mapping of every subtype is <em>known-limit-documented</em> (native IT path).
  *
+ * <p><b>XML (A-TYP-016):</b> XuGu documents {@code XML}/{@code XMLTYPE} synonyms
+ * ({@code reference/sql/datatype/xml.md}, BLOB-backed, max 2GB). Dialect maps
+ * {@code SqlTypes.SQLXML} → {@code XML} DDL via {@link XuguXmlTypeSupport}; standard
+ * {@link XmlJdbcType} contributed when JDBC supports it. Full ORM entity round-trip on
+ * {@code java.sql.SQLXML} is <em>known-limit-documented</em> — native SQL IT path.
+ *
+ * <p><b>Geometric (A-TYP-017):</b> XuGu documents simple 2D types POINT/LINE/LSEG/BOX/PATH/
+ * POLYGON/CIRCLE ({@code reference/sql/datatype/geometric.md}) — not PostGIS. Dialect maps
+ * {@code SqlTypes.POINT} and bounded {@code SqlTypes.GEOMETRY} → {@code POINT} DDL via
+ * {@link XuguGeometricTypeSupport}; all seven subtype DDL strings locked for native SQL.
+ * Full ORM mapping of every geometric column type is <em>known-limit-documented</em>.
+ * Geometric functions (A-FUN-020): bounded 21-function registry per
+ * {@code reference/function/geometric-functions/}.
+ *
  * <p><b>ARRAY (A-TYP-015 / C-DDL-005):</b> {@link #supportsStandardArrays()} enables
  * Hibernate {@code SqlTypes.ARRAY} / {@code getPreferredSqlTypeCodeForArray()} with XuGu
  * {@code elementType[]}/{@code INTEGER ARRAY} DDL ({@code reference/sql/datatype/array.md}).
@@ -149,6 +166,10 @@ import jakarta.persistence.Timeout;
  * {@code json_arrayagg}/{@code json_objectagg}; C-JSON-005 deepen adds {@code json_unquote},
  * {@code json_length}, {@code json_type} (bounded subset — not full json_* registry);
  * JDBC writes use {@code cast(? as json)}; {@link #getAggregateSupport()} covers JSON paths.
+ * XML (A-FUN-021): bounded subset {@code xmlelement}/{@code xmlquery}/{@code xmltable}
+ * ({@code reference/function/xml-functions/**}); {@code EXTRACT(xml,xpath)} is native-SQL
+ * only (name shared with temporal {@code extract(field from …)} HQL). {@code XMLTABLE} is
+ * documented single-node only — not a cluster-safe dialect claim.
  * Hibernate {@code listagg} → XuGu {@code LISTAGG … WITHIN GROUP}.
  *
  * <p><b>Bulk mutation (C-BULK-* / I-003):</b>
@@ -291,6 +312,8 @@ public class XuguDialect extends Dialect {
 			case SqlTypes.ARRAY -> "array";
 			case SqlTypes.DURATION -> XuguIntervalTypeSupport.DURATION_DDL;
 			case SqlTypes.INTERVAL_SECOND -> XuguIntervalTypeSupport.INTERVAL_SECOND_DDL;
+			case SqlTypes.SQLXML -> XuguXmlTypeSupport.XML_DDL;
+			case SqlTypes.POINT, SqlTypes.GEOMETRY -> XuguGeometricTypeSupport.POINT_DDL;
 			default -> super.columnType( sqlTypeCode );
 		};
 	}
@@ -327,6 +350,9 @@ public class XuguDialect extends Dialect {
 		ddlTypes.addDescriptor( new DdlTypeImpl( SqlTypes.JSON, columnType( SqlTypes.JSON ), this ) );
 		ddlTypes.addDescriptor( new DdlTypeImpl( SqlTypes.DURATION, columnType( SqlTypes.DURATION ), this ) );
 		ddlTypes.addDescriptor( new DdlTypeImpl( SqlTypes.INTERVAL_SECOND, columnType( SqlTypes.INTERVAL_SECOND ), this ) );
+		ddlTypes.addDescriptor( new DdlTypeImpl( SqlTypes.SQLXML, columnType( SqlTypes.SQLXML ), this ) );
+		ddlTypes.addDescriptor( new DdlTypeImpl( SqlTypes.POINT, columnType( SqlTypes.POINT ), this ) );
+		ddlTypes.addDescriptor( new DdlTypeImpl( SqlTypes.GEOMETRY, columnType( SqlTypes.GEOMETRY ), this ) );
 	}
 
 	@Override
@@ -336,6 +362,7 @@ public class XuguDialect extends Dialect {
 		jdbcTypes.addDescriptorIfAbsent( UUIDJdbcType.INSTANCE );
 		jdbcTypes.addDescriptorIfAbsent( SqlTypes.JSON, XuguCastingJsonJdbcType.INSTANCE );
 		jdbcTypes.addTypeConstructorIfAbsent( XuguCastingJsonArrayJdbcTypeConstructor.INSTANCE );
+		jdbcTypes.addDescriptorIfAbsent( SqlTypes.SQLXML, XmlJdbcType.INSTANCE );
 	}
 
 	@Override

@@ -143,16 +143,6 @@ class XuguNegativeRegressionBaselineTest {
 	// 延后 rows — @Disabled SSOT anchors (no positive SQL invention)
 	// -------------------------------------------------------------------------
 
-	@Disabled( "SSOT " + SSOT + " — A-TYP-016 XML deferred" )
-	@Test
-	void deferred_A_TYP_016_xml() {
-	}
-
-	@Disabled( "SSOT " + SSOT + " — A-TYP-017 geometric/spatial deferred" )
-	@Test
-	void deferred_A_TYP_017_spatial() {
-	}
-
 	@Disabled( "SSOT " + SSOT + " — A-TYP-018 UDT deferred" )
 	@Test
 	void deferred_A_TYP_018_udt() {
@@ -191,16 +181,6 @@ class XuguNegativeRegressionBaselineTest {
 	@Disabled( "SSOT " + SSOT + " — A-FUN-019 regexp_* HQL deferred" )
 	@Test
 	void deferred_A_FUN_019_regexp() {
-	}
-
-	@Disabled( "SSOT " + SSOT + " — A-FUN-020 geometric functions deferred (pairs A-TYP-017)" )
-	@Test
-	void deferred_A_FUN_020_geometric() {
-	}
-
-	@Disabled( "SSOT " + SSOT + " — A-FUN-021 XML functions deferred (pairs A-TYP-016)" )
-	@Test
-	void deferred_A_FUN_021_xmlFunctions() {
 	}
 
 	@Disabled( "SSOT " + SSOT + " — A-SCH-017 advanced index types deferred" )

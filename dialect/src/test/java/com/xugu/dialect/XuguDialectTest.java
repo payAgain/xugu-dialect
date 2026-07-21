@@ -59,6 +59,9 @@ class XuguDialectTest {
 		assertEquals( "json", expose( SqlTypes.JSON ) );
 		assertEquals( "interval day to second", expose( SqlTypes.DURATION ) );
 		assertEquals( "interval second", expose( SqlTypes.INTERVAL_SECOND ) );
+		assertEquals( "xml", expose( SqlTypes.SQLXML ) );
+		assertEquals( "point", expose( SqlTypes.POINT ) );
+		assertEquals( "point", expose( SqlTypes.GEOMETRY ) );
 	}
 
 	@Test

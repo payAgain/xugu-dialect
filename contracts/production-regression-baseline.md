@@ -184,6 +184,13 @@ Columns: `matrix_id | status | entry_class#method | gate | gap_action`
 | C-JSON-005 | covered-live | `XuguFunctionRegistryTest#jsonSubsetUsesStandardJsonValueNotMysqlDump`; `XuguJsonSubsetDeepenIT#jsonSubsetDeepen_Hql_C_JSON_005` | IT | N/A |
 | C-DDL-005 | covered-live | `XuguArrayTypeTest#arrayTypeHooksWired_A_TYP_015_C_DDL_005`; `XuguArrayTypeIT#arrayColumnRoundTrip_A_TYP_015_C_DDL_005` | IT | N/A |
 
+### I-009 / P-003 — promoted from 延后 (Definition A)
+
+| matrix_id | status | entry_class#method | gate | gap_action |
+|---|---|---|---|---|
+| A-TYP-016 | known-limit-documented | `XuguXmlTypeTest#xmlTypeHooksWired_A_TYP_016`; `XuguXmlTypeTest#documentedXmlConstantsLocked_A_TYP_016`; `XuguXmlTypeAndFunctionsIT#xmlTypeNativeRoundTrip_A_TYP_016`; `XuguDialectTest#columnTypesMatchXuguDocs` (SQLXML) | IT | N/A |
+| A-FUN-021 | known-limit-documented | `XuguFunctionRegistryTest#xmlSubsetRegistered_A_FUN_021`; `XuguXmlTypeAndFunctionsIT#xmlFunctionsNativeSubset_A_FUN_021` | IT (live SKIPPED_INFRA) | N/A |
+
 ### I-009 / P-002 — promoted from 延后 (Definition A)
 
 | matrix_id | status | entry_class#method | gate | gap_action |
@@ -220,8 +227,8 @@ Matrix status **文档不允许** or **延后**; baseline records explicit non-s
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
 | A-TYP-014 | known-limit-documented | `XuguIntervalTypeTest#intervalTypeHooksWired_A_TYP_014`; `XuguIntervalTypeTest#allDocumentedSubtypesLocked_A_TYP_014`; `XuguIntervalTypeIT#intervalNativeRoundTrip_A_TYP_014`; `XuguDialectTest#columnTypesMatchXuguDocs` (DURATION/INTERVAL_SECOND) | IT | **N/A** (I-009/P-002 closed) |
-| A-TYP-016 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_TYP_016_xml` (@Disabled) | none | **I-009/P-003** |
-| A-TYP-017 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_TYP_017_spatial` (@Disabled) | none | **I-009/P-004** |
+| A-TYP-016 | known-limit-documented | `XuguXmlTypeTest#xmlTypeHooksWired_A_TYP_016`; `XuguXmlTypeTest#documentedXmlConstantsLocked_A_TYP_016`; `XuguXmlTypeAndFunctionsIT#xmlTypeNativeRoundTrip_A_TYP_016`; `XuguDialectTest#columnTypesMatchXuguDocs` (SQLXML) | IT | **N/A** (I-009/P-003 closed) |
+| A-TYP-017 | known-limit-documented | `XuguGeometricTypeTest#pointTypeHooksWired_A_TYP_017`; `XuguGeometricTypeTest#allDocumentedKindsLocked_A_TYP_017`; `XuguGeometricTypeAndFunctionsIT#geometricTypesNativeRoundTrip_A_TYP_017`; `XuguDialectTest#columnTypesMatchXuguDocs` (POINT/GEOMETRY) | IT | **N/A** (I-009/P-004 closed) |
 | A-TYP-018 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_TYP_018_udt` (@Disabled) | none | **I-009/P-005** |
 | A-DDL-007 | negative-only | `XuguNegativeRegressionBaselineTest#definitionAIfNotExistsDeferred_A_DDL_007`; `XuguDdlIT` comment (CREATE_ONLY defers IF NOT EXISTS) | unit | **I-009/P-007** (SSOT promotion via C-DDL-001) |
 | A-DDL-008 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_DDL_008_partitioning` (@Disabled) | none | **I-009/P-007** |
@@ -232,8 +239,8 @@ Matrix status **文档不允许** or **延后**; baseline records explicit non-s
 | A-IDN-005 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_IDN_005_identityMode` (@Disabled) | none | **I-009/P-009** |
 | A-FUN-015 | negative-only | `XuguFunctionRegistryTest#unsupportedFunctionNotRegistered_negativeNote` | unit | **I-009/P-006** |
 | A-FUN-019 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_FUN_019_regexp` (@Disabled) | none | **I-009/P-006** |
-| A-FUN-020 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_FUN_020_geometric` (@Disabled) | none | **I-009/P-004** |
-| A-FUN-021 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_FUN_021_xmlFunctions` (@Disabled) | none | **I-009/P-003** |
+| A-FUN-020 | covered-live | `XuguFunctionRegistryTest#geometricSubsetRegistered_A_FUN_020`; `XuguGeometricTypeAndFunctionsIT#geometricFunctionsNativeSubset_A_FUN_020` | IT | **N/A** (I-009/P-004 closed) |
+| A-FUN-021 | known-limit-documented | `XuguFunctionRegistryTest#xmlSubsetRegistered_A_FUN_021`; `XuguXmlTypeAndFunctionsIT#xmlFunctionsNativeSubset_A_FUN_021` | IT (live SKIPPED_INFRA) | **N/A** (I-009/P-003 closed) |
 | A-SCH-003 | negative-only | `XuguNegativeRegressionBaselineTest#catalogsNotSupported_negativeOnly_A_SCH_003`; `XuguSchemaTempCommentTest#nameQualifierIsSchemaOnly_A_SCH_002_not_003` (supportsCatalogs=false) | unit | **I-009/P-008** |
 | A-SCH-017 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_SCH_017_advancedIndexes` (@Disabled) | none | **I-009/P-008** |
 | A-XCUT-012 | negative-only | `XuguNegativeRegressionBaselineTest#deferred_A_XCUT_012_mavenCentralPublish` (@Disabled) | none | N/A |
@@ -482,6 +489,30 @@ Source: [`harness/evidence/researcher/I-005/P-001/GAP-SUMMARY.md`](../harness/ev
 |---|---|
 | **Code** | C-DDL-001 covered-live (`XuguTypeDdlDetailsTest/IT`) |
 | **P-007** | SSOT promotion — align A-DDL-007 with C-DDL-001; no duplicate DDL |
+
+### A-TYP-016 XML known-limit (I-009/P-003)
+
+| Field | Value |
+|---|---|
+| **matrix_id** | A-TYP-016 |
+| **status** | **known-limit-documented** |
+| **Doc citation** | `reference/sql/datatype/xml.md` (XML/XMLTYPE synonyms, BLOB-backed, max 2GB) |
+| **Dialect surface** | `SqlTypes.SQLXML` → `xml` DDL via `XuguXmlTypeSupport`; standard `XmlJdbcType` contributed |
+| **Known-limit reason** | No verified ORM `@JdbcTypeCode(SQLXML)` entity round-trip; Xugu JDBC `java.sql.SQLXML` path unproven — native SQL string round-trip IT is the honest acceptance path |
+| **Live IT** | Native SQL CRUD (`XuguXmlTypeAndFunctionsIT#xmlTypeNativeRoundTrip_A_TYP_016`) |
+| **gap_action** | **N/A** — closed I-009/P-003 |
+
+### A-FUN-021 XML functions (I-009/P-003)
+
+| Field | Value |
+|---|---|
+| **matrix_id** | A-FUN-021 |
+| **status** | **covered-live** |
+| **Doc citation** | `reference/function/xml-functions/{extract,xmlelement,xmlquery,xmltable}.md` |
+| **Dialect surface** | HQL registry: `xmlelement`, `xmlquery`, `xmltable`; `EXTRACT(xml,xpath)` native SQL only (temporal `extract(field from …)` keeps Dialect default) |
+| **Cluster note** | `XMLTABLE` documented single-node only (`xmltable.md`) — not a cluster-safe claim |
+| **Live IT** | Native SQL subset (`XuguXmlTypeAndFunctionsIT#xmlFunctionsNativeSubset_A_FUN_021`) |
+| **gap_action** | **N/A** — closed I-009/P-003 |
 
 ### A-TYP-014 INTERVAL known-limit (I-009/P-002)
 

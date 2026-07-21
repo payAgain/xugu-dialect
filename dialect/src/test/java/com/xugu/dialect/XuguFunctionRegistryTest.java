@@ -16,6 +16,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.xugu.dialect.function.XuguFunctionRegistrations;
+import com.xugu.dialect.function.XuguGeometricFunctions;
 import com.xugu.dialect.support.OfflineConnectionProvider;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -133,6 +134,25 @@ class XuguFunctionRegistryTest {
 		assertTrue( listagg.getClass().getSimpleName().toLowerCase().contains( "listagg" ) );
 		assertRegistered( "string_agg" );
 		assertRegistered( "group_concat" );
+	}
+
+	@Test
+	void xmlSubsetRegistered_A_FUN_021() {
+		assertRegistered( "xmlelement" );
+		assertRegistered( "xmlquery" );
+		assertRegistered( "xmltable" );
+		// EXTRACT(XML,xpath) is native-SQL only — temporal extract(field from …) keeps Dialect default
+		assertNotNull( functions.findFunctionDescriptor( "extract" ) );
+		assertNull( functions.findFunctionDescriptor( "extractvalue" ),
+				"extractvalue not in bounded A-FUN-021 subset" );
+	}
+
+	@Test
+	void geometricSubsetRegistered_A_FUN_020() {
+		for ( String name : XuguGeometricFunctions.DOCUMENTED_NAMES ) {
+			assertRegistered( name );
+		}
+		assertEquals( 21, XuguGeometricFunctions.DOCUMENTED_NAMES.size() );
 	}
 
 	@Test
