@@ -5,13 +5,13 @@
       "id": "build",
       "description": "Build the project or validate that it can be packaged",
       "required": true,
-      "command": "mvn -q -DskipTests package"
+      "command": "C:\\Users\\admin\\tools\\apache-maven-3.9.9\\bin\\mvn.cmd -q -DskipTests package"
     },
     {
       "id": "test",
       "description": "Run the project's automated test suite",
       "required": true,
-      "command": "mvn -q test"
+      "command": "C:\\Users\\admin\\tools\\apache-maven-3.9.9\\bin\\mvn.cmd -q test"
     },
     {
       "id": "lint",

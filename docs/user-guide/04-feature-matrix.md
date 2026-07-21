@@ -51,12 +51,15 @@
 | A-SEQ-001 | 可实现 | `hbm2ddl validate` 经 `all_sequences` 读取序列元数据（I-002/P-002；见排障 §3） |
 | A-LCK-004 SKIP LOCKED | 文档不允许 | `supportsSkipLocked=false`；不会发出该关键字 — 专节 [07-lock-integration.md](07-lock-integration.md) |
 | A-LCK-005 FOR SHARE / PESSIMISTIC_READ | 文档不允许 | 无 `FOR SHARE`；`PESSIMISTIC_READ`→排他 **`FOR UPDATE`** — [07-lock-integration.md](07-lock-integration.md) |
-| A-TYP-014 INTERVAL 等 | 延后 | 暂勿当作已交付能力 |
+| A-TYP-014 INTERVAL | **known-limit-documented**（I-009/P-002） | 13 子类型 + native SQL IT；非完整 ORM `@JdbcTypeCode` 往返 |
+| A-TYP-016/017/018 XML/几何/UDT | **known-limit-documented**（I-009/P-003…P-005） | native SQL 诚实路径；见 baseline SSOT call-outs |
 | C-EXC-* / C-JSON-001…004 / C-WIN-* / C-CTE-* / C-BULK-001/003 / C-DDL-001…003 / C-CAT-001 / C-GUID-001 | 可实现（I-003） | 见 ruler-C 矩阵 Acceptance hint（✅ + IT 类名） |
 | C-BULK-002 bulk insert | **covered-live**（I-007/P-002） | 门控真库 IT PASS — 见 [05-troubleshooting.md §10](05-troubleshooting.md#10-bulk-insertjoined--identity已知限制) |
 | C-JSON-005 / A-TYP-015 / C-DDL-005 / A-SEQ-006 | **covered-live**（I-007/P-004） | 见 [`p004-track-c-capabilities.md`](../p004-track-c-capabilities.md) |
 | C-DDL-004 ENUM / C-SKIP-001 | 文档不允许 | 不发出 MySQL ENUM / SKIP LOCKED |
-| C-JSON-006 / C-SRV-001 / C-SEL-001 等 | 延后 | I-003 首批之外 |
+| C-JSON-006 | **doc-forbidden negative-only**（I-009/P-010） | 文档无 `json_table` — 禁止发明 SQL |
+| C-SRV-001 | **covered-live**（I-009/P-010） | 只读 `SHOW` 会话参数探测 |
+| C-SEL-001 | **known-limit-documented**（I-009/P-010） | `DialectResolver` SPI 足够；`XuguDialectSelector` 为内部扩展 |
 
 ## I-005 baseline counts（冻结）
 
@@ -66,12 +69,25 @@
 | **诚实 covered-live（I-008 Q1 已达成）** | **83/98** | **82** 门控 dialect/demo IT + **1** demo-live（`A-XCUT-009`）；SSOT `status=covered-live` = **83** |
 | known-limit-documented | **15** | **P-003** Batch A 关闭（thin live IT **4** + waiver **15**） |
 | unit-only-without-live | **0** | P-003/P-004 后无未文档化的 unit-only 可实现行 |
-| negative-only (文档不允许 + 延后) | 34 | All have `entry_class#method` |
+| negative-only (文档不允许 + explicit defer) | **11** | Doc-forbidden + `@Disabled` defer anchors; open **延后** = **0** |
 | Demo smoke | 7 | See baseline SSOT demo table |
 
 > **禁止**再写「**94 covered-live**」— 该口径把 CHARTER 标签与 live 证据混为一谈。诚实 rollup：[`production-regression-baseline.md`](../../contracts/production-regression-baseline.md) § Summary；晋升图：[`harness/evidence/architect-contract/I-008/P-001/PROMOTION-MAP.md`](../../harness/evidence/architect-contract/I-008/P-001/PROMOTION-MAP.md)。
 
 验证门控：[03-verify.md § Frozen baseline](03-verify.md#frozen-baseline--i-005-冻结基线门控)。
+
+## I-009 deferred closure（终态）
+
+| Bucket | Count | 说明 |
+|---|---:|---|
+| P-001 延后库存 | **20** | P-002…P-010 全部关闭 |
+| covered-live（延后交付） | **7** | 含 A-FUN-019/020、A-LCK-006、A-IDN-005、A-DDL-007、C-SRV-001、A-FUN-021 |
+| known-limit-documented（延后交付） | **12** | 含 INTERVAL/XML/几何/UDT、TOP/ROWNUM、catalog/索引、partition/encrypt、C-SEL-001 |
+| doc-forbidden negative-only | **1** | C-JSON-006 |
+| Open matrix **延后** | **0** | `A-XCUT-012` Ship defer 锚点保留 |
+| Charter **98** rollup（不膨胀） | **83/98** + **15** | 与 I-008 Q1 诚实计数一致 |
+
+验证门控：[03-verify.md § I-009 Accept prep](03-verify.md#i-009-accept-prep--延后矩阵全量交付--verify-pass)。
 
 ## I-006 consumer-path counts（冻结）
 

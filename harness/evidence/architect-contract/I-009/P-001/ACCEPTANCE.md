@@ -7,6 +7,8 @@
 > invocation_id: `inv-i009-p001-rp02-architect`  
 > Result: **ACCEPT READY** (pending reviewer RP-03)
 
+- Decision: `accepted`
+
 ## Approved scope
 
 - Task: `harness/tasks/P-001.md`

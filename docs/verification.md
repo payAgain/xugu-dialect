@@ -170,6 +170,30 @@ When no live DB is available, Phase evidence must document **`SKIPPED_INFRA`** �
 
 User-facing procedure: [`docs/user-guide/03-verify.md`](user-guide/03-verify.md) § I-008 Accept.
 
+## I-009 deferred matrix delivery (Accept prep)
+
+Initiative **I-009** closes the **20-row** deferred inventory (P-002…P-010) on GAV **`7.4.5.Final`** / **`compatiblemode=NONE`**. SSOT: [`contracts/production-regression-baseline.md`](../contracts/production-regression-baseline.md) § I-009 deferred delivery routing; batch map: [`contracts/i009-deferred-batch-map.md`](../contracts/i009-deferred-batch-map.md).
+
+| Track | Outcome | Evidence |
+|---|---|---|
+| **P-002…P-010** | All deferred rows **covered-live** or **known-limit-documented** | `harness/evidence/implementer/I-009/P-00*/ACCEPTANCE.md` |
+| **C-JSON-006** | **doc-forbidden negative-only** — `supportsJsonTableFunction=false`; no invented JSON_TABLE SQL | P-010 |
+| **Charter 98 rollup** | **83/98** covered-live + **15** known-limit-documented — **not** inflated by deferred closure | P-011 docs align |
+
+### Offline vs Accept (I-009)
+
+| Mode | Command | Proves |
+|---|---|---|
+| **Daily / CI offline** | `mvn -q test` + `python harness/scripts/verify.py` | Build, unit wiring, `@Disabled` / skip semantics — **required** for Phase Accept prep |
+| **Initiative Accept prep (I-009)** | `XUGU_RUN_IT=true mvn -q test` (full reactor) | Gated dialect + demo IT when DB reachable |
+| **Accept evidence path** | `harness/evidence/test/I-009/P-011/` | Phase-bound `verification.json`, `TEST-REPORT.md`, live log or **`SKIPPED_INFRA`** |
+
+When no live DB is available, Phase evidence must document **`SKIPPED_INFRA`** — offline **VERIFY PASS** satisfies P-011 harness gate but Accept live log remains optional infra-dependent.
+
+**Ship / tag / push / Central:** out of I-009 scope (**NOT Ship**).
+
+User-facing procedure: [`docs/user-guide/03-verify.md`](user-guide/03-verify.md) § I-009 Accept prep.
+
 ## Change-Type Matrix
 
 | Change Type | Required Validation |

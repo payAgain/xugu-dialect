@@ -158,6 +158,28 @@ Initiative **I-008** 在 I-005/I-006/I-007 基线之上闭环 Q1–Q4。**离线
 
 **Q5 out of scope：** 性能基准与 Hibernate 多版本兼容矩阵 **未做**（I-008 Scope PASS 明示）。
 
+## I-009 Accept prep — 延后矩阵全量交付 + VERIFY PASS
+
+Initiative **I-009** 在 I-005/I-006/I-007/I-008 基线之上交付 **20 行**延后库存（P-002…P-010）。SSOT：[`contracts/production-regression-baseline.md`](../../contracts/production-regression-baseline.md) § I-009 deferred delivery routing。
+
+| Mode | Command | 证明什么 |
+|---|---|---|
+| **日常 / CI 离线** | `mvn -q test` + `python harness/scripts/verify.py` | 构建 + 单元/布线 — **P-011 必须 VERIFY PASS** |
+| **Accept prep 真库（有 DB）** | `XUGU_RUN_IT=true mvn -q test` | **全 reactor** 门控 dialect + demo IT 须全绿 |
+| **Accept 归档** | `harness/evidence/test/I-009/P-011/` | `verification.json`、`TEST-REPORT.md`、live log 或 **`SKIPPED_INFRA`** |
+
+### I-009 延后行终态（诚实，不膨胀 98 计数）
+
+| 终态 | 行数 | 示例 |
+|---|---:|---|
+| **covered-live** | 7 | A-FUN-019/020, A-LCK-006, A-IDN-005, A-DDL-007, C-SRV-001, A-FUN-021 |
+| **known-limit-documented** | 12 | A-TYP-014/016/017/018, A-PAG-004/006, A-SCH-003/017, A-DDL-008/009, A-FUN-015, C-SEL-001 |
+| **doc-forbidden negative-only** | 1 | C-JSON-006（禁止发明 `json_table`） |
+
+Charter **98** 可实现诚实 rollup **不变**：**83/98** covered-live + **15** known-limit-documented — 见 [04-feature-matrix.md § I-009](04-feature-matrix.md#i-009-deferred-closure终态)。
+
+**NOT Ship** — Maven Central / tag 不在 I-009 范围。
+
 ### I-008 Accept — 黄金路径 manifest（Q4 冻结）
 
 Initiative Accept 须 **`XUGU_RUN_IT=true mvn -q test`** 全 reactor 绿，且下列路径在真库上均有 live IT 覆盖（离线 skip **不足以** Accept）：

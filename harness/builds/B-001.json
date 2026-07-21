@@ -5,7 +5,7 @@
   "plan_revision": 1,
   "status": "approved",
   "approved": true,
-  "completed": false,
+  "completed": true,
   "proposed_phase_ids": [
     "P-001", "P-002", "P-003", "P-004", "P-005", "P-006",
     "P-007", "P-008", "P-009", "P-010", "P-011"

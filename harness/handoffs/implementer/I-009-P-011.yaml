@@ -1,0 +1,56 @@
+schema_version: 1
+role: implementer
+phase_id: P-011
+build_id: B-001
+initiative_id: I-009
+invocation_id: inv-i009-p011-rp01-implementer
+step_id: RP-01
+status: passed
+updated_at: "2026-07-21T11:34:00+08:00"
+
+summary: >
+  I-009 docs SSOT final align: production-regression-baseline Summary counts (20/20 deferred closed,
+  charter 83/98 honest rollup unchanged), verification.md + user-guide I-009 Accept prep sections.
+  Harness hygiene: P-001 Decision accepted line; P-003/P-004 verification.json BOM stripped.
+
+doc_updates:
+  - contracts/production-regression-baseline.md
+  - docs/verification.md
+  - docs/user-guide/03-verify.md
+  - docs/user-guide/04-feature-matrix.md
+  - docs/user-guide/README.md
+  - harness/evidence/architect-contract/I-009/P-001/ACCEPTANCE.md
+  - harness/evidence/test/I-009/P-003/verification.json
+  - harness/evidence/test/I-009/P-004/verification.json
+
+deferred_closure:
+  total: 20
+  covered_live: 7
+  known_limit_documented: 12
+  doc_forbidden_negative: 1
+  open_deferred: 0
+
+charter_98_rollup:
+  covered_live: 83
+  known_limit_documented: 15
+  gap: 0
+
+validation:
+  build:
+    command: "mvn -q -DskipTests package"
+    exit_code: 0
+  test_offline:
+    command: "mvn -q test"
+    exit_code: 0
+
+not_done:
+  - RP-02 test verify PASS evidence
+  - RP-03 reviewer
+  - git commit
+  - Ship
+
+next:
+  - RP-02 test: verify.py PASS + live SKIPPED_INFRA or green log
+  - RP-03 reviewer: audit honest counts; no Ship claims
+
+blocker: null

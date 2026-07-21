@@ -68,7 +68,7 @@ tasks:
     dependencies: [P-006]
   - task_id: P-008
     title: "catalog 限定 + 高级索引"
-    status: ready
+    status: accepted
     build_id: B-001
     packet: harness/tasks/P-008.md
     acceptance_doc: harness/evidence/implementer/I-009/P-008/ACCEPTANCE.md
@@ -76,7 +76,7 @@ tasks:
     dependencies: [P-007]
   - task_id: P-009
     title: "LOCK TABLE + TOP/ROWNUM 分页备选 + IDENTITY_MODE"
-    status: ready
+    status: accepted
     build_id: B-001
     packet: harness/tasks/P-009.md
     acceptance_doc: harness/evidence/implementer/I-009/P-009/ACCEPTANCE.md
@@ -84,7 +84,7 @@ tasks:
     dependencies: [P-008]
   - task_id: P-010
     title: "Ruler C — json_table / ServerConfig / DialectSelector"
-    status: ready
+    status: accepted
     build_id: B-001
     packet: harness/tasks/P-010.md
     acceptance_doc: harness/evidence/implementer/I-009/P-010/ACCEPTANCE.md
@@ -92,7 +92,7 @@ tasks:
     dependencies: [P-009]
   - task_id: P-011
     title: "文档终对齐 + 全 reactor 真库 + VERIFY PASS Accept 准备"
-    status: ready
+    status: accepted
     build_id: B-001
     packet: harness/tasks/P-011.md
     acceptance_doc: harness/evidence/implementer/I-009/P-011/ACCEPTANCE.md
