@@ -2,6 +2,7 @@
 
 > **Date:** 2026-07-21  
 > **Branch:** `feat/i-009-deferred-matrix-delivery`  
+> **Triage SHA:** `8d1de762ff99c2de6883292dca58e8c0c08cc171`  
 > **NOT** Ship / Archive
 
 ## Compatible-mode narrative (unchanged)
