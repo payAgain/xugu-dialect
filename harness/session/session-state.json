@@ -2,37 +2,37 @@
   "schema_version": 1,
   "task_id": "I-009",
   "batch_id": "B-001",
-  "status": "build_approved_executing",
+  "status": "build_complete_awaiting_accept",
   "harness_level": "Standard",
-  "last_updated": "2026-07-21T10:00:00+08:00",
+  "last_updated": "2026-07-21T11:40:00+08:00",
   "initiative_id": "I-009",
   "initiative_type": "feature",
   "working_branch": "feat/i-009-deferred-matrix-delivery",
   "active_plan": [
-    "B-001 approved P-001…P-011 serial",
-    "Deliver all deferred matrix rows; 文档不允许 skip"
+    "B-001 P-001…P-011 all accepted",
+    "VERIFY PASS offline; live SKIPPED_INFRA"
   ],
   "next_3_steps": [
-    "Orchestrator: serial P-001→P-011",
-    "Must-commit per Phase",
-    "Human Gate Initiative Accept after all Phases accepted"
+    "Human Gate Initiative Accept",
+    "Optional live IT re-run",
+    "Archive I-009 NOT Ship"
   ],
   "validation": {
-    "last_result": "P-001 accepted; harness_check PASS; starting P-002"
+    "last_result": "VERIFY PASS; B-001 completed"
   },
   "cognitive_state": {
     "failure_count": 0,
-    "current_mode": "build_execution",
+    "current_mode": "awaiting_accept",
     "blocked_on": null
   },
   "version_control_checkpoint": {
-    "decision": "p001_accepted",
+    "decision": "b001_complete",
     "committed": true,
     "branch": "feat/i-009-deferred-matrix-delivery",
     "plan_head": "6965c3a"
   },
   "handoff": {
-    "resume_from": "harness/builds/B-001.json"
+    "resume_from": "harness/handoffs/orchestrator/I-009-B-001-complete.md"
   },
   "approved_build": "B-001",
   "approved_phases": [
@@ -40,5 +40,5 @@
     "P-007", "P-008", "P-009", "P-010", "P-011"
   ],
   "ship": false,
-  "updated_at": "2026-07-21T09:40:00+08:00"
+  "updated_at": "2026-07-21T11:40:00+08:00"
 }

@@ -1,0 +1,38 @@
+schema_version: 1
+role: test
+phase_id: P-011
+build_id: B-001
+initiative_id: I-009
+invocation_id: inv-i009-p011-rp02-test
+step_id: RP-02
+status: passed
+required: true
+completed_at: "2026-07-21T11:34:00+08:00"
+purpose: offline verify.py VERIFY PASS; full reactor live XUGU_RUN_IT or SKIPPED_INFRA
+
+commands:
+  - { cmd: "mvn -q -DskipTests package", exit: 0 }
+  - { cmd: "mvn -q test (offline)", exit: 0 }
+  - { cmd: "python harness/scripts/verify.py --phase P-011 --evidence harness/evidence/test/I-009/P-011/verification.json", exit: 0 }
+  - { cmd: "XUGU_RUN_IT=true mvn -q test @ 192.168.2.239:5138", exit: 1, note: "SKIPPED_INFRA Connection refused" }
+
+verify:
+  status: PASS
+  evidence: harness/evidence/test/I-009/P-011/verification.json
+
+live_it:
+  status: SKIPPED_INFRA
+  jdbc: "jdbc:xugu://192.168.2.239:5138/SYSTEM?user=SYSDBA&password=SYSDBA&compatiblemode=NONE&ssl=nssl"
+  probe: "port_closed 10061"
+  artifact: harness/evidence/test/I-009/P-011/IT-RESULT.txt
+
+observed_flows:
+  i009-full-reactor-live-evidence-verify-pass-accept-prep: PASS_offline_SKIPPED_INFRA_live
+
+outputs:
+  - harness/evidence/test/I-009/P-011/TEST-REPORT.md
+  - harness/evidence/test/I-009/P-011/verification.json
+  - harness/evidence/test/I-009/P-011/IT-RESULT.txt
+  - harness/handoffs/test/I-009-P-011.yaml
+
+next_step: RP-03 reviewer

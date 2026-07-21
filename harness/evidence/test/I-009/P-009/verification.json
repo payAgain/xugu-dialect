@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "phase_id": "P-009",
+  "build_id": "B-001",
+  "initiative_id": "I-009",
+  "role": "test",
+  "results": [
+    {"id": "build", "status": "PASS", "exit_code": 0},
+    {"id": "test", "status": "PASS", "exit_code": 0},
+    {"id": "live", "status": "SKIPPED_INFRA", "note": "192.168.2.239:5138 unreachable"}
+  ]
+}
