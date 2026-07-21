@@ -36,7 +36,7 @@
 - [ ] 不 Ship
 
 ## Status
-`active` — Scope PASS + B-001（P-001~P-010）approved (~2026-07-21T14:48+08:00)；Build in progress；**NOT Ship**
+`active` — B-001 P-001…P-010 **complete**；VERIFY PASS；await **Initiative Accept**；**NOT Ship** · **NOT Archive**
 
 ## Branch
 `feat/i-010-orm-hql-quality-completion`
