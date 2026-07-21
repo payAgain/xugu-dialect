@@ -1,7 +1,0 @@
-﻿# XuguDB reachability probe — P-003 RP-02
-# Date: 2026-07-20T16:45:00+08:00
-
-host=127.0.0.1
-port=5138
-TcpTestSucceeded=False
-status=UNAVAILABLE

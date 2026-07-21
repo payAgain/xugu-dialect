@@ -1,8 +1,0 @@
-﻿IT-RESULT RETEST (test-p004-retest-20260715)
-gate=ON real_db=true
-XuguDB jdbc:xugu://127.0.0.1:5138/SYSTEM?...&compatiblemode=NONE dialect=XuguDialect version=12.0
-totals: tests=26 failures=0 errors=0 skipped=0
-IT methods executed: 9 (TypeRoundTrip 4 + Ddl 1 + Binary 1 + Pagination 1 + Lock 2)
-Lock IT: forUpdateExecutesAndSkipLockedUnsupported PASS; limitForUpdateComboExecutes PASS
-Observed combo order: FOR UPDATE before LIMIT; FOR UPDATE ... LIMIT ... WAIT OK; Hibernate LIMIT...FOR UPDATE rejected
-A-LCK-005 docs: present in XuguDialect javadoc + NOTES + matrix (文档不允许 + shim + exclusive + concurrent readers may block)

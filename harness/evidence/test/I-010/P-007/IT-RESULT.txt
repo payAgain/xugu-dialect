@@ -1,4 +1,0 @@
-observed_flow: regexp-hql-session-live
-offline: PASS (registry unit + IT gate skip)
-live: SKIPPED_INFRA (192.168.2.239:5138 / 127.0.0.1:5138 TcpTestSucceeded=False)
-disposition: A-FUN-019 remains covered-live (HQL Session anchors added; do not regress)

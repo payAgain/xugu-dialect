@@ -1,6 +1,0 @@
-OFFLINE: PASS (XuguFunctionRegistryTest#geometricSubsetRegistered_A_FUN_020; XuguGeometricTypeTest 4/4; XuguGeometricTypeAndFunctionsIT 4 skipped by gate)
-LIVE: SKIPPED_INFRA (TcpTestSucceeded=False; 192.168.2.239:5138 / 127.0.0.1:5138)
-HQL_SESSION_PATH: implemented (area + center + point via Session.createQuery; reuses I010P004PointEntity)
-NATIVE_SUBSET: retained (geometricFunctionsNativeSubset_A_FUN_020)
-SSOT: A-FUN-020 remains covered-live (strengthened with HQL anchors; no regress)
-FUNCS_COVERED_HQL: area, center, point

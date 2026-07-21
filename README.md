@@ -12,7 +12,7 @@ I-006 Spring Boot consumer-path (same GAV **7.4.5.Final**): **41** Boot-required
 
 I-007 capability hardening (same GAV **7.4.5.Final**): Track **A** C-BULK-002 **covered-live**; Track **B** Flyway + Demo deepening; Track **C** JSON subset / ARRAY / ALTER SEQUENCE **covered-live**. SSOT: [contracts/i007-capability-hardening-plan.md](contracts/i007-capability-hardening-plan.md). Track C user summary: [docs/p004-track-c-capabilities.md](docs/p004-track-c-capabilities.md). **NOT Ship**.
 
-I-008 production quality gaps (same GAV **7.4.5.Final**): Q1–Q4 closed — honest **83/98** covered-live + **15** known-limit; lock semantics (Q2); Boot UUID/JSON out-of-box (Q3); Accept requires full reactor live evidence (Q4). **Q5 performance / multi-version matrix out of scope.** SSOT: [harness/initiatives/I-008/brief.md](harness/initiatives/I-008/brief.md). Accept prep: [docs/user-guide/03-verify.md](docs/user-guide/03-verify.md) § I-008 Accept. **NOT Ship**.
+I-008 production quality gaps (same GAV **7.4.5.Final**): Q1–Q4 closed — honest **83/98** covered-live + **15** known-limit; lock semantics (Q2); Boot UUID/JSON out-of-box (Q3); Accept requires full reactor live evidence (Q4). **Q5 performance / multi-version matrix out of scope.** SSOT: [docs/initiatives/I-008-brief.md](docs/initiatives/I-008-brief.md). Accept prep: [docs/user-guide/03-verify.md](docs/user-guide/03-verify.md) § I-008 Accept. **NOT Ship**.
 
 ## Start here
 
@@ -36,7 +36,6 @@ I-008 production quality gaps (same GAV **7.4.5.Final**): Q1–Q4 closed — hon
 ```text
 mvn -q -DskipTests package
 mvn -q test
-python harness/scripts/verify.py
 ```
 
 Live DB integration (optional gate):
@@ -49,9 +48,22 @@ mvn -q -pl demo-spring-boot -am test -Dxugu.run.integration=true
 
 Consumer-path details (Layers A/B/C′, Accept prep): [docs/user-guide/06-consumer-path.md](docs/user-guide/06-consumer-path.md).
 
-## Agent / harness
+## Agent / Trellis
 
-See [AGENTS.md](AGENTS.md). Ship / Maven Central is a separate Human Gate step (not part of day-to-day verify).
+This repo is managed by **[Trellis](https://docs.trytrellis.app/)** (`@mindfoldhq/trellis`).
+
+- Entry: [AGENTS.md](AGENTS.md)
+- Workflow / specs / tasks: [`.trellis/`](.trellis/)
+- Cursor commands / skills: [`.cursor/`](.cursor/)
+- First-time bootstrap task: `.trellis/tasks/00-bootstrap-guidelines/`
+
+```text
+npm install -g @mindfoldhq/trellis@latest
+trellis init --cursor -u <your-name>
+trellis update   # sync project templates after CLI upgrade
+```
+
+Ship / Maven Central is a separate human authorization step (not part of day-to-day verify).
 
 ## Credentials
 

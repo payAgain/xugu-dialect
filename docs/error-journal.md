@@ -32,7 +32,7 @@ I-001 Accept 后独立工程 `xugu-hibernate-test` 实库复测 20/22：HQL 分�
 1. 库产品「可实现」行必须声明 `app_entrypoint` + 禁止伪证据
 2. Reviewer：仅 SPI 证据支撑应用能力 → MAJOR request-changes
 3. 独立黑盒复测纳入 major Accept / Ship 证据策略
-4. 事故必须回流 agents/skills，不得只修业务代码
+4. 事故必须回流 `.trellis/spec/` 或 journal，不得只修业务代码
 
 ### Related Files / Tasks
 - `docs/harness-gap-analysis-i001-external-it.md`

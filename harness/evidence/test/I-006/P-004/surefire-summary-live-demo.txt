@@ -1,5 +1,0 @@
-﻿module: demo-spring-boot (XUGU_RUN_IT=true)
-Tests run: 28, Failures: 0, Errors: 0, Skipped: 0
-dialect (-am): Tests run: 139, Failures: 0, Errors: 0, Skipped: 22
-source: demo-spring-boot/target/surefire-reports + mvn-test-live-demo.log
-timestamp: 2026-07-18T23:53:47+08:00

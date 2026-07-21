@@ -1,8 +1,0 @@
-P-007 RP-02 live DB probe
-Timestamp: 2026-07-20T18:05:10+08:00
-Target: 127.0.0.1:5138 (XuGu JDBC default)
-TcpTestSucceeded: False
-Offline reactor: mvn -q test exit 0 (XUGU_RUN_IT unset)
-Live attempt: XUGU_RUN_IT=true mvn -q test exit 1
-Signature: java.net.ConnectException Connection refused (no further information)
-Verdict: SKIPPED_INFRA — no XuGuDB listener on host

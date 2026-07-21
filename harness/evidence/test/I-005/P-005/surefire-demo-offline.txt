@@ -1,5 +1,0 @@
-DemoOfflineSmokeTest: Tests run: 2, Failures: 0, Errors: 0, Skipped: 0
-DemoPersonCrudIT: Tests run: 1, Failures: 0, Errors: 0, Skipped: 1
-DemoBootBaselineSmokeTest: Tests run: 4, Failures: 0, Errors: 0, Skipped: 4
-
-Reactor offline (gate OFF): dialect 139 run / 54 skipped; demo 7 run / 5 skipped; exit 0

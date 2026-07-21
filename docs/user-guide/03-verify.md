@@ -1,4 +1,4 @@
-# 03 — Verify / 验证
+﻿# 03 — Verify / 验证
 
 ← [02-configuration.md](02-configuration.md) · [Index](README.md) · Next: [04-feature-matrix.md](04-feature-matrix.md)
 
@@ -14,12 +14,6 @@ mvn -q verify
 ```
 
 默认 **`xugu.run.integration=false`**：标注为 gated 的真实库 IT 会跳过，离线即可通过单元测试与打包。
-
-Harness 契约（治理用）：
-
-```bash
-python harness/scripts/verify.py
-```
 
 ## Demo：Spring Boot 运行
 
@@ -73,7 +67,7 @@ I-005 将 **Definition A 可实现 (78)** + **I-003 ruler C 可实现 (16)** = *
 |---|---|---|
 | **Daily / offline** | `mvn -q test` | 默认 CI、无真库；gated IT 跳过 |
 | **Frozen baseline (I-005 Accept)** | `XUGU_RUN_IT=true mvn -q test` | 冻结基线验收；**全部** gated dialect + demo IT 须全绿 |
-| **Harness contract** | `python harness/scripts/verify.py` | 项目治理；Accept 须 **VERIFY PASS** |
+| **Project verify** | `mvn -q test` | 项目治理；Accept 须 **VERIFY PASS** |
 
 ### 冻结基线步骤（复现）
 
@@ -85,7 +79,7 @@ I-005 将 **Definition A 可实现 (78)** + **I-003 ruler C 可实现 (16)** = *
    ```
    或 `mvn -q test -Dxugu.run.integration=true`。
 3. 期望：dialect 模块 gated IT + demo `DemoPersonCrudIT` / `DemoBootBaselineSmokeTest` 全 PASS；离线单元与 `@Disabled` defer 锚点仍按默认 gate 行为。
-4. 运行 `python harness/scripts/verify.py` → **VERIFY PASS**（build + offline test）。
+4. 运行 `mvn -q test` → **VERIFY PASS**（build + offline test）。
 5. **GAV 不变**：`com.xugu:xugu-dialect:7.4.5.Final`。
 
 ### I-007 后 C-BULK-002 状态
@@ -111,7 +105,7 @@ I-006 冻结 Spring Boot **消费者路径**子集（**不是** 94 行 Boot 镜�
 |---|---|---|
 | **Daily / offline** | `mvn -q test` | 默认 CI、无真库；gated IT 跳过 |
 | **Consumer-path live (I-006)** | `XUGU_RUN_IT=true mvn -q test` 或 `mvn -q -pl demo-spring-boot -am test` + gate ON | 有可达 XuguDB；期望 demo 全绿 |
-| **Harness contract** | `python harness/scripts/verify.py` | Accept 须 **VERIFY PASS**（offline required checks） |
+| **Project verify** | `mvn -q test` | Accept 须 **VERIFY PASS**（offline required checks） |
 
 完整步骤、Layer 说明与边界：[06-consumer-path.md](06-consumer-path.md)。
 
@@ -129,8 +123,8 @@ Initiative **I-007**（A/B/C tracks）在 I-005/I-006 基线之上硬化能力�
 
 | Mode | Command | When |
 |---|---|---|
-| **Daily / offline** | `mvn -q test` + `python harness/scripts/verify.py` | Accept 须 **VERIFY PASS** |
-| **Live (when DB available)** | `XUGU_RUN_IT=true mvn -q test` | dialect + demo gated IT；Accept 证据见 `harness/evidence/test/I-007/P-00*/` |
+| **Daily / offline** | `mvn -q test` + `mvn -q test` | Accept 须 **VERIFY PASS** |
+| **Live (when DB available)** | `XUGU_RUN_IT=true mvn -q test` | dialect + demo gated IT；Accept 证据见 `historical I-007 test evidence (removed)` |
 | **GAV / compat** | `7.4.5.Final` + `compatiblemode=NONE` | 不升版；**NOT Ship** |
 
 ## I-008 Accept — 全量 reactor 真库证据（Q4）
@@ -140,17 +134,17 @@ Initiative **I-008** 在 I-005/I-006/I-007 基线之上闭环 Q1–Q4。**离线
 | Mode | Command | 证明什么 |
 |---|---|---|
 | **日常 / CI 离线** | `mvn -q test` | 默认 gate OFF；gated IT 跳过 |
-| **Harness 契约** | `python harness/scripts/verify.py` | 配置化 build + offline test — **非** 全量真库回归 |
+| **项目验证** | `mvn -q test` | 配置化 build + offline test — **非** 全量真库回归 |
 | **I-008 Accept（有可达 XuguDB）** | `XUGU_RUN_IT=true mvn -q test` | **全 reactor** 门控 dialect + demo IT 须全绿 |
-| **Accept 归档** | `harness/evidence/test/I-008/P-007/` | `mvn-test-live-it-final.log`、`IT-RESULT.txt`（**P-007** 写入） |
+| **Accept 归档** | `historical I-008/P-007 evidence (removed)` | `mvn-test-live-it-final.log`、`IT-RESULT.txt`（**P-007** 写入） |
 
 子集证据（Accept 引用，非替代全量 reactor）：
 
 | Phase | 目录 | 内容 |
 |---|---|---|
-| P-005 | `harness/evidence/test/I-008/P-005/` | 锁语义 live IT |
-| P-006 | `harness/evidence/test/I-008/P-006/` | Boot UUID/JSON 开箱 live demo |
-| P-007 | `harness/evidence/test/I-008/P-007/` | **Accept 级** 全 reactor 终验 |
+| P-005 | historical I-008 P-005 evidence (removed with harness) | 锁语义 live IT |
+| P-006 | `historical I-008/P-006 evidence (removed)` | Boot UUID/JSON 开箱 live demo |
+| P-007 | `historical I-008/P-007 evidence (removed)` | **Accept 级** 全 reactor 终验 |
 
 无真库时：文档 **`SKIPPED_INFRA`** — 离线绿 **不能** 代替 Accept live log。
 
@@ -164,9 +158,9 @@ Initiative **I-009** 在 I-005/I-006/I-007/I-008 基线之上交付 **20 行**�
 
 | Mode | Command | 证明什么 |
 |---|---|---|
-| **日常 / CI 离线** | `mvn -q test` + `python harness/scripts/verify.py` | 构建 + 单元/布线 — **P-011 必须 VERIFY PASS** |
+| **日常 / CI 离线** | `mvn -q test` + `mvn -q test` | 构建 + 单元/布线 — **P-011 必须 VERIFY PASS** |
 | **Accept prep 真库（有 DB）** | `XUGU_RUN_IT=true mvn -q test` | **全 reactor** 门控 dialect + demo IT 须全绿 |
-| **Accept 归档** | `harness/evidence/test/I-009/P-011/` | `verification.json`、`TEST-REPORT.md`、live log 或 **`SKIPPED_INFRA`** |
+| **Accept 归档** | `historical I-009/P-011 evidence (removed)` | `verification.json`、`TEST-REPORT.md`、live log 或 **`SKIPPED_INFRA`** |
 
 ### I-009 延后行终态（诚实，不膨胀 98 计数）
 
@@ -188,9 +182,9 @@ Initiative **I-010** 交付 ORM 实体深度（INTERVAL/XML/POINT）+ HQL Sessio
 
 | Mode | Command | 证明什么 |
 |---|---|---|
-| **日常 / CI 离线** | `mvn -q test` + `python harness/scripts/verify.py` | 构建 + 单元/布线 — **P-010 必须 VERIFY PASS** |
+| **日常 / CI 离线** | `mvn -q test` + `mvn -q test` | 构建 + 单元/布线 — **P-010 必须 VERIFY PASS** |
 | **Accept prep 真库（有 DB）** | `XUGU_RUN_IT=true mvn -q test` | **全 reactor** 门控 dialect + demo IT；新 ORM/HQL IT 须 live 绿才能晋升 covered-live |
-| **Accept 归档** | `harness/evidence/test/I-010/P-010/` · `harness/evidence/orchestrator/I-010/P-010/` | `verification.json`、`TEST-REPORT.md`、live log 或 **`SKIPPED_INFRA`** |
+| **Accept 归档** | `historical I-010/P-010 evidence (removed)` · `historical I-010 orchestrator evidence (removed)` | `verification.json`、`TEST-REPORT.md`、live log 或 **`SKIPPED_INFRA`** |
 
 ### I-010 诚实残差（live @5287 后）
 
@@ -218,7 +212,7 @@ Initiative **I-010** Build **B-002**（Phase **P-011…P-017**）对照只读参
 | **Unit / 离线** | `mvn -q test`（默认 gate OFF） | 金标 / 边界 Unit 可离线绿；gated IT **assume-skip** |
 | **门控 IT（有可达 XuguDB）** | `XUGU_RUN_IT=true` **或** `-Dxugu.run.integration=true` → `mvn -q test` | 套件 Integration 行 live 绿 |
 | **无库诚实** | 同上但缺库 | IT **assume-skip** / 证据记 **`SKIPPED_INFRA`** — 离线绿 **不能** 假装 live PASS |
-| **Harness 契约** | `python harness/scripts/verify.py` | 配置化 build + offline test（Accept 须 **VERIFY PASS**） |
+| **项目验证** | `mvn -q test` | 配置化 build + offline test（Accept 须 **VERIFY PASS**） |
 
 **不照搬：** EF Spec 8500、Migrations、Retry、compatible 双方言、RETURNING/ADO、Owned API、文档不允许项（SKIP LOCKED / FOR SHARE / `json_table` / ENUM 等）。
 
@@ -228,11 +222,11 @@ Initiative **I-010** Build **B-002**（Phase **P-011…P-017**）对照只读参
 
 | Gate | Result |
 |---|---|
-| `python harness/scripts/verify.py` | **VERIFY PASS** |
+| `mvn -q test` | **VERIFY PASS** |
 | Offline `mvn -q test` | **PASS**（gated IT assume-skip） |
 | Live `XUGU_RUN_IT=true` @5287 | dialect **253/0/0/4** · demo **36/0/0/0** |
 | Suite SSOT | XP-001…005/007…009 **covered-live**；XP-006/010 **covered-unit** — [`xuguefcore-parity-suite.md`](../../contracts/xuguefcore-parity-suite.md) |
-| Evidence | `harness/evidence/test/I-010/live-it-5287/` |
+| Evidence | `historical I-010 live-it-5287 evidence (removed)` |
 
 Human Gate：**Initiative Accept I-010**（非 Ship / 非 Archive）。
 
@@ -250,7 +244,7 @@ Initiative Accept 须 **`XUGU_RUN_IT=true mvn -q test`** 全 reactor 绿，且�
 | **JSON** | A-TYP-013, C-JSON-001…004 | `DemoUuidJsonOutOfBoxIT#uuidAndJsonGoldenPathWithDefaultBootWiring`; `XuguJsonAggregateIT#jsonColumnRoundTripAndHqlAggregates` |
 | **HQL** | A-PAG + Layer A JPQL | `XuguHqlPaginationIT`（分页/锁组合）; `DemoBootBaselineSmokeTest#jpaPersistAndJpqlQueryRoundTrip` |
 
-子集 Phase 证据（**非**替代全量 reactor）：P-005 锁 — `harness/evidence/test/I-008/P-005/`；P-006 Boot UUID/JSON — `harness/evidence/test/I-008/P-006/`。Accept 终验归档 — `harness/evidence/test/I-008/P-007/`（`mvn-test-live-it-final.log`, `IT-RESULT.txt`）。Implementer Accept 准备清单 — `harness/evidence/implementer/I-008/P-007/ACCEPTANCE.md`。
+子集 Phase 证据（**非**替代全量 reactor）：P-005 锁 — historical I-008 P-005 evidence (removed with harness)；P-006 Boot UUID/JSON — `historical I-008/P-006 evidence (removed)`。Accept 终验归档 — `historical I-008/P-007 evidence (removed)`（`mvn-test-live-it-final.log`, `IT-RESULT.txt`）。Implementer Accept 准备清单 — `historical I-008 ACCEPTANCE (removed)`。
 
 ## Checklist（集成方自测）
 

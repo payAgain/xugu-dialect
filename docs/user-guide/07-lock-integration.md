@@ -1,4 +1,4 @@
-# 07 — Lock integration / 悲观锁集成须知
+﻿# 07 — Lock integration / 悲观锁集成须知
 
 ← [05-troubleshooting.md](05-troubleshooting.md) · [Index](README.md) · Related: [04-feature-matrix.md](04-feature-matrix.md)
 
@@ -14,7 +14,7 @@
 | **`PESSIMISTIC_READ`** | Hibernate 映射为 **排他 `FOR UPDATE`**，**不是**共享读锁 | 并发读者可能被阻塞 |
 | **分页 + 锁** | 语法顺序 **`FOR UPDATE … LIMIT … [WAIT …]`** | 非 `LIMIT … FOR UPDATE` |
 
-真库行为证据归档：**I-008 P-005**（`harness/evidence/test/I-008/P-005/`）。本文档为 **P-002** 用户向专节；不发明未实现 SQL。
+真库行为证据归档：**I-008 P-005**（historical I-008 P-005 evidence (removed with harness)）。本文档为 **P-002** 用户向专节；不发明未实现 SQL。
 
 ---
 
@@ -96,6 +96,6 @@ Boot 消费者路径示例（门控 IT）：`DemoLockIT#pessimisticWriteLocksPer
 | [05-troubleshooting.md §1–§2](05-troubleshooting.md) | LIMIT / FOR UPDATE 顺序、E19132 |
 | [06-consumer-path.md](06-consumer-path.md) | Boot Layer B 悲观锁 demo 入口 |
 | [`docs/verification.md`](../verification.md) | I-008 真库 Accept 与离线区别 |
-| **P-005 证据** | `harness/evidence/test/I-008/P-005/` — 锁语义 live IT 归档 |
+| **P-005 证据** | historical I-008 P-005 evidence (removed with harness) — 锁语义 live IT 归档 |
 | **P-005 离线测试** | `dialect/.../XuguLockSemanticsTest` — Q2 负向 + READ→FOR UPDATE 行为 |
 | **P-005 真库锚点** | `XuguLockIT#pessimisticReadExecutesAsForUpdateNotShare` |

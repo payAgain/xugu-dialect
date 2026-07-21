@@ -1,2 +1,0 @@
-﻿host=192.168.2.239 TcpTestSucceeded=False
-host=127.0.0.1 TcpTestSucceeded=False

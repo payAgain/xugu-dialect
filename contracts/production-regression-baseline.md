@@ -1,9 +1,9 @@
-# Production Regression Baseline (SSOT)
+﻿# Production Regression Baseline (SSOT)
 
 > **Status:** Accepted baseline inventory (I-005 / P-001 / RP-02)  
 > **Initiative:** I-005 — production regression baseline  
 > **Author role:** architect-contract  
-> **Sources:** [`feature-matrix-definition-a.md`](feature-matrix-definition-a.md), [`feature-matrix-i003-ruler-c.md`](feature-matrix-i003-ruler-c.md), [`harness/evidence/researcher/I-005/P-001/INVENTORY.md`](../harness/evidence/researcher/I-005/P-001/INVENTORY.md)  
+> **Sources:** [`feature-matrix-definition-a.md`](feature-matrix-definition-a.md), [`feature-matrix-i003-ruler-c.md`](feature-matrix-i003-ruler-c.md), historical I-005 researcher inventory (removed with harness migration)  
 > **Scope:** Definition A **可实现** (78) + Ruler C **可实现** (16) = **94 matrix rows**; plus **negative-only** rows for **文档不允许** / **延后**  
 > **IT gate:** `XuguITGate.isEnabled()` ← env `XUGU_RUN_IT=true` or JVM `-Dxugu.run.integration=true`  
 > **Demo IT gate:** `XuguIntegrationGate.isEnabled()` (same property/env)
@@ -250,7 +250,7 @@ Columns: `matrix_id | status | entry_class#method | gate | gap_action`
 
 ### I-010 / P-008 — Batch A A-FUN-003/005/006/007/009 independent HQL Session
 
-Independent gated HQL `Session.createQuery` methods on `XuguBatchAFunctionFamiliesIT`. **Promoted to covered-live** after live @5287 PASS (I-010 Accept prep 2026-07-21). Evidence: `harness/evidence/test/I-010/live-it-5287/`.
+Independent gated HQL `Session.createQuery` methods on `XuguBatchAFunctionFamiliesIT`. **Promoted to covered-live** after live @5287 PASS (I-010 Accept prep 2026-07-21). Evidence: historical I-010 live-it-5287 evidence (removed with harness).
 
 | matrix_id | status | entry_class#method | gate | gap_action |
 |---|---|---|---|---|
@@ -336,7 +336,7 @@ Matrix status **文档不允许** or **延后**; baseline records explicit non-s
 
 ## Explicit call-out — P-003 Batch A known-limit waivers (remaining)
 
-Formal live IT waived per [harness/evidence/architect-contract/I-008/P-001/PROMOTION-MAP.md](../harness/evidence/architect-contract/I-008/P-001/PROMOTION-MAP.md) Batch A locks. **I-010 live @5287:** A-FUN-003/005/006/007/009 promoted out of this waiver table to **covered-live** (see § I-010 / P-008). Charter Accept rollup: **91/98** covered-live + **7** known-limit-documented.
+Formal live IT waived per [docs/archive/i008-promotion/PROMOTION-MAP.md](../docs/archive/i008-promotion/PROMOTION-MAP.md) Batch A locks. **I-010 live @5287:** A-FUN-003/005/006/007/009 promoted out of this waiver table to **covered-live** (see § I-010 / P-008). Charter Accept rollup: **91/98** covered-live + **7** known-limit-documented.
 
 | matrix_id | waiver_reason | live_bundle |
 |---|---|---|
@@ -365,7 +365,7 @@ Formal live IT waived per [harness/evidence/architect-contract/I-008/P-001/PROMO
 | **Live IT** | **PASS** (I-007/P-002) — gated `XUGU_RUN_IT=true`; dialect fix: use `LocalTemporaryTableInsertStrategy(EntityMappingType, …)` instead of mistaken `TemporaryTable.createEntityTable(EntityMappingType, …)` id-table delegate |
 | **User doc** | [`docs/user-guide/05-troubleshooting.md`](../docs/user-guide/05-troubleshooting.md) §10 (updated P-002) |
 | **gap_action** | **N/A** — closed **covered-live** in I-007/P-002 |
-| **I-007 re-open** | **Closed** — P-002 prefer-live-unblock **PASS**; evidence: `harness/evidence/test/I-007/P-002/`. SSOT: [`i007-capability-hardening-plan.md`](i007-capability-hardening-plan.md) § C-BULK-002 STRATEGY LOCK. |
+| **I-007 re-open** | **Closed** — P-002 prefer-live-unblock **PASS**; evidence: historical I-007/P-002 evidence (removed). SSOT: [`i007-capability-hardening-plan.md`](i007-capability-hardening-plan.md) § C-BULK-002 STRATEGY LOCK. |
 
 ---
 
@@ -423,7 +423,7 @@ All **must-add** and **consolidate** negatives from the P-001 gap audit are **cl
 
 ## Gap summary by domain (P-002 must-close)
 
-Source: [`harness/evidence/researcher/I-005/P-001/GAP-SUMMARY.md`](../harness/evidence/researcher/I-005/P-001/GAP-SUMMARY.md)
+Source: historical I-005 GAP-SUMMARY (removed with harness)
 
 ### 1. Types & identifiers
 
@@ -524,7 +524,7 @@ Source: [`harness/evidence/researcher/I-005/P-001/GAP-SUMMARY.md`](../harness/ev
 
 > **Initiative:** I-009 — deferred matrix full delivery  
 > **Batch map SSOT:** [`i009-deferred-batch-map.md`](i009-deferred-batch-map.md)  
-> **Evidence:** `harness/evidence/architect-contract/I-009/P-001/{ACCEPTANCE,BATCH-MAP}.md`  
+> **Evidence:** historical I-009 P-001 evidence (removed with harness)  
 > **GAV:** `7.4.5.Final` · **compatiblemode:** `NONE` · **NOT Ship**
 
 ### Batch summary

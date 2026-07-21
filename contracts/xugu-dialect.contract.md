@@ -5,7 +5,7 @@
 > **Author role:** architect-contract  
 > **Status:** CONFIRMED for subsequent implement Phases (P-003…P-008)  
 > **Supersedes (scope):** capability gaps left open by `contracts/xugu-dialect.scaffold.contract.md` (scaffold remains authoritative for Maven layout)  
-> **SSOT baselines:** `PROJECT_CHARTER.md`, `DECISIONS/ADR-0001-hibernate-baseline.md`, `docs/architecture.md`, `harness/initiatives/I-001/brief.md`  
+> **SSOT baselines:** `PROJECT_CHARTER.md`, `DECISIONS/ADR-0001-hibernate-baseline.md`, `docs/architecture.md`, `docs/initiatives/I-001-brief.md`  
 > **Feature matrix SSOT:** [`contracts/feature-matrix-definition-a.md`](feature-matrix-definition-a.md)
 
 ---
@@ -15,7 +15,7 @@
 Lock the **public integration surface** and **definition A capability boundary** for `com.xugu:xugu-dialect` so implementers, demo authors, and integrators share one contract:
 
 - What to configure (GAV, package, explicit dialect, planned SPI)
-- What the dialect module owns vs demo/docs/harness
+- What the dialect module owns vs demo/docs
 - Which Hibernate production capabilities are in-scope for I-001 (via the feature matrix)
 
 This contract does **not** authorize reading or porting `E:\Work\java\hibernate-dialect` or any legacy xugu-dialect sources.
@@ -95,7 +95,7 @@ Connection URL shape reference: `jdbc:xugu://…` — exact query parameters fol
 ```text
 demo-spring-boot  →  dialect (com.xugu:xugu-dialect)  →  (Hibernate 7.4.5.Final API + Xugu JDBC)
 docs              describes this contract + matrix; does not reverse-depend on demo for truth
-harness           governance only; never on runtime classpath
+.trellis          Trellis workflow / specs / tasks; never on runtime classpath
 ```
 
 | Area | Owns | Must not |
@@ -104,7 +104,7 @@ harness           governance only; never on runtime classpath
 | **demo-spring-boot** | Runnable demo against real DB | Host core dialect implementation |
 | **docs/** (project) | User guide, verification steps, matrix cross-ref | Rewrite `E:\Work\docs\content` |
 | **contracts/** | Public contracts + definition A matrix SSOT | Business Java |
-| **harness/** | Clarify→Ship process | Dialect runtime code |
+| **.trellis/** | Trellis workflow, specs, tasks | Dialect runtime code |
 
 ---
 
@@ -155,7 +155,7 @@ Integrators using JPA pessimistic locking on XuguDB **must** read [`docs/user-gu
 - **`PESSIMISTIC_READ` maps to exclusive `FOR UPDATE`**, not a PostgreSQL-style share lock
 - Pagination + lock SQL order: **`FOR UPDATE` → `LIMIT` → `WAIT`**
 
-Live behavioral evidence for I-008 Accept: **P-005** (`harness/evidence/test/I-008/P-005/`).
+Live behavioral evidence for I-008 Accept: **P-005** (historical harness evidence path removed; see `docs/archive/i008-promotion/`).
 
 Honest regression counts (I-010 Accept, live @5287): **91/98** covered-live + **7** known-limit-documented — see [`production-regression-baseline.md`](production-regression-baseline.md) § Summary counts. (I-008 Q1 freeze was **83/98** + **15** KL.)
 

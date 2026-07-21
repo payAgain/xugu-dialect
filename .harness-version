@@ -1,8 +1,0 @@
-{
-  "framework": "engineering-harness",
-  "version": "0.9.0",
-  "level": "Standard",
-  "layout": "tool-agnostic",
-  "cli": "python",
-  "initialized_at": "2026-07-14T14:46:40+08:00"
-}

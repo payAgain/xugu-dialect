@@ -1,6 +1,0 @@
-﻿jar: xugu-dialect-7.4.5.Final.jar
-path: E:\Work\java\hibernate-test\dialect\target\xugu-dialect-7.4.5.Final.jar
-entry: FOUND META-INF/services/org.hibernate.engine.jdbc.dialect.spi.DialectResolver
-body:
-com.xugu.dialect.XuguDialectResolver
-

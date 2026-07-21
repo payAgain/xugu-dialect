@@ -1,4 +1,4 @@
-# Production Readiness Profile
+﻿# Production Readiness Profile
 
 This document defines what “production-ready” means for this project. Completed at Bootstrap (G1) for a **library + demo** product; revise when architecture or operating conditions change.
 
@@ -41,8 +41,8 @@ Do not leave a dimension undecided before approving a production Build.
 For Initiative **I-008 Accept**, functional correctness on a reachable XuguDB additionally requires:
 
 - Gated **full reactor** green: `XUGU_RUN_IT=true mvn -q test`
-- Deposited log under `harness/evidence/test/I-008/P-007/` (`mvn-test-live-it-final.log`, `IT-RESULT.txt`)
-- **`SKIPPED_INFRA`** documented when no live DB — offline `python harness/scripts/verify.py` **VERIFY PASS** alone is **insufficient** for production / Accept claims
+- Deposited log under `historical I-008/P-007 evidence (removed)` (`mvn-test-live-it-final.log`, `IT-RESULT.txt`)
+- **`SKIPPED_INFRA`** documented when no live DB — offline `mvn -q test` **VERIFY PASS** alone is **insufficient** for production / Accept claims
 
 See [`docs/verification.md`](verification.md) § I-008 and [`docs/user-guide/03-verify.md`](user-guide/03-verify.md) § I-008 Accept.
 
@@ -50,9 +50,9 @@ See [`docs/verification.md`](verification.md) § I-008 and [`docs/user-guide/03-
 
 ## Project verification commands
 
-The executable command contract is `harness/verification.json`.
+The executable command contract is `Maven verify (`mvn -q test`)`.
 
-**Bootstrap note:** Maven parent/modules are **not scaffolded yet**. `build` / `test` commands remain placeholders (`<fill-build-command>` / `<fill-test-command>`). Until a Maven scaffold Initiative fills real commands, `python harness/scripts/verify.py` is expected to report **`VERIFY INCOMPLETE`**. That blocks Accept — do not claim production Build complete without configured required checks.
+**Bootstrap note:** Maven parent/modules are **not scaffolded yet**. `build` / `test` commands remain placeholders (`<fill-build-command>` / `<fill-test-command>`). Until a Maven scaffold Initiative fills real commands, `mvn -q test` is expected to report **`VERIFY INCOMPLETE`**. That blocks Accept — do not claim production Build complete without configured required checks.
 
 ## Acceptance rule
 

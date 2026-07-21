@@ -1,1 +1,0 @@
-﻿HARNESS_CHECK PASS (level=Standard, layout=tool-agnostic)

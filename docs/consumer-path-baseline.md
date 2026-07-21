@@ -1,4 +1,4 @@
-# Consumer-Path Baseline (docs pointer)
+﻿# Consumer-Path Baseline (docs pointer)
 
 > **SSOT (do not duplicate):** [`contracts/consumer-path-baseline.md`](../contracts/consumer-path-baseline.md)  
 > **User guide (how to run):** [`docs/user-guide/06-consumer-path.md`](user-guide/06-consumer-path.md)  
@@ -13,7 +13,7 @@ This file is a short navigation stub only. The full Boot-required matrix (**41**
 
 ```text
 mvn -q test
-python harness/scripts/verify.py
+mvn -q test
 # with live DB:
 XUGU_RUN_IT=true mvn -q test
 ```

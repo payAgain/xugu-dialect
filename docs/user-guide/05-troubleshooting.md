@@ -1,4 +1,4 @@
-# 05 — Troubleshooting / 故障排查
+﻿# 05 — Troubleshooting / 故障排查
 
 ← [04-feature-matrix.md](04-feature-matrix.md) · [Index](README.md) · Next: [06-consumer-path.md](06-consumer-path.md) · Recipes: [08-schema-tooling-recipes.md](08-schema-tooling-recipes.md)
 
@@ -176,4 +176,4 @@ hibernate.query.json_functions_enabled=true
 - Matrix (Definition A): [`contracts/feature-matrix-definition-a.md`](../../contracts/feature-matrix-definition-a.md)  
 - Matrix (I-003 ruler C): [`contracts/feature-matrix-i003-ruler-c.md`](../../contracts/feature-matrix-i003-ruler-c.md)  
 - Demo README: [`demo-spring-boot/README.md`](../../demo-spring-boot/README.md)  
-- Project verification: `docs/verification.md` / `python harness/scripts/verify.py`
+- Project verification: `docs/verification.md` / `mvn -q test`

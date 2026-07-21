@@ -1,4 +1,4 @@
-# 06 — Consumer-path baseline / 消费者路径基线（I-006）
+﻿# 06 — Consumer-path baseline / 消费者路径基线（I-006）
 
 ← [05-troubleshooting.md](05-troubleshooting.md) · [Index](README.md) · Related: [03-verify.md](03-verify.md)
 
@@ -49,7 +49,7 @@ mvn -q -pl demo-spring-boot -am test
 Harness 契约（Accept 门控之一）：
 
 ```bash
-python harness/scripts/verify.py
+mvn -q test
 ```
 
 期望：`VERIFY PASS`（build + offline test）。
@@ -104,7 +104,7 @@ I-005 全量冻结步骤仍见 [03-verify.md § Frozen baseline](03-verify.md#fr
 
 - [ ] GAV：`com.xugu:xugu-dialect:7.4.5.Final`
 - [ ] Boot 若用 4.1.0：已强制 `hibernate.version=7.4.5.Final`
-- [ ] 离线：`mvn -q test` 绿；`python harness/scripts/verify.py` → **VERIFY PASS**（**仅** 布线 + 单元 — **非** 生产 Accept）
+- [ ] 离线：`mvn -q test` 绿；`mvn -q test` → **VERIFY PASS**（**仅** 布线 + 单元 — **非** 生产 Accept）
 - [ ] （有库）`XUGU_RUN_IT=true` 下 demo IT 全绿 — I-008 Accept 另需 **全 reactor** live log（见 [03-verify.md § I-008 Accept](03-verify.md#i-008-accept--全量-reactor-真库证据q4)）
 - [ ] SSOT Boot-required open gaps = **0**（对照 contracts 表）
 - [ ] 未把 exclusion appendix 的 `dialect-it-only` 误当成 Boot gap

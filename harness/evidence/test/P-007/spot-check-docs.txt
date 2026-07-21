@@ -1,3 +1,0 @@
-﻿spot-check docs I-003 ruler-C: - **I-003 ruler C matrix (SSOT):** [contracts/feature-matrix-i003-ruler-c.md](contracts/feature-matrix-i003-ruler-c.md)
-spot-check GAV 7.4.5.Final unchanged: pom.xml version=<version>7.4.5.Final</version>
-contracts/feature-matrix-i003-ruler-c.md exists: True

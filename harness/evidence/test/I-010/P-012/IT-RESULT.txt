@@ -1,3 +1,0 @@
-﻿XuguOptimisticConcurrencyIT: tests=2 skipped=2 failures=0 errors=0 (gate OFF assume)
-XuguHqlGroupByCountIT: tests=2 skipped=2 failures=0 errors=0 (gate OFF assume)
-live: SKIPPED_INFRA (TCP :5138 refused)

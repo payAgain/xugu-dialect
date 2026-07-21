@@ -1,4 +1,0 @@
-=== Offline surefire summary (gate OFF) ===
-dialect: Tests run: 139, Failures: 0, Errors: 0, Skipped: 54
-demo-spring-boot: Tests run: 28, Failures: 0, Errors: 0, Skipped: 23
-reactor: Tests run: 167, Failures: 0, Errors: 0, Skipped: 77

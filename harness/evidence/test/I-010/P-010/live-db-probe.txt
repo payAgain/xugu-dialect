@@ -1,7 +1,0 @@
-# Live DB probe — I-010 / P-010
-# completed_at: 2026-07-21T16:02:05+08:00
-
-host=192.168.2.239 port=5138 TcpTestSucceeded=False
-host=127.0.0.1 port=5138 TcpTestSucceeded=False
-
-Verdict: SKIPPED_INFRA — XuguDB TCP :5138 unreachable; full-reactor live IT not attempted.

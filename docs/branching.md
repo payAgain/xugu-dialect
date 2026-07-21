@@ -1,4 +1,4 @@
-# Branching Policy (GitHub Flow)
+﻿# Branching Policy (GitHub Flow)
 
 This project uses **GitHub Flow**.
 
@@ -8,7 +8,7 @@ This project uses **GitHub Flow**.
 - Work on short-lived branches:
   - `feat/<slug>` — features / implementation batches
   - `fix/<slug>` — bug fixes
-  - `chore/<slug>` — tooling / harness
+  - `chore/<slug>` — tooling / Trellis
   - `docs/<slug>` — docs only
   - `hotfix/<slug>` — urgent fixes
 - Merge to `main` via PR (or explicit human-approved merge).
@@ -18,16 +18,12 @@ This project uses **GitHub Flow**.
 
 1. Check current branch (`git branch --show-current`).
 2. If on `main`/`master` for implementation work, create `feat/<task-or-batch>`.
-3. Record branch in Session Briefing and `version_control_checkpoint`.
+3. Prefer Trellis tasks under `.trellis/tasks/` for structured work.
 
-## Sensor
-
-```text
-python harness/scripts/branch_check.py
-```
-
-Or from the framework CLI:
+## Check
 
 ```text
-python -m engineering_harness branch-check .
+git branch --show-current
 ```
+
+Stay off `main`/`master` for implementation work.

@@ -1,9 +1,0 @@
-
-
-ComputerName     : 192.168.2.239
-RemotePort       : 5138
-TcpTestSucceeded : False
-
-
-
-

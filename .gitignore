@@ -53,7 +53,7 @@ secrets/
 coverage/
 *.exec
 
-# Python harness caches
+# Python caches (Trellis hooks / scripts)
 __pycache__/
 *.py[cod]
 .pytest_cache/

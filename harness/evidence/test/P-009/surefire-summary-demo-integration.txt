@@ -1,2 +1,0 @@
-﻿DemoOfflineSmokeTest: tests=2 failures=0 errors=0 skipped=0
-DemoPersonCrudIT: tests=1 failures=0 errors=0 skipped=0

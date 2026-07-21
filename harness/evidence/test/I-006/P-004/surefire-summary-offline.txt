@@ -1,4 +1,0 @@
-﻿module: demo-spring-boot (offline / gate off)
-Tests run: 28, Failures: 0, Errors: 0, Skipped: 23
-dialect: Tests run: 139, Failures: 0, Errors: 0, Skipped: 54
-timestamp: 2026-07-18T23:53:47+08:00

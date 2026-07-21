@@ -1,8 +1,0 @@
-﻿IT-RESULT — I-008 P-003 RP-02 (inv-i008-p003-rp02-test)
-Date: 2026-07-20T16:47:18+08:00
-
-offline (XUGU_RUN_IT unset): PASS — gated IT skipped; unit/offline green
-live (XUGU_RUN_IT=true): SKIPPED_INFRA — DB 127.0.0.1:5138 unavailable
-
-Batch A live promotions (A-TYP-003/019, A-DDL-005, A-XCUT-001) NOT exercised on real DB this run.
-Re-run when XuGuDB is up: XUGU_RUN_IT=true mvn -q -pl dialect test -Dtest=XuguCastPatternIT,XuguDefaultColumnExportIT,XuguIdentifierFoldingIT,XuguTypeRoundTripIT

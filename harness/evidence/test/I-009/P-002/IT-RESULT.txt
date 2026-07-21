@@ -1,5 +1,0 @@
-﻿live_it_verdict=SKIPPED_INFRA
-maven_exit=1
-reason=192.168.2.239:5138 TcpTestSucceeded=False; JDBC Connection refused (E50025)
-test=com.xugu.dialect.it.XuguIntervalTypeIT#intervalNativeRoundTrip_A_TYP_014
-surefire=Tests run: 1, Failures: 1 (infra, not product assertion)
