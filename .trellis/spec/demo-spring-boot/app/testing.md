@@ -8,8 +8,8 @@
 
 | Layer | Example | Gate |
 |-------|---------|------|
-| Offline unit/smoke | `DemoOfflineSmokeTest`, `DemoBootBaselineSmokeTest` | none |
-| Live IT | `it/DemoPersonCrudIT`, `DemoTypesIT`, `DemoJsonIT`, `DemoFlywayIT`, … | `XuguIntegrationGate` |
+| Offline unit/smoke | `DemoOfflineSmokeTest` | none |
+| Live IT | `it/DemoPersonCrudIT`, `it/DemoBootBaselineSmokeTest`, `DemoTypesIT`, `DemoJsonIT`, `DemoFlywayIT`, … | `XuguIntegrationGate` |
 | Support | `support/XuguIntegrationGate`, `support/DemoXuguJdbc` | — |
 
 ---

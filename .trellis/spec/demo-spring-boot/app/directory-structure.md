@@ -30,8 +30,10 @@ demo-spring-boot/
     │           └── org.flywaydb.core.extensibility.Plugin
     └── test/
         └── java/com/xugu/demo/
-            ├── DemoOfflineSmokeTest.java   # offline
-            ├── it/*IT.java                 # gated SpringBootTest IT
+            ├── DemoOfflineSmokeTest.java   # offline only
+            ├── it/                         # gated SpringBootTest (gate off → skip)
+            │   ├── Demo*IT.java
+            │   └── DemoBootBaselineSmokeTest.java  # live smoke (*SmokeTest, not *IT)
             └── support/
                 ├── XuguIntegrationGate.java
                 └── DemoXuguJdbc.java
@@ -59,8 +61,8 @@ demo-spring-boot → xugu-dialect → (Hibernate API + Xugu JDBC)
 
 - Entities: `Demo*` (`DemoPerson`, `DemoJsonDoc`, …)
 - Repositories: `Demo*Repository`
-- IT: `Demo*IT` under `it/`, gated with `@EnabledIf(XuguIntegrationGate)`
-- Offline: `DemoOfflineSmokeTest`, `DemoBootBaselineSmokeTest` patterns as existing
+- Live IT: `Demo*IT` (and `DemoBootBaselineSmokeTest`) under `it/`, gated with `@EnabledIf(XuguIntegrationGate)`
+- Offline: `DemoOfflineSmokeTest` only (must stay green with gate off)
 
 ---
 
