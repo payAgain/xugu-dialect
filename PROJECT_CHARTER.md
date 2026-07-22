@@ -17,7 +17,7 @@
 | Field | Value |
 |---|---|
 | **Product name** | XuguDB Hibernate Dialect (`xugu-dialect`) |
-| **Working repo** | `hibernate-test` (`E:\Work\java\hibernate-test`) |
+| **Working repo** | `xugu-dialect` (`E:\Work\java\xugu-dialect`) |
 | **Mission** | 在本仓库从零交付可生产使用的虚谷数据库（XuguDB）Hibernate 方言制品：可发布的 dialect jar、可运行的 Spring Boot demo、以及项目内生产级使用/验证文档；使应用能通过显式 dialect 或 DialectResolver SPI 自动识别接入 XuguDB。 |
 
 ---
@@ -92,12 +92,12 @@
 | **dialect** (`com.xugu:xugu-dialect`) | `XuguDialect`、类型/函数/序列/Limit 等方言能力、DialectResolver SPI、单元/集成测试 | Hibernate 7.4.5 API、Xugu JDBC | 依赖 demo；继承 MySQL/Oracle Dialect；引用旁路仓实现 |
 | **demo-spring-boot** | 可运行的 Spring Boot 示例应用，验证真实库接入与核心场景 | dialect 制品、Xugu JDBC、Spring Boot（版本对齐 Hibernate 7.4.5） | 承载方言核心实现；成为唯一测试替身 |
 | **docs**（项目内） | 生产使用说明、配置示例、验证步骤、特性矩阵引用 | 方言公共契约与 Intent/Charter | 改写 `E:\Work\docs\content` |
-| **harness** | Clarify/Charter/Bootstrap/Scope/Plan/Build 治理、验证契约、会话状态 | 无业务运行时依赖 | 混入方言实现代码 |
+| **`.trellis`** | Trellis 工作流、package specs、任务归档、workspace journal | 无业务运行时依赖 | 混入方言实现代码 |
 
 **Dependency direction (non-negotiable):**  
 `demo-spring-boot` → `dialect` → (Hibernate API + Xugu JDBC)  
 `docs` 描述契约，不反向依赖 demo。  
-`harness` 治理流程，不进入运行时 classpath。
+`.trellis` 治理流程，不进入运行时 classpath。
 
 ---
 
@@ -112,7 +112,7 @@
 7. **默认 `compatible_mode=NONE`**；连接密钥优先 env。
 8. **交付三件套**：dialect jar + Spring Boot demo + 项目内生产文档。
 9. **GitHub Flow**：不在 `main`/`master` 上实现；Ship（tag/push/release/受保护分支）仅 Human Gate 授权。
-10. **驾驭架**：无 Intent/Charter PASS 与批准前不写业务 Java；Phases 默认串行，由 orchestrator 决定依赖，不问人类并行。
+10. **编排**：结构化工作走 Trellis tasks（`.trellis/tasks/`）；无 Human 批准不 Ship（tag/push/Central）。
 
 ---
 
@@ -120,12 +120,12 @@
 
 - 制品 `com.xugu:xugu-dialect:7.4.5.Final` 可构建、可安装/本地消费。
 - `com.xugu.dialect.XuguDialect` 可通过显式配置与 DialectResolver SPI 自动识别接入。
-- 定义 A 特性矩阵中「文档允许」项均有实现与验收证据（Plan 落表，Build 闭环）。
+- 定义 A 特性矩阵中「文档允许」项均有实现与验收证据。
 - 真实 XuguDB 集成测试通过（连接参数可 env 覆盖；默认 NONE）。
 - Spring Boot demo 可启动并对真实库演示核心能力。
 - 项目内生产文档足以让集成方按文档完成配置与验证。
-- 项目验证契约（`harness/verification.json` + `python harness/scripts/verify.py`）在约定检查配置完整后给出 **VERIFY PASS**。
-- 工作分支有 must-commit SHA；Accept 前无 VERIFY FAIL / INCOMPLETE 阻塞项。
+- 离线 `mvn -q -DskipTests package` 与 `mvn -q test` 通过；宣称 Accept / live 覆盖时须有门控真库证据。
+- 工作分支有 must-commit SHA；Accept 前无失败的必测阻塞项。
 
 ---
 
@@ -133,11 +133,10 @@
 
 | Layer | Expectation |
 |---|---|
-| Harness | `python harness/scripts/harness_check.py`；分支检查 `branch_check.py` |
-| Project verify | `python harness/scripts/verify.py` — 仅当所需检查均已配置且成功 → **PASS** |
-| Build / Test | Bootstrap 后填入真实 build/test 命令（Maven）；集成测试依赖可达的 XuguDB |
+| Orchestration | Trellis tasks / `.trellis/spec/`；历史 Initiative → `.trellis/tasks/archive/` |
+| Build / Test | `mvn -q -DskipTests package`；`mvn -q test`；可选 `XUGU_RUN_IT=true mvn -q test` |
 | Evidence | 观察行为 + 验证输出 + commit SHA（有变更时）方可宣称完成 |
-| Accept gate | `VERIFY PASS` 必需；`VERIFY INCOMPLETE` / `VERIFY FAIL` 阻塞 Accept |
+| Accept gate | 离线必测绿；live Accept 另需门控真库证据（见 `contracts/production-regression-baseline.md`） |
 | Ship | Central 发布凭证与 tag/push 不在本 Charter 批准范围内，另需 Human Gate |
 
 **本地连接默认仅作开发参考；CI 必须通过环境变量注入主机、库名、账号口令。**

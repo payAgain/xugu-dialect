@@ -20,6 +20,7 @@
 | File | Lines | Status |
 |------|-------|--------|
 | `journal-1.md` | ~0 | Active |
+| `error-journal.md` | — | Migrated from `docs/error-journal.md` |
 <!-- @@@/auto:active-documents -->
 
 ---

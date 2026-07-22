@@ -1,0 +1,29 @@
+{
+  "id": "i-007-capability-hardening-abc",
+  "name": "i-007-capability-hardening-abc",
+  "title": "I-007: 能力硬化 A/B/C",
+  "description": "Migrated from docs/initiatives/I-007-brief.md (former harness)",
+  "status": "completed",
+  "dev_type": "feature",
+  "scope": null,
+  "package": "dialect",
+  "priority": "P1",
+  "creator": "yyyymd",
+  "assignee": "yyyymd",
+  "createdAt": "2026-07-20",
+  "completedAt": "2026-07-20",
+  "branch": null,
+  "base_branch": null,
+  "worktree_path": null,
+  "commit": null,
+  "pr_url": null,
+  "subtasks": [],
+  "children": [],
+  "parent": null,
+  "relatedFiles": [],
+  "notes": "Migrated from former harness / docs/initiatives on 2026-07-22.",
+  "meta": {
+    "legacy_id": "I-007",
+    "source": "docs/initiatives/I-007-brief.md"
+  }
+}

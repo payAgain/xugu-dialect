@@ -1,0 +1,29 @@
+{
+  "id": "i-002-hql-pagination-sequence-metadata",
+  "name": "i-002-hql-pagination-sequence-metadata",
+  "title": "I-002: 修复 HQL 分页 OFFSET/FETCH 与 schema validate 序列元数据",
+  "description": "Migrated from docs/initiatives/I-002-brief.md (former harness)",
+  "status": "completed",
+  "dev_type": "hotfix",
+  "scope": null,
+  "package": "dialect",
+  "priority": "P1",
+  "creator": "yyyymd",
+  "assignee": "yyyymd",
+  "createdAt": "2026-07-16",
+  "completedAt": "2026-07-16",
+  "branch": null,
+  "base_branch": null,
+  "worktree_path": null,
+  "commit": null,
+  "pr_url": null,
+  "subtasks": [],
+  "children": [],
+  "parent": null,
+  "relatedFiles": [],
+  "notes": "Migrated from former harness / docs/initiatives on 2026-07-22.",
+  "meta": {
+    "legacy_id": "I-002",
+    "source": "docs/initiatives/I-002-brief.md"
+  }
+}

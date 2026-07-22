@@ -52,7 +52,7 @@
 - Spring Boot: **4.1.0** + `hibernate.version=7.4.5.Final`
 - Docs path: **`docs/user-guide/`**
 - Ship: **out of this Initiative** (deferred)
-- Initiative Accept evidence: `harness/evidence/orchestrator/I-001/ACCEPTANCE.md`
+- Initiative Accept evidence: `(historical harness evidence removed; see Trellis task research/ if present) orchestrator/I-001/ACCEPTANCE.md`
 
 ## Open Questions (Scope)
 - （无）— 2026-07-14 Human Gate 已确认 Boot 4.1.0+覆盖、Ship 另开、`docs/user-guide/`
@@ -62,6 +62,6 @@
 
 - Human Gate Accept: 「确认 I-001 Accept」(~2026-07-15T16:15+08:00)
 - Human Gate Archive: 「Archive I-001」(~2026-07-15T16:25+08:00)
-- Archive record: `harness/initiatives/I-001/ARCHIVE.md`
+- Archive record: `.trellis/tasks/archive/2026-07/ (historical; former harness path) I-001/ARCHIVE.md`
 - Delivery: GAV `com.xugu:xugu-dialect:7.4.5.Final`; Boot demo 4.1.0; `docs/user-guide`; Definition A 可实现 78/78 closed; VERIFY PASS
 - Ship / tag / push / Central: **not** done — separate authorization required

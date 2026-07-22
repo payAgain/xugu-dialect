@@ -79,7 +79,7 @@
 | negative-only (文档不允许 + explicit defer) | **11** | Doc-forbidden + `@Disabled` defer anchors; open **延后** = **0** |
 | Demo smoke | 7 | See baseline SSOT demo table |
 
-> **禁止**再写「**94 covered-live**」或陈旧「**83/98 + 15 KL**」作为**当前**口径。诚实 rollup：[`production-regression-baseline.md`](../../contracts/production-regression-baseline.md) § Summary；I-008 晋升图（历史）：[`docs/archive/i008-promotion/PROMOTION-MAP.md`](../../docs/archive/i008-promotion/PROMOTION-MAP.md)。
+> **禁止**再写「**94 covered-live**」或陈旧「**83/98 + 15 KL**」作为**当前**口径。诚实 rollup：[`production-regression-baseline.md`](../../contracts/production-regression-baseline.md) § Summary；I-008 晋升图（历史）：[`.trellis/tasks/archive/2026-07/i-008-production-quality-gaps/research/i008-promotion/PROMOTION-MAP.md`](../../.trellis/tasks/archive/2026-07/i-008-production-quality-gaps/research/i008-promotion/PROMOTION-MAP.md)。
 
 验证门控：[03-verify.md § Frozen baseline](03-verify.md#frozen-baseline--i-005-冻结基线门控)。
 

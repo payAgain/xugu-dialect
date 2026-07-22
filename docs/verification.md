@@ -32,4 +32,4 @@ This repo is managed by **Trellis** (`.trellis/`). Use Trellis tasks / `/trellis
 
 - User-facing verify steps: [docs/user-guide/03-verify.md](user-guide/03-verify.md)
 - Production regression SSOT: [contracts/production-regression-baseline.md](../contracts/production-regression-baseline.md)
-- Historical initiative briefs: [docs/initiatives/](initiatives/)
+- Historical initiative archives: [.trellis/tasks/archive/2026-07/](../.trellis/tasks/archive/2026-07/INDEX.md)

@@ -34,7 +34,7 @@
 
 ## Status
 `completed` / **archived** — Accept (~2026-07-21T14:11+08:00)；Archive (~2026-07-21T14:40+08:00，开 I-010)；**NOT Ship**  
-Evidence: `harness/evidence/orchestrator/I-009/ACCEPTANCE.md` · Archive: `harness/initiatives/I-009/ARCHIVE.md`
+Evidence: `(historical harness evidence removed; see Trellis task research/ if present) orchestrator/I-009/ACCEPTANCE.md` · Archive: `.trellis/tasks/archive/2026-07/ (historical; former harness path) I-009/ARCHIVE.md`
 
 ## Branch
 `feat/i-009-deferred-matrix-delivery`

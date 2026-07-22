@@ -1,0 +1,29 @@
+{
+  "id": "i-008-production-quality-gaps",
+  "name": "i-008-production-quality-gaps",
+  "title": "I-008: 生产质量短板补全 Q1–Q4",
+  "description": "Migrated from docs/initiatives/I-008-brief.md (former harness)",
+  "status": "completed",
+  "dev_type": "feature",
+  "scope": null,
+  "package": "dialect",
+  "priority": "P1",
+  "creator": "yyyymd",
+  "assignee": "yyyymd",
+  "createdAt": "2026-07-21",
+  "completedAt": "2026-07-21",
+  "branch": null,
+  "base_branch": null,
+  "worktree_path": null,
+  "commit": null,
+  "pr_url": null,
+  "subtasks": [],
+  "children": [],
+  "parent": null,
+  "relatedFiles": [],
+  "notes": "Migrated from former harness / docs/initiatives on 2026-07-22.",
+  "meta": {
+    "legacy_id": "I-008",
+    "source": "docs/initiatives/I-008-brief.md"
+  }
+}

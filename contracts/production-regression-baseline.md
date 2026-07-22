@@ -336,7 +336,7 @@ Matrix status **文档不允许** or **延后**; baseline records explicit non-s
 
 ## Explicit call-out — P-003 Batch A known-limit waivers (remaining)
 
-Formal live IT waived per [docs/archive/i008-promotion/PROMOTION-MAP.md](../docs/archive/i008-promotion/PROMOTION-MAP.md) Batch A locks. **I-010 live @5287:** A-FUN-003/005/006/007/009 promoted out of this waiver table to **covered-live** (see § I-010 / P-008). Charter Accept rollup: **91/98** covered-live + **7** known-limit-documented.
+Formal live IT waived per [`.trellis/.../i008-promotion/PROMOTION-MAP.md`](../.trellis/tasks/archive/2026-07/i-008-production-quality-gaps/research/i008-promotion/PROMOTION-MAP.md) Batch A locks. **I-010 live @5287:** A-FUN-003/005/006/007/009 promoted out of this waiver table to **covered-live** (see § I-010 / P-008). Charter Accept rollup: **91/98** covered-live + **7** known-limit-documented.
 
 | matrix_id | waiver_reason | live_bundle |
 |---|---|---|

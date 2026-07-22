@@ -69,7 +69,6 @@ Consumer-path verification modes:
 |---|---|---|
 | Offline | `mvn -q -pl demo-spring-boot -am test` | Gated IT skipped; offline smoke green |
 | Live | `$env:XUGU_RUN_IT='true'; mvn -q -pl demo-spring-boot -am test` | Demo ≈32 tests green (I-007 P-005 Track B deepening) |
-| Harness | `python harness/scripts/verify.py` (repo root) | **VERIFY PASS** |
 
 ```bash
 # offline (default) — skips gated IT

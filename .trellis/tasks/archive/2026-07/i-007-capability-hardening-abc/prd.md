@@ -56,7 +56,7 @@
 - Branch: `feat/i-007-capability-hardening-abc`
 - SSOT touch: `contracts/production-regression-baseline.md`, `contracts/consumer-path-baseline.md`, feature matrices
 - Ship: **out of this Initiative**
-- Accept evidence: `harness/evidence/orchestrator/I-007/ACCEPTANCE.md`
+- Accept evidence: `(historical harness evidence removed; see Trellis task research/ if present) orchestrator/I-007/ACCEPTANCE.md`
 
 ## Status
-`completed` / **archived** — 见 `harness/initiatives/I-007/ARCHIVE.md`（2026-07-20；I-008 Scope PASS）。**NOT Ship**。
+`completed` / **archived** — 见 `.trellis/tasks/archive/2026-07/ (historical; former harness path) I-007/ARCHIVE.md`（2026-07-20；I-008 Scope PASS）。**NOT Ship**。

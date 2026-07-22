@@ -5,7 +5,7 @@
 > **Author role:** architect-contract  
 > **invocation_id:** `inv-i007-p001-rp02-architect`  
 > **Branch:** `feat/i-007-capability-hardening-abc`  
-> **Sources:** [`production-regression-baseline.md`](production-regression-baseline.md) (I-005), [`consumer-path-baseline.md`](consumer-path-baseline.md) (I-006 FROZEN), [`harness/initiatives/I-007/brief.md`](../harness/initiatives/I-007/brief.md), [`harness/evidence/researcher/I-007/P-001/INVENTORY.md`](../harness/evidence/researcher/I-007/P-001/INVENTORY.md)  
+> **Sources:** [`production-regression-baseline.md`](production-regression-baseline.md) (I-005), [`consumer-path-baseline.md`](consumer-path-baseline.md) (I-006 FROZEN), [I-007 archived PRD](../.trellis/tasks/archive/2026-07/i-007-capability-hardening-abc/prd.md) (former harness researcher inventory removed with harness)  
 > **GAV:** `com.xugu:xugu-dialect:7.4.5.Final` — **no bump**  
 > **compatiblemode:** **NONE** only  
 > **Dialect strategy:** Native Xugu — **no** MySQL/Oracle compat inheritance  

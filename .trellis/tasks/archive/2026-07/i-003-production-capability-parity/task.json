@@ -1,0 +1,29 @@
+{
+  "id": "i-003-production-capability-parity",
+  "name": "i-003-production-capability-parity",
+  "title": "I-003: 生产能力补齐（尺子 C）",
+  "description": "Migrated from docs/initiatives/I-003-brief.md (former harness)",
+  "status": "completed",
+  "dev_type": "feature",
+  "scope": null,
+  "package": "dialect",
+  "priority": "P1",
+  "creator": "yyyymd",
+  "assignee": "yyyymd",
+  "createdAt": "2026-07-17",
+  "completedAt": "2026-07-17",
+  "branch": null,
+  "base_branch": null,
+  "worktree_path": null,
+  "commit": null,
+  "pr_url": null,
+  "subtasks": [],
+  "children": [],
+  "parent": null,
+  "relatedFiles": [],
+  "notes": "Migrated from former harness / docs/initiatives on 2026-07-22.",
+  "meta": {
+    "legacy_id": "I-003",
+    "source": "docs/initiatives/I-003-brief.md"
+  }
+}

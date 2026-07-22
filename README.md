@@ -12,7 +12,7 @@ I-006 Spring Boot consumer-path (same GAV **7.4.5.Final**): **41** Boot-required
 
 I-007 capability hardening (same GAV **7.4.5.Final**): Track **A** C-BULK-002 **covered-live**; Track **B** Flyway + Demo deepening; Track **C** JSON subset / ARRAY / ALTER SEQUENCE **covered-live**. SSOT: [contracts/i007-capability-hardening-plan.md](contracts/i007-capability-hardening-plan.md). Track C user summary: [docs/p004-track-c-capabilities.md](docs/p004-track-c-capabilities.md). **NOT Ship**.
 
-I-008 production quality gaps (same GAV **7.4.5.Final**): Q1–Q4 closed — honest **83/98** covered-live + **15** known-limit; lock semantics (Q2); Boot UUID/JSON out-of-box (Q3); Accept requires full reactor live evidence (Q4). **Q5 performance / multi-version matrix out of scope.** SSOT: [docs/initiatives/I-008-brief.md](docs/initiatives/I-008-brief.md). Accept prep: [docs/user-guide/03-verify.md](docs/user-guide/03-verify.md) § I-008 Accept. **NOT Ship**.
+I-008 production quality gaps (same GAV **7.4.5.Final**): Q1–Q4 closed — honest **83/98** covered-live + **15** known-limit; lock semantics (Q2); Boot UUID/JSON out-of-box (Q3); Accept requires full reactor live evidence (Q4). **Q5 performance / multi-version matrix out of scope.** SSOT: [.trellis/tasks/archive/2026-07/i-008-production-quality-gaps/prd.md](.trellis/tasks/archive/2026-07/i-008-production-quality-gaps/prd.md). Accept prep: [docs/user-guide/03-verify.md](docs/user-guide/03-verify.md) § I-008 Accept. **NOT Ship**.
 
 ## Start here
 

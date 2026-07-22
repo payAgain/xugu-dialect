@@ -4,7 +4,7 @@
 > **invocation_id:** `inv-i008-p001-rp02-architect`  
 > **Date:** 2026-07-20  
 > **Branch:** `feat/i-008-production-quality-gaps`  
-> **Source:** `harness/evidence/researcher/I-008/P-001/{INVENTORY,GAP-SUMMARY}.md`  
+> **Source:** `(historical harness evidence removed; see Trellis task research/ if present) researcher/I-008/P-001/{INVENTORY,GAP-SUMMARY}.md`  
 > **Constraint:** GAV `7.4.5.Final`; `compatiblemode=NONE`; Q5 OUT; NOT Ship; no dialect/demo Java
 
 ---

@@ -43,7 +43,7 @@
 - Predecessor: I-005 archived
 - Branch: `feat/i-006-consumer-path-coverage`
 - SSOT: `contracts/consumer-path-baseline.md`
-- Accept evidence: `harness/evidence/orchestrator/I-006/ACCEPTANCE.md`
+- Accept evidence: `(historical harness evidence removed; see Trellis task research/ if present) orchestrator/I-006/ACCEPTANCE.md`
 - Ship: **out of this Initiative**
 
 ## Status
@@ -53,5 +53,5 @@
 - Plan complete: ~2026-07-18T15:13+08:00
 - B-001 approved / P-001…P-005 all accepted
 - Initiative Accept: ~2026-07-19T11:07+08:00
-- Archive: ~2026-07-19T13:53+08:00 — `harness/initiatives/I-006/ARCHIVE.md`
-- Successor: **I-007** (`harness/initiatives/I-007/brief.md`)
+- Archive: ~2026-07-19T13:53+08:00 — `.trellis/tasks/archive/2026-07/ (historical; former harness path) I-006/ARCHIVE.md`
+- Successor: **I-007** (`.trellis/tasks/archive/2026-07/ (historical; former harness path) I-007/brief.md`)

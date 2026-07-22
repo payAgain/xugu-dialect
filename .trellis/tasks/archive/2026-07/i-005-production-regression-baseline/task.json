@@ -1,0 +1,29 @@
+{
+  "id": "i-005-production-regression-baseline",
+  "name": "i-005-production-regression-baseline",
+  "title": "I-005: 生产回归测试基线",
+  "description": "Migrated from docs/initiatives/I-005-brief.md (former harness)",
+  "status": "completed",
+  "dev_type": "feature",
+  "scope": null,
+  "package": "dialect",
+  "priority": "P1",
+  "creator": "yyyymd",
+  "assignee": "yyyymd",
+  "createdAt": "2026-07-18",
+  "completedAt": "2026-07-18",
+  "branch": null,
+  "base_branch": null,
+  "worktree_path": null,
+  "commit": null,
+  "pr_url": null,
+  "subtasks": [],
+  "children": [],
+  "parent": null,
+  "relatedFiles": [],
+  "notes": "Migrated from former harness / docs/initiatives on 2026-07-22.",
+  "meta": {
+    "legacy_id": "I-005",
+    "source": "docs/initiatives/I-005-brief.md"
+  }
+}

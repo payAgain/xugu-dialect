@@ -34,7 +34,7 @@ Do not leave a dimension undecided before approving a production Build.
 | Deployment and configuration | **conditional** | Build, GAV, JDBC packaging, Hibernate/Boot config, module layout | Reproducible Maven build/install; config examples in project docs |
 | Rollback and recovery | **conditional** | Published artifact or consumer-breaking change | Version/rollback or deprecation plan at Ship; irreversible-change gate |
 | Compatibility | **required** | Public dialect API, SPI, GAV, Hibernate 7.4.5 alignment, config keys | Compatibility tests / matrix notes; no silent break of documented entry points |
-| Maintainability | **required** | All maintained projects | Tests, architecture/ADR updates, harness handoff |
+| Maintainability | **required** | All maintained projects | Tests, architecture/ADR updates, Trellis task/spec handoff |
 
 ## I-008 Accept live evidence (Q4)
 

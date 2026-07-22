@@ -14,19 +14,19 @@ Library + demo product for **XuguDB Hibernate Dialect** (`xugu-dialect`):
 - Runnable Spring Boot demo against real XuguDB (demo runtime/IT deferred past P-001)
 - Project-internal production documentation under `docs/`
 
-Harness level: **Standard**. Governance under `harness/`.
+Orchestration: **Trellis** (`.trellis/`). Historical initiative archives: `.trellis/tasks/archive/2026-07/`.
 
 ## Maven multi-module layout
 
 Parent aggregator at repository root:
 
 ```text
-hibernate-test/                    # parent POM (packaging=pom)
+xugu-dialect/                      # parent POM (packaging=pom)
 ├── dialect/                       # com.xugu:xugu-dialect:7.4.5.Final
-├── demo-spring-boot/              # Spring Boot 4.1.0 demo module (entry scaffold)
+├── demo-spring-boot/              # Spring Boot 4.1.0 demo module
 ├── docs/                          # project docs (not a Maven module)
 ├── contracts/                     # public contract markdown
-├── harness/                       # engineering harness (not on runtime classpath)
+├── .trellis/                      # Trellis workflow / specs / task archive
 ├── DECISIONS/                     # ADRs
 ├── xugu-jdbc-12.3.6.jar           # JDBC driver at repo root (Charter baseline)
 ├── PROJECT_CHARTER.md
@@ -35,11 +35,11 @@ hibernate-test/                    # parent POM (packaging=pom)
 
 | Path | Role | Status |
 |---|---|---|
-| `dialect/` | Dialect library module (`com.xugu.dialect`, stub `XuguDialect`) | **Scaffolded** (P-001) — definition A / SPI not yet |
-| `demo-spring-boot/` | Spring Boot demo consuming dialect + JDBC | **Scaffolded** (P-001) — main entry only; no business demo |
+| `dialect/` | Dialect library module (`com.xugu.dialect`) | Live — Accept 91/98 covered-live + 7 KL (I-010) |
+| `demo-spring-boot/` | Spring Boot demo consuming dialect + JDBC | Live consumer demo + gated IT |
 | `docs/` | Production use / verification / readiness docs | Present; matrix pointer [`feature-matrix-definition-a.md`](feature-matrix-definition-a.md) → contracts SSOT |
-| `contracts/` | Module public contracts | **P-002:** [`xugu-dialect.contract.md`](../contracts/xugu-dialect.contract.md) + [Definition A matrix SSOT](../contracts/feature-matrix-definition-a.md) (105 rows); scaffold contract retained |
-| `harness/` | Clarify→Ship governance | Present |
+| `contracts/` | Module public contracts | [`xugu-dialect.contract.md`](../contracts/xugu-dialect.contract.md) + matrices / baselines |
+| `.trellis/` | Trellis governance (specs, tasks, workspace) | Present |
 | `xugu-jdbc-12.3.6.jar` | Xugu JDBC 12.3.6 | Present at root; wired via Maven `systemPath` |
 
 Directory name is **`dialect/`** (Maven artifact id remains `xugu-dialect` per ADR-0001).
@@ -65,34 +65,34 @@ Directory name is **`dialect/`** (Maven artifact id remains `xugu-dialect` per A
 ```text
 demo-spring-boot  →  dialect  →  (Hibernate 7.4.5 API + Xugu JDBC)
 docs              describes contracts; does not depend on demo for truth
-harness           governance only; never on runtime classpath
+.trellis          governance / specs / archives; never on runtime classpath
 ```
 
 - `dialect` must **not** depend on `demo-spring-boot`.
 - Demo must **not** host core dialect implementation.
-- Integration tests for dialect must use **real** XuguDB (not mock-only substitute) — deferred past P-001.
+- Integration tests for dialect must use **real** XuguDB when the IT gate is on (`XUGU_RUN_IT=true`).
 
 ## Entry Points (current)
 
 | Kind | Entry | Status |
 |---|---|---|
-| Dialect explicit | `hibernate.dialect=com.xugu.dialect.XuguDialect` | Stub class exists (P-001); capabilities later |
-| Dialect auto | DialectResolver SPI for XuguDB | Planned (not in P-001) |
-| Demo | `com.xugu.demo.DemoApplication` in `demo-spring-boot/` | Scaffolded (compile/package only) |
-| Harness verify | `python harness/scripts/verify.py` | Present; build/test = real `mvn` commands |
+| Dialect explicit | `hibernate.dialect=com.xugu.dialect.XuguDialect` | Live |
+| Dialect auto | DialectResolver SPI (`xugu`) | Live |
+| Demo | `com.xugu.demo.DemoApplication` in `demo-spring-boot/` | Live |
+| Verify | `mvn -q -DskipTests package` · `mvn -q test` | Offline default; gated live IT optional |
 | JDBC | system / module dependency on root jar | Wired in both modules |
 
 ## Data / Control Flow (target)
 
 1. Application (or demo) configures Hibernate with explicit dialect or relies on SPI resolution.
-2. Dialect generates SQL consistent with XuguDB docs (`E:\Work\docs\content`) within definition A matrix (Plan / later Phases).
+2. Dialect generates SQL consistent with XuguDB docs (`E:\Work\docs\content`) within definition A matrix.
 3. JDBC driver (`xugu-jdbc-12.3.6.jar`) talks to real XuguDB; connection secrets prefer env override.
-4. Tests and demo observe real DB behavior; harness records verification evidence.
+4. Tests and demo observe real DB behavior; Trellis tasks/archive hold historical Accept notes.
 
 ## Notes for Future Agents
 
-- Definition A matrix SSOT is `contracts/feature-matrix-definition-a.md` (P-002 accepted). DialectResolver SPI remains out of scope until P-008.
-- Do not invent SQL for **文档不允许** rows.
+- Definition A matrix SSOT is `contracts/feature-matrix-definition-a.md`. Coding conventions live under `.trellis/spec/`.
+- Do not invent SQL for **文档不允许** / known-limit rows.
 - Do not read or port `E:\Work\java\hibernate-dialect`.
-- Record further stable decisions in `DECISIONS/`.
-- Build: `mvn -q -DskipTests package` · Test: `mvn -q test` (see `harness/verification.json`).
+- Record further stable decisions in `DECISIONS/` or `.trellis/spec/`.
+- Build: `mvn -q -DskipTests package` · Test: `mvn -q test` (see `docs/verification.md`).

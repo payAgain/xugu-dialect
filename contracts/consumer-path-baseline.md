@@ -5,7 +5,7 @@
 > **Author role:** architect-contract (P-001); Layers A/B/C′ by implementer (P-002…P-004); docs freeze by implementer (P-005); verification by test; Accept by orchestrator  
 > **invocation_id:** `inv-i006-p005-rp01-implementer` (docs freeze); prior Accept `inv-i006-p004-rp03-reviewer`  
 
-> **Sources:** [`production-regression-baseline.md`](production-regression-baseline.md) (I-005), [`harness/evidence/researcher/I-006/P-001/INVENTORY.md`](../harness/evidence/researcher/I-006/P-001/INVENTORY.md), [`GAP-SUMMARY.md`](../harness/evidence/researcher/I-006/P-001/GAP-SUMMARY.md), [`harness/initiatives/I-006/brief.md`](../harness/initiatives/I-006/brief.md)  
+> **Sources:** [`production-regression-baseline.md`](production-regression-baseline.md) (I-005), [I-006 archived PRD](../.trellis/tasks/archive/2026-07/i-006-consumer-path-coverage/prd.md) (former harness researcher inventory removed with harness)  
 > **User guide:** [`docs/user-guide/06-consumer-path.md`](../docs/user-guide/06-consumer-path.md) · pointer [`docs/consumer-path-baseline.md`](../docs/consumer-path-baseline.md)  
 > **Scope:** **Boot-required** consumer-path subset only — **41** rows (Layer A=13 / B=9 / C′=19). **Not** a full 94-row Boot mirror of I-005 可实现.  
 > **GAV:** `com.xugu:xugu-dialect:7.4.5.Final` (document only; no Ship / bump in this Initiative)  

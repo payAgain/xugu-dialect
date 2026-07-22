@@ -48,7 +48,7 @@ SSOT：`contracts/xuguefcore-parity-suite.md`（P-011）
 ## Acceptance criteria
 - [x] B-001 质量口径退出清单 P0+P1（VERIFY PASS；live @5287 PASS）
 - [x] B-002 10 项用例落地（XP covered-live×8 + covered-unit×2）
-- [x] VERIFY PASS；真库证据 `harness/evidence/test/I-010/live-it-5287/`
+- [x] VERIFY PASS；真库证据 `(historical harness evidence removed; see Trellis task research/ if present) test/I-010/live-it-5287/`
 - [x] 不 Ship
 
 ## Status

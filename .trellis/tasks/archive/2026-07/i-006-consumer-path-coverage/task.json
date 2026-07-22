@@ -1,0 +1,29 @@
+{
+  "id": "i-006-consumer-path-coverage",
+  "name": "i-006-consumer-path-coverage",
+  "title": "I-006: 消费者路径全面覆盖",
+  "description": "Migrated from docs/initiatives/I-006-brief.md (former harness)",
+  "status": "completed",
+  "dev_type": "feature",
+  "scope": null,
+  "package": "dialect",
+  "priority": "P1",
+  "creator": "yyyymd",
+  "assignee": "yyyymd",
+  "createdAt": "2026-07-19",
+  "completedAt": "2026-07-19",
+  "branch": null,
+  "base_branch": null,
+  "worktree_path": null,
+  "commit": null,
+  "pr_url": null,
+  "subtasks": [],
+  "children": [],
+  "parent": null,
+  "relatedFiles": [],
+  "notes": "Migrated from former harness / docs/initiatives on 2026-07-22.",
+  "meta": {
+    "legacy_id": "I-006",
+    "source": "docs/initiatives/I-006-brief.md"
+  }
+}

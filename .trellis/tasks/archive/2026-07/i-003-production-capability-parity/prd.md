@@ -33,7 +33,7 @@
 ## Related
 - Branch: `feat/i-003-production-capability-parity`
 - Matrix SSOT: `contracts/feature-matrix-i003-ruler-c.md` (**CONFIRMED**)
-- Accept evidence: `harness/evidence/orchestrator/I-003/ACCEPTANCE.md`
+- Accept evidence: `(historical harness evidence removed; see Trellis task research/ if present) orchestrator/I-003/ACCEPTANCE.md`
 - Ship: **out of this Initiative**
 
 ## Status
@@ -43,4 +43,4 @@
 - P-001…P-007: all accepted
 - Initiative Accept: ~2026-07-16T17:46+08:00
 - Archive: ~2026-07-17T14:32+08:00
-- Archive doc: `harness/initiatives/I-003/ARCHIVE.md`
+- Archive doc: `.trellis/tasks/archive/2026-07/ (historical; former harness path) I-003/ARCHIVE.md`

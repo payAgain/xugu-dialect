@@ -5,7 +5,7 @@
 > **Author role:** architect-contract  
 > **Status:** CONFIRMED for subsequent implement Phases (P-003…P-008)  
 > **Supersedes (scope):** capability gaps left open by `contracts/xugu-dialect.scaffold.contract.md` (scaffold remains authoritative for Maven layout)  
-> **SSOT baselines:** `PROJECT_CHARTER.md`, `DECISIONS/ADR-0001-hibernate-baseline.md`, `docs/architecture.md`, `docs/initiatives/I-001-brief.md`  
+> **SSOT baselines:** `PROJECT_CHARTER.md`, `DECISIONS/ADR-0001-hibernate-baseline.md`, `docs/architecture.md`, `.trellis/tasks/archive/2026-07/i-001-xugu-dialect-major/prd.md`  
 > **Feature matrix SSOT:** [`contracts/feature-matrix-definition-a.md`](feature-matrix-definition-a.md)
 
 ---
@@ -155,7 +155,7 @@ Integrators using JPA pessimistic locking on XuguDB **must** read [`docs/user-gu
 - **`PESSIMISTIC_READ` maps to exclusive `FOR UPDATE`**, not a PostgreSQL-style share lock
 - Pagination + lock SQL order: **`FOR UPDATE` → `LIMIT` → `WAIT`**
 
-Live behavioral evidence for I-008 Accept: **P-005** (historical harness evidence path removed; see `docs/archive/i008-promotion/`).
+Live behavioral evidence for I-008 Accept: **P-005** (historical harness evidence path removed; see `.trellis/tasks/archive/2026-07/i-008-production-quality-gaps/research/i008-promotion/`).
 
 Honest regression counts (I-010 Accept, live @5287): **91/98** covered-live + **7** known-limit-documented — see [`production-regression-baseline.md`](production-regression-baseline.md) § Summary counts. (I-008 Q1 freeze was **83/98** + **15** KL.)
 

@@ -28,7 +28,7 @@
 
 ## Related
 - Branch: `fix/i-004-sequence-drop-identity-reserved`
-- Accept evidence: `harness/evidence/orchestrator/I-004/ACCEPTANCE.md`
+- Accept evidence: `(historical harness evidence removed; see Trellis task research/ if present) orchestrator/I-004/ACCEPTANCE.md`
 - Ship: **out of this Initiative**
 
 ## Status
@@ -38,4 +38,4 @@
 - P-001…P-002: accepted under B-001
 - Initiative Accept: ~2026-07-17T15:01+08:00
 - Archive: ~2026-07-17T15:23+08:00
-- Archive doc: `harness/initiatives/I-004/ARCHIVE.md`
+- Archive doc: `.trellis/tasks/archive/2026-07/ (historical; former harness path) I-004/ARCHIVE.md`

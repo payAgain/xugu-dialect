@@ -1,0 +1,29 @@
+{
+  "id": "i-009-deferred-matrix-delivery",
+  "name": "i-009-deferred-matrix-delivery",
+  "title": "I-009: 交付矩阵全部「延后」项",
+  "description": "Migrated from docs/initiatives/I-009-brief.md (former harness)",
+  "status": "completed",
+  "dev_type": "feature",
+  "scope": null,
+  "package": "dialect",
+  "priority": "P1",
+  "creator": "yyyymd",
+  "assignee": "yyyymd",
+  "createdAt": "2026-07-21",
+  "completedAt": "2026-07-21",
+  "branch": null,
+  "base_branch": null,
+  "worktree_path": null,
+  "commit": null,
+  "pr_url": null,
+  "subtasks": [],
+  "children": [],
+  "parent": null,
+  "relatedFiles": [],
+  "notes": "Migrated from former harness / docs/initiatives on 2026-07-22.",
+  "meta": {
+    "legacy_id": "I-009",
+    "source": "docs/initiatives/I-009-brief.md"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "i-001-xugu-dialect-major",
+  "name": "i-001-xugu-dialect-major",
+  "title": "I-001: 交付 Hibernate 7.4.5 虚谷方言 jar + Spring Boot demo + 项目文档（定义 A 全量）",
+  "description": "Migrated from docs/initiatives/I-001-brief.md (former harness)",
+  "status": "completed",
+  "dev_type": "major",
+  "scope": null,
+  "package": "dialect",
+  "priority": "P1",
+  "creator": "yyyymd",
+  "assignee": "yyyymd",
+  "createdAt": "2026-07-15",
+  "completedAt": "2026-07-15",
+  "branch": null,
+  "base_branch": null,
+  "worktree_path": null,
+  "commit": null,
+  "pr_url": null,
+  "subtasks": [],
+  "children": [],
+  "parent": null,
+  "relatedFiles": [],
+  "notes": "Migrated from former harness / docs/initiatives on 2026-07-22.",
+  "meta": {
+    "legacy_id": "I-001",
+    "source": "docs/initiatives/I-001-brief.md"
+  }
+}

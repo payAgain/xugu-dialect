@@ -1,0 +1,29 @@
+{
+  "id": "i-004-sequence-drop-identity-reserved",
+  "name": "i-004-sequence-drop-identity-reserved",
+  "title": "I-004: DROP SEQUENCE IF EXISTS + IDENTITY×保留字表名方言缓解",
+  "description": "Migrated from docs/initiatives/I-004-brief.md (former harness)",
+  "status": "completed",
+  "dev_type": "hotfix",
+  "scope": null,
+  "package": "dialect",
+  "priority": "P1",
+  "creator": "yyyymd",
+  "assignee": "yyyymd",
+  "createdAt": "2026-07-17",
+  "completedAt": "2026-07-17",
+  "branch": null,
+  "base_branch": null,
+  "worktree_path": null,
+  "commit": null,
+  "pr_url": null,
+  "subtasks": [],
+  "children": [],
+  "parent": null,
+  "relatedFiles": [],
+  "notes": "Migrated from former harness / docs/initiatives on 2026-07-22.",
+  "meta": {
+    "legacy_id": "I-004",
+    "source": "docs/initiatives/I-004-brief.md"
+  }
+}

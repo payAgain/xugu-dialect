@@ -40,7 +40,7 @@
 - Draft clarify: `harness/drafts/I-005-SCOPE-CLARIFYING.md`
 - Branch: `feat/i-005-production-regression-baseline`
 - SSOT: `contracts/production-regression-baseline.md`
-- Accept evidence: `harness/evidence/orchestrator/I-005/ACCEPTANCE.md`
+- Accept evidence: `(historical harness evidence removed; see Trellis task research/ if present) orchestrator/I-005/ACCEPTANCE.md`
 - Ship: **out of this Initiative**
 
 ## Status
@@ -50,4 +50,4 @@
 - B-001 P-001…P-006: all accepted
 - Initiative Accept: ~2026-07-18T13:00+08:00
 - Archive: ~2026-07-18T14:23+08:00
-- Archive doc: `harness/initiatives/I-005/ARCHIVE.md`
+- Archive doc: `.trellis/tasks/archive/2026-07/ (historical; former harness path) I-005/ARCHIVE.md`

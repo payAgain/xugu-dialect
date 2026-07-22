@@ -20,11 +20,12 @@ Managed by Trellis. Edits outside this block are preserved; edits inside may be 
 
 <!-- TRELLIS:END -->
 
-# Project notes (hibernate-test)
+# Project notes (xugu-dialect)
 
 - Product charter: `PROJECT_CHARTER.md`
 - Decisions: `DECISIONS/`
 - Public contracts: `contracts/`
 - User guide: `docs/user-guide/`
-- Historical initiative briefs (migrated from former harness): `docs/initiatives/`
+- Historical initiative archives (former harness → Trellis): `.trellis/tasks/archive/2026-07/`
+- Migrated error journal: `.trellis/workspace/yyyymd/error-journal.md`
 - Verify: `mvn -q -DskipTests package` and `mvn -q test` (optional live: `XUGU_RUN_IT=true mvn -q test`)

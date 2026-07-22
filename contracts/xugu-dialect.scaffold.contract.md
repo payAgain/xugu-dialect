@@ -4,7 +4,7 @@
 > **Phase:** P-001 / Build B-001 / Initiative I-001  
 > **Author role:** architect-contract  
 > **Status:** CONFIRMED for implementer  
-> **SSOT baselines:** `PROJECT_CHARTER.md`, `DECISIONS/ADR-0001-hibernate-baseline.md`, `docs/architecture.md`, `harness/initiatives/I-001/brief.md`  
+> **SSOT baselines:** `PROJECT_CHARTER.md`, `DECISIONS/ADR-0001-hibernate-baseline.md`, `docs/architecture.md`, `.trellis/tasks/archive/2026-07/i-001-xugu-dialect-major/prd.md`  
 > **Full dialect API / definition-A matrix:** deferred to later Phase (`contracts/xugu-dialect.contract.md` planned at P-002+)
 
 ---
@@ -19,7 +19,7 @@ This contract does **not** authorize dialect SQL/DDL/Limit/SPI behavior beyond a
 ## 2. Repository layout (MUST)
 
 ```text
-hibernate-test/                         # parent aggregator POM
+xugu-dialect/                           # parent aggregator POM
 ├── pom.xml                             # packaging=pom; modules listed below
 ├── dialect/                            # library module (dir name locked)
 │   ├── pom.xml
@@ -33,7 +33,7 @@ hibernate-test/                         # parent aggregator POM
 ├── xugu-jdbc-12.3.6.jar                # already at repo root (MUST remain)
 ├── docs/                               # NOT a Maven module
 ├── contracts/
-├── harness/
+├── .trellis/                           # Trellis (not on runtime classpath)
 └── ...
 ```
 
@@ -83,7 +83,7 @@ demo-spring-boot  →  dialect (com.xugu:xugu-dialect)  →  (Hibernate 7.4.5.Fi
 
 - `dialect` **MUST NOT** depend on `demo-spring-boot`.
 - `demo-spring-boot` **MUST** depend on `com.xugu:xugu-dialect` (reactor / sibling module dependency).
-- Neither module puts `harness/` or `docs/` on the runtime classpath.
+- Neither module puts `.trellis/` or `docs/` on the runtime classpath.
 - Demo **MUST NOT** host core dialect implementation (no copy of dialect sources under demo).
 
 ---
@@ -161,7 +161,7 @@ MUST:
 
 Per Phase packet (implementer owns these paths; listed here for contract completeness):
 
-- Replace `harness/verification.json` and `AGENTS.md` Real commands placeholders with real `mvn` build/test commands consistent with this layout.
+- Keep `AGENTS.md` / `docs/verification.md` Maven verify commands consistent with this layout.
 - Suggested shape (non-binding exact flags left to implementer, must succeed on JDK 17):
   - build: e.g. `mvn -q -DskipTests package`
   - test: e.g. `mvn test` (empty/minimal tests may pass)
@@ -196,6 +196,5 @@ Per Phase packet (implementer owns these paths; listed here for contract complet
 ## 13. Related documents
 
 - `docs/architecture.md` — planned layout (this contract confirms it for scaffold)
-- `harness/evidence/architect-contract/P-001/layout-confirmation.md`
-- `harness/tasks/P-001.md`
+- `.trellis/tasks/archive/2026-07/i-001-xugu-dialect-major/prd.md` — historical I-001 brief
 - `DECISIONS/ADR-0001-hibernate-baseline.md`
