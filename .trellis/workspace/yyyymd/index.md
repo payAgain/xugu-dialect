@@ -8,8 +8,8 @@
 
 <!-- @@@auto:current-status -->
 - **Active File**: `journal-1.md`
-- **Total Sessions**: 0
-- **Last Active**: -
+- **Total Sessions**: 1
+- **Last Active**: 2026-07-22
 <!-- @@@/auto:current-status -->
 
 ---
@@ -19,8 +19,7 @@
 <!-- @@@auto:active-documents -->
 | File | Lines | Status |
 |------|-------|--------|
-| `journal-1.md` | ~0 | Active |
-| `error-journal.md` | — | Migrated from `docs/error-journal.md` |
+| `journal-1.md` | ~42 | Active |
 <!-- @@@/auto:active-documents -->
 
 ---
@@ -30,6 +29,7 @@
 <!-- @@@auto:session-history -->
 | # | Date | Title | Commits | Branch |
 |---|------|-------|---------|--------|
+| 1 | 2026-07-22 | Bootstrap guidelines finish + harness docs migration | `b93e6e7`, `1d2d78e` | `feat/i-010-orm-hql-quality-completion` |
 <!-- @@@/auto:session-history -->
 
 ---
